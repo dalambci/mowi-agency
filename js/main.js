@@ -92,6 +92,65 @@ if (revealTargets.length && "IntersectionObserver" in window) {
   revealTargets.forEach((el) => el.classList.add("is-visible"));
 }
 
+// --- Hero entrance animation -------------------------------------------------
+// Copied 1:1 from vuewer.com's own hero: fetched their live HTML + compiled
+// JS bundle and read the exact Alpine/GSAP values (delays, easings,
+// distances — see css/style.css for the full breakdown, next to the CSS
+// classes this drives). Their headline uses GSAP for a per-character
+// stagger; this project stays vanilla JS, so setupHeroTextAnimation below
+// reimplements the same effect — split into words (so a word never
+// line-wraps mid-character) then characters, each getting a --char-delay
+// custom property (base delay + 0.03s per character, matching GSAP's
+// stagger:0.03) that a plain CSS animation reads.
+function setupHeroTextAnimation(el, delay = 0) {
+  const words = el.textContent.split(/(\s+)/);
+  el.textContent = "";
+  let charIndex = 0;
+  words.forEach((word) => {
+    if (word.trim() === "") {
+      el.appendChild(document.createTextNode(word));
+      return;
+    }
+    const wordSpan = document.createElement("span");
+    wordSpan.className = "text-reveal-word";
+    wordSpan.style.display = "inline-block";
+    wordSpan.style.whiteSpace = "nowrap";
+    [...word].forEach((char) => {
+      const charSpan = document.createElement("span");
+      charSpan.className = "text-reveal-char";
+      charSpan.textContent = char;
+      charSpan.style.setProperty("--char-delay", `${(delay + charIndex * 0.03).toFixed(2)}s`);
+      charIndex += 1;
+      wordSpan.appendChild(charSpan);
+    });
+    el.appendChild(wordSpan);
+  });
+}
+
+const heroContent = document.querySelector(".hero-frame-content");
+const heroHeading = heroContent ? heroContent.querySelector(".hero-heading-reveal") : null;
+
+if (heroContent) {
+  if (heroHeading && !prefersReducedMotion) setupHeroTextAnimation(heroHeading);
+
+  if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+    heroContent.classList.add("is-revealed");
+  } else {
+    const heroObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-revealed");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.35 }
+    );
+    heroObserver.observe(heroContent);
+  }
+}
+
 // --- Animated stat counters -------------------------------------------------
 // Numbers marked with [data-count="N"] count up from 0 to N once the stats
 // strip scrolls into view. All counters in the strip start together (one

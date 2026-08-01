@@ -73,12 +73,16 @@
       <div class="hero-frame-grid">
         <div class="hero-frame-col"></div>
 
-        <div class="hero-frame-col hero-frame-content" data-reveal>
-          <span class="eyebrow">AI · Business intelligence · MKB</span>
+        <!-- data-reveal removed: this block's own entrance animation
+             (badge pop + per-character headline + staggered paragraph/
+             buttons) replaces the generic fade-in — see the "Hero entrance
+             animation" section in css/style.css and js/main.js. -->
+        <div class="hero-frame-col hero-frame-content">
+          <span class="eyebrow hero-badge-reveal">AI · Business intelligence · MKB</span>
 
-          <h1>AI-automatisering die uw team tijd teruggeeft — Power BI houdt u op koers.</h1>
+          <h1 class="hero-heading-reveal">AI-automatisering die uw team tijd teruggeeft — Power BI houdt u op koers.</h1>
 
-          <p class="lede" style="margin-top: 1.5rem; max-width: 34rem;">
+          <p class="lede hero-reveal hero-reveal-delay-1" style="margin-top: 1.5rem; max-width: 34rem;">
             Stop met sturen op onderbuikgevoel en verouderde Excel-lijstjes. Mowi automatiseert
             de terugkerende taken die uw team elke week uren kosten en zorgt dat uw cijfers live
             inzichtelijk zijn. Voor MKB-bedrijven vanaf circa 20 medewerkers, in Nederland en
@@ -86,8 +90,8 @@
           </p>
 
           <div class="hero-actions">
-            <a href="#afspraak" class="btn btn-primary">Plan een kennismaking — 30 min</a>
-            <a href="ai-automatisering.html" class="btn btn-secondary">Ontdek AI-automatisering</a>
+            <a href="#afspraak" class="btn btn-primary hero-reveal hero-reveal-delay-2">Plan een kennismaking — 30 min</a>
+            <a href="ai-automatisering.html" class="btn btn-secondary hero-reveal hero-reveal-delay-3">Ontdek AI-automatisering</a>
           </div>
         </div>
 
