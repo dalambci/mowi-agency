@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mowi — AI-automatisering en Power BI dashboards voor het MKB</title>
+  <meta name="description" content="Mowi automatiseert de terugkerende taken die uw team elke week uren kosten en bouwt de Power BI dashboards die uw cijfers live inzichtelijk maken. Voor MKB-bedrijven in Nederland en Vlaanderen." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" type="image/png" href="assets/mowi-icon.png" />
+</head>
+<body>
+
+  <!-- ===== Header / navigation =====
+       Sticky top bar. Below the 56rem breakpoint the nav links collapse
+       into a hamburger menu (js/main.js toggles the .is-open class and
+       aria-expanded). -->
+  <header class="site-header">
+    <div class="header-bar">
+      <a href="#afspraak" class="header-cta">
+        Gratis adviesgesprek
+      </a>
+
+      <nav class="main-nav" id="main-nav" aria-label="Hoofdmenu">
+        <ul class="nav-group">
+          <li class="nav-dropdown">
+            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="service-menu">
+              Service
+              <span class="nav-dropdown-icon" aria-hidden="true"></span>
+            </button>
+            <ul class="nav-dropdown-menu" id="service-menu">
+              <li><a href="ai-automatisering.html">AI-automatisering</a></li>
+              <li><a href="power-bi-dashboards.html">Power BI dashboards</a></li>
+              <li><a href="trainingen.html">Trainingen</a></li>
+            </ul>
+          </li>
+          <!-- No pricing page yet (out of scope for now) — placeholder link -->
+          <li><a href="#pricing">Tarieven</a></li>
+        </ul>
+        <ul class="nav-group">
+          <li><a href="cases.html">Cases</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <!-- Same CTA, shown only inside the open mobile menu -->
+        <a href="#afspraak" class="btn btn-primary header-cta-mobile">Gratis adviesgesprek</a>
+      </nav>
+
+      <a href="index.html" class="wordmark" aria-label="Mowi - home">
+        <img src="assets/mowi-icon.png" alt="" class="wordmark-icon" />
+        <img src="assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="main-nav" aria-label="Menu openen">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== Hero frame =====
+         AI-automatisering leads the headline; Power BI dashboards is the
+         supporting clause. #afspraak points at the on-page booking section
+         that will be added lower on this page in a later pass.
+
+         Structure mirrors the reference screenshot from vuewer.com: a
+         bordered block with empty margin columns flanking a centered
+         content column (continuing the header's grid lines downward), and
+         the client-logo strip inside the same frame below a divider. -->
+    <div class="hero-frame-wrap">
+    <div class="hero-frame">
+      <div class="hero-frame-grid">
+        <div class="hero-frame-col"></div>
+
+        <div class="hero-frame-col hero-frame-content" data-reveal>
+          <span class="eyebrow">AI · Business intelligence · MKB</span>
+
+          <h1>AI-automatisering die uw team tijd teruggeeft — Power BI houdt u op koers.</h1>
+
+          <p class="lede" style="margin-top: 1.5rem; max-width: 34rem;">
+            Stop met sturen op onderbuikgevoel en verouderde Excel-lijstjes. Mowi automatiseert
+            de terugkerende taken die uw team elke week uren kosten en zorgt dat uw cijfers live
+            inzichtelijk zijn. Voor MKB-bedrijven vanaf circa 20 medewerkers, in Nederland en
+            Vlaanderen.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#afspraak" class="btn btn-primary">Plan een kennismaking — 30 min</a>
+            <a href="ai-automatisering.html" class="btn btn-secondary">Ontdek AI-automatisering</a>
+          </div>
+        </div>
+
+        <div class="hero-frame-col"></div>
+      </div>
+
+      <!-- Neutral placeholder tiles — real client logos aren't available yet
+           (see CLAUDE.md). The track holds two identical sets of 8 tiles
+           back to back; animating exactly -50% loops it seamlessly. -->
+      <div class="hero-frame-logos">
+        <div class="logo-marquee" aria-hidden="true">
+          <div class="logo-track">
+            <span class="logo-tile">logo</span>
+            <span class="logo-tile">logo</span>
+            <span class="logo-tile">logo</span>
+            <span class="logo-tile">logo</span>
+            <span class="logo-tile">logo</span>
+            <span class="logo-tile">logo</span>
+            <span class="logo-tile">logo</span>
+            <span class="logo-tile">logo</span>
+            <!-- duplicated set for the seamless loop -->
+            <span class="logo-tile">logo</span>
+            <span class="logo-tile">logo</span>
+            <span class="logo-tile">logo</span>
+            <span class="logo-tile">logo</span>
+            <span class="logo-tile">logo</span>
+            <span class="logo-tile">logo</span>
+            <span class="logo-tile">logo</span>
+            <span class="logo-tile">logo</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <!-- ===== Stats strip =====
+         The three single-number stats count up from 0 on scroll-into-view
+         (js/main.js). "2–6 wk" is a range, not a single number, so it stays
+         static text — counting up to a range doesn't read as meaningful. -->
+    <section class="container section" data-reveal>
+      <div class="stats-bar">
+        <div>
+          <div class="stat-number"><span data-count="15">0</span> jaar</div>
+          <div class="stat-label">Power BI-ervaring</div>
+        </div>
+        <div>
+          <div class="stat-number"><span data-count="100">0</span>+</div>
+          <div class="stat-label">dashboards opgeleverd</div>
+        </div>
+        <div>
+          <div class="stat-number"><span data-count="5">0</span>/5</div>
+          <div class="stat-label">klantbeoordeling</div>
+        </div>
+        <div>
+          <div class="stat-number">2–6 wk</div>
+          <div class="stat-label">tot werkend resultaat</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Diensten ===== -->
+    <section class="container section" id="diensten">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">Diensten</span>
+        <h2>Eén partner voor slimmer werken.</h2>
+      </div>
+
+      <div class="grid grid-3">
+        <div class="card card-featured" data-reveal>
+          <div class="card-icon">AI</div>
+          <h3>AI-automatisering</h3>
+          <p>Facturen verwerken, offertes opstellen, klantvragen beantwoorden, data overtikken: we brengen per
+            organisatie in kaart welke taken u beter kunt wegautomatiseren — en regelen dat van A tot Z.</p>
+          <a href="ai-automatisering.html" class="card-link">Ontdek wat AI voor uw processen kan →</a>
+        </div>
+
+        <div class="card" data-reveal>
+          <div class="card-icon">BI</div>
+          <h3>Power BI dashboards</h3>
+          <p>Al uw cijfers — omzet, marge, voorraad, productie — actueel in één overzicht, automatisch gevuld vanuit
+            uw ERP, CRM of Excel. Standaard in twee weken; maatwerk in twee tot zes weken.</p>
+          <a href="power-bi-dashboards.html" class="card-link">Bekijk onze dashboards →</a>
+        </div>
+
+        <div class="card" data-reveal>
+          <div class="card-icon">TR</div>
+          <h3>Trainingen</h3>
+          <p>Liever zelf aan het stuur? We trainen uw team op locatie in Power BI en Automatiseren met AI. Eén dag,
+            en iedereen uit uw team kan aanschuiven.</p>
+          <a href="trainingen.html" class="card-link">Bekijk de trainingen →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Wat we automatiseren ===== -->
+    <section class="section section-tint">
+      <div class="container">
+        <div class="section-head center" data-reveal>
+          <span class="eyebrow">Mogelijkheden</span>
+          <h2>Wat we voor u kunnen automatiseren.</h2>
+        </div>
+
+        <div class="grid grid-3">
+          <div class="card" data-reveal>
+            <h3>Factuur- &amp; documentverwerking</h3>
+            <p>Inkomende documenten lezen, controleren en boeken — zonder overtypen.</p>
+          </div>
+          <div class="card" data-reveal>
+            <h3>Offertes &amp; aanvragen</h3>
+            <p>Aanvragen automatisch omzetten in een kloppende, verzendklare offerte.</p>
+          </div>
+          <div class="card" data-reveal>
+            <h3>Klantvragen &amp; helpdesk</h3>
+            <p>Veelgestelde vragen direct beantwoord, 24/7, zonder wachttijd.</p>
+          </div>
+          <div class="card" data-reveal>
+            <h3>Data-invoer &amp; overzetten</h3>
+            <p>Gegevens die nu tussen systemen worden overgetikt, stromen vanzelf door.</p>
+          </div>
+          <div class="card" data-reveal>
+            <h3>Rapportages &amp; samenvattingen</h3>
+            <p>Terugkerende rapportages stellen zichzelf samen, elke week opnieuw.</p>
+          </div>
+          <div class="card" data-reveal>
+            <h3>Planning &amp; routes</h3>
+            <p>Capaciteit en routes automatisch optimaliseren op basis van actuele data.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Voor wie ===== -->
+    <section class="container section">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">Voor wie</span>
+        <h2>Gemaakt voor bedrijven waar de datacomplexiteit groeit.</h2>
+        <p class="lede" style="margin-top: 1rem;">
+          Mowi werkt voor MKB-bedrijven vanaf zo'n 20 medewerkers — met name in productie, groothandel en
+          logistiek. We koppelen met vrijwel elk systeem, van AFAS en Exact tot Excel.
+        </p>
+      </div>
+
+      <div class="grid grid-3">
+        <div class="card" data-reveal>
+          <h3>Directeur / eigenaar</h3>
+          <p>U wilt op elk moment weten hoe uw bedrijf ervoor staat — niet wachten op het maandrapport.</p>
+        </div>
+        <div class="card" data-reveal>
+          <h3>Operations manager</h3>
+          <p>U wilt zien waar het knelt in planning, voorraad of doorlooptijd, vóórdat het een probleem is.</p>
+        </div>
+        <div class="card" data-reveal>
+          <h3>Financieel verantwoordelijke</h3>
+          <p>U bent meer tijd kwijt aan het verzamelen van cijfers dan aan het analyseren ervan.</p>
+        </div>
+      </div>
+
+      <div class="pill-row" style="margin-top: 2rem;" data-reveal>
+        <span class="pill">AFAS</span>
+        <span class="pill">Exact</span>
+        <span class="pill">Microsoft Dynamics</span>
+        <span class="pill">SAP</span>
+        <span class="pill">Epicor</span>
+        <span class="pill">HubSpot</span>
+        <span class="pill">Salesforce</span>
+        <span class="pill">Excel</span>
+        <span class="pill">+ vrijwel elk ander systeem</span>
+      </div>
+    </section>
+
+    <!-- ===== Resultaat ===== -->
+    <section class="section section-tint">
+      <div class="container">
+        <div class="section-head center" data-reveal>
+          <span class="eyebrow">Resultaat</span>
+          <h2>Wat het oplevert.</h2>
+        </div>
+
+        <div class="grid grid-3">
+          <div class="card" data-reveal>
+            <h3>Eén waarheid</h3>
+            <p>Iedereen kijkt naar dezelfde, actuele cijfers — einde aan discussies over wiens Excel klopt.</p>
+          </div>
+          <div class="card" data-reveal>
+            <h3>Uren besparen</h3>
+            <p>Taken die nu handmatig gebeuren, voeren zichzelf uit — elke dag opnieuw.</p>
+          </div>
+          <div class="card" data-reveal>
+            <h3>Sneller bijsturen</h3>
+            <p>Afwijkingen in verkoop, marge of planning ziet u dezelfde dag, niet volgende maand.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Bewijs / cases teaser ===== -->
+    <section class="container section">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">Bewijs</span>
+        <h2>Klanten die u voorgingen.</h2>
+        <p class="lede" style="margin-top: 1rem;">Onze klanten beoordelen de samenwerking gemiddeld met 5/5.</p>
+      </div>
+
+      <div class="grid grid-3">
+        <div class="case-card" data-reveal>
+          <span class="case-tag">Payroll-automatisering</span>
+          <p class="case-result">8 medewerkers → 1, 10 werkdagen → 30 minuten</p>
+        </div>
+        <div class="case-card" data-reveal>
+          <span class="case-tag">Productie · Dibalex</span>
+          <p class="case-result">Van een volledige dag naar een paar minuten MT-rapportage</p>
+        </div>
+        <div class="case-card" data-reveal>
+          <span class="case-tag">Productie · MMI</span>
+          <p class="case-result">Van een week naar 1 dag reactietijd op klantwijzigingen</p>
+        </div>
+      </div>
+
+      <a href="cases.html" class="card-link" style="margin-top: 1.5rem; display: inline-block;">Bekijk alle cases →</a>
+    </section>
+
+    <!-- ===== Testimonial ===== -->
+    <section class="container section" data-reveal>
+      <div class="testimonial">
+        <blockquote>
+          "We hebben ons nooit gerealiseerd hoeveel onbenutte data we eigenlijk hadden. Het dashboard stimuleert een
+          nieuwe manier van denken en biedt een solide basis om proactief te handelen in plaats van reactief te zijn."
+        </blockquote>
+        <cite>— Lucas, productieleider, maakindustrie</cite>
+      </div>
+    </section>
+
+    <!-- ===== Werkwijze ===== -->
+    <section class="container section">
+      <div class="section-head center" data-reveal>
+        <span class="eyebrow">Werkwijze</span>
+        <h2>Klein beginnen, meetbaar resultaat.</h2>
+      </div>
+
+      <div class="steps">
+        <div class="step" data-reveal>
+          <h3>Taken-scan</h3>
+          <p>30 minuten, online. We brengen in kaart welke taken zich lenen voor automatisering.</p>
+        </div>
+        <div class="step" data-reveal>
+          <h3>Eén proces eerst</h3>
+          <p>We starten met het proces met de meeste winst, niet met alles tegelijk.</p>
+        </div>
+        <div class="step" data-reveal>
+          <h3>Bouwen &amp; aansluiten</h3>
+          <p>Gekoppeld aan uw systemen. Standaard in 2 weken, maatwerk in 2–6 weken.</p>
+        </div>
+        <div class="step" data-reveal>
+          <h3>Meten &amp; uitbreiden</h3>
+          <p>We meten het resultaat en breiden uit naar het volgende proces.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="container section">
+      <div class="cta-band" data-reveal>
+        <h2>Benieuwd wat er in uw bedrijf te winnen valt?</h2>
+        <p>In een kennismaking van 30 minuten kijken we naar uw situatie: welke problemen spelen er, wat is er
+          mogelijk, en zijn we een goede match? Vrijblijvend.</p>
+        <div class="cta-actions">
+          <a href="contact.html" class="btn btn-secondary">Plan uw kennismaking</a>
+        </div>
+        <p class="cta-alt">Liever direct contact? [PHONE] · <a href="mailto:[EMAIL]">[EMAIL]</a></p>
+      </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section class="container section" style="max-width: 48rem;">
+      <div class="section-head center" data-reveal>
+        <span class="eyebrow">Veelgestelde vragen</span>
+        <h2>Vragen? Antwoorden.</h2>
+      </div>
+
+      <div class="accordion" data-reveal>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-1">
+            Wat kost een automatisering of dashboard?
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-panel" id="faq-1">
+            <p>Dat hangt af van de complexiteit en het aantal systemen dat we koppelen. Na een gratis
+              kennismaking van 30 minuten weet u een vaste prijs — geen verrassingen achteraf.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-2">
+            Hoe snel staat een automatisering live?
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-panel" id="faq-2">
+            <p>De meeste automatiseringen en dashboards staan binnen twee tot zes weken live, afhankelijk van
+              de complexiteit. We beginnen altijd met het proces dat de meeste tijd bespaart.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-3">
+            Werkt dit met ons systeem?
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-panel" id="faq-3">
+            <p>In de meeste gevallen wel. We koppelen met vrijwel elk ERP-, CRM- of boekhoudsysteem — van AFAS
+              en Exact tot maatwerksoftware. Geen match? Dan zeggen we dat eerlijk in de kennismaking.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-4">
+            Wat als het niet bevalt?
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-panel" id="faq-4">
+            <p>U zit nergens aan vast. We werken met korte, overzichtelijke trajecten en bespreken vooraf wat u
+              kunt verwachten — geen jarenlange contracten of verborgen voorwaarden.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-5">
+            Hoe zit het met onze data en privacy?
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-panel" id="faq-5">
+            <p>Uw data blijft van u. We werken volgens de AVG, koppelen alleen met wat nodig is, en houden waar
+              gewenst een mens in de controle-loop bij geautomatiseerde processen.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-6">
+            Heb ik technische kennis nodig om dit te gebruiken?
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-panel" id="faq-6">
+            <p>Nee. Wij bouwen de automatisering of het dashboard, dragen het over en trainen uw team zodat
+              iedereen er meteen mee uit de voeten kan.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="wordmark wordmark-lg">
+          <img src="assets/mowi-icon.png" alt="" class="wordmark-icon" />
+          <img src="assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
+        </span>
+        <p>AI-automatisering, Power BI dashboards en trainingen voor MKB-bedrijven in Nederland en Vlaanderen.</p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Footermenu">
+        <span class="footer-heading">Navigatie</span>
+        <a href="index.html">Home</a>
+        <a href="ai-automatisering.html">AI-automatisering</a>
+        <a href="power-bi-dashboards.html">Power BI dashboards</a>
+        <a href="trainingen.html">Trainingen</a>
+        <a href="cases.html">Cases</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="footer-contact">
+        <span class="footer-heading">Contact</span>
+        <p>[PHONE]</p>
+        <p>[EMAIL]</p>
+        <p>[STREET_ADDRESS]</p>
+        <p>KVK [KVK_NUMBER]</p>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>© 2026 Mowi · Nederland &amp; België</p>
+      <div class="footer-legal">
+        <a href="#">Privacyverklaring</a>
+        <a href="#">Algemene voorwaarden</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

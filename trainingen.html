@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trainingen — Mowi</title>
+  <meta name="description" content="Vier praktijkgerichte trainingen in Power BI en AI-automatisering, bij u op locatie. Eén dag, iedereen uit uw team kan aanschuiven." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" type="image/png" href="assets/mowi-icon.png" />
+</head>
+<body>
+
+  <!-- ===== Header ===== -->
+  <header class="site-header">
+    <div class="header-bar">
+      <a href="#afspraak" class="header-cta">
+        Gratis adviesgesprek
+      </a>
+
+      <nav class="main-nav" id="main-nav" aria-label="Hoofdmenu">
+        <ul class="nav-group">
+          <li class="nav-dropdown">
+            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="service-menu" aria-current="page">
+              Service
+              <span class="nav-dropdown-icon" aria-hidden="true"></span>
+            </button>
+            <ul class="nav-dropdown-menu" id="service-menu">
+              <li><a href="ai-automatisering.html">AI-automatisering</a></li>
+              <li><a href="power-bi-dashboards.html">Power BI dashboards</a></li>
+              <li><a href="trainingen.html" aria-current="page">Trainingen</a></li>
+            </ul>
+          </li>
+          <!-- No pricing page yet (out of scope for now) — placeholder link -->
+          <li><a href="#pricing">Tarieven</a></li>
+        </ul>
+        <ul class="nav-group">
+          <li><a href="cases.html">Cases</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <!-- Same CTA, shown only inside the open mobile menu -->
+        <a href="#afspraak" class="btn btn-primary header-cta-mobile">Gratis adviesgesprek</a>
+      </nav>
+
+      <a href="index.html" class="wordmark" aria-label="Mowi - home">
+        <img src="assets/mowi-icon.png" alt="" class="wordmark-icon" />
+        <img src="assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="main-nav" aria-label="Menu openen">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== Hero ===== -->
+    <section class="container hero">
+      <div class="breadcrumb"><a href="index.html">Home</a> / Trainingen</div>
+      <div style="max-width: 44rem;">
+        <h1>Uw team zelf aan het stuur met AI en Power BI.</h1>
+        <p class="lede" style="margin-top: 1.5rem;">
+          Vier praktijkgerichte trainingen in AI-automatisering, Power BI en datavisualisatie, gegeven bij u op
+          locatie — door de specialist die dagelijks dashboards en automatiseringen bouwt. Eén dag, iedereen uit uw
+          team kan aanschuiven — los te boeken of als onderdeel van een implementatietraject.
+        </p>
+        <div class="hero-actions">
+          <a href="contact.html" class="btn btn-primary">Vraag een trainingsvoorstel aan</a>
+          <a href="#aanbod" class="btn btn-secondary">Bekijk het aanbod</a>
+        </div>
+      </div>
+
+      <div class="pill-row" style="margin-top: 2.5rem;" data-reveal>
+        <span class="pill">✓ Uw eigen data als oefenmateriaal</span>
+        <span class="pill">✓ Grafieken &amp; visualisatie</span>
+        <span class="pill">✓ KPI's opstellen</span>
+        <span class="pill">✓ DAX-codering</span>
+        <span class="pill">✓ Data koppelen</span>
+      </div>
+    </section>
+
+    <!-- ===== Waarom ===== -->
+    <section class="section section-tint">
+      <div class="container">
+        <div class="section-head center" data-reveal>
+          <span class="eyebrow">Waarom</span>
+          <h2>Een dashboard is zo goed als het team dat ermee werkt.</h2>
+          <p class="lede" style="margin-top: 1rem;">
+            Wij geloven meer in de kunde van uw team dan in de tool alleen. Daarom trainen we op locatie, met uw
+            eigen data — geen generieke klaslokaaltraining, maar direct toepasbaar op uw situatie.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Aanbod ===== -->
+    <section class="container section" id="aanbod">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">Aanbod</span>
+        <h2>Vier trainingen, één dag per training.</h2>
+      </div>
+
+      <div class="grid grid-2">
+        <div class="card" data-reveal>
+          <h3>Power BI · Basis</h3>
+          <p>Power BI basis &amp; datavisualisatie: grafieken maken, rapporten opmaken, KPI's opstellen en dashboardfilters gebruiken.</p>
+        </div>
+        <div class="card" data-reveal>
+          <h3>Power BI · Gevorderd</h3>
+          <p>DAX-codering, datamodellering, KPI-formulering en het herkennen van veelgemaakte dashboardvalkuilen.</p>
+        </div>
+        <div class="card" data-reveal>
+          <h3>Automatiseren met AI · Basis</h3>
+          <p>Wat AI kan, hoe u het verantwoord inzet, en hoe u dagelijkse taken herkent die zich lenen voor automatisering.</p>
+        </div>
+        <div class="card" data-reveal>
+          <h3>Automatiseren met AI · Gevorderd</h3>
+          <p>Workflows bouwen, AI-systemen koppelen, en kwaliteitscontrole inrichten in geautomatiseerde processen.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Praktisch ===== -->
+    <section class="section section-tint">
+      <div class="container">
+        <div class="section-head center" data-reveal>
+          <span class="eyebrow">Praktisch</span>
+          <h2>Hoe een trainingsdag eruitziet.</h2>
+        </div>
+
+        <div class="grid grid-4">
+          <div class="card" data-reveal>
+            <h3>Duur</h3>
+            <p>1 dag</p>
+          </div>
+          <div class="card" data-reveal>
+            <h3>Locatie</h3>
+            <p>Bij u op kantoor</p>
+          </div>
+          <div class="card" data-reveal>
+            <h3>Deelnemers</h3>
+            <p>Iedereen kan aanschuiven</p>
+          </div>
+          <div class="card" data-reveal>
+            <h3>Investering</h3>
+            <p>Op aanvraag</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section class="container section" style="max-width: 48rem;">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">Veelgestelde vragen</span>
+        <h2>Nog vragen?</h2>
+      </div>
+
+      <div class="accordion" data-reveal>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-tr-1">
+            Wat kost een trainingsdag?
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-panel" id="faq-tr-1">
+            <p>De prijs is per dag, ongeacht het aantal deelnemers. Vraag een voorstel aan voor een exacte prijsopgave.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-tr-2">
+            Waar geven jullie de training?
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-panel" id="faq-tr-2">
+            <p>Bij u op locatie, in heel Nederland en Vlaanderen — inclusief Amsterdam en Rotterdam.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-tr-3">
+            Kan een training onderdeel zijn van een project?
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-panel" id="faq-tr-3">
+            <p>Ja, trainingen zijn los te boeken of te combineren met een dashboard- of automatiseringstraject, zodat uw team het resultaat ook echt gaat gebruiken.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-tr-4">
+            Is voorkennis nodig?
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-panel" id="faq-tr-4">
+            <p>Nee, de basistrainingen vereisen geen voorkennis. Voor de gevorderde trainingen is basiskennis van Power BI of AI-automatisering handig.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="container section">
+      <div class="cta-band" data-reveal>
+        <h2>Vraag een trainingsvoorstel aan.</h2>
+        <p>We denken graag mee over welke training het beste past bij uw team en situatie.</p>
+        <div class="cta-actions">
+          <a href="contact.html" class="btn btn-secondary">Vraag een trainingsvoorstel aan</a>
+        </div>
+        <p class="cta-alt">Liever direct contact? [PHONE] · <a href="mailto:[EMAIL]">[EMAIL]</a></p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="wordmark wordmark-lg">
+          <img src="assets/mowi-icon.png" alt="" class="wordmark-icon" />
+          <img src="assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
+        </span>
+        <p>AI-automatisering, Power BI dashboards en trainingen voor MKB-bedrijven in Nederland en Vlaanderen.</p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Footermenu">
+        <span class="footer-heading">Navigatie</span>
+        <a href="index.html">Home</a>
+        <a href="ai-automatisering.html">AI-automatisering</a>
+        <a href="power-bi-dashboards.html">Power BI dashboards</a>
+        <a href="trainingen.html">Trainingen</a>
+        <a href="cases.html">Cases</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="footer-contact">
+        <span class="footer-heading">Contact</span>
+        <p>[PHONE]</p>
+        <p>[EMAIL]</p>
+        <p>[STREET_ADDRESS]</p>
+        <p>KVK [KVK_NUMBER]</p>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>© 2026 Mowi · Nederland &amp; België</p>
+      <div class="footer-legal">
+        <a href="#">Privacyverklaring</a>
+        <a href="#">Algemene voorwaarden</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

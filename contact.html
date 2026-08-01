@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Mowi</title>
+  <meta name="description" content="Plan een vrijblijvende kennismaking van 30 minuten met Mowi, of neem direct contact op." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" type="image/png" href="assets/mowi-icon.png" />
+</head>
+<body>
+
+  <!-- ===== Header ===== -->
+  <header class="site-header">
+    <div class="header-bar">
+      <a href="#afspraak" class="header-cta">
+        Gratis adviesgesprek
+      </a>
+
+      <nav class="main-nav" id="main-nav" aria-label="Hoofdmenu">
+        <ul class="nav-group">
+          <li class="nav-dropdown">
+            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="service-menu">
+              Service
+              <span class="nav-dropdown-icon" aria-hidden="true"></span>
+            </button>
+            <ul class="nav-dropdown-menu" id="service-menu">
+              <li><a href="ai-automatisering.html">AI-automatisering</a></li>
+              <li><a href="power-bi-dashboards.html">Power BI dashboards</a></li>
+              <li><a href="trainingen.html">Trainingen</a></li>
+            </ul>
+          </li>
+          <!-- No pricing page yet (out of scope for now) — placeholder link -->
+          <li><a href="#pricing">Tarieven</a></li>
+        </ul>
+        <ul class="nav-group">
+          <li><a href="cases.html">Cases</a></li>
+          <li><a href="contact.html" aria-current="page">Contact</a></li>
+        </ul>
+        <!-- Same CTA, shown only inside the open mobile menu -->
+        <a href="#afspraak" class="btn btn-primary header-cta-mobile">Gratis adviesgesprek</a>
+      </nav>
+
+      <a href="index.html" class="wordmark" aria-label="Mowi - home">
+        <img src="assets/mowi-icon.png" alt="" class="wordmark-icon" />
+        <img src="assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="main-nav" aria-label="Menu openen">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== Hero ===== -->
+    <section class="container hero">
+      <div class="breadcrumb"><a href="index.html">Home</a> / Contact</div>
+      <div style="max-width: 44rem;">
+        <h1>Plan een vrijblijvende kennismaking.</h1>
+        <p class="lede" style="margin-top: 1.5rem;">
+          In 30 minuten bespreken we uw situatie: welke problemen spelen er, wie is Mowi, wie bent u — en
+          kunnen we een oplossing bieden? Bij een goede match plannen we vervolgens een afspraak op locatie.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== Kennismaking + form ===== -->
+    <section class="container section">
+      <div class="grid grid-2" style="align-items: start;">
+
+        <!-- Scheduling placeholder: replace with an embedded Calendly widget at [CALENDLY_URL] -->
+        <div class="card" data-reveal>
+          <span class="eyebrow">Plan direct</span>
+          <h2 style="font-size: 1.75rem;">Kies een moment dat u past.</h2>
+          <p style="color: var(--color-gray-600); margin-top: 0.75rem;">
+            30 minuten, online en vrijblijvend. U weet daarna precies wat de volgende stap zou zijn.
+          </p>
+          <a href="[CALENDLY_URL]" class="btn btn-primary btn-block" style="margin-top: 1.5rem;">
+            Plan een kennismaking
+          </a>
+          <p class="form-note">
+            Deze knop verwijst naar de agenda van [FULL_NAME] — vul [CALENDLY_URL] in zodra de agendalink bekend is.
+          </p>
+        </div>
+
+        <!-- Static contact form. No backend yet: wire this up to a form service or -->
+        <!-- server endpoint that sends to [EMAIL] before launch. -->
+        <div class="card" data-reveal>
+          <span class="eyebrow">Of stuur een bericht</span>
+          <h2 style="font-size: 1.75rem;">Liever eerst iets vragen?</h2>
+
+          <form style="margin-top: 1.5rem;" action="#" method="post">
+            <div class="form-field">
+              <label for="name">Naam</label>
+              <input type="text" id="name" name="name" required />
+            </div>
+            <div class="form-field">
+              <label for="email">E-mailadres</label>
+              <input type="email" id="email" name="email" required />
+            </div>
+            <div class="form-field">
+              <label for="company">Bedrijfsnaam</label>
+              <input type="text" id="company" name="company" />
+            </div>
+            <div class="form-field">
+              <label for="message">Bericht</label>
+              <textarea id="message" name="message" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Verstuur bericht</button>
+            <p class="form-note">
+              Dit formulier is nog niet gekoppeld aan een verzendservice. Koppel het aan [EMAIL] of een
+              formulierendienst voordat de site live gaat.
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Direct contact ===== -->
+    <section class="section section-tint">
+      <div class="container">
+        <div class="section-head center" data-reveal>
+          <span class="eyebrow">Liever direct contact?</span>
+          <h2>Bel of mail ons.</h2>
+        </div>
+
+        <div class="grid grid-4">
+          <div class="card text-center" data-reveal>
+            <h3>Telefoon</h3>
+            <p><a href="tel:[PHONE]">[PHONE]</a></p>
+          </div>
+          <div class="card text-center" data-reveal>
+            <h3>E-mail</h3>
+            <p><a href="mailto:[EMAIL]">[EMAIL]</a></p>
+          </div>
+          <div class="card text-center" data-reveal>
+            <h3>Adres</h3>
+            <p>[STREET_ADDRESS]</p>
+          </div>
+          <div class="card text-center" data-reveal>
+            <h3>KVK</h3>
+            <p>[KVK_NUMBER]</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="wordmark wordmark-lg">
+          <img src="assets/mowi-icon.png" alt="" class="wordmark-icon" />
+          <img src="assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
+        </span>
+        <p>AI-automatisering, Power BI dashboards en trainingen voor MKB-bedrijven in Nederland en Vlaanderen.</p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Footermenu">
+        <span class="footer-heading">Navigatie</span>
+        <a href="index.html">Home</a>
+        <a href="ai-automatisering.html">AI-automatisering</a>
+        <a href="power-bi-dashboards.html">Power BI dashboards</a>
+        <a href="trainingen.html">Trainingen</a>
+        <a href="cases.html">Cases</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="footer-contact">
+        <span class="footer-heading">Contact</span>
+        <p>[PHONE]</p>
+        <p>[EMAIL]</p>
+        <p>[STREET_ADDRESS]</p>
+        <p>KVK [KVK_NUMBER]</p>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>© 2026 Mowi · Nederland &amp; België</p>
+      <div class="footer-legal">
+        <a href="#">Privacyverklaring</a>
+        <a href="#">Algemene voorwaarden</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

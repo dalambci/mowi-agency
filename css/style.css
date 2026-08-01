@@ -1,0 +1,1512 @@
+/* ==========================================================================
+   Mowi — main stylesheet
+   Visual style inspired by vuewer.com (see reference/style-vuewer.md).
+   Plain CSS, no build step, no framework.
+   ========================================================================== */
+
+/* --- Design tokens ------------------------------------------------------ */
+:root {
+  /* ---- Core palette (see reference/style-vuewer.md) ----------------------
+     Vuewer's own palette is a warm off-white canvas with near-black ink and
+     almost no color of its own. We keep that restraint, but add one warm
+     accent, since a fully monochrome site needs *some* way to signal
+     interactive/brand moments beyond a hover state. */
+  --color-bg: #f4f4f0;              /* page background — warm off-white */
+  --color-surface: #ffffff;         /* cards, panels, anything "raised" */
+  --color-text: #000000;            /* pure black */
+  --color-text-muted: #6b6a63;      /* secondary/body copy — warm grey */
+  --color-accent: #b5622f;          /* warm terracotta — links, focus, small accents */
+  --color-accent-soft: rgba(181, 98, 47, 0.12); /* tinted background for accent pills */
+  --color-border: #e6e2d8;          /* hairline borders — warm-tinted, not neutral grey */
+  --color-header-line: rgba(22, 20, 15, 0.18); /* crisper, darker divider used only in the header's segmented bar */
+
+  /* Back-compat aliases: components further down this file were named
+     before the tokens above were formalized. Keeping both means nothing
+     that already ships references a color that no longer exists. */
+  --color-ink: var(--color-text);
+  --color-white: var(--color-surface);
+  --color-gray-900: var(--color-text);
+  --color-gray-600: var(--color-text-muted);
+  --color-gray-500: #8a887f;
+  --color-gray-400: #b0ada2;
+  --color-bg-tint: rgba(22, 20, 15, 0.04);
+  --color-bg-tint-strong: rgba(22, 20, 15, 0.06);
+
+  /* Type — Vuewer self-hosts a paid grotesk (files just named "Font", weights
+     400–900, no identifiable name). It is not on Google Fonts. Plus Jakarta
+     Sans is the closest free match: same geometric/slightly-rounded
+     character, same wide 400–800 weight range, same all-purpose use for
+     both headings and body text. */
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  /* Tracking scale (letter-spacing), matches vuewer's tokens */
+  --tracking-tighter: -0.05em;
+  --tracking-tight: -0.025em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.025em;
+
+  /* Radius scale — zeroed out site-wide per request (square corners
+     everywhere). The one exception, the hero's "AI · Business
+     intelligence · MKB" pill, uses its own hardcoded value instead of
+     these tokens (see .hero-frame-content .eyebrow) so it stays rounded
+     without this scale needing to come back. */
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+  --radius-2xl: 0;
+  --radius-3xl: 0;
+  --radius-full: 0;
+
+  /* Shadows — soft, low-opacity black, used sparingly */
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  /* Verified straight from vuewer.com's own compiled CSS (their nav "Start"
+     pill uses this exact hover:shadow-xl value) — used for our own button
+     hovers below instead of a color change. */
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+
+  /* Motion — --ease-out is a fast, premium deceleration used for reveal-on-
+     scroll. --ease-bounce is the slight-overshoot curve vuewer.com uses for
+     its own larger reveal animations (see reference/style-vuewer.md); used
+     sparingly here, only on small hover lifts. */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-bounce: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  /* --section-gap only drives the footer's own top margin now — the
+     section-to-section rhythm itself is verified padding on .section
+     directly (see that rule below), pulled from vuewer's compiled CSS. */
+  --section-gap: 6rem;
+
+  /* Verified from vuewer.com's compiled CSS (max-w-8xl + px-4/sm:px-6/lg:px-12
+     on <main>): container max-width is 1600px, padding steps 16px → 24px
+     (≥40rem) → 48px (≥64rem). */
+  --container-width: 100rem;
+  --container-pad: 1rem;
+}
+
+@media (min-width: 40rem) {
+  :root {
+    --container-pad: 1.5rem;
+  }
+}
+
+@media (min-width: 64rem) {
+  :root {
+    --section-gap: 8rem;
+    --container-pad: 3rem;
+  }
+}
+
+/* --- Reset ---------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-gray-900);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+}
+
+/* Subtle grain across the whole page — vuewer.com has the same paper-like
+   noise if you zoom in on their background. Pure CSS/SVG (feTurbulence),
+   no image asset. Fixed + pointer-events:none so it never affects layout,
+   scrolling or interaction; tiled at a small size so it stays cheap. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+img,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+h1, h2, h3, h4, p, figure {
+  margin: 0;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* Respect reduced-motion preference for all animations on the site */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Keep anchor targets (e.g. #afspraak, FAQ items) clear of the sticky
+   header when the page scroll-behavior:smooth lands on them. */
+[id] {
+  scroll-margin-top: 6rem;
+}
+
+/* --- Layout helpers --------------------------------------------------------
+   Section container = `.container` (max-width ~1152px, horizontal padding,
+   centered) + `.section` (generous vertical rhythm, 96px mobile / 128px
+   desktop). Used together on every top-level page section, e.g.
+   `<section class="section"><div class="container">...</div></section>`. */
+.container {
+  max-width: var(--container-width);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+}
+
+/* Verified from vuewer.com's hero section (py-16 md:py-24): 64px vertical
+   padding, stepping to 96px at ≥48rem. Padding (not margin) — matches
+   vuewer's actual mechanism exactly, even though it means adjacent
+   sections' padding stacks rather than collapsing like margin would. */
+.section {
+  padding-block: 4rem;
+}
+
+@media (min-width: 48rem) {
+  .section {
+    padding-block: 6rem;
+  }
+}
+
+/* Alternating sections use a white panel (not a darker sand tint) so the page
+   stays mostly cream/white — contrast comes from the border + shadow instead
+   of a darker background color. */
+.section-tint > .container {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-3xl);
+  box-shadow: var(--shadow-sm);
+  padding-block: 4rem;
+}
+
+.section-head {
+  max-width: 42rem;
+  margin-bottom: 3rem;
+}
+
+.section-head.center {
+  margin-inline: auto;
+  text-align: center;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-gray-500);
+  margin-bottom: 0.75rem;
+}
+
+/* --- Typography ------------------------------------------------------------
+   Large, bold, confident headings with tight line-height/tracking, matching
+   Vuewer's scale. Content convention (not enforced in CSS): section headings
+   end with a period — e.g. "Wat het oplevert." — so write the period into
+   the copy itself, not as generated content. */
+h1, h2, h3, h4 {
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-ink);
+}
+
+/* Verified from vuewer.com's hero heading (the visible "Web development"
+   div, since their literal <h1> is sr-only): step-scale, not clamp — they
+   use discrete breakpoints (base/sm/md/lg), so we match that mechanism
+   rather than smoothly interpolating. font-weight 800 overrides the
+   h1,h2,h3,h4 rule above on purpose (extrabold specifically for h1). */
+h1 {
+  font-size: 2.25rem; /* 36px */
+  line-height: calc(2.5 / 2.25); /* ~1.111, vuewer's text-4xl pairing */
+  letter-spacing: var(--tracking-tighter);
+  font-weight: 800;
+}
+
+@media (min-width: 40rem) {
+  h1 {
+    font-size: 3rem; /* 48px */
+    line-height: 1;
+  }
+}
+
+@media (min-width: 48rem) {
+  h1 {
+    font-size: 3.75rem; /* 60px */
+  }
+}
+
+@media (min-width: 64rem) {
+  h1 {
+    font-size: 72px; /* 90px verified value, 20% smaller per request */
+  }
+}
+
+h2 {
+  font-size: clamp(2rem, 2.5vw + 1rem, 3rem);
+  line-height: 1.15;
+}
+
+h3 {
+  font-size: 1.375rem;
+  line-height: 1.3;
+  font-weight: 600;
+}
+
+/* Verified from vuewer.com's .rich-content paragraph styling. */
+.lede {
+  font-size: 1.125rem; /* 18px */
+  font-weight: 500;
+  color: var(--color-gray-600);
+  line-height: 1.5;
+}
+
+@media (min-width: 40rem) {
+  .lede {
+    font-size: 1.5rem; /* 24px */
+    line-height: calc(2 / 1.5); /* ~1.333 */
+  }
+}
+
+.text-sm {
+  font-size: 0.875rem;
+}
+
+.muted {
+  color: var(--color-gray-500);
+}
+
+/* --- Buttons -----------------------------------------------------------------
+   Verified from vuewer.com's actual button markup (Get Started / More Info):
+   fixed 48px height + 24px horizontal padding (not block padding), 16px
+   bold uppercase text, 180px min-width, and — confirmed by the absence of
+   any "rounded-*" class on their button — a genuinely sharp 0 border-radius.
+   Pill treatment is reserved for small tags/badges (.pill, .eyebrow). */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  height: 3rem; /* 48px */
+  padding-inline: 1.5rem; /* 24px */
+  min-width: 180px;
+  border-radius: 0;
+  font-size: 1rem; /* 16px */
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid transparent;
+}
+
+/* Found via real mobile testing (Playwright at 390px): vuewer's short
+   English labels ("GET STARTED") never wrap, but our longer Dutch CTAs
+   ("Ontdek in 30 minuten wat u kunt automatiseren") overflowed the
+   viewport with nowrap text and no way to shrink. Let them wrap and grow
+   past the fixed 48px height on narrow screens instead. */
+@media (max-width: 30rem) {
+  .btn {
+    height: auto;
+    min-height: 3rem;
+    padding-block: 0.75rem;
+    white-space: normal;
+    text-align: center;
+  }
+}
+
+.btn-primary {
+  background: var(--color-ink);
+  color: var(--color-white);
+}
+
+/* Verified from vuewer.com: their black CTA buttons don't shift color or
+   lift on hover, just gain a soft shadow (their hover:shadow-xl utility). */
+.btn-primary:hover {
+  box-shadow: var(--shadow-xl);
+}
+
+.btn-secondary {
+  background: var(--color-white);
+  color: var(--color-ink);
+  border-color: var(--color-header-line);
+}
+
+.btn-secondary:hover {
+  box-shadow: var(--shadow-xl);
+}
+
+.btn-block {
+  width: 100%;
+}
+
+/* --- Site header --------------------------------------------------------------
+   A bordered, segmented bar inspired by vuewer.com's navbar: individual
+   cells (CTA, each nav link, logo) divided by hairline rules, a bold black
+   CTA cell, and uppercase nav labels — see reference/style-vuewer.md. Below
+   75rem it collapses to a compact [logo | hamburger] bar; the full nav + CTA
+   move into a slide-down mobile panel instead. */
+.site-header {
+  position: sticky;
+  /* Verified from vuewer.com: their floating header sits inset the same
+     48px from the top as from the sides at ≥64rem — top scales with
+     --container-pad instead of a fixed value, to match that at every
+     breakpoint (16px / 24px / 48px). */
+  top: var(--container-pad);
+  z-index: 50;
+  padding-inline: var(--container-pad);
+}
+
+.header-bar {
+  max-width: var(--container-width);
+  margin-inline: auto;
+  display: flex;
+  align-items: stretch;
+  background: var(--color-bg);
+  border: 1px solid var(--color-header-line);
+  /* Square corners on purpose (no border-radius) — also means no
+     overflow:hidden is needed here, unlike hero-frame, which is what lets
+     the Service dropdown panel (an absolutely-positioned descendant)
+     render below the bar instead of being clipped. */
+  box-shadow: var(--shadow-sm);
+}
+
+/* At desktop widths the bar becomes a real 3-column grid using the exact
+   same 1fr 2.2fr 1fr proportions as .hero-frame-grid below it, so the CTA,
+   nav and logo cells genuinely line up with the hero's three columns
+   (not just the bar's outer width matching, which was already true) —
+   DOM order (cta, nav, wordmark) maps straight onto the three columns
+   with no explicit grid-column needed. Mobile keeps the simpler flex
+   [logo | hamburger] layout, unchanged. */
+@media (min-width: 75rem) {
+  .header-bar {
+    display: grid;
+    grid-template-columns: 1fr 2.2fr 1fr;
+  }
+}
+
+/* Verified from vuewer.com's actual header: 78px tall. Cells had no
+   vertical padding of their own to measure against — min-height on the
+   bar itself (with align-items:stretch above) is what gets every cell to
+   that height uniformly, regardless of each cell's own content. Scoped to
+   the desktop bar only; the collapsed mobile [logo|hamburger] bar doesn't
+   need to match a measurement taken from vuewer's full desktop nav. */
+@media (min-width: 75rem) {
+  .header-bar {
+    min-height: 78px;
+  }
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* The v2 logo artwork (a textured/halftone illustration, see CLAUDE.md) has
+   a wider, landscape ring icon and needs a bit more height than the old
+   clean-vector marks did, so the fine texture doesn't turn to mud at small
+   sizes. */
+.wordmark-icon {
+  display: block;
+  height: 28px;
+  width: auto;
+}
+
+.wordmark-text {
+  display: block;
+  height: 18px;
+  width: auto;
+}
+
+/* Larger lockup used for the footer brand block */
+.wordmark-lg .wordmark-icon {
+  height: 40px;
+}
+
+.wordmark-lg .wordmark-text {
+  height: 26px;
+}
+
+/* Logo cell — bordered/padded only when nested in the header bar, so the
+   same .wordmark markup stays plain when reused in the footer. Centered
+   and enlarged at desktop widths, since it's now a full grid column wide
+   (roughly 320px at 1440px) rather than an auto-width flex item. */
+.header-bar .wordmark {
+  flex-shrink: 0;
+  padding-inline: 1.5rem;
+  border-left: 1px solid var(--color-header-line);
+}
+
+@media (min-width: 75rem) {
+  .header-bar .wordmark {
+    justify-content: center;
+  }
+
+  .header-bar .wordmark .wordmark-icon {
+    height: 40px;
+  }
+
+  .header-bar .wordmark .wordmark-text {
+    height: 26px;
+  }
+}
+
+/* CTA cell — the bold black "start" cell from the reference screenshot,
+   reworded to our own copy. Font-size matches the other nav cells (18px)
+   so it reads as one consistent row, not a smaller separate label. */
+.header-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding-inline: 1.5rem;
+  background: var(--color-ink);
+  color: var(--color-white);
+  font-size: 1.125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  white-space: nowrap;
+  transition: box-shadow 0.2s ease;
+}
+
+/* Verified straight from vuewer.com's own nav "Start" pill — the exact
+   same black button in the exact same role. Its hover is a shadow lift
+   only, no color change (and no orange, ever). */
+.header-cta:hover {
+  box-shadow: var(--shadow-xl);
+}
+
+.header-cta-mobile {
+  display: none;
+}
+
+/* Nav generates no box of its own (display: contents) so its two
+   <ul class="nav-group"> lists become cells directly in the header bar's
+   layout — mobile's stacked column or desktop's even flex row below. */
+.main-nav {
+  display: contents;
+}
+
+/* Desktop: .main-nav is the grid's middle column (see .header-bar above),
+   a real flex row instead of flattening. Both nav-groups are flattened too
+   (see .nav-group below) so all 4 items sit as direct flex children here —
+   space-between then gives perfectly even gaps between all 4 and flushes
+   the first/last item to the column's own edges, matching the hero's
+   center column below exactly. */
+@media (min-width: 75rem) {
+  .main-nav {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+  }
+}
+
+/* Flattened at every width: mobile stacks the <li>s directly in .main-nav's
+   column; desktop spreads them directly in its even space-between row
+   above. The original 2+2 grouping (Service+Pricing | Cases+Contact) now
+   shows up only as the divider line below, not as its own spacing block. */
+.nav-group {
+  display: contents;
+}
+
+/* Outer edges: inset the first/last nav items from the CTA/logo cell
+   boundaries, echoing those cells' own inline padding. Desktop-only —
+   on mobile the nav items already get their own stacked-column padding.
+   (No divider between Pricing/Cases anymore — tried a centered vertical
+   rule here and it didn't read well, removed.) */
+@media (min-width: 75rem) {
+  /* margin-left:0 overrides the -0.75rem hover-box compensation above —
+     this 40px is the deliberate column-edge inset and shouldn't be
+     partly cancelled by that trick. */
+  .nav-group:first-of-type > li:first-child > .nav-dropdown-trigger {
+    padding-left: 40px;
+    margin-left: 0;
+  }
+
+  .nav-group:last-of-type > li:last-child > a {
+    padding-right: 40px;
+    margin-right: 0;
+  }
+}
+
+/* Scoped to "li a" (not just ".main-nav a") on purpose: .header-cta-mobile
+   is also an <a> that lives directly inside <nav>, and an unscoped
+   ".main-nav a" selector would out-specificity its own "display: none" and
+   force it visible on desktop. font-size verified from vuewer.com's actual
+   nav cells (18px/700), up from an earlier estimate of 13px — their short
+   English words afford it, and ours are short now too post-restructure. */
+/* Scoped with ">" child combinators (not the old descendant "li a") so
+   these rules only reach the 4 top-level items (Service/Pricing/Cases/
+   Contact) — not the nested "Service" dropdown's own links, which are
+   also technically ".main-nav ... li a" but have their own separate
+   styling further down and shouldn't inherit this border/hover trick. */
+.main-nav > .nav-group > li > a,
+.main-nav .nav-dropdown-trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 1.125rem; /* 18px */
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-text);
+  background: none;
+  /* Transparent 1px border reserves the space a solid border takes on
+     hover (see below) so it doesn't shift layout when it appears. */
+  border: 1px solid transparent;
+  padding: 0;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Verified from vuewer.com's own nav items: hover is a faint black tint
+   (their bg-black/3) plus a border that fades in from transparent to
+   solid — no color change, no orange. Active-page state keeps our own
+   accent color, kept as a separate rule so it doesn't get overridden by
+   the hover styling below. */
+.main-nav > .nav-group > li > a:hover,
+.main-nav .nav-dropdown-trigger:hover {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: var(--color-text);
+}
+
+.main-nav > .nav-group > li > a[aria-current="page"],
+.main-nav .nav-dropdown-trigger[aria-current="page"] {
+  color: var(--color-accent);
+}
+
+/* --- Nav dropdown ("Service") -------------------------------------------
+   Click-to-open (not hover-only, for touch/accessibility), same max-height
+   toggle mechanism on both desktop (floating panel) and mobile (expands
+   inline within the slide-down nav panel) — just repositioned per context. */
+.nav-dropdown {
+  position: relative;
+}
+
+/* height:100% only makes sense in the desktop horizontal row (fills the
+   header-bar's height, matching sibling cells) — on mobile the nav is a
+   vertical stack instead, where height:100% on a flex item caused it to
+   balloon and eat most of the panel as blank space. */
+@media (min-width: 75rem) {
+  .nav-dropdown {
+    height: 100%;
+  }
+
+  /* padding-inline + a matching negative margin-inline gives the hover
+     highlight some breathing room beyond the text without changing the
+     item's footprint in the space-between row — the padding pushes the
+     background/border out, the margin pulls it back to the same position
+     it occupied before. */
+  .main-nav > .nav-group > li > a,
+  .main-nav .nav-dropdown-trigger {
+    height: 100%;
+    padding-inline: 0.75rem;
+    margin-inline: -0.75rem;
+  }
+}
+
+.nav-dropdown-icon {
+  width: 0.4375rem;
+  height: 0.4375rem;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translateY(-3px);
+  transition: transform 0.2s var(--ease-out);
+  flex-shrink: 0;
+}
+
+.nav-dropdown-trigger[aria-expanded="true"] .nav-dropdown-icon {
+  transform: rotate(225deg) translateY(-1px);
+}
+
+.nav-dropdown-menu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s var(--ease-out);
+}
+
+.nav-dropdown-trigger[aria-expanded="true"] + .nav-dropdown-menu {
+  max-height: 16rem;
+}
+
+/* Selector needs to out-specificity ".main-nav li a" (which sets
+   uppercase) — plain ".nav-dropdown-menu a" loses that fight since
+   ".main-nav li a" has one more class in the chain. */
+.main-nav ul.nav-dropdown-menu a {
+  display: block;
+  white-space: nowrap;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: normal;
+  color: var(--color-text);
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.nav-dropdown-menu a[aria-current="page"] {
+  color: var(--color-accent);
+}
+
+@media (min-width: 75rem) {
+  .nav-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 1px);
+    left: 0;
+    min-width: 14rem;
+    background: var(--color-bg);
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    z-index: 60;
+  }
+
+  /* Border/shadow only while open — otherwise they still render at the
+     collapsed max-height:0, showing as a faint line under the trigger. */
+  .nav-dropdown-trigger[aria-expanded="true"] + .nav-dropdown-menu {
+    border: 1px solid var(--color-header-line);
+    box-shadow: var(--shadow-md);
+  }
+
+  .nav-dropdown-menu li + li {
+    border-top: 1px solid var(--color-header-line);
+  }
+
+  .nav-dropdown-menu a {
+    padding: 0.875rem 1.25rem;
+  }
+
+  .nav-dropdown-menu a:hover,
+  .nav-dropdown-menu a[aria-current="page"] {
+    background: var(--color-bg-tint-strong);
+  }
+}
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 3.25rem;
+  flex-shrink: 0;
+  border: none;
+  border-left: 1px solid var(--color-header-line);
+  background: none;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: var(--color-ink);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.nav-toggle[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* This header packs a CTA + 5 nav cells + logo — wider than the site's usual
+   56rem breakpoint needs to fit comfortably, so it collapses earlier. */
+@media (max-width: 75rem) {
+  .header-bar .wordmark {
+    border-left: none;
+  }
+
+  .header-cta {
+    display: none;
+  }
+
+  .main-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    position: fixed;
+    inset: 6rem 1rem 1rem 1rem;
+    background: var(--color-bg);
+    border: 1px solid var(--color-header-line);
+    border-radius: var(--radius-2xl);
+    padding: 2rem var(--container-pad);
+    transform: translateY(-8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s var(--ease-out), transform 0.25s var(--ease-out);
+    overflow-y: auto;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .main-nav.is-open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .main-nav li a,
+  .main-nav .nav-dropdown-trigger {
+    font-size: 1.25rem;
+  }
+
+  .nav-dropdown {
+    width: 100%;
+  }
+
+  .nav-dropdown-trigger {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .nav-dropdown-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-top: 1rem;
+  }
+
+  .nav-dropdown-menu a {
+    padding-left: 1rem;
+    font-size: 1.0625rem;
+  }
+
+  .main-nav .header-cta-mobile {
+    display: inline-flex;
+    margin-top: 1rem;
+  }
+
+  .nav-toggle {
+    display: flex;
+  }
+}
+
+/* --- Hero frame -----------------------------------------------------------
+   A bordered block that continues the header's grid language down through
+   the hero and the client-logo strip below it (see reference screenshot
+   from vuewer.com): empty margin columns flank a centered content column,
+   divided by the same hairline rule used in the header bar, with the logo
+   strip in the same frame below a horizontal divider. */
+/* Fix: .hero-frame previously had no inset of its own — below the 1600px
+   container cap it sat flush against the viewport edges (measured: exactly
+   100vw wide) while .site-header correctly inset via padding-inline on its
+   wrapper. This wrapper mirrors that same site-header/header-bar pattern. */
+.hero-frame-wrap {
+  padding-inline: var(--container-pad);
+}
+
+.hero-frame {
+  max-width: var(--container-width);
+  margin-inline: auto;
+  margin-top: 2rem;
+  border: 1px solid var(--color-header-line);
+  border-radius: var(--radius-2xl);
+  overflow: hidden;
+  background: var(--color-bg);
+}
+
+.hero-frame-grid {
+  display: grid;
+  grid-template-columns: 1fr 2.2fr 1fr;
+}
+
+.hero-frame-col {
+  /* Grid items default to min-width:auto, meaning they refuse to shrink
+     below their content's min-content size — a nowrap button label was
+     enough to push this column (and the whole page) wider than the
+     viewport on mobile. min-width:0 is the standard fix. */
+  min-width: 0;
+  border-left: 1px solid var(--color-header-line);
+}
+
+.hero-frame-col:first-child {
+  border-left: none;
+}
+
+.hero-frame-content {
+  padding: 5rem 2rem;
+  text-align: center;
+}
+
+.hero-frame-content .eyebrow {
+  border: 1px solid var(--color-header-line);
+  /* The one deliberate exception to the site's square-corners rule —
+     hardcoded rather than a --radius-* token, since that whole scale is
+     zeroed out (see :root). */
+  border-radius: 999px;
+  padding: 0.375rem 1.125rem;
+  margin-bottom: 1.5rem;
+}
+
+.hero-frame-content .lede {
+  margin-inline: auto;
+}
+
+.hero-frame-content .hero-actions {
+  justify-content: center;
+}
+
+.hero-frame-logos {
+  border-top: 1px solid var(--color-header-line);
+  padding-block: 2rem;
+}
+
+@media (max-width: 48rem) {
+  .hero-frame-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-frame-col:not(.hero-frame-content) {
+    display: none;
+  }
+
+  .hero-frame-content {
+    padding: 3rem 1.5rem;
+  }
+}
+
+/* --- Hero -------------------------------------------------------------------- */
+.hero {
+  padding-top: 4rem;
+}
+
+.hero-grid {
+  display: grid;
+  gap: 3rem;
+  align-items: center;
+}
+
+@media (min-width: 64rem) {
+  .hero-grid {
+    grid-template-columns: 1.1fr 0.9fr;
+  }
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+/* Live-data widget card shown in hero, mirrors the data-vista original */
+.data-card {
+  background: var(--color-white);
+  border-radius: var(--radius-3xl);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-lg);
+  padding: 1.75rem;
+}
+
+.data-card-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-block: 0.75rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.data-card-row:last-child {
+  border-bottom: none;
+}
+
+.data-card-label {
+  color: var(--color-gray-500);
+  font-size: 0.9375rem;
+}
+
+.data-card-value {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.data-card-delta {
+  color: #16a34a;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-left: 0.5rem;
+}
+
+/* --- Stats bar ----------------------------------------------------------------- */
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  text-align: center;
+}
+
+@media (min-width: 48rem) {
+  .stats-bar {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.stat-number {
+  font-size: clamp(1.75rem, 2.5vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: var(--tracking-tight);
+}
+
+.stat-label {
+  color: var(--color-gray-500);
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+/* --- Logo marquee (placeholder tiles only — never real client logos) ---------- */
+.logo-marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+}
+
+.logo-track {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+
+.logo-track.reverse {
+  animation-name: marquee-reverse;
+}
+
+/* Pause the loop on hover/focus so a curious visitor can read a tile —
+   pure CSS, no JS needed. */
+.logo-marquee:hover .logo-track,
+.logo-marquee:focus-within .logo-track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes marquee-reverse {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+
+.logo-tile {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 9rem;
+  height: 3.5rem;
+  border-radius: var(--radius-xl);
+  background: var(--color-bg-tint-strong);
+  color: var(--color-gray-400);
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+}
+
+/* --- Cards -------------------------------------------------------------------- */
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.grid-2 { grid-template-columns: 1fr; }
+.grid-3 { grid-template-columns: 1fr; }
+.grid-4 { grid-template-columns: 1fr; }
+
+@media (min-width: 40rem) {
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 64rem) {
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-4 { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* Verified from vuewer.com's card component: rounded-md (6px) + p-6/sm:p-10/lg:p-12. */
+.card {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md); /* 6px */
+  padding: 1.5rem; /* 24px */
+  transition: transform 0.3s var(--ease-bounce), box-shadow 0.3s ease;
+}
+
+@media (min-width: 40rem) {
+  .card {
+    padding: 2.5rem; /* 40px */
+  }
+}
+
+@media (min-width: 64rem) {
+  .card {
+    padding: 3rem; /* 48px */
+  }
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.card-icon {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: var(--radius-lg);
+  background: var(--color-ink);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+}
+
+.card p {
+  color: var(--color-gray-600);
+  margin-top: 0.5rem;
+}
+
+.card.card-featured {
+  background: var(--color-ink);
+  color: var(--color-white);
+  border-color: var(--color-ink);
+}
+
+.card.card-featured h3,
+.card.card-featured .card-icon {
+  color: var(--color-white);
+}
+
+.card.card-featured .card-icon {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.card.card-featured p {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.card.card-featured a {
+  color: var(--color-white);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.card-link {
+  display: inline-block;
+  margin-top: 1rem;
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+
+/* Small pill tag, e.g. for system-integration names */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.375rem 0.9rem;
+  border-radius: var(--radius-full);
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-gray-600);
+}
+
+.pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+}
+
+/* Accent variant — use sparingly, e.g. to flag something as new/featured */
+.pill-accent {
+  background: var(--color-accent-soft);
+  border-color: transparent;
+  color: var(--color-accent);
+}
+
+/* --- Case cards ---------------------------------------------------------------- */
+.case-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-2xl);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.case-tag {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-gray-500);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+}
+
+.case-result {
+  font-size: 1.375rem;
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+}
+
+.case-block {
+  border-top: 1px solid var(--color-border);
+  padding-top: 1rem;
+}
+
+.case-block h4 {
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-gray-500);
+  margin-bottom: 0.375rem;
+}
+
+.case-block p {
+  color: var(--color-gray-600);
+}
+
+/* --- Testimonial ---------------------------------------------------------------- */
+.testimonial {
+  background: var(--color-ink);
+  color: var(--color-white);
+  border-radius: var(--radius-3xl);
+  padding: 3rem;
+  text-align: center;
+}
+
+.testimonial blockquote {
+  font-size: clamp(1.25rem, 2vw, 1.625rem);
+  font-weight: 600;
+  letter-spacing: var(--tracking-tight);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.testimonial cite {
+  display: block;
+  margin-top: 1.5rem;
+  font-style: normal;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9375rem;
+}
+
+/* --- Numbered steps (werkwijze) --------------------------------------------------- */
+.steps {
+  counter-reset: step;
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (min-width: 48rem) {
+  .steps {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.step {
+  position: relative;
+  padding-top: 3rem;
+}
+
+.step::before {
+  counter-increment: step;
+  content: counter(step, decimal-leading-zero);
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--color-gray-400);
+  letter-spacing: var(--tracking-tight);
+}
+
+.step h3 {
+  margin-bottom: 0.5rem;
+}
+
+.step p {
+  color: var(--color-gray-600);
+}
+
+/* --- Accordion (FAQ) --------------------------------------------------------------- */
+.accordion {
+  border-top: 1px solid var(--color-border);
+}
+
+.accordion-item {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.accordion-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 1.5rem;
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.accordion-icon {
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s var(--ease-out);
+}
+
+.accordion-trigger[aria-expanded="true"] .accordion-icon {
+  transform: rotate(45deg);
+}
+
+.accordion-panel {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.35s var(--ease-out), opacity 0.25s ease;
+}
+
+.accordion-panel.is-open {
+  opacity: 1;
+}
+
+.accordion-panel p {
+  color: var(--color-gray-600);
+  padding-bottom: 1.5rem;
+  max-width: 40rem;
+}
+
+/* --- Scroll reveal ---------------------------------------------------------------------
+   Deliberately subtle: a short rise + fade, not a slide or a bounce — should
+   read as "the page is calm and just loaded in," never as a flourish. */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.45s var(--ease-out), transform 0.45s var(--ease-out);
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- CTA band ---------------------------------------------------------------------------- */
+.cta-band {
+  background: var(--color-ink);
+  color: var(--color-white);
+  border-radius: var(--radius-3xl);
+  padding: 3.5rem 2rem;
+  text-align: center;
+}
+
+.cta-band h2 {
+  color: var(--color-white);
+}
+
+.cta-band p {
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 36rem;
+  margin: 1rem auto 0;
+}
+
+.cta-band .btn-secondary {
+  background: var(--color-white);
+}
+
+.cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.cta-alt {
+  margin-top: 1.5rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.875rem;
+}
+
+.cta-alt a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* --- Forms ------------------------------------------------------------------------------- */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.form-field label {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.form-field input,
+.form-field textarea {
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  background: var(--color-white);
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 1px;
+}
+
+.form-note {
+  font-size: 0.8125rem;
+  color: var(--color-gray-500);
+  margin-top: 1rem;
+}
+
+/* --- Breadcrumb -------------------------------------------------------------------------- */
+.breadcrumb {
+  font-size: 0.875rem;
+  color: var(--color-gray-500);
+  margin-bottom: 1.5rem;
+}
+
+.breadcrumb a {
+  color: var(--color-gray-500);
+}
+
+.breadcrumb a:hover {
+  color: var(--color-ink);
+}
+
+/* --- Footer -------------------------------------------------------------------------------- */
+.site-footer {
+  margin-top: var(--section-gap);
+  border-top: 1px solid var(--color-border);
+  padding-top: 4rem;
+  padding-bottom: 2rem;
+}
+
+.footer-inner {
+  display: grid;
+  gap: 2.5rem;
+}
+
+@media (min-width: 48rem) {
+  .footer-inner {
+    grid-template-columns: 1.4fr 1fr 1fr;
+  }
+}
+
+.footer-brand p {
+  color: var(--color-gray-600);
+  margin-top: 1rem;
+  max-width: 22rem;
+}
+
+.footer-nav, .footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.footer-nav a, .footer-contact a, .footer-contact p {
+  color: var(--color-gray-600);
+  font-size: 0.9375rem;
+}
+
+.footer-nav a:hover {
+  color: var(--color-ink);
+}
+
+.footer-heading {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-gray-500);
+  margin-bottom: 0.5rem;
+}
+
+.footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--color-border);
+  color: var(--color-gray-500);
+  font-size: 0.875rem;
+}
+
+.footer-legal {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.footer-legal a:hover {
+  color: var(--color-ink);
+}
+
+/* --- Utilities ------------------------------------------------------------------------------ */
+.text-center { text-align: center; }
+.mt-0 { margin-top: 0; }
