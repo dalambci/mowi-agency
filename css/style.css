@@ -812,10 +812,16 @@ h3 {
     inset: auto 0 0 0;
     z-index: 45;
     background: var(--color-ink);
+    /* Verified on vuewer.com: the sheet's black background is edge-to-edge,
+       but its actual link grid is inset by the same amount as the header's
+       own padding-inline (--container-pad, 16px at this width) — so the
+       grid's left/right edges line up vertically with the header cells
+       above it, instead of running flush to the screen edge. */
+    padding-inline: var(--container-pad);
+    padding-block: 0;
     border: none;
     border-top: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 0;
-    padding: 0;
     max-height: calc(100dvh - 6rem);
     overflow-y: auto;
     transform: translateY(100%);
