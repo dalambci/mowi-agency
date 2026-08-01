@@ -397,6 +397,23 @@ h3 {
   top: var(--container-pad);
   z-index: 50;
   padding-inline: var(--container-pad);
+  transition: top 0.3s var(--ease-out);
+}
+
+/* js/main.js toggles this the moment window.scrollY > 0 (matching
+   vuewer.com's own x-init scroll listener) — once the page has scrolled at
+   all, the header pulls in tighter to the top instead of keeping its
+   original landing-page inset, so it overlaps less content while
+   scrolling. Desktop settles at a small fixed 10px; mobile goes all the
+   way to 0 (flush against the screen edge) per request. */
+.site-header.is-scrolled {
+  top: 10px;
+}
+
+@media (max-width: 75rem) {
+  .site-header.is-scrolled {
+    top: 0;
+  }
 }
 
 .header-bar {

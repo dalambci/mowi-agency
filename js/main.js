@@ -6,6 +6,21 @@
 
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+// --- Sticky header compaction on scroll --------------------------------------
+// Matches vuewer.com's own pattern (their header does
+// `x-init="window.addEventListener('scroll', () => scrolled = window.scrollY > 0)"`)
+// — see css/style.css's .site-header.is-scrolled for the actual top-offset
+// values this toggles between.
+const siteHeader = document.querySelector(".site-header");
+
+if (siteHeader) {
+  const updateHeaderScrolled = () => {
+    siteHeader.classList.toggle("is-scrolled", window.scrollY > 0);
+  };
+  updateHeaderScrolled();
+  window.addEventListener("scroll", updateHeaderScrolled, { passive: true });
+}
+
 // --- Mobile nav toggle -----------------------------------------------------
 const navToggle = document.getElementById("navToggle");
 const mainNav = document.getElementById("main-nav");
