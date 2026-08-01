@@ -10,21 +10,39 @@ const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)
 const navToggle = document.getElementById("navToggle");
 const mainNav = document.getElementById("main-nav");
 
+function closeMobileNav() {
+  navToggle.setAttribute("aria-expanded", "false");
+  mainNav.classList.remove("is-open");
+  document.body.classList.remove("nav-open");
+  document.body.style.overflow = "";
+}
+
 if (navToggle && mainNav) {
   navToggle.addEventListener("click", () => {
     const isOpen = navToggle.getAttribute("aria-expanded") === "true";
-    navToggle.setAttribute("aria-expanded", String(!isOpen));
-    mainNav.classList.toggle("is-open", !isOpen);
-    document.body.style.overflow = isOpen ? "" : "hidden";
+    if (isOpen) {
+      closeMobileNav();
+    } else {
+      navToggle.setAttribute("aria-expanded", "true");
+      mainNav.classList.add("is-open");
+      document.body.classList.add("nav-open");
+      document.body.style.overflow = "hidden";
+    }
   });
 
   // Close the mobile menu after tapping a link, so navigation feels instant.
   mainNav.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => {
-      navToggle.setAttribute("aria-expanded", "false");
-      mainNav.classList.remove("is-open");
-      document.body.style.overflow = "";
-    });
+    link.addEventListener("click", closeMobileNav);
+  });
+
+  // Tapping the dimmed backdrop (body.nav-open::after, see css/style.css)
+  // closes the sheet — the backdrop itself is a pseudo-element, so this
+  // listens on body and bails out for clicks that landed on the panel or
+  // the toggle button itself.
+  document.body.addEventListener("click", (event) => {
+    if (!document.body.classList.contains("nav-open")) return;
+    if (mainNav.contains(event.target) || navToggle.contains(event.target)) return;
+    closeMobileNav();
   });
 }
 
