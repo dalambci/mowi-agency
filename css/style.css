@@ -18,7 +18,13 @@
   --color-accent: #b5622f;          /* warm terracotta — links, focus, small accents */
   --color-accent-soft: rgba(181, 98, 47, 0.12); /* tinted background for accent pills */
   --color-border: #e6e2d8;          /* hairline borders — warm-tinted, not neutral grey */
-  --color-header-line: rgba(22, 20, 15, 0.18); /* crisper, darker divider used only in the header's segmented bar */
+  /* Pixel-sampled straight from a vuewer.com screenshot: their header's own
+     segment dividers are solid (0,0,0) black — much bolder than the faint
+     hairline their hero-frame's *continuing* vertical lines use further
+     down the page (those measured close to --color-border above, near
+     #d2d2cf). Two different weights for two different jobs: this one is
+     only for the header's own segmented bar. */
+  --color-header-line: rgba(10, 9, 7, 0.85);
 
   /* Back-compat aliases: components further down this file were named
      before the tokens above were formalized. Keeping both means nothing
@@ -951,7 +957,12 @@ h3 {
      enough to push this column (and the whole page) wider than the
      viewport on mobile. min-width:0 is the standard fix. */
   min-width: 0;
-  border-left: 1px solid var(--color-header-line);
+  /* --color-border (faint), not --color-header-line (bold) — pixel-sampled
+     from vuewer.com: their frame's *outer* perimeter is solid black all
+     the way around (top, bottom, left, right, even deep into the hero),
+     but these *internal* column dividers use the much fainter hairline
+     weight instead. Two different jobs, two different variables. */
+  border-left: 1px solid var(--color-border);
 }
 
 .hero-frame-col:first-child {
