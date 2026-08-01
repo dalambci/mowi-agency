@@ -101,29 +101,35 @@
            every one to the exact same box via object-fit: contain so they
            read as a uniform row despite very different source aspect
            ratios. The track holds two identical sets of 9 tiles back to
-           back; animating exactly -50% loops it seamlessly. -->
+           back; animating exactly -50% loops it seamlessly.
+
+           No loading="lazy" here on purpose: every tile scrolls into view
+           repeatedly via the CSS transform animation (not real page
+           scroll), and the browser's lazy-load intersection check doesn't
+           reliably keep up with that — tiles would render blank for a few
+           seconds mid-loop before their deferred fetch/decode finished. -->
       <div class="hero-frame-logos">
         <div class="logo-marquee" aria-hidden="true">
           <div class="logo-track">
-            <span class="logo-tile"><img src="assets/logos/afas.png" alt="AFAS" loading="lazy"></span>
-            <span class="logo-tile"><img src="assets/logos/dynamics-365.png" alt="Microsoft Dynamics 365" loading="lazy"></span>
-            <span class="logo-tile"><img src="assets/logos/exact.png" alt="Exact" loading="lazy"></span>
-            <span class="logo-tile"><img src="assets/logos/hubspot.png" alt="HubSpot" loading="lazy"></span>
-            <span class="logo-tile"><img src="assets/logos/excel.png" alt="Microsoft Excel" loading="lazy"></span>
-            <span class="logo-tile"><img src="assets/logos/odoo.png" alt="Odoo" loading="lazy"></span>
-            <span class="logo-tile"><img src="assets/logos/salesforce.png" alt="Salesforce" loading="lazy"></span>
-            <span class="logo-tile"><img src="assets/logos/sap.png" alt="SAP" loading="lazy"></span>
-            <span class="logo-tile"><img src="assets/logos/twinfield.png" alt="Twinfield" loading="lazy"></span>
+            <span class="logo-tile"><img src="assets/logos/afas.png" alt="AFAS"></span>
+            <span class="logo-tile"><img src="assets/logos/dynamics-365.png" alt="Microsoft Dynamics 365"></span>
+            <span class="logo-tile"><img src="assets/logos/exact.png" alt="Exact"></span>
+            <span class="logo-tile"><img src="assets/logos/hubspot.png" alt="HubSpot"></span>
+            <span class="logo-tile"><img src="assets/logos/excel.png" alt="Microsoft Excel"></span>
+            <span class="logo-tile"><img src="assets/logos/odoo.png" alt="Odoo"></span>
+            <span class="logo-tile"><img src="assets/logos/salesforce.png" alt="Salesforce"></span>
+            <span class="logo-tile"><img src="assets/logos/sap.png" alt="SAP"></span>
+            <span class="logo-tile"><img src="assets/logos/twinfield.png" alt="Twinfield"></span>
             <!-- duplicated set for the seamless loop -->
-            <span class="logo-tile"><img src="assets/logos/afas.png" alt="" loading="lazy"></span>
-            <span class="logo-tile"><img src="assets/logos/dynamics-365.png" alt="" loading="lazy"></span>
-            <span class="logo-tile"><img src="assets/logos/exact.png" alt="" loading="lazy"></span>
-            <span class="logo-tile"><img src="assets/logos/hubspot.png" alt="" loading="lazy"></span>
-            <span class="logo-tile"><img src="assets/logos/excel.png" alt="" loading="lazy"></span>
-            <span class="logo-tile"><img src="assets/logos/odoo.png" alt="" loading="lazy"></span>
-            <span class="logo-tile"><img src="assets/logos/salesforce.png" alt="" loading="lazy"></span>
-            <span class="logo-tile"><img src="assets/logos/sap.png" alt="" loading="lazy"></span>
-            <span class="logo-tile"><img src="assets/logos/twinfield.png" alt="" loading="lazy"></span>
+            <span class="logo-tile"><img src="assets/logos/afas.png" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/dynamics-365.png" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/exact.png" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/hubspot.png" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/excel.png" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/odoo.png" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/salesforce.png" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/sap.png" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/twinfield.png" alt=""></span>
           </div>
         </div>
       </div>
