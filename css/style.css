@@ -975,7 +975,7 @@ h3 {
 .logo-track {
   display: flex;
   align-items: center;
-  gap: 3rem;
+  gap: 4.5rem;
   width: max-content;
   animation: marquee 30s linear infinite;
 }
