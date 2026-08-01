@@ -973,13 +973,12 @@ h3 {
 }
 
 /* Spacing lives on each tile (margin-right), not as a flex `gap` on the
-   track. With an odd tile count (9) per set, `gap` splits into 17 gaps
-   across the 18 duplicated tiles — an odd number that can't divide evenly
-   in half, so the -50% reset in the marquee keyframes landed mid-gap
-   instead of on a tile boundary, showing a brief blank flash every loop.
-   Margin-per-tile makes each tile "own" the space after it, so the total
-   track width is always an exact multiple of (tile + its margin) and -50%
-   lands precisely on the seam between the two duplicated sets. */
+   track — a `gap` splits unevenly whenever the tile count per set is odd
+   (9 tiles = 17 gaps across 2 sets, which can't divide evenly), so a
+   gap-based reset can land mid-gap instead of on a tile boundary. Margin
+   per tile makes each tile "own" the space after it, so the track width
+   is always an exact multiple of (tile + its margin), whatever the set
+   count — the -33.333% reset below always lands precisely on a seam. */
 .logo-track {
   display: flex;
   align-items: center;
@@ -998,13 +997,17 @@ h3 {
   animation-play-state: paused;
 }
 
+/* -33.333% = exactly one set-width out of the track's 3 duplicated sets
+   (see index.html comment for why 3 sets, not 2). Same absolute distance
+   as the old -50%-of-2-sets version, so the scroll speed is unchanged —
+   only the reset fraction changes because the track is now 3 sets wide. */
 @keyframes marquee {
   from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  to { transform: translateX(-33.333%); }
 }
 
 @keyframes marquee-reverse {
-  from { transform: translateX(-50%); }
+  from { transform: translateX(-33.333%); }
   to { transform: translateX(0); }
 }
 

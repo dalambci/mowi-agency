@@ -100,14 +100,25 @@
            and was capped to a shared max dimension; .logo-tile then fits
            every one to the exact same box via object-fit: contain so they
            read as a uniform row despite very different source aspect
-           ratios. The track holds two identical sets of 9 tiles back to
-           back; animating exactly -50% loops it seamlessly.
+           ratios. The track holds THREE identical sets of 9 tiles back to
+           back, animating exactly -33.333% (one set-width) per loop.
 
-           No loading="lazy" here on purpose: every tile scrolls into view
-           repeatedly via the CSS transform animation (not real page
-           scroll), and the browser's lazy-load intersection check doesn't
-           reliably keep up with that — tiles would render blank for a few
-           seconds mid-loop before their deferred fetch/decode finished. -->
+           Two sets isn't enough: one set is ~1195px wide, but the site's
+           container can be up to 1600px (--container-width: 100rem). At
+           the point in the loop where set 1 has scrolled fully off and
+           set 2 is the only thing left to cover the container, set 2
+           alone (1195px) can't span a 1600px container — leaving real
+           blank space at the right edge for the last stretch of the loop.
+           A third set guarantees two full sets (~2390px) are always on
+           screen after any shift, comfortably covering the container at
+           any width the site actually uses.
+
+           No loading="lazy" on the imgs, on purpose: every tile scrolls
+           into view repeatedly via this transform animation (not real
+           page scroll), and the browser's lazy-load intersection check
+           doesn't reliably keep up with that — tiles would render blank
+           for a few seconds mid-loop before their deferred fetch/decode
+           finished. -->
       <div class="hero-frame-logos">
         <div class="logo-marquee" aria-hidden="true">
           <div class="logo-track">
@@ -120,7 +131,17 @@
             <span class="logo-tile"><img src="assets/logos/salesforce.png" alt="Salesforce"></span>
             <span class="logo-tile"><img src="assets/logos/sap.png" alt="SAP"></span>
             <span class="logo-tile"><img src="assets/logos/twinfield.png" alt="Twinfield"></span>
-            <!-- duplicated set for the seamless loop -->
+            <!-- 2nd of 3 identical sets, for the seamless loop -->
+            <span class="logo-tile"><img src="assets/logos/afas.png" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/dynamics-365.png" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/exact.png" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/hubspot.png" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/excel.png" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/odoo.png" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/salesforce.png" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/sap.png" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/twinfield.png" alt=""></span>
+            <!-- 3rd of 3 identical sets -->
             <span class="logo-tile"><img src="assets/logos/afas.png" alt=""></span>
             <span class="logo-tile"><img src="assets/logos/dynamics-365.png" alt=""></span>
             <span class="logo-tile"><img src="assets/logos/exact.png" alt=""></span>
