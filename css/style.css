@@ -764,14 +764,15 @@ h3 {
     border-left: none;
   }
 
+  /* 34px = 40px - 15%, per request. */
   .header-bar .wordmark .wordmark-icon {
-    height: 40px;
+    height: 34px;
   }
 
   /* Same height as the icon (not the smaller desktop 26px) — grown to
      match rather than shrinking the icon down to the text. */
   .header-bar .wordmark .wordmark-text {
-    height: 40px;
+    height: 34px;
   }
 
   .header-cta {
