@@ -11,7 +11,7 @@
      almost no color of its own. We keep that restraint, but add one warm
      accent, since a fully monochrome site needs *some* way to signal
      interactive/brand moments beyond a hover state. */
-  --color-bg: #f4f4f0;              /* page background — warm off-white */
+  --color-bg: #fcfbfa;              /* page background — near-neutral light grey */
   --color-surface: #ffffff;         /* cards, panels, anything "raised" */
   --color-text: #000000;            /* pure black */
   --color-text-muted: #6b6a63;      /* secondary/body copy — warm grey */

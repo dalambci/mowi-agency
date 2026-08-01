@@ -39,7 +39,7 @@ durable and apply to all future work in this repo, not just the current task.
 - Never copy Vuewer's actual text, images, project screenshots, client logos, or brand assets.
   Only reuse their design *patterns* (colors, type scale, spacing, radius, shadows,
   animations) reinterpreted with our own content.
-- Base page background stays the warm cream (`#f4f4f0`, `--color-bg`). Prefer **white** as the
+- Base page background stays a near-neutral light grey (`#fcfbfa`, `--color-bg`). Prefer **white** as the
   secondary/contrast surface (alternating sections, cards), not a darker sand/tint shade.
   Alternating sections (`.section-tint`) render as a white panel with a hairline border and
   soft shadow, not a darker-cream background — contrast comes from that border/elevation, not
