@@ -1023,22 +1023,13 @@ h3 {
 
 /* A full sentence, not a short 2-3 word label, so it skips the all-caps
    .eyebrow treatment used for section labels like "Diensten" — that would
-   hurt readability at this length. Muted color keeps it secondary to the
-   headline above and the logos below, not competing with either. */
-/* font-size matches .lede (the hero's own paragraph) exactly, at the same
-   40rem breakpoint, per request — "as big as the paragraph above it". */
+   hurt readability at this length. Carries the .lede class (see markup) to
+   inherit the hero paragraph's font-size/weight/color/line-height exactly,
+   rather than duplicating those values here where they could drift out of
+   sync — this rule only adds what .lede doesn't already provide. */
 .marquee-heading {
   text-align: center;
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: var(--color-gray-500);
   margin-bottom: 1.25rem;
-}
-
-@media (min-width: 40rem) {
-  .marquee-heading {
-    font-size: 1.5rem;
-  }
 }
 
 @media (max-width: 48rem) {
