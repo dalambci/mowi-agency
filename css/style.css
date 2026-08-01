@@ -1608,8 +1608,10 @@ h3 {
      duration) is what makes this actually noticeable — without it, the
      reveal fires the instant an element crosses the IntersectionObserver
      threshold, which is often while it's still mid-scroll, so it reads as
-     "just appeared" rather than as a visible animation. */
-  transition: opacity 0.45s var(--ease-out) 0.15s, transform 0.45s var(--ease-out) 0.15s;
+     "just appeared" rather than as a visible animation. Duration bumped
+     from 0.45s to 0.7s (delay unchanged) since the fade/rise itself was
+     still over too quickly to actually read as motion. */
+  transition: opacity 0.7s var(--ease-out) 0.15s, transform 0.7s var(--ease-out) 0.15s;
 }
 
 [data-reveal].is-visible {
