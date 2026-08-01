@@ -523,16 +523,16 @@ h3 {
 }
 
 /* Desktop: .main-nav is the grid's middle column (see .header-bar above),
-   a real flex row instead of flattening. Both nav-groups are flattened too
-   (see .nav-group below) so all 4 items sit as direct flex children here —
-   space-between then gives perfectly even gaps between all 4 and flushes
-   the first/last item to the column's own edges, matching the hero's
-   center column below exactly. */
+   a real 4-column grid instead of flattening. Both nav-groups are flattened
+   too (see .nav-group below) so all 4 items sit as direct grid children
+   here — equal 1fr tracks give every item the exact same cell width, so
+   each one's hover box (which fills its cell, see the item rule below) is
+   an identical size instead of hugging whatever width its own text needs. */
 @media (min-width: 75rem) {
   .main-nav {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     align-items: stretch;
-    justify-content: space-between;
   }
 }
 
@@ -542,26 +542,6 @@ h3 {
    shows up only as the divider line below, not as its own spacing block. */
 .nav-group {
   display: contents;
-}
-
-/* Outer edges: inset the first/last nav items from the CTA/logo cell
-   boundaries, echoing those cells' own inline padding. Desktop-only —
-   on mobile the nav items already get their own stacked-column padding.
-   (No divider between Pricing/Cases anymore — tried a centered vertical
-   rule here and it didn't read well, removed.) */
-@media (min-width: 75rem) {
-  /* margin-left:0 overrides the -0.75rem hover-box compensation above —
-     this 40px is the deliberate column-edge inset and shouldn't be
-     partly cancelled by that trick. */
-  .nav-group:first-of-type > li:first-child > .nav-dropdown-trigger {
-    padding-left: 40px;
-    margin-left: 0;
-  }
-
-  .nav-group:last-of-type > li:last-child > a {
-    padding-right: 40px;
-    margin-right: 0;
-  }
 }
 
 /* Scoped to "li a" (not just ".main-nav a") on purpose: .header-cta-mobile
@@ -597,18 +577,15 @@ h3 {
 
 /* Verified from vuewer.com's own nav items: hover is a faint black tint
    (their bg-black/3) plus a border that fades in from transparent to
-   solid — no color change, no orange. Active-page state keeps our own
-   accent color, kept as a separate rule so it doesn't get overridden by
-   the hover styling below. */
+   solid — no color change, no orange. Active-page state reuses this exact
+   same box (not a color change) so it stays permanently "hovered"-looking
+   in black rather than switching to the accent color. */
 .main-nav > .nav-group > li > a:hover,
-.main-nav .nav-dropdown-trigger:hover {
-  background: rgba(0, 0, 0, 0.03);
-  border-color: var(--color-text);
-}
-
+.main-nav .nav-dropdown-trigger:hover,
 .main-nav > .nav-group > li > a[aria-current="page"],
 .main-nav .nav-dropdown-trigger[aria-current="page"] {
-  color: var(--color-accent);
+  background: rgba(0, 0, 0, 0.03);
+  border-color: var(--color-text);
 }
 
 /* --- Nav dropdown ("Service") -------------------------------------------
@@ -628,16 +605,16 @@ h3 {
     height: 100%;
   }
 
-  /* padding-inline + a matching negative margin-inline gives the hover
-     highlight some breathing room beyond the text without changing the
-     item's footprint in the space-between row — the padding pushes the
-     background/border out, the margin pulls it back to the same position
-     it occupied before. */
+  /* Each item fills its whole 1fr grid cell (width and height) with its
+     text centered inside — that's what makes the hover box (below) an
+     identical-size rectangle for all 4 items, rather than a box sized to
+     however wide that item's own words happen to be. */
   .main-nav > .nav-group > li > a,
   .main-nav .nav-dropdown-trigger {
     height: 100%;
-    padding-inline: 0.75rem;
-    margin-inline: -0.75rem;
+    width: 100%;
+    justify-content: center;
+    padding-inline: 1.5rem;
   }
 }
 
@@ -677,10 +654,6 @@ h3 {
   letter-spacing: normal;
   color: var(--color-text);
   transition: color 0.2s ease, background-color 0.2s ease;
-}
-
-.nav-dropdown-menu a[aria-current="page"] {
-  color: var(--color-accent);
 }
 
 @media (min-width: 75rem) {
