@@ -94,29 +94,36 @@
         <div class="hero-frame-col"></div>
       </div>
 
-      <!-- Neutral placeholder tiles — real client logos aren't available yet
-           (see CLAUDE.md). The track holds two identical sets of 8 tiles
-           back to back; animating exactly -50% loops it seamlessly. -->
+      <!-- Real logos of the apps/systems Mowi automates around (not client
+           logos — see CLAUDE.md, that rule only covers actual customers).
+           Each PNG in assets/logos/ had its background stripped to alpha
+           and was capped to a shared max dimension; .logo-tile then fits
+           every one to the exact same box via object-fit: contain so they
+           read as a uniform row despite very different source aspect
+           ratios. The track holds two identical sets of 9 tiles back to
+           back; animating exactly -50% loops it seamlessly. -->
       <div class="hero-frame-logos">
         <div class="logo-marquee" aria-hidden="true">
           <div class="logo-track">
-            <span class="logo-tile">logo</span>
-            <span class="logo-tile">logo</span>
-            <span class="logo-tile">logo</span>
-            <span class="logo-tile">logo</span>
-            <span class="logo-tile">logo</span>
-            <span class="logo-tile">logo</span>
-            <span class="logo-tile">logo</span>
-            <span class="logo-tile">logo</span>
+            <span class="logo-tile"><img src="assets/logos/afas.png" alt="AFAS" loading="lazy"></span>
+            <span class="logo-tile"><img src="assets/logos/dynamics-365.png" alt="Microsoft Dynamics 365" loading="lazy"></span>
+            <span class="logo-tile"><img src="assets/logos/exact.png" alt="Exact" loading="lazy"></span>
+            <span class="logo-tile"><img src="assets/logos/hubspot.png" alt="HubSpot" loading="lazy"></span>
+            <span class="logo-tile"><img src="assets/logos/excel.png" alt="Microsoft Excel" loading="lazy"></span>
+            <span class="logo-tile"><img src="assets/logos/odoo.png" alt="Odoo" loading="lazy"></span>
+            <span class="logo-tile"><img src="assets/logos/salesforce.png" alt="Salesforce" loading="lazy"></span>
+            <span class="logo-tile"><img src="assets/logos/sap.png" alt="SAP" loading="lazy"></span>
+            <span class="logo-tile"><img src="assets/logos/twinfield.png" alt="Twinfield" loading="lazy"></span>
             <!-- duplicated set for the seamless loop -->
-            <span class="logo-tile">logo</span>
-            <span class="logo-tile">logo</span>
-            <span class="logo-tile">logo</span>
-            <span class="logo-tile">logo</span>
-            <span class="logo-tile">logo</span>
-            <span class="logo-tile">logo</span>
-            <span class="logo-tile">logo</span>
-            <span class="logo-tile">logo</span>
+            <span class="logo-tile"><img src="assets/logos/afas.png" alt="" loading="lazy"></span>
+            <span class="logo-tile"><img src="assets/logos/dynamics-365.png" alt="" loading="lazy"></span>
+            <span class="logo-tile"><img src="assets/logos/exact.png" alt="" loading="lazy"></span>
+            <span class="logo-tile"><img src="assets/logos/hubspot.png" alt="" loading="lazy"></span>
+            <span class="logo-tile"><img src="assets/logos/excel.png" alt="" loading="lazy"></span>
+            <span class="logo-tile"><img src="assets/logos/odoo.png" alt="" loading="lazy"></span>
+            <span class="logo-tile"><img src="assets/logos/salesforce.png" alt="" loading="lazy"></span>
+            <span class="logo-tile"><img src="assets/logos/sap.png" alt="" loading="lazy"></span>
+            <span class="logo-tile"><img src="assets/logos/twinfield.png" alt="" loading="lazy"></span>
           </div>
         </div>
       </div>
