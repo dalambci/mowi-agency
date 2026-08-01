@@ -972,10 +972,17 @@ h3 {
   mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
 }
 
+/* Spacing lives on each tile (margin-right), not as a flex `gap` on the
+   track. With an odd tile count (9) per set, `gap` splits into 17 gaps
+   across the 18 duplicated tiles — an odd number that can't divide evenly
+   in half, so the -50% reset in the marquee keyframes landed mid-gap
+   instead of on a tile boundary, showing a brief blank flash every loop.
+   Margin-per-tile makes each tile "own" the space after it, so the total
+   track width is always an exact multiple of (tile + its margin) and -50%
+   lands precisely on the seam between the two duplicated sets. */
 .logo-track {
   display: flex;
   align-items: center;
-  gap: 4.5rem;
   width: max-content;
   animation: marquee 30s linear infinite;
 }
@@ -1013,6 +1020,7 @@ h3 {
   justify-content: center;
   width: 3.8rem;
   height: 1.4rem;
+  margin-right: 4.5rem;
 }
 
 /* Grayscale strips each logo of its brand colour so the row reads as one
