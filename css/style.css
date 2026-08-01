@@ -1001,11 +1001,11 @@ h3 {
   to { transform: translateX(0); }
 }
 
-/* White card (not a darker sand tint, see CLAUDE.md) so each logo's own
-   colours read clearly against it. Fixed box + object-fit:contain on the
-   img is what makes every logo "the same size" despite very different
-   source aspect ratios (a wide wordmark like Dynamics 365 vs. a near-square
-   mark like SAP) — each is scaled down to fit the same padded area. */
+/* No card/background — logos sit directly on the page. Fixed box +
+   object-fit:contain on the img is what makes every logo "the same size"
+   despite very different source aspect ratios (a wide wordmark like
+   Dynamics 365 vs. a near-square mark like SAP) — each is scaled down to
+   fit the same box. */
 .logo-tile {
   flex-shrink: 0;
   display: flex;
@@ -1013,19 +1013,17 @@ h3 {
   justify-content: center;
   width: 9.5rem;
   height: 3.5rem;
-  padding: 0.75rem 1.25rem;
-  border-radius: var(--radius-xl);
-  background: var(--color-white);
-  border: 1px solid var(--color-border);
-  box-shadow: var(--shadow-sm);
 }
 
+/* Grayscale strips each logo of its brand colour so the row reads as one
+   neutral set of marks rather than a clash of blues/reds/oranges. */
 .logo-tile img {
   max-width: 100%;
   max-height: 100%;
   width: auto;
   height: auto;
   object-fit: contain;
+  filter: grayscale(100%);
 }
 
 /* --- Cards -------------------------------------------------------------------- */
