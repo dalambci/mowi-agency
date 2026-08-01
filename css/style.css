@@ -756,15 +756,20 @@ h3 {
 
   .header-bar .wordmark {
     order: 2;
+    /* Pushes the cell itself flush to the header's right edge instead of
+       sitting wherever its own content-width happens to land in the flex
+       row — the hamburger/CTA cells stay a fixed width, so without this
+       the logo cell was left floating with dead space after it. */
+    margin-left: auto;
     padding-inline: 1.0625rem;
   }
 
   .header-bar .wordmark .wordmark-icon {
-    height: 33px;
+    height: 40px;
   }
 
   .header-bar .wordmark .wordmark-text {
-    height: 21px;
+    height: 26px;
   }
 
   .header-cta {
@@ -775,13 +780,14 @@ h3 {
     position: relative;
   }
 
+  /* A plain arrow-right glyph — swapped in for the earlier calendar icon. */
   .header-cta::before {
     content: "";
     width: 24px;
     height: 24px;
     background-color: currentColor;
-    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2'/%3E%3Cline x1='16' y1='2' x2='16' y2='6'/%3E%3Cline x1='8' y1='2' x2='8' y2='6'/%3E%3Cline x1='3' y1='10' x2='21' y2='10'/%3E%3C/svg%3E") center / contain no-repeat;
-    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2'/%3E%3Cline x1='16' y1='2' x2='16' y2='6'/%3E%3Cline x1='8' y1='2' x2='8' y2='6'/%3E%3Cline x1='3' y1='10' x2='21' y2='10'/%3E%3C/svg%3E") center / contain no-repeat;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='4' y1='12' x2='20' y2='12'/%3E%3Cpolyline points='13 5 20 12 13 19'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='4' y1='12' x2='20' y2='12'/%3E%3Cpolyline points='13 5 20 12 13 19'/%3E%3C/svg%3E") center / contain no-repeat;
   }
 
   .nav-toggle {
@@ -995,6 +1001,18 @@ h3 {
 .hero-frame-logos {
   border-top: 1px solid var(--color-header-line);
   padding-block: 2rem;
+}
+
+/* A full sentence, not a short 2-3 word label, so it skips the all-caps
+   .eyebrow treatment used for section labels like "Diensten" — that would
+   hurt readability at this length. Muted color keeps it secondary to the
+   headline above and the logos below, not competing with either. */
+.marquee-heading {
+  text-align: center;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-gray-500);
+  margin-bottom: 1.25rem;
 }
 
 @media (max-width: 48rem) {
