@@ -1141,8 +1141,21 @@ h3 {
 }
 
 /* --- Hero -------------------------------------------------------------------- */
+/* padding-block (not just padding-top) matching .section's own exact
+   values — this section had zero bottom padding, so the gap between it
+   and the section right after it was only half of a normal
+   section-to-section gap (padding doesn't collapse like margin does, so
+   two adjacent .section elements each contribute their own 4-6rem,
+   totalling 8-12rem, while this one contributed nothing on its own
+   bottom edge). */
 .hero {
-  padding-top: 4rem;
+  padding-block: 4rem;
+}
+
+@media (min-width: 48rem) {
+  .hero {
+    padding-block: 6rem;
+  }
 }
 
 .hero-grid {
