@@ -836,7 +836,10 @@ h3 {
        grid's left/right edges line up vertically with the header cells
        above it, instead of running flush to the screen edge. */
     padding-inline: var(--container-pad);
-    padding-block: 0;
+    /* Bottom matches the left/right inset (--container-pad) instead of
+       sitting flush against the screen edge — top stays 0 since the
+       border-top divider below already marks that edge. */
+    padding-block: 0 var(--container-pad);
     border: none;
     border-top: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 0;
