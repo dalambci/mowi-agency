@@ -756,20 +756,22 @@ h3 {
 
   .header-bar .wordmark {
     order: 2;
-    /* Pushes the cell itself flush to the header's right edge instead of
-       sitting wherever its own content-width happens to land in the flex
-       row — the hamburger/CTA cells stay a fixed width, so without this
-       the logo cell was left floating with dead space after it. */
-    margin-left: auto;
+    /* margin-inline:auto (not margin-left:auto) centers the cell within
+       whatever space is left after the fixed-width toggle/CTA cells,
+       instead of pushing it flush to the right edge. */
+    margin-inline: auto;
     padding-inline: 1.0625rem;
+    border-left: none;
   }
 
   .header-bar .wordmark .wordmark-icon {
     height: 40px;
   }
 
+  /* Same height as the icon (not the smaller desktop 26px) — grown to
+     match rather than shrinking the icon down to the text. */
   .header-bar .wordmark .wordmark-text {
-    height: 26px;
+    height: 40px;
   }
 
   .header-cta {
@@ -952,6 +954,21 @@ h3 {
   background: var(--color-bg);
 }
 
+/* Measured: on desktop, .hero-frame's top and .header-bar's bottom sit
+   exactly 16px into *negative* space (-16px) — .site-header's own box is
+   taller than header-bar itself and, being position:sticky with a
+   z-index, visually sits on top of that overlap, masking it so the hero
+   reads as flush against the header. Below the header's own breakpoint,
+   margin-top:2rem pushed the hero well past that overlap into genuinely
+   visible empty space instead. margin-top:0 here lands mobile at the
+   exact same -16px relationship desktop already has (verified), so it
+   gets masked the same way and reads flush too. */
+@media (max-width: 75rem) {
+  .hero-frame {
+    margin-top: 0;
+  }
+}
+
 .hero-frame-grid {
   display: grid;
   grid-template-columns: 1fr 2.2fr 1fr;
@@ -1007,12 +1024,20 @@ h3 {
    .eyebrow treatment used for section labels like "Diensten" — that would
    hurt readability at this length. Muted color keeps it secondary to the
    headline above and the logos below, not competing with either. */
+/* font-size matches .lede (the hero's own paragraph) exactly, at the same
+   40rem breakpoint, per request — "as big as the paragraph above it". */
 .marquee-heading {
   text-align: center;
-  font-size: 0.9375rem;
+  font-size: 1.125rem;
   font-weight: 600;
   color: var(--color-gray-500);
   margin-bottom: 1.25rem;
+}
+
+@media (min-width: 40rem) {
+  .marquee-heading {
+    font-size: 1.5rem;
+  }
 }
 
 @media (max-width: 48rem) {
