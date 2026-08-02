@@ -110,7 +110,16 @@ Wherever personal/business details belong, insert these placeholders verbatim in
 - The standard lockup is icon + wordmark side by side, using the shared `.wordmark` /
   `.wordmark-icon` / `.wordmark-text` CSS classes (see `css/style.css`). The header uses the
   small size; the footer uses the `.wordmark-lg` modifier for a larger version.
-- The icon (`mowi-icon.png`) is also used as the favicon (`<link rel="icon">`) on every page.
+- `assets/favicon.png` — a dedicated favicon derivative of `mowi-icon.png`, used via
+  `<link rel="icon">` and `<link rel="apple-touch-icon">` on every page (not `mowi-icon.png`
+  directly). `mowi-icon.png` is 1317×790 — a wide, non-square source, since it's meant to be
+  read at logo size next to the wordmark, not as an icon on its own. Browsers squish a
+  non-square image into the small square favicon slot (visibly distorted on desktop) and
+  mobile/PWA icon handling is often stricter still and can just fail to show a non-square one
+  at all — matches a real bug report ("not showing on mobile, compressed-looking on desktop").
+  `favicon.png` is the ring padded onto a transparent square canvas (centered, no cropping),
+  then downscaled to 512×512. If `mowi-icon.png` is ever regenerated, regenerate this the same
+  way rather than pointing the favicon at the raw logo file again.
 - **No client logos and no invented logos.** Wherever a *client* logo strip/marquee appears,
   use neutral grey placeholder tiles (simple rounded blocks containing the word "logo"). Real
   client logos come later. This does not apply to Mowi's own logo, which is real and final.
