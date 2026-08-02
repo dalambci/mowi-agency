@@ -1,0 +1,10 @@
+# Force HTTPS — the server was accepting plain HTTP requests with a 200 OK
+# instead of redirecting, meaning any visit that happened to hit http:// (an
+# in-app browser's own link handling, a stray non-https share, etc.) loaded
+# completely unencrypted with no lock icon at all. Cloudways' nginx layer
+# doesn't expose an HTTP->HTTPS toggle for this app in its dashboard, but
+# the Apache layer behind it (confirmed running, and the same layer that
+# would read this file) makes this the right place for it.
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
