@@ -251,6 +251,11 @@ h1, h2, h3, h4 {
   font-weight: 700;
   letter-spacing: var(--tracking-tight);
   color: var(--color-ink);
+  /* Dutch compounds long-form (e.g. "wegautomatiseren", "managementdashboard")
+     have few/no break points a browser will use by default, which can push
+     a heading wider than its container at narrow widths. Only kicks in when
+     a word truly doesn't fit — normal wrapping at spaces is unaffected. */
+  overflow-wrap: break-word;
 }
 
 /* Verified from vuewer.com's hero heading (the visible "Web development"
@@ -386,7 +391,7 @@ h3 {
    A bordered, segmented bar inspired by vuewer.com's navbar: individual
    cells (CTA, each nav link, logo) divided by hairline rules, a bold black
    CTA cell, and uppercase nav labels — see reference/style-vuewer.md. Below
-   75rem it collapses to a compact [logo | hamburger] bar; the full nav + CTA
+   48rem it collapses to a compact [logo | hamburger] bar; the full nav + CTA
    move into a slide-down mobile panel instead. */
 .site-header {
   position: sticky;
@@ -410,7 +415,7 @@ h3 {
   top: 10px;
 }
 
-@media (max-width: 75rem) {
+@media (max-width: 47.9375rem) {
   .site-header.is-scrolled {
     top: 0;
   }
@@ -437,9 +442,21 @@ h3 {
    DOM order (cta, nav, wordmark) maps straight onto the three columns
    with no explicit grid-column needed. Mobile keeps the simpler flex
    [logo | hamburger] layout, unchanged. */
-@media (min-width: 75rem) {
+@media (min-width: 48rem) {
   .header-bar {
     display: grid;
+    /* minmax(0, ...) so columns can shrink below their content's natural
+       size at tablet widths instead of forcing the bar (and page) wider —
+       same fix as the .grid-* system below. Proportions favor the nav a
+       bit more than the 64rem+ tier (2.4fr vs 2.2fr, CTA/logo 0.9fr each)
+       since the nav is the tightest fit at tablet widths; restored to the
+       original 1fr/2.2fr/1fr at min-width:64rem once there's room. */
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 2.4fr) minmax(0, 0.9fr);
+  }
+}
+
+@media (min-width: 64rem) {
+  .header-bar {
     grid-template-columns: 1fr 2.2fr 1fr;
   }
 }
@@ -450,7 +467,7 @@ h3 {
    that height uniformly, regardless of each cell's own content. Scoped to
    the desktop bar only; the collapsed mobile [logo|hamburger] bar doesn't
    need to match a measurement taken from vuewer's full desktop nav. */
-@media (min-width: 75rem) {
+@media (min-width: 48rem) {
   .header-bar {
     min-height: 78px;
   }
@@ -493,13 +510,24 @@ h3 {
    (roughly 320px at 1440px) rather than an auto-width flex item. */
 .header-bar .wordmark {
   flex-shrink: 0;
-  padding-inline: 1.5rem;
+  /* Compact at its tablet-tier default (0.875rem); the 64rem override
+     below restores the full 1.5rem once the desktop grid has room. */
+  padding-inline: 0.875rem;
   border-left: 1px solid var(--color-header-line);
 }
 
-@media (min-width: 75rem) {
+@media (min-width: 48rem) {
   .header-bar .wordmark {
     justify-content: center;
+  }
+}
+
+/* Icon/text stay at their compact default size (28px/18px, see above) at
+   tablet widths — only enlarged once the desktop-proper tier (64rem+) has
+   the grid room the larger lockup needs. */
+@media (min-width: 64rem) {
+  .header-bar .wordmark {
+    padding-inline: 1.5rem;
   }
 
   .header-bar .wordmark .wordmark-icon {
@@ -512,22 +540,33 @@ h3 {
 }
 
 /* CTA cell — the bold black "start" cell from the reference screenshot,
-   reworded to our own copy. Font-size matches the other nav cells (18px)
-   so it reads as one consistent row, not a smaller separate label. */
+   reworded to our own copy. Font-size matches the other nav cells so it
+   reads as one consistent row, not a smaller separate label — full 18px
+   only from 64rem up (see override below); compact 14px/no-nowrap by
+   default so the long Dutch label ("Gratis adviesgesprek") can wrap to two
+   lines rather than overflow its cell at tablet widths. */
 .header-cta {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  padding-inline: 1.5rem;
+  padding-inline: 0.875rem;
   background: var(--color-ink);
   color: var(--color-white);
-  font-size: 1.125rem;
+  font-size: 0.875rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: var(--tracking-wide);
-  white-space: nowrap;
+  text-align: center;
   transition: box-shadow 0.2s ease;
+}
+
+@media (min-width: 64rem) {
+  .header-cta {
+    padding-inline: 1.5rem;
+    font-size: 1.125rem;
+    white-space: nowrap;
+  }
 }
 
 /* Verified straight from vuewer.com's own nav "Start" pill — the exact
@@ -554,10 +593,10 @@ h3 {
    here — equal 1fr tracks give every item the exact same cell width, so
    each one's hover box (which fills its cell, see the item rule below) is
    an identical size instead of hugging whatever width its own text needs. */
-@media (min-width: 75rem) {
+@media (min-width: 48rem) {
   .main-nav {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     align-items: stretch;
   }
 }
@@ -586,7 +625,10 @@ h3 {
   display: flex;
   align-items: center;
   gap: 0.375rem;
-  font-size: 1.125rem; /* 18px */
+  /* 14px by default (tablet-safe); bumped to the full 18px at 64rem+, see
+     override below — 18px items didn't leave the row enough room between
+     48rem and 64rem. */
+  font-size: 0.875rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: var(--tracking-wide);
@@ -626,7 +668,7 @@ h3 {
    header-bar's height, matching sibling cells) — on mobile the nav is a
    vertical stack instead, where height:100% on a flex item caused it to
    balloon and eat most of the panel as blank space. */
-@media (min-width: 75rem) {
+@media (min-width: 48rem) {
   .nav-dropdown {
     height: 100%;
   }
@@ -640,6 +682,14 @@ h3 {
     height: 100%;
     width: 100%;
     justify-content: center;
+    padding-inline: 0.625rem;
+  }
+}
+
+@media (min-width: 64rem) {
+  .main-nav > .nav-group > li > a,
+  .main-nav .nav-dropdown-trigger {
+    font-size: 1.125rem; /* 18px, restored from the 14px tablet default */
     padding-inline: 1.5rem;
   }
 }
@@ -682,7 +732,7 @@ h3 {
   transition: color 0.2s ease, background-color 0.2s ease;
 }
 
-@media (min-width: 75rem) {
+@media (min-width: 48rem) {
   .nav-dropdown-menu {
     position: absolute;
     top: calc(100% + 1px);
@@ -766,7 +816,7 @@ h3 {
      had before), with a dimmed backdrop behind it and a 2-column grid of
      bold-uppercase links with hairline dividers that invert on hover/tap
      — all verified against vuewer's live compiled classes. */
-@media (max-width: 75rem) {
+@media (max-width: 47.9375rem) {
   /* Height verified against vuewer's own mobile header cells at a true
      390px width: ~57px tall, noticeably more generous than a bare-minimum
      icon-height row. */
@@ -784,15 +834,18 @@ h3 {
     border-left: none;
   }
 
-  /* 34px = 40px - 15%, per request. */
+  /* 34px = 40px - 15%, per request. clamp() so it scales down on the
+     narrowest phones (≤~360px) instead of overflowing — the wordmark cell's
+     available width shrinks faster than the fixed-width toggle/CTA cells
+     beside it. */
   .header-bar .wordmark .wordmark-icon {
-    height: 34px;
+    height: clamp(28px, 9vw, 34px);
   }
 
   /* Same height as the icon (not the smaller desktop 26px) — grown to
      match rather than shrinking the icon down to the text. */
   .header-bar .wordmark .wordmark-text {
-    height: 34px;
+    height: clamp(28px, 9vw, 34px);
   }
 
   .header-cta {
@@ -987,7 +1040,7 @@ h3 {
    visible empty space instead. margin-top:0 here lands mobile at the
    exact same -16px relationship desktop already has (verified), so it
    gets masked the same way and reads flush too. */
-@media (max-width: 75rem) {
+@media (max-width: 47.9375rem) {
   .hero-frame {
     margin-top: 0;
   }
@@ -1319,18 +1372,23 @@ h3 {
   gap: 1.5rem;
 }
 
-.grid-2 { grid-template-columns: 1fr; }
-.grid-3 { grid-template-columns: 1fr; }
-.grid-4 { grid-template-columns: 1fr; }
+/* minmax(0, 1fr), not bare 1fr — a bare 1fr track's automatic minimum size
+   is its content's min-content width, so a long word/label can force the
+   track (and the whole grid) wider than its container instead of wrapping.
+   minmax(0, 1fr) removes that content-based floor so tracks actually share
+   space evenly and shrink with the viewport. */
+.grid-2 { grid-template-columns: minmax(0, 1fr); }
+.grid-3 { grid-template-columns: minmax(0, 1fr); }
+.grid-4 { grid-template-columns: minmax(0, 1fr); }
 
 @media (min-width: 40rem) {
-  .grid-2 { grid-template-columns: repeat(2, 1fr); }
-  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (min-width: 64rem) {
-  .grid-3 { grid-template-columns: repeat(3, 1fr); }
-  .grid-4 { grid-template-columns: repeat(4, 1fr); }
+  .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 
 /* Verified from vuewer.com's card component: rounded-md (6px) + p-6/sm:p-10/lg:p-12. */
