@@ -117,9 +117,26 @@ function syncMegaMenuColumnHeights() {
     if (mobileMegaMenuQuery.matches) {
       automationsList.style.maxHeight = `${platformList.getBoundingClientRect().height}px`;
       automationsList.classList.add("nav-megamenu-scroll");
+
+      // Bottom-edge fade (mask-image, see .nav-megamenu-scroll in
+      // style.css) signals there's more to scroll to; removed once actually
+      // scrolled to the end so the last item doesn't stay half-faded after
+      // the user has already seen it. Listener is bound once per element
+      // (guarded via the dataset flag) since this whole function reruns on
+      // every resize.
+      const updateScrollFade = () => {
+        const atBottom =
+          automationsList.scrollHeight - automationsList.scrollTop - automationsList.clientHeight < 2;
+        automationsList.classList.toggle("is-at-bottom", atBottom);
+      };
+      if (!automationsList.dataset.scrollFadeBound) {
+        automationsList.addEventListener("scroll", updateScrollFade, { passive: true });
+        automationsList.dataset.scrollFadeBound = "true";
+      }
+      updateScrollFade();
     } else {
       automationsList.style.maxHeight = "";
-      automationsList.classList.remove("nav-megamenu-scroll");
+      automationsList.classList.remove("nav-megamenu-scroll", "is-at-bottom");
     }
   });
 }

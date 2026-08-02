@@ -1268,26 +1268,37 @@ h3 {
     border-left: 1px solid rgba(255, 255, 255, 0.15);
   }
 
+  /* Smaller than the shared/desktop size (0.859375rem) — the 25% bump
+     requested for both breakpoints read as too big specifically at mobile
+     widths, so this reverts just the mobile label back to its original
+     pre-bump size while desktop keeps the larger one. Horizontal padding
+     matches .nav-megamenu-col li's own 0.5rem (not the old 1rem) so
+     "PLATFORM"/"AUTOMATIONS" lines up with the item text directly below
+     it instead of sitting further inset. Top/bottom trimmed down too — the
+     original 0.75rem/0.5rem left more vertical air above/below the label
+     than it needed. */
   .nav-megamenu-label {
-    padding: 0.75rem 1rem 0.5rem;
+    font-size: 0.6875rem;
+    padding: 0.5rem 0.5rem 0.25rem;
     color: rgba(255, 255, 255, 0.5);
   }
 
   /* Full-width rows, hairline dividers BETWEEN items only (not before the
      first one, right under the label, or boxing each item individually —
-     see the reference screenshot this was built against). 0.75rem is the
-     largest size where every single item — including "Workflow Automation"
-     and "Invoice processing" — stays on one line at 360px; anything bigger
-     (tested up to 1.125rem) forced at least one item to wrap, leaving that
-     row taller than the rest and breaking the even row-to-row alignment
-     across both columns. Same brightness + hover for the plain
+     see the reference screenshot this was built against). Horizontal
+     padding trimmed from 1rem to 0.5rem specifically to reclaim room for a
+     bigger font — 0.875rem is the largest size that still keeps every
+     item, including "Workflow Automation" and "Invoice processing", on one
+     line at 360px with that smaller padding (0.75rem padding only allowed
+     up to 0.8125rem; going below 0.5rem gained nothing further until
+     0.25rem, which felt too tight). Same brightness + hover for the plain
      "Automations" items as the real links (see the base rule above) — not
      dimmed, so they don't read as disabled. */
   .nav-megamenu-col li {
-    font-size: 0.75rem;
+    font-size: 0.875rem;
     line-height: 1.2;
     color: rgba(255, 255, 255, 0.85);
-    padding: 0.75rem 1rem;
+    padding: 0.75rem 0.5rem;
   }
 
   .nav-megamenu-col li:not(:first-child) {
@@ -1296,8 +1307,8 @@ h3 {
 
   .nav-megamenu-col li a {
     display: block;
-    margin: -0.75rem -1rem;
-    padding: 0.75rem 1rem;
+    margin: -0.75rem -0.5rem;
+    padding: 0.75rem 0.5rem;
     color: inherit;
   }
 
@@ -1314,10 +1325,57 @@ h3 {
      syncMegaMenuColumnHeights() in main.js, since it depends on actual
      rendered text-wrap/line-count at the current viewport width, not a
      value CSS alone can express. This just supplies the scrollbar/clip
-     behavior once JS sets that height. */
+     behavior once JS sets that height.
+
+     The bottom edge fades out (mask-image) as a "there's more below, scroll
+     to see it" cue, since the exact-height cap otherwise clips cleanly
+     right at an item boundary and reads as a complete, 3-item list rather
+     than a cut-off one. Removed once actually scrolled to the end
+     (.is-at-bottom, toggled by the same function in main.js) so the last
+     item doesn't stay permanently half-faded after the user has already
+     scrolled past it.
+
+     Percentage-based stops, not a fixed rem distance from the edge, so this
+     scales with the list's actual rendered height rather than a px/rem
+     guess that only happens to line up right at one particular height.
+     Row 3 (the last visible row, of 3 equal rows) spans 66.67%-100% of the
+     total list height, i.e. it's 33.33% tall — fading exactly 60% of THAT
+     row's own height (not 60% of the whole list) means the fade must start
+     60% of 33.33% = 20 points before the bottom, i.e. at 100% - 20% = 80%.
+     (83% only faded row 3's bottom half — too slight; 70% faded ~90% of
+     the row — too much; 80% = 60% of the row.) Rows 1-2 stay fully solid
+     regardless — only row 3 itself ever fades. */
   .nav-megamenu-col ul.nav-megamenu-scroll {
     overflow-y: auto;
     overscroll-behavior: contain;
+    -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+    /* Permanent (not auto-hiding) scrollbar, as another "this scrolls" cue
+       alongside the fade above — Firefox via scrollbar-width/-color,
+       WebKit/Blink via the ::-webkit-scrollbar rules below. NOTE: iOS
+       Safari always auto-hides its scrollbar and flashes it only during an
+       active scroll gesture — there is no CSS override for that, so this
+       has no effect there regardless. It does work on Android and desktop
+       browsers. */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.35) transparent;
+  }
+
+  .nav-megamenu-col ul.nav-megamenu-scroll::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .nav-megamenu-col ul.nav-megamenu-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .nav-megamenu-col ul.nav-megamenu-scroll::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.35);
+  }
+
+  .nav-megamenu-col ul.nav-megamenu-scroll.is-at-bottom {
+    -webkit-mask-image: none;
+    mask-image: none;
   }
 
   /* The header's own CTA is visible at all times now (even with the sheet
