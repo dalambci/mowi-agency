@@ -126,11 +126,15 @@ retype credentials from scratch or falling back to a password:
   never leak into the docs section. Font is Inter via `fonts.bunny.net` (matches the dashboard
   exactly), not the marketing site's Plus Jakarta Sans.
 - Sidebar navigation is generated entirely from `js/docs-nav.js` (`DOCS_NAV` / `DOCS_HOME`
-  globals) by `js/docs.js`, which also builds the breadcrumb, previous/next links, and the
-  "Op deze pagina" TOC (scroll-spy, only rendered when the article has real `h2`s — stub pages
-  correctly show no TOC). **To add a new docs article: add one `{ title, href }` line to the
-  right category in `js/docs-nav.js` and create the matching `docs-*.html` file** — the sidebar,
-  breadcrumb, and prev/next everywhere else update automatically, nothing else to touch.
+  globals, hrefs are plain filenames like `agent-crm-sync.html` — no `docs/` or `docs-` prefix)
+  by `js/docs.js`, which also builds the breadcrumb, previous/next links, and the "Op deze
+  pagina" TOC (scroll-spy, only rendered when the article has real `h2`s — stub pages correctly
+  show no TOC). **To add a new docs article: add one `{ title, href }` line to the right
+  category in `js/docs-nav.js` and create the matching `docs/<slug>.html` file** (copy an
+  existing article's `<head>`/header/sidebar-mount/breadcrumb-mount/TOC-mount boilerplate — the
+  three `../` asset references and the `data-docs-href` matching the new filename are the only
+  parts that differ) — the sidebar, breadcrumb, and prev/next everywhere else update
+  automatically, nothing else to touch.
 - Every docs page follows the same shell: `.docs-header` (slim, wordmark + "Terug naar website"
   + "Inloggen" linking to `https://dashboard.mowi.agency/login`) → `.docs-sidebar` (mount point
   only, populated by JS) → `.docs-content-wrap` (`.docs-column` + `.docs-toc`). Reusable
@@ -139,15 +143,17 @@ retype credentials from scratch or falling back to a password:
   (the `-result` variant is for "U ziet nu ..." expected-result confirmations), `.docs-media`
   (grey rounded image placeholder + caption, for screenshots to be added later), and
   `.docs-token-row` / `.docs-copy-btn` (copyable key/URL blocks with a working clipboard button).
-- All 19 approved articles + `docs.html` (overview, dashboard-style category cards) exist and
-  have **real written content** (as of 2026-08-03) — not stubs. Every article follows the same
-  anatomy: two-sentence "what this does," one-line goal, prerequisites box, numbered steps with
-  "U ziet nu ..." results, image placeholders, troubleshooting, next steps. The Email triage
-  agent page (`docs-agent-email-triage.html`) was written first and approved by the user as the
-  template every other article copies — if in doubt about tone/structure/depth for a new or
-  edited article, match that one.
-- The marketing footer (`.footer-nav`, present on every marketing page) links to `docs.html` as
-  "Documentatie" — keep that link when editing any footer.
+- All 19 approved articles + `docs/index.html` (overview, dashboard-style category cards) exist
+  and have **real written content** (as of 2026-08-03) — not stubs. Every article follows the
+  same anatomy: two-sentence "what this does," one-line goal, prerequisites box, numbered steps
+  with "U ziet nu ..." results, image placeholders, troubleshooting, next steps. The Email
+  triage agent page (`docs/agent-email-triage.html`) was written first and approved by the user
+  as the template every other article copies — if in doubt about tone/structure/depth for a new
+  or edited article, match that one.
+- The marketing footer has a dedicated **"Support"** column (`.footer-support`, its own grid
+  column in `.footer-inner` — 4 columns total: brand/nav/support/contact) that links to
+  `docs/index.html` as "Documentatie" — keep that link when editing any footer. It used to be a
+  flat item inside "Navigatie"; that changed 2026-08-03, don't move it back.
 
 ### Precision rules that produced this content — apply to every future edit
 - **Never invent a click-path.** Steps inside our own dashboard are grounded by reading the
@@ -165,29 +171,29 @@ retype credentials from scratch or falling back to a password:
   page (Salesforce's and Exact Online's help portals are JS-rendered SPAs that don't reliably
   return real content to WebFetch — when a fetch returns only a loading/CSS-error shell, that's
   the tool failing to render, not the page being empty; don't treat it as "nothing exists there").
-  Find every open one with: `grep -rn "DRAFT\|VERIFY" docs-*.html` (27 remain as of 2026-08-03:
+  Find every open one with: `grep -rn "DRAFT\|VERIFY" docs/*.html` (27 remain as of 2026-08-03:
   23 DRAFT, 4 VERIFY — see chat history for the full grouped list, or re-run the grep and read
   each comment, they're self-explanatory).
-- **Never guess security/network specifics.** `docs-it-beveiliging.html` and
-  `docs-it-netwerkvereisten.html` deliberately omit encryption/retention/certification claims and
+- **Never guess security/network specifics.** `docs/it-beveiliging.html` and
+  `docs/it-netwerkvereisten.html` deliberately omit encryption/retention/certification claims and
   all IP/domain/port values — a wrong firewall value is worse than none. Only add these once a
   human confirms them; don't infer from how other Mowi infrastructure is configured.
 - **Two confirmed facts already resolved into real page content** (not placeholders): the
   dashboard runs on the same server as this website but as a separate application under its own
-  subdomain (stated on `docs-it-beveiliging.html`); there is no standard verwerkersovereenkomst
+  subdomain (stated on `docs/it-beveiliging.html`); there is no standard verwerkersovereenkomst
   (DPA) today, it's arranged per client on request (same page).
 - **Known cross-repo mismatch, not yet fixed anywhere:** the dashboard's own `config/support.php`
   (`SUPPORT_DOCS_URL`, referenced from `resources/views/support/index.blade.php`'s "Open
   documentation" button) defaults to `https://docs.mowi.agency` — a subdomain that doesn't exist.
-  This docs section actually lives at `mowi.agency/docs.html` on this repo. Someone needs to
-  either point that env var at the real URL or stand up `docs.mowi.agency` to resolve here; not
+  This docs section actually lives at `mowi.agency/docs/` on this repo. Someone needs to either
+  point that env var at the real URL or stand up `docs.mowi.agency` to resolve here; not
   something to silently fix from this repo.
 - **Salesforce-specific, time-sensitive:** as of Salesforce's Spring '26 release, Salesforce
   itself recommends "External Client Apps" as the successor to "Connected Apps" for new
   integrations (confirmed on a directly-loaded Salesforce Help page); several independent
   secondary sources additionally claim new Connected App creation is blocked by default in most
   orgs since that release, which could not be confirmed on a Salesforce-owned page directly —
-  `docs-koppeling-salesforce.html` is written to lead with External Client App and defer to the
+  `docs/koppeling-salesforce.html` is written to lead with External Client App and defer to the
   admin, with the unconfirmed part left VERIFY. Re-check this if Salesforce ships further changes
   before this page is considered final.
 
@@ -265,11 +271,18 @@ Wherever personal/business details belong, insert these placeholders verbatim in
 
 ## Folder structure
 - `index.html` in the project root.
-- All other pages as `.html` files in the root (no subfolders per page) — including the docs
-  section (`docs.html` plus `docs-*.html` per article); it does not get its own subfolder either.
+- All other marketing pages as `.html` files in the root (no subfolders per page).
+- `docs/` — the entire documentation section lives here: `docs/index.html` is the overview page,
+  every article is `docs/<slug>.html` with **no `docs-` filename prefix** (the folder itself is
+  the namespace — e.g. `docs/agent-crm-sync.html`, not `docs/docs-agent-crm-sync.html`). Pages in
+  here reference shared assets one level up (`../css/docs.css`, `../js/docs.js`,
+  `../assets/favicon.png`, etc.) and link to each other with plain sibling filenames
+  (`href="agent-crm-sync.html"`, no `docs/` or `docs-` prefix needed from inside the folder
+  itself). The marketing footer's "Documentatie" link points to `docs/index.html`.
 - `css/` — stylesheets (`style.css` for the marketing site, `docs.css` for the docs section —
   the two are never mixed on the same page).
 - `js/` — vanilla JS (`main.js` marketing behavior; `docs-nav.js` + `docs.js` for the docs
-  section).
+  section — both live in the shared `js/` folder, not inside `docs/`, and are loaded by every
+  docs page via `../js/...`).
 - `assets/` — images/icons/etc.
 - `reference/` — research docs (content source, style sources) — not part of the shipped site.
