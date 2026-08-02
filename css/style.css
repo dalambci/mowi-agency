@@ -1253,6 +1253,7 @@ h3 {
   }
 
   .nav-megamenu-col {
+    position: relative; /* anchors .nav-megamenu-scrollbar below */
     flex: 1;
     min-width: 0; /* lets long item text actually wrap instead of overflowing its column */
   }
@@ -1350,27 +1351,40 @@ h3 {
     overscroll-behavior: contain;
     -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
     mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-    /* Permanent (not auto-hiding) scrollbar, as another "this scrolls" cue
-       alongside the fade above — Firefox via scrollbar-width/-color,
-       WebKit/Blink via the ::-webkit-scrollbar rules below. NOTE: iOS
-       Safari always auto-hides its scrollbar and flashes it only during an
-       active scroll gesture — there is no CSS override for that, so this
-       has no effect there regardless. It does work on Android and desktop
-       browsers. */
-    scrollbar-width: thin;
-    scrollbar-color: rgba(255, 255, 255, 0.35) transparent;
+    /* The native scrollbar is hidden — iOS Safari always auto-hides it
+       regardless of CSS and flashes it only during an active scroll
+       gesture, with no override available, so it can't be relied on as a
+       permanent indicator. .nav-megamenu-scrollbar below is a custom
+       track/thumb we draw and position ourselves instead (see
+       ensureScrollIndicator() in main.js), which works the same on every
+       platform. Hiding the native one here avoids the two showing up side
+       by side on browsers that *would* have honored scrollbar-width. */
+    scrollbar-width: none;
   }
 
   .nav-megamenu-col ul.nav-megamenu-scroll::-webkit-scrollbar {
-    width: 4px;
+    display: none;
   }
 
-  .nav-megamenu-col ul.nav-megamenu-scroll::-webkit-scrollbar-track {
-    background: transparent;
+  /* right:0.125rem, not a negative inset — the mobile panel has zero
+     padding of its own (just its 1px border, see the open-state rule
+     above), so anything positioned outside the column's own right edge
+     would sit past the panel's border and get clipped by .nav-megamenu's
+     own overflow:hidden (needed for the accordion collapse). This keeps it
+     just inside that boundary instead. */
+  .nav-megamenu-scrollbar {
+    position: absolute;
+    right: 0.125rem;
+    width: 3px;
+    background: rgba(255, 255, 255, 0.12);
+    pointer-events: none;
   }
 
-  .nav-megamenu-col ul.nav-megamenu-scroll::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.35);
+  .nav-megamenu-scrollbar-thumb {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.45);
   }
 
   .nav-megamenu-col ul.nav-megamenu-scroll.is-at-bottom {

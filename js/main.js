@@ -109,6 +109,32 @@ document.addEventListener("keydown", (event) => {
 // descendant's own layout size, only what's painted.
 const mobileMegaMenuQuery = window.matchMedia("(max-width: 47.9375rem)");
 
+// A custom-drawn track + thumb, not the browser's native scrollbar — iOS
+// Safari always auto-hides its native scrollbar and there is no CSS
+// override for that, so a *real* permanent indicator has to be an element
+// we draw and position ourselves. Created once per Automations list (lazily,
+// on first sync) and appended as a sibling of the <ul> inside
+// .nav-megamenu-col, which is what it's positioned relative to — not the
+// <ul> itself, since anything absolutely positioned inside an
+// overflow:auto element scrolls away with its content instead of staying
+// put as a fixed rail alongside it.
+function ensureScrollIndicator(list) {
+  const column = list.parentElement;
+  let track = column.querySelector(".nav-megamenu-scrollbar");
+  if (!track) {
+    track = document.createElement("div");
+    track.className = "nav-megamenu-scrollbar";
+    track.innerHTML = '<div class="nav-megamenu-scrollbar-thumb"></div>';
+    column.appendChild(track);
+  }
+  // list.offsetTop/clientHeight (not top:0/height:100% in CSS) since the
+  // track needs to span just the <ul>, not the label above it too — both
+  // live in the same .nav-megamenu-col.
+  track.style.top = `${list.offsetTop}px`;
+  track.style.height = `${list.clientHeight}px`;
+  return track.querySelector(".nav-megamenu-scrollbar-thumb");
+}
+
 function syncMegaMenuColumnHeights() {
   document.querySelectorAll(".nav-megamenu").forEach((menu) => {
     const [platformList, automationsList] = menu.querySelectorAll(".nav-megamenu-col ul");
@@ -118,25 +144,35 @@ function syncMegaMenuColumnHeights() {
       automationsList.style.maxHeight = `${platformList.getBoundingClientRect().height}px`;
       automationsList.classList.add("nav-megamenu-scroll");
 
+      const thumb = ensureScrollIndicator(automationsList);
+
       // Bottom-edge fade (mask-image, see .nav-megamenu-scroll in
-      // style.css) signals there's more to scroll to; removed once actually
-      // scrolled to the end so the last item doesn't stay half-faded after
-      // the user has already seen it. Listener is bound once per element
-      // (guarded via the dataset flag) since this whole function reruns on
-      // every resize.
-      const updateScrollFade = () => {
-        const atBottom =
-          automationsList.scrollHeight - automationsList.scrollTop - automationsList.clientHeight < 2;
-        automationsList.classList.toggle("is-at-bottom", atBottom);
+      // style.css) and the thumb's own size/position both signal there's
+      // more to scroll to; the fade is removed once actually scrolled to
+      // the end so the last item doesn't stay half-faded after the user
+      // has already seen it. Listener is bound once per element (guarded
+      // via the dataset flag) since this whole function reruns on every
+      // resize.
+      const updateScrollState = () => {
+        const { scrollTop, scrollHeight, clientHeight } = automationsList;
+        automationsList.classList.toggle("is-at-bottom", scrollHeight - scrollTop - clientHeight < 2);
+
+        const thumbHeight = Math.max(16, (clientHeight / scrollHeight) * clientHeight);
+        const maxScrollTop = scrollHeight - clientHeight;
+        const scrollRatio = maxScrollTop > 0 ? scrollTop / maxScrollTop : 0;
+        thumb.style.height = `${thumbHeight}px`;
+        thumb.style.top = `${(clientHeight - thumbHeight) * scrollRatio}px`;
       };
       if (!automationsList.dataset.scrollFadeBound) {
-        automationsList.addEventListener("scroll", updateScrollFade, { passive: true });
+        automationsList.addEventListener("scroll", updateScrollState, { passive: true });
         automationsList.dataset.scrollFadeBound = "true";
       }
-      updateScrollFade();
+      updateScrollState();
     } else {
       automationsList.style.maxHeight = "";
       automationsList.classList.remove("nav-megamenu-scroll", "is-at-bottom");
+      const track = automationsList.parentElement.querySelector(".nav-megamenu-scrollbar");
+      if (track) track.remove();
     }
   });
 }
