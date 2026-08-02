@@ -16,22 +16,40 @@
   <!-- ===== Header ===== -->
   <header class="site-header">
     <div class="header-bar">
-      <a href="#afspraak" class="header-cta">
-        <span class="header-cta-full">Gratis adviesgesprek</span><span class="header-cta-short">Adviesgesprek</span>
-      </a>
+      <span class="header-cta-slot">
+        <a href="#afspraak" class="header-cta">
+          <span class="header-cta-full">Gratis adviesgesprek</span><span class="header-cta-short">Adviesgesprek</span>
+        </a>
+      </span>
 
       <nav class="main-nav" id="main-nav" aria-label="Hoofdmenu">
         <ul class="nav-group">
           <li class="nav-dropdown">
-            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="service-menu">
-              Service
+            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="products-menu" aria-haspopup="true">
+              Products
               <span class="nav-dropdown-icon" aria-hidden="true"></span>
             </button>
-            <ul class="nav-dropdown-menu" id="service-menu">
-              <li><a href="ai-automatisering.html">AI-automatisering</a></li>
-              <li><a href="power-bi-dashboards.html">Power BI dashboards</a></li>
-              <li><a href="trainingen.html">Trainingen</a></li>
-            </ul>
+            <!-- English labels are deliberate here — see CLAUDE.md's Language & tone exception. -->
+            <div class="nav-megamenu" id="products-menu">
+              <div class="nav-megamenu-col">
+                <p class="nav-megamenu-label">Platform</p>
+                <ul>
+                  <li><a href="ai-automatisering.html">Workflow Automation</a></li>
+                  <li><a href="power-bi-dashboards.html">BI Dashboard</a></li>
+                  <li><a href="trainingen.html">Trainingen</a></li>
+                </ul>
+              </div>
+              <div class="nav-megamenu-col">
+                <p class="nav-megamenu-label">Automations</p>
+                <ul>
+                  <li>CRM sync</li>
+                  <li>Email triage</li>
+                  <li>Invoice processing</li>
+                  <li>Lead enrichment</li>
+                  <li>Report generator</li>
+                </ul>
+              </div>
+            </div>
           </li>
           <!-- No pricing page yet (out of scope for now) — placeholder link -->
           <li><a href="#pricing">Tarieven</a></li>
@@ -85,9 +103,11 @@
           <p style="color: var(--color-gray-600); margin-top: 0.75rem;">
             30 minuten, online en vrijblijvend. U weet daarna precies wat de volgende stap zou zijn.
           </p>
-          <a href="[CALENDLY_URL]" class="btn btn-primary btn-block" style="margin-top: 1.5rem;">
-            Plan een kennismaking
-          </a>
+          <span class="btn-slot" style="margin-top: 1.5rem;">
+            <a href="[CALENDLY_URL]" class="btn btn-primary btn-block">
+              Plan een kennismaking
+            </a>
+          </span>
           <p class="form-note">
             Deze knop verwijst naar de agenda van [FULL_NAME] — vul [CALENDLY_URL] in zodra de agendalink bekend is.
           </p>
@@ -116,7 +136,9 @@
               <label for="message">Bericht</label>
               <textarea id="message" name="message" rows="4" required></textarea>
             </div>
-            <button type="submit" class="btn btn-primary btn-block">Verstuur bericht</button>
+            <span class="btn-slot">
+              <button type="submit" class="btn btn-primary btn-block">Verstuur bericht</button>
+            </span>
             <p class="form-note">
               Dit formulier is nog niet gekoppeld aan een verzendservice. Koppel het aan [EMAIL] of een
               formulierendienst voordat de site live gaat.

@@ -19,22 +19,40 @@
        aria-expanded). -->
   <header class="site-header">
     <div class="header-bar">
-      <a href="#afspraak" class="header-cta">
-        <span class="header-cta-full">Gratis adviesgesprek</span><span class="header-cta-short">Adviesgesprek</span>
-      </a>
+      <span class="header-cta-slot">
+        <a href="#afspraak" class="header-cta">
+          <span class="header-cta-full">Gratis adviesgesprek</span><span class="header-cta-short">Adviesgesprek</span>
+        </a>
+      </span>
 
       <nav class="main-nav" id="main-nav" aria-label="Hoofdmenu">
         <ul class="nav-group">
           <li class="nav-dropdown">
-            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="service-menu">
-              Service
+            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="products-menu" aria-haspopup="true">
+              Products
               <span class="nav-dropdown-icon" aria-hidden="true"></span>
             </button>
-            <ul class="nav-dropdown-menu" id="service-menu">
-              <li><a href="ai-automatisering.html">AI-automatisering</a></li>
-              <li><a href="power-bi-dashboards.html">Power BI dashboards</a></li>
-              <li><a href="trainingen.html">Trainingen</a></li>
-            </ul>
+            <!-- English labels are deliberate here — see CLAUDE.md's Language & tone exception. -->
+            <div class="nav-megamenu" id="products-menu">
+              <div class="nav-megamenu-col">
+                <p class="nav-megamenu-label">Platform</p>
+                <ul>
+                  <li><a href="ai-automatisering.html">Workflow Automation</a></li>
+                  <li><a href="power-bi-dashboards.html">BI Dashboard</a></li>
+                  <li><a href="trainingen.html">Trainingen</a></li>
+                </ul>
+              </div>
+              <div class="nav-megamenu-col">
+                <p class="nav-megamenu-label">Automations</p>
+                <ul>
+                  <li>CRM sync</li>
+                  <li>Email triage</li>
+                  <li>Invoice processing</li>
+                  <li>Lead enrichment</li>
+                  <li>Report generator</li>
+                </ul>
+              </div>
+            </div>
           </li>
           <!-- No pricing page yet (out of scope for now) — placeholder link -->
           <li><a href="#pricing">Tarieven</a></li>
@@ -96,8 +114,12 @@
           </p>
 
           <div class="hero-actions">
-            <a href="#afspraak" class="btn btn-primary hero-reveal hero-reveal-delay-2">Plan kennismaking — 20 min</a>
-            <a href="ai-automatisering.html" class="btn btn-secondary hero-reveal hero-reveal-delay-3">Ontdek AI-automatisering</a>
+            <span class="btn-slot hero-reveal hero-reveal-delay-2">
+              <a href="#afspraak" class="btn btn-primary">Plan kennismaking — 20 min</a>
+            </span>
+            <span class="btn-slot hero-reveal hero-reveal-delay-3">
+              <a href="ai-automatisering.html" class="btn btn-secondary">Ontdek AI-automatisering</a>
+            </span>
           </div>
         </div>
 
@@ -399,7 +421,9 @@
         <p>In een kennismaking van 30 minuten kijken we naar uw situatie: welke problemen spelen er, wat is er
           mogelijk, en zijn we een goede match? Vrijblijvend.</p>
         <div class="cta-actions">
-          <a href="contact.html" class="btn btn-secondary">Plan uw kennismaking</a>
+          <span class="btn-slot">
+            <a href="contact.html" class="btn btn-secondary">Plan uw kennismaking</a>
+          </span>
         </div>
         <p class="cta-alt">Liever direct contact? [PHONE] · <a href="mailto:[EMAIL]">[EMAIL]</a></p>
       </div>

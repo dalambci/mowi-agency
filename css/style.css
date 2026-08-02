@@ -67,10 +67,6 @@
   --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
-  /* Verified straight from vuewer.com's own compiled CSS (their nav "Start"
-     pill uses this exact hover:shadow-xl value) — used for our own button
-     hovers below instead of a color change. */
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
 
   /* Motion — --ease-out is a fast, premium deceleration used for reveal-on-
      scroll. --ease-bounce is the slight-overshoot curve vuewer.com uses for
@@ -367,23 +363,48 @@ h3 {
   color: var(--color-white);
 }
 
-/* Verified from vuewer.com: their black CTA buttons don't shift color or
-   lift on hover, just gain a soft shadow (their hover:shadow-xl utility). */
-.btn-primary:hover {
-  box-shadow: var(--shadow-xl);
-}
-
 .btn-secondary {
   background: var(--color-white);
   color: var(--color-ink);
-  border-color: var(--color-header-line);
-}
-
-.btn-secondary:hover {
-  box-shadow: var(--shadow-xl);
+  /* Own black border (unlike vuewer's border-none real button) — needed so
+     the button's own edge stays visible once it's mid-hover-translate and
+     no longer sitting flush against .btn-slot's border below; without it,
+     the white fill had no visible edge against the black slot revealed
+     behind it. */
+  border-color: var(--color-ink);
 }
 
 .btn-block {
+  width: 100%;
+}
+
+/* --- Magnetic-hover "slot" wrapper --------------------------------------------
+   Reproduced 1:1 from vuewer.com's own buttons, inspected live via DevTools:
+   each button actually sits inside a second, static, unmoving box exactly
+   its own size (their grandparent element — `border border-black`, plus
+   `bg-gray`, near-white, behind their black buttons, or `bg-black`, solid,
+   behind their white/gray ones). Only the visible button inside (this
+   project's existing .btn/.btn-primary/.btn-secondary, completely
+   unchanged) gets the magnetic translate in js/main.js, so on hover it
+   visibly slides a few px out of this fixed slot, leaving the border (and,
+   behind light buttons, a solid dark fill) exposed where it used to sit.
+   Markup: wrap the existing button in <span class="btn-slot">. */
+.btn-slot {
+  display: inline-flex;
+  border: 1px solid var(--color-ink);
+  background: var(--color-bg);
+}
+
+.btn-slot:has(.btn-secondary) {
+  background: var(--color-ink);
+}
+
+/* .btn-block buttons (e.g. contact-form submits) need their slot to grow
+   full-width too, not just the button inside it — otherwise the slot stays
+   shrink-to-fit around the button and the width:100% on .btn-block has
+   nothing to resolve against. */
+.btn-slot:has(.btn-block) {
+  display: flex;
   width: 100%;
 }
 
@@ -616,11 +637,41 @@ h3 {
    at 1024-1279px is narrower than this cell's full-size nowrap text needs
    — 80rem (1280px) is the first width where 1fr's share comfortably fits
    "GRATIS ADVIESGESPREK" at 18px nowrap with room to spare. */
+/* Slot wrapper for .header-cta — same magnetic-hover "static box left
+   behind" treatment as .btn-slot above (see that comment for the full
+   vuewer explanation), adapted for a full-bleed grid cell instead of a
+   free-standing pill: from 48rem up, .header-cta-slot becomes the actual
+   grid item (taking over that role from .header-cta itself) and stretches
+   it to fill the cell via flex:1 below, so the slot's border/background
+   exactly track the cell's size. Only a border-right is needed at that
+   width — the slot's other three edges already sit exactly on
+   .header-bar's own outer border, so a full 4-sided border would just
+   double up on top of it.
+
+   display:contents below 48rem (and no flex:1 on .header-cta) is
+   deliberate: at that width .header-bar collapses to a totally different
+   compact [logo | hamburger] layout where .header-cta becomes a fixed
+   3.75rem icon-only button (see the max-width:47.9375rem override further
+   down) — flex:1's implicit flex-basis:0 would silently override that
+   fixed width. contents removes the slot from the box tree entirely below
+   48rem, so .header-cta participates in that layout exactly as if this
+   wrapper didn't exist (no visible slot there either, which is fine: touch
+   devices don't hover, so the effect isn't needed at that width anyway). */
+.header-cta-slot {
+  display: contents;
+}
+
+@media (min-width: 48rem) {
+  .header-cta-slot {
+    display: flex;
+    border-right: 1px solid var(--color-ink);
+  }
+}
+
 .header-cta {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
   padding-inline: 0.875rem;
   background: var(--color-ink);
   color: var(--color-white);
@@ -630,6 +681,12 @@ h3 {
   letter-spacing: var(--tracking-wide);
   text-align: center;
   transition: box-shadow 0.2s ease;
+}
+
+@media (min-width: 48rem) {
+  .header-cta {
+    flex: 1;
+  }
 }
 
 @media (min-width: 80rem) {
@@ -655,13 +712,6 @@ h3 {
   .header-cta-short {
     display: inline;
   }
-}
-
-/* Verified straight from vuewer.com's own nav "Start" pill — the exact
-   same black button in the exact same role. Its hover is a shadow lift
-   only, no color change (and no orange, ever). */
-.header-cta:hover {
-  box-shadow: var(--shadow-xl);
 }
 
 .header-cta-mobile {
@@ -753,10 +803,14 @@ h3 {
   border-color: var(--color-text);
 }
 
-/* --- Nav dropdown ("Service") -------------------------------------------
-   Click-to-open (not hover-only, for touch/accessibility), same max-height
-   toggle mechanism on both desktop (floating panel) and mobile (expands
-   inline within the slide-down nav panel) — just repositioned per context. */
+/* --- Nav dropdown ("Products" mega-menu) -----------------------------------
+   Opens on hover at desktop/tablet widths (see the min-width:48rem block
+   below) plus click (main.js), which stays as the only way in on touch and
+   the only accessible way in via keyboard. Also closes on Esc (main.js).
+   .nav-megamenu is the panel itself — two columns (.nav-megamenu-col), each
+   an eyebrow-style label (.nav-megamenu-label) over a list of items; real
+   links get their own hover/current-page treatment, plain <li> text (the
+   non-clickable "Automations" items) intentionally gets none. */
 .nav-dropdown {
   position: relative;
 }
@@ -805,59 +859,158 @@ h3 {
   transform: rotate(225deg) translateY(-1px);
 }
 
-.nav-dropdown-menu {
+/* Base/mobile: shown via a max-height accordion, same mechanism the old
+   flat dropdown used — the panel is a normal in-flow grid item here (see
+   the max-width:47.9375rem block below), so it needs its layout footprint
+   to genuinely collapse to zero when closed, not just turn invisible. */
+.nav-megamenu {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.3s var(--ease-out);
 }
 
-.nav-dropdown-trigger[aria-expanded="true"] + .nav-dropdown-menu {
-  max-height: 16rem;
+.nav-dropdown-trigger[aria-expanded="true"] + .nav-megamenu {
+  max-height: 26rem; /* generous enough for two columns of wrapped labels at mobile widths */
 }
 
-/* Selector needs to out-specificity ".main-nav li a" (which sets
-   uppercase) — plain ".nav-dropdown-menu a" loses that fight since
-   ".main-nav li a" has one more class in the chain. */
-.main-nav ul.nav-dropdown-menu a {
-  display: block;
-  white-space: nowrap;
-  font-size: 0.9375rem;
+/* 0.859375rem = 0.6875rem * 1.25 — 25% larger than the original eyebrow
+   size, per request, applied to both desktop and mobile since neither
+   breakpoint overrides font-size here. font-weight:600 (not 700) matches
+   the site's actual .eyebrow component (see that class further up this
+   file) — this label is styled as one of those, so it should carry the
+   exact same weight, not a bolder one-off value. */
+.nav-megamenu-label {
+  font-size: 0.859375rem;
   font-weight: 600;
-  text-transform: none;
-  letter-spacing: normal;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  margin: 0 0 0.375rem;
+}
+
+.nav-megamenu-col ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Plain, non-link <li> text (the "Automations" placeholder items) — styled
+   identically to the real links below (same color, same hover), not dimmed
+   or "greyed out": these read as just as clickable as the shipped features,
+   even though there's genuinely no href/destination behind them yet
+   (per request — a deliberate choice, not an oversight). */
+.nav-megamenu-col li {
+  font-size: 0.9375rem;
+  line-height: 1.3;
   color: var(--color-text);
+  cursor: pointer;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.nav-megamenu-col li a {
+  display: block;
+  color: inherit;
+  text-decoration: none;
   transition: color 0.2s ease, background-color 0.2s ease;
 }
 
 @media (min-width: 48rem) {
-  .nav-dropdown-menu {
+  .nav-megamenu {
     position: absolute;
-    top: calc(100% + 1px);
+    /* Flush against the trigger (no gap) — .nav-dropdown's own box (its
+       hover target) ends exactly here since both it and the trigger are
+       height:100% of the same row, so a gap of even 1px left a dead pixel
+       strip the cursor could pass through while moving from the trigger
+       down into the panel, dropping the :hover and closing it mid-move. */
+    top: 100%;
     left: 0;
-    min-width: 14rem;
-    background: var(--color-bg);
-    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
     z-index: 60;
-  }
-
-  /* Border/shadow only while open — otherwise they still render at the
-     collapsed max-height:0, showing as a faint line under the trigger. */
-  .nav-dropdown-trigger[aria-expanded="true"] + .nav-dropdown-menu {
+    display: flex;
+    /* Same background, border weight/color and square corners as
+       .header-bar itself (see var(--color-header-line)/--radius-lg near the
+       top of this file) — reads as a natural extension of the header bar
+       dropping down, not a separate floating "card" component. */
+    background: var(--color-bg);
     border: 1px solid var(--color-header-line);
+    border-radius: 0;
     box-shadow: var(--shadow-md);
+    padding: 1.25rem 0;
+    min-width: 27rem;
+    max-height: none;
+    overflow: visible;
+    /* Fade + small translate, not the mobile max-height accordion — see the
+       prefers-reduced-motion override further down for the no-motion case. */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-0.375rem);
+    transition: opacity 0.18s var(--ease-out), transform 0.18s var(--ease-out),
+      visibility 0s linear 0.18s;
   }
 
-  .nav-dropdown-menu li + li {
-    border-top: 1px solid var(--color-header-line);
+  /* Opens on hover at desktop/tablet widths (mouse/trackpad context). The
+     click-based JS toggle (main.js) stays wired alongside it — hover has no
+     equivalent on touch, and keyboard users (Tab + Enter/Space) still need
+     click to open/close it. */
+  .nav-dropdown-trigger[aria-expanded="true"] + .nav-megamenu,
+  .nav-dropdown:hover .nav-megamenu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+    transition: opacity 0.18s var(--ease-out), transform 0.18s var(--ease-out);
   }
 
-  .nav-dropdown-menu a {
-    padding: 0.875rem 1.25rem;
+  .nav-dropdown:hover .nav-dropdown-icon {
+    transform: rotate(225deg) translateY(-1px);
   }
 
-  .nav-dropdown-menu a:hover,
-  .nav-dropdown-menu a[aria-current="page"] {
-    background: var(--color-bg-tint-strong);
+  .nav-megamenu-col {
+    display: flex;
+    flex-direction: column;
+    min-width: 11rem;
+    padding-inline: 1.5rem;
+  }
+
+  /* var(--color-gray-500), not --color-text-muted — matches the site's
+     actual .eyebrow component color exactly (see that class further up
+     this file), rather than a darker, browner one-off muted tone. */
+  .nav-megamenu-label {
+    color: var(--color-gray-500);
+  }
+
+  .nav-megamenu-col li {
+    white-space: nowrap;
+  }
+
+  /* Identical hover recipe to the top-level nav items themselves
+     (.main-nav > .nav-group > li > a:hover above): a transparent 1px border
+     reserves the space a solid one takes on hover, so nothing shifts when
+     it appears — no color change, no rounded corners, no orange, ever.
+     Applies to both the real links AND the plain "Automations" items (see
+     the base rule above) — same treatment for both, deliberately, so the
+     placeholder items don't read as visibly disabled. */
+  .nav-megamenu-col li a,
+  .nav-megamenu-col li:not(:has(a)) {
+    border: 1px solid transparent;
+    padding: 0.3125rem 0.5rem;
+    margin: -0.3125rem -0.5rem;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+
+  .nav-megamenu-col li a:hover,
+  .nav-megamenu-col li a[aria-current="page"],
+  .nav-megamenu-col li:not(:has(a)):hover {
+    background: rgba(0, 0, 0, 0.03);
+    border-color: var(--color-text);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-megamenu {
+    transition: none;
   }
 }
 
@@ -993,9 +1146,9 @@ h3 {
   .main-nav {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    /* dense backfills the gap left when the Service row (see .nav-dropdown
+    /* dense backfills the gap left when the Products row (see .nav-dropdown
        below) forces a full-width row — Tarieven, the next item in source
-       order, pulls back up to sit beside Service instead of being pushed
+       order, pulls back up to sit beside Products instead of being pushed
        down a row, which is what keeps this a clean 2x2 instead of leaving
        a hole. */
     grid-auto-flow: dense;
@@ -1036,25 +1189,25 @@ h3 {
     transition: transform 0.3s var(--ease-out);
   }
 
-  /* A true 2x2 (Service+Tarieven / Cases+Contact), matching vuewer's own
+  /* A true 2x2 (Products+Tarieven / Cases+Contact), matching vuewer's own
      flat Services/Tarieven/Over/Contact grid exactly — not 1-then-2-then-1.
-     .nav-dropdown (the <li> wrapping the trigger + submenu) goes
-     display:contents here so the trigger and the submenu <ul> become
-     independent grid items in their own right: the trigger stays a normal
-     half-width cell (sits next to Tarieven), while the submenu spans the
-     full width and drops into its own row below when expanded — collapsed
-     (max-height:0) it takes zero visible space, so by default this reads
-     as an ordinary 4-cell grid. */
+     .nav-dropdown (the <li> wrapping the trigger + mega-menu) goes
+     display:contents here so the trigger and the panel become independent
+     grid items in their own right: the trigger stays a normal half-width
+     cell (sits next to Tarieven), while the panel spans the full width and
+     drops into its own row below when expanded — collapsed (max-height:0)
+     it takes zero visible space, so by default this reads as an ordinary
+     4-cell grid. */
   .nav-dropdown {
     display: contents;
   }
 
-  .nav-dropdown-menu {
+  .nav-megamenu {
     grid-column: 1 / -1;
   }
 
   /* Matches the base rule's ".main-nav > .nav-group > li > a" selector
-     specificity exactly (see the similar note near .nav-dropdown-menu a
+     specificity exactly (see the similar note near .nav-megamenu-col li a
      below) — a plainer ".main-nav li a" loses the color override to that
      base rule's black text, which on this new black panel meant invisible
      black-on-black text. */
@@ -1082,23 +1235,89 @@ h3 {
     width: 100%;
   }
 
-  .nav-dropdown-menu {
+  /* Matches the original single-column dropdown's own look exactly (full-
+     width flowing rows divided by hairlines, not individually boxed) —
+     just split into two columns side by side, with a vertical line down
+     the middle instead of one long list. "Platform" and "Automations"
+     each get their own label on top. */
+  .nav-megamenu {
     display: flex;
-    flex-direction: column;
+  }
+
+  /* border-top:none — the panel's own top edge sits flush against the
+     Products/Tarieven row's own bottom border above it, so a second border
+     here would just double up on top of that existing line. */
+  .nav-dropdown-trigger[aria-expanded="true"] + .nav-megamenu {
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-top: none;
+  }
+
+  .nav-megamenu-col {
+    flex: 1;
+    min-width: 0; /* lets long item text actually wrap instead of overflowing its column */
+  }
+
+  /* Overrides the base rule's gap:0.5rem — rows are separated by hairline
+     borders here (see .nav-megamenu-col li below), not empty space. */
+  .nav-megamenu-col ul {
     gap: 0;
   }
 
-  .main-nav ul.nav-dropdown-menu a {
-    color: rgba(255, 255, 255, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-top: none;
-    padding: 1rem;
+  /* The vertical line down the middle. */
+  .nav-megamenu-col + .nav-megamenu-col {
+    border-left: 1px solid rgba(255, 255, 255, 0.15);
   }
 
-  .main-nav ul.nav-dropdown-menu a:hover,
-  .nav-dropdown-menu a[aria-current="page"] {
+  .nav-megamenu-label {
+    padding: 0.75rem 1rem 0.5rem;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  /* Full-width rows, hairline dividers BETWEEN items only (not before the
+     first one, right under the label, or boxing each item individually —
+     see the reference screenshot this was built against). 0.75rem is the
+     largest size where every single item — including "Workflow Automation"
+     and "Invoice processing" — stays on one line at 360px; anything bigger
+     (tested up to 1.125rem) forced at least one item to wrap, leaving that
+     row taller than the rest and breaking the even row-to-row alignment
+     across both columns. Same brightness + hover for the plain
+     "Automations" items as the real links (see the base rule above) — not
+     dimmed, so they don't read as disabled. */
+  .nav-megamenu-col li {
+    font-size: 0.75rem;
+    line-height: 1.2;
+    color: rgba(255, 255, 255, 0.85);
+    padding: 0.75rem 1rem;
+  }
+
+  .nav-megamenu-col li:not(:first-child) {
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .nav-megamenu-col li a {
+    display: block;
+    margin: -0.75rem -1rem;
+    padding: 0.75rem 1rem;
+    color: inherit;
+  }
+
+  .nav-megamenu-col li a:hover,
+  .nav-megamenu-col li a[aria-current="page"],
+  .nav-megamenu-col li:not(:has(a)):hover {
     background: rgba(255, 255, 255, 0.08);
     color: var(--color-white);
+  }
+
+  /* Matching column heights: the shorter "Platform" list's rendered height
+     becomes a max-height cap on "Automations" (which has more items and
+     would otherwise run much longer) — set as an inline style by
+     syncMegaMenuColumnHeights() in main.js, since it depends on actual
+     rendered text-wrap/line-count at the current viewport width, not a
+     value CSS alone can express. This just supplies the scrollbar/clip
+     behavior once JS sets that height. */
+  .nav-megamenu-col ul.nav-megamenu-scroll {
+    overflow-y: auto;
+    overscroll-behavior: contain;
   }
 
   /* The header's own CTA is visible at all times now (even with the sheet

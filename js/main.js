@@ -61,10 +61,14 @@ if (navToggle && mainNav) {
   });
 }
 
-// --- Nav dropdown ("Service") -------------------------------------------------
-// Click-to-toggle (not hover-only, so it works the same on touch and mouse).
-// The open/closed animation itself is a pure CSS max-height transition keyed
-// off aria-expanded — this just flips the attribute.
+// --- Nav dropdown ("Products" mega-menu) ---------------------------------------
+// Click-to-toggle here; hover-to-open at desktop/tablet widths is pure CSS
+// (see .nav-dropdown:hover in style.css) and needs no JS. This stays wired
+// alongside it because hover has no touch equivalent, and it's the only way
+// keyboard users (Tab + Enter/Space) can open/close it. The open/closed
+// animation itself is pure CSS (max-height accordion on mobile, opacity +
+// translate on desktop — see .nav-megamenu in style.css) keyed off
+// aria-expanded — this just flips the attribute.
 document.querySelectorAll(".nav-dropdown-trigger").forEach((trigger) => {
   trigger.addEventListener("click", (event) => {
     event.stopPropagation();
@@ -81,6 +85,47 @@ document.addEventListener("click", (event) => {
     }
   });
 });
+
+// Esc closes an open dropdown and returns focus to its trigger — otherwise
+// a keyboard user tabbed into the mega-menu's links would have no way to
+// dismiss it short of tabbing all the way back out.
+document.addEventListener("keydown", (event) => {
+  if (event.key !== "Escape") return;
+  document.querySelectorAll('.nav-dropdown-trigger[aria-expanded="true"]').forEach((trigger) => {
+    trigger.setAttribute("aria-expanded", "false");
+    trigger.focus();
+  });
+});
+
+// Mobile only, by request — "Platform" (3 items) is naturally shorter than
+// "Automations" (5 items); capping Automations to Platform's own rendered
+// height, and letting just that list scroll internally
+// (.nav-megamenu-scroll in style.css), keeps the two columns visually
+// matched instead of the panel growing lopsided. Desktop's panel just sizes
+// to its own content, uncapped. Recomputed on load and resize since it
+// depends on actual text-wrap at the current column width (360px vs.
+// 390px, ...), not a value CSS alone can express — this works even while
+// the menu is closed, since overflow-clipping an ancestor doesn't change a
+// descendant's own layout size, only what's painted.
+const mobileMegaMenuQuery = window.matchMedia("(max-width: 47.9375rem)");
+
+function syncMegaMenuColumnHeights() {
+  document.querySelectorAll(".nav-megamenu").forEach((menu) => {
+    const [platformList, automationsList] = menu.querySelectorAll(".nav-megamenu-col ul");
+    if (!platformList || !automationsList) return;
+
+    if (mobileMegaMenuQuery.matches) {
+      automationsList.style.maxHeight = `${platformList.getBoundingClientRect().height}px`;
+      automationsList.classList.add("nav-megamenu-scroll");
+    } else {
+      automationsList.style.maxHeight = "";
+      automationsList.classList.remove("nav-megamenu-scroll");
+    }
+  });
+}
+
+syncMegaMenuColumnHeights();
+window.addEventListener("resize", syncMegaMenuColumnHeights);
 
 // --- Scroll-reveal animations -----------------------------------------------
 // Elements with [data-reveal] fade/rise in once they enter the viewport.
@@ -209,6 +254,154 @@ if (countEls.length) {
     );
     statsObserver.observe(statsBar);
   }
+}
+
+// --- Magnetic button hover ---------------------------------------------------
+// Reproduced 1:1 from vuewer.com's own buttons — inspected live via DevTools,
+// not just the reference doc's summary. Their nav "Start" pill AND their
+// body CTAs ("Get Started" / "More Info") are both wrapped in an Alpine
+// component (x-data="hoverFollower()") that nudges the whole button a few
+// px toward the pointer — horizontal/vertical translate only, no rotation,
+// confirmed by watching the real hover on vuewer.com directly (an earlier
+// pass here mistakenly added a tilt based on a noisy inline-style reading;
+// the button stays level). No shadow either — per request, buttons have no
+// hover box-shadow.
+//
+// Direction always stays up-and-right: on entry the button pops straight
+// to its full up-right nudge (not computed from wherever the pointer
+// happened to land — an earlier pass here offset from the button's center
+// instead, which made the direction depend on entry position and felt
+// inconsistent button to button). It then keeps following the cursor as it
+// moves inside the button, but that following is clamped to the same
+// up-right quadrant (x never goes below 0, y never goes above 0) instead of
+// the full ±range an unclamped magnetic pull would allow — so it still
+// visibly tracks the pointer without ever drifting down-left and losing
+// the consistent demeanor the initial pop established.
+//
+// The button doesn't jump straight there — it EASES toward it every
+// animation frame (current += (target - current) * EASE), which is what
+// actually produces vuewer's smooth, slightly-lagging "chase" feel;
+// snapping the transform directly on entry (an earlier pass here) reads as
+// far too sharp/aggressive by comparison, even though the CSS transition
+// while easing is genuinely instant either way — the smoothing itself is
+// the lerp loop, not a transition duration. On pointerleave the CSS
+// `transition: transform 380ms cubic-bezier(.2,.8,.2,1)` takes over
+// instead, matching vuewer's own spring-back exactly.
+//
+// The "left behind" box: on vuewer, every one of these buttons actually
+// sits inside a second, static element exactly its own size (their
+// grandparent — see .btn-slot/.header-cta-slot in style.css) that does NOT
+// get this transform, so translating just the button visibly slides it out
+// of that fixed slot. This only targets the moving button itself; the slot
+// is pure CSS and needs no JS.
+//
+// .header-dashboard-btn (the login icon in the header) gets a plain,
+// unbiased version instead — it still tracks the cursor in whatever
+// direction it moves, just without the up-right pop/bias above, since a
+// bare icon with no slot/fill behind it (see its own CSS comment in
+// style.css) doesn't carry that consistent demeanor the same way the
+// filled buttons do.
+if (!prefersReducedMotion) {
+  const SPRING_BACK = "transform 380ms cubic-bezier(0.2, 0.8, 0.2, 1)";
+  const EASE = 0.06; // lower = slower/smoother chase, higher = snappier
+  const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+
+  // Nudge scales with the button's own size so a small icon button gets a
+  // proportionally smaller move than a full-width CTA, instead of the same
+  // fixed px range for both.
+  const maxTranslateFor = (rect) => Math.min(10, Math.min(rect.width, rect.height) * 0.25);
+
+  // Shared easing/reset plumbing for both variants below — onEnter and
+  // onMove each return a {x, y} target given the element's current rect
+  // (and, for onMove, the pointer event); onEnter is optional (the
+  // unbiased variant has no pop, so it's skipped there).
+  const setupMagneticHover = (el, { onEnter, onMove }) => {
+    let targetX = 0;
+    let targetY = 0;
+    let currentX = 0;
+    let currentY = 0;
+    let rafId = null;
+
+    const tick = () => {
+      currentX += (targetX - currentX) * EASE;
+      currentY += (targetY - currentY) * EASE;
+      el.style.transition = "transform 0s";
+      el.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+
+      if (Math.abs(targetX - currentX) > 0.05 || Math.abs(targetY - currentY) > 0.05) {
+        rafId = requestAnimationFrame(tick);
+      } else {
+        rafId = null;
+      }
+    };
+
+    if (onEnter) {
+      el.addEventListener("pointerenter", (event) => {
+        if (event.pointerType === "touch") return;
+        ({ x: targetX, y: targetY } = onEnter(el.getBoundingClientRect()));
+        if (rafId === null) rafId = requestAnimationFrame(tick);
+      });
+    }
+
+    el.addEventListener("pointermove", (event) => {
+      if (event.pointerType === "touch") return;
+      ({ x: targetX, y: targetY } = onMove(el.getBoundingClientRect(), event));
+      if (rafId === null) rafId = requestAnimationFrame(tick);
+    });
+
+    const resetTransform = () => {
+      targetX = 0;
+      targetY = 0;
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+      currentX = 0;
+      currentY = 0;
+      el.style.transition = SPRING_BACK;
+      el.style.transform = "translate3d(0, 0, 0)";
+    };
+
+    el.addEventListener("pointerleave", resetTransform);
+    el.addEventListener("pointercancel", resetTransform);
+  };
+
+  document.querySelectorAll(".header-cta, .btn-primary, .btn-secondary").forEach((el) => {
+    setupMagneticHover(el, {
+      onEnter: (rect) => {
+        const m = maxTranslateFor(rect);
+        return { x: m, y: -m };
+      },
+      // Keeps following the cursor after the initial pop, but clamped to
+      // the up-right quadrant only — the pointer's position just shifts
+      // the button somewhere between "centered" (0,0) and "fully popped"
+      // (m, -m), never past either end.
+      onMove: (rect, event) => {
+        const m = maxTranslateFor(rect);
+        const relX = event.clientX - rect.left - rect.width / 2;
+        const relY = event.clientY - rect.top - rect.height / 2;
+        return {
+          x: clamp(m * 0.6 + relX * 0.25, 0, m),
+          y: clamp(-m * 0.6 + relY * 0.25, -m, 0),
+        };
+      },
+    });
+  });
+
+  document.querySelectorAll(".header-dashboard-btn").forEach((el) => {
+    setupMagneticHover(el, {
+      // No onEnter — plain magnetic tracking, unbiased in any direction.
+      onMove: (rect, event) => {
+        const m = maxTranslateFor(rect);
+        const relX = event.clientX - rect.left - rect.width / 2;
+        const relY = event.clientY - rect.top - rect.height / 2;
+        return {
+          x: clamp(relX * 0.25, -m, m),
+          y: clamp(relY * 0.25, -m, m),
+        };
+      },
+    });
+  });
 }
 
 // --- FAQ accordion -----------------------------------------------------------
