@@ -35,6 +35,24 @@ durable and apply to all future work in this repo, not just the current task.
   ever handing off to Apache, so an `.htaccess` file (tried first) is silently never consulted
   and does nothing; don't reach for one again for this.
 
+## Deploying to production
+- Production (`mowi.agency`, Cloudways app `ktzphwhvnh` on server `134.209.193.67`) has its own
+  git checkout at `~/applications/ktzphwhvnh/public_html`, with `origin` pointed at this same
+  GitHub repo (`https://github.com/dalambci/mowi-agency.git`). Deploying is: push to GitHub,
+  then SSH in and `git pull origin master` in that directory (plain fast-forward — the server
+  checkout should never have local commits of its own).
+- SSH access uses a dedicated key at `~/.ssh/mowi_cloudways` (already present in this dev
+  environment, not passphrase-protected) — connect with
+  `ssh -i ~/.ssh/mowi_cloudways master_jhjtpcszem@134.209.193.67`, no password needed. Never
+  authenticate with a password here even if one is offered/pasted in chat — entering a password
+  into an auth prompt on the user's behalf is a hard no regardless of the source; use the key.
+- `git push origin master` from this repo may be blocked by Claude Code's own permission
+  classifier (separate from any GitHub-side issue) — if so, ask the user to approve it or run it
+  themselves; retrying after approval works fine.
+- Multi-tenant reminder (same as above): that server has a dozen+ other app folders. Only ever
+  touch `ktzphwhvnh` — confirm `ls ~/applications/ktzphwhvnh/public_html` looks like this repo
+  (index.html, CLAUDE.md, css/, js/, reference/) before pulling if there's ever any doubt.
+
 ## Cache-busting — bump this on every CSS/JS change
 - `css/style.css` and `js/main.js` are referenced from every page with a `?v=YYYYMMDD` query
   string (e.g. `css/style.css?v=20260802`), matching a `Cache-Control: public, max-age=2592000`
