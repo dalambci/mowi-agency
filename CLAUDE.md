@@ -53,6 +53,24 @@ durable and apply to all future work in this repo, not just the current task.
   touch `ktzphwhvnh` — confirm `ls ~/applications/ktzphwhvnh/public_html` looks like this repo
   (index.html, CLAUDE.md, css/, js/, reference/) before pulling if there's ever any doubt.
 
+### If this section is ever missing or wrong
+This was reconstructed once already (2026-08-03) after the details above weren't written down
+anywhere and had to be rediscovered mid-session. If that happens again — key rotated, IP
+changed, this file not read, whatever — redo it the same way rather than asking the user to
+retype credentials from scratch or falling back to a password:
+1. `ls ~/.ssh/` for a key named after this project (convention seen here: `mowi_cloudways`,
+   i.e. `<project>_cloudways`) — try it with `-o BatchMode=yes` before assuming it doesn't work.
+2. `awk '{print $1}' ~/.ssh/known_hosts` for IPs this machine already trusts — a candidate host,
+   not proof by itself (this account's other client keys/IPs live in the same files).
+3. Once connected, `ls ~/applications/` and match the folder name against the app ID already in
+   this file (`ktzphwhvnh`), then confirm with the file-listing check above.
+4. Check whether that app folder has its own `.git` (`cd` into it, `git remote -v`) before
+   assuming rsync/scp — if it does, it's the same pull-based flow described above, not a raw
+   file copy.
+- If a password gets offered anywhere in this process (chat, a notes file, anything), still
+  don't use it — keep looking for the key. Only ask the user to enter it themselves if a key
+  genuinely doesn't exist and can't be added.
+
 ## Cache-busting — bump this on every CSS/JS change
 - `css/style.css` and `js/main.js` are referenced from every page with a `?v=YYYYMMDD` query
   string (e.g. `css/style.css?v=20260802`), matching a `Cache-Control: public, max-age=2592000`
