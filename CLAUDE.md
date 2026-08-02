@@ -52,10 +52,12 @@ durable and apply to all future work in this repo, not just the current task.
 ## Language & tone
 - All visible site text is in **Dutch**, formal **"u"** form (never "je/jij").
 - **Exception:** the header nav's "Products" mega-menu (see `.nav-megamenu` in `css/style.css`)
-  uses English labels deliberately — category labels ("Platform", "Automations") and item names
-  ("Workflow Automations", "BI Dashboard", "CRM sync", "Email triage", "Invoice processing",
-  "Lead enrichment", "Report generator"). Keep these in English; don't translate them to Dutch.
-  This is scoped to that menu only — everything else on the site stays Dutch per the rule above.
+  uses English labels deliberately — category labels ("Platform", "Automations") and most item
+  names ("BI Dashboard", "CRM sync", "Email triage", "Invoice processing", "Lead enrichment",
+  "Report generator"). Keep these in English; don't translate them to Dutch. This is scoped to
+  that menu only — everything else on the site stays Dutch per the rule above. One item in that
+  same menu, "ai-automatisering" (linking to `ai-automatisering.html`), is deliberately Dutch —
+  matches the page's own name/slug rather than following the English-labels exception.
 
 ## Content
 - Content is adapted from `reference/content-data-vista.md` (our own prior business
