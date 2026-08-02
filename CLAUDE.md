@@ -84,6 +84,16 @@ retype credentials from scratch or falling back to a password:
   value on all `<link>`/`<script>` tags referencing them, across every HTML page**, so browsers
   are forced to fetch the new file immediately rather than waiting out the cache. Use the
   current date (`YYYYMMDD`); if multiple deploys land same-day, append `-2`, `-3`, etc.
+- **Separate from the above:** production also has a page-level HTTP cache in front of nginx
+  (confirmed 2026-08-03 — `curl -sI https://mowi.agency/` showed `X-Cache: HIT` and `Age: 252`;
+  likely Varnish, which Cloudways commonly bundles). This caches whole HTML responses, not just
+  the static CSS/JS the `?v=` trick covers, so a page can keep serving pre-deploy HTML for a
+  while even though the file on disk (and `git log` on the server) is already correct. If a
+  deploy doesn't seem to have landed, verify the actual file first (`ssh` in and read/grep it,
+  or `curl` with a cache-busting query string like `?nocache=$(date +%s)`) before assuming
+  something went wrong — it's very likely just this cache, not a failed deploy. No known way to
+  force-purge it from this repo/session; ask the user to clear it via the Cloudways dashboard if
+  an instant update is actually needed.
 
 ## Language & tone
 - All visible site text is in **Dutch**, formal **"u"** form (never "je/jij").
