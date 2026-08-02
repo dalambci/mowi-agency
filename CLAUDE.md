@@ -59,6 +59,102 @@ durable and apply to all future work in this repo, not just the current task.
   same menu, "AI-automatisering" (linking to `ai-automatisering.html`), is deliberately Dutch —
   matches the page's own name/slug rather than following the English-labels exception.
 
+## Documentation section (setup guides for clients)
+- Structure, page anatomy, navigation anatomy, and writing rules are defined in
+  `reference/docs-style-guide.md` — study/inspiration only, same status as
+  `reference/style-vuewer.md`, not part of the shipped site. Follow it for every docs page.
+- Language: Dutch, formal **"u"** form, same as the rest of the site.
+- Agent and product names stay in English, per the existing Products mega-menu exception above
+  (e.g. "CRM sync", "Email triage", "Invoice processing", "Lead enrichment", "Report generator").
+- UI labels (button/menu names the client sees on their actual screen) are quoted **exactly**,
+  in whatever language that screen shows them in — do not translate a UI label that's genuinely
+  English on-screen into Dutch, or vice versa. Verify the real on-screen wording before writing
+  a step; never guess or approximate it.
+- The client portal is always called **"het dashboard"** — never "de omgeving," "het portaal,"
+  or "uw account." One term, used consistently across every docs page.
+- Information architecture (categories + initial page list) is proposed in
+  `reference/docs-style-guide.md` §4. Treat that as the working IA once approved; update this
+  file's Folder structure section below if/when the docs section adds new folders.
+
+### Docs are visually a dashboard extension, not a marketing page
+- Docs pages are styled to match the **client dashboard** (a separate Laravel app at
+  `c:\Users\SalP1\Desktop\Mowi Dashboard` — not part of this repo), not this site's own
+  marketing design. Calm neutrals, no accent hue, no display-sized headings, no marquees, no
+  scroll-reveal animation.
+- Style source of truth: `reference/dashboard-css/` (a copy of the dashboard's own
+  `resources/css/dashboard.css`, plus a README summarizing the extracted tokens) — study/
+  inspiration only, same status as `reference/style-vuewer.md`. If the dashboard's CSS ever
+  changes, re-copy it there and re-derive `css/docs.css`'s tokens from it.
+- All docs pages load **only** `css/docs.css` (self-contained: reset, layout, components) —
+  never `css/style.css` or `js/main.js`. This is deliberate, so marketing styling/animation can
+  never leak into the docs section. Font is Inter via `fonts.bunny.net` (matches the dashboard
+  exactly), not the marketing site's Plus Jakarta Sans.
+- Sidebar navigation is generated entirely from `js/docs-nav.js` (`DOCS_NAV` / `DOCS_HOME`
+  globals) by `js/docs.js`, which also builds the breadcrumb, previous/next links, and the
+  "Op deze pagina" TOC (scroll-spy, only rendered when the article has real `h2`s — stub pages
+  correctly show no TOC). **To add a new docs article: add one `{ title, href }` line to the
+  right category in `js/docs-nav.js` and create the matching `docs-*.html` file** — the sidebar,
+  breadcrumb, and prev/next everywhere else update automatically, nothing else to touch.
+- Every docs page follows the same shell: `.docs-header` (slim, wordmark + "Terug naar website"
+  + "Inloggen" linking to `https://dashboard.mowi.agency/login`) → `.docs-sidebar` (mount point
+  only, populated by JS) → `.docs-content-wrap` (`.docs-column` + `.docs-toc`). Reusable
+  components live in `css/docs.css`: `.docs-steps` (numbered steps with circles), `.docs-prereqs`
+  (prerequisites checklist box), `.docs-callout` with `-note` / `-warning` / `-result` modifiers
+  (the `-result` variant is for "U ziet nu ..." expected-result confirmations), `.docs-media`
+  (grey rounded image placeholder + caption, for screenshots to be added later), and
+  `.docs-token-row` / `.docs-copy-btn` (copyable key/URL blocks with a working clipboard button).
+- All 19 approved articles + `docs.html` (overview, dashboard-style category cards) exist and
+  have **real written content** (as of 2026-08-03) — not stubs. Every article follows the same
+  anatomy: two-sentence "what this does," one-line goal, prerequisites box, numbered steps with
+  "U ziet nu ..." results, image placeholders, troubleshooting, next steps. The Email triage
+  agent page (`docs-agent-email-triage.html`) was written first and approved by the user as the
+  template every other article copies — if in doubt about tone/structure/depth for a new or
+  edited article, match that one.
+- The marketing footer (`.footer-nav`, present on every marketing page) links to `docs.html` as
+  "Documentatie" — keep that link when editing any footer.
+
+### Precision rules that produced this content — apply to every future edit
+- **Never invent a click-path.** Steps inside our own dashboard are grounded by reading the
+  actual Mowi Dashboard Laravel codebase (`c:\Users\SalP1\Desktop\Mowi Dashboard` —
+  routes/web.php, the relevant `resources/views/**/*.blade.php`), not guessed from what a
+  dashboard "probably" looks like. Steps inside external tools (Gmail, Outlook, Salesforce,
+  Exact Online, AFAS, Power BI) are grounded by fetching that tool's own official documentation
+  (WebFetch/WebSearch), not recalled from memory.
+- **Two HTML comment markers flag unresolved precision gaps** — `<!-- DRAFT: ... -->` for steps
+  in our own platform where the screen/process doesn't exist yet or isn't confirmed (e.g. there
+  is currently no self-service "Koppelingen" UI in the dashboard at all — every agent/koppeling
+  page's connection step is honestly DRAFT-marked for this reason, and that's a real product gap,
+  not a doc-writing gap); `<!-- VERIFY: ... -->` for external-tool details found via secondary
+  sources (blog posts, community articles) rather than confirmed directly on the vendor's own
+  page (Salesforce's and Exact Online's help portals are JS-rendered SPAs that don't reliably
+  return real content to WebFetch — when a fetch returns only a loading/CSS-error shell, that's
+  the tool failing to render, not the page being empty; don't treat it as "nothing exists there").
+  Find every open one with: `grep -rn "DRAFT\|VERIFY" docs-*.html` (27 remain as of 2026-08-03:
+  23 DRAFT, 4 VERIFY — see chat history for the full grouped list, or re-run the grep and read
+  each comment, they're self-explanatory).
+- **Never guess security/network specifics.** `docs-it-beveiliging.html` and
+  `docs-it-netwerkvereisten.html` deliberately omit encryption/retention/certification claims and
+  all IP/domain/port values — a wrong firewall value is worse than none. Only add these once a
+  human confirms them; don't infer from how other Mowi infrastructure is configured.
+- **Two confirmed facts already resolved into real page content** (not placeholders): the
+  dashboard runs on the same server as this website but as a separate application under its own
+  subdomain (stated on `docs-it-beveiliging.html`); there is no standard verwerkersovereenkomst
+  (DPA) today, it's arranged per client on request (same page).
+- **Known cross-repo mismatch, not yet fixed anywhere:** the dashboard's own `config/support.php`
+  (`SUPPORT_DOCS_URL`, referenced from `resources/views/support/index.blade.php`'s "Open
+  documentation" button) defaults to `https://docs.mowi.agency` — a subdomain that doesn't exist.
+  This docs section actually lives at `mowi.agency/docs.html` on this repo. Someone needs to
+  either point that env var at the real URL or stand up `docs.mowi.agency` to resolve here; not
+  something to silently fix from this repo.
+- **Salesforce-specific, time-sensitive:** as of Salesforce's Spring '26 release, Salesforce
+  itself recommends "External Client Apps" as the successor to "Connected Apps" for new
+  integrations (confirmed on a directly-loaded Salesforce Help page); several independent
+  secondary sources additionally claim new Connected App creation is blocked by default in most
+  orgs since that release, which could not be confirmed on a Salesforce-owned page directly —
+  `docs-koppeling-salesforce.html` is written to lead with External Client App and defer to the
+  admin, with the unconfirmed part left VERIFY. Re-check this if Salesforce ships further changes
+  before this page is considered final.
+
 ## Content
 - Content is adapted from `reference/content-data-vista.md` (our own prior business
   website — safe to reuse/adapt in full: text, numbers, stats, client names, case studies).
@@ -133,8 +229,11 @@ Wherever personal/business details belong, insert these placeholders verbatim in
 
 ## Folder structure
 - `index.html` in the project root.
-- All other pages as `.html` files in the root (no subfolders per page).
-- `css/` — stylesheets
-- `js/` — vanilla JS
+- All other pages as `.html` files in the root (no subfolders per page) — including the docs
+  section (`docs.html` plus `docs-*.html` per article); it does not get its own subfolder either.
+- `css/` — stylesheets (`style.css` for the marketing site, `docs.css` for the docs section —
+  the two are never mixed on the same page).
+- `js/` — vanilla JS (`main.js` marketing behavior; `docs-nav.js` + `docs.js` for the docs
+  section).
 - `assets/` — images/icons/etc.
-- `reference/` — research docs (content source, style source) — not part of the shipped site.
+- `reference/` — research docs (content source, style sources) — not part of the shipped site.

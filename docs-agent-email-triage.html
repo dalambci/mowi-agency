@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Email triage instellen — Documentatie — Mowi</title>
+  <meta name="description" content="Zo vindt u de Email triage-agent in het dashboard, richt u de mailboxkoppeling in en controleert u dat de agent actief is." />
+  <link rel="preconnect" href="https://fonts.bunny.net" />
+  <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/docs.css?v=20260802" />
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/favicon.png" />
+</head>
+<body class="docs" data-docs-href="docs-agent-email-triage.html">
+  <div class="docs-shell">
+    <header class="docs-header">
+      <div class="docs-header-inner">
+        <button class="docs-menu-toggle" id="docsMenuToggle" aria-expanded="false" aria-controls="docsSidebar" aria-label="Menu openen">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+        <a href="/" class="docs-wordmark" aria-label="Mowi - home">
+          <img src="assets/mowi-icon.png" alt="" class="docs-wordmark-icon" />
+          <img src="assets/mowi-wordmark.png" alt="Mowi" class="docs-wordmark-text" />
+        </a>
+        <span class="docs-header-divider" aria-hidden="true"></span>
+        <span class="docs-header-label">Documentatie</span>
+        <div class="docs-header-actions">
+          <a href="/" class="docs-header-link">Terug naar website</a>
+          <a href="https://dashboard.mowi.agency/login" class="docs-header-link docs-header-link-primary" target="_blank" rel="noopener">Inloggen</a>
+        </div>
+      </div>
+    </header>
+    <div class="docs-body">
+      <div class="docs-sidebar-backdrop" id="docsSidebarBackdrop"></div>
+      <aside class="docs-sidebar" id="docsSidebar">
+        <nav class="docs-sidebar-nav" id="docsSidebarNav" aria-label="Documentatie-navigatie"></nav>
+      </aside>
+      <div class="docs-main">
+        <div class="docs-content-wrap">
+          <div class="docs-column">
+            <nav class="docs-breadcrumb" id="docsBreadcrumb" aria-label="Broodkruimel"></nav>
+
+            <article class="docs-article">
+              <h1>Email triage instellen</h1>
+
+              <p class="docs-dek">
+                De Email triage-agent classificeert binnenkomende klantvragen in de gekoppelde mailbox
+                en routeert elk bericht automatisch naar de juiste plek. Zo hoeft niemand in uw team
+                inkomende e-mail meer handmatig te sorteren voordat ermee gewerkt kan worden.
+              </p>
+              <p>
+                Na deze stappen vindt u de Email triage-agent terug in het dashboard, weet u hoe de
+                mailboxkoppeling wordt ingericht, en kunt u controleren of de agent actief is.
+              </p>
+
+              <div class="docs-prereqs">
+                <div class="docs-prereqs-label">Vereisten</div>
+                <ul>
+                  <li>Toegang tot <strong>het dashboard</strong> (inloggegevens van uw organisatie).</li>
+                  <li>Rechten om toegang tot de mailbox te verlenen die getriaged moet worden — of iemand
+                    die dat namens u kan doen, bijvoorbeeld uw IT-partner.</li>
+                  <li>Het e-mailadres van die mailbox bij de hand (bijvoorbeeld
+                    <code>info@uwbedrijf.nl</code>).</li>
+                </ul>
+              </div>
+
+              <h2>De agent instellen</h2>
+
+              <div class="docs-steps">
+                <div class="docs-step">
+                  <span class="docs-step-num">1</span>
+                  <div class="docs-step-body">
+                    <h3>Log in bij het dashboard</h3>
+                    <p>Ga naar het dashboard en log in met uw e-mailadres en wachtwoord.</p>
+                    <p class="docs-muted">U ziet nu het <strong>Home</strong>-overzicht van het dashboard.</p>
+                  </div>
+                </div>
+
+                <div class="docs-step">
+                  <span class="docs-step-num">2</span>
+                  <div class="docs-step-body">
+                    <h3>Open Agents</h3>
+                    <p>Klik in de zijbalk op <strong>Agents</strong>.</p>
+                    <p class="docs-muted">U ziet nu een lijst met alle agents voor uw organisatie, elk met
+                      naam, schema en status (<strong>Running</strong> of <strong>Paused</strong>).</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="docs-media">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 15l5-5 4 4 4-4 5 5"/><circle cx="8.5" cy="8.5" r="1.3"/></svg>
+                <span>Schermafbeelding volgt</span>
+              </div>
+              <p class="docs-media-caption">De Agents-lijst in het dashboard, met naam, schema en status per agent.</p>
+
+              <div class="docs-steps">
+                <div class="docs-step">
+                  <span class="docs-step-num">3</span>
+                  <div class="docs-step-body">
+                    <h3>Open Email triage</h3>
+                    <p>Klik op de rij met <strong>Email triage</strong>.</p>
+                    <p class="docs-muted">U ziet nu de detailpagina van de agent, met de status rechtsboven
+                      en een toelichting onder <strong>About</strong>.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="docs-media">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 15l5-5 4 4 4-4 5 5"/><circle cx="8.5" cy="8.5" r="1.3"/></svg>
+                <span>Schermafbeelding volgt</span>
+              </div>
+              <p class="docs-media-caption">De detailpagina van de Email triage-agent, met de status Running of Paused rechtsboven.</p>
+
+              <div class="docs-steps">
+                <div class="docs-step">
+                  <span class="docs-step-num">4</span>
+                  <div class="docs-step-body">
+                    <h3>Verleen toegang tot de mailbox</h3>
+                    <p>
+                      Geef Mowi toegang tot de mailbox die getriaged moet worden. Mowi's
+                      implementatieteam neemt hierover contact met u op om de koppeling in te richten.
+                      <!-- DRAFT: het dashboard heeft nog geen eigen scherm voor het zelf koppelen van een
+                           mailbox — dit gebeurt momenteel buiten het dashboard om, samen met Mowi. Zodra
+                           dit een stap in het dashboard wordt, moet deze alinea vervangen worden door de
+                           echte klikpaden (geen bestaand scherm om nu al aan te beschrijven). -->
+                    </p>
+                    <p class="docs-muted">U ontvangt een bevestiging van Mowi zodra de koppeling actief is —
+                      meestal per e-mail of telefonisch; hiervoor is geen vast, geautomatiseerd proces.</p>
+                  </div>
+                </div>
+
+                <div class="docs-step">
+                  <span class="docs-step-num">5</span>
+                  <div class="docs-step-body">
+                    <h3>Controleer de status</h3>
+                    <p>Ga terug naar de detailpagina van <strong>Email triage</strong> en bekijk de status
+                      rechtsboven.</p>
+                    <p class="docs-muted">Staat de status op <strong>Running</strong>? Dan verwerkt de agent
+                      actief e-mail. Staat deze op <strong>Paused</strong>? Dan is de koppeling nog niet
+                      actief.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="docs-media">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 15l5-5 4 4 4-4 5 5"/><circle cx="8.5" cy="8.5" r="1.3"/></svg>
+                <span>Schermafbeelding volgt</span>
+              </div>
+              <p class="docs-media-caption">Run history op de detailpagina van de agent: tijdstip, status en aantal verwerkte taken per run.</p>
+
+              <div class="docs-callout docs-callout-result">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8 12.5l2.5 2.5 5.5-6"/></svg>
+                <p><strong>U weet dat Email triage volledig actief is</strong> wanneer de status op de
+                  detailpagina <strong>Running</strong> toont en er nieuwe regels verschijnen onder
+                  <strong>Run history</strong>.</p>
+              </div>
+
+              <h2>Problemen oplossen</h2>
+
+              <h3>Er verschijnen geen nieuwe runs</h3>
+              <p>
+                Controleer of er geen regel in de gekoppelde mailbox nieuwe e-mail onderschept voordat
+                Email triage die te zien krijgt. De schermtekst hieronder is Engels — dat is de taal
+                waarin Google en Microsoft hun eigen documentatie schrijven; welke taal uw eigen mailbox
+                toont hangt af van uw account-instellingen, en de menunaam kan daardoor afwijken van wat
+                hieronder staat.
+              </p>
+              <p>
+                Gebruikt u Gmail? Klik op het <strong>Settings</strong>-pictogram rechtsboven, kies
+                <strong>See all settings</strong> en open het tabblad
+                <strong>Filters and Blocked Addresses</strong>. Zoek de filter op: staat bij de acties
+                <strong>Skip the Inbox (Archive it)</strong> of <strong>Apply the label</strong>
+                aangevinkt? Dan verplaatst Gmail het bericht mogelijk voordat Email triage het ziet. Klik
+                op <strong>Edit</strong> om de filter aan te passen, of op <strong>Delete</strong> om hem
+                te verwijderen.
+              </p>
+              <p>
+                Gebruikt u Outlook? Ga naar <strong>Settings</strong> → <strong>Mail</strong> →
+                <strong>Rules</strong> (in de klassieke Outlook-applicatie: <strong>File</strong> →
+                <strong>Manage Rules &amp; Alerts</strong>). Schakel de regel tijdelijk uit via de
+                schakelaar naast de regelnaam.
+              </p>
+
+              <h3>Status staat op Paused</h3>
+              <p>
+                U kunt de status niet zelf wijzigen in het dashboard. Neem contact op met Mowi om de
+                agent weer te laten draaien.
+              </p>
+
+              <h3>Een run heeft de status Failed</h3>
+              <p>
+                Bekijk de kolom <strong>Note</strong> bij die run onder <strong>Run history</strong> op de
+                detailpagina van de agent. Staat er een foutmelding? Neem contact op met Mowi en vermeld
+                de tekst uit <strong>Note</strong>.
+              </p>
+
+              <h3>Toegang tot de mailbox lijkt te zijn ingetrokken</h3>
+              <p>
+                Gebruikt u Gmail? Ga naar <strong>myaccount.google.com/linkedapps</strong>, kies
+                <strong>Access to your Google Account</strong> en zoek Mowi in de lijst. Klik op
+                <strong>See details</strong> om te zien welke toegang is verleend, of op
+                <strong>Remove access</strong> als u de koppeling zelf wilt intrekken — bijvoorbeeld om
+                daarna samen met Mowi opnieuw te koppelen.
+              </p>
+              <p>
+                Gebruikt u Microsoft 365? Ga naar <strong>myapplications.microsoft.com</strong>, zoek Mowi
+                in de lijst, klik op de <strong>···</strong>-knop naast de app en kies <strong>Manage
+                your application</strong>. Daar ziet u welke rechten zijn verleend en kunt u ze intrekken
+                via <strong>Revoke Permissions</strong>.
+              </p>
+
+              <h3>E-mails komen wel binnen, maar de agent reageert niet meteen</h3>
+              <p>
+                Email triage draait op een vast schema, niet continu. Bekijk het schema onder de titel op
+                de detailpagina van de agent, of open <strong>Runs, last 14 days</strong> om te zien hoe
+                vaak de agent draait.
+              </p>
+
+              <h2>Volgende stappen</h2>
+              <p>
+                Wilt u dat een collega ook toegang krijgt tot het dashboard?
+                <a href="docs-toegang-en-rollen.html">Lees Toegang en rollen</a>.
+              </p>
+              <p>
+                Loopt de agent nog niet zoals verwacht na deze stappen?
+                <a href="docs-faq-agent-voert-geen-taken-uit.html">Lees Een agent voert geen taken uit</a>.
+              </p>
+            </article>
+
+            <nav class="docs-prevnext" id="docsPrevNext" aria-label="Vorige en volgende pagina"></nav>
+          </div>
+
+          <aside class="docs-toc" id="docsToc">
+            <div class="docs-toc-label">Op deze pagina</div>
+            <ol id="docsTocList"></ol>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/docs-nav.js?v=20260802"></script>
+  <script src="js/docs.js?v=20260802"></script>
+</body>
+</html>

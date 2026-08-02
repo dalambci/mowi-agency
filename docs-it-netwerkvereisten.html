@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Netwerkvereisten — Documentatie — Mowi</title>
+  <meta name="description" content="Waar u rekening mee houdt bij firewalls en toegangsbeheer rond een koppeling met Mowi." />
+  <link rel="preconnect" href="https://fonts.bunny.net" />
+  <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/docs.css?v=20260802" />
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/favicon.png" />
+</head>
+<body class="docs" data-docs-href="docs-it-netwerkvereisten.html">
+  <div class="docs-shell">
+    <header class="docs-header">
+      <div class="docs-header-inner">
+        <button class="docs-menu-toggle" id="docsMenuToggle" aria-expanded="false" aria-controls="docsSidebar" aria-label="Menu openen">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+        <a href="/" class="docs-wordmark" aria-label="Mowi - home">
+          <img src="assets/mowi-icon.png" alt="" class="docs-wordmark-icon" />
+          <img src="assets/mowi-wordmark.png" alt="Mowi" class="docs-wordmark-text" />
+        </a>
+        <span class="docs-header-divider" aria-hidden="true"></span>
+        <span class="docs-header-label">Documentatie</span>
+        <div class="docs-header-actions">
+          <a href="/" class="docs-header-link">Terug naar website</a>
+          <a href="https://dashboard.mowi.agency/login" class="docs-header-link docs-header-link-primary" target="_blank" rel="noopener">Inloggen</a>
+        </div>
+      </div>
+    </header>
+    <div class="docs-body">
+      <div class="docs-sidebar-backdrop" id="docsSidebarBackdrop"></div>
+      <aside class="docs-sidebar" id="docsSidebar">
+        <nav class="docs-sidebar-nav" id="docsSidebarNav" aria-label="Documentatie-navigatie"></nav>
+      </aside>
+      <div class="docs-main">
+        <div class="docs-content-wrap">
+          <div class="docs-column">
+            <nav class="docs-breadcrumb" id="docsBreadcrumb" aria-label="Broodkruimel"></nav>
+
+            <article class="docs-article">
+              <h1>Netwerkvereisten</h1>
+
+              <p class="docs-dek">
+                Deze pagina is voor de IT-beheerder die vooraf wil weten of een firewall of proxy een
+                koppeling met Mowi in de weg zou kunnen zitten.
+              </p>
+
+              <div class="docs-callout docs-callout-warning">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4l9 16H3z"/><path d="M12 10v4"/><circle cx="12" cy="17" r=".4" fill="currentColor"/></svg>
+                <p>
+                  <strong>Er staan hier bewust geen IP-adressen, domeinen of poortnummers.</strong>
+                  Verkeerde of verouderde netwerkgegevens zijn erger dan geen gegevens: ze kunnen een
+                  firewall-configuratie laten mislukken of, omgekeerd, een verkeerde regel laten
+                  goedkeuren. Vraag de actuele lijst rechtstreeks op bij Mowi voordat u iets in een
+                  firewall of proxy instelt.
+                  <!-- DRAFT: exacte IP-adressen, domeinen en poorten zijn niet bevestigd op
+                       platformniveau — bewust niet ingevuld om te voorkomen dat we iets verzinnen dat
+                       een firewall-configuratie zou kunnen laten mislukken. -->
+                </p>
+              </div>
+
+              <h2>Wat wel al bekend is</h2>
+              <p>
+                Mowi's koppelingen lopen over standaard, versleutelde verbindingen (HTTPS) naar de
+                systemen die u koppelt (bijvoorbeeld uw mailbox, CRM, ERP of Power BI-omgeving) — niet
+                via een aparte VPN of dedicated lijn, tenzij dat expliciet met Mowi is afgesproken.
+                <!-- DRAFT: of een VPN of dedicated verbinding voor specifieke implementaties gebruikt
+                     wordt, is niet standaard bevestigd — dit hangt af van de afspraken per klant. -->
+              </p>
+
+              <h2>Volgende stappen</h2>
+              <p>
+                Vragen over welke gegevens een koppeling verwerkt?
+                <a href="docs-it-beveiliging.html">Lees Beveiliging &amp; gegevensverwerking</a>.
+              </p>
+              <p>
+                Wilt u de actuele netwerkgegevens opvragen?
+                <a href="docs-faq-contact-support.html">Lees Contact opnemen met support</a>.
+              </p>
+            </article>
+
+            <nav class="docs-prevnext" id="docsPrevNext" aria-label="Vorige en volgende pagina"></nav>
+          </div>
+
+          <aside class="docs-toc" id="docsToc">
+            <div class="docs-toc-label">Op deze pagina</div>
+            <ol id="docsTocList"></ol>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/docs-nav.js?v=20260802"></script>
+  <script src="js/docs.js?v=20260802"></script>
+</body>
+</html>
