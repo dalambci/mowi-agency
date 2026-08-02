@@ -529,6 +529,26 @@ h3 {
   .header-bar .header-logo-cell {
     justify-content: center;
   }
+
+  /* Split the cell instead of centering the pair as one unit, from the
+     first width the logo cell is actually a bordered/centered header cell
+     (48rem) — not just once it's full desktop size (80rem). Without this,
+     tablet widths (e.g. iPad mini, 768px) fell back to DOM order (button,
+     then wordmark), putting the login icon left of the logo instead of
+     right of it like desktop. The dashboard button moves to the cell's
+     right edge (order:2, flipping its left-first DOM/markup order) while
+     the wordmark grows to fill the leftover space (flex:1) and centers
+     itself within it — so the logo stays visually centered in "what's
+     left" after the button claims its own room on the right. */
+  .header-bar .header-dashboard-btn {
+    order: 2;
+  }
+
+  .header-bar .wordmark {
+    order: 1;
+    flex: 1;
+    justify-content: center;
+  }
 }
 
 /* Icon/text stay at their compact default size (28px/18px, see above) at
@@ -545,22 +565,6 @@ h3 {
 
   .header-bar .wordmark-text {
     height: 26px;
-  }
-
-  /* At true desktop widths, split the cell instead of centering the pair
-     as one unit: the dashboard button moves to the cell's right edge
-     (order:2, flipping its left-first DOM/markup order) while the
-     wordmark grows to fill the leftover space (flex:1) and centers
-     itself within it — so the logo stays visually centered in "what's
-     left" after the button claims its own room on the right. */
-  .header-bar .header-dashboard-btn {
-    order: 2;
-  }
-
-  .header-bar .wordmark {
-    order: 1;
-    flex: 1;
-    justify-content: center;
   }
 }
 
