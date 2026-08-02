@@ -25,13 +25,15 @@ durable and apply to all future work in this repo, not just the current task.
   the only way found so far to actually verify layout at e.g. 390px rather than guess from
   full-desktop screenshots.
 
-## .htaccess — HTTPS enforcement
-- The production host (Cloudways) was serving plain `http://mowi.agency` with a 200 OK instead
-  of redirecting to HTTPS — no dashboard toggle for this exists on that app (checked; the
-  nginx/Apache vhost configs are root-owned, not editable via the app's own SSH user either).
-  `.htaccess` (Apache, running behind Cloudways' nginx layer — confirmed via `ps aux`) forces
-  the redirect instead. Don't remove it without confirming the host-level redirect has been
-  fixed properly first.
+## HTTPS enforcement lives in Cloudways, not this repo
+- The production host was serving plain `http://mowi.agency` with a 200 OK instead of
+  redirecting to HTTPS. Fixed via Cloudways' own dashboard toggle: app **mowi.agency**
+  (Cloudways app ID 6590002, folder `ktzphwhvnh` — this Cloudways account hosts several
+  unrelated client sites, so double-check the app ID/domain before touching anything there) →
+  **Application Settings → HTTPS Redirection**. That's the correct fix — nginx serves this
+  site's static files directly (confirmed via the `Server: nginx` response header) without
+  ever handing off to Apache, so an `.htaccess` file (tried first) is silently never consulted
+  and does nothing; don't reach for one again for this.
 
 ## Cache-busting — bump this on every CSS/JS change
 - `css/style.css` and `js/main.js` are referenced from every page with a `?v=YYYYMMDD` query
