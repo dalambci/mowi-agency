@@ -2240,7 +2240,7 @@ h3 {
 
 @media (min-width: 48rem) {
   .footer-inner {
-    grid-template-columns: 1.4fr 1fr 1fr;
+    grid-template-columns: 1.3fr 1fr 0.7fr 1fr;
   }
 }
 
@@ -2250,18 +2250,18 @@ h3 {
   max-width: 22rem;
 }
 
-.footer-nav, .footer-contact {
+.footer-nav, .footer-support, .footer-contact {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
 }
 
-.footer-nav a, .footer-contact a, .footer-contact p {
+.footer-nav a, .footer-support a, .footer-contact a, .footer-contact p {
   color: var(--color-gray-600);
   font-size: 0.9375rem;
 }
 
-.footer-nav a:hover {
+.footer-nav a:hover, .footer-support a:hover {
   color: var(--color-ink);
 }
 

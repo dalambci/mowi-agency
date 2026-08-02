@@ -152,6 +152,7 @@ body.docs {
 .docs-content-wrap.no-toc .docs-toc { display: none; }
 
 .docs-column { min-width: 0; }
+.docs-column--wide { max-width: none; }
 
 /* ---------- Breadcrumb ---------- */
 .docs-breadcrumb {
@@ -382,6 +383,13 @@ body.docs {
 
   .docs-prevnext { grid-template-columns: 1fr; }
   .docs-prevnext-link.next { text-align: left; align-items: flex-start; }
+}
+
+@media (max-width: 480px) {
+  /* Hamburger + wordmark + "Terug naar website" + "Inloggen" don't all fit at
+     phone widths. The wordmark already links home, so drop the redundant
+     text link and keep just the primary "Inloggen" action. */
+  .docs-header-link:not(.docs-header-link-primary) { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
