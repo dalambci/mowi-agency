@@ -20,7 +20,7 @@
   <header class="site-header">
     <div class="header-bar">
       <a href="#afspraak" class="header-cta">
-        Gratis adviesgesprek
+        <span class="header-cta-full">Gratis adviesgesprek</span><span class="header-cta-short">Adviesgesprek</span>
       </a>
 
       <nav class="main-nav" id="main-nav" aria-label="Hoofdmenu">
@@ -45,12 +45,18 @@
         </ul>
         <!-- Same CTA, shown only inside the open mobile menu -->
         <a href="#afspraak" class="btn btn-primary header-cta-mobile">Gratis adviesgesprek</a>
+        <a href="https://dashboard.mowi.agency/login" class="header-dashboard-mobile" target="_blank" rel="noopener">Dashboard log in</a>
       </nav>
 
-      <a href="index.html" class="wordmark" aria-label="Mowi - home">
-        <img src="assets/mowi-icon.png" alt="" class="wordmark-icon" />
-        <img src="assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
-      </a>
+      <div class="header-logo-cell">
+        <a href="https://dashboard.mowi.agency/login" class="header-dashboard-btn" aria-label="Dashboard inloggen" target="_blank" rel="noopener">
+          <span class="header-dashboard-icon" aria-hidden="true"></span>
+        </a>
+        <a href="index.html" class="wordmark" aria-label="Mowi - home">
+          <img src="assets/mowi-icon.png" alt="" class="wordmark-icon" />
+          <img src="assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
+        </a>
+      </div>
 
       <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="main-nav" aria-label="Menu openen">
         <span></span><span></span><span></span>

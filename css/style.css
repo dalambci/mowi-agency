@@ -445,19 +445,20 @@ h3 {
 @media (min-width: 48rem) {
   .header-bar {
     display: grid;
-    /* minmax(0, ...) so columns can shrink below their content's natural
-       size at tablet widths instead of forcing the bar (and page) wider —
-       same fix as the .grid-* system below. Proportions favor the nav a
-       bit more than the 64rem+ tier (2.4fr vs 2.2fr, CTA/logo 0.9fr each)
-       since the nav is the tightest fit at tablet widths; restored to the
-       original 1fr/2.2fr/1fr at min-width:64rem once there's room. */
-    grid-template-columns: minmax(0, 0.9fr) minmax(0, 2.4fr) minmax(0, 0.9fr);
-  }
-}
-
-@media (min-width: 64rem) {
-  .header-bar {
-    grid-template-columns: 1fr 2.2fr 1fr;
+    /* minmax(0, ...) on a PURE 1fr/2.2fr/1fr ratio, permanently — not just
+       at tablet widths. A bare (non-minmax) fr track's automatic minimum
+       is its content's min-content size, so at 1024px the old "revert to
+       bare 1fr/2.2fr/1fr at 64rem" rule let the CTA cell's nowrap text
+       force column 1 wider than its 1fr share while the logo cell's
+       smaller min-content left column 3 untouched — an asymmetric split
+       that no longer matched .hero-frame-grid's own pure 1fr/2.2fr/1fr
+       columns below it, breaking the vertical divider-line alignment
+       between header and hero. minmax(0, fr) removes that content-based
+       floor so both grids resolve to the identical proportional split at
+       every width, guaranteed — the tradeoff is that content sizing (CTA
+       nowrap, nav/logo full-size fonts) must itself be verified to fit
+       within that pure share, see the 80rem tier below. */
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2.2fr) minmax(0, 1fr);
   }
 }
 
@@ -507,8 +508,16 @@ h3 {
 /* Logo cell — bordered/padded only when nested in the header bar, so the
    same .wordmark markup stays plain when reused in the footer. Centered
    and enlarged at desktop widths, since it's now a full grid column wide
-   (roughly 320px at 1440px) rather than an auto-width flex item. */
-.header-bar .wordmark {
+   (roughly 320px at 1440px) rather than an auto-width flex item.
+   .header-logo-cell (not .wordmark itself) is the actual grid/flex cell now
+   — it holds the dashboard-login icon button alongside the wordmark, so the
+   cell-level box styling (padding/border/centering) lives here instead,
+   leaving .wordmark itself the same plain icon+text row it's always been
+   (still reused as-is in the footer, which has no logo cell wrapper). */
+.header-bar .header-logo-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
   flex-shrink: 0;
   /* Compact at its tablet-tier default (0.875rem); the 64rem override
      below restores the full 1.5rem once the desktop grid has room. */
@@ -517,34 +526,92 @@ h3 {
 }
 
 @media (min-width: 48rem) {
-  .header-bar .wordmark {
+  .header-bar .header-logo-cell {
     justify-content: center;
   }
 }
 
 /* Icon/text stay at their compact default size (28px/18px, see above) at
-   tablet widths — only enlarged once the desktop-proper tier (64rem+) has
-   the grid room the larger lockup needs. */
-@media (min-width: 64rem) {
-  .header-bar .wordmark {
+   tablet widths — only enlarged once there's genuinely enough room (see
+   the 80rem note on .header-cta below for why that's 80rem, not 64rem). */
+@media (min-width: 80rem) {
+  .header-bar .header-logo-cell {
     padding-inline: 1.5rem;
   }
 
-  .header-bar .wordmark .wordmark-icon {
+  .header-bar .wordmark-icon {
     height: 40px;
   }
 
-  .header-bar .wordmark .wordmark-text {
+  .header-bar .wordmark-text {
     height: 26px;
+  }
+
+  /* At true desktop widths, split the cell instead of centering the pair
+     as one unit: the dashboard button moves to the cell's right edge
+     (order:2, flipping its left-first DOM/markup order) while the
+     wordmark grows to fill the leftover space (flex:1) and centers
+     itself within it — so the logo stays visually centered in "what's
+     left" after the button claims its own room on the right. */
+  .header-bar .header-dashboard-btn {
+    order: 2;
+  }
+
+  .header-bar .wordmark {
+    order: 1;
+    flex: 1;
+    justify-content: center;
+  }
+}
+
+/* Dashboard-login button — a plain black icon (no background/border), just
+   large enough to sit comfortably next to the wordmark inside the logo
+   cell without a filled square competing with it visually. */
+.header-dashboard-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--color-ink);
+  transition: opacity 0.2s ease;
+}
+
+.header-dashboard-btn:hover {
+  opacity: 0.6;
+}
+
+/* Simple user/account glyph — mask so it inherits currentColor (black,
+   matching the wordmark's own ink) instead of needing a separate image
+   asset. Kept modest — smaller than the wordmark icon beside it — so the
+   pair reads as [small icon, logo] rather than two competing marks. */
+.header-dashboard-icon {
+  width: 1.15rem; /* 1rem + 15% */
+  height: 1.15rem;
+  background-color: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='8' r='4'/%3E%3Cpath d='M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='8' r='4'/%3E%3Cpath d='M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+@media (min-width: 80rem) {
+  .header-dashboard-icon {
+    width: 1.4375rem; /* 1.25rem + 15% */
+    height: 1.4375rem;
   }
 }
 
 /* CTA cell — the bold black "start" cell from the reference screenshot,
    reworded to our own copy. Font-size matches the other nav cells so it
    reads as one consistent row, not a smaller separate label — full 18px
-   only from 64rem up (see override below); compact 14px/no-nowrap by
+   only from 80rem up (see override below); compact 14px/no-nowrap by
    default so the long Dutch label ("Gratis adviesgesprek") can wrap to two
-   lines rather than overflow its cell at tablet widths. */
+   lines rather than overflow its cell at tablet widths.
+
+   80rem, not 64rem: with .header-bar's grid now a pure content-immune
+   1fr/2.2fr/1fr split (see the 48rem media query above, added to fix
+   header/hero divider-line alignment), the CTA column's actual pixel share
+   at 1024-1279px is narrower than this cell's full-size nowrap text needs
+   — 80rem (1280px) is the first width where 1fr's share comfortably fits
+   "GRATIS ADVIESGESPREK" at 18px nowrap with room to spare. */
 .header-cta {
   display: flex;
   align-items: center;
@@ -561,11 +628,28 @@ h3 {
   transition: box-shadow 0.2s ease;
 }
 
-@media (min-width: 64rem) {
+@media (min-width: 80rem) {
   .header-cta {
     padding-inline: 1.5rem;
     font-size: 1.125rem;
     white-space: nowrap;
+  }
+}
+
+/* Tablet tier swaps in the shorter "Adviesgesprek" label instead of the
+   full "Gratis adviesgesprek" — the compact cell at this tier has less
+   room, and the shorter word fits on one line instead of wrapping. */
+.header-cta-short {
+  display: none;
+}
+
+@media (min-width: 48rem) and (max-width: 79.9375rem) {
+  .header-cta-full {
+    display: none;
+  }
+
+  .header-cta-short {
+    display: inline;
   }
 }
 
@@ -577,6 +661,15 @@ h3 {
 }
 
 .header-cta-mobile {
+  display: none;
+}
+
+/* Hidden by default like .header-cta-mobile above — .main-nav is
+   display:contents at desktop widths, which would otherwise let this leak
+   out as a stray flow item in the header-bar grid instead of staying
+   inside the mobile sheet. Made visible only within the mobile media query
+   below, where it's given its actual full-width styling. */
+.header-dashboard-mobile {
   display: none;
 }
 
@@ -686,7 +779,7 @@ h3 {
   }
 }
 
-@media (min-width: 64rem) {
+@media (min-width: 80rem) {
   .main-nav > .nav-group > li > a,
   .main-nav .nav-dropdown-trigger {
     font-size: 1.125rem; /* 18px, restored from the 14px tablet default */
@@ -824,7 +917,7 @@ h3 {
     min-height: 3.5625rem;
   }
 
-  .header-bar .wordmark {
+  .header-bar .header-logo-cell {
     order: 2;
     /* margin-inline:auto (not margin-left:auto) centers the cell within
        whatever space is left after the fixed-width toggle/CTA cells,
@@ -838,14 +931,21 @@ h3 {
      narrowest phones (≤~360px) instead of overflowing — the wordmark cell's
      available width shrinks faster than the fixed-width toggle/CTA cells
      beside it. */
-  .header-bar .wordmark .wordmark-icon {
+  .header-bar .wordmark-icon {
     height: clamp(28px, 9vw, 34px);
   }
 
   /* Same height as the icon (not the smaller desktop 26px) — grown to
      match rather than shrinking the icon down to the text. */
-  .header-bar .wordmark .wordmark-text {
+  .header-bar .wordmark-text {
     height: clamp(28px, 9vw, 34px);
+  }
+
+  /* The icon button is desktop/tablet-only — its mobile equivalent is the
+     full-width link at the bottom of the nav sheet (.header-dashboard-mobile
+     below), not a second copy squeezed into this already-tight compact bar. */
+  .header-dashboard-btn {
+    display: none;
   }
 
   .header-cta {
@@ -1005,6 +1105,32 @@ h3 {
   .main-nav .header-cta-mobile {
     display: none;
   }
+
+  /* Full-width link at the very bottom of the sheet — same bordered/
+     invert-on-hover language as the nav cells above it, but its own row
+     (grid-column: 1/-1) since it's a single standalone action, not one of
+     the four-item Service/Tarieven/Cases/Contact grid. */
+  .header-dashboard-mobile {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 0.75rem;
+    padding: 1.25rem 1rem;
+    font-size: 1.0625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    color: var(--color-white);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .header-dashboard-mobile:hover {
+    background: var(--color-white);
+    color: var(--color-ink);
+    border-color: var(--color-white);
+  }
 }
 
 /* --- Hero frame -----------------------------------------------------------
@@ -1039,16 +1165,31 @@ h3 {
    margin-top:2rem pushed the hero well past that overlap into genuinely
    visible empty space instead. margin-top:0 here lands mobile at the
    exact same -16px relationship desktop already has (verified), so it
-   gets masked the same way and reads flush too. */
+   gets masked the same way and reads flush too.
+
+   The 48rem-63.9375rem tablet tier has its own shorter header-bar height
+   (compact CTA/nav sizing, see the header rules above), which throws that
+   match off — measured at +8px (a real visible gap) instead of -16px at
+   this tier, hence the separate override below landing it back on -16px. */
 @media (max-width: 47.9375rem) {
   .hero-frame {
     margin-top: 0;
   }
 }
 
+@media (min-width: 48rem) and (max-width: 63.9375rem) {
+  .hero-frame {
+    margin-top: 0.5rem;
+  }
+}
+
+/* minmax(0, ...) matching .header-bar's own grid exactly (see 48rem media
+   query above it) — the header and hero frame share one continuous set of
+   vertical divider lines top to bottom, and only stay aligned at every
+   width if both grids resolve their fractions the same content-immune way. */
 .hero-frame-grid {
   display: grid;
-  grid-template-columns: 1fr 2.2fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2.2fr) minmax(0, 1fr);
 }
 
 .hero-frame-col {
@@ -1179,7 +1320,12 @@ h3 {
   margin-bottom: 1.25rem;
 }
 
-@media (max-width: 48rem) {
+/* 47.9375rem (not 48rem) to match the header's own mobile cutover exactly
+   — at 48rem (768px) both boundaries are inclusive, so using the same
+   48rem here would fire this mobile collapse at the same instant the
+   header switches to its desktop 3-column grid, breaking alignment right
+   at that pixel. */
+@media (max-width: 47.9375rem) {
   .hero-frame-grid {
     grid-template-columns: 1fr;
   }
