@@ -25,6 +25,20 @@ durable and apply to all future work in this repo, not just the current task.
   the only way found so far to actually verify layout at e.g. 390px rather than guess from
   full-desktop screenshots.
 
+## Cache-busting — bump this on every CSS/JS change
+- `css/style.css` and `js/main.js` are referenced from every page with a `?v=YYYYMMDD` query
+  string (e.g. `css/style.css?v=20260802`), matching a `Cache-Control: public, max-age=2592000`
+  (30-day) header set at the server. Without the version string, a browser that already cached
+  the file simply keeps serving that stale copy for up to 30 days after a deploy — it doesn't
+  even revalidate with the server, so redeploying alone does not fix it for a visitor who's
+  already cached the old one.
+- Root-caused from a real incident: the site looked completely broken in a browser that had
+  visited before the Products mega-menu shipped, because it was silently serving pre-mega-menu
+  CSS/JS. **Every session that edits `css/style.css` or `js/main.js` must bump the `?v=`
+  value on all `<link>`/`<script>` tags referencing them, across every HTML page**, so browsers
+  are forced to fetch the new file immediately rather than waiting out the cache. Use the
+  current date (`YYYYMMDD`); if multiple deploys land same-day, append `-2`, `-3`, etc.
+
 ## Language & tone
 - All visible site text is in **Dutch**, formal **"u"** form (never "je/jij").
 - **Exception:** the header nav's "Products" mega-menu (see `.nav-megamenu` in `css/style.css`)
