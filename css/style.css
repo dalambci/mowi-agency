@@ -1222,13 +1222,18 @@ h3 {
     min-height: 5rem;
   }
 
+  /* Same recipe as the sub-menu items inside the Products mega-menu below
+     (.nav-megamenu-col li a:hover) — a soft grey tint, not a full white
+     invert. Reused deliberately (was var(--color-white) bg / ink text
+     before) since the softer grey reads as easier on the eye and now the
+     whole mobile sheet, top-level cells and sub-items alike, shares one
+     consistent hover/active treatment instead of two different ones. */
   .main-nav > .nav-group > li > a:hover,
   .main-nav .nav-dropdown-trigger:hover,
   .main-nav > .nav-group > li > a[aria-current="page"],
   .main-nav .nav-dropdown-trigger[aria-current="page"] {
-    background: var(--color-white);
-    color: var(--color-ink);
-    border-color: var(--color-white);
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--color-white);
   }
 
   .nav-dropdown-trigger {
