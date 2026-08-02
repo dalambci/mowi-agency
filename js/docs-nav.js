@@ -10,7 +10,7 @@
    as siblings) — no docs/ prefix and no docs- filename prefix.
    ============================================================ */
 
-var DOCS_HOME = { title: "Documentatie", href: "index.html" };
+var DOCS_HOME = { title: "Documentatie", href: "./" };
 
 var DOCS_NAV = [
   {
