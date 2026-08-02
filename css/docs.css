@@ -99,8 +99,8 @@ body.docs {
   white-space: nowrap;
 }
 .docs-header-link:hover { background: var(--docs-muted-bg); color: var(--docs-text); }
-.docs-header-link-primary { background: var(--docs-text); color: #FFFFFF; }
-.docs-header-link-primary:hover { background: #2B2A28; color: #FFFFFF; }
+.docs-header-link.docs-header-link-primary { background: var(--docs-text); color: #FFFFFF; }
+.docs-header-link.docs-header-link-primary:hover { background: #2B2A28; color: #FFFFFF; }
 
 /* ============================================================
    Body shell: sidebar + main
