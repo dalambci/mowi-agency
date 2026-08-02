@@ -53,7 +53,7 @@ durable and apply to all future work in this repo, not just the current task.
 - All visible site text is in **Dutch**, formal **"u"** form (never "je/jij").
 - **Exception:** the header nav's "Products" mega-menu (see `.nav-megamenu` in `css/style.css`)
   uses English labels deliberately — category labels ("Platform", "Automations") and most item
-  names ("BI Dashboard", "CRM sync", "Email triage", "Invoice processing", "Lead enrichment",
+  names ("BI dashboard", "CRM sync", "Email triage", "Invoice processing", "Lead enrichment",
   "Report generator"). Keep these in English; don't translate them to Dutch. This is scoped to
   that menu only — everything else on the site stays Dutch per the rule above. One item in that
   same menu, "AI-automatisering" (linking to `ai-automatisering.html`), is deliberately Dutch —
