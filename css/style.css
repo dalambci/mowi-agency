@@ -1227,13 +1227,21 @@ h3 {
      invert. Reused deliberately (was var(--color-white) bg / ink text
      before) since the softer grey reads as easier on the eye and now the
      whole mobile sheet, top-level cells and sub-items alike, shares one
-     consistent hover/active treatment instead of two different ones. */
+     consistent hover/active treatment instead of two different ones.
+     border-color explicitly reset to match the cell's own resting border
+     (rgba(255,255,255,.15), same as every other cell) — the desktop/base
+     version of this same selector (line ~798) sets border-color to
+     var(--color-text) (black) for its own light-background hover, and
+     without an override here that black leaked straight through at mobile
+     widths too, on a black background, looking like a broken/missing
+     border on whichever cell was active. */
   .main-nav > .nav-group > li > a:hover,
   .main-nav .nav-dropdown-trigger:hover,
   .main-nav > .nav-group > li > a[aria-current="page"],
   .main-nav .nav-dropdown-trigger[aria-current="page"] {
     background: rgba(255, 255, 255, 0.08);
     color: var(--color-white);
+    border-color: rgba(255, 255, 255, 0.15);
   }
 
   .nav-dropdown-trigger {
@@ -1371,17 +1379,18 @@ h3 {
     display: none;
   }
 
-  /* right:0.125rem, not a negative inset — the mobile panel has zero
-     padding of its own (just its 1px border, see the open-state rule
-     above), so anything positioned outside the column's own right edge
-     would sit past the panel's border and get clipped by .nav-megamenu's
-     own overflow:hidden (needed for the accordion collapse). This keeps it
-     just inside that boundary instead. */
+  /* right:0 — flush against the column/panel's own inner edge (the panel
+     has zero padding of its own, just its 1px border, see the open-state
+     rule above), not inset from it; an earlier 0.125rem gap left a sliver
+     of empty space between the border and the indicator that looked
+     unintentional. Kept subtle on purpose (dim, not bright white) — it
+     only needs to register as "this scrolls", not compete for attention
+     with the actual menu items. */
   .nav-megamenu-scrollbar {
     position: absolute;
-    right: 0.125rem;
+    right: 0;
     width: 3px;
-    background: rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.06);
     pointer-events: none;
   }
 
@@ -1389,7 +1398,7 @@ h3 {
     position: absolute;
     left: 0;
     width: 100%;
-    background: rgba(255, 255, 255, 0.45);
+    background: rgba(255, 255, 255, 0.2);
   }
 
   .nav-megamenu-col ul.nav-megamenu-scroll.is-at-bottom {
