@@ -1552,13 +1552,16 @@ h3 {
    Surface Pro — mobile (<48rem, single-column layout) is unaffected. */
 @media (min-width: 48rem) {
   .hero-heading-reveal {
-    font-size: 3rem; /* hold at 48px instead of the generic rule's 60px here */
+    /* 48px still read too large on real iPad mini/air/pro-11 hands-on
+       testing (2026-08-03) — only iPad Pro 12.9" landscape (already in
+       the 60px tier below) looked right. Cut 20% from 48px: 2.4rem/38.4px. */
+    font-size: 2.4rem;
   }
 }
 
 @media (min-width: 85rem) { /* ~1360px — past every common tablet, including iPad Pro 12.9" landscape */
   .hero-heading-reveal {
-    font-size: 3.75rem; /* 60px */
+    font-size: 3.75rem; /* 60px — confirmed this tier already looks right, untouched */
   }
 }
 
