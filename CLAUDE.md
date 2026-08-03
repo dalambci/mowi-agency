@@ -3,6 +3,16 @@
 This is a brand-new marketing website for an AI automation business. These rules are
 durable and apply to all future work in this repo, not just the current task.
 
+## Project memory (Obsidian)
+Long-term project knowledge lives in `c:\Users\SalP1\Desktop\Mowi brain\Mowi\`.
+At the start of every session: read "Mowi - Home.md" plus the notes relevant to today's task.
+When we decide or change something important: update the relevant note AND add a dated line
+to "Mowi - Decisions log.md" before the session ends. Never delete history — mark superseded
+decisions as superseded. The full procedure is packaged as the `mowi-second-brain` skill
+(`.claude/skills/mowi-second-brain/SKILL.md`) — invoke it rather than relying on this summary
+alone. A `Stop` hook in `.claude/settings.json` prints a reminder after every response as a
+backstop in case something important didn't get written down.
+
 ## Tech stack
 - **Static site only:** plain HTML, CSS and vanilla JavaScript.
 - No frameworks (no React/Vue/etc.), no build step, no bundler, no database, no PHP/backend
@@ -147,26 +157,31 @@ retype credentials from scratch or falling back to a password:
   are the only parts that differ), **and add the same `<slug>` to the Cloudways rewrite rule**
   (see below) — the sidebar, breadcrumb, and prev/next everywhere else update automatically.
 
-### Extensionless docs URLs depend on a Cloudways Web Rule, not just link edits
-- Docs links (sidebar, breadcrumb, prev/next, in-article cross-links) point to e.g.
-  `agent-crm-sync`, not `agent-crm-sync.html` — the file on disk still ends in `.html`, only the
-  URL is clean. This only works because of an **Internal Rewrite** rule configured directly in
-  the Cloudways dashboard (app `mowi.agency` / 6590002 → **Web Rules → Rewrite Rules**, not
-  anything in this repo or in nginx config files we have access to — see the SSH/root-permission
-  note under "Deploying to production" above): `^/docs/([a-z0-9-]+)$` → `/docs/$1.html`,
-  Action **Internal rewrite**. Verified 2026-08-03 against all 19 articles (right status code
-  *and* right page content, not just a 200) plus collateral checks (`/docs/` index, the
-  `.html` URLs directly, `/`, `css/docs.css`, a genuinely nonexistent slug) — all behaved
-  correctly, nothing else on the site was affected.
-- **This rule is scoped to `/docs/` only** — extensionless URLs do NOT work anywhere else on the
-  site (marketing pages still need `.html`). Don't assume otherwise, and don't extend `docs-nav.js`
-  or any other link to rely on extensionless URLs outside `/docs/` without adding a matching rule
-  first.
-- The account's Web Rules quota showed **24/25 remaining** after adding this one rule — check
-  before adding more; a second broad rule could exhaust it.
-- `serve.js` (local dev server) mirrors this specific rule (falls back to appending `.html` only
-  for unresolved paths under `/docs/`) so local testing matches production. If the live rule
-  ever changes, update `serve.js` to match or local testing will silently diverge from reality.
+### Extensionless URLs (site-wide) depend on Cloudways Web Rules, not just link edits
+- All internal links — root marketing pages (`/cases`, `/contact`, `/ai-automatisering`,
+  `/power-bi-dashboards`, `/trainingen`) and docs links (sidebar, breadcrumb, prev/next,
+  in-article cross-links, e.g. `/docs/agent-crm-sync`) — point to extensionless URLs. The files
+  on disk still end in `.html`; only the URL is clean.
+- This only works via **Internal Rewrite** rules configured directly in the Cloudways dashboard
+  (app `mowi.agency` / 6590002 → **Web Rules → Rewrite Rules**, not anything in this repo or in
+  nginx config files we have access to — see the SSH/root-permission note under "Deploying to
+  production" above). The docs rule — `^/docs/([a-z0-9-]+)$` → `/docs/$1.html`, Action
+  **Internal rewrite** — was verified 2026-08-03 against all 19 articles (right status code *and*
+  right page content) plus collateral checks, all correct.
+- **A second rule for the root-level marketing pages is required and, as of this writing, has
+  NOT yet been added to Cloudways** — only the code side (links + local `serve.js`) is done.
+  Add: `^/(cases|contact|ai-automatisering|power-bi-dashboards|trainingen)$` →
+  `/$1.html`, Action **Internal rewrite** (kept as an explicit slug list rather than a generic
+  `[a-z0-9-]+` catch-all, so it can never accidentally intercept `/docs`, `/css/...`, `/js/...`,
+  `/assets/...` or any future non-page path). Until this rule exists, the root pages will 404 on
+  production when visited without `.html` — `index.html` is unaffected since `/` already serves
+  it directly.
+- The account's Web Rules quota showed **24/25 remaining** after adding the docs rule — adding
+  this one brings it to 23/25; check before adding more.
+- `serve.js` (local dev server) mirrors both rules generically (falls back to appending `.html`
+  to any unresolved extensionless path, not just under `/docs/`) so local testing matches
+  production once the second rule is added. If the live rules ever change, update `serve.js` to
+  match or local testing will silently diverge from reality.
 - If `docs/` is ever moved off this Cloudways app (different host, different app, subdomain
   split, etc.), this rule does not travel with the repo — recreate it on the new host first, or
   every docs link will 404.

@@ -1,0 +1,14 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '{\"systemMessage\": \"Reminder: if anything important was decided or changed this session, update the relevant note in the Obsidian vault (c:/Users/SalP1/Desktop/Mowi brain/Mowi/) and add a dated line to \\\"Mowi - Decisions log.md\\\" before you finish.\"}'"
+          }
+        ]
+      }
+    ]
+  }
+}

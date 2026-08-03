@@ -28,11 +28,11 @@ http
     let filePath = path.join(ROOT, urlPath);
 
     fs.readFile(filePath, (err, data) => {
-      // Mirrors production's Cloudways "Internal rewrite" Web Rule, which is
-      // scoped to /docs/* only (^/docs/([a-z0-9-]+)$ -> /docs/$1.html) — kept
-      // scoped the same way here so local testing doesn't imply extensionless
-      // URLs work anywhere they actually don't. See js/docs-nav.js for details.
-      if (err && !path.extname(filePath) && urlPath.startsWith("/docs/")) {
+      // Mirrors production's Cloudways "Internal rewrite" Web Rules, which map
+      // any extensionless path to its .html file site-wide (both the root
+      // marketing pages and /docs/* articles) — see CLAUDE.md "Extensionless
+      // URLs" section for the exact rules.
+      if (err && !path.extname(filePath)) {
         filePath += ".html";
         fs.readFile(filePath, (err2, data2) => respond(err2, data2, filePath));
         return;
