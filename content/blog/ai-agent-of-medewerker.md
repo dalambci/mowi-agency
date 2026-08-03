@@ -7,7 +7,7 @@ updated:
 author: Sal
 tags: [prijzen, vergelijking]
 video_id:
-draft: true
+draft: false
 sources: []
 faq:
   - q: "Vervangt een AI-agent mijn administratief medewerker volledig?"

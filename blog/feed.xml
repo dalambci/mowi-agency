@@ -3,5 +3,11 @@
   <title>Mowi Blog</title>
   <description>Praktische antwoorden over AI-automatisering voor het MKB</description>
   <link>https://mowi.agency/blog</link>
-
+    <item>
+      <title>Is een AI-agent goedkoper dan een administratief medewerker?</title>
+      <description>Een medewerker kost al snel €38.000-45.000/jaar. Een AI-agent: €1.000 eenmalig + €50/maand per taak. Bereken hier de besparing en waar de grens ligt.</description>
+      <link>https://mowi.agency/blog/ai-agent-of-medewerker</link>
+      <guid>https://mowi.agency/blog/ai-agent-of-medewerker</guid>
+      <pubDate>Mon, 03 Aug 2026 00:00:00 GMT</pubDate>
+    </item>
   </channel></rss>
