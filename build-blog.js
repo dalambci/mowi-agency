@@ -16,7 +16,7 @@ const ROOT = __dirname;
 const CONTENT_DIR = path.join(ROOT, "content", "blog");
 const OUTPUT_DIR = path.join(ROOT, "blog");
 const SITE_URL = "https://mowi.agency";
-const CSS_VERSION = "20260803-7"; // bump alongside every css/style.css edit
+const CSS_VERSION = "20260803-8"; // bump alongside every css/style.css edit
 
 // ---------------------------------------------------------------------------
 // Minimal YAML-frontmatter parser (subset: scalars, inline arrays, block
