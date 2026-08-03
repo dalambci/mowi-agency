@@ -404,6 +404,7 @@ function renderPost(post) {
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png?v=20260804" />
   <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon.png?v=20260804" />
   <link rel="apple-touch-icon" href="/assets/favicon.png?v=20260804" />
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
   ${articleJsonLd(post, url)}
 </head>
 <body>
@@ -456,6 +457,7 @@ function renderIndex(posts) {
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png?v=20260804" />
   <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon.png?v=20260804" />
   <link rel="apple-touch-icon" href="/assets/favicon.png?v=20260804" />
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 </head>
 <body>
 ${headerHtml()}
