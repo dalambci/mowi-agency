@@ -1542,6 +1542,32 @@ h3 {
   justify-content: center;
 }
 
+/* This headline's column is only ~52% of .hero-frame-grid's width
+   (1fr / 2.2fr / 1fr split), not the full viewport — so it needs its own,
+   slower font-size ramp than the generic h1 scale above. Without this
+   override, tablets (roughly 768-1366px) hit the generic rule's 60px tier
+   at the exact breakpoint where the framed grid also narrows the column,
+   and this long headline wraps to 6-7 lines. Verified 2026-08-03 across
+   iPad mini/air/pro (both orientations), a generic Android tablet, and
+   Surface Pro — mobile (<48rem, single-column layout) is unaffected. */
+@media (min-width: 48rem) {
+  .hero-heading-reveal {
+    font-size: 3rem; /* hold at 48px instead of the generic rule's 60px here */
+  }
+}
+
+@media (min-width: 85rem) { /* ~1360px — past every common tablet, including iPad Pro 12.9" landscape */
+  .hero-heading-reveal {
+    font-size: 3.75rem; /* 60px */
+  }
+}
+
+@media (min-width: 100rem) { /* 1600px, matches --container-width's own cap */
+  .hero-heading-reveal {
+    font-size: 72px;
+  }
+}
+
 /* --- Hero entrance animation --------------------------------------------
    Copied 1:1 from vuewer.com's own compiled hero (fetched their live HTML +
    JS bundle and read the exact Alpine/GSAP values — see reference/
