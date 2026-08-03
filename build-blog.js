@@ -401,9 +401,9 @@ function renderPost(post) {
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/css/style.css?v=${CSS_VERSION}" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png?v=20260804" />
-  <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon.png?v=20260804" />
-  <link rel="apple-touch-icon" href="/assets/favicon.png?v=20260804" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png?v=20260804-2" />
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon.png?v=20260804-2" />
+  <link rel="apple-touch-icon" href="/assets/favicon.png?v=20260804-2" />
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
   ${articleJsonLd(post, url)}
 </head>
@@ -454,9 +454,9 @@ function renderIndex(posts) {
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/css/style.css?v=${CSS_VERSION}" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png?v=20260804" />
-  <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon.png?v=20260804" />
-  <link rel="apple-touch-icon" href="/assets/favicon.png?v=20260804" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png?v=20260804-2" />
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon.png?v=20260804-2" />
+  <link rel="apple-touch-icon" href="/assets/favicon.png?v=20260804-2" />
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 </head>
 <body>
