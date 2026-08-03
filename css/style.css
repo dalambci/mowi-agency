@@ -2340,6 +2340,7 @@ h3 {
 .blog-breadcrumb {
   font-size: 0.875rem;
   color: var(--color-text-muted);
+  margin-top: 1.5rem;
   margin-bottom: 1.5rem;
 }
 
@@ -2516,9 +2517,8 @@ h3 {
 
 .blog-cta {
   margin-top: 2.5rem;
-  padding: 2rem;
-  background: var(--color-ink);
-  color: var(--color-white);
+  padding-top: 2rem;
+  border-top: 1px solid var(--color-border);
   text-align: center;
 }
 
@@ -2527,6 +2527,23 @@ h3 {
 }
 
 /* --- Blog index (listing page) --- */
+.blog-index-intro {
+  padding-top: 3rem;
+}
+
+.blog-index-intro h1 {
+  font-size: clamp(1.625rem, 1.35rem + 1vw, 2.125rem);
+  line-height: 1.25;
+  margin-bottom: 0;
+}
+
+.blog-index-intro p {
+  max-width: 42rem;
+  color: var(--color-text-muted);
+  margin-top: 1rem;
+  margin-bottom: 2.5rem;
+}
+
 .blog-index-grid {
   display: grid;
   grid-template-columns: 1fr;

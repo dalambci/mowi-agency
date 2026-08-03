@@ -16,7 +16,7 @@ const ROOT = __dirname;
 const CONTENT_DIR = path.join(ROOT, "content", "blog");
 const OUTPUT_DIR = path.join(ROOT, "blog");
 const SITE_URL = "https://mowi.agency";
-const CSS_VERSION = "20260803-6"; // bump alongside every css/style.css edit
+const CSS_VERSION = "20260803-7"; // bump alongside every css/style.css edit
 
 // ---------------------------------------------------------------------------
 // Minimal YAML-frontmatter parser (subset: scalars, inline arrays, block
@@ -459,9 +459,11 @@ function renderIndex(posts) {
 </head>
 <body>
 ${headerHtml()}
-  <main class="container" style="padding-block: 3rem 5rem;">
-    <h1>Blog</h1>
-    <p style="max-width: 42rem; color: var(--color-text-muted); margin-bottom: 2.5rem;">Praktische antwoorden over AI-automatisering voor het MKB — kosten, koppelingen, en wat werkt in de praktijk.</p>
+  <main class="container" style="padding-bottom: 5rem;">
+    <div class="blog-index-intro">
+      <h1>Blog</h1>
+      <p>Praktische antwoorden over AI-automatisering voor het MKB — kosten, koppelingen, en wat werkt in de praktijk.</p>
+    </div>
     <div class="blog-index-grid">
 ${cards || '      <p>Binnenkort de eerste posts.</p>'}
     </div>
