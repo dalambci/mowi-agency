@@ -25,18 +25,31 @@ http
     let urlPath = decodeURIComponent(req.url.split("?")[0]);
     if (urlPath.endsWith("/")) urlPath += "index.html";
 
-    const filePath = path.join(ROOT, urlPath);
+    let filePath = path.join(ROOT, urlPath);
 
     fs.readFile(filePath, (err, data) => {
+      // Mirrors production's Cloudways "Internal rewrite" Web Rule, which is
+      // scoped to /docs/* only (^/docs/([a-z0-9-]+)$ -> /docs/$1.html) — kept
+      // scoped the same way here so local testing doesn't imply extensionless
+      // URLs work anywhere they actually don't. See js/docs-nav.js for details.
+      if (err && !path.extname(filePath) && urlPath.startsWith("/docs/")) {
+        filePath += ".html";
+        fs.readFile(filePath, (err2, data2) => respond(err2, data2, filePath));
+        return;
+      }
+      respond(err, data, filePath);
+    });
+
+    function respond(err, data, servedPath) {
       if (err) {
         res.writeHead(404, { "Content-Type": "text/plain" });
         res.end("Not found: " + urlPath);
         return;
       }
-      const ext = path.extname(filePath);
+      const ext = path.extname(servedPath);
       res.writeHead(200, { "Content-Type": TYPES[ext] || "application/octet-stream" });
       res.end(data);
-    });
+    }
   })
   .listen(PORT, () => {
     console.log(`Mowi site running at http://localhost:${PORT}`);

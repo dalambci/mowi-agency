@@ -136,15 +136,40 @@ retype credentials from scratch or falling back to a password:
   never leak into the docs section. Font is Inter via `fonts.bunny.net` (matches the dashboard
   exactly), not the marketing site's Plus Jakarta Sans.
 - Sidebar navigation is generated entirely from `js/docs-nav.js` (`DOCS_NAV` / `DOCS_HOME`
-  globals, hrefs are plain filenames like `agent-crm-sync.html` — no `docs/` or `docs-` prefix)
-  by `js/docs.js`, which also builds the breadcrumb, previous/next links, and the "Op deze
-  pagina" TOC (scroll-spy, only rendered when the article has real `h2`s — stub pages correctly
-  show no TOC). **To add a new docs article: add one `{ title, href }` line to the right
-  category in `js/docs-nav.js` and create the matching `docs/<slug>.html` file** (copy an
-  existing article's `<head>`/header/sidebar-mount/breadcrumb-mount/TOC-mount boilerplate — the
-  three `../` asset references and the `data-docs-href` matching the new filename are the only
-  parts that differ) — the sidebar, breadcrumb, and prev/next everywhere else update
-  automatically, nothing else to touch.
+  globals, hrefs are extensionless — `agent-crm-sync`, not `agent-crm-sync.html` or
+  `docs/agent-crm-sync.html`; see "Extensionless docs URLs" below for why that works) by
+  `js/docs.js`, which also builds the breadcrumb, previous/next links, and the "Op deze pagina"
+  TOC (scroll-spy, only rendered when the article has real `h2`s — stub pages correctly show no
+  TOC). **To add a new docs article: add one `{ title, href }` line (extensionless) to the right
+  category in `js/docs-nav.js`, create the matching `docs/<slug>.html` file** (copy an existing
+  article's `<head>`/header/sidebar-mount/breadcrumb-mount/TOC-mount boilerplate — the three
+  `../` asset references and the `data-docs-href` matching the new filename, also extensionless,
+  are the only parts that differ), **and add the same `<slug>` to the Cloudways rewrite rule**
+  (see below) — the sidebar, breadcrumb, and prev/next everywhere else update automatically.
+
+### Extensionless docs URLs depend on a Cloudways Web Rule, not just link edits
+- Docs links (sidebar, breadcrumb, prev/next, in-article cross-links) point to e.g.
+  `agent-crm-sync`, not `agent-crm-sync.html` — the file on disk still ends in `.html`, only the
+  URL is clean. This only works because of an **Internal Rewrite** rule configured directly in
+  the Cloudways dashboard (app `mowi.agency` / 6590002 → **Web Rules → Rewrite Rules**, not
+  anything in this repo or in nginx config files we have access to — see the SSH/root-permission
+  note under "Deploying to production" above): `^/docs/([a-z0-9-]+)$` → `/docs/$1.html`,
+  Action **Internal rewrite**. Verified 2026-08-03 against all 19 articles (right status code
+  *and* right page content, not just a 200) plus collateral checks (`/docs/` index, the
+  `.html` URLs directly, `/`, `css/docs.css`, a genuinely nonexistent slug) — all behaved
+  correctly, nothing else on the site was affected.
+- **This rule is scoped to `/docs/` only** — extensionless URLs do NOT work anywhere else on the
+  site (marketing pages still need `.html`). Don't assume otherwise, and don't extend `docs-nav.js`
+  or any other link to rely on extensionless URLs outside `/docs/` without adding a matching rule
+  first.
+- The account's Web Rules quota showed **24/25 remaining** after adding this one rule — check
+  before adding more; a second broad rule could exhaust it.
+- `serve.js` (local dev server) mirrors this specific rule (falls back to appending `.html` only
+  for unresolved paths under `/docs/`) so local testing matches production. If the live rule
+  ever changes, update `serve.js` to match or local testing will silently diverge from reality.
+- If `docs/` is ever moved off this Cloudways app (different host, different app, subdomain
+  split, etc.), this rule does not travel with the repo — recreate it on the new host first, or
+  every docs link will 404.
 - Every docs page follows the same shell: `.docs-header` (slim, wordmark + "Terug naar website"
   + "Inloggen" linking to `https://dashboard.mowi.agency/login`) → `.docs-sidebar` (mount point
   only, populated by JS) → `.docs-content-wrap` (`.docs-column` + `.docs-toc`). Reusable
