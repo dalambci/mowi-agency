@@ -2334,13 +2334,22 @@ h3 {
 .blog-article {
   max-width: 42rem; /* ~70-75ch measure at this font size, matching the docs reading width */
   margin-inline: auto;
-  padding-block: 3rem 5rem;
+  padding-block: 0 5rem;
 }
 
+/* .site-header is position:sticky with top: var(--container-pad) - before the
+   sticky threshold triggers it renders like position:relative (visually
+   shifted down by that amount, but its reserved flow-space stays at the
+   original position), leaving a phantom zone under the header exactly
+   var(--container-pad) tall that the next element overlaps unless its own
+   top spacing clears it. Since --container-pad itself is responsive
+   (16/24/48px), a flat margin here would produce a different VISIBLE gap at
+   every breakpoint (as it did before this fix) - adding a flat 1.5rem on top
+   of var(--container-pad) keeps the real visible gap constant everywhere. */
 .blog-breadcrumb {
   font-size: 0.875rem;
   color: var(--color-text-muted);
-  margin-top: 1.5rem;
+  margin-top: calc(var(--container-pad) + 1.5rem);
   margin-bottom: 1.5rem;
 }
 
@@ -2527,8 +2536,13 @@ h3 {
 }
 
 /* --- Blog index (listing page) --- */
+/* Same phantom-zone reasoning as .blog-breadcrumb above: a flat padding-top
+   here produced a different VISIBLE gap per breakpoint (56px mobile vs 16px
+   desktop) since --container-pad (the zone's size) shrinks at mobile while
+   this stayed fixed. calc() keeps the real visible gap constant everywhere,
+   matching the flat 1.5rem used below the paragraph exactly. */
 .blog-index-intro {
-  padding-top: 4rem;
+  padding-top: calc(var(--container-pad) + 1.5rem);
 }
 
 .blog-index-intro h1 {
@@ -2541,7 +2555,7 @@ h3 {
   max-width: 42rem;
   color: var(--color-text-muted);
   margin-top: 0.5rem;
-  margin-bottom: 4rem;
+  margin-bottom: 1.5rem;
 }
 
 .blog-index-grid {
