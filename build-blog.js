@@ -16,7 +16,7 @@ const ROOT = __dirname;
 const CONTENT_DIR = path.join(ROOT, "content", "blog");
 const OUTPUT_DIR = path.join(ROOT, "blog");
 const SITE_URL = "https://mowi.agency";
-const CSS_VERSION = "20260803-5"; // bump alongside every css/style.css edit
+const CSS_VERSION = "20260803-6"; // bump alongside every css/style.css edit
 
 // ---------------------------------------------------------------------------
 // Minimal YAML-frontmatter parser (subset: scalars, inline arrays, block
@@ -190,18 +190,6 @@ function renderSources(sources) {
   for (const s of sources) html += `<li>${renderInline(s)}</li>\n`;
   html += "</ul></div>\n";
   return html;
-}
-
-function renderAuthor(author) {
-  if (!author) return "";
-  if (typeof author === "string") {
-    return `<div class="blog-author"><span class="blog-author-name">${author}</span></div>\n`;
-  }
-  const photo = author.photo
-    ? `<img src="${author.photo}" alt="" />`
-    : "";
-  const bio = author.bio ? `<span class="blog-author-bio">${author.bio}</span>` : "";
-  return `<div class="blog-author">${photo}<span><span class="blog-author-name">${author.name || ""}</span>${bio ? "<br>" + bio : ""}</span></div>\n`;
 }
 
 function renderVideo(videoId) {
@@ -434,8 +422,6 @@ ${headerHtml()}
       <p>Benieuwd wat dit voor uw situatie betekent?</p>
       <a href="/contact" class="btn btn-primary">Plan een kennismaking</a>
     </div>
-
-    ${renderAuthor(post.author)}
   </main>
 ${footerHtml()}
 </body>

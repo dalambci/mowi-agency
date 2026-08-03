@@ -4,7 +4,7 @@ description: "Max 155 tekens. Comprimeer het directe antwoord — moet nuttig zi
 slug: korte-nederlandse-slug                                        # wordt de URL: /blog/korte-nederlandse-slug
 date: 2026-01-01                                                    # publicatiedatum (YYYY-MM-DD)
 updated:                                                            # leeg laten tot een latere revisie; toont dan "Laatst bijgewerkt"
-author: Sal                                                         # alleen een naam nu; foto/bio komen later zonder het template te wijzigen
+author: Sal                                                         # gebruikt in de byline ("Sal · Gepubliceerd ...") en in de JSON-LD; geen aparte auteursbox onderaan de post
 tags: [voorbeeld-tag]                                               # gebruikt voor "Verder lezen"-suggesties later
 video_id:                                                            # YouTube video-ID (het stuk na "v=" in de URL), leeg = geen video
 draft: true                                                         # true = verschijnt nergens (niet op /blog/, niet in de sitemap, niet in de feed). Zet op false om te publiceren.
