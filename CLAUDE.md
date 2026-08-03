@@ -310,6 +310,16 @@ Wherever personal/business details belong, insert these placeholders verbatim in
   `favicon.png` is the ring padded onto a transparent square canvas (centered, no cropping),
   then downscaled to 512×512. If `mowi-icon.png` is ever regenerated, regenerate this the same
   way rather than pointing the favicon at the raw logo file again.
+- `favicon.ico` (project root, not `assets/`) — a **second real incident**, distinct from the
+  one above: even with a correctly-square `favicon.png` and proper `<link rel="icon">` /
+  `<link rel="apple-touch-icon">` tags on every page, the icon still didn't show on some mobile
+  browsers/in-app webviews while working fine on desktop. Root cause: those clients (iOS Safari
+  home-screen icons, various Android in-app browsers) probe `/favicon.ico` at the conventional
+  root path directly, ignoring the `<link>` tag entirely, and show nothing if it 404s — which it
+  did, since no file existed there. Fixed by generating `favicon.ico` as a plain ICO container
+  wrapping the same `favicon.png` bytes (no re-encoding, so there's still one real source image).
+  If `favicon.png` is ever regenerated, regenerate `favicon.ico` from it the same way — don't let
+  the two drift apart.
 - **No client logos and no invented logos.** Wherever a *client* logo strip/marquee appears,
   use neutral grey placeholder tiles (simple rounded blocks containing the word "logo"). Real
   client logos come later. This does not apply to Mowi's own logo, which is real and final.
