@@ -8,13 +8,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260804-10" />
+  <link rel="stylesheet" href="css/style.css?v=20260804-23" />
   <link rel="icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="shortcut icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260804-3" />
   <link rel="apple-touch-icon-precomposed" href="assets/apple-icon-180.png?v=20260804-3" />
   <script defer data-domain="mowi.agency" src="https://plausible.io/js/script.js"></script>
-  <script src="js/broken-image-guard.js?v=20260804-10"></script>
+  <script src="js/broken-image-guard.js?v=20260804-23"></script>
 </head>
 <body>
 
@@ -88,30 +88,159 @@
     <!-- ===== Hero ===== -->
     <section class="container hero">
       <div class="breadcrumb"><a href="/">Home</a> / AI-automatisering</div>
-      <div style="max-width: 44rem;">
-        <h1>Terugkerende taken wegautomatiseren met AI.</h1>
-        <p class="lede" style="margin-top: 1.5rem;">
-          Facturen verwerken, offertes opstellen, klantvragen beantwoorden, data overtikken: we brengen per
-          organisatie in kaart welke taken u beter kunt wegautomatiseren — en regelen dat vervolgens van A tot Z.
-        </p>
-        <div class="hero-actions">
-          <span class="btn-slot">
-            <a href="contact#calendly-widget" class="btn btn-primary" data-event="CTA Click">Ontdek in 30 minuten wat u kunt automatiseren</a>
-          </span>
+      <div class="hero-with-visual">
+        <div>
+          <h1>Terugkerende taken wegautomatiseren met AI.</h1>
+          <p class="lede" style="margin-top: 1.5rem;">
+            Facturen verwerken, offertes opstellen, klantvragen beantwoorden, data overtikken: we brengen per
+            organisatie in kaart welke taken u beter kunt wegautomatiseren — en regelen dat vervolgens van A tot Z.
+          </p>
+          <div class="hero-actions">
+            <span class="btn-slot">
+              <a href="contact#calendly-widget" class="btn btn-primary" data-event="CTA Click">Ontdek in 30 minuten wat u kunt automatiseren</a>
+            </span>
+          </div>
+        </div>
+
+        <!-- Hero showcase: taak -> Mowi -> resultaat, in three beats. Same
+             4-row grid at every width, one task card at a time traveling
+             through the hub to become its paired result — just smaller on
+             phones (see css/style.css's own comment on .hero-showcase),
+             not a separate simplified layout. -->
+        <div class="hero-showcase" aria-hidden="true">
+          <!-- Real connector lines (task edge -> result edge, passing behind
+               the hub plate), drawn/positioned by js/main.js from actual
+               element geometry — see that file's drawShowcaseLines(). -->
+          <svg class="showcase-lines" id="showcaseLines"></svg>
+
+          <div class="showcase-task" style="grid-row: 1;">
+            <span class="showcase-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="5" y="3" width="14" height="18" rx="2" />
+                <path d="M8.5 8h7M8.5 12h7M8.5 16h4" />
+              </svg>
+            </span>
+            <span>Inkomende factuur</span>
+          </div>
+          <div class="showcase-task" style="grid-row: 2;">
+            <span class="showcase-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 2L11 13" />
+                <path d="M22 2l-7 20-4-9-9-4 20-7z" />
+              </svg>
+            </span>
+            <span>Offerteaanvraag</span>
+          </div>
+          <div class="showcase-task" style="grid-row: 3;">
+            <span class="showcase-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 6a2 2 0 012-2h12a2 2 0 012 2v7a2 2 0 01-2 2H10l-4 3.5V15a2 2 0 01-2-2V6z" />
+                <circle cx="9" cy="9.5" r="0.4" fill="currentColor" stroke="none" />
+                <circle cx="12" cy="9.5" r="0.4" fill="currentColor" stroke="none" />
+                <circle cx="15" cy="9.5" r="0.4" fill="currentColor" stroke="none" />
+              </svg>
+            </span>
+            <span>Klantvraag</span>
+          </div>
+          <div class="showcase-task" style="grid-row: 4;">
+            <span class="showcase-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="9" width="8" height="8" rx="2" />
+                <rect x="13" y="7" width="8" height="8" rx="2" />
+                <path d="M11 13h2" />
+              </svg>
+            </span>
+            <span>Data-invoer</span>
+          </div>
+
+          <!-- Real brand asset (assets/mowi-icon.png, used sitewide), not
+               stock/AI art — this is the platform every task passes through. -->
+          <div class="showcase-hub">
+            <div class="showcase-hub-pulse"></div>
+            <div class="showcase-hub-plate">
+              <img src="assets/mowi-icon.png" alt="" />
+            </div>
+          </div>
+
+          <div class="showcase-result" style="grid-row: 1;">
+            <span class="showcase-check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7" /></svg>
+            </span>
+            <span>Geboekt in uw boekhouding</span>
+          </div>
+          <div class="showcase-result" style="grid-row: 2;">
+            <span class="showcase-check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7" /></svg>
+            </span>
+            <span>Offerte verstuurd</span>
+          </div>
+          <div class="showcase-result" style="grid-row: 3;">
+            <span class="showcase-check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7" /></svg>
+            </span>
+            <span>Beantwoord</span>
+          </div>
+          <div class="showcase-result" style="grid-row: 4;">
+            <span class="showcase-check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7" /></svg>
+            </span>
+            <span>CRM bijgewerkt</span>
+          </div>
+
+          <div class="showcase-ghost" id="showcaseGhost"></div>
         </div>
       </div>
     </section>
 
     <!-- ===== Concreet ===== -->
     <section class="container section">
-      <div class="section-head" data-reveal>
-        <span class="eyebrow">Concreet</span>
-        <h2>Wat is AI-automatisering — zonder de hype?</h2>
-        <p class="lede" style="margin-top: 1rem;">
-          Software die terugkerende taken in uw organisatie zelfstandig uitvoert. Denk aan het lezen, controleren en
-          boeken van inkomende documenten — zonder dat uw team er tussen hoeft te zitten, en zonder dat u er zelf
-          technische kennis voor nodig heeft.
-        </p>
+      <div class="concreet-layout">
+        <div class="section-head" data-reveal style="margin-bottom: 0;">
+          <span class="eyebrow">Concreet</span>
+          <h2>Wat is AI-automatisering — zonder de hype?</h2>
+          <p class="lede" style="margin-top: 1rem;">
+            Software die terugkerende taken in uw organisatie zelfstandig uitvoert. Denk aan het lezen, controleren en
+            boeken van inkomende documenten — zonder dat uw team er tussen hoeft te zitten, en zonder dat u er zelf
+            technische kennis voor nodig heeft.
+          </p>
+        </div>
+
+        <div class="concreet-visuals">
+          <!-- Live agent-feed widget, moved here from the trust section so
+               it sits right next to the claim it's actually demonstrating.
+               A designed activity-feed card (not a screenshot) — the 4 rows
+               here are a real, complete end state on their own; js/main.js
+               only adds the looping cycle on top when motion is allowed. -->
+          <div class="agent-feed-card" data-reveal>
+            <p class="agent-feed-title">Live activiteit</p>
+            <ul class="agent-feed-list" id="agentFeedList">
+              <li class="agent-feed-row is-done">
+                <span class="agent-feed-dot" aria-hidden="true"></span>
+                <span class="agent-feed-text">Email triage — 14 mails gesorteerd</span>
+              </li>
+              <li class="agent-feed-row is-done">
+                <span class="agent-feed-dot" aria-hidden="true"></span>
+                <span class="agent-feed-text">Invoice processing — 6 facturen verwerkt</span>
+              </li>
+              <li class="agent-feed-row is-done">
+                <span class="agent-feed-dot" aria-hidden="true"></span>
+                <span class="agent-feed-text">Needs attention — opgelost</span>
+              </li>
+              <li class="agent-feed-row is-done">
+                <span class="agent-feed-dot" aria-hidden="true"></span>
+                <span class="agent-feed-text">Report generator — rapport verzonden</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Renders only once assets/screenshots/dashboard-agents-overview.png
+               actually exists — js/broken-image-guard.js hides the whole frame
+               (chrome bar included) on a 404, so this is never a placeholder. -->
+          <div class="browser-frame" data-reveal>
+            <div class="browser-frame-bar" aria-hidden="true"><span></span><span></span><span></span></div>
+            <img src="assets/screenshots/dashboard-agents-overview.png" alt="Mowi dashboard — overzicht van actieve agents" loading="lazy" />
+          </div>
+        </div>
       </div>
     </section>
 
@@ -125,33 +254,121 @@
 
         <div class="grid grid-3">
           <div class="card" data-reveal>
+            <span class="task-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect class="ti-muted" x="6" y="6" width="18" height="24" rx="3" />
+                <path class="ti-muted" d="M11 13h8M11 18h8M11 23h5" />
+                <path class="ti-accent" d="M27 20h9" />
+                <path class="ti-accent ti-move" d="M31 16l5 4-5 4" />
+                <rect class="ti-accent" x="27" y="30" width="15" height="12" rx="3" />
+                <path class="ti-accent" d="M31 36l3 3 6-6" />
+              </svg>
+            </span>
             <h3>Factuur- &amp; documentverwerking</h3>
             <p>Inkomende documenten lezen, controleren en boeken.</p>
             <a href="agents/invoice-processing" class="card-link">Bekijk Invoice processing →</a>
           </div>
           <div class="card" data-reveal>
+            <span class="task-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path class="ti-muted" d="M6 12a3 3 0 013-3h10a3 3 0 013 3v7a3 3 0 01-3 3h-7l-4 4v-4H9a3 3 0 01-3-3z" />
+                <path class="ti-accent" d="M27 22h9" />
+                <path class="ti-accent ti-move" d="M31 18l5 4-5 4" />
+                <rect class="ti-accent" x="26" y="28" width="17" height="14" rx="3" />
+                <path class="ti-accent" d="M30 33h9M30 37h6" />
+              </svg>
+            </span>
             <h3>Offertes &amp; aanvragen</h3>
             <p>Aanvragen automatisch omzetten in een kloppende offerte.</p>
           </div>
           <div class="card" data-reveal>
+            <span class="task-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path class="ti-muted" d="M5 14a4 4 0 014-4h14a4 4 0 014 4v8a4 4 0 01-4 4H14l-5 5v-5a4 4 0 01-4-4z" />
+                <path class="ti-accent" d="M21 24a4 4 0 014-4h14a4 4 0 014 4v6a4 4 0 01-4 4h-3l-4 4v-4h-7a4 4 0 01-4-4z" />
+                <g class="ti-accent-fill ti-move">
+                  <circle cx="29" cy="29" r="1.4" />
+                  <circle cx="34" cy="29" r="1.4" />
+                  <circle cx="39" cy="29" r="1.4" />
+                </g>
+              </svg>
+            </span>
             <h3>Klantvragen &amp; helpdesk</h3>
             <p>Veelgestelde vragen direct beantwoord, 24/7 beschikbaar.</p>
           </div>
           <div class="card" data-reveal>
+            <span class="task-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect class="ti-muted" x="5" y="10" width="14" height="14" rx="3" />
+                <rect x="29" y="24" width="14" height="14" rx="3" />
+                <path class="ti-accent" d="M17 20c6 2 8 6 14 6" />
+                <circle class="ti-accent-fill ti-move" cx="24" cy="23" r="1.8" />
+              </svg>
+            </span>
             <h3>Data-invoer &amp; overzetten</h3>
             <p>Gegevens stromen automatisch door tussen systemen.</p>
             <a href="agents/crm-sync" class="card-link">Bekijk CRM sync →</a>
           </div>
           <div class="card" data-reveal>
+            <span class="task-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect class="ti-muted" x="7" y="6" width="34" height="36" rx="3" />
+                <path d="M14 16h10M14 22h16" />
+                <path class="ti-accent ti-move" d="M14 28h20" />
+                <path d="M14 34h8" />
+              </svg>
+            </span>
             <h3>Rapportages &amp; samenvattingen</h3>
             <p>Terugkerende rapportages stellen zichzelf samen.</p>
             <a href="agents/report-generator" class="card-link">Bekijk Report generator →</a>
           </div>
           <div class="card" data-reveal>
+            <span class="task-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path class="ti-muted" d="M6 38C14 30 10 18 18 14c8-4 10 8 18 4 4-2 4-6 6-8" stroke-dasharray="1 5" />
+                <circle cx="6" cy="38" r="2.4" />
+                <circle cx="18" cy="14" r="2.4" />
+                <circle class="ti-accent-fill ti-move" cx="42" cy="10" r="3" />
+              </svg>
+            </span>
             <h3>Planning &amp; routes</h3>
             <p>Capaciteit en routes optimaliseren op basis van actuele data.</p>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- ===== Mowi koppelt met =====
+         Static row of small pill labels — reuses the site's existing
+         .pill/.pill-row component as-is (same pattern as the "werkt met"
+         pills elsewhere on the site), all systems shown at once rather than
+         cycling through them one at a time. -->
+    <section class="container section" style="padding-block: 2.5rem;">
+      <div class="koppelt-widget" data-reveal>
+        <p class="koppelt-label">Mowi koppelt met</p>
+
+        <div class="pill-row" style="justify-content: center;">
+          <span class="pill">AFAS</span>
+          <span class="pill">Exact Online</span>
+          <span class="pill">SnelStart</span>
+          <span class="pill">Twinfield</span>
+          <span class="pill">Pipedrive</span>
+          <span class="pill">HubSpot</span>
+          <span class="pill">Salesforce</span>
+          <span class="pill">Microsoft Dynamics</span>
+          <span class="pill">SAP</span>
+          <span class="pill">Epicor</span>
+          <span class="pill">MKG</span>
+          <span class="pill">De Ridder</span>
+          <span class="pill">BEMET</span>
+          <span class="pill">Plan de Campagne</span>
+          <span class="pill">ECI</span>
+          <span class="pill">Odoo</span>
+          <span class="pill">Excel</span>
+          <span class="pill">SharePoint</span>
+        </div>
+
+        <p class="koppelt-note">en vrijwel elk ander systeem.</p>
       </div>
     </section>
 
@@ -165,7 +382,15 @@
       <div class="grid grid-3">
         <div class="case-card" data-reveal>
           <span class="case-tag">Payroll-automatisering</span>
-          <p class="case-result">8 medewerkers → 1 · 10 werkdagen → 30 minuten</p>
+          <p class="case-result case-result-animated">
+            <span class="case-before">8 medewerkers</span>
+            <span class="case-arrow" aria-hidden="true">→</span>
+            <span class="case-after">1</span>
+            <span class="case-sep">·</span>
+            <span class="case-before">10 werkdagen</span>
+            <span class="case-arrow" aria-hidden="true">→</span>
+            <span class="case-after">30 minuten</span>
+          </p>
         </div>
         <div class="case-card" data-reveal>
           <span class="case-tag">AI helpdesk</span>
@@ -198,22 +423,30 @@
           <h2>Klein beginnen, meetbaar resultaat.</h2>
         </div>
 
-        <div class="steps">
-          <div class="step" data-reveal>
-            <h3>Taken-scan</h3>
-            <p>We brengen in kaart welke taken zich lenen voor automatisering.</p>
-          </div>
-          <div class="step" data-reveal>
-            <h3>Eén proces eerst</h3>
-            <p>We starten met het proces met de meeste winst, niet met alles tegelijk.</p>
-          </div>
-          <div class="step" data-reveal>
-            <h3>Bouwen &amp; aansluiten</h3>
-            <p>We koppelen de automatisering aan uw bestaande systemen, waaronder Microsoft-platform en Power BI.</p>
-          </div>
-          <div class="step" data-reveal>
-            <h3>Meten &amp; uitbreiden</h3>
-            <p>We meten het resultaat en breiden uit naar het volgende proces.</p>
+        <div class="steps-wrap" data-reveal>
+          <div class="steps">
+            <div class="step" data-reveal>
+              <h3>Taken-scan</h3>
+              <p>We brengen in kaart welke taken zich lenen voor automatisering.</p>
+            </div>
+            <div class="step" data-reveal>
+              <h3>Eén proces eerst</h3>
+              <p>We starten met het proces met de meeste winst, niet met alles tegelijk.</p>
+            </div>
+            <div class="step" data-reveal>
+              <h3>Bouwen &amp; aansluiten</h3>
+              <p>We koppelen de automatisering aan uw bestaande systemen, waaronder Microsoft-platform en Power BI.</p>
+            </div>
+            <div class="step" data-reveal>
+              <h3>Meten &amp; uitbreiden</h3>
+              <p>We meten het resultaat en breiden uit naar het volgende proces.</p>
+              <!-- Renders only once assets/screenshots/dashboard-run-history.png
+                   actually exists (see js/broken-image-guard.js). -->
+              <div class="browser-frame browser-frame-compact">
+                <div class="browser-frame-bar" aria-hidden="true"><span></span><span></span><span></span></div>
+                <img src="assets/screenshots/dashboard-run-history.png" alt="Mowi dashboard — run-geschiedenis van een agent" loading="lazy" />
+              </div>
+            </div>
           </div>
         </div>
 
@@ -283,31 +516,6 @@
         <p class="cta-alt">Liever direct contact? 085 333 5800 · <a href="mailto:contact@mowi.agency">contact@mowi.agency</a></p>
       </div>
     </section>
-    <!-- ===== Vertrouwen ===== -->
-    <section class="container section" data-reveal>
-      <div class="section-head center">
-        <span class="eyebrow">Vertrouwen</span>
-        <h2>Waar u op kunt bouwen.</h2>
-      </div>
-      <div class="trust-list">
-        <div class="trust-item">
-          <p>AVG-proof — een verwerkersovereenkomst is standaard onderdeel van elke samenwerking.</p>
-        </div>
-        <div class="trust-item">
-          <p>Uw data versleuteld — encryptie tijdens transport en opslag, met dagelijkse backups. <!-- VERIFY: encryptie/backup-claim nog niet bevestigd op platformniveau, zie docs/it-beveiliging.html --></p>
-        </div>
-        <div class="trust-item">
-          <p>Niets faalt onopgemerkt — elke agent wordt bewaakt. Gaat er iets mis, dan ziet u het direct in uw dashboard onder 'Needs attention'.</p>
-        </div>
-        <div class="trust-item">
-          <span class="trust-photo"><img src="assets/team/sal.jpg" alt="Sal Pagrach" /></span>
-          <p>Sal Pagrach — uw vaste aanspreekpunt, van kennismaking tot nazorg.</p>
-        </div>
-        <div class="trust-item">
-          <p>Nederlands bedrijf, actief in Nederland en Vlaanderen.</p>
-        </div>
-      </div>
-    </section>
   </main>
 
   <!-- ===== Footer ===== -->
@@ -355,6 +563,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=20260804-10"></script>
+  <script src="js/main.js?v=20260804-23"></script>
 </body>
 </html>

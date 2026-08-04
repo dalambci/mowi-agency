@@ -550,3 +550,357 @@ document.querySelectorAll(".demo-video-play").forEach((btn) => {
 // <head> instead — see that file's header comment for why (a race with
 // images already in the initial HTML, since this script runs at the bottom
 // of <body>).
+
+// ==========================================================================
+// /ai-automatisering visual pilot (2026-08-04, hero rebuilt 2026-08-06) —
+// widget behavior. Every selector below is null-guarded, so this is a
+// silent no-op on every other page. The hero showcase and the agent-feed
+// widget already render a complete, correct-looking end state in plain
+// HTML before any of this runs (the showcase's 4 task cards + first result
+// pair, the agent-feed's 4 static rows) — this only adds the *motion* on
+// top.
+// ==========================================================================
+
+// Shared helper: stop/resume a continuous loop while its widget is scrolled
+// off-screen, so nothing burns CPU (rAF/setInterval/CSS animation) while
+// invisible. Purely a saving on top of already-correct behavior — a widget
+// that never gets observed (no IntersectionObserver support) just keeps
+// running unconditionally, which is still fine.
+function pauseWhenOffscreen(el, onEnter, onLeave) {
+  if (!el || !("IntersectionObserver" in window)) return;
+  new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) onEnter();
+        else onLeave();
+      });
+    },
+    { threshold: 0.1 }
+  ).observe(el);
+}
+
+// --- Hero showcase: taak -> Mowi -> resultaat ---------------------------------
+// One 3-column grid with 4 fixed task/result rows, at every viewport width
+// (see css/style.css's own comment on .hero-showcase) — sized down for
+// phones via CSS, not swapped for a different component.
+const showcaseHub = document.querySelector(".hero-showcase .showcase-hub");
+
+if (showcaseHub && !prefersReducedMotion) {
+  pauseWhenOffscreen(
+    showcaseHub,
+    () => showcaseHub.classList.remove("is-paused"),
+    () => showcaseHub.classList.add("is-paused")
+  );
+}
+
+const showcaseTaskEls = [...document.querySelectorAll(".hero-showcase .showcase-task")];
+const showcaseResultEls = [...document.querySelectorAll(".hero-showcase .showcase-result")];
+const showcaseGhost = document.getElementById("showcaseGhost");
+const showcaseEl = document.querySelector(".hero-showcase");
+const showcaseLinesSvg = document.getElementById("showcaseLines");
+const SVG_NS = "http://www.w3.org/2000/svg";
+
+// Every card's actual box, in pixels relative to the showcase container —
+// recomputed on demand (never cached) so it's always correct after a
+// resize or a font-swap reflow.
+function showcaseRectOf(el) {
+  const containerRect = showcaseEl.getBoundingClientRect();
+  const r = el.getBoundingClientRect();
+  const left = r.left - containerRect.left;
+  const top = r.top - containerRect.top;
+  return {
+    left,
+    right: left + r.width,
+    centerX: left + r.width / 2,
+    centerY: top + r.height / 2,
+  };
+}
+
+// Draws one line per task->hub and hub->result leg, all 8 meeting exactly
+// at the hub's own center — real geometry, not approximated, so every line
+// genuinely touches both the card it starts from and the hub it ends at
+// (the hub plate's higher z-index then visually covers the convergence
+// point, so each pair reads as one line passing straight through the logo).
+// The task->hub half is always visible (task cards are always visible); the
+// hub->result half only appears once its result card actually has — never
+// drawn in ahead of a card that hasn't shown up yet.
+function drawShowcaseLines() {
+  if (!showcaseEl || !showcaseLinesSvg || !showcaseHub || !showcaseTaskEls.length) return;
+  const containerRect = showcaseEl.getBoundingClientRect();
+  if (!containerRect.width) return; // not laid out yet
+
+  showcaseLinesSvg.setAttribute("width", containerRect.width);
+  showcaseLinesSvg.setAttribute("height", containerRect.height);
+  showcaseLinesSvg.innerHTML = "";
+
+  const hub = showcaseRectOf(showcaseHub);
+
+  showcaseTaskEls.forEach((taskEl, i) => {
+    const resultEl = showcaseResultEls[i];
+    if (!resultEl) return;
+    const task = showcaseRectOf(taskEl);
+    const result = showcaseRectOf(resultEl);
+
+    const taskLine = document.createElementNS(SVG_NS, "line");
+    taskLine.setAttribute("x1", task.right);
+    taskLine.setAttribute("y1", task.centerY);
+    taskLine.setAttribute("x2", hub.centerX);
+    taskLine.setAttribute("y2", hub.centerY);
+    taskLine.dataset.row = String(i);
+    showcaseLinesSvg.appendChild(taskLine);
+
+    const resultLine = document.createElementNS(SVG_NS, "line");
+    resultLine.setAttribute("x1", hub.centerX);
+    resultLine.setAttribute("y1", hub.centerY);
+    resultLine.setAttribute("x2", result.left);
+    resultLine.setAttribute("y2", result.centerY);
+    resultLine.setAttribute("pathLength", "1"); // lets the CSS dashoffset transition use simple 0-1 units regardless of actual on-screen length
+    resultLine.dataset.row = String(i);
+    resultLine.dataset.side = "result";
+    if (resultEl.classList.contains("is-pending")) {
+      resultLine.classList.add("is-hidden");
+    }
+    showcaseLinesSvg.appendChild(resultLine);
+  });
+}
+
+function setShowcaseLineActive(index, active) {
+  if (!showcaseLinesSvg) return;
+  showcaseLinesSvg.querySelectorAll(`[data-row="${index}"]`).forEach((line) => {
+    line.classList.toggle("is-active", active);
+  });
+}
+
+function setShowcaseResultLineVisible(index, visible) {
+  if (!showcaseLinesSvg) return;
+  const line = showcaseLinesSvg.querySelector(`[data-row="${index}"][data-side="result"]`);
+  if (line) line.classList.toggle("is-hidden", !visible);
+}
+
+// Results start hidden (see the "Desktop/tablet" block below) before the
+// very first line draw, so is-pending is already correct by the time
+// drawShowcaseLines() first reads it — order matters here.
+if (showcaseHub && !prefersReducedMotion) {
+  showcaseResultEls.forEach((el) => el.classList.add("is-pending"));
+}
+
+if (showcaseEl && showcaseLinesSvg) {
+  drawShowcaseLines();
+  window.addEventListener("resize", drawShowcaseLines);
+  // Plus Jakarta Sans loads async — a late font swap can shift card widths
+  // slightly after the lines were first drawn against fallback-font metrics.
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(drawShowcaseLines);
+  }
+}
+
+// --- Desktop/tablet: the traveling card ---------------------------------------
+if (
+  showcaseHub &&
+  showcaseGhost &&
+  showcaseTaskEls.length &&
+  showcaseResultEls.length &&
+  !prefersReducedMotion
+) {
+  const positionGhostOn = (el) => {
+    const containerRect = showcaseEl.getBoundingClientRect();
+    const r = el.getBoundingClientRect();
+    showcaseGhost.style.left = `${r.left - containerRect.left}px`;
+    showcaseGhost.style.top = `${r.top - containerRect.top}px`;
+    showcaseGhost.style.width = `${r.width}px`;
+    showcaseGhost.style.height = `${r.height}px`;
+  };
+
+  let desktopIndex = 0;
+  let desktopVisible = true;
+  let desktopRunning = false;
+
+  function runDesktopStep() {
+    const i = desktopIndex;
+    const taskEl = showcaseTaskEls[i];
+    const resultEl = showcaseResultEls[i];
+
+    taskEl.classList.add("is-active");
+    setShowcaseLineActive(i, true);
+
+    // Parked exactly on the task card, no transition — this is the
+    // starting point every distance below is measured relative to.
+    showcaseGhost.className = "showcase-ghost showcase-task";
+    showcaseGhost.innerHTML = taskEl.innerHTML;
+    showcaseGhost.style.transition = "none";
+    positionGhostOn(taskEl);
+    showcaseGhost.style.transform = "translate(0, 0) scale(1)";
+    showcaseGhost.style.opacity = "1";
+    void showcaseGhost.offsetWidth; // force reflow so the next transition actually animates
+
+    const task = showcaseRectOf(taskEl);
+    const hub = showcaseRectOf(showcaseHub);
+    const result = showcaseRectOf(resultEl);
+    // Same convergence point the static lines use (drawShowcaseLines above)
+    // — the ghost flies the exact same path its own row's lines trace.
+    const toHub = { x: hub.centerX - task.centerX, y: hub.centerY - task.centerY };
+    const toResult = { x: result.centerX - task.centerX, y: result.centerY - task.centerY };
+
+    requestAnimationFrame(() => {
+      showcaseGhost.style.transition = "transform 0.8s var(--ease-out), opacity 0.5s ease";
+      showcaseGhost.style.transform = `translate(${toHub.x}px, ${toHub.y}px) scale(0.2)`;
+      showcaseGhost.style.opacity = "0";
+    });
+
+    setTimeout(() => {
+      // Absorbed into the hub — a short processing pulse.
+      showcaseHub.classList.add("is-processing");
+      setTimeout(() => showcaseHub.classList.remove("is-processing"), 600);
+
+      // Swap content to the result while parked at the hub (identical
+      // transform to where phase 1 ended, so nothing visibly jumps).
+      showcaseGhost.className = "showcase-ghost showcase-result";
+      showcaseGhost.innerHTML = resultEl.innerHTML;
+      showcaseGhost.style.transition = "none";
+      showcaseGhost.style.transform = `translate(${toHub.x}px, ${toHub.y}px) scale(0.2)`;
+      showcaseGhost.style.opacity = "0";
+      void showcaseGhost.offsetWidth;
+
+      setTimeout(() => {
+        showcaseGhost.style.transition = "transform 0.8s var(--ease-bounce), opacity 0.3s ease";
+        showcaseGhost.style.transform = `translate(${toResult.x}px, ${toResult.y}px) scale(1)`;
+        showcaseGhost.style.opacity = "1";
+
+        setTimeout(() => {
+          // Arrived — hand off to the real, already-positioned result card.
+          // The hub->result line appears at this exact moment too, never
+          // before the card it connects to actually exists on screen.
+          taskEl.classList.remove("is-active");
+          setShowcaseLineActive(i, false);
+          resultEl.classList.remove("is-pending");
+          setShowcaseResultLineVisible(i, true);
+          showcaseGhost.style.opacity = "0";
+
+          setTimeout(() => {
+            desktopIndex += 1;
+            if (desktopIndex >= showcaseTaskEls.length) {
+              desktopIndex = 0;
+              showcaseResultEls.forEach((el, idx) => {
+                el.classList.add("is-pending");
+                setShowcaseResultLineVisible(idx, false);
+              });
+              setTimeout(advanceDesktop, 500);
+            } else {
+              advanceDesktop();
+            }
+          }, 1200); // hold on the completed result before the next task starts
+        }, 800); // matches the fly-to-result transition duration
+      }, 550); // brief pause "inside" the hub before flying back out
+    }, 800); // matches the fly-to-hub transition duration
+  }
+
+  function advanceDesktop() {
+    if (!desktopVisible) {
+      desktopRunning = false;
+      return;
+    }
+    runDesktopStep();
+  }
+
+  function startDesktop() {
+    desktopVisible = true;
+    if (!desktopRunning) {
+      desktopRunning = true;
+      runDesktopStep();
+    }
+  }
+
+  function stopDesktop() {
+    desktopVisible = false;
+  }
+
+  pauseWhenOffscreen(showcaseEl, startDesktop, stopDesktop);
+
+  window.addEventListener("resize", () => {
+    // A resize can happen mid-flight — snap the ghost to wherever it
+    // should be for its CURRENT phase rather than leave it misaligned;
+    // the next step recomputes fresh coordinates regardless.
+    if (showcaseGhost.style.opacity === "0") return;
+    positionGhostOn(showcaseTaskEls[desktopIndex]);
+  });
+}
+
+// "Mowi koppelt met" is a static row of pill labels (see css/style.css's
+// .koppelt-widget) — no JS needed, so there's nothing to wire up here.
+
+// --- Live agent-feed widget ---------------------------------------------------
+// The 4 rows already in the HTML are a real, correct end state (also the
+// reduced-motion fallback, since this block simply never runs then). When
+// motion is allowed, it keeps cycling through the same short script,
+// prepending one new row at a time and dropping the oldest.
+const agentFeedCard = document.querySelector(".agent-feed-card");
+const agentFeedList = document.getElementById("agentFeedList");
+
+if (agentFeedCard && agentFeedList && !prefersReducedMotion) {
+  const SCRIPT = [
+    { text: "Email triage — 14 mails gesorteerd", status: "done" },
+    { text: "Invoice processing — 6 facturen verwerkt", status: "done" },
+    {
+      text: "Needs attention — koppeling verlopen",
+      status: "warning",
+      resolvesTo: "Needs attention — opgelost",
+    },
+    { text: "Report generator — rapport verzonden", status: "done" },
+    { text: "CRM sync — 9 leads bijgewerkt", status: "done" },
+  ];
+  const MAX_ROWS = 4;
+  let scriptIndex = 0;
+  let feedTimer = null;
+
+  function addFeedRow(entry) {
+    const li = document.createElement("li");
+    li.className = `agent-feed-row agent-feed-row-enter is-${entry.status}`;
+
+    const dot = document.createElement("span");
+    dot.className = "agent-feed-dot";
+    dot.setAttribute("aria-hidden", "true");
+
+    const text = document.createElement("span");
+    text.className = "agent-feed-text";
+    text.textContent = entry.text;
+
+    li.append(dot, text);
+    agentFeedList.prepend(li);
+    // Two-step class removal (armed on append, cleared next frame) so the
+    // browser actually renders the "entering" state first — dropping both
+    // in the same frame would collapse straight to the resting state with
+    // no visible transition.
+    requestAnimationFrame(() => li.classList.remove("agent-feed-row-enter"));
+
+    while (agentFeedList.children.length > MAX_ROWS) {
+      agentFeedList.lastElementChild.remove();
+    }
+    return li;
+  }
+
+  function playFeedStep() {
+    const entry = SCRIPT[scriptIndex % SCRIPT.length];
+    scriptIndex += 1;
+    const row = addFeedRow(entry);
+
+    if (entry.resolvesTo) {
+      setTimeout(() => {
+        row.classList.remove("is-warning");
+        row.classList.add("is-done");
+        row.querySelector(".agent-feed-text").textContent = entry.resolvesTo;
+      }, 2200);
+    }
+  }
+
+  function startFeed() {
+    if (feedTimer) return;
+    feedTimer = setInterval(playFeedStep, 2800);
+  }
+
+  function stopFeed() {
+    clearInterval(feedTimer);
+    feedTimer = null;
+  }
+
+  pauseWhenOffscreen(agentFeedCard, startFeed, stopFeed);
+}
