@@ -8,11 +8,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260804-6" />
+  <link rel="stylesheet" href="css/style.css?v=20260804-10" />
   <link rel="icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="shortcut icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260804-3" />
   <link rel="apple-touch-icon-precomposed" href="assets/apple-icon-180.png?v=20260804-3" />
+  <script defer data-domain="mowi.agency" src="https://plausible.io/js/script.js"></script>
+  <script src="js/broken-image-guard.js?v=20260804-10"></script>
 </head>
 <body>
 
@@ -20,7 +22,7 @@
   <header class="site-header">
     <div class="header-bar">
       <span class="header-cta-slot">
-        <a href="#calendly-widget" class="header-cta">
+        <a href="#calendly-widget" class="header-cta" data-event="CTA Click">
           <span class="header-cta-full">Gratis adviesgesprek</span><span class="header-cta-short">Adviesgesprek</span>
         </a>
       </span>
@@ -62,7 +64,7 @@
           <li><a href="contact" aria-current="page">Contact</a></li>
         </ul>
         <!-- Same CTA, shown only inside the open mobile menu -->
-        <a href="#calendly-widget" class="btn btn-primary header-cta-mobile">Gratis adviesgesprek</a>
+        <a href="#calendly-widget" class="btn btn-primary header-cta-mobile" data-event="CTA Click">Gratis adviesgesprek</a>
         <a href="https://dashboard.mowi.agency/login" class="header-dashboard-mobile" target="_blank" rel="noopener">Dashboard log in</a>
       </nav>
 
@@ -95,98 +97,21 @@
       </div>
     </section>
 
-    <!-- ===== Kennismaking + form ===== -->
+    <!-- ===== Kennismaking =====
+         Website & Conversion plan, 2.3 (CTA hygiene): booking is the only
+         path on this page now — the Formspree contact form that used to sit
+         beside this card was removed on purpose, not lost. See the vault's
+         decisions log (2026-08-04) if it ever needs restoring. -->
     <section class="container section">
-      <div class="grid grid-2" style="align-items: start;">
-
-        <!-- Calendly inline embed. Widget script is loaded once at the bottom of this page. -->
-        <!-- id targeted by the header CTA button (site-wide) so it can jump straight here. -->
-        <div class="card" data-reveal id="calendly-widget">
-          <span class="eyebrow">Plan direct</span>
-          <h2 class="prose-heading">Kies een moment dat u past.</h2>
-          <p style="color: var(--color-gray-600); margin-top: 0.75rem;">
-            30 minuten, online en vrijblijvend. U weet daarna precies wat de volgende stap zou zijn.
-          </p>
-          <div class="calendly-inline-widget" data-url="https://calendly.com/contact-mowi/30min?hide_gdpr_banner=1&embed_type=Inline&embed_domain=mowi.agency" style="min-width: 280px; height: 630px; margin-top: 1.5rem;"></div>
-        </div>
-
-        <!-- Contact form wired to Formspree (https://formspree.io/f/xdennnjl), -->
-        <!-- notifying contact@mowi.agency. Submits via fetch below for an inline confirmation. -->
-        <div class="card" data-reveal>
-          <span class="eyebrow">Of stuur een bericht</span>
-          <h2 class="prose-heading">Liever eerst iets vragen?</h2>
-
-          <form id="contact-form" style="margin-top: 1.5rem;" action="https://formspree.io/f/xdennnjl" method="post">
-            <input type="hidden" name="_subject" value="Nieuw bericht via mowi.agency" />
-            <div id="contact-form-fields">
-              <div class="form-field">
-                <label for="name">Naam</label>
-                <input type="text" id="name" name="name" required />
-              </div>
-              <div class="form-field">
-                <label for="email">E-mailadres</label>
-                <input type="email" id="email" name="email" required />
-              </div>
-              <div class="form-field">
-                <label for="company">Bedrijfsnaam</label>
-                <input type="text" id="company" name="company" />
-              </div>
-              <div class="form-field">
-                <label for="message">Bericht</label>
-                <textarea id="message" name="message" rows="4" required></textarea>
-              </div>
-              <span class="btn-slot">
-                <button type="submit" class="btn btn-primary btn-block">Verstuur bericht</button>
-              </span>
-            </div>
-            <p class="form-note" id="contact-form-error" role="alert" hidden></p>
-          </form>
-
-          <div class="form-success" id="contact-form-success" role="status" hidden>
-            <span class="form-success-icon" aria-hidden="true">&#10003;</span>
-            <p><strong>Bedankt! Uw bericht is verstuurd.</strong><br />We nemen zo snel mogelijk contact met u op.</p>
-          </div>
-
-          <script>
-            // Progressive enhancement: submits via fetch so the visitor stays on
-            // this page instead of being redirected to Formspree's own generic
-            // confirmation page. Falls back to a plain POST (which still works,
-            // just leaves the site) if JS fails for any reason. The success
-            // message lives outside <form> so it can't get hidden along with it.
-            (function () {
-              const form = document.getElementById("contact-form");
-              const fields = document.getElementById("contact-form-fields");
-              const errorNote = document.getElementById("contact-form-error");
-              const success = document.getElementById("contact-form-success");
-              if (!form) return;
-
-              form.addEventListener("submit", function (event) {
-                event.preventDefault();
-                errorNote.hidden = true;
-
-                fetch(form.action, {
-                  method: "POST",
-                  body: new FormData(form),
-                  headers: { Accept: "application/json" },
-                })
-                  .then((response) => {
-                    if (response.ok) {
-                      form.reset();
-                      fields.hidden = true;
-                      success.hidden = false;
-                    } else {
-                      errorNote.textContent = "Er ging iets mis bij het versturen. Mail ons gerust direct op contact@mowi.agency.";
-                      errorNote.hidden = false;
-                    }
-                  })
-                  .catch(() => {
-                    errorNote.textContent = "Er ging iets mis bij het versturen. Mail ons gerust direct op contact@mowi.agency.";
-                    errorNote.hidden = false;
-                  });
-              });
-            })();
-          </script>
-        </div>
+      <!-- Calendly inline embed. Widget script is loaded once at the bottom of this page. -->
+      <!-- id targeted by the header CTA button (site-wide) so it can jump straight here. -->
+      <div class="card" data-reveal id="calendly-widget" style="max-width: 40rem; margin-inline: auto;">
+        <span class="eyebrow">Plan direct</span>
+        <h2 class="prose-heading">Kies een moment dat u past.</h2>
+        <p style="color: var(--color-gray-600); margin-top: 0.75rem;">
+          30 minuten, online en vrijblijvend. U weet daarna precies wat de volgende stap zou zijn.
+        </p>
+        <div class="calendly-inline-widget" data-url="https://calendly.com/contact-mowi/30min?hide_gdpr_banner=1&embed_type=Inline&embed_domain=mowi.agency" style="min-width: 280px; height: 630px; margin-top: 1.5rem;"></div>
       </div>
     </section>
 
@@ -215,6 +140,31 @@
             <h3>KVK</h3>
             <p>71290877</p>
           </div>
+        </div>
+      </div>
+    </section>
+    <!-- ===== Vertrouwen ===== -->
+    <section class="container section" data-reveal>
+      <div class="section-head center">
+        <span class="eyebrow">Vertrouwen</span>
+        <h2>Waar u op kunt bouwen.</h2>
+      </div>
+      <div class="trust-list">
+        <div class="trust-item">
+          <p>AVG-proof — een verwerkersovereenkomst is standaard onderdeel van elke samenwerking.</p>
+        </div>
+        <div class="trust-item">
+          <p>Uw data versleuteld — encryptie tijdens transport en opslag, met dagelijkse backups. <!-- VERIFY: encryptie/backup-claim nog niet bevestigd op platformniveau, zie docs/it-beveiliging.html --></p>
+        </div>
+        <div class="trust-item">
+          <p>Niets faalt onopgemerkt — elke agent wordt bewaakt. Gaat er iets mis, dan ziet u het direct in uw dashboard onder 'Needs attention'.</p>
+        </div>
+        <div class="trust-item">
+          <span class="trust-photo"><img src="assets/team/sal.jpg" alt="Sal Pagrach" /></span>
+          <p>Sal Pagrach — uw vaste aanspreekpunt, van kennismaking tot nazorg.</p>
+        </div>
+        <div class="trust-item">
+          <p>Nederlands bedrijf, actief in Nederland en Vlaanderen.</p>
         </div>
       </div>
     </section>
@@ -265,7 +215,7 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=20260804-6"></script>
+  <script src="js/main.js?v=20260804-10"></script>
   <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 </body>
 </html>

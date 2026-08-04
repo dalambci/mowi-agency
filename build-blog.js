@@ -16,7 +16,44 @@ const ROOT = __dirname;
 const CONTENT_DIR = path.join(ROOT, "content", "blog");
 const OUTPUT_DIR = path.join(ROOT, "blog");
 const SITE_URL = "https://mowi.agency";
-const CSS_VERSION = "20260804-6"; // bump alongside every css/style.css edit
+const CSS_VERSION = "20260804-10"; // bump alongside every css/style.css edit
+// Website & Conversion plan, Phase 1: Plausible, no cookie banner needed.
+// data-domain must exactly match the account Sal creates at plausible.io.
+const PLAUSIBLE_SNIPPET = `<script defer data-domain="mowi.agency" src="https://plausible.io/js/script.js"></script>`;
+// Loaded from <head>, deliberately not bundled into main.js — see
+// js/broken-image-guard.js's own header comment for why (a race against
+// images already present in the initial HTML).
+const BROKEN_IMAGE_GUARD_SNIPPET = `<script src="/js/broken-image-guard.js?v=${CSS_VERSION}"></script>`;
+
+// Website & Conversion plan, 0.2 + 2.4: same trust block as every root page,
+// root-relative asset paths to match this file's own convention. Kept OUTSIDE
+// <main class="blog-article"> on post pages (see renderPost below) so the
+// prose-scoped .blog-article h2/p rules can't override its styling.
+const TRUST_BLOCK_SNIPPET = `  <section class="container section" data-reveal>
+    <div class="section-head center">
+      <span class="eyebrow">Vertrouwen</span>
+      <h2>Waar u op kunt bouwen.</h2>
+    </div>
+    <div class="trust-list">
+      <div class="trust-item">
+        <p>AVG-proof — een verwerkersovereenkomst is standaard onderdeel van elke samenwerking.</p>
+      </div>
+      <div class="trust-item">
+        <p>Uw data versleuteld — encryptie tijdens transport en opslag, met dagelijkse backups. <!-- VERIFY: encryptie/backup-claim nog niet bevestigd op platformniveau, zie docs/it-beveiliging.html --></p>
+      </div>
+      <div class="trust-item">
+        <p>Niets faalt onopgemerkt — elke agent wordt bewaakt. Gaat er iets mis, dan ziet u het direct in uw dashboard onder 'Needs attention'.</p>
+      </div>
+      <div class="trust-item">
+        <span class="trust-photo"><img src="/assets/team/sal.jpg" alt="Sal Pagrach" /></span>
+        <p>Sal Pagrach — uw vaste aanspreekpunt, van kennismaking tot nazorg.</p>
+      </div>
+      <div class="trust-item">
+        <p>Nederlands bedrijf, actief in Nederland en Vlaanderen.</p>
+      </div>
+    </div>
+  </section>
+`;
 
 // ---------------------------------------------------------------------------
 // Minimal YAML-frontmatter parser (subset: scalars, inline arrays, block
@@ -216,7 +253,7 @@ function headerHtml() {
   return `  <header class="site-header">
     <div class="header-bar">
       <span class="header-cta-slot">
-        <a href="/#afspraak" class="header-cta">
+        <a href="/contact#calendly-widget" class="header-cta" data-event="CTA Click">
           <span class="header-cta-full">Gratis adviesgesprek</span><span class="header-cta-short">Adviesgesprek</span>
         </a>
       </span>
@@ -255,7 +292,7 @@ function headerHtml() {
           <li><a href="/cases">Cases</a></li>
           <li><a href="/contact">Contact</a></li>
         </ul>
-        <a href="/#afspraak" class="btn btn-primary header-cta-mobile">Gratis adviesgesprek</a>
+        <a href="/contact#calendly-widget" class="btn btn-primary header-cta-mobile" data-event="CTA Click">Gratis adviesgesprek</a>
         <a href="https://dashboard.mowi.agency/login" class="header-dashboard-mobile" target="_blank" rel="noopener">Dashboard log in</a>
       </nav>
 
@@ -405,6 +442,8 @@ function renderPost(post) {
   <link rel="shortcut icon" href="/assets/icon-192.png?v=20260804-3" />
   <link rel="apple-touch-icon" href="/assets/apple-icon-180.png?v=20260804-3" />
   <link rel="apple-touch-icon-precomposed" href="/assets/apple-icon-180.png?v=20260804-3" />
+  ${PLAUSIBLE_SNIPPET}
+  ${BROKEN_IMAGE_GUARD_SNIPPET}
   ${articleJsonLd(post, url)}
 </head>
 <body>
@@ -421,10 +460,10 @@ ${headerHtml()}
 
     <div class="blog-cta">
       <p>Benieuwd wat dit voor uw situatie betekent?</p>
-      <a href="/contact" class="btn btn-primary">Plan een kennismaking</a>
+      <a href="/contact#calendly-widget" class="btn btn-primary" data-event="CTA Click">Plan een kennismaking</a>
     </div>
   </main>
-${footerHtml()}
+${TRUST_BLOCK_SNIPPET}${footerHtml()}
 </body>
 </html>
 `;
@@ -458,6 +497,8 @@ function renderIndex(posts) {
   <link rel="shortcut icon" href="/assets/icon-192.png?v=20260804-3" />
   <link rel="apple-touch-icon" href="/assets/apple-icon-180.png?v=20260804-3" />
   <link rel="apple-touch-icon-precomposed" href="/assets/apple-icon-180.png?v=20260804-3" />
+  ${PLAUSIBLE_SNIPPET}
+  ${BROKEN_IMAGE_GUARD_SNIPPET}
 </head>
 <body>
 ${headerHtml()}
@@ -470,7 +511,7 @@ ${headerHtml()}
 ${cards || '      <p>Binnenkort de eerste posts.</p>'}
     </div>
   </main>
-${footerHtml()}
+${TRUST_BLOCK_SNIPPET}${footerHtml()}
 </body>
 </html>
 `;

@@ -479,37 +479,74 @@ document.querySelectorAll(".accordion-trigger").forEach((trigger) => {
   });
 });
 
-// --- Broken-image safety net --------------------------------------------------
-// Any <img> that fails to load at runtime gets hidden so a missing asset
-// never leaves a visible broken-image icon. "error" doesn't bubble on
-// <img>, so this has to listen on the capture phase.
-//
-// .blog-figure (a full-width block, not a grid item) collapses entirely —
-// safe, since nothing else needs to reflow around it.
-//
-// .card/.case-card/.blog-card sit in a FIXED-column-count grid
-// (grid-template-columns: repeat(3/4, ...) — see .grid-3/.grid-4 in
-// style.css), so hiding a whole card would leave an empty trailing cell
-// rather than truly redistributing the row — CSS grid doesn't collapse
-// fixed tracks just because one item disappears. None of these currently
-// hold an image as their only content, so this just hides the broken <img>
-// itself and leaves the rest of that card's content (heading/text) in
-// place — no half-empty grid cell, nothing to reflow.
-//
-// .logo-tile is deliberately skipped altogether: the logo marquee's
-// infinite-scroll animation depends on every tile staying the same fixed
-// width (see .logo-tile comment in style.css) — hiding one would desync
-// its duplicated tile sets and break the loop, so a missing logo there
-// should be fixed at the source instead of hidden at runtime.
-document.addEventListener(
-  "error",
-  (event) => {
-    const img = event.target;
-    if (!(img instanceof HTMLImageElement)) return;
-    if (img.closest(".logo-tile")) return;
+// --- Analytics event hooks (Website & Conversion plan, Phase 0) --------------
+// Phase 1 installs the actual Plausible <script> tag; until then (and on any
+// session where an ad-blocker strips it) window.plausible doesn't exist, so
+// mowiTrack stays a silent no-op. Built now, alongside the components that
+// need to fire these events, so Phase 1 is just "add the script tag and
+// verify" — no further code changes.
+function mowiTrack(name, props) {
+  if (typeof window.plausible === "function") {
+    window.plausible(name, props ? { props } : undefined);
+  }
+}
 
-    const figure = img.closest(".blog-figure");
-    (figure || img).style.display = "none";
-  },
-  true
-);
+// Generic [data-event="Event Name" data-event-prop="value"] delegation.
+// Deliberately NOT keyed off .btn-primary — that class is reused for things
+// that are not the sitewide booking CTA (e.g. the contact form's submit
+// button) and would mis-fire "CTA Click" if this listened on the class
+// instead. Each dataset key past "event" itself becomes a lowerCamel prop:
+// data-event-agent="email-triage" -> { agent: "email-triage" }.
+document.addEventListener("click", (event) => {
+  const el = event.target.closest("[data-event]");
+  if (!el) return;
+  const name = el.getAttribute("data-event");
+  const props = {};
+  Object.entries(el.dataset).forEach(([key, value]) => {
+    if (key === "event" || !key.startsWith("event")) return;
+    const propName = key.slice(5);
+    props[propName.charAt(0).toLowerCase() + propName.slice(1)] = value;
+  });
+  // CTA Click's spec'd prop is { page } — derive it from the URL instead of
+  // requiring every CTA instance to hardcode its own page name.
+  if (name === "CTA Click" && !("page" in props)) props.page = window.location.pathname;
+  mowiTrack(name, props);
+});
+
+// Calendly posts this message to the embedding window the moment a booking
+// is confirmed inside the inline widget (contact.html today). Harmless on
+// any page without the widget — it just never fires.
+window.addEventListener("message", (event) => {
+  if (event.data && event.data.event === "calendly.event_scheduled") {
+    mowiTrack("Call Booked", { page: window.location.pathname });
+  }
+});
+
+// --- Demo video slot: click-to-play (0.4) -------------------------------------
+// .demo-video-play only exists in the markup once a real file lands at
+// assets/demos/<agent-slug>.mp4 (see css/style.css) — the "Demo binnenkort"
+// poster state has no button to wire up, so this simply finds nothing on
+// pages that don't have a real video yet.
+document.querySelectorAll(".demo-video-play").forEach((btn) => {
+  btn.addEventListener(
+    "click",
+    () => {
+      const slot = btn.closest(".demo-video");
+      const src = slot ? slot.dataset.videoSrc : null;
+      if (!slot || !src) return;
+      slot.innerHTML = "";
+      const video = document.createElement("video");
+      video.src = src;
+      video.controls = true;
+      video.autoplay = true;
+      video.playsInline = true;
+      slot.appendChild(video);
+    },
+    { once: true }
+  );
+});
+
+// Broken-image safety net moved to js/broken-image-guard.js, loaded from
+// <head> instead — see that file's header comment for why (a race with
+// images already in the initial HTML, since this script runs at the bottom
+// of <body>).

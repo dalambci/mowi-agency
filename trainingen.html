@@ -8,11 +8,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260804-6" />
+  <link rel="stylesheet" href="css/style.css?v=20260804-10" />
   <link rel="icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="shortcut icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260804-3" />
   <link rel="apple-touch-icon-precomposed" href="assets/apple-icon-180.png?v=20260804-3" />
+  <script defer data-domain="mowi.agency" src="https://plausible.io/js/script.js"></script>
+  <script src="js/broken-image-guard.js?v=20260804-10"></script>
 </head>
 <body>
 
@@ -20,7 +22,7 @@
   <header class="site-header">
     <div class="header-bar">
       <span class="header-cta-slot">
-        <a href="contact#calendly-widget" class="header-cta">
+        <a href="contact#calendly-widget" class="header-cta" data-event="CTA Click">
           <span class="header-cta-full">Gratis adviesgesprek</span><span class="header-cta-short">Adviesgesprek</span>
         </a>
       </span>
@@ -62,7 +64,7 @@
           <li><a href="contact">Contact</a></li>
         </ul>
         <!-- Same CTA, shown only inside the open mobile menu -->
-        <a href="contact#calendly-widget" class="btn btn-primary header-cta-mobile">Gratis adviesgesprek</a>
+        <a href="contact#calendly-widget" class="btn btn-primary header-cta-mobile" data-event="CTA Click">Gratis adviesgesprek</a>
         <a href="https://dashboard.mowi.agency/login" class="header-dashboard-mobile" target="_blank" rel="noopener">Dashboard log in</a>
       </nav>
 
@@ -95,12 +97,12 @@
         </p>
         <div class="hero-actions">
           <span class="btn-slot">
-            <a href="contact" class="btn btn-primary">Vraag een trainingsvoorstel aan</a>
-          </span>
-          <span class="btn-slot">
-            <a href="#aanbod" class="btn btn-secondary">Bekijk het aanbod</a>
+            <a href="contact#calendly-widget" class="btn btn-primary" data-event="CTA Click">Vraag een trainingsvoorstel aan</a>
           </span>
         </div>
+        <!-- Website & Conversion plan, 0.1: secondary links are text links,
+             never a second button competing with the primary CTA. -->
+        <a href="#aanbod" class="card-link" style="margin-top: 1rem; display: inline-block;">Bekijk het aanbod →</a>
       </div>
 
       <div class="pill-row" style="margin-top: 2.5rem;" data-reveal>
@@ -236,10 +238,35 @@
         <p>We denken graag mee over welke training het beste past bij uw team en situatie.</p>
         <div class="cta-actions">
           <span class="btn-slot">
-            <a href="contact" class="btn btn-secondary">Vraag een trainingsvoorstel aan</a>
+            <a href="contact#calendly-widget" class="btn btn-secondary" data-event="CTA Click">Vraag een trainingsvoorstel aan</a>
           </span>
         </div>
         <p class="cta-alt">Liever direct contact? 085 333 5800 · <a href="mailto:contact@mowi.agency">contact@mowi.agency</a></p>
+      </div>
+    </section>
+    <!-- ===== Vertrouwen ===== -->
+    <section class="container section" data-reveal>
+      <div class="section-head center">
+        <span class="eyebrow">Vertrouwen</span>
+        <h2>Waar u op kunt bouwen.</h2>
+      </div>
+      <div class="trust-list">
+        <div class="trust-item">
+          <p>AVG-proof — een verwerkersovereenkomst is standaard onderdeel van elke samenwerking.</p>
+        </div>
+        <div class="trust-item">
+          <p>Uw data versleuteld — encryptie tijdens transport en opslag, met dagelijkse backups. <!-- VERIFY: encryptie/backup-claim nog niet bevestigd op platformniveau, zie docs/it-beveiliging.html --></p>
+        </div>
+        <div class="trust-item">
+          <p>Niets faalt onopgemerkt — elke agent wordt bewaakt. Gaat er iets mis, dan ziet u het direct in uw dashboard onder 'Needs attention'.</p>
+        </div>
+        <div class="trust-item">
+          <span class="trust-photo"><img src="assets/team/sal.jpg" alt="Sal Pagrach" /></span>
+          <p>Sal Pagrach — uw vaste aanspreekpunt, van kennismaking tot nazorg.</p>
+        </div>
+        <div class="trust-item">
+          <p>Nederlands bedrijf, actief in Nederland en Vlaanderen.</p>
+        </div>
       </div>
     </section>
   </main>
@@ -289,6 +316,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=20260804-6"></script>
+  <script src="js/main.js?v=20260804-10"></script>
 </body>
 </html>

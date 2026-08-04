@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260804-6" />
+  <link rel="stylesheet" href="css/style.css?v=20260804-10" />
   <style>
     /* Styling for this style-guide page only — not part of the design system itself. */
     .ds-block {
@@ -293,6 +293,143 @@
             .container binnen .ds-section-demo &middot; max-width: var(--container-width)
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- ===== Website & Conversion plan — Phase 0 shared components =====
+         Six components below match the vault note "Website & Conversion —
+         Implementation Plan", Phase 0 exactly (0.1–0.6). Built once here,
+         reused by every /agents/ and /koppelingen/ page from Phase 3 on. -->
+
+    <!-- ===== 0.1 Primary CTA block ===== -->
+    <section class="ds-block">
+      <span class="eyebrow">0.1 &middot; Primary CTA block</span>
+      <h2>Eén actie, overal hetzelfde.</h2>
+      <p class="ds-caption">
+        Reuses .cta-band as-is (heading + één zin + .btn-slot &gt; .btn-primary), zonder de
+        .cta-alt telefoon/mail-regel. Wijst naar <code>contact#calendly-widget</code> — de
+        werkende Calendly-embed — niet naar het plan-document se letterlijke
+        <code>index.html#afspraak</code>, dat geen bestaand anker is (zie STOP 0-verslag).
+      </p>
+
+      <div style="margin-top: 1.5rem;">
+        <div class="cta-band">
+          <h2>Benieuwd wat er in uw bedrijf te winnen valt?</h2>
+          <p>In een kennismaking van 30 minuten kijken we naar uw situatie — vrijblijvend.</p>
+          <div class="cta-actions">
+            <span class="btn-slot">
+              <a href="contact#calendly-widget" class="btn btn-primary" data-event="CTA Click">Plan een kennismaking</a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 0.2 Trust block ===== -->
+    <section class="ds-block">
+      <span class="eyebrow">0.2 &middot; Trust block</span>
+      <h2>Waar u op kunt bouwen.</h2>
+      <p class="ds-caption">
+        .trust-block &middot; op elke marketingpagina, direct boven de footer. Item 4's foto
+        (<code>assets/team/sal.jpg</code>) bestaat nog niet, dus toont de browser hier een
+        kapot-beeld icoontje in het gestippelde vlak. Op echte pagina's (die js/main.js wél
+        laden — dit ontwerpsysteem-overzicht bewust niet, zie de intro hierboven) verbergt de
+        bestaande broken-image safety net die &lt;img&gt; automatisch, en blijft alleen het
+        gestippelde vlak zelf als placeholder staan.
+      </p>
+
+      <div style="margin-top: 1.5rem;">
+        <div class="section-head">
+          <span class="eyebrow">Vertrouwen</span>
+          <h2>Waar u op kunt bouwen.</h2>
+        </div>
+        <div class="trust-list">
+          <div class="trust-item">
+            <p>AVG-proof — een verwerkersovereenkomst is standaard onderdeel van elke samenwerking.</p>
+          </div>
+          <div class="trust-item">
+            <p>Uw data versleuteld — encryptie tijdens transport en opslag, met dagelijkse backups. <!-- VERIFY: encryptie/backup-claim nog niet bevestigd op platformniveau, zie docs/it-beveiliging.html --></p>
+          </div>
+          <div class="trust-item">
+            <p>Niets faalt onopgemerkt — elke agent wordt bewaakt. Gaat er iets mis, dan ziet u het direct in uw dashboard onder 'Needs attention'.</p>
+          </div>
+          <div class="trust-item">
+            <span class="trust-photo"><img src="assets/team/sal.jpg" alt="Sal Pagrach" /></span>
+            <p>Sal Pagrach — uw vaste aanspreekpunt, van kennismaking tot nazorg.</p>
+          </div>
+          <div class="trust-item">
+            <p>Nederlands bedrijf, actief in Nederland en Vlaanderen.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 0.3 Pricing line ===== -->
+    <section class="ds-block">
+      <span class="eyebrow">0.3 &middot; Pricing line</span>
+      <h2>Eén consistent prijspatroon.</h2>
+      <p class="ds-caption">
+        .pricing-line &middot; placeholder-token rendert letterlijk tot Sal een echt bedrag
+        aanlevert — nooit een verzonnen getal.
+      </p>
+
+      <div style="margin-top: 1.5rem;">
+        <p class="pricing-line">Vanaf <strong>€[PRICE_EMAIL_TRIAGE]</strong> per maand &middot; eenmalige setup op basis van de inventarisatie &middot; exacte prijs in uw voorstel.</p>
+      </div>
+    </section>
+
+    <!-- ===== 0.4 Video slot ===== -->
+    <section class="ds-block">
+      <span class="eyebrow">0.4 &middot; Video slot</span>
+      <h2>Demo, of eerlijk "binnenkort".</h2>
+      <p class="ds-caption">
+        .demo-video &middot; toont hier de "geen video"-status (echt en functioneel — er bestaat
+        nog geen bestand in <code>assets/demos/</code>). Zodra een echt bestand landt, krijgt de
+        markup <code>.has-video</code> + <code>data-video-src</code> en vervangt js/main.js de
+        poster bij een klik door een native &lt;video&gt; (zelfde swap-patroon als
+        .blog-video-facade), en vuurt <code>data-event="Video Play"</code>.
+      </p>
+
+      <div style="margin-top: 1.5rem; max-width: 32rem;">
+        <div class="demo-video">
+          <div class="demo-video-poster">
+            <span class="demo-video-agent">Email triage</span>
+            <span class="demo-video-soon">Demo binnenkort</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 0.5 "Werkt met" pills ===== -->
+    <section class="ds-block">
+      <span class="eyebrow">0.5 &middot; "Werkt met" pills</span>
+      <h2>Tekst, geen logo's.</h2>
+      <p class="ds-caption">
+        a.pill &middot; hergebruikt .pill/.pill-row 1:1, met een hover-state voor de klikbare
+        variant. Wijst naar de bijbehorende /koppelingen/-pagina zodra die bestaat.
+      </p>
+
+      <div class="pill-row" style="margin-top: 1.5rem;">
+        <a href="#" class="pill">Gmail</a>
+        <a href="#" class="pill">Outlook / Microsoft 365</a>
+        <a href="#" class="pill">Elke IMAP-mailbox</a>
+      </div>
+    </section>
+
+    <!-- ===== 0.6 IT-sheet download button ===== -->
+    <section class="ds-block">
+      <span class="eyebrow">0.6 &middot; IT-sheet download</span>
+      <h2>Eén A4 voor de IT-partner.</h2>
+      <p class="ds-caption">
+        Hergebruikt .btn.btn-secondary 1:1 — geen nieuwe CSS nodig. <code>data-event="Sheet
+        Download"</code> vuurt ook als het PDF-bestand nog 404't (Phase 1.3 test dat
+        expliciet).
+      </p>
+
+      <div class="ds-row" style="margin-top: 1.5rem;">
+        <span class="btn-slot">
+          <a href="downloads/it-partner-exact-online.pdf" class="btn btn-secondary" data-event="Sheet Download" data-event-pakket="exact-online">Download: instructies voor uw IT-partner (PDF)</a>
+        </span>
       </div>
     </section>
 

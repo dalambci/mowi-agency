@@ -2122,6 +2122,14 @@ h3 {
   .steps {
     grid-template-columns: repeat(4, 1fr);
   }
+
+  /* Modifier for a 3-step sequence (e.g. an agent page's "Hoe het werkt") —
+     stays inside this same breakpoint so mobile still gets .steps' plain
+     single-column default, unlike an inline style which can't be scoped to
+     a media query. */
+  .steps-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .step {
@@ -2707,3 +2715,153 @@ h3 {
   background: var(--color-accent-soft);
   color: var(--color-accent);
 }
+
+/* ==========================================================================
+   Website & Conversion plan — Phase 0 shared components
+   Reusable primitives for the /agents/ and /koppelingen/ pages built in
+   later phases. Spec: Obsidian vault, "Website & Conversion — Implementation
+   Plan" note, Phase 0. 0.1 (primary CTA) has no new CSS — it reuses
+   .cta-band + .btn-slot > .btn-primary already defined above.
+   ========================================================================== */
+
+/* --- 0.2 Trust block ---------------------------------------------------------
+   Appears on every marketing page, directly above the footer. Five compact
+   items; the photo item (#4) reuses the same dashed-placeholder look as
+   .blog-media-placeholder until assets/team/sal.jpg exists — the existing
+   broken-image safety net in js/main.js hides a missing <img> automatically,
+   leaving the empty dashed box as the placeholder. */
+.trust-list {
+  display: grid;
+  gap: 1.75rem;
+}
+
+@media (min-width: 48rem) {
+  .trust-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.trust-item {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.trust-item p {
+  color: var(--color-gray-600);
+}
+
+.trust-photo {
+  width: 3.5rem;
+  height: 3.5rem;
+  flex-shrink: 0;
+  background: var(--color-bg-tint);
+  border: 1px dashed var(--color-border);
+}
+
+.trust-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --- 0.3 Pricing line ---------------------------------------------------------
+   One consistent "vanaf €X per maand" pattern, reused on every agent page.
+   Placeholder tokens (e.g. [PRICE_EMAIL_TRIAGE]) render literally until real
+   numbers exist — never invent a number here. */
+.pricing-line {
+  display: inline-block;
+  padding: 1.25rem 1.5rem;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  font-size: 1.0625rem;
+  color: var(--color-gray-600);
+}
+
+.pricing-line strong {
+  color: var(--color-ink);
+  font-weight: 700;
+}
+
+/* --- 0.4 Video slot ---------------------------------------------------------
+   16:9 demo container. No file yet -> calm "Demo binnenkort" poster (never a
+   broken player, never a fake thumbnail implying a video exists). Once a
+   real file lands at assets/demos/<agent-slug>.mp4, markup adds
+   .has-video + data-video-src and js/main.js upgrades it to a click-to-play
+   native <video> — same click-to-swap pattern as .blog-video-facade, just a
+   local file instead of a YouTube embed. */
+.demo-video {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: var(--color-ink);
+  overflow: hidden;
+}
+
+.demo-video-poster {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  color: var(--color-white);
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.demo-video-agent {
+  font-size: 1.0625rem;
+  font-weight: 700;
+}
+
+.demo-video-soon {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.demo-video-play {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: transparent;
+  padding: 0;
+}
+
+.demo-video-play span {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%; /* deliberate exception to the site's square-corners rule, matching .blog-video-play */
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: var(--color-ink);
+}
+
+.demo-video video {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* --- 0.5 "Werkt met" pills ---------------------------------------------------
+   Reuses the existing .pill/.pill-row as-is (text-only, no third-party logo
+   images in v1). This just adds a hover state for the linkable variant
+   Phase 3+ pages use to point at /koppelingen/ pages. */
+a.pill {
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+a.pill:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* --- 0.6 IT-sheet download button ---------------------------------------------
+   Reuses .btn.btn-secondary as-is; no new CSS needed beyond a spot for the
+   download glyph already handled by .btn's existing gap. */

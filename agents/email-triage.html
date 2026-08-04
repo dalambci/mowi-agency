@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Email triage — inbox automatisch sorteren met AI | Mowi</title>
+  <meta name="description" content="Mowi's Email triage-agent sorteert met AI elke binnenkomende mail — voordat uw team eraan begint. Voor MKB-bedrijven in Nederland en Vlaanderen." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css?v=20260804-10" />
+  <link rel="icon" href="../assets/icon-192.png?v=20260804-3" />
+  <link rel="shortcut icon" href="../assets/icon-192.png?v=20260804-3" />
+  <link rel="apple-touch-icon" href="../assets/apple-icon-180.png?v=20260804-3" />
+  <link rel="apple-touch-icon-precomposed" href="../assets/apple-icon-180.png?v=20260804-3" />
+  <script defer data-domain="mowi.agency" src="https://plausible.io/js/script.js"></script>
+  <script src="../js/broken-image-guard.js?v=20260804-10"></script>
+</head>
+<body>
+
+  <!-- ===== Header =====
+       Identical to every root page, paths adjusted one level up for /agents/. -->
+  <header class="site-header">
+    <div class="header-bar">
+      <span class="header-cta-slot">
+        <a href="../contact#calendly-widget" class="header-cta" data-event="CTA Click">
+          <span class="header-cta-full">Gratis adviesgesprek</span><span class="header-cta-short">Adviesgesprek</span>
+        </a>
+      </span>
+
+      <nav class="main-nav" id="main-nav" aria-label="Hoofdmenu">
+        <ul class="nav-group">
+          <li class="nav-dropdown">
+            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="products-menu" aria-haspopup="true">
+              Products
+              <span class="nav-dropdown-icon" aria-hidden="true"></span>
+            </button>
+            <!-- English labels are deliberate here — see CLAUDE.md's Language & tone exception. -->
+            <div class="nav-megamenu" id="products-menu">
+              <div class="nav-megamenu-col">
+                <p class="nav-megamenu-label">Platform</p>
+                <ul>
+                  <li><a href="../ai-automatisering">AI-automatisering</a></li>
+                  <li><a href="../power-bi-dashboards">BI dashboard</a></li>
+                  <li><a href="../trainingen">Trainingen</a></li>
+                </ul>
+              </div>
+              <div class="nav-megamenu-col">
+                <p class="nav-megamenu-label">Automations</p>
+                <ul>
+                  <li>CRM sync</li>
+                  <!-- Not yet a self-link, even on its own page: the plan (Phase 4)
+                       bundles all five Automations items into links together,
+                       once every /agents/ page exists — not one at a time. -->
+                  <li>Email triage</li>
+                  <li>Invoice processing</li>
+                  <li>Lead enrichment</li>
+                  <li>Report generator</li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <!-- No pricing page yet (out of scope for now) — placeholder link -->
+          <li><a href="../#pricing">Tarieven</a></li>
+        </ul>
+        <ul class="nav-group">
+          <li><a href="../cases">Cases</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <!-- Same CTA, shown only inside the open mobile menu -->
+        <a href="../contact#calendly-widget" class="btn btn-primary header-cta-mobile" data-event="CTA Click">Gratis adviesgesprek</a>
+        <a href="https://dashboard.mowi.agency/login" class="header-dashboard-mobile" target="_blank" rel="noopener">Dashboard log in</a>
+      </nav>
+
+      <div class="header-logo-cell">
+        <a href="https://dashboard.mowi.agency/login" class="header-dashboard-btn" aria-label="Dashboard inloggen" target="_blank" rel="noopener">
+          <span class="header-dashboard-icon" aria-hidden="true"></span>
+        </a>
+        <a href="/" class="wordmark" aria-label="Mowi - home">
+          <img src="../assets/mowi-icon.png" alt="" class="wordmark-icon" />
+          <img src="../assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
+        </a>
+      </div>
+
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="main-nav" aria-label="Menu openen">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== Hero ===== -->
+    <section class="container hero">
+      <div class="breadcrumb"><a href="/">Home</a> / Email triage</div>
+      <div style="max-width: 44rem;">
+        <span class="eyebrow">Agent · Email triage</span>
+        <h1>Uw inbox, elke ochtend al gesorteerd.</h1>
+        <p class="lede" style="margin-top: 1.5rem;">
+          De Email triage-agent leest elke binnenkomende mail, herkent waar die over gaat en zet hem in de juiste
+          categorie — voordat uw team eraan begint.
+        </p>
+        <div class="hero-actions">
+          <span class="btn-slot">
+            <a href="../contact#calendly-widget" class="btn btn-primary" data-event="CTA Click">Plan een kennismaking</a>
+          </span>
+        </div>
+        <a href="../docs/agent-email-triage" class="card-link" style="margin-top: 1rem; display: inline-block;">Bekijk de documentatie →</a>
+      </div>
+    </section>
+
+    <!-- ===== Wat het doet ===== -->
+    <section class="section section-tint">
+      <div class="container">
+        <div class="section-head center" data-reveal>
+          <span class="eyebrow">Wat het doet</span>
+          <h2>Uw mailbox, continu bijgehouden.</h2>
+        </div>
+
+        <div class="grid grid-3">
+          <div class="card" data-reveal>
+            <h3>Automatische categorisering</h3>
+            <p>Elke binnenkomende mail wordt gelezen en in de juiste categorie gezet — voordat uw team eraan begint.</p>
+          </div>
+          <div class="card" data-reveal>
+            <h3>Meldingen bij urgentie</h3>
+            <p>Urgente mails blijven niet onopgemerkt liggen. <!-- VERIFY tegen v1-featureset: alerting-gedrag niet bevestigd in docs/agent-email-triage.html, alleen categorisering + Needs attention bij storingen --></p>
+          </div>
+          <div class="card" data-reveal>
+            <h3>Volledige zichtbaarheid</h3>
+            <p>Elke run is zichtbaar in uw dashboard — inclusief de keren dat er iets misging.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Demo ===== -->
+    <section class="container section" style="max-width: 48rem;">
+      <div class="section-head center" data-reveal>
+        <span class="eyebrow">Demo</span>
+        <h2>Zie de agent aan het werk.</h2>
+      </div>
+      <div class="demo-video" data-reveal>
+        <div class="demo-video-poster">
+          <span class="demo-video-agent">Email triage</span>
+          <span class="demo-video-soon">Demo binnenkort</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Werkt met ===== -->
+    <section class="container section">
+      <div class="section-head center" data-reveal>
+        <span class="eyebrow">Werkt met</span>
+        <h2>Sluit aan op uw mailbox.</h2>
+      </div>
+      <div class="pill-row" style="justify-content: center;" data-reveal>
+        <span class="pill">Gmail</span>
+        <span class="pill">Outlook / Microsoft 365</span>
+        <span class="pill">Elke IMAP-mailbox</span>
+        <!-- VERIFY: matrix uit het implementatieplan, nog niet bevestigd tegen de huidige v1-koppelmethode (docs/agent-email-triage.html beschrijft Google/Microsoft account-autorisatie, geen losstaande IMAP-inlog). -->
+      </div>
+    </section>
+
+    <!-- ===== Hoe het werkt ===== -->
+    <section class="section section-tint">
+      <div class="container">
+        <div class="section-head center" data-reveal>
+          <span class="eyebrow">Hoe het werkt</span>
+          <h2>Van koppeling tot dagelijks gebruik.</h2>
+        </div>
+
+        <div class="steps steps-3">
+          <div class="step" data-reveal>
+            <h3>Koppelen</h3>
+            <p>Uw mailbox veilig verbinden, samen of via de handleiding.</p>
+          </div>
+          <div class="step" data-reveal>
+            <h3>Afstemmen</h3>
+            <p>Categorieën en regels ingericht op hoe uw team werkt.</p>
+          </div>
+          <div class="step" data-reveal>
+            <h3>Draaien</h3>
+            <p>De agent werkt continu; storingen ziet u direct onder 'Needs attention'.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Prijs ===== -->
+    <section class="container section" style="max-width: 48rem;">
+      <div class="section-head center" data-reveal>
+        <span class="eyebrow">Prijs</span>
+        <h2>Vaste, voorspelbare kosten.</h2>
+      </div>
+      <div class="text-center" data-reveal>
+        <p class="pricing-line">Vanaf <strong>€[PRICE_EMAIL_TRIAGE]</strong> per maand &middot; eenmalige setup op basis van de inventarisatie &middot; exacte prijs in uw voorstel.</p>
+      </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section class="container section" style="max-width: 48rem;">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">Veelgestelde vragen</span>
+        <h2>Vragen over Email triage.</h2>
+      </div>
+
+      <div class="accordion" data-reveal>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-et-1">
+            Wat leest de agent precies, en wat gebeurt er met onze data?
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-panel" id="faq-et-1">
+            <p>
+              De agent leest de inhoud van elke binnenkomende mail in de gekoppelde mailbox om te bepalen in welke
+              categorie deze hoort. De koppeling zelf wordt door Mowi's implementatieteam ingericht, in overleg met
+              u of uw IT-partner. Specifieke techniek zoals encryptie en bewaartermijnen bevestigen we pas zodra
+              dat met Mowi is vastgesteld <!-- VERIFY: zie docs/it-beveiliging.html, deze claims staan daar bewust nog niet --> —
+              vraag er in de kennismaking gerust naar.
+            </p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-et-2">
+            Wat gebeurt er bij twijfelgevallen?
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-panel" id="faq-et-2">
+            <p>
+              Storingen ziet u altijd direct terug onder 'Needs attention' in uw dashboard, zodat niets stil
+              blijft liggen. <!-- VERIFY: exact gedrag bij een e-mail die de agent niet zeker kan categoriseren is niet bevestigd in v1 — navragen bij Mowi voordat dit hard wordt toegezegd --> Vraag naar de actuele werkwijze in de kennismaking.
+            </p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-et-3">
+            Zitten we ergens aan vast?
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-panel" id="faq-et-3">
+            <p>
+              U zit nergens aan vast. We werken met korte, overzichtelijke afspraken en bespreken vooraf wat u kunt
+              verwachten — geen jarenlange contracten of verborgen voorwaarden.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="container section">
+      <div class="cta-band" data-reveal>
+        <h2>Klaar om uw inbox uit handen te geven?</h2>
+        <p>In een kennismaking van 30 minuten kijken we of Email triage bij uw situatie past. Vrijblijvend.</p>
+        <div class="cta-actions">
+          <span class="btn-slot">
+            <a href="../contact#calendly-widget" class="btn btn-secondary" data-event="CTA Click">Plan uw kennismaking</a>
+          </span>
+        </div>
+        <p class="cta-alt">Liever direct contact? 085 333 5800 · <a href="mailto:contact@mowi.agency">contact@mowi.agency</a></p>
+      </div>
+    </section>
+
+    <!-- ===== Vertrouwen ===== -->
+    <section class="container section" data-reveal>
+      <div class="section-head center">
+        <span class="eyebrow">Vertrouwen</span>
+        <h2>Waar u op kunt bouwen.</h2>
+      </div>
+      <div class="trust-list">
+        <div class="trust-item">
+          <p>AVG-proof — een verwerkersovereenkomst is standaard onderdeel van elke samenwerking.</p>
+        </div>
+        <div class="trust-item">
+          <p>Uw data versleuteld — encryptie tijdens transport en opslag, met dagelijkse backups. <!-- VERIFY: encryptie/backup-claim nog niet bevestigd op platformniveau, zie docs/it-beveiliging.html --></p>
+        </div>
+        <div class="trust-item">
+          <p>Niets faalt onopgemerkt — elke agent wordt bewaakt. Gaat er iets mis, dan ziet u het direct in uw dashboard onder 'Needs attention'.</p>
+        </div>
+        <div class="trust-item">
+          <span class="trust-photo"><img src="../assets/team/sal.jpg" alt="Sal Pagrach" /></span>
+          <p>Sal Pagrach — uw vaste aanspreekpunt, van kennismaking tot nazorg.</p>
+        </div>
+        <div class="trust-item">
+          <p>Nederlands bedrijf, actief in Nederland en Vlaanderen.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="wordmark wordmark-lg">
+          <img src="../assets/mowi-icon.png" alt="" class="wordmark-icon" />
+          <img src="../assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
+        </span>
+        <p>AI-automatisering, Power BI dashboards en trainingen voor MKB-bedrijven in Nederland en Vlaanderen.</p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Footermenu">
+        <span class="footer-heading">Navigatie</span>
+        <a href="/">Home</a>
+        <a href="../ai-automatisering">AI-automatisering</a>
+        <a href="../power-bi-dashboards">Power BI dashboards</a>
+        <a href="../trainingen">Trainingen</a>
+        <a href="../blog/">Blog</a>
+        <a href="../cases">Cases</a>
+        <a href="../contact">Contact</a>
+      </nav>
+
+      <nav class="footer-support" aria-label="Supportmenu">
+        <span class="footer-heading">Support</span>
+        <a href="../docs/">Documentatie</a>
+      </nav>
+
+      <div class="footer-contact">
+        <span class="footer-heading">Contact</span>
+        <p>085 333 5800</p>
+        <p>contact@mowi.agency</p>
+        <p>Overtoom 149<br>Amsterdam</p>
+        <p>KVK 71290877</p>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>© 2026 Mowi · Nederland &amp; België</p>
+      <div class="footer-legal">
+        <a href="#">Privacyverklaring</a>
+        <a href="#">Algemene voorwaarden</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js?v=20260804-10"></script>
+</body>
+</html>
