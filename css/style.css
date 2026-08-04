@@ -1922,6 +1922,15 @@ h3 {
   }
 }
 
+/* Scoped to the /contact "Bel of mail ons" grid only (not the other
+   grid-4 usages elsewhere) — these cards hold one short line of text,
+   and the default card padding left too little room for
+   "contact@mowi.agency" to fit on one line at full font size. */
+.contact-info-grid .card {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
 .card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-md);
