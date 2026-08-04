@@ -149,6 +149,15 @@ function renderInline(text) {
     .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
 }
 
+// For JSON-LD text fields: real plain text, not markdown or HTML — a rich
+// snippet showing literal "[Exact Online](/koppelingen/...)" would look
+// broken in search results, so bold/link syntax is stripped, not rendered.
+function stripInlineMarkdown(text) {
+  return text
+    .replace(/\*\*(.+?)\*\*/g, "$1")
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, "$1");
+}
+
 // ---------------------------------------------------------------------------
 // Block-level markdown renderer for the post body. Supports: paragraphs,
 // ## headings, pipe tables, [BEELD: ...] media placeholders. First paragraph
@@ -393,8 +402,8 @@ function articleJsonLd(post, url) {
       "@type": "FAQPage",
       mainEntity: post.faq.map((f) => ({
         "@type": "Question",
-        name: f.q,
-        acceptedAnswer: { "@type": "Answer", text: f.a },
+        name: stripInlineMarkdown(f.q),
+        acceptedAnswer: { "@type": "Answer", text: stripInlineMarkdown(f.a) },
       })),
     });
   }
@@ -521,10 +530,19 @@ function buildSitemap(posts) {
   const staticPages = [
     "", "cases", "contact", "ai-automatisering", "power-bi-dashboards", "trainingen", "docs/",
   ];
-  const docsSlugs = fs.readdirSync(path.join(ROOT, "docs")).filter((f) => f.endsWith(".html")).map((f) => "docs/" + f.replace(/\.html$/, ""));
+  // docs/, agents/, koppelingen/ are all read from disk rather than hand-listed,
+  // so a new page in any of those folders is in the sitemap the next time this
+  // script runs — no separate "don't forget the sitemap" step to remember.
+  const readFolderSlugs = (folder) =>
+    fs.readdirSync(path.join(ROOT, folder)).filter((f) => f.endsWith(".html")).map((f) => folder + "/" + f.replace(/\.html$/, ""));
+  const docsSlugs = readFolderSlugs("docs");
+  const agentSlugs = readFolderSlugs("agents");
+  const koppelingenSlugs = readFolderSlugs("koppelingen");
   const urls = [
     ...staticPages.map((p) => `${SITE_URL}/${p}`),
     ...docsSlugs.map((p) => `${SITE_URL}/${p}`),
+    ...agentSlugs.map((p) => `${SITE_URL}/${p}`),
+    ...koppelingenSlugs.map((p) => `${SITE_URL}/${p}`),
     `${SITE_URL}/blog`,
     ...posts.map((p) => `${SITE_URL}/blog/${p.slug}`),
   ];

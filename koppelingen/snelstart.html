@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Report generator — managementrapporten automatisch samenstellen | Mowi</title>
-  <meta name="description" content="Mowi's Report generator-agent stelt terugkerende managementrapporten automatisch samen vanuit uw Power BI-data, onderdeel van onze AI-automatisering. Voor MKB in NL/BE." />
+  <title>SnelStart automatiseren met AI | Mowi</title>
+  <meta name="description" content="Wat Mowi's AI-agents voor u automatiseren in SnelStart — van inkoopfacturen tot boeking. Voor MKB-bedrijven in Nederland en Vlaanderen." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -19,7 +19,7 @@
 <body>
 
   <!-- ===== Header =====
-       Identical to every root page, paths adjusted one level up for /agents/. -->
+       Identical to every root page, paths adjusted one level up for /koppelingen/. -->
   <header class="site-header">
     <div class="header-bar">
       <span class="header-cta-slot">
@@ -48,11 +48,11 @@
               <div class="nav-megamenu-col">
                 <p class="nav-megamenu-label">Automations</p>
                 <ul>
-                  <li><a href="crm-sync">CRM sync</a></li>
-                  <li><a href="email-triage">Email triage</a></li>
-                  <li><a href="invoice-processing">Invoice processing</a></li>
-                  <li><a href="lead-enrichment">Lead enrichment</a></li>
-                  <li><a href="report-generator" aria-current="page">Report generator</a></li>
+                  <li><a href="../agents/crm-sync">CRM sync</a></li>
+                  <li><a href="../agents/email-triage">Email triage</a></li>
+                  <li><a href="../agents/invoice-processing">Invoice processing</a></li>
+                  <li><a href="../agents/lead-enrichment">Lead enrichment</a></li>
+                  <li><a href="../agents/report-generator">Report generator</a></li>
                 </ul>
               </div>
             </div>
@@ -88,173 +88,56 @@
   <main>
     <!-- ===== Hero ===== -->
     <section class="container hero">
-      <div class="breadcrumb"><a href="/">Home</a> / Report generator</div>
+      <div class="breadcrumb"><a href="/">Home</a> / SnelStart</div>
       <div style="max-width: 44rem;">
-        <span class="eyebrow">Agent · Report generator</span>
-        <h1>Het rapport staat er al, elke keer weer.</h1>
+        <h1>Automatiseren in SnelStart.</h1>
         <p class="lede" style="margin-top: 1.5rem;">
-          De Report generator-agent stelt een terugkerend managementrapport samen op basis van uw Power
-          BI-datasets — voordat het besproken of verstuurd hoeft te worden.
+          Wat Mowi's agents voor u regelen in SnelStart — zonder dat uw team er nog naar om hoeft te kijken.
         </p>
         <div class="hero-actions">
           <span class="btn-slot">
             <a href="../contact#calendly-widget" class="btn btn-primary" data-event="CTA Click">Plan een kennismaking</a>
           </span>
         </div>
-        <a href="../docs/agent-report-generator" class="card-link" style="margin-top: 1rem; display: inline-block;">Bekijk de documentatie →</a>
       </div>
     </section>
 
-    <!-- ===== Wat het doet ===== -->
+    <!-- ===== Wat we automatiseren in dit pakket =====
+         Geen docs/koppeling-snelstart.html op dit moment (zie js/docs-nav.js —
+         Koppelingen-categorie heeft alleen Salesforce/Exact Online/AFAS), dus
+         deze claim komt alleen uit de matrix in het implementatieplan, niet
+         onafhankelijk bevestigd. Docs-link-sectie bewust weggelaten in overleg
+         met Sal (2026-08-04) — komt terug zodra de docs-pagina bestaat. -->
     <section class="section section-tint">
       <div class="container">
         <div class="section-head center" data-reveal>
-          <span class="eyebrow">Wat het doet</span>
-          <h2>Van Power BI-data tot kant-en-klaar rapport.</h2>
+          <span class="eyebrow">Wat we automatiseren</span>
+          <h2>Deze agent werkt met SnelStart.</h2>
         </div>
 
-        <div class="grid grid-3">
+        <div class="grid" style="max-width: 24rem; margin-inline: auto;">
           <div class="card" data-reveal>
-            <h3>Automatisch samengesteld</h3>
-            <p>Het rapport wordt op het afgesproken moment opnieuw samengesteld uit uw Power BI-datasets.</p>
-          </div>
-          <div class="card" data-reveal>
-            <h3>Altijd op schema</h3>
-            <p>U hoeft niet meer te denken aan het bijwerken — de agent doet dat volgens een vast schema.</p>
-          </div>
-          <div class="card" data-reveal>
-            <h3>Volledige zichtbaarheid</h3>
-            <p>Elke run is zichtbaar in uw dashboard — inclusief de keren dat er iets misging.</p>
+            <h3>Invoice processing</h3>
+            <p>Leveranciersfacturen worden gelezen en in SnelStart verwerkt. <!-- VERIFY: matrix uit het implementatieplan; er bestaat nog geen docs/koppeling-snelstart.html om dit tegen te bevestigen --></p>
+            <a href="../agents/invoice-processing" class="card-link">Bekijk Invoice processing →</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ===== Demo ===== -->
-    <section class="container section" style="max-width: 48rem;">
+    <!-- ===== Voor uw IT-partner ===== -->
+    <section class="container section" style="max-width: 40rem;">
       <div class="section-head center" data-reveal>
-        <span class="eyebrow">Demo</span>
-        <h2>Zie de agent aan het werk.</h2>
-      </div>
-      <div class="demo-video" data-reveal>
-        <div class="demo-video-poster">
-          <span class="demo-video-agent">Report generator</span>
-          <span class="demo-video-soon">Demo binnenkort</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== Werkt met ===== -->
-    <section class="container section">
-      <div class="section-head center" data-reveal>
-        <span class="eyebrow">Werkt met</span>
-        <h2>Sluit aan op uw data.</h2>
-      </div>
-      <div class="pill-row" style="justify-content: center;" data-reveal>
-        <a href="../koppelingen/exact-online" class="pill">Exact Online</a>
-        <a href="../koppelingen/afas" class="pill">AFAS</a>
-        <span class="pill">Power BI</span>
-        <!-- VERIFY: Sal bevestigt deze matrix (uit het implementatieplan, Phase 4). -->
-      </div>
-    </section>
-
-    <!-- ===== Hoe het werkt ===== -->
-    <section class="section section-tint">
-      <div class="container">
-        <div class="section-head center" data-reveal>
-          <span class="eyebrow">Hoe het werkt</span>
-          <h2>Van koppeling tot dagelijks gebruik.</h2>
-        </div>
-
-        <div class="steps steps-3">
-          <div class="step" data-reveal>
-            <h3>Koppelen</h3>
-            <p>Uw Power BI-werkruimte veilig verbinden, samen of via de handleiding.</p>
-          </div>
-          <div class="step" data-reveal>
-            <h3>Afstemmen</h3>
-            <p>Rapport, datasets en frequentie ingericht op hoe uw team rapporteert.</p>
-          </div>
-          <div class="step" data-reveal>
-            <h3>Draaien</h3>
-            <p>De agent stelt het rapport continu samen; storingen ziet u direct onder 'Needs attention'.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== Prijs ===== -->
-    <section class="container section" style="max-width: 48rem;">
-      <div class="section-head center" data-reveal>
-        <span class="eyebrow">Prijs</span>
-        <h2>Vaste, voorspelbare kosten.</h2>
+        <span class="eyebrow">Voor uw IT-partner</span>
+        <h2>Eén A4, direct door te sturen.</h2>
+        <p class="lede" style="margin-top: 1rem;">
+          Uw boekhouder beheert SnelStart? Stuur ze dit — één A4 met precies wat er nodig is.
+        </p>
       </div>
       <div class="text-center" data-reveal>
-        <p class="pricing-line">Vanaf <strong>€[PRICE_REPORT_GENERATOR]</strong> per maand &middot; eenmalige setup op basis van de inventarisatie &middot; exacte prijs in uw voorstel.</p>
-      </div>
-    </section>
-
-    <!-- ===== FAQ ===== -->
-    <section class="container section" style="max-width: 48rem;">
-      <div class="section-head" data-reveal>
-        <span class="eyebrow">Veelgestelde vragen</span>
-        <h2>Vragen over Report generator.</h2>
-      </div>
-
-      <div class="accordion" data-reveal>
-        <div class="accordion-item">
-          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-rg-1">
-            Wat leest de agent precies, en wat gebeurt er met onze data?
-            <span class="accordion-icon">+</span>
-          </button>
-          <div class="accordion-panel" id="faq-rg-1">
-            <p>
-              De agent leest de datasets in de gekoppelde Power BI-werkruimte om het rapport samen te stellen. De
-              koppeling zelf wordt door Mowi's implementatieteam ingericht, in overleg met u of uw IT-partner.
-              Specifieke techniek zoals encryptie en bewaartermijnen bevestigen we pas zodra dat met Mowi is
-              vastgesteld <!-- VERIFY: zie docs/it-beveiliging.html, deze claims staan daar bewust nog niet --> —
-              vraag er in de kennismaking gerust naar.
-            </p>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-rg-2">
-            Wat als het rapport verouderde cijfers toont?
-            <span class="accordion-icon">+</span>
-          </button>
-          <div class="accordion-panel" id="faq-rg-2">
-            <p>
-              Controleer dan of de onderliggende Power BI-dataset op tijd is ververst — dat kan in Power BI zelf
-              worden geforceerd of nagekeken. Komt dit vaker voor? Neem dan contact op met Mowi.
-            </p>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-rg-3">
-            Zitten we ergens aan vast?
-            <span class="accordion-icon">+</span>
-          </button>
-          <div class="accordion-panel" id="faq-rg-3">
-            <p>
-              U zit nergens aan vast. We werken met korte, overzichtelijke afspraken en bespreken vooraf wat u kunt
-              verwachten — geen jarenlange contracten of verborgen voorwaarden.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== CTA ===== -->
-    <section class="container section">
-      <div class="cta-band" data-reveal>
-        <h2>Klaar om uw rapportage uit handen te geven?</h2>
-        <p>In een kennismaking van 30 minuten kijken we of Report generator bij uw situatie past. Vrijblijvend.</p>
-        <div class="cta-actions">
-          <span class="btn-slot">
-            <a href="../contact#calendly-widget" class="btn btn-secondary" data-event="CTA Click">Plan uw kennismaking</a>
-          </span>
-        </div>
-        <p class="cta-alt">Liever direct contact? 085 333 5800 · <a href="mailto:contact@mowi.agency">contact@mowi.agency</a></p>
+        <span class="btn-slot">
+          <a href="../downloads/it-partner-snelstart.pdf" class="btn btn-secondary" data-event="Sheet Download" data-event-pakket="snelstart">Download: instructies voor uw IT-partner (PDF)</a>
+        </span>
       </div>
     </section>
 
@@ -281,6 +164,20 @@
         <div class="trust-item">
           <p>Nederlands bedrijf, actief in Nederland en Vlaanderen.</p>
         </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="container section">
+      <div class="cta-band" data-reveal>
+        <h2>Klaar om SnelStart te laten werken voor u?</h2>
+        <p>In een kennismaking van 30 minuten kijken we wat er in uw situatie te automatiseren valt. Vrijblijvend.</p>
+        <div class="cta-actions">
+          <span class="btn-slot">
+            <a href="../contact#calendly-widget" class="btn btn-secondary" data-event="CTA Click">Plan uw kennismaking</a>
+          </span>
+        </div>
+        <p class="cta-alt">Liever direct contact? 085 333 5800 · <a href="mailto:contact@mowi.agency">contact@mowi.agency</a></p>
       </div>
     </section>
   </main>
