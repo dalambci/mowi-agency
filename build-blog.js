@@ -277,11 +277,11 @@ function headerHtml() {
               <div class="nav-megamenu-col">
                 <p class="nav-megamenu-label">Automations</p>
                 <ul>
-                  <li>CRM sync</li>
-                  <li>Email triage</li>
-                  <li>Invoice processing</li>
-                  <li>Lead enrichment</li>
-                  <li>Report generator</li>
+                  <li><a href="/agents/crm-sync">CRM sync</a></li>
+                  <li><a href="/agents/email-triage">Email triage</a></li>
+                  <li><a href="/agents/invoice-processing">Invoice processing</a></li>
+                  <li><a href="/agents/lead-enrichment">Lead enrichment</a></li>
+                  <li><a href="/agents/report-generator">Report generator</a></li>
                 </ul>
               </div>
             </div>
