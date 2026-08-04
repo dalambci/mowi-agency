@@ -2346,6 +2346,11 @@ h3 {
   gap: 0.75rem;
 }
 
+.footer-contact {
+  align-items: center;
+  text-align: center;
+}
+
 .footer-nav a, .footer-support a, .footer-contact a, .footer-contact p {
   color: var(--color-gray-600);
   font-size: 0.9375rem;
