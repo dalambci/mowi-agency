@@ -88,6 +88,27 @@
      (≥40rem) → 48px (≥64rem). */
   --container-width: 100rem;
   --container-pad: 1rem;
+
+  /* ---- Content/prose typography (reference = /blog, the site's canonical
+     reading-content standard) ----------------------------------------------
+     Scoped to genuine prose/content headings and body copy — NOT the hero
+     h1 or section h2 scale above, which are a deliberate large-display
+     component reverse-engineered from vuewer.com and intentionally much
+     bigger. Use these tokens for any content heading/paragraph that reads
+     like an article, not a marketing hero/section title. */
+  --content-h1-size: clamp(1.625rem, 1.35rem + 1vw, 2.125rem);
+  --content-h1-line-height: 1.25;
+  --content-h1-margin-bottom: 1.5rem;
+  --content-h2-size: 1.375rem;
+  --content-h2-margin-top: 2.5rem;
+  --content-h2-margin-bottom: 0.75rem;
+  --content-p-line-height: 1.7;
+  --content-p-margin-bottom: 1.25rem;
+
+  /* ---- Breadcrumb (reference = /blog's .blog-breadcrumb) ---------------- */
+  --breadcrumb-font-size: 0.875rem;
+  --breadcrumb-color: var(--color-text-muted);
+  --breadcrumb-margin-bottom: 1.5rem;
 }
 
 @media (min-width: 40rem) {
@@ -1606,7 +1627,14 @@ h3 {
    which this project can't depend on (vanilla JS only) — js/main.js
    reimplements the same per-character stagger with plain CSS animations
    instead, driven by a --char-delay custom property per <span>. */
-.hero-badge-reveal {
+/* Both .hero-badge-reveal and .hero-reveal only go invisible once their
+   ancestor carries .reveal-armed — added by js/main.js right before it
+   starts observing, same safety reasoning as [data-reveal].reveal-armed
+   above. Without that gate, this content (the homepage's actual headline
+   and CTA) would be permanently invisible if js/main.js ever failed to
+   load — worse than any other reveal on the site, since it's the first
+   thing every visitor sees. */
+.hero-frame-content.reveal-armed .hero-badge-reveal {
   opacity: 0;
   transform: scale(0.5);
   transition: opacity 0.7s var(--ease-bounce) 1s, transform 0.7s var(--ease-bounce) 1s;
@@ -1618,7 +1646,7 @@ h3 {
 }
 
 /* translateY(96px) = vuewer's translate-y-24 (Tailwind: 24 * 0.25rem). */
-.hero-reveal {
+.hero-frame-content.reveal-armed .hero-reveal {
   opacity: 0;
   transform: translateY(96px);
   transition: opacity 1s var(--ease-vuewer-rise), transform 1s var(--ease-vuewer-rise);
@@ -2180,8 +2208,14 @@ h3 {
 
 /* --- Scroll reveal ---------------------------------------------------------------------
    Deliberately subtle: a short rise + fade, not a slide or a bounce — should
-   read as "the page is calm and just loaded in," never as a flourish. */
-[data-reveal] {
+   read as "the page is calm and just loaded in," never as a flourish.
+   [data-reveal] itself carries NO hidden state — only .reveal-armed does,
+   and js/main.js only adds .reveal-armed once it has actually set up the
+   IntersectionObserver that will reveal it again. If js/main.js fails to
+   load/run for any reason, .reveal-armed never gets added, so content just
+   stays at its normal, fully-visible default — it can never get stuck
+   invisible the way a bare `[data-reveal] { opacity: 0 }` default would. */
+[data-reveal].reveal-armed {
   opacity: 0;
   transform: translateY(16px);
   /* A short delay before the transition starts (not just a longer
@@ -2314,13 +2348,13 @@ h3 {
 
 /* --- Breadcrumb -------------------------------------------------------------------------- */
 .breadcrumb {
-  font-size: 0.875rem;
-  color: var(--color-gray-500);
-  margin-bottom: 1.5rem;
+  font-size: var(--breadcrumb-font-size);
+  color: var(--breadcrumb-color);
+  margin-bottom: var(--breadcrumb-margin-bottom);
 }
 
 .breadcrumb a {
-  color: var(--color-gray-500);
+  color: var(--breadcrumb-color);
 }
 
 .breadcrumb a:hover {
@@ -2402,6 +2436,15 @@ h3 {
 .text-center { text-align: center; }
 .mt-0 { margin-top: 0; }
 
+/* Compact content heading — for a card/section title that needs to read as
+   a real headline but is too small a space for the hero h1 scale (e.g. a
+   card title). Uses the /blog content-heading token instead of a one-off
+   hardcoded font-size. */
+.prose-heading {
+  font-size: var(--content-h1-size);
+  line-height: var(--content-h1-line-height);
+}
+
 /* --- Blog (marketing content, marketing tokens — a calmer READING mode, not the docs stylesheet;
    /docs/ CSS stays scoped to /docs/ only per project rule) -------------------------------------- */
 .blog-article {
@@ -2420,14 +2463,14 @@ h3 {
    every breakpoint (as it did before this fix) - adding a flat 1.5rem on top
    of var(--container-pad) keeps the real visible gap constant everywhere. */
 .blog-breadcrumb {
-  font-size: 0.875rem;
-  color: var(--color-text-muted);
+  font-size: var(--breadcrumb-font-size);
+  color: var(--breadcrumb-color);
   margin-top: calc(var(--container-pad) + 1.5rem);
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--breadcrumb-margin-bottom);
 }
 
 .blog-breadcrumb a {
-  color: var(--color-text-muted);
+  color: var(--breadcrumb-color);
 }
 
 .blog-breadcrumb a:hover {
@@ -2435,9 +2478,9 @@ h3 {
 }
 
 .blog-article h1 {
-  font-size: clamp(1.625rem, 1.35rem + 1vw, 2.125rem);
-  line-height: 1.25;
-  margin-bottom: 1.5rem;
+  font-size: var(--content-h1-size);
+  line-height: var(--content-h1-line-height);
+  margin-bottom: var(--content-h1-margin-bottom);
 }
 
 .blog-meta {
@@ -2447,15 +2490,15 @@ h3 {
 }
 
 .blog-article h2 {
-  font-size: 1.375rem;
-  margin-top: 2.5rem;
-  margin-bottom: 0.75rem;
+  font-size: var(--content-h2-size);
+  margin-top: var(--content-h2-margin-top);
+  margin-bottom: var(--content-h2-margin-bottom);
 }
 
 .blog-article p {
-  line-height: 1.7;
+  line-height: var(--content-p-line-height);
   color: var(--color-text);
-  margin-bottom: 1.25rem;
+  margin-bottom: var(--content-p-margin-bottom);
 }
 
 .blog-direct-answer {
@@ -2619,9 +2662,9 @@ h3 {
 }
 
 .blog-index-intro h1 {
-  font-size: clamp(1.625rem, 1.35rem + 1vw, 2.125rem);
-  line-height: 1.25;
-  margin-bottom: 0;
+  font-size: var(--content-h1-size);
+  line-height: var(--content-h1-line-height);
+  margin-bottom: 0; /* intentional exception — the paragraph below owns the gap via its own margin-top */
 }
 
 .blog-index-intro p {

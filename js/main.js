@@ -183,10 +183,15 @@ window.addEventListener("resize", syncMegaMenuColumnHeights);
 // --- Scroll-reveal animations -----------------------------------------------
 // Elements with [data-reveal] fade/rise in once they enter the viewport.
 // The animation itself (timing, distance) lives in css/style.css — this just
-// flips the class at the right moment.
+// flips the class at the right moment. Content only becomes invisible once
+// .reveal-armed is added here — if this script never runs, elements simply
+// never leave their normal, visible default (see the .reveal-armed comment
+// in css/style.css for why the hiding is opt-in, not opt-out).
 const revealTargets = document.querySelectorAll("[data-reveal]");
 
 if (revealTargets.length && "IntersectionObserver" in window) {
+  revealTargets.forEach((el) => el.classList.add("reveal-armed"));
+
   const revealObserver = new IntersectionObserver(
     (entries, observer) => {
       entries.forEach((entry) => {
@@ -249,6 +254,10 @@ if (heroContent) {
   if (prefersReducedMotion || !("IntersectionObserver" in window)) {
     heroContent.classList.add("is-revealed");
   } else {
+    // Only arm the hidden state right before actually observing — this is
+    // the homepage's headline/CTA, so it must never be hidden by CSS alone
+    // (see .reveal-armed comment in css/style.css).
+    heroContent.classList.add("reveal-armed");
     const heroObserver = new IntersectionObserver(
       (entries, observer) => {
         entries.forEach((entry) => {
@@ -469,3 +478,38 @@ document.querySelectorAll(".accordion-trigger").forEach((trigger) => {
     panel.style.maxHeight = isOpen ? "" : `${panel.scrollHeight}px`;
   });
 });
+
+// --- Broken-image safety net --------------------------------------------------
+// Any <img> that fails to load at runtime gets hidden so a missing asset
+// never leaves a visible broken-image icon. "error" doesn't bubble on
+// <img>, so this has to listen on the capture phase.
+//
+// .blog-figure (a full-width block, not a grid item) collapses entirely —
+// safe, since nothing else needs to reflow around it.
+//
+// .card/.case-card/.blog-card sit in a FIXED-column-count grid
+// (grid-template-columns: repeat(3/4, ...) — see .grid-3/.grid-4 in
+// style.css), so hiding a whole card would leave an empty trailing cell
+// rather than truly redistributing the row — CSS grid doesn't collapse
+// fixed tracks just because one item disappears. None of these currently
+// hold an image as their only content, so this just hides the broken <img>
+// itself and leaves the rest of that card's content (heading/text) in
+// place — no half-empty grid cell, nothing to reflow.
+//
+// .logo-tile is deliberately skipped altogether: the logo marquee's
+// infinite-scroll animation depends on every tile staying the same fixed
+// width (see .logo-tile comment in style.css) — hiding one would desync
+// its duplicated tile sets and break the loop, so a missing logo there
+// should be fixed at the source instead of hidden at runtime.
+document.addEventListener(
+  "error",
+  (event) => {
+    const img = event.target;
+    if (!(img instanceof HTMLImageElement)) return;
+    if (img.closest(".logo-tile")) return;
+
+    const figure = img.closest(".blog-figure");
+    (figure || img).style.display = "none";
+  },
+  true
+);
