@@ -278,8 +278,8 @@ function headerHtml() {
               <div class="nav-megamenu-col">
                 <p class="nav-megamenu-label">Platform</p>
                 <ul>
-                  <li><a href="/ai-automatisering">AI-automatisering</a></li>
-                  <li><a href="/power-bi-dashboards">BI dashboard</a></li>
+                  <li><a href="/ai-automatisering">Agentic AI</a></li>
+                  <li><a href="/power-bi-dashboards">Power BI</a></li>
                   <li><a href="/trainingen">Trainingen</a></li>
                 </ul>
               </div>
@@ -337,7 +337,7 @@ function footerHtml() {
       <nav class="footer-nav" aria-label="Footermenu">
         <span class="footer-heading">Navigatie</span>
         <a href="/">Home</a>
-        <a href="/ai-automatisering">AI-automatisering</a>
+        <a href="/ai-automatisering">Agentic AI</a>
         <a href="/power-bi-dashboards">Power BI dashboards</a>
         <a href="/trainingen">Trainingen</a>
         <a href="/blog/">Blog</a>
