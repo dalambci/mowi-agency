@@ -1943,6 +1943,9 @@ h3 {
 .card p {
   color: var(--color-gray-600);
   margin-top: 0.5rem;
+  /* Unbreakable strings (e.g. an email address) otherwise overflow the
+     card's edges instead of wrapping — same fix as h1-h4 above. */
+  overflow-wrap: break-word;
 }
 
 .card.card-featured {
