@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260803-11" />
+  <link rel="stylesheet" href="css/style.css?v=20260804" />
   <link rel="icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="shortcut icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260804-3" />
@@ -20,7 +20,7 @@
   <header class="site-header">
     <div class="header-bar">
       <span class="header-cta-slot">
-        <a href="#afspraak" class="header-cta">
+        <a href="#calendly-widget" class="header-cta">
           <span class="header-cta-full">Gratis adviesgesprek</span><span class="header-cta-short">Adviesgesprek</span>
         </a>
       </span>
@@ -62,7 +62,7 @@
           <li><a href="contact" aria-current="page">Contact</a></li>
         </ul>
         <!-- Same CTA, shown only inside the open mobile menu -->
-        <a href="#afspraak" class="btn btn-primary header-cta-mobile">Gratis adviesgesprek</a>
+        <a href="#calendly-widget" class="btn btn-primary header-cta-mobile">Gratis adviesgesprek</a>
         <a href="https://dashboard.mowi.agency/login" class="header-dashboard-mobile" target="_blank" rel="noopener">Dashboard log in</a>
       </nav>
 
@@ -87,7 +87,7 @@
     <section class="container hero">
       <div class="breadcrumb"><a href="/">Home</a> / Contact</div>
       <div style="max-width: 44rem;">
-        <h1>Plan een vrijblijvende kennismaking.</h1>
+        <h1 class="contact-heading">Plan een vrijblijvende kennismaking.</h1>
         <p class="lede" style="margin-top: 1.5rem;">
           In 30 minuten bespreken we uw situatie: welke problemen spelen er, wie is Mowi, wie bent u — en
           kunnen we een oplossing bieden? Bij een goede match plannen we vervolgens een afspraak op locatie.
@@ -99,54 +99,93 @@
     <section class="container section">
       <div class="grid grid-2" style="align-items: start;">
 
-        <!-- Scheduling placeholder: replace with an embedded Calendly widget at [CALENDLY_URL] -->
-        <div class="card" data-reveal>
+        <!-- Calendly inline embed. Widget script is loaded once at the bottom of this page. -->
+        <!-- id targeted by the header CTA button (site-wide) so it can jump straight here. -->
+        <div class="card" data-reveal id="calendly-widget">
           <span class="eyebrow">Plan direct</span>
           <h2 style="font-size: 1.75rem;">Kies een moment dat u past.</h2>
           <p style="color: var(--color-gray-600); margin-top: 0.75rem;">
             30 minuten, online en vrijblijvend. U weet daarna precies wat de volgende stap zou zijn.
           </p>
-          <span class="btn-slot" style="margin-top: 1.5rem;">
-            <a href="[CALENDLY_URL]" class="btn btn-primary btn-block">
-              Plan een kennismaking
-            </a>
-          </span>
-          <p class="form-note">
-            Deze knop verwijst naar de agenda van [FULL_NAME] — vul [CALENDLY_URL] in zodra de agendalink bekend is.
-          </p>
+          <div class="calendly-inline-widget" data-url="https://calendly.com/contact-mowi/30min" style="min-width: 280px; height: 630px; margin-top: 1.5rem;"></div>
         </div>
 
-        <!-- Static contact form. No backend yet: wire this up to a form service or -->
-        <!-- server endpoint that sends to [EMAIL] before launch. -->
+        <!-- Contact form wired to Formspree (https://formspree.io/f/xdennnjl), -->
+        <!-- notifying contact@mowi.agency. Submits via fetch below for an inline confirmation. -->
         <div class="card" data-reveal>
           <span class="eyebrow">Of stuur een bericht</span>
           <h2 style="font-size: 1.75rem;">Liever eerst iets vragen?</h2>
 
-          <form style="margin-top: 1.5rem;" action="#" method="post">
-            <div class="form-field">
-              <label for="name">Naam</label>
-              <input type="text" id="name" name="name" required />
+          <form id="contact-form" style="margin-top: 1.5rem;" action="https://formspree.io/f/xdennnjl" method="post">
+            <input type="hidden" name="_subject" value="Nieuw bericht via mowi.agency" />
+            <div id="contact-form-fields">
+              <div class="form-field">
+                <label for="name">Naam</label>
+                <input type="text" id="name" name="name" required />
+              </div>
+              <div class="form-field">
+                <label for="email">E-mailadres</label>
+                <input type="email" id="email" name="email" required />
+              </div>
+              <div class="form-field">
+                <label for="company">Bedrijfsnaam</label>
+                <input type="text" id="company" name="company" />
+              </div>
+              <div class="form-field">
+                <label for="message">Bericht</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+              </div>
+              <span class="btn-slot">
+                <button type="submit" class="btn btn-primary btn-block">Verstuur bericht</button>
+              </span>
             </div>
-            <div class="form-field">
-              <label for="email">E-mailadres</label>
-              <input type="email" id="email" name="email" required />
-            </div>
-            <div class="form-field">
-              <label for="company">Bedrijfsnaam</label>
-              <input type="text" id="company" name="company" />
-            </div>
-            <div class="form-field">
-              <label for="message">Bericht</label>
-              <textarea id="message" name="message" rows="4" required></textarea>
-            </div>
-            <span class="btn-slot">
-              <button type="submit" class="btn btn-primary btn-block">Verstuur bericht</button>
-            </span>
-            <p class="form-note">
-              Dit formulier is nog niet gekoppeld aan een verzendservice. Koppel het aan [EMAIL] of een
-              formulierendienst voordat de site live gaat.
-            </p>
+            <p class="form-note" id="contact-form-error" role="alert" hidden></p>
           </form>
+
+          <div class="form-success" id="contact-form-success" role="status" hidden>
+            <span class="form-success-icon" aria-hidden="true">&#10003;</span>
+            <p><strong>Bedankt! Uw bericht is verstuurd.</strong><br />We nemen zo snel mogelijk contact met u op.</p>
+          </div>
+
+          <script>
+            // Progressive enhancement: submits via fetch so the visitor stays on
+            // this page instead of being redirected to Formspree's own generic
+            // confirmation page. Falls back to a plain POST (which still works,
+            // just leaves the site) if JS fails for any reason. The success
+            // message lives outside <form> so it can't get hidden along with it.
+            (function () {
+              const form = document.getElementById("contact-form");
+              const fields = document.getElementById("contact-form-fields");
+              const errorNote = document.getElementById("contact-form-error");
+              const success = document.getElementById("contact-form-success");
+              if (!form) return;
+
+              form.addEventListener("submit", function (event) {
+                event.preventDefault();
+                errorNote.hidden = true;
+
+                fetch(form.action, {
+                  method: "POST",
+                  body: new FormData(form),
+                  headers: { Accept: "application/json" },
+                })
+                  .then((response) => {
+                    if (response.ok) {
+                      form.reset();
+                      fields.hidden = true;
+                      success.hidden = false;
+                    } else {
+                      errorNote.textContent = "Er ging iets mis bij het versturen. Mail ons gerust direct op contact@mowi.agency.";
+                      errorNote.hidden = false;
+                    }
+                  })
+                  .catch(() => {
+                    errorNote.textContent = "Er ging iets mis bij het versturen. Mail ons gerust direct op contact@mowi.agency.";
+                    errorNote.hidden = false;
+                  });
+              });
+            })();
+          </script>
         </div>
       </div>
     </section>
@@ -227,5 +266,6 @@
   </footer>
 
   <script src="js/main.js?v=20260802"></script>
+  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 </body>
 </html>

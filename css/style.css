@@ -285,6 +285,32 @@ h1 {
   }
 }
 
+/* Contact page's own heading, 20% smaller than the shared h1 scale above at
+   every breakpoint — scoped to this class (not .hero h1) since .hero is
+   reused by ai-automatisering/cases/power-bi-dashboards/trainingen too, and
+   only the contact page's heading was asked to shrink. */
+.contact-heading {
+  font-size: 1.8rem; /* 20% smaller than 2.25rem */
+}
+
+@media (min-width: 40rem) {
+  .contact-heading {
+    font-size: 2.4rem; /* 20% smaller than 3rem */
+  }
+}
+
+@media (min-width: 48rem) {
+  .contact-heading {
+    font-size: 3rem; /* 20% smaller than 3.75rem */
+  }
+}
+
+@media (min-width: 64rem) {
+  .contact-heading {
+    font-size: 57.6px; /* 20% smaller than 72px */
+  }
+}
+
 h2 {
   font-size: clamp(2rem, 2.5vw + 1rem, 3rem);
   line-height: 1.15;
@@ -2237,6 +2263,41 @@ h3 {
   font-size: 0.8125rem;
   color: var(--color-gray-500);
   margin-top: 1rem;
+}
+
+.form-success[hidden] {
+  display: none;
+}
+
+.form-success {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  padding: 1.25rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  background: var(--color-accent-soft);
+}
+
+.form-success-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: var(--color-white);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.form-success p {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.5;
 }
 
 /* --- Breadcrumb -------------------------------------------------------------------------- */
