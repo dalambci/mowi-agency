@@ -3074,6 +3074,33 @@ a.pill:hover {
   }
 }
 
+/* /contact only: below 64rem the heading/lede block and the Calendly card
+   stack (same as every other .hero-with-visual page), but this page's
+   stacked gap needs to specifically match the 1.5rem already used between
+   the h1 and the lede paragraph just above it — not the showcase pages'
+   generic 2rem stack gap, which was never tuned against this page's own
+   heading rhythm. max-width scopes it to below the 64rem 2-column split
+   above, which sets its own 3rem gap and must stay untouched. */
+@media (max-width: 63.9375rem) {
+  .contact-hero-visual {
+    gap: 1.5rem;
+  }
+}
+
+/* /contact only, desktop: the shared .hero-with-visual align-items:center
+   (tuned for the showcase pages, where both columns are roughly the same
+   height) reads badly here — the Calendly card is much taller than the
+   heading/lede block (it's a full calendar, not a fixed-height widget), so
+   centering left the heading floating in empty space partway down the row
+   instead of level with the breadcrumb above it. Top-align both columns
+   instead, so the heading starts exactly where the single-column layout
+   already puts it. */
+@media (min-width: 64rem) {
+  .contact-hero-visual {
+    align-items: start;
+  }
+}
+
 /* Shared task/result "card" look (reuses the site's own card language:
    white surface, hairline border, shadow-sm, square corners via
    --radius-md) and the small icon/check tokens inside them. Sized down for

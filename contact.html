@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260805-6" />
+  <link rel="stylesheet" href="css/style.css?v=20260805-7" />
   <link rel="icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="shortcut icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260804-3" />
@@ -85,33 +85,36 @@
   </header>
 
   <main>
-    <!-- ===== Hero ===== -->
+    <!-- ===== Hero =====
+         Calendly widget lives inside the hero now, as the visual half of
+         .hero-with-visual (same side-by-side-on-desktop/stacked-on-mobile
+         pattern as /agentic-ai + every /agents/* page) — sits to the right
+         of the heading from 64rem up instead of underneath it. Website &
+         Conversion plan, 2.3 (CTA hygiene): booking is the only path on this
+         page now — the Formspree contact form that used to sit beside this
+         card was removed on purpose, not lost. See the vault's decisions
+         log (2026-08-04) if it ever needs restoring. -->
     <section class="container hero">
       <div class="breadcrumb"><a href="/">Home</a> / Contact</div>
-      <div style="max-width: 44rem;">
-        <h1 class="contact-heading">Plan een vrijblijvende kennismaking.</h1>
-        <p class="lede" style="margin-top: 1.5rem;">
-          In 30 minuten bespreken we uw situatie: welke problemen spelen er, wie is Mowi, wie bent u — en
-          kunnen we een oplossing bieden? Bij een goede match plannen we vervolgens een afspraak op locatie.
-        </p>
-      </div>
-    </section>
+      <div class="hero-with-visual contact-hero-visual">
+        <div style="max-width: 44rem;">
+          <h1 class="contact-heading">Plan een vrijblijvende kennismaking.</h1>
+          <p class="lede" style="margin-top: 1.5rem;">
+            In 30 minuten bespreken we uw situatie: welke problemen spelen er, wie is Mowi, wie bent u — en
+            kunnen we een oplossing bieden? Bij een goede match plannen we vervolgens een afspraak op locatie.
+          </p>
+        </div>
 
-    <!-- ===== Kennismaking =====
-         Website & Conversion plan, 2.3 (CTA hygiene): booking is the only
-         path on this page now — the Formspree contact form that used to sit
-         beside this card was removed on purpose, not lost. See the vault's
-         decisions log (2026-08-04) if it ever needs restoring. -->
-    <section class="container section">
-      <!-- Calendly inline embed. Widget script is loaded once at the bottom of this page. -->
-      <!-- id targeted by the header CTA button (site-wide) so it can jump straight here. -->
-      <div class="card" data-reveal id="calendly-widget" style="max-width: 40rem; margin-inline: auto;">
-        <span class="eyebrow">Plan direct</span>
-        <h2 class="prose-heading">Kies een moment dat u past.</h2>
-        <p style="color: var(--color-gray-600); margin-top: 0.75rem;">
-          30 minuten, online en vrijblijvend. U weet daarna precies wat de volgende stap zou zijn.
-        </p>
-        <div class="calendly-inline-widget" data-url="https://calendly.com/contact-mowi/30min?hide_gdpr_banner=1&embed_type=Inline&embed_domain=mowi.agency" style="min-width: 280px; height: 630px; margin-top: 1.5rem;"></div>
+        <!-- Calendly inline embed. Widget script is loaded once at the bottom of this page. -->
+        <!-- id targeted by the header CTA button (site-wide) so it can jump straight here. -->
+        <div class="card" data-reveal id="calendly-widget">
+          <span class="eyebrow">Plan direct</span>
+          <h2 class="prose-heading">Kies een moment dat u past.</h2>
+          <p style="color: var(--color-gray-600); margin-top: 0.75rem;">
+            30 minuten, online en vrijblijvend. U weet daarna precies wat de volgende stap zou zijn.
+          </p>
+          <div class="calendly-inline-widget" data-url="https://calendly.com/contact-mowi/30min?hide_gdpr_banner=1&embed_type=Inline&embed_domain=mowi.agency" style="min-width: 280px; height: 630px; margin-top: 1.5rem;"></div>
+        </div>
       </div>
     </section>
 
