@@ -105,15 +105,22 @@
   --content-p-line-height: 1.7;
   --content-p-margin-bottom: 1.25rem;
 
-  /* ---- Breadcrumb (reference = /blog's .blog-breadcrumb) ---------------- */
+  /* ---- Breadcrumb (reference = /blog's .blog-breadcrumb) ----------------
+     Mobile-first: 0.75rem here, stepped back up to the original 1.5rem at
+     40rem+ below — halved specifically on phones, where the hero's own top
+     padding (see .hero in the Layout section) already eats a lot of the
+     viewport before the h1 shows up; this shouldn't add more on top of
+     that. Same token everywhere the breadcrumb is used, so the fix is
+     automatically consistent across every page that has one. */
   --breadcrumb-font-size: 0.875rem;
   --breadcrumb-color: var(--color-text-muted);
-  --breadcrumb-margin-bottom: 1.5rem;
+  --breadcrumb-margin-bottom: 0.75rem;
 }
 
 @media (min-width: 40rem) {
   :root {
     --container-pad: 1.5rem;
+    --breadcrumb-margin-bottom: 1.5rem;
   }
 }
 
@@ -1739,8 +1746,16 @@ h3 {
    two adjacent .section elements each contribute their own 4-6rem,
    totalling 8-12rem, while this one contributed nothing on its own
    bottom edge). */
+/* Top/bottom split on purpose: bottom keeps the normal 4rem section rhythm
+   (space before whatever comes next), but the top — which is really just
+   "space above the breadcrumb" on every page that has one — was using that
+   same full section-sized gap on mobile, directly on top of the sticky
+   header, and ate a disproportionate chunk of a phone's viewport height
+   before any real content (h1) appeared. Reduced independently; ≥48rem
+   goes back to one even padding-block, unchanged from before. */
 .hero {
-  padding-block: 4rem;
+  padding-top: 1.75rem;
+  padding-bottom: 4rem;
 }
 
 @media (min-width: 48rem) {
@@ -2867,19 +2882,22 @@ a.pill:hover {
    download glyph already handled by .btn's existing gap. */
 
 /* ==========================================================================
-   /ai-automatisering visual pilot (2026-08-04)
-   Illustration system + widgets built for this one page as a design pilot —
-   every rule below is scoped to page-specific classes; no shared component
-   used elsewhere is touched. See reference/widgets-vuewer.md for the
-   mechanics this was studied from (never copied — see that file's own
-   header) and CLAUDE.md for the hard constraints this all follows: inline
-   SVG/CSS/vanilla JS only, no libraries, reduced-motion always leaves
-   content fully visible, every animation is enhancement-only (the page
-   looks finished even if js/main.js never runs).
+   Illustration + widget system (piloted 2026-08-04 on /ai-automatisering,
+   rolled out 2026-08-06 to every /agents/*.html page)
+   Every rule below is scoped to page-specific classes; no shared component
+   used elsewhere is touched. The .hero-showcase component in particular is
+   fully generic — each page just supplies its own 4 task/result pairs in
+   the HTML, css/js needs no per-page changes. See reference/widgets-vuewer.md
+   for the mechanics this was studied from (never copied — see that file's
+   own header) and CLAUDE.md for the hard constraints this all follows:
+   inline SVG/CSS/vanilla JS only, no libraries, reduced-motion always
+   leaves content fully visible, every animation is enhancement-only (the
+   page looks finished even if js/main.js never runs).
 
    --- Illustration system spec ---------------------------------------------
-   One consistent visual language for every inline SVG on this page (the
-   hero showcase's task/result icons, the six "Zes soorten taken" icons):
+   One consistent visual language for every inline SVG built for this system
+   (every hero showcase's task/result icons, the six "Zes soorten taken"
+   icons on /ai-automatisering):
    - Stroke width 1.5 (SVG user units) everywhere — one weight, never mixed.
    - Corner radius rx="3" on every rounded rect — one radius, everywhere.
    - Max 3 colors, all existing tokens, no new hex values introduced:

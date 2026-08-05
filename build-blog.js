@@ -16,7 +16,7 @@ const ROOT = __dirname;
 const CONTENT_DIR = path.join(ROOT, "content", "blog");
 const OUTPUT_DIR = path.join(ROOT, "blog");
 const SITE_URL = "https://mowi.agency";
-const CSS_VERSION = "20260804-10"; // bump alongside every css/style.css edit
+const CSS_VERSION = "20260804-25"; // bump alongside every css/style.css edit
 // Website & Conversion plan, Phase 1: Plausible, no cookie banner needed.
 // data-domain must exactly match the account Sal creates at plausible.io.
 const PLAUSIBLE_SNIPPET = `<script defer data-domain="mowi.agency" src="https://plausible.io/js/script.js"></script>`;
@@ -24,36 +24,6 @@ const PLAUSIBLE_SNIPPET = `<script defer data-domain="mowi.agency" src="https://
 // js/broken-image-guard.js's own header comment for why (a race against
 // images already present in the initial HTML).
 const BROKEN_IMAGE_GUARD_SNIPPET = `<script src="/js/broken-image-guard.js?v=${CSS_VERSION}"></script>`;
-
-// Website & Conversion plan, 0.2 + 2.4: same trust block as every root page,
-// root-relative asset paths to match this file's own convention. Kept OUTSIDE
-// <main class="blog-article"> on post pages (see renderPost below) so the
-// prose-scoped .blog-article h2/p rules can't override its styling.
-const TRUST_BLOCK_SNIPPET = `  <section class="container section" data-reveal>
-    <div class="section-head center">
-      <span class="eyebrow">Vertrouwen</span>
-      <h2>Waar u op kunt bouwen.</h2>
-    </div>
-    <div class="trust-list">
-      <div class="trust-item">
-        <p>AVG-proof — een verwerkersovereenkomst is standaard onderdeel van elke samenwerking.</p>
-      </div>
-      <div class="trust-item">
-        <p>Uw data versleuteld — encryptie tijdens transport en opslag, met dagelijkse backups. <!-- VERIFY: encryptie/backup-claim nog niet bevestigd op platformniveau, zie docs/it-beveiliging.html --></p>
-      </div>
-      <div class="trust-item">
-        <p>Niets faalt onopgemerkt — elke agent wordt bewaakt. Gaat er iets mis, dan ziet u het direct in uw dashboard onder 'Needs attention'.</p>
-      </div>
-      <div class="trust-item">
-        <span class="trust-photo"><img src="/assets/team/sal.jpg" alt="Sal Pagrach" /></span>
-        <p>Sal Pagrach — uw vaste aanspreekpunt, van kennismaking tot nazorg.</p>
-      </div>
-      <div class="trust-item">
-        <p>Nederlands bedrijf, actief in Nederland en Vlaanderen.</p>
-      </div>
-    </div>
-  </section>
-`;
 
 // ---------------------------------------------------------------------------
 // Minimal YAML-frontmatter parser (subset: scalars, inline arrays, block
@@ -472,7 +442,7 @@ ${headerHtml()}
       <a href="/contact#calendly-widget" class="btn btn-primary" data-event="CTA Click">Plan een kennismaking</a>
     </div>
   </main>
-${TRUST_BLOCK_SNIPPET}${footerHtml()}
+${footerHtml()}
 </body>
 </html>
 `;
@@ -520,7 +490,7 @@ ${headerHtml()}
 ${cards || '      <p>Binnenkort de eerste posts.</p>'}
     </div>
   </main>
-${TRUST_BLOCK_SNIPPET}${footerHtml()}
+${footerHtml()}
 </body>
 </html>
 `;
