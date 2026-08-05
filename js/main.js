@@ -552,7 +552,8 @@ document.querySelectorAll(".demo-video-play").forEach((btn) => {
 // of <body>).
 
 // ==========================================================================
-// /ai-automatisering visual pilot (2026-08-04, hero rebuilt 2026-08-06) —
+// /agentic-ai visual pilot (piloted 2026-08-04 as /ai-automatisering, page
+// renamed 2026-08-05; hero rebuilt 2026-08-06) —
 // widget behavior. Every selector below is null-guarded, so this is a
 // silent no-op on every other page. The hero showcase and the agent-feed
 // widget already render a complete, correct-looking end state in plain

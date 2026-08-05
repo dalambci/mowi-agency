@@ -131,6 +131,17 @@
   }
 }
 
+/* Breadcrumb spacing token — see .breadcrumb, .blog-breadcrumb and
+   .hero:has(.breadcrumb) below. 15px top/bottom on every non-mobile breakpoint
+   (tablet AND desktop, ≥40rem — same mobile/non-mobile line the pre-existing
+   --breadcrumb-margin-bottom split already drew). Deliberately not defined
+   below 40rem: mobile keeps its own halved 0.75rem margin-bottom untouched. */
+@media (min-width: 40rem) {
+  :root {
+    --breadcrumb-space-block: 15px;
+  }
+}
+
 /* --- Reset ---------------------------------------------------------------- */
 *,
 *::before,
@@ -301,9 +312,17 @@ h1 {
   }
 }
 
+/* This block's range is effectively capped at 63.9375rem in practice — the
+   64rem block below overrides font-size again above that, so this value only
+   ever renders on the 48rem-63.9375rem tablet tier. 2.8125rem = 75% of the
+   previous 3.75rem (45px vs 60px), paired with the tablet-tier breadcrumb
+   spacing work above to make tablet heroes noticeably more compact — both
+   changes made together, intentionally. line-height stays untouched: it's
+   the unitless `1` inherited from the 40rem block, so it scales with the
+   smaller font-size automatically and doesn't need its own override. */
 @media (min-width: 48rem) {
   h1 {
-    font-size: 3.75rem; /* 60px */
+    font-size: 2.8125rem; /* 45px, 75% of the previous 60px */
   }
 }
 
@@ -313,9 +332,20 @@ h1 {
   }
 }
 
+/* iPad Pro only (1024-1366px = 64rem-85.375rem, portrait through 12.9" landscape):
+   30% off the 72px desktop value. Bounded with max-width so real desktop
+   (>1366px) falls through to the 72px rule above, untouched — this tier exists
+   because iPad Pro already crosses the 64rem desktop breakpoint but still
+   reads too large at that heading size on the device itself. */
+@media (min-width: 64rem) and (max-width: 85.375rem) {
+  h1 {
+    font-size: 50.4px; /* 30% off 72px */
+  }
+}
+
 /* Contact page's own heading, 20% smaller than the shared h1 scale above at
    every breakpoint — scoped to this class (not .hero h1) since .hero is
-   reused by ai-automatisering/cases/power-bi-dashboards/trainingen too, and
+   reused by agentic-ai/cases/power-bi-dashboards/trainingen too, and
    only the contact page's heading was asked to shrink. */
 .contact-heading {
   font-size: 1.8rem; /* 20% smaller than 2.25rem */
@@ -336,6 +366,13 @@ h1 {
 @media (min-width: 64rem) {
   .contact-heading {
     font-size: 57.6px; /* 20% smaller than 72px */
+  }
+}
+
+/* Same iPad Pro tier as the shared h1 rule above, same 20%-off relationship. */
+@media (min-width: 64rem) and (max-width: 85.375rem) {
+  .contact-heading {
+    font-size: 40.32px; /* 20% smaller than 50.4px */
   }
 }
 
@@ -1764,6 +1801,37 @@ h3 {
   }
 }
 
+/* Every non-mobile breakpoint (≥40rem, tablet AND desktop): on heroes that open
+   with a breadcrumb, the breadcrumb's own padding-block (see .breadcrumb below,
+   --breadcrumb-space-block) fully owns the EXTRA space above it instead of
+   stacking on top of this 6rem (or, in the 40-47.9375rem sliver before the
+   48rem block above kicks in, the mobile-tier 1.75rem) — otherwise the two
+   values combine into a much bigger, uneven gap than the space the breadcrumb
+   itself gets below it.
+
+   NOT a flat 0, though — .site-header is `position: sticky; top:
+   var(--container-pad)`, which makes it float with that same inset from the
+   very first paint (unscrolled), not just while scrolling. Sticky elements
+   still reserve their un-adjusted flow height for layout purposes, so the
+   next sibling (.hero) starts right where the header WOULD be without that
+   offset — meaning the header's actual painted box (pushed down by its own
+   sticky inset) overlaps back over .hero by exactly --container-pad, on top
+   with z-index:50. A flat 0 here landed the breadcrumb entirely underneath
+   that overlap — invisible, not just tightly spaced. --container-pad exactly
+   cancels it (confirmed via getBoundingClientRect at 700/800/1024/1440px —
+   the overlap tracks --container-pad exactly at every width), so the
+   breadcrumb's own 15px is the only space that ends up visible, same as
+   intended. padding-block-end (space at the bottom of the hero, after the
+   content) is untouched. Heroes without a breadcrumb (e.g. index.html's
+   .hero-frame, a different class entirely, which has its own separate
+   margin-top correction for this exact same sticky-overlap mechanism) are
+   unaffected. */
+@media (min-width: 40rem) {
+  .hero:has(.breadcrumb) {
+    padding-block-start: var(--container-pad);
+  }
+}
+
 .hero-grid {
   display: grid;
   gap: 3rem;
@@ -2376,6 +2444,19 @@ h3 {
   margin-bottom: var(--breadcrumb-margin-bottom);
 }
 
+/* Every non-mobile breakpoint (≥40rem): replaces margin-bottom with equal
+   padding-block (top and bottom, 15px/15px), decoupled from the hero's own
+   padding (see .hero:has(.breadcrumb) above) — so the air above and below the
+   breadcrumb is identical everywhere it appears, tablet through desktop alike.
+   --breadcrumb-margin-bottom is retired for this whole range; mobile (<40rem)
+   still uses it unchanged, per explicit instruction not to touch that tier. */
+@media (min-width: 40rem) {
+  .breadcrumb {
+    padding-block: var(--breadcrumb-space-block);
+    margin-bottom: 0;
+  }
+}
+
 .breadcrumb a {
   color: var(--breadcrumb-color);
 }
@@ -2490,6 +2571,33 @@ h3 {
   color: var(--breadcrumb-color);
   margin-top: calc(var(--container-pad) + 1.5rem);
   margin-bottom: var(--breadcrumb-margin-bottom);
+}
+
+/* Every non-mobile breakpoint (≥40rem): same 15px/15px treatment as .breadcrumb
+   above, for consistency across every breadcrumb on the site — supersedes both
+   the phantom-zone margin-top formula and --breadcrumb-margin-bottom for this
+   range. Mobile (<40rem) keeps the original values untouched.
+   margin-top is var(--container-pad), NOT 0 — same sticky-header-overlap
+   mechanism documented on .hero:has(.breadcrumb) above: .site-header floats
+   with `top: var(--container-pad)` from first paint, and since sticky still
+   reserves its un-adjusted flow height, .blog-article (the very next
+   sibling, no hero in between) starts that same --container-pad short of
+   where the header's painted box actually ends. A flat 0 here put the
+   breadcrumb entirely underneath the header, invisible — confirmed via a
+   Playwright sweep after the first attempt shipped broken. --container-pad
+   exactly cancels the overlap, same as the hero fix.
+   Selector is `.blog-article .blog-breadcrumb`, not just `.blog-breadcrumb`,
+   specifically to out-specificity the pre-existing `.blog-article p` rule
+   below (0,1,1 vs. this element's plain 0,1,0) — that rule was silently
+   winning the margin-bottom cascade on its own 1.25rem value, which would
+   have stacked with this padding-block to a 35px gap instead of the
+   intended clean 15px. */
+@media (min-width: 40rem) {
+  .blog-article .blog-breadcrumb {
+    margin-top: var(--container-pad);
+    padding-block: var(--breadcrumb-space-block);
+    margin-bottom: 0;
+  }
 }
 
 .blog-breadcrumb a {
@@ -2882,8 +2990,9 @@ a.pill:hover {
    download glyph already handled by .btn's existing gap. */
 
 /* ==========================================================================
-   Illustration + widget system (piloted 2026-08-04 on /ai-automatisering,
-   rolled out 2026-08-06 to every /agents/*.html page)
+   Illustration + widget system (piloted 2026-08-04 on /ai-automatisering, since
+   renamed to /agentic-ai on 2026-08-05, rolled out 2026-08-06 to every
+   /agents/*.html page)
    Every rule below is scoped to page-specific classes; no shared component
    used elsewhere is touched. The .hero-showcase component in particular is
    fully generic — each page just supplies its own 4 task/result pairs in
@@ -2897,7 +3006,7 @@ a.pill:hover {
    --- Illustration system spec ---------------------------------------------
    One consistent visual language for every inline SVG built for this system
    (every hero showcase's task/result icons, the six "Zes soorten taken"
-   icons on /ai-automatisering):
+   icons on /agentic-ai):
    - Stroke width 1.5 (SVG user units) everywhere — one weight, never mixed.
    - Corner radius rx="3" on every rounded rect — one radius, everywhere.
    - Max 3 colors, all existing tokens, no new hex values introduced:
@@ -2936,9 +3045,21 @@ a.pill:hover {
   gap: 2rem;
 }
 
+/* Text column gets the LARGER share (1.1fr vs 1fr for the visual widget) —
+   deliberately reversed from an earlier 1fr/1.1fr split. That split starved
+   the heading column right at the two points where it needed room most: the
+   64rem breakpoint (where this grid first goes 2-column right as the h1 also
+   jumps to its iPad Pro size) and the 85.375rem breakpoint (where the h1
+   jumps again to its full desktop size) both landed the text column too
+   narrow for "wegautomatiseren" (17 chars) to fit on one line, forcing an
+   ugly mid-word break via the h1,h2,h3,h4 overflow-wrap:break-word safety
+   net. Confirmed via a Playwright per-pixel sweep (Range.getClientRects()
+   per word, checking for a word split across two line-top values): broken
+   at 1024-1045px and 1368-1412px with the old ratio, clean across the full
+   320-2000px range with this one. */
 @media (min-width: 64rem) {
   .hero-with-visual {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
     gap: 3rem;
     align-items: center;
   }
@@ -3278,7 +3399,7 @@ a.pill:hover {
 
 /* --- Live agent-feed widget ------------------------------------------------
    A designed activity-feed card, not a fake screenshot — lives next to the
-   "Wat is AI-automatisering" claim it's actually demonstrating (see
+   "Wat is Agentic AI-automatisering" claim it's actually demonstrating (see
    .concreet-visuals below), not the trust section. The 4 rows in the
    initial HTML ARE the reduced-motion/no-JS end state; js/main.js (when
    motion is allowed) takes over from there and keeps cycling — so this

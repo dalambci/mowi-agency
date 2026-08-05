@@ -26,7 +26,8 @@
    itself and leaves the rest of that card's content (heading/text) in
    place — no half-empty grid cell, nothing to reflow.
 
-   .browser-frame (ai-automatisering.html screenshot slots, 2026-08-04) gets
+   .browser-frame (agentic-ai.html screenshot slots, formerly ai-automatisering.html,
+   2026-08-04) gets
    the same whole-container treatment as .blog-figure — a missing screenshot
    hides its browser-chrome bar too, instead of leaving an empty frame shell.
 

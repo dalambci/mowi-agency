@@ -111,9 +111,11 @@ retype credentials from scratch or falling back to a password:
   uses English labels deliberately — category labels ("Platform", "Automations") and most item
   names ("BI dashboard", "CRM sync", "Email triage", "Invoice processing", "Lead enrichment",
   "Report generator"). Keep these in English; don't translate them to Dutch. This is scoped to
-  that menu only — everything else on the site stays Dutch per the rule above. One item in that
-  same menu, "AI-automatisering" (linking to `ai-automatisering.html`), is deliberately Dutch —
-  matches the page's own name/slug rather than following the English-labels exception.
+  that menu only — everything else on the site stays Dutch per the rule above. The Platform
+  column's first item, formerly the deliberately-Dutch "AI-automatisering" (matching that page's
+  old name/slug as an exception to the English-labels rule), was renamed to "Agentic AI" and the
+  page itself renamed from `ai-automatisering.html` to `agentic-ai.html` to match — the item now
+  fits the English-labels convention normally and is no longer an exception to it.
 
 ## Documentation section (setup guides for clients)
 - Structure, page anatomy, navigation anatomy, and writing rules are defined in
@@ -158,7 +160,7 @@ retype credentials from scratch or falling back to a password:
   (see below) — the sidebar, breadcrumb, and prev/next everywhere else update automatically.
 
 ### Extensionless URLs (site-wide) depend on Cloudways Web Rules, not just link edits
-- All internal links — root marketing pages (`/cases`, `/contact`, `/ai-automatisering`,
+- All internal links — root marketing pages (`/cases`, `/contact`, `/agentic-ai`,
   `/power-bi-dashboards`, `/trainingen`) and docs links (sidebar, breadcrumb, prev/next,
   in-article cross-links, e.g. `/docs/agent-crm-sync`) — point to extensionless URLs. The files
   on disk still end in `.html`; only the URL is clean.
@@ -168,14 +170,16 @@ retype credentials from scratch or falling back to a password:
   production" above). The docs rule — `^/docs/([a-z0-9-]+)$` → `/docs/$1.html`, Action
   **Internal rewrite** — was verified 2026-08-03 against all 19 articles (right status code *and*
   right page content) plus collateral checks, all correct.
-- **A second rule for the root-level marketing pages is required and, as of this writing, has
-  NOT yet been added to Cloudways** — only the code side (links + local `serve.js`) is done.
-  Add: `^/(cases|contact|ai-automatisering|power-bi-dashboards|trainingen)$` →
-  `/$1.html`, Action **Internal rewrite** (kept as an explicit slug list rather than a generic
-  `[a-z0-9-]+` catch-all, so it can never accidentally intercept `/docs`, `/css/...`, `/js/...`,
-  `/assets/...` or any future non-page path). Until this rule exists, the root pages will 404 on
-  production when visited without `.html` — `index.html` is unaffected since `/` already serves
-  it directly.
+- A second rule for the root-level marketing pages — `^/(cases|contact|agentic-ai|power-bi-dashboards|trainingen)$`
+  → `/$1.html`, Action **Internal rewrite** — was added and confirmed live (verified via a direct
+  `curl` against production, 2026-08-05; this paragraph previously said it hadn't been added yet,
+  which was stale). Kept as an explicit slug list rather than a generic `[a-z0-9-]+` catch-all, so
+  it can never accidentally intercept `/docs`, `/css/...`, `/js/...`, `/assets/...` or any future
+  non-page path. **The `ai-automatisering` slug in that rule's regex was never updated to
+  `agentic-ai`** when the page was renamed (2026-08-05) — this repo has no API/CLI access to
+  Cloudways Web Rules, only the dashboard UI does, so this is a manual step still owed: edit the
+  rule's regex in the Cloudways dashboard to swap the slug, or `/agentic-ai` will 404 in production
+  even though the code side (links + local `serve.js`) is already done.
 - The account's Web Rules quota showed **24/25 remaining** after adding the docs rule — adding
   this one brings it to 23/25; check before adding more.
 - `serve.js` (local dev server) mirrors both rules generically (falls back to appending `.html`
