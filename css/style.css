@@ -3045,34 +3045,28 @@ a.pill:hover {
   gap: 2rem;
 }
 
-/* 2-column split starts at 85.375rem (1366px, the same iPad-Pro/desktop line
-   the h1 already draws — see its own comment), NOT 64rem. It used to start at
-   64rem, which put the entire 1024-1365px "iPad Pro" tier into a squeezed
-   2-column layout at the exact width where two separate things went wrong at
-   once: the h1 (fixed by the 1.1fr/1fr ratio below, only needed once this
-   grid is actually 2-column) and, found later the same day, the
-   .showcase-task/.showcase-result cards inside .hero-showcase — those never
-   get a smaller size tier of their own (their one size-up breakpoint is
-   43.75rem with no upper bound, same value from tablet through desktop), so
-   at 1024px they were squeezed from a roomy ~300px-wide column down to
-   ~148px while still trying to render full desktop-size text, wrapping some
-   pages' longer labels ("Klant gewijzigd in CRM", "Alleen e-mailadres
-   bekend") onto 2-3 lines. Delaying the split means the entire iPad-Pro tier
-   stays single-column (heading full-width above, showcase full-width below,
-   same shape it already has at 700-1023px, where nothing wraps) — the
-   showcase gets all the room it needs without shrinking its cards, and the
-   h1 gets full container width too, well past what it needs. True desktop
-   (≥85.375rem) is untouched: still 2-column, same 1.1fr/1fr ratio, still
-   verified against both the heading and (spot-checked) the showcase cards. */
-/* Below 85.375rem, that single-column fallback is only meant for actual
-   touch tablets (iPad/iPad Pro) — a laptop (MacBook or otherwise) with a
-   trackpad/mouse reports `hover: hover` and `pointer: fine` even at the same
-   CSS pixel width a touch tablet would report (a 13" MacBook Air/Pro's
-   default macOS-scaled resolution is 1280×800, landing right inside this
-   "iPad Pro" width tier), and width alone can't tell those two apart. On
-   those devices, keep the showcase next to the heading — same 2-column grid
-   as real desktop, just starting earlier (64rem instead of 85.375rem). */
-@media (min-width: 85.375rem), (min-width: 64rem) and (hover: hover) and (pointer: fine) {
+/* 2-column from 64rem up, same as it always was — SUPERSEDES two earlier
+   attempts at this same problem, both abandoned the same day:
+   (1) delaying the split to 85.375rem so the whole 1024-1365px "iPad Pro"
+   tier rendered single-column, avoiding a showcase-card squeeze — but that
+   also pushed the showcase below the heading on MacBook-width windows (a
+   13" MacBook's default macOS scaling is ~1280px, landing in that same
+   range), which Sal didn't want;
+   (2) restoring 2-column there only for `(hover: hover) and (pointer:
+   fine)` devices (mouse/trackpad, not touch) — real MacBooks do report
+   that, but Chrome/Firefox DevTools' device-toolbar/responsive mode
+   reports `hover:none`/`pointer:coarse` by default regardless of the
+   viewport width you set, so ANY width-based test done that way (the
+   normal way to test responsive breakpoints) looked broken even though
+   real hardware wasn't — a fragile, hard-to-verify distinction to build a
+   fix on.
+   Final approach: keep 2-column unconditional at 64rem+, exactly like
+   before either fix — and solve the actual card-squeeze problem directly,
+   in the showcase's own sizing, at the tier below (see the next comment).
+   Pure width-based again, so it looks identical everywhere: real iPad, real
+   MacBook, and any dev-tools resize regardless of its touch-simulation
+   setting. */
+@media (min-width: 64rem) {
   .hero-with-visual {
     grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
     gap: 3rem;
@@ -3113,6 +3107,28 @@ a.pill:hover {
 
 .showcase-task.is-active {
   border-color: var(--color-accent);
+}
+
+/* .is-fluid only: on the base grid pages, .hero-showcase's own
+   align-items:center + fixed row tracks keep every task the same height
+   regardless of whether its own text happens to wrap to 1 or 2 lines — but
+   .is-fluid's task column deliberately has no such mechanism (natural
+   height is the whole point). That exposed a real, measured bug: Plus
+   Jakarta Sans loads async, and
+   the fallback font is narrow enough that "Factuur binnengekomen" first
+   renders on ONE line, then rewraps to two once the real font swaps in —
+   a visible height (and thus hub-position) shift the "left column never
+   moves" requirement can't tolerate. min-height reserves 2-line space
+   from the very first paint regardless of which font is active, so the
+   font swap changes nothing about the box, only the text inside it. */
+.hero-showcase.is-fluid .showcase-task {
+  min-height: 2.5rem;
+}
+
+@media (min-width: 43.75rem) {
+  .hero-showcase.is-fluid .showcase-task {
+    min-height: 3.5rem;
+  }
 }
 
 .showcase-icon {
@@ -3247,24 +3263,28 @@ a.pill:hover {
 
 /* --- Layout: one 3-column grid, 4 fixed rows, at every width --------------
    Same layout from the smallest phone up to desktop — just smaller, not a
-   different component (per request). Connector lines are real <line>
-   elements in an absolutely-positioned SVG overlay (.showcase-lines), each
-   one drawn from a task card's actual right edge straight to its paired
-   result card's actual left edge — computed from real
-   getBoundingClientRect() values in js/main.js, not guessed coordinates, so
-   they always genuinely touch both cards regardless of font-loading/content
-   reflow or the size tier below. Every line runs UNDER the hub plate
-   (z-index below it, above nothing else) so it visually disappears behind
-   the plate and "continues" on the other side — the line quite literally
-   goes through the Mowi logo, not just near it. */
+   different component. Connector lines are real <line> elements in an
+   absolutely-positioned SVG overlay (.showcase-lines), each one drawn from a
+   task card's actual right edge straight to its paired result card's actual
+   left edge — computed from real getBoundingClientRect() values in
+   js/main.js, not guessed coordinates, so they always genuinely touch both
+   cards regardless of font-loading/content reflow or the size tier below.
+   Every line runs UNDER the hub plate (z-index below it, above nothing else)
+   so it visually disappears behind the plate and "continues" on the other
+   side — the line quite literally goes through the Mowi logo, not just near
+   it.
+
+   .is-fluid (email-triage only) is a wholly separate, independent variant —
+   no fixed height, no cap on how many result cards exist or how tall any one
+   of them gets (the "Offerte-concept" card is taller than a plain result by
+   design). The task column and hub are grouped into their own sub-grid
+   (.showcase-left-group) specifically so the result column's height can
+   never feed back into where the task column or hub sit — see that rule's
+   own comment. It fully overrides grid-template-columns/rows below and never
+   relies on this 3-column/4-row setup. */
 .hero-showcase {
   display: grid;
   position: relative;
-  /* The ghost's arrival uses --ease-bounce, which briefly overshoots past
-     its resting position — harmless at wide viewports, but on a narrow
-     phone the result column sits close enough to the edge that the
-     overshoot alone could push it into horizontal page-scroll territory.
-     Contain it here rather than tuning the easing away. */
   overflow: hidden;
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   grid-template-rows: repeat(4, auto);
@@ -3280,34 +3300,99 @@ a.pill:hover {
   }
 }
 
-/* Putting the showcase back in 2-column mode for MacBook-width devices (see
-   .hero-with-visual's `hover:hover`/`pointer:fine` rule above) reintroduced
-   the exact card-text-wrap problem the single-column fallback exists to
-   avoid — confirmed via the same Playwright line-count sweep, now run
-   without touch emulation: 3-line wraps on the same labels, across the same
-   1024-1365px range, just on a device with a mouse instead of a finger. The
-   showcase's own task/result cards, hub plate, and column gaps all only have
-   ONE size-up breakpoint (43.75rem) with no upper bound, so they render at
-   full desktop size at MacBook-tablet widths regardless of how little room
-   the 2-column split actually leaves them. This tier shrinks all three
-   together — card font/padding, hub plate, column gap — scoped to the exact
-   same `64rem-85.3125rem` + `hover:hover`/`pointer:fine` condition as the
-   grid rule, so it only ever applies where that rule put the showcase back
-   into 2 columns. MUST come after every other `(min-width: 43.75rem)` block
-   above touching these same selectors — same specificity, so source order
-   decides, and an earlier position here was silently overridden by those
-   (a real bug caught by re-measuring computed styles, not just eyeballing
-   the CSS). Target was "never 3 lines" (2-line wraps on the longest labels
-   are pre-existing and already accepted at real desktop widths — see the
-   flagged `/agents/email-triage.html` case — not something this needs to
-   eliminate), verified empirically rather than purely computed: iterated
-   against a Playwright sweep across all 6 `.hero-with-visual` pages until
-   zero 3-line results remained anywhere in this range. */
-@media (min-width: 64rem) and (max-width: 85.3125rem) and (hover: hover) and (pointer: fine) {
-  .hero-showcase {
+/* No fixed height, no cap on content height — the whole point is that this
+   one is allowed to be as tall as its content needs. grid-template-rows:none
+   cancels the base's explicit 4-row definition (this variant's own 2
+   children, .showcase-left-group and .showcase-col-result, form a single
+   implicit row, so the base's row-gap would never have applied in practice —
+   reset here anyway so that stays true regardless of the base's own rules).
+   align-items:start (grid default would stretch both columns to the taller
+   one's height, which is harmless visually here since neither column's CSS
+   relies on 100% height, but start is the honest, intention-revealing
+   value: two independent columns, not two stretched panes.) */
+.hero-showcase.is-fluid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-rows: none;
+  align-items: start;
+  column-gap: 0.625rem;
+}
+
+@media (min-width: 43.75rem) {
+  .hero-showcase.is-fluid {
+    column-gap: 1.75rem;
+  }
+}
+
+/* Groups the task column with the hub so the hub centers against the task
+   column's own (fixed, 4-card) height specifically — NOT the result
+   column's, which is free to grow arbitrarily taller. Without this
+   grouping, hub and task-col would be siblings in the same outer grid row
+   as the result column, and that row's height (hence the hub's centered
+   position within it) would be whatever the TALLEST of the three is —
+   meaning the hub would visibly drift downward every time a new result
+   card made the right side taller. This is the one piece of the "left side
+   never moves" requirement that isn't just "don't stretch it" — it needs
+   its own layout scope entirely. */
+.showcase-left-group {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: 0.625rem;
+}
+
+@media (min-width: 43.75rem) {
+  .showcase-left-group {
     column-gap: 1rem;
   }
+}
 
+/* .is-fluid only: has just 2 explicit grid columns (left-group, result), so
+   .showcase-col-result needs its own grid-column:2 — it's a flex child of
+   .showcase-col elsewhere (no grid-column of its own to override). */
+.hero-showcase.is-fluid .showcase-col-result {
+  grid-column: 2;
+}
+
+/* .is-fluid only: one column = one of the two 4-card lists (task or
+   result), stacked with a fixed gap — natural height, never stretched,
+   which is exactly what this variant needs. */
+.showcase-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+@media (min-width: 43.75rem) {
+  .showcase-col {
+    gap: 0.625rem;
+  }
+}
+
+/* The showcase stays in 2-column mode continuously from 64rem (see
+   .hero-with-visual above) — at 1024-1365px specifically ("iPad Pro" width,
+   whether the device is actually a tablet, a MacBook, or a dev-tools resize)
+   that leaves its task/result column only ~148px wide, while the cards
+   themselves only have ONE size-up breakpoint (43.75rem) with no upper
+   bound, so they'd otherwise render at full desktop size regardless of how
+   little room they actually have — wrapping the longer labels ("Klant
+   gewijzigd in CRM", "Alleen e-mailadres bekend") onto 2-3 lines. This tier
+   shrinks card font/padding, hub plate, and column gap together for exactly
+   that width range, unconditionally — no touch/pointer detection, pure
+   width, so it looks the same on every device and every way of testing it
+   (see .hero-with-visual's own comment for why an earlier, pointer-based
+   version of this was abandoned). MUST come after every other
+   `(min-width: 43.75rem)` block above touching these same selectors — same
+   specificity, so source order decides, and an earlier position here was
+   silently overridden by those (a real bug caught by re-measuring computed
+   styles, not just eyeballing the CSS). Target was "never 3 lines" (2-line
+   wraps on the longest labels are pre-existing and already accepted at real
+   desktop widths — see the flagged `/agents/email-triage.html` case — not
+   something this needs to eliminate), verified empirically rather than
+   purely computed: iterated against a Playwright sweep across all 6
+   `.hero-with-visual` pages until zero 3-line results remained anywhere in
+   this range. */
+@media (min-width: 64rem) and (max-width: 85.3125rem) {
   .showcase-task,
   .showcase-result {
     gap: 0.5rem;
@@ -3372,6 +3457,13 @@ a.pill:hover {
   stroke-dashoffset: 1;
 }
 
+/* Direct grid items of .hero-showcase's 3-column/4-row grid (their exact
+   row is set inline per card via style="grid-row: N" in the HTML, so task[i]
+   and result[i] always land on the same row regardless of source order).
+   .is-fluid's own task/result cards are flex children of .showcase-col
+   instead (see that rule) — grid-column/grid-row are simply inert on them
+   there, harmless to leave shared. position:relative is for z-index, to
+   stack above .showcase-lines (the connector-line SVG). */
 .showcase-task {
   grid-column: 1;
   position: relative;
@@ -3382,14 +3474,294 @@ a.pill:hover {
   grid-column: 3;
   position: relative;
   z-index: 1;
+}
+
+/* Shared by every result-side card type (.showcase-result, .showcase-
+   compose, .showcase-offerte-card) — one is-pending/reveal treatment and
+   one JS marker class (querySelectorAll(".showcase-endpoint") is how
+   js/main.js finds "the 4 outcome cards" regardless of which type each one
+   is), instead of each card type redefining the same opacity/transform
+   rules. is-pending is only ever added by JS (gated behind
+   !prefersReducedMotion, same convention as everywhere else on the site),
+   so the base/no-modifier state — real content, fully visible — is also
+   the reduced-motion/no-JS end state. */
+.showcase-endpoint {
   opacity: 1;
   transform: scale(1);
   transition: opacity 0.4s ease, transform 0.4s var(--ease-bounce);
 }
 
-.showcase-result.is-pending {
+.showcase-endpoint.is-pending {
   opacity: 0;
   transform: scale(0.85);
+}
+
+/* Compact concept-reply card — the agent visibly drafting a response after
+   a reply-type mail lands in its category (see agents/email-triage.html and
+   js/main.js's typeComposeCard). Default/no-modifier state is the FINISHED
+   look (full line, visible skeleton, visible badge) — that's also the
+   reduced-motion/no-JS end state, same convention as every other showcase
+   card on the site.
+   min-height is the same font-load-reflow defense as .showcase-task (see
+   its own comment): even though .showcase-compose-line is nowrap (can't
+   itself wrap), the CARD's overall height still measurably shifted by 16px
+   between the fallback font and Plus Jakarta Sans in testing — small
+   cross-element font-metric differences (header, tag, line, skeleton,
+   badge each a few sub-pixels off) add up across several stacked rows.
+   Pinning min-height to the settled, real-font measurement removes the gap
+   layout could ever shift into, regardless of load timing or which row
+   this card happens to occupy in the result column. */
+.showcase-compose {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1875rem;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: 0.375rem 0.5rem;
+  min-height: 4.25rem;
+}
+
+@media (min-width: 43.75rem) {
+  .showcase-compose {
+    gap: 0.25rem;
+    padding: 0.625rem 0.75rem;
+    min-height: 5.625rem;
+  }
+}
+
+.showcase-compose-headrow {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.showcase-compose-header {
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+@media (min-width: 43.75rem) {
+  .showcase-compose-header {
+    font-size: 0.625rem;
+  }
+}
+
+/* Small category tag next to the header — same information the old,
+   separate result badge used to carry ("Support", "Sales"), folded into
+   this card instead of a second card, per the compressed-beat spec. */
+.showcase-compose-tag {
+  font-size: 0.5rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  background: var(--color-accent-soft);
+  border-radius: 999px; /* deliberate exception, same precedent as the skeleton bar below */
+  padding: 0.0625rem 0.375rem;
+}
+
+@media (min-width: 43.75rem) {
+  .showcase-compose-tag {
+    font-size: 0.5625rem;
+  }
+}
+
+.showcase-compose-line {
+  margin: 0;
+  font-size: 0.5625rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--color-text);
+  /* Guarantees exactly one line — required for the fixed slot height to
+     hold, and matches the given copy's own trailing "…", which now reads
+     as a deliberate truncation rather than an accident either way. */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (min-width: 43.75rem) {
+  .showcase-compose-line {
+    font-size: 0.75rem;
+  }
+}
+
+/* Deliberately NOT real text — one placeholder bar standing in for the
+   rest of a reply the demo doesn't need to fully write out (see CLAUDE.md's
+   "no lorem beyond the deliberate skeleton lines" allowance for this exact
+   component — compressed from two bars to one for the compact card).
+   border-radius:999px is an explicit exception to the site's zeroed-out
+   radius tokens, same precedent as the hub plate/pills — reads as a soft
+   text-line shape, not another square card edge. */
+.showcase-compose-skeleton {
+  display: block;
+  height: 0.375rem;
+  width: 70%;
+  border-radius: 999px;
+  background: var(--color-border);
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+@media (min-width: 43.75rem) {
+  .showcase-compose-skeleton {
+    height: 0.5rem;
+  }
+}
+
+.showcase-compose-skeleton.is-hidden {
+  opacity: 0;
+}
+
+/* Same one-off green as .showcase-check (see its own comment) — "done"
+   needs a color the ink/accent/border palette doesn't have, reused here
+   rather than introducing a second green. */
+.showcase-compose-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.5rem;
+  font-weight: 700;
+  color: #4a7a52;
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.3s ease, transform 0.3s var(--ease-bounce);
+}
+
+@media (min-width: 43.75rem) {
+  .showcase-compose-badge {
+    font-size: 0.625rem;
+  }
+}
+
+.showcase-compose-badge.is-hidden {
+  opacity: 0;
+  transform: scale(0.85);
+}
+
+.showcase-compose-badge .showcase-check {
+  width: 0.625rem;
+  height: 0.625rem;
+}
+
+@media (min-width: 43.75rem) {
+  .showcase-compose-badge .showcase-check {
+    width: 0.8125rem;
+    height: 0.8125rem;
+  }
+}
+
+.showcase-compose-badge .showcase-check svg {
+  width: 0.4rem;
+  height: 0.4rem;
+}
+
+/* Offerte-concept card (email-triage only, Offerteaanvraag's result) — the
+   agent's biggest time-saver, so deliberately the richest/tallest card in
+   the showcase: three field rows that visibly fill in one by one (see
+   js/main.js's playOfferteBeat), a totals-line skeleton, the "Offerte
+   klaargezet" badge (reuses .showcase-compose-badge/-header/-skeleton as-is
+   — same visual language, no reason to duplicate them), and a muted
+   closing line making the human-in-the-loop point explicit: the agent
+   fills it in, a person still has to press send. Allowed to be taller than
+   every other card on the page — that's the whole point of decoupling the
+   result column's height from the task column's (see .hero-showcase.is-
+   fluid above) — so nothing here is size-constrained the way the fixed-
+   stage cards are. */
+.showcase-offerte-card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: 0.5rem 0.625rem;
+  /* Same font-load-reflow defense as .showcase-compose above — settled
+     measurement, not computed, for the same reason. */
+  min-height: 8.125rem;
+}
+
+@media (min-width: 43.75rem) {
+  .showcase-offerte-card {
+    gap: 0.3125rem;
+    padding: 0.75rem 0.875rem;
+    min-height: 10.375rem;
+  }
+}
+
+/* Each field row is hidden/shown as one unit (label stays put, value +
+   checkmark are what actually "fill in" — the label is the part of a form
+   that's already there before you fill it, the value+check are the part
+   the agent just supplied) — js/main.js reveals these one at a time with a
+   stagger, not all together. */
+.showcase-offerte-field {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.5625rem;
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 0.3s ease, transform 0.3s var(--ease-out);
+}
+
+@media (min-width: 43.75rem) {
+  .showcase-offerte-field {
+    gap: 0.5rem;
+    font-size: 0.6875rem;
+  }
+}
+
+.showcase-offerte-field.is-hidden {
+  opacity: 0;
+  transform: translateX(-6px);
+}
+
+.showcase-offerte-field-label {
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+}
+
+.showcase-offerte-field-value {
+  flex: 1 1 auto;
+  min-width: 0;
+  color: var(--color-text);
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.showcase-offerte-field .showcase-check {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+/* Explicitly NOT "Offerte verstuurd" anywhere in this card, including here
+   — the agent prepares it, a human sends it. See CLAUDE.md-adjacent product
+   framing: this is the one place on the site that draws that line visually,
+   not just in copy. */
+.showcase-offerte-closing {
+  font-size: 0.5rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+@media (min-width: 43.75rem) {
+  .showcase-offerte-closing {
+    font-size: 0.625rem;
+  }
+}
+
+.showcase-offerte-closing.is-hidden {
+  opacity: 0;
 }
 
 .showcase-hub {

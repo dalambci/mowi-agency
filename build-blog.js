@@ -16,7 +16,7 @@ const ROOT = __dirname;
 const CONTENT_DIR = path.join(ROOT, "content", "blog");
 const OUTPUT_DIR = path.join(ROOT, "blog");
 const SITE_URL = "https://mowi.agency";
-const CSS_VERSION = "20260805-2"; // bump alongside every css/style.css edit
+const CSS_VERSION = "20260805-6"; // bump alongside every css/style.css edit
 // Website & Conversion plan, Phase 1: Plausible, no cookie banner needed.
 // data-domain must exactly match the account Sal creates at plausible.io.
 const PLAUSIBLE_SNIPPET = `<script defer data-domain="mowi.agency" src="https://plausible.io/js/script.js"></script>`;

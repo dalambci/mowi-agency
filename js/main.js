@@ -595,11 +595,91 @@ if (showcaseHub && !prefersReducedMotion) {
 }
 
 const showcaseTaskEls = [...document.querySelectorAll(".hero-showcase .showcase-task")];
-const showcaseResultEls = [...document.querySelectorAll(".hero-showcase .showcase-result")];
+// .showcase-endpoint, not .showcase-result: on email-triage two of the four
+// outcomes are richer card types (.showcase-compose, .showcase-offerte-card)
+// that need the exact same is-pending/reveal/connector-line treatment as a
+// plain .showcase-result — see that class's own comment in css/style.css.
+// Order matches showcaseTaskEls 1:1 (index i's outcome belongs to task i).
+const showcaseResultEls = [...document.querySelectorAll(".hero-showcase .showcase-endpoint")];
 const showcaseGhost = document.getElementById("showcaseGhost");
 const showcaseEl = document.querySelector(".hero-showcase");
 const showcaseLinesSvg = document.getElementById("showcaseLines");
 const SVG_NS = "http://www.w3.org/2000/svg";
+
+// Types cardEl's line letter by letter (compose cards only — every other
+// card type has no .showcase-compose-line and just holds for a flat
+// ~1200ms), then fades in its one skeleton line and finally the "Concept
+// klaar" badge. Calls onDone once it's sat on the finished state for a beat.
+function typeComposeCard(cardEl, onDone) {
+  const lineEl = cardEl.querySelector(".showcase-compose-line");
+  if (!lineEl) {
+    setTimeout(onDone, 1200);
+    return;
+  }
+  const skeleton = cardEl.querySelector(".showcase-compose-skeleton");
+  const badge = cardEl.querySelector(".showcase-compose-badge");
+  // dataset.fullText was stashed by the initial setup above (the line's own
+  // textContent was already cleared then, to avoid a flash of the finished
+  // sentence before typing starts) — fall back to textContent for safety if
+  // this is ever called without that setup having run first.
+  const fullText = lineEl.dataset.fullText || lineEl.textContent;
+  lineEl.textContent = "";
+  if (skeleton) skeleton.classList.add("is-hidden");
+  if (badge) badge.classList.add("is-hidden");
+
+  let charIndex = 0;
+  function typeChar() {
+    lineEl.textContent = fullText.slice(0, charIndex);
+    if (charIndex < fullText.length) {
+      charIndex += 1;
+      setTimeout(typeChar, 14); // fast — "watching the agent write", not reading along
+      return;
+    }
+    setTimeout(() => {
+      if (skeleton) skeleton.classList.remove("is-hidden");
+      setTimeout(() => {
+        if (badge) badge.classList.remove("is-hidden");
+        setTimeout(onDone, 350); // hold on the finished badge briefly before the cycle moves on
+      }, 250);
+    }, 150); // brief pause between "typing stops" and "skeleton appears"
+  }
+  typeChar();
+}
+
+// Reveals cardEl's field rows one at a time (each a fade+slide-in, not a
+// per-character type — three separate "fill" actions in ~1.5s reads as
+// "quick fill", not a typing effect, which is reserved for prose), then the
+// totals skeleton, then the "Offerte klaargezet" badge, then the closing
+// "Alleen nog versturen" line. ~2.5-3s end to end. Calls onDone once it's
+// sat on the finished state for a beat. Offerteaanvraag's own beat — the
+// biggest time-saver, deliberately the longest/richest reveal on the page.
+function playOfferteBeat(cardEl, onDone) {
+  const fields = [...cardEl.querySelectorAll(".showcase-offerte-field")];
+  const skeleton = cardEl.querySelector(".showcase-compose-skeleton");
+  const badge = cardEl.querySelector(".showcase-compose-badge");
+  const closing = cardEl.querySelector(".showcase-offerte-closing");
+
+  fields.forEach((f) => f.classList.add("is-hidden"));
+  if (skeleton) skeleton.classList.add("is-hidden");
+  if (badge) badge.classList.add("is-hidden");
+  if (closing) closing.classList.add("is-hidden");
+
+  const FIELD_STAGGER = 450;
+  fields.forEach((f, idx) => {
+    setTimeout(() => f.classList.remove("is-hidden"), 200 + idx * FIELD_STAGGER);
+  });
+
+  setTimeout(() => {
+    if (skeleton) skeleton.classList.remove("is-hidden");
+    setTimeout(() => {
+      if (badge) badge.classList.remove("is-hidden");
+      setTimeout(() => {
+        if (closing) closing.classList.remove("is-hidden");
+        setTimeout(onDone, 450); // hold on the finished card, longest of the three reveal types — this is the beat that has to land
+      }, 300);
+    }, 300);
+  }, 200 + fields.length * FIELD_STAGGER);
+}
 
 // Every card's actual box, in pixels relative to the showcase container —
 // recomputed on demand (never cached) so it's always correct after a
@@ -617,14 +697,15 @@ function showcaseRectOf(el) {
   };
 }
 
-// Draws one line per task->hub and hub->result leg, all 8 meeting exactly
-// at the hub's own center — real geometry, not approximated, so every line
-// genuinely touches both the card it starts from and the hub it ends at
-// (the hub plate's higher z-index then visually covers the convergence
-// point, so each pair reads as one line passing straight through the logo).
-// The task->hub half is always visible (task cards are always visible); the
-// hub->result half only appears once its result card actually has — never
-// drawn in ahead of a card that hasn't shown up yet.
+// Draws one line per task->hub leg plus one per hub->result leg, for every
+// page alike — every .showcase-endpoint is a real, stable element from
+// first paint (see showcaseResultEls above), so there's always a genuine
+// target to point to; nothing free-floating, nothing computed against a
+// stale position. All lines meet exactly at the hub's own center — real
+// geometry, not approximated, so they always genuinely touch both the card
+// and the hub (the hub plate's higher z-index then
+// covers the convergence point, so each pair reads as one line passing
+// straight through the logo).
 function drawShowcaseLines() {
   if (!showcaseEl || !showcaseLinesSvg || !showcaseHub || !showcaseTaskEls.length) return;
   const containerRect = showcaseEl.getBoundingClientRect();
@@ -637,10 +718,7 @@ function drawShowcaseLines() {
   const hub = showcaseRectOf(showcaseHub);
 
   showcaseTaskEls.forEach((taskEl, i) => {
-    const resultEl = showcaseResultEls[i];
-    if (!resultEl) return;
     const task = showcaseRectOf(taskEl);
-    const result = showcaseRectOf(resultEl);
 
     const taskLine = document.createElementNS(SVG_NS, "line");
     taskLine.setAttribute("x1", task.right);
@@ -649,6 +727,10 @@ function drawShowcaseLines() {
     taskLine.setAttribute("y2", hub.centerY);
     taskLine.dataset.row = String(i);
     showcaseLinesSvg.appendChild(taskLine);
+
+    const resultEl = showcaseResultEls[i];
+    if (!resultEl) return;
+    const result = showcaseRectOf(resultEl);
 
     const resultLine = document.createElementNS(SVG_NS, "line");
     resultLine.setAttribute("x1", hub.centerX);
@@ -681,8 +763,36 @@ function setShowcaseResultLineVisible(index, visible) {
 // Results start hidden (see the "Desktop/tablet" block below) before the
 // very first line draw, so is-pending is already correct by the time
 // drawShowcaseLines() first reads it — order matters here.
+//
+// Compose/offerte cards ALSO need their own internal reveal-able parts
+// (typed line, fields, skeleton, badge) hidden right now, not just left for
+// their beat function to hide 250ms after the card itself appears — a real
+// bug caught by continuous polling, not a one-off spot check: without this,
+// the card's default (finished) state is briefly visible the instant
+// is-pending is removed, THEN the beat clears and replays everything,
+// reading as a flash before the "real" reveal starts. Text is stashed to
+// dataset.fullText before clearing so typeComposeCard still has the real
+// sentence to retype later.
 if (showcaseHub && !prefersReducedMotion) {
-  showcaseResultEls.forEach((el) => el.classList.add("is-pending"));
+  showcaseResultEls.forEach((el) => {
+    el.classList.add("is-pending");
+    if (el.classList.contains("showcase-compose")) {
+      const lineEl = el.querySelector(".showcase-compose-line");
+      if (lineEl) {
+        lineEl.dataset.fullText = lineEl.textContent;
+        lineEl.textContent = "";
+      }
+      el.querySelectorAll(".showcase-compose-skeleton, .showcase-compose-badge").forEach((n) =>
+        n.classList.add("is-hidden")
+      );
+    } else if (el.classList.contains("showcase-offerte-card")) {
+      el
+        .querySelectorAll(
+          ".showcase-offerte-field, .showcase-compose-skeleton, .showcase-compose-badge, .showcase-offerte-closing"
+        )
+        .forEach((n) => n.classList.add("is-hidden"));
+    }
+  });
 }
 
 if (showcaseEl && showcaseLinesSvg) {
@@ -754,9 +864,20 @@ if (
       setTimeout(() => showcaseHub.classList.remove("is-processing"), 600);
 
       // Swap content to the result while parked at the hub (identical
-      // transform to where phase 1 ended, so nothing visibly jumps).
+      // transform to where phase 1 ended, so nothing visibly jumps). The
+      // offerte card is deliberately rich/wide (three field rows) — cloning
+      // its full innerHTML into the ghost read as a long line of text
+      // stretching almost out of the viewport while still mid-flight, a
+      // real visual bug caught live, not in the automated sweeps (nothing
+      // in those checks the GHOST's own content, only the real cards'
+      // final positions). A plain icon+label placeholder flies compactly
+      // instead, matching every other row's ghost — the rich card itself
+      // only ever appears once actually landed, where playOfferteBeat
+      // reveals it properly.
       showcaseGhost.className = "showcase-ghost showcase-result";
-      showcaseGhost.innerHTML = resultEl.innerHTML;
+      showcaseGhost.innerHTML = resultEl.classList.contains("showcase-offerte-card")
+        ? '<span class="showcase-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7" /></svg></span><span>Offerte-concept</span>'
+        : resultEl.innerHTML;
       showcaseGhost.style.transition = "none";
       showcaseGhost.style.transform = `translate(${toHub.x}px, ${toHub.y}px) scale(0.2)`;
       showcaseGhost.style.opacity = "0";
@@ -777,7 +898,7 @@ if (
           setShowcaseResultLineVisible(i, true);
           showcaseGhost.style.opacity = "0";
 
-          setTimeout(() => {
+          function finishRowAndAdvance() {
             desktopIndex += 1;
             if (desktopIndex >= showcaseTaskEls.length) {
               desktopIndex = 0;
@@ -789,7 +910,21 @@ if (
             } else {
               advanceDesktop();
             }
-          }, 1200); // hold on the completed result before the next task starts
+          }
+
+          // Which beat plays (if any) depends on the result card's own
+          // type — same convention as every other reveal on the site, just
+          // now with three possible card types instead of one:
+          //   .showcase-compose      -> typeComposeCard (~1.6s)
+          //   .showcase-offerte-card -> playOfferteBeat (~2.5-3s)
+          //   plain .showcase-result -> flat 1200ms hold, unchanged
+          if (resultEl.classList.contains("showcase-compose")) {
+            setTimeout(() => typeComposeCard(resultEl, () => setTimeout(finishRowAndAdvance, 400)), 250);
+          } else if (resultEl.classList.contains("showcase-offerte-card")) {
+            setTimeout(() => playOfferteBeat(resultEl, () => setTimeout(finishRowAndAdvance, 400)), 250);
+          } else {
+            setTimeout(finishRowAndAdvance, 1200);
+          }
         }, 800); // matches the fly-to-result transition duration
       }, 550); // brief pause "inside" the hub before flying back out
     }, 800); // matches the fly-to-hub transition duration
