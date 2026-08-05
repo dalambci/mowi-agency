@@ -8,8 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260805-8" />
-  <link rel="stylesheet" href="css/hero-anim-trainingen.css?v=20260805-4" />
+  <link rel="stylesheet" href="css/style.css?v=20260805-15" />
+  <link rel="stylesheet" href="css/hero-anim-trainingen.css?v=20260806-4" />
   <link rel="icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="shortcut icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260804-3" />
@@ -110,120 +110,74 @@
           <a href="#aanbod" class="card-link" style="margin-top: 1rem; display: inline-block;">Bekijk het aanbod →</a>
         </div>
 
-        <!-- Hero animation: one canvas, a named cursor, two alternating
-             scenes (Power BI / AI-automation), each named after the actual
-             training that teaches it. Default-visible fallback (below) is
-             the reduced-motion/no-JS end state; the animated stage is a
-             JS-only enhancement (see hero-anim-trainingen.js). -->
+        <!-- Hero animation: one fixed-size card, four beats (one per
+             training), cycling on a loop. Default HTML state (beat 1
+             already active and fully ticked, all four dots visible) is
+             the reduced-motion/no-JS end state; hero-anim-trainingen.js
+             only ever resets and replays this same markup once motion is
+             confirmed allowed. -->
         <div class="hero-anim--trainingen" aria-hidden="true">
-          <div class="hero-anim--trainingen__fallback">
-            <div class="hero-anim--trainingen__fallback-panel">
-              <div class="hero-anim--trainingen__tag">Na Power BI · Basis</div>
-              <div class="hero-anim--trainingen__fallback-chart">
-                <div class="hero-anim--trainingen__fallback-bar"></div>
-                <div class="hero-anim--trainingen__fallback-bar"></div>
-                <div class="hero-anim--trainingen__fallback-bar"></div>
-                <div class="hero-anim--trainingen__fallback-bar"></div>
-              </div>
-              <div class="hero-anim--trainingen__badge is-visible">
-                <span class="hero-anim--trainingen__badge-check">✓</span>
-                <span class="hero-anim--trainingen__badge-label">Dashboard staat</span>
-              </div>
-            </div>
-            <div class="hero-anim--trainingen__fallback-panel">
-              <div class="hero-anim--trainingen__tag">Na Automatiseren met AI · Gevorderd</div>
-              <div class="hero-anim--trainingen__fallback-flow">
-                <span class="hero-anim--trainingen__fallback-node">Mail binnen</span>
-                <span class="hero-anim--trainingen__fallback-node">Gegevens uitlezen</span>
-                <span class="hero-anim--trainingen__fallback-node">In systeem zetten</span>
-              </div>
-              <div class="hero-anim--trainingen__badge is-visible">
-                <span class="hero-anim--trainingen__badge-check">✓</span>
-                <span class="hero-anim--trainingen__badge-label">Workflow actief</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="hero-anim--trainingen__stage">
-            <div class="hero-anim--trainingen__tag">Na Power BI · Basis</div>
-            <div class="hero-anim--trainingen__badge">
-              <span class="hero-anim--trainingen__badge-check">✓</span>
-              <span class="hero-anim--trainingen__badge-label">Dashboard staat</span>
-            </div>
-            <div class="hero-anim--trainingen__canvas">
-              <!-- Scene 1: Power BI -->
-              <div class="hero-anim--trainingen__scene" data-scene="1">
-                <div class="hero-anim--trainingen__chart">
-                  <div class="hero-anim--trainingen__chart-drop">Sleep de grafiek hierheen</div>
-                  <div class="hero-anim--trainingen__chart-bars">
-                    <div class="hero-anim--trainingen__bar"></div>
-                    <div class="hero-anim--trainingen__bar"></div>
-                    <div class="hero-anim--trainingen__bar"></div>
-                    <div class="hero-anim--trainingen__bar"></div>
+          <div class="hero-anim--trainingen__card">
+            <span class="hero-anim--trainingen__eyebrow">Trainingen</span>
+            <div class="hero-anim--trainingen__beats">
+              <div class="hero-anim--trainingen__beat is-active">
+                <h3 class="hero-anim--trainingen__header">Power BI · Basis</h3>
+                <div class="hero-anim--trainingen__skills">
+                  <div class="hero-anim--trainingen__skill is-visible">
+                    <span class="hero-anim--trainingen__check">✓</span>
+                    <span class="hero-anim--trainingen__skill-label">Maakt zelf rapporten</span>
                   </div>
-                  <div class="hero-anim--trainingen__chart-meta">
-                    <span class="hero-anim--trainingen__chart-label">Omzet per regio · Q3</span>
-                    <span class="hero-anim--trainingen__filter-pill">Noord-Holland</span>
+                  <div class="hero-anim--trainingen__skill is-visible">
+                    <span class="hero-anim--trainingen__check">✓</span>
+                    <span class="hero-anim--trainingen__skill-label">Stelt KPI's op</span>
                   </div>
                 </div>
-                <div class="hero-anim--trainingen__kpi">
-                  <div class="hero-anim--trainingen__kpi-label">Omzet</div>
-                  <div class="hero-anim--trainingen__kpi-value">€0</div>
+              </div>
+              <div class="hero-anim--trainingen__beat">
+                <h3 class="hero-anim--trainingen__header">Power BI · Gevorderd</h3>
+                <div class="hero-anim--trainingen__skills">
+                  <div class="hero-anim--trainingen__skill">
+                    <span class="hero-anim--trainingen__check">✓</span>
+                    <span class="hero-anim--trainingen__skill-label">Schrijft DAX</span>
+                  </div>
+                  <div class="hero-anim--trainingen__skill">
+                    <span class="hero-anim--trainingen__check">✓</span>
+                    <span class="hero-anim--trainingen__skill-label">Modelleert data</span>
+                  </div>
                 </div>
               </div>
-
-              <!-- Scene 2: Automatiseren met AI -->
-              <div class="hero-anim--trainingen__scene" data-scene="2">
-                <div class="hero-anim--trainingen__flow">
-                  <svg class="hero-anim--trainingen__flow-lines"></svg>
-                  <div class="hero-anim--trainingen__node">
-                    <div class="hero-anim--trainingen__node-dot">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="3" y="5" width="18" height="14" rx="2" />
-                        <path d="M3 7l9 6 9-6" />
-                      </svg>
-                    </div>
-                    <div class="hero-anim--trainingen__node-label">Mail binnen</div>
+              <div class="hero-anim--trainingen__beat">
+                <h3 class="hero-anim--trainingen__header">Automatiseren met AI · Basis</h3>
+                <div class="hero-anim--trainingen__skills">
+                  <div class="hero-anim--trainingen__skill">
+                    <span class="hero-anim--trainingen__check">✓</span>
+                    <span class="hero-anim--trainingen__skill-label">Herkent automatiseerbare taken</span>
                   </div>
-                  <div class="hero-anim--trainingen__node">
-                    <div class="hero-anim--trainingen__node-dot">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M4 6a2 2 0 012-2h12a2 2 0 012 2v7a2 2 0 01-2 2H10l-4 3.5V15a2 2 0 01-2-2V6z" />
-                        <circle cx="9" cy="9.5" r="0.4" fill="currentColor" stroke="none" />
-                        <circle cx="12" cy="9.5" r="0.4" fill="currentColor" stroke="none" />
-                        <circle cx="15" cy="9.5" r="0.4" fill="currentColor" stroke="none" />
-                      </svg>
-                    </div>
-                    <div class="hero-anim--trainingen__node-label">Gegevens uitlezen</div>
-                  </div>
-                  <div class="hero-anim--trainingen__node">
-                    <div class="hero-anim--trainingen__node-dot">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                        <ellipse cx="12" cy="6" rx="7" ry="3" />
-                        <path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6" />
-                        <path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6" />
-                      </svg>
-                    </div>
-                    <div class="hero-anim--trainingen__node-label">In systeem zetten</div>
+                  <div class="hero-anim--trainingen__skill">
+                    <span class="hero-anim--trainingen__check">✓</span>
+                    <span class="hero-anim--trainingen__skill-label">Zet AI verantwoord in</span>
                   </div>
                 </div>
-                <div class="hero-anim--trainingen__toggle-row">
-                  <div class="hero-anim--trainingen__toggle"><div class="hero-anim--trainingen__toggle-knob"></div></div>
-                  <span class="hero-anim--trainingen__status-pill"></span>
+              </div>
+              <div class="hero-anim--trainingen__beat">
+                <h3 class="hero-anim--trainingen__header">Automatiseren met AI · Gevorderd</h3>
+                <div class="hero-anim--trainingen__skills">
+                  <div class="hero-anim--trainingen__skill">
+                    <span class="hero-anim--trainingen__check">✓</span>
+                    <span class="hero-anim--trainingen__skill-label">Bouwt workflows</span>
+                  </div>
+                  <div class="hero-anim--trainingen__skill">
+                    <span class="hero-anim--trainingen__check">✓</span>
+                    <span class="hero-anim--trainingen__skill-label">Koppelt AI-systemen</span>
+                  </div>
                 </div>
-                <div class="hero-anim--trainingen__counter"></div>
               </div>
             </div>
-
-            <div class="hero-anim--trainingen__cursor">
-              <svg class="hero-anim--trainingen__cursor-arrow" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M5 3l14 8.5-6.2 1.3L11 19.5z" />
-              </svg>
-              <span class="hero-anim--trainingen__click-ring"></span>
-              <div class="hero-anim--trainingen__cursor-info">
-                <span class="hero-anim--trainingen__pill">Anna · Officemanager</span>
-                <span class="hero-anim--trainingen__drag-chip">📊 Grafiek</span>
-              </div>
+            <div class="hero-anim--trainingen__dots">
+              <span class="hero-anim--trainingen__dot is-active"></span>
+              <span class="hero-anim--trainingen__dot"></span>
+              <span class="hero-anim--trainingen__dot"></span>
+              <span class="hero-anim--trainingen__dot"></span>
             </div>
           </div>
         </div>
@@ -417,6 +371,6 @@
   </footer>
 
   <script src="js/main.js?v=20260805-6"></script>
-  <script src="js/hero-anim-trainingen.js?v=20260805-6"></script>
+  <script src="js/hero-anim-trainingen.js?v=20260806-1"></script>
 </body>
 </html>

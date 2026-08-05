@@ -16,7 +16,7 @@ const ROOT = __dirname;
 const CONTENT_DIR = path.join(ROOT, "content", "blog");
 const OUTPUT_DIR = path.join(ROOT, "blog");
 const SITE_URL = "https://mowi.agency";
-const CSS_VERSION = "20260805-7"; // bump alongside every css/style.css edit
+const CSS_VERSION = "20260805-15"; // bump alongside every css/style.css edit
 // Website & Conversion plan, Phase 1: Plausible, no cookie banner needed.
 // data-domain must exactly match the account Sal creates at plausible.io.
 const PLAUSIBLE_SNIPPET = `<script defer data-domain="mowi.agency" src="https://plausible.io/js/script.js"></script>`;
@@ -265,7 +265,7 @@ function headerHtml() {
               </div>
             </div>
           </li>
-          <li><a href="/#pricing">Tarieven</a></li>
+          <li><a href="/tarieven">Tarieven</a></li>
         </ul>
         <ul class="nav-group">
           <li><a href="/cases">Cases</a></li>
@@ -310,6 +310,7 @@ function footerHtml() {
         <a href="/agentic-ai">Agentic AI</a>
         <a href="/power-bi-dashboards">Power BI dashboards</a>
         <a href="/trainingen">Trainingen</a>
+        <a href="/tarieven">Tarieven</a>
         <a href="/blog/">Blog</a>
         <a href="/cases">Cases</a>
         <a href="/contact">Contact</a>
@@ -498,7 +499,7 @@ ${footerHtml()}
 
 function buildSitemap(posts) {
   const staticPages = [
-    "", "cases", "contact", "agentic-ai", "power-bi-dashboards", "trainingen", "docs/",
+    "", "cases", "contact", "agentic-ai", "power-bi-dashboards", "trainingen", "tarieven", "docs/",
   ];
   // docs/, agents/, koppelingen/ are all read from disk rather than hand-listed,
   // so a new page in any of those folders is in the sitemap the next time this

@@ -61,6 +61,24 @@ if (navToggle && mainNav) {
   });
 }
 
+// --- Contact CTAs: skip the Calendly-widget scroll on desktop ---------------
+// On mobile, jumping straight to the booking widget after tapping a CTA
+// reads as natural — it's right below the hero already. On desktop the
+// same jump can scroll a full page length past content the click had
+// nothing to do with, which reads as jarring rather than helpful; land on
+// the page itself instead (and if already on /contact, just stay put —
+// no scroll at all). Checked at click time, not once at load, against the
+// site's own mobile/desktop nav breakpoint (48rem, see .main-nav above in
+// style.css), so a resize between load and click is still honored.
+document.querySelectorAll('a[href$="#calendly-widget"]').forEach((link) => {
+  link.addEventListener("click", (event) => {
+    if (!window.matchMedia("(min-width: 48rem)").matches) return; // mobile: keep the native scroll
+    event.preventDefault();
+    const target = link.getAttribute("href").replace("#calendly-widget", "");
+    if (target) window.location.href = target;
+  });
+});
+
 // --- Nav dropdown ("Products" mega-menu) ---------------------------------------
 // Click-to-toggle here; hover-to-open at desktop/tablet widths is pure CSS
 // (see .nav-dropdown:hover in style.css) and needs no JS. This stays wired

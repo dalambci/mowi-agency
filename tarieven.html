@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tarieven — AI-agents voor het MKB | Mowi</title>
+  <meta name="description" content="Een eenmalige setup op basis van de inventarisatie, daarna een vast maandbedrag per agent — alles inbegrepen. Bekijk de pakketten." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css?v=20260805-15" />
+  <link rel="icon" href="assets/icon-192.png?v=20260804-3" />
+  <link rel="shortcut icon" href="assets/icon-192.png?v=20260804-3" />
+  <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260804-3" />
+  <link rel="apple-touch-icon-precomposed" href="assets/apple-icon-180.png?v=20260804-3" />
+  <script defer data-domain="mowi.agency" src="https://plausible.io/js/script.js"></script>
+  <script src="js/broken-image-guard.js?v=20260805-1"></script>
+</head>
+<body>
+
+  <!-- ===== Header ===== -->
+  <header class="site-header">
+    <div class="header-bar">
+      <span class="header-cta-slot">
+        <a href="contact#calendly-widget" class="header-cta" data-event="CTA Click">
+          <span class="header-cta-full">Gratis adviesgesprek</span><span class="header-cta-short">Adviesgesprek</span>
+        </a>
+      </span>
+
+      <nav class="main-nav" id="main-nav" aria-label="Hoofdmenu">
+        <ul class="nav-group">
+          <li class="nav-dropdown">
+            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="products-menu" aria-haspopup="true">
+              Products
+              <span class="nav-dropdown-icon" aria-hidden="true"></span>
+            </button>
+            <!-- English labels are deliberate here — see CLAUDE.md's Language & tone exception. -->
+            <div class="nav-megamenu" id="products-menu">
+              <div class="nav-megamenu-col">
+                <p class="nav-megamenu-label">Platform</p>
+                <ul>
+                  <li><a href="agentic-ai">Agentic AI</a></li>
+                  <li><a href="power-bi-dashboards">Power BI</a></li>
+                  <li><a href="trainingen">Trainingen</a></li>
+                </ul>
+              </div>
+              <div class="nav-megamenu-col">
+                <p class="nav-megamenu-label">Automations</p>
+                <ul>
+                  <li><a href="agents/crm-sync">CRM sync</a></li>
+                  <li><a href="agents/email-triage">Email triage</a></li>
+                  <li><a href="agents/invoice-processing">Invoice processing</a></li>
+                  <li><a href="agents/lead-enrichment">Lead enrichment</a></li>
+                  <li><a href="agents/report-generator">Report generator</a></li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li><a href="tarieven" aria-current="page">Tarieven</a></li>
+        </ul>
+        <ul class="nav-group">
+          <li><a href="cases">Cases</a></li>
+          <li><a href="contact">Contact</a></li>
+        </ul>
+        <!-- Same CTA, shown only inside the open mobile menu -->
+        <a href="contact#calendly-widget" class="btn btn-primary header-cta-mobile" data-event="CTA Click">Gratis adviesgesprek</a>
+        <a href="https://dashboard.mowi.agency/login" class="header-dashboard-mobile" target="_blank" rel="noopener">Dashboard log in</a>
+      </nav>
+
+      <div class="header-logo-cell">
+        <a href="https://dashboard.mowi.agency/login" class="header-dashboard-btn" aria-label="Dashboard inloggen" target="_blank" rel="noopener">
+          <span class="header-dashboard-icon" aria-hidden="true"></span>
+        </a>
+        <a href="/" class="wordmark" aria-label="Mowi - home">
+          <img src="assets/mowi-icon.png" alt="" class="wordmark-icon" />
+          <img src="assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
+        </a>
+      </div>
+
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="main-nav" aria-label="Menu openen">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== Breadcrumb (hero heading removed per Sal — page opens straight
+         on the Pakketten heading below) ===== -->
+    <section class="container hero hero-crumb-only">
+      <div class="breadcrumb"><a href="/">Home</a> / Tarieven</div>
+    </section>
+
+    <!-- ===== Pakketten ===== -->
+    <section class="container section" id="pakketten">
+      <div class="section-head pakketten-head" data-reveal>
+        <h2>Kies wat past. Groei wanneer u wilt.</h2>
+      </div>
+
+      <div class="grid grid-3">
+        <!-- Start -->
+        <div class="card pricing-card" data-reveal>
+          <h3>Start</h3>
+          <p class="pricing-card-desc">1 agent naar keuze.</p>
+
+          <div class="pricing-price">
+            <span class="pricing-price-setup">Setup vanaf €500</span>
+            <span class="pricing-price-monthly">vanaf €40 <small>/maand</small></span>
+          </div>
+
+          <ul class="pricing-features">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>1 agent volledig ingericht</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Inventarisatie op locatie</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Koppeling met uw systeem</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Dashboard-toegang</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Monitoring via Needs attention</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Training voor uw team</span></li>
+          </ul>
+
+          <a href="contact#calendly-widget" class="card-link" data-event="CTA Click" data-event-card="start">Vraag een voorstel aan →</a>
+        </div>
+
+        <!-- Groei (featured) -->
+        <div class="card card-featured pricing-card" data-reveal>
+          <span class="pricing-badge">Aangeraden</span>
+          <h3>Groei</h3>
+          <p class="pricing-card-desc">2–3 agents naar keuze.</p>
+
+          <div class="pricing-price">
+            <span class="pricing-price-setup">Setup vanaf €1.000</span>
+            <span class="pricing-price-monthly">vanaf €100 <small>/maand</small></span>
+          </div>
+
+          <ul class="pricing-features">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>2–3 agents naar keuze</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Alles uit Start</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Agents werken samen (bijv. Email triage → Invoice processing)</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Prioriteit bij storingen</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Kwartaal-optimalisatie op basis van run-data</span></li>
+          </ul>
+
+          <a href="contact#calendly-widget" class="card-link" data-event="CTA Click" data-event-card="groei">Vraag een voorstel aan →</a>
+        </div>
+
+        <!-- Compleet -->
+        <div class="card pricing-card" data-reveal>
+          <h3>Compleet</h3>
+          <p class="pricing-card-desc">Alle vijf agents + Power BI dashboard-traject.</p>
+
+          <div class="pricing-price">
+            <span class="pricing-price-setup">Setup vanaf €2.000</span>
+            <span class="pricing-price-monthly">vanaf €150 <small>/maand</small></span>
+          </div>
+
+          <ul class="pricing-features">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Alle vijf agents</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Power BI dashboard inbegrepen</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Alles uit Groei</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Jaarlijkse strategiesessie</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Eerste keuze bij nieuwe agent-types</span></li>
+          </ul>
+
+          <a href="contact#calendly-widget" class="card-link" data-event="CTA Click" data-event-card="compleet">Vraag een voorstel aan →</a>
+        </div>
+      </div>
+
+      <div class="pricing-maatwerk" data-reveal>
+        <p>Maatwerk of twijfel? Elke offerte start met een gratis adviesgesprek — exacte prijzen staan altijd in uw voorstel.</p>
+        <a href="contact#calendly-widget" class="card-link" data-event="CTA Click" data-event-card="maatwerk">Plan een adviesgesprek →</a>
+      </div>
+    </section>
+
+    <!-- ===== Altijd inbegrepen ===== -->
+    <section class="section section-tint">
+      <div class="container" style="max-width: 56rem;">
+        <div class="section-head center" data-reveal>
+          <span class="eyebrow">Altijd inbegrepen</span>
+          <h2>Waarom er een vast maandbedrag is.</h2>
+          <p class="lede" style="margin-top: 1rem;">
+            Het maandbedrag is geen abonnement op stilstand — het houdt uw agents actueel, veilig en werkend, ook
+            als de systemen eromheen veranderen.
+          </p>
+        </div>
+
+        <ul class="check-list" data-reveal>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Continue updates naar de nieuwste AI-modellen zodra ze beschikbaar zijn</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Onderhoud en storingsherstel</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Koppelingen die blijven werken, ook als Exact, AFAS of uw CRM hun API wijzigt</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>24/7 monitoring met Needs attention in uw dashboard</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Volledige run-historie — u ziet precies wat elke agent doet</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Beveiligingsupdates, encryptie en dagelijkse backups</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Verwerkersovereenkomst op aanvraag geregeld</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Vast aanspreekpunt</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Nieuwe dashboard-functies zonder meerprijs</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Periodieke optimalisatie van uw agents op basis van hun resultaten</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== Setup-uitleg ===== -->
+    <section class="container section">
+      <div class="section-head center" data-reveal>
+        <span class="eyebrow">De eenmalige setup</span>
+        <h2>Wat er gebeurt voordat een agent live gaat.</h2>
+      </div>
+
+      <div class="steps steps-3">
+        <div class="step" data-reveal>
+          <h3>Inventarisatie op locatie</h3>
+          <p>We brengen bij u op locatie in kaart welke taken zich lenen voor automatisering en welke systemen erbij horen.</p>
+        </div>
+        <div class="step" data-reveal>
+          <h3>Bouwen en koppelen</h3>
+          <p>De agent wordt gebouwd en gekoppeld aan uw systemen, zodat hij precies past bij uw manier van werken.</p>
+        </div>
+        <div class="step" data-reveal>
+          <h3>Training en livegang</h3>
+          <p>Uw team leert ermee werken en de agent gaat live, zichtbaar in uw dashboard.</p>
+        </div>
+      </div>
+
+      <p class="muted" style="margin-top: 2rem;">
+        Losse trainingen zijn ook apart te boeken, met een aparte dagprijs — zie
+        <a href="trainingen" class="card-link" style="display: inline;">Trainingen</a>.
+      </p>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section class="container section" style="max-width: 48rem;">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">Veelgestelde vragen</span>
+        <h2>Nog vragen over de tarieven?</h2>
+      </div>
+
+      <div class="accordion" data-reveal>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-tv-1">
+            Waarom een setup-fee?
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-panel" id="faq-tv-1">
+            <p>De setup-fee dekt het eenmalige werk voordat een agent live gaat: de inventarisatie op locatie, het bouwen en koppelen aan uw systemen, en de training van uw team. Het maandbedrag daarna is alleen voor het draaiend houden en optimaliseren van de agent.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-tv-2">
+            Wat als we willen stoppen?
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-panel" id="faq-tv-2">
+            <p>U kunt maandelijks opzeggen. De exacte voorwaarden staan in uw voorstel.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-tv-3">
+            Zit er een limiet op het aantal taken?
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-panel" id="faq-tv-3">
+            <p>Elk pakket werkt met een fair-use-grens: [FAIR_USE_OMSCHRIJVING]. Deze grens is altijd transparant zichtbaar in uw dashboard, samen met het actuele verbruik.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-tv-4">
+            Kunnen we later agents toevoegen?
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-panel" id="faq-tv-4">
+            <p>Ja, u kunt op elk moment opschalen naar een volgend pakket of een extra agent toevoegen. We bespreken dat graag in een adviesgesprek, samen met wat dat voor uw setup en maandbedrag betekent.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-tv-5">
+            Wat kost een training?
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-panel" id="faq-tv-5">
+            <p>Trainingen zijn los te boeken of te combineren met een implementatietraject, met een aparte dagprijs — zie <a href="trainingen">Trainingen</a> voor het volledige aanbod.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="container section">
+      <div class="cta-band" data-reveal>
+        <h2>Klaar voor duidelijkheid over uw prijs?</h2>
+        <p>In een gratis adviesgesprek van 30 minuten bespreken we uw situatie en ontvangt u een voorstel op maat.</p>
+        <div class="cta-actions">
+          <span class="btn-slot">
+            <a href="contact#calendly-widget" class="btn btn-secondary" data-event="CTA Click" data-event-card="maatwerk">Gratis adviesgesprek</a>
+          </span>
+        </div>
+        <p class="cta-alt">Liever direct contact? 085 333 5800 · <a href="mailto:contact@mowi.agency">contact@mowi.agency</a></p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="wordmark wordmark-lg">
+          <img src="assets/mowi-icon.png" alt="" class="wordmark-icon" />
+          <img src="assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
+        </span>
+        <p>AI-automatisering, Power BI dashboards en trainingen voor MKB-bedrijven in Nederland en Vlaanderen.</p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Footermenu">
+        <span class="footer-heading">Navigatie</span>
+        <a href="/">Home</a>
+        <a href="agentic-ai">Agentic AI</a>
+        <a href="power-bi-dashboards">Power BI dashboards</a>
+        <a href="trainingen">Trainingen</a>
+        <a href="tarieven">Tarieven</a>
+        <a href="blog/">Blog</a>
+        <a href="cases">Cases</a>
+        <a href="contact">Contact</a>
+      </nav>
+
+      <nav class="footer-support" aria-label="Supportmenu">
+        <span class="footer-heading">Support</span>
+        <a href="docs/">Documentatie</a>
+      </nav>
+
+      <div class="footer-contact">
+        <span class="footer-heading">Contact</span>
+        <p>085 333 5800</p>
+        <p>contact@mowi.agency</p>
+        <p>Overtoom 149<br>Amsterdam</p>
+        <p>KVK 71290877</p>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>© 2026 Mowi · Nederland &amp; België</p>
+      <div class="footer-legal">
+        <a href="#">Privacyverklaring</a>
+        <a href="#">Algemene voorwaarden</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js?v=20260805-6"></script>
+</body>
+</html>

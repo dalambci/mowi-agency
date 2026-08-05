@@ -1801,6 +1801,26 @@ h3 {
   }
 }
 
+/* .hero's padding-bottom (4rem/6rem above) exists to leave room below a big
+   h1/lede/CTA block before the next section starts — on /tarieven the hero
+   holds nothing but the breadcrumb, so that same padding just reads as a
+   large dead gap. Zeroed here; the breadcrumb's own spacing (margin-bottom
+   mobile, padding-block ≥40rem) is left as the only air below it. */
+.hero.hero-crumb-only {
+  padding-bottom: 0;
+}
+
+/* Mirrors the gap ABOVE the breadcrumb (hero's own padding-top, 1.75rem
+   mobile / --container-pad ≥40rem — the latter is what exactly cancels the
+   sticky header's overlap, see .hero:has(.breadcrumb) above) so the space
+   below the breadcrumb reads the same, instead of falling through to
+   .section's much larger standalone 4rem/6rem rhythm. ID-scoped so only
+   this section's top side changes — its own bottom padding, and every
+   other .section on the page, are untouched. */
+#pakketten {
+  padding-top: 0;
+}
+
 /* Every non-mobile breakpoint (≥40rem, tablet AND desktop): on heroes that open
    with a breadcrumb, the breadcrumb's own padding-block (see .breadcrumb below,
    --breadcrumb-space-block) fully owns the EXTRA space above it instead of
@@ -4074,4 +4094,206 @@ a.pill:hover {
 
 .browser-frame-compact {
   margin-top: 1.25rem;
+}
+
+/* --- Pricing (/tarieven) -----------------------------------------------------
+   Card anatomy inspired by vuewer.com/pricing (price anchor + checkmark
+   bullet list + single request button) — reinterpreted with this site's own
+   tokens/copy, never their text or assets. Built on top of the existing
+   .card/.card-featured/.btn-slot components rather than a parallel set, so
+   elevation/hover/magnetic-button behavior stay identical to the rest of
+   the site. .pricing-card is a flex column with the CTA pinned to the
+   bottom via margin-top:auto, so all three cards line up at equal height
+   even though "Groei"'s bullet list is one line longer than "Start"'s
+   (the grid item itself already stretches full-height via CSS grid's
+   default align-items:stretch — see .grid above). */
+
+/* No hero on this page (removed per Sal — the page opens straight on this
+   heading), so .section-head's default 3rem margin-bottom/h2 scale would
+   read oversized as the very first thing on the page: 50% less margin,
+   20% smaller heading, no eyebrow. Scoped to this one instance rather than
+   changing .section-head/h2 globally. */
+.pakketten-head {
+  margin-bottom: 1.5rem;
+}
+
+.pakketten-head h2 {
+  font-size: clamp(1.6rem, 2vw + 0.8rem, 2.4rem);
+}
+
+.pricing-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Absolutely positioned (relative to the card's own padding box — top:0/
+   left:0 lands it exactly where it used to sit in-flow, at every card
+   padding breakpoint, with no manual matching needed) specifically so it
+   takes the "Aangeraden" badge out of the layout flow. In-flow, it was
+   pushing Groei's h3 below Start/Compleet's, since only Groei has a badge —
+   now all three h3s start at the same fixed offset (see .pricing-card h3)
+   regardless of which card actually has a badge. top:0/left:0 lands on the
+   card's PADDING edge though, 1px inside its border — leaving a 1px sliver
+   of the card's own surface visible past the badge's corner (.card's
+   border-width is a fixed 1px, so -1px here cancels it exactly, flush with
+   the true outer corner). */
+.pricing-badge {
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  display: inline-flex;
+  padding: 0.3rem 0.75rem;
+  background: var(--color-accent);
+  color: var(--color-white);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+}
+
+.pricing-card h3 {
+  margin-top: 2.25rem;
+}
+
+.pricing-card-desc {
+  margin-top: 0.5rem;
+  color: var(--color-gray-600);
+}
+
+.pricing-card.card-featured .pricing-card-desc {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.pricing-price {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.pricing-card.card-featured .pricing-price {
+  border-top-color: rgba(255, 255, 255, 0.2);
+}
+
+.pricing-price-setup {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--color-gray-600);
+}
+
+.pricing-card.card-featured .pricing-price-setup {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.pricing-price-monthly {
+  display: block;
+  margin-top: 0.375rem;
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: var(--tracking-tight);
+}
+
+.pricing-price-monthly small {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-gray-600);
+}
+
+.pricing-card.card-featured .pricing-price-monthly small {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.pricing-features {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.pricing-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+  font-size: 0.9375rem;
+}
+
+.pricing-features svg {
+  flex-shrink: 0;
+  width: 1.125rem;
+  height: 1.125rem;
+  margin-top: 0.15rem;
+  color: var(--color-accent);
+}
+
+.pricing-card.card-featured .pricing-features svg {
+  color: var(--color-white);
+}
+
+/* CTA matches the homepage Diensten section's 3-card treatment (.card-link
+   arrow-link, not a filled button) — .card-featured a's existing white-link
+   override (further up this file) already makes this legible on the dark
+   "Groei" card for free, same as it does for Diensten's own featured card. */
+.pricing-card .card-link {
+  margin-top: auto;
+  padding-top: 2rem;
+}
+
+/* Slim full-width row below the 3 cards, for the maatwerk/twijfel note —
+   deliberately lighter-weight than .card (no hover lift, no shadow): it's
+   a footnote to the pricing grid above it, not a fourth competing option. */
+.pricing-maatwerk {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.75rem 2rem;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+}
+
+.pricing-maatwerk p {
+  color: var(--color-gray-600);
+  max-width: 38rem;
+}
+
+/* .card-link's own default margin-top:1rem (meant to sit below other card
+   content) is asymmetric with its margin-bottom:0 — inside this row's
+   align-items:center, that pushes the link below true vertical center
+   against the paragraph beside it. Zeroed here since there's no content
+   above it in this context to space away from. */
+.pricing-maatwerk .card-link {
+  margin-top: 0;
+}
+
+/* Two-column checkmark list, "Altijd inbegrepen" section — single column
+   below 40rem, matching every other 2-up grid's mobile behavior on this
+   site (e.g. .grid-2). */
+.check-list {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+}
+
+@media (min-width: 40rem) {
+  .check-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 3rem;
+  }
+}
+
+.check-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.check-list svg {
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.15rem;
+  color: var(--color-accent);
 }
