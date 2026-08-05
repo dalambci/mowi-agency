@@ -170,18 +170,26 @@ retype credentials from scratch or falling back to a password:
   production" above). The docs rule — `^/docs/([a-z0-9-]+)$` → `/docs/$1.html`, Action
   **Internal rewrite** — was verified 2026-08-03 against all 19 articles (right status code *and*
   right page content) plus collateral checks, all correct.
-- A second rule for the root-level marketing pages — `^/(cases|contact|agentic-ai|power-bi-dashboards|trainingen)$`
-  → `/$1.html`, Action **Internal rewrite** — was added and confirmed live (verified via a direct
-  `curl` against production, 2026-08-05; this paragraph previously said it hadn't been added yet,
-  which was stale). Kept as an explicit slug list rather than a generic `[a-z0-9-]+` catch-all, so
-  it can never accidentally intercept `/docs`, `/css/...`, `/js/...`, `/assets/...` or any future
-  non-page path. **The `ai-automatisering` slug in that rule's regex was never updated to
-  `agentic-ai`** when the page was renamed (2026-08-05) — this repo has no API/CLI access to
-  Cloudways Web Rules, only the dashboard UI does, so this is a manual step still owed: edit the
-  rule's regex in the Cloudways dashboard to swap the slug, or `/agentic-ai` will 404 in production
-  even though the code side (links + local `serve.js`) is already done.
-- The account's Web Rules quota showed **24/25 remaining** after adding the docs rule — adding
-  this one brings it to 23/25; check before adding more.
+- Root-level marketing pages resolve extensionlessly too, confirmed **not** via an explicit slug
+  list (that was this paragraph's own earlier, wrong claim, corrected 2026-08-05 with hard
+  evidence): after `/ai-automatisering` was renamed to `/agentic-ai`, the new clean URL worked in
+  production **immediately**, with no Cloudways change made — and a `curl` to `/test` (never on
+  any documented slug list, dev-only, not meant to have a clean URL at all) also resolved to
+  `test.html`, while a genuinely nonexistent slug correctly 404'd. That rules out an explicit
+  per-slug allowlist; the real mechanism generically tries `<path>.html` for any unmatched path
+  and 404s if it doesn't exist on disk. Whether that's a Cloudways Web Rule written more broadly
+  than previously assumed, or plain nginx `try_files` configured at the server-block level (this
+  repo's SSH user has no root/nginx-config access to check directly — see the SSH/root-permission
+  note under "Deploying to production" above) is unconfirmed either way. **Practical upshot: a
+  newly-added or renamed root-level `.html` page does not need any Cloudways dashboard step to get
+  a working clean URL** — it already works, verify with a `curl` if in doubt rather than assuming
+  a manual step is owed.
+- The account's Web Rules quota showed **24/25 remaining** after adding the docs rule (2026-08-03,
+  a real, confirmed rule — see above). A second root-level rule was believed added shortly after,
+  which would've brought it to 23/25, but 2026-08-05's finding above casts doubt on whether that
+  second rule is what's actually doing the work (a generic nginx fallback would explain the same
+  observed behavior without consuming a quota slot at all) — re-check the actual quota number in
+  the dashboard rather than trusting 23 vs. 24 from memory.
 - `serve.js` (local dev server) mirrors both rules generically (falls back to appending `.html`
   to any unresolved extensionless path, not just under `/docs/`) so local testing matches
   production once the second rule is added. If the live rules ever change, update `serve.js` to
