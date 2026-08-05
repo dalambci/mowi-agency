@@ -4153,8 +4153,29 @@ a.pill:hover {
   letter-spacing: var(--tracking-wide);
 }
 
+/* Sized so the gap from the "Aangeraden" badge's own bottom edge to the
+   title matches the 0.5rem gap from the title down to .pricing-card-desc
+   below it (badge height is a constant ~29px regardless of breakpoint,
+   while .card's own padding-top grows 24px -> 40px -> 48px — so the margin
+   needed to hold that same 0.5rem gap shrinks, then goes negative, as
+   padding-top overtakes the badge's height), plus a flat +5px on top per
+   Sal's ask. Titles still land on the same row on Start/Compleet, which
+   have no badge to measure against, because this margin is one flat value
+   applied to every card's h3 equally. */
 .pricing-card h3 {
-  margin-top: 2.25rem;
+  margin-top: 1.125rem;
+}
+
+@media (min-width: 40rem) {
+  .pricing-card h3 {
+    margin-top: 0.125rem;
+  }
+}
+
+@media (min-width: 64rem) {
+  .pricing-card h3 {
+    margin-top: -0.375rem;
+  }
 }
 
 .pricing-card-desc {
