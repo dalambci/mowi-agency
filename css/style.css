@@ -3045,19 +3045,34 @@ a.pill:hover {
   gap: 2rem;
 }
 
-/* Text column gets the LARGER share (1.1fr vs 1fr for the visual widget) —
-   deliberately reversed from an earlier 1fr/1.1fr split. That split starved
-   the heading column right at the two points where it needed room most: the
-   64rem breakpoint (where this grid first goes 2-column right as the h1 also
-   jumps to its iPad Pro size) and the 85.375rem breakpoint (where the h1
-   jumps again to its full desktop size) both landed the text column too
-   narrow for "wegautomatiseren" (17 chars) to fit on one line, forcing an
-   ugly mid-word break via the h1,h2,h3,h4 overflow-wrap:break-word safety
-   net. Confirmed via a Playwright per-pixel sweep (Range.getClientRects()
-   per word, checking for a word split across two line-top values): broken
-   at 1024-1045px and 1368-1412px with the old ratio, clean across the full
-   320-2000px range with this one. */
-@media (min-width: 64rem) {
+/* 2-column split starts at 85.375rem (1366px, the same iPad-Pro/desktop line
+   the h1 already draws — see its own comment), NOT 64rem. It used to start at
+   64rem, which put the entire 1024-1365px "iPad Pro" tier into a squeezed
+   2-column layout at the exact width where two separate things went wrong at
+   once: the h1 (fixed by the 1.1fr/1fr ratio below, only needed once this
+   grid is actually 2-column) and, found later the same day, the
+   .showcase-task/.showcase-result cards inside .hero-showcase — those never
+   get a smaller size tier of their own (their one size-up breakpoint is
+   43.75rem with no upper bound, same value from tablet through desktop), so
+   at 1024px they were squeezed from a roomy ~300px-wide column down to
+   ~148px while still trying to render full desktop-size text, wrapping some
+   pages' longer labels ("Klant gewijzigd in CRM", "Alleen e-mailadres
+   bekend") onto 2-3 lines. Delaying the split means the entire iPad-Pro tier
+   stays single-column (heading full-width above, showcase full-width below,
+   same shape it already has at 700-1023px, where nothing wraps) — the
+   showcase gets all the room it needs without shrinking its cards, and the
+   h1 gets full container width too, well past what it needs. True desktop
+   (≥85.375rem) is untouched: still 2-column, same 1.1fr/1fr ratio, still
+   verified against both the heading and (spot-checked) the showcase cards. */
+/* Below 85.375rem, that single-column fallback is only meant for actual
+   touch tablets (iPad/iPad Pro) — a laptop (MacBook or otherwise) with a
+   trackpad/mouse reports `hover: hover` and `pointer: fine` even at the same
+   CSS pixel width a touch tablet would report (a 13" MacBook Air/Pro's
+   default macOS-scaled resolution is 1280×800, landing right inside this
+   "iPad Pro" width tier), and width alone can't tell those two apart. On
+   those devices, keep the showcase next to the heading — same 2-column grid
+   as real desktop, just starting earlier (64rem instead of 85.375rem). */
+@media (min-width: 85.375rem), (min-width: 64rem) and (hover: hover) and (pointer: fine) {
   .hero-with-visual {
     grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
     gap: 3rem;
@@ -3262,6 +3277,63 @@ a.pill:hover {
   .hero-showcase {
     column-gap: 1.75rem;
     row-gap: 0.625rem;
+  }
+}
+
+/* Putting the showcase back in 2-column mode for MacBook-width devices (see
+   .hero-with-visual's `hover:hover`/`pointer:fine` rule above) reintroduced
+   the exact card-text-wrap problem the single-column fallback exists to
+   avoid — confirmed via the same Playwright line-count sweep, now run
+   without touch emulation: 3-line wraps on the same labels, across the same
+   1024-1365px range, just on a device with a mouse instead of a finger. The
+   showcase's own task/result cards, hub plate, and column gaps all only have
+   ONE size-up breakpoint (43.75rem) with no upper bound, so they render at
+   full desktop size at MacBook-tablet widths regardless of how little room
+   the 2-column split actually leaves them. This tier shrinks all three
+   together — card font/padding, hub plate, column gap — scoped to the exact
+   same `64rem-85.3125rem` + `hover:hover`/`pointer:fine` condition as the
+   grid rule, so it only ever applies where that rule put the showcase back
+   into 2 columns. MUST come after every other `(min-width: 43.75rem)` block
+   above touching these same selectors — same specificity, so source order
+   decides, and an earlier position here was silently overridden by those
+   (a real bug caught by re-measuring computed styles, not just eyeballing
+   the CSS). Target was "never 3 lines" (2-line wraps on the longest labels
+   are pre-existing and already accepted at real desktop widths — see the
+   flagged `/agents/email-triage.html` case — not something this needs to
+   eliminate), verified empirically rather than purely computed: iterated
+   against a Playwright sweep across all 6 `.hero-with-visual` pages until
+   zero 3-line results remained anywhere in this range. */
+@media (min-width: 64rem) and (max-width: 85.3125rem) and (hover: hover) and (pointer: fine) {
+  .hero-showcase {
+    column-gap: 1rem;
+  }
+
+  .showcase-task,
+  .showcase-result {
+    gap: 0.5rem;
+    padding: 0.5rem 0.625rem;
+    font-size: 0.75rem;
+    line-height: 1.25;
+  }
+
+  .showcase-icon {
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+
+  .showcase-check {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .showcase-check svg {
+    width: 0.55rem;
+    height: 0.55rem;
+  }
+
+  .showcase-hub-plate {
+    width: 3rem;
+    height: 3rem;
   }
 }
 
