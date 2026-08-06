@@ -36,31 +36,27 @@
 /* Height is a hard, measured value (not min-height, not auto) — the one
    property this build exists to keep stable. Measured via Playwright
    against all four beats' real rendered height with fonts settled
-   (document.fonts.ready), at both breakpoints, then locked here with a
-   small buffer. Width is intentionally NOT a fixed length: it simply
-   fills its grid column (see .hero-with-visual in style.css), which is
-   already stable with respect to beat content/animation state — the
-   "never changes for any reason" requirement is about the animation never
-   resizing the card, not about being non-responsive to viewport width. */
+   (document.fonts.ready). Width is intentionally NOT a fixed length: it
+   simply fills its grid column (see .hero-with-visual in style.css),
+   which is already stable with respect to beat content/animation state —
+   the "never changes for any reason" requirement is about the animation
+   never resizing the card, not about being non-responsive to viewport
+   width. One size for every breakpoint now — mobile used to have its own
+   shorter/tighter values, but they kept fighting real-device font-metric
+   differences (see git history), so mobile was simplified to just reuse
+   the desktop numbers, which never had that problem. */
 .hero-anim--trainingen__card {
   position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 14rem;
-  padding: 1.25rem;
+  height: 13.5rem;
+  padding: 1.75rem;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
   overflow: hidden;
-}
-
-@media (min-width: 43.75rem) {
-  .hero-anim--trainingen__card {
-    height: 13.5rem;
-    padding: 1.75rem;
-  }
 }
 
 .hero-anim--trainingen__eyebrow {
@@ -107,27 +103,20 @@
 .hero-anim--trainingen__header {
   flex-shrink: 0;
   margin: 0;
-  font-size: 1rem;
+  font-size: 1.125rem;
   font-weight: 700;
   line-height: 1.3;
   color: var(--color-text);
-  min-height: 2.6rem;
+  min-height: 2.925rem;
 }
 
-@media (min-width: 43.75rem) {
-  .hero-anim--trainingen__header {
-    font-size: 1.125rem;
-    min-height: 2.925rem;
-  }
-}
-
-/* Vertically centers the two skill rows in the space between the header
-   above and the progress dots below, rather than sitting anchored right
-   under the header (real feedback: for beats whose header is only one
-   line, the header's own 2-line min-height reservation left a dead gap
-   above the rows, reading as "pushed too low" instead of centered).
-   translateY nudges 15px above dead-center (second round of feedback) —
-   transform only, so it can't affect the card's own fixed height. */
+/* flex:1 + justify-content:center splits whatever space is left after the
+   header exactly evenly above/below the rows — computed live by the
+   browser off the actual rendered text height, so it self-corrects for
+   font-metric differences across browsers/devices. translateY(-15px)
+   nudges that already-even split up a bit (real feedback, from before
+   mobile had its own separate rules) — one shared value now for every
+   breakpoint. */
 .hero-anim--trainingen__skills {
   flex: 1;
   display: flex;
@@ -178,23 +167,17 @@
   transform: scale(1);
 }
 
-/* min-height reserves 2-line space — settled-font pin against the longest
-   label ("Herkent automatiseerbare taken") at the mobile type scale. */
+/* min-height reserves single-line space — settled-font pin against the
+   longest label ("Herkent automatiseerbare taken"), which stays on one
+   line at every real width (checked down to 320px). */
 .hero-anim--trainingen__skill-label {
   display: flex;
   align-items: center;
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   font-weight: 600;
   line-height: 1.3;
   color: var(--color-text);
-  min-height: 2.1rem;
-}
-
-@media (min-width: 43.75rem) {
-  .hero-anim--trainingen__skill-label {
-    font-size: 0.875rem;
-    min-height: 1.15rem;
-  }
+  min-height: 1.15rem;
 }
 
 .hero-anim--trainingen__dots {
