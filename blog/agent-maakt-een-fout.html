@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wat gebeurt er als de e-mailagent een fout maakt? — Mowi</title>
+  <meta name="description" content="Elke storing verschijnt direct onder 'Needs attention' in het dashboard. Wat telt als een fout, wie lost het op, en merkt de klant er iets van?" />
+  <link rel="canonical" href="https://mowi.agency/blog/agent-maakt-een-fout" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Wat gebeurt er als de e-mailagent een fout maakt?" />
+  <meta property="og:description" content="Elke storing verschijnt direct onder 'Needs attention' in het dashboard. Wat telt als een fout, wie lost het op, en merkt de klant er iets van?" />
+  <meta property="og:url" content="https://mowi.agency/blog/agent-maakt-een-fout" />
+  <meta property="og:image" content="https://mowi.agency/assets/og-default.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Wat gebeurt er als de e-mailagent een fout maakt?" />
+  <meta name="twitter:description" content="Elke storing verschijnt direct onder 'Needs attention' in het dashboard. Wat telt als een fout, wie lost het op, en merkt de klant er iets van?" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css?v=20260806-1" />
+  <link rel="icon" href="/assets/icon-192.png?v=20260804-3" />
+  <link rel="shortcut icon" href="/assets/icon-192.png?v=20260804-3" />
+  <link rel="apple-touch-icon" href="/assets/apple-icon-180.png?v=20260804-3" />
+  <link rel="apple-touch-icon-precomposed" href="/assets/apple-icon-180.png?v=20260804-3" />
+  <script defer data-domain="mowi.agency" src="https://plausible.io/js/script.js"></script>
+  <script src="/js/broken-image-guard.js?v=20260806-1"></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Wat gebeurt er als de e-mailagent een fout maakt?","author":{"@type":"Person","name":"Sal"},"publisher":{"@type":"Organization","name":"Mowi","logo":{"@type":"ImageObject","url":"https://mowi.agency/assets/mowi-icon.png"}},"datePublished":"2026-08-08","dateModified":"2026-08-08","mainEntityOfPage":{"@type":"WebPage","@id":"https://mowi.agency/blog/agent-maakt-een-fout"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Kan ik een gepauzeerde agent zelf weer starten?","acceptedAnswer":{"@type":"Answer","text":"Nee, dat kan niet zelf in het dashboard. Neem contact op met Mowi om de agent weer te laten draaien."}},{"@type":"Question","name":"Wat zie ik als een run is mislukt?","acceptedAnswer":{"@type":"Answer","text":"Bij een mislukte run staat een toelichting in de kolom Note onder Run history — neem contact op met Mowi en vermeld die tekst."}},{"@type":"Question","name":"Merkt de klant iets van een storing?","acceptedAnswer":{"@type":"Answer","text":"Meestal niet: Needs attention signaleert het voordat een klant erover kan bellen, en de mail blijft gewoon in de mailbox staan tot het is opgelost."}},{"@type":"Question","name":"Werkt dit ook als de mailboxkoppeling wegvalt?","acceptedAnswer":{"@type":"Answer","text":"Ja, ook dat verschijnt als storing. Herstel gebeurt via je Google- of Microsoft-accountinstellingen, samen met Mowi."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mowi.agency"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://mowi.agency/blog"},{"@type":"ListItem","position":3,"name":"Wat gebeurt er als de e-mailagent een fout maakt?","item":"https://mowi.agency/blog/agent-maakt-een-fout"}]}</script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-bar">
+      <span class="header-cta-slot">
+        <a href="/contact#calendly-widget" class="header-cta" data-event="CTA Click">
+          <span class="header-cta-full">Gratis adviesgesprek</span><span class="header-cta-short">Adviesgesprek</span>
+        </a>
+      </span>
+
+      <nav class="main-nav" id="main-nav" aria-label="Hoofdmenu">
+        <ul class="nav-group">
+          <li class="nav-dropdown">
+            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="products-menu" aria-haspopup="true">
+              Products
+              <span class="nav-dropdown-icon" aria-hidden="true"></span>
+            </button>
+            <div class="nav-megamenu" id="products-menu">
+              <div class="nav-megamenu-col">
+                <p class="nav-megamenu-label">Platform</p>
+                <ul>
+                  <li><a href="/agentic-ai">Agentic AI</a></li>
+                  <li><a href="/power-bi-dashboards">Power BI</a></li>
+                  <li><a href="/trainingen">Trainingen</a></li>
+                </ul>
+              </div>
+              <div class="nav-megamenu-col">
+                <p class="nav-megamenu-label">Automations</p>
+                <ul>
+                  <li><a href="/agents/crm-sync">CRM sync</a></li>
+                  <li><a href="/agents/email-triage">Email triage</a></li>
+                  <li><a href="/agents/invoice-processing">Invoice processing</a></li>
+                  <li><a href="/agents/lead-enrichment">Lead enrichment</a></li>
+                  <li><a href="/agents/report-generator">Report generator</a></li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li><a href="/tarieven">Tarieven</a></li>
+        </ul>
+        <ul class="nav-group">
+          <li><a href="/cases">Cases</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+        <a href="/contact#calendly-widget" class="btn btn-primary header-cta-mobile" data-event="CTA Click">Gratis adviesgesprek</a>
+        <a href="https://dashboard.mowi.agency/login" class="header-dashboard-mobile" target="_blank" rel="noopener">Dashboard log in</a>
+      </nav>
+
+      <div class="header-logo-cell">
+        <a href="https://dashboard.mowi.agency/login" class="header-dashboard-btn" aria-label="Dashboard inloggen" target="_blank" rel="noopener">
+          <span class="header-dashboard-icon" aria-hidden="true"></span>
+        </a>
+        <a href="/" class="wordmark" aria-label="Mowi - home">
+          <img src="/assets/mowi-icon.png" alt="" class="wordmark-icon" />
+          <img src="/assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
+        </a>
+      </div>
+
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="main-nav" aria-label="Menu openen">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="blog-article container">
+    <p class="blog-breadcrumb"><a href="/">Home</a> &rsaquo; <a href="/blog/">Blog</a> &rsaquo; Wat gebeurt er als de e-mailagent een fout maakt?</p>
+    <h1>Wat gebeurt er als de e-mailagent een fout maakt?</h1>
+    <p class="blog-meta">Sal &middot; Gepubliceerd 8 augustus 2026</p>
+
+    <div class="blog-direct-answer"><p>Niets stiekem: elke fout — een verkeerd ingeschatte mail, een mislukte run, een weggevallen mailboxkoppeling — verschijnt direct onder "Needs attention" in het dashboard, zodat iemand het ziet voordat een klant erover belt. De agent lost het niet zelf op; dat doe jij of Mowi. Geen enkel systeem is foutloos. Het verschil zit in of je het merkt vóór het schade doet, niet in of het ooit misgaat.</p>
+</div>
+<h2>Waarom deze vraag nu speelt</h2>
+<p>Voordat iemand de mailbox uit handen geeft, is dit meestal de eerste vraag: wat als het misgaat? Bij administratie is een fout vervelend; bij e-mail naar klanten voelt het risicovoller, omdat een verkeerd antwoord direct zichtbaar is voor de buitenwereld.</p>
+<p>Een vaag "dat lossen we op" stelt niemand gerust. Hieronder staat precies wat er telt als fout, waar je dat ziet, en wie er dan aan zet is.</p>
+<h2>Wat telt eigenlijk als een fout?</h2>
+<p>Drie dingen kunnen misgaan: de agent schat een mail verkeerd in, een run mislukt door een technisch probleem, of de koppeling met de mailbox valt weg.</p>
+<p>Een verkeerde inschatting is bijvoorbeeld een offerteaanvraag die als nieuwsbrief wordt gearchiveerd. Een mislukte run is een technische hapering tijdens het verwerken — de mail zelf blijft gewoon in de mailbox staan, er gaat niets verloren. Een weggevallen koppeling ontstaat meestal doordat toegang is ingetrokken, een wachtwoord is gewijzigd, of een beveiligingsinstelling van Gmail of Microsoft 365 de verbinding blokkeert.</p>
+<h2>Hoe zie je dat er iets misging?</h2>
+<p>Via "Needs attention" in het dashboard, en dat verschijnt op het moment zelf, niet achteraf. Bekijk de <a href="/agents/email-triage">Email triage-agent</a> voor het volledige overzicht van wat je daar ziet.</p>
+<p>Op de detailpagina van de agent staat de status rechtsboven (Running of Paused) en daaronder Run history: tijdstip, status en aantal verwerkte taken per run. Staat een run op Failed, dan staat er een toelichting in de kolom Note — dat is precies de tekst die je aan Mowi doorgeeft om het probleem te melden.</p>
+<h2>Wie lost het op, en wat doe jij?</h2>
+<p>Jijzelf niet vanuit het dashboard — de status zelf wijzigen kan daar niet. Je meldt het bij Mowi, met de tekst uit de Note-kolom als die er is, en Mowi herstelt het.</p>
+<p>Er is geen vaste hersteltijd om hier te noemen; hoe snel dat gaat hangt af van wat er precies misging. Wat wel vaststaat: het probleem is al zichtbaar voordat je het zelf hoefde te ontdekken, en dat is de winst ten opzichte van een systeem zonder die melding.</p>
+<h2>Merkt de klant er iets van?</h2>
+<p>Meestal niet, zolang de storing snel wordt opgemerkt en verholpen. De mail zelf gaat nooit verloren — hij blijft gewoon in de mailbox staan tot hij alsnog correct wordt verwerkt.</p>
+<p>Er is wel een situatie waarin een klant het wél merkt: als een koppeling langere tijd stil ligt zonder dat iemand het dashboard checkt, stapelt onverwerkte mail zich op en duurt het langer voordat een klant iets terughoort. Precies daarom is het raadzaam om zelf ook af en toe naar Running te kijken, niet alleen te vertrouwen op de melding.</p>
+<h2>Praktijkvoorbeeld: onze eigen inbox</h2>
+<p>Mowi draait de Email triage-agent op de eigen inbox — gaat er iets mis, dan zien we dat zelf het eerst, via hetzelfde "Needs attention"-systeem dat klanten ook hebben. Er is geen apart, beter systeem achter de schermen: het is exact wat je zelf ook in je dashboard ziet.</p>
+<p>Dat is ook waarom het zo is gebouwd: niet voor een demo, maar om zelf op te kunnen vertrouwen vóórdat het aan een klant werd aangeboden. Signaleert het voor de eigen mailbox iets te laat, dan is dat het eerste wat opvalt — nog voordat het bij een klant een rol speelt.</p>
+<h2>Wat je in het dashboard ziet: het overzicht</h2>
+<div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Status</th><th>Wat het betekent</th><th>Wat je doet</th></tr></thead><tbody><tr><td>Running</td><td>Agent verwerkt actief mail</td><td>Niets — dit is de normale stand</td></tr><tr><td>Paused</td><td>Koppeling of proces staat stil</td><td>Neem contact op met Mowi</td></tr><tr><td>Failed (bij een run)</td><td>Die specifieke run is mislukt</td><td>Bekijk de Note-kolom, meld dit bij Mowi</td></tr></tbody></table></div>
+<p>Meer weten over hoe dit er in de praktijk uitziet? Lees de <a href="/docs/agent-email-triage">installatiehandleiding voor Email triage</a>, of hoe de agent binnenkomende mail precies afhandelt in <a href="/blog/e-mail-automatisch-beantwoorden">Kan e-mail automatisch beantwoord worden zonder dat klanten het merken?</a></p>
+
+    
+    <div class="blog-faq"><h2>Veelgestelde vragen</h2>
+<div class="blog-faq-item"><p class="blog-faq-q">Kan ik een gepauzeerde agent zelf weer starten?</p><p>Nee, dat kan niet zelf in het dashboard. Neem contact op met Mowi om de agent weer te laten draaien.</p></div>
+<div class="blog-faq-item"><p class="blog-faq-q">Wat zie ik als een run is mislukt?</p><p>Bij een mislukte run staat een toelichting in de kolom Note onder Run history — neem contact op met Mowi en vermeld die tekst.</p></div>
+<div class="blog-faq-item"><p class="blog-faq-q">Merkt de klant iets van een storing?</p><p>Meestal niet: Needs attention signaleert het voordat een klant erover kan bellen, en de mail blijft gewoon in de mailbox staan tot het is opgelost.</p></div>
+<div class="blog-faq-item"><p class="blog-faq-q">Werkt dit ook als de mailboxkoppeling wegvalt?</p><p>Ja, ook dat verschijnt als storing. Herstel gebeurt via je Google- of Microsoft-accountinstellingen, samen met Mowi.</p></div>
+</div>
+
+    
+
+    <div class="blog-cta">
+      <p>Benieuwd wat dit voor uw situatie betekent?</p>
+      <a href="/contact#calendly-widget" class="btn btn-primary" data-event="CTA Click">Plan een kennismaking</a>
+    </div>
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="wordmark wordmark-lg">
+          <img src="/assets/mowi-icon.png" alt="" class="wordmark-icon" />
+          <img src="/assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
+        </span>
+        <p>AI-automatisering, Power BI dashboards en trainingen voor MKB-bedrijven in Nederland en Vlaanderen.</p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Footermenu">
+        <span class="footer-heading">Navigatie</span>
+        <a href="/">Home</a>
+        <a href="/agentic-ai">Agentic AI</a>
+        <a href="/power-bi-dashboards">Power BI dashboards</a>
+        <a href="/trainingen">Trainingen</a>
+        <a href="/tarieven">Tarieven</a>
+        <a href="/blog/">Blog</a>
+        <a href="/cases">Cases</a>
+        <a href="/contact">Contact</a>
+      </nav>
+
+      <nav class="footer-support" aria-label="Supportmenu">
+        <span class="footer-heading">Support</span>
+        <a href="/docs/">Documentatie</a>
+      </nav>
+
+      <div class="footer-contact">
+        <span class="footer-heading">Contact</span>
+        <p>085 333 5800</p>
+        <p>contact@mowi.agency</p>
+        <p>Overtoom 149<br>Amsterdam</p>
+        <p>KVK 71290877</p>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>&copy; 2026 Mowi &middot; Nederland &amp; Belgi&euml;</p>
+      <div class="footer-legal">
+        <a href="#">Privacyverklaring</a>
+        <a href="#">Algemene voorwaarden</a>
+      </div>
+    </div>
+  </footer>
+  <script src="/js/main.js?v=20260806-1"></script>
+  <script>
+    document.querySelectorAll(".blog-video-facade").forEach(function (el) {
+      el.addEventListener("click", function () {
+        var id = el.getAttribute("data-video-id");
+        el.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+      }, { once: true });
+    });
+  </script>
+
+</body>
+</html>
