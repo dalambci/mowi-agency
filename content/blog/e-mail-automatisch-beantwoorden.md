@@ -1,6 +1,6 @@
 ---
 title: "Kan e-mail automatisch beantwoord worden zonder dat klanten het merken?"
-description: "Een e-mailagent leest, sorteert en beantwoordt mail per categorie zelf, of zet een concept klaar. Vanaf €500 setup + €40/maand. Zo werkt het precies."
+description: "Een e-mailagent checkt offertes meteen op ontbrekende info en vraagt dit direct op — sneller contact, meer kans op de opdracht. Zo werkt het precies."
 slug: e-mail-automatisch-beantwoorden
 date: 2026-08-08
 updated:
@@ -11,7 +11,7 @@ draft: false
 sources: []
 faq:
   - q: "Beantwoordt de agent mail helemaal zelfstandig?"
-    a: "Per categorie stel je dat zelf in: voor sommige taken verstuurt de agent automatisch, voor andere zet hij een concept klaar dat jij nog checkt."
+    a: "Bij offertes vraagt hij automatisch ontbrekende info op, maar stelt hij de offerte niet zelf op. Voor andere taken stel je per categorie in of hij zelf verstuurt of een concept klaarzet."
   - q: "Wat als de agent een mail verkeerd inschat?"
     a: "Dat verschijnt direct onder 'Needs attention' in het dashboard, zodat het opvalt voordat een klant erover belt — niet pas achteraf."
   - q: "Werkt dit met Gmail of Outlook?"
@@ -20,7 +20,7 @@ faq:
     a: "Via de vaste werkwijze: kennismaking (30 min) → inventarisatie op locatie → build → koppeling → training en nazorg."
 ---
 
-Ja, meestal wel — mits je het per categorie zelf instelt. Een e-mailagent leest, sorteert en beantwoordt binnenkomende mail; voor offertes en standaardvragen stuurt hij zelf, of hij zet een concept klaar dat jij in één klik verstuurt. Klanten merken vooral dat ze sneller antwoord krijgen, niet wie of wat dat antwoord typte. Vanaf € 40 per maand per taak, met een eenmalige setup vanaf € 500.
+Ja, meestal wel — mits je het per categorie zelf instelt. Een e-mailagent leest en sorteert binnenkomende mail; bij een offerteaanvraag checkt hij meteen of alle informatie compleet is en vraagt hij zelf om wat ontbreekt, bij een klantvraag zet hij een concept-antwoord klaar. Klanten merken vooral dat ze sneller antwoord krijgen — en juist die snelheid bij offertes werkt direct door in je omzet.
 
 ## Waarom deze vraag nu speelt
 
@@ -32,17 +32,17 @@ Precies dan komt de vraag boven: kun je dit automatiseren zonder dat klanten mer
 
 De agent leest elke binnenkomende mail, herkent om welk type het gaat, en routeert hem naar de juiste plek — vaak met een concept-antwoord er al bij. Bekijk de [Email triage-agent](/agents/email-triage) voor het volledige overzicht.
 
-Vier categorieën komen het meest voor: een offerteaanvraag, een klantvraag, een factuur en een nieuwsbrief. Bij een offerteaanvraag haalt de agent de relevante velden er zelf uit — klant, omvang, gewenste datum — en zet een offerte-concept klaar, met het label "Offerte klaargezet, alleen nog versturen". Bij een klantvraag staat er een concept-antwoord klaar. Facturen gaan naar de map Facturen, nieuwsbrieven naar het archief.
+Vier categorieën komen het meest voor: een offerteaanvraag, een klantvraag, een factuur en een nieuwsbrief. Bij een offerteaanvraag haalt de agent de relevante velden eruit — klant, omvang, gewenste datum — en controleert meteen of alles compleet is. Ontbreekt er iets, dan gaat de vraag om aanvulling direct terug naar de klant; de agent stelt zelf geen offerte op, dat blijft mensenwerk. Bij een klantvraag staat er wel een concept-antwoord klaar. Facturen gaan naar de map Facturen, nieuwsbrieven naar het archief.
 
 Gaat het om iets dringends, dan krijgt iemand van het team daar een melding van — de mail blijft niet liggen tot de eerstvolgende keer dat iemand de inbox opent. De agent draait op een vast schema, niet continu; hoe vaak dat schema loopt spreek je af tijdens de inventarisatie, afgestemd op hoe druk de mailbox is. Niets verdwijnt ongezien: elke run is zichtbaar in het dashboard, ook de keren dat er iets misging.
 
 ## Wat gebeurt er als informatie ontbreekt in de aanvraag?
 
-Ontbreekt een gegeven — bijvoorbeeld de gewenste opleverdatum — dan stuurt de agent daar zelf een gerichte vraag over terug, in plaats van de mail te laten liggen tot iemand het opmerkt.
+Ontbreekt er iets in een offerteaanvraag — bijvoorbeeld de gewenste opleverdatum of de omvang van het werk — dan stuurt de agent daar direct en automatisch een gerichte vraag over terug, in plaats van de aanvraag te laten liggen tot iemand het opmerkt.
 
-Dat is een keuze die je per categorie instelt: voor de ene taak wil je dat de agent zelf om de ontbrekende informatie vraagt, voor een andere taak wil je dat hij het als concept bij jou neerlegt zodat jij die vraag zelf stelt. Een offerteaanvraag zonder omvang levert dan bijvoorbeeld een kort, gericht antwoord op — "Om een goede inschatting te maken, hebben we ook het aantal vierkante meters nodig" — in plaats van een generiek "we nemen contact met u op".
+Dat gaat zonder tussenkomst: de agent stelt geen offerte op, maar zorgt er wel voor dat een onvolledige aanvraag niet onnodig blijft liggen. Een offerteaanvraag zonder omvang levert dan bijvoorbeeld een kort, gericht antwoord op — "Om een goede inschatting te maken, hebben we ook het aantal vierkante meters nodig" — in plaats van een generiek "we nemen contact met u op" dat pas later een concrete vraag stelt.
 
-Het effect is hetzelfde in beide gevallen: de klant hoort dezelfde dag iets terug, ook als het antwoord nog niet compleet is. Zo blijft er contact — niemand wacht op een reactie die nooit komt omdat iemand intern te druk was om de mail te openen. Dat is ook het verschil met een standaard ontvangstbevestiging: de vraag die terugkomt is specifiek voor die aanvraag, geen automatisch gegenereerde ruis.
+Het effect: de klant hoort dezelfde dag iets terug, ook als de offerte zelf nog niet klaar is. Daar zit de snelheidswinst — niet in het opstellen van de offerte, maar in het razendsnel ophalen van wat daarvoor nog nodig is. Zo verdwijnt er geen tijd tussen "aanvraag binnen" en "aanvraag compleet".
 
 ## Merken klanten dat er een agent meeleest?
 
@@ -54,9 +54,9 @@ Dat soort gevallen blijft voorlopig mensenwerk, en daarom staat het bij twijfel 
 
 ## Levert sneller antwoorden meer omzet op?
 
-Dat hangt af van je eigen cijfers, maar reken het gerust een keer door. Stel dat je 20 offerteaanvragen per maand krijgt, met een gemiddelde opdrachtwaarde van € 2.500. Reageer je dezelfde dag in plaats van twee dagen later, en win je daardoor twee aanvragen extra per maand, dan is dat € 5.000 aan omzet — tegenover een agent die vanaf € 40 per maand kost. Wil je dit naast wat een medewerker kost leggen? Lees [Is een AI-agent goedkoper dan een administratief medewerker?](/blog/ai-agent-of-medewerker)
+Dat hangt af van je eigen cijfers, maar reken het gerust een keer door. Stel dat je 20 offerteaanvragen per maand krijgt, met een gemiddelde opdrachtwaarde van € 2.500. Nu duurt het vaak dagen voordat ontbrekende informatie compleet is, simpelweg omdat niemand er meteen tijd voor heeft. Vraagt de agent dat automatisch en dezelfde dag op, en win je daardoor twee aanvragen extra per maand die anders afhaakten, dan is dat € 5.000 aan omzet — tegenover een agent die vanaf € 40 per maand kost. Wil je dit naast wat een medewerker kost leggen? Lees [Is een AI-agent goedkoper dan een administratief medewerker?](/blog/ai-agent-of-medewerker)
 
-Vul je eigen aantallen in; de uitkomst verschilt sterk per bedrijf en branche, en hangt af van hoeveel van die twee dagen vertraging daadwerkelijk aanvragen kost. Bij een lagere gemiddelde opdrachtwaarde of minder aanvragen per maand is het bedrag kleiner — maar de maandprijs van de agent schaalt evenredig mee naar beneden, dus de verhouding blijft grofweg gelijk.
+Vul je eigen aantallen in; de uitkomst verschilt sterk per bedrijf en branche, en hangt af van hoeveel aanvragen je nu kwijtraakt puur omdat de aanvulling te laat kwam. Bij een lagere gemiddelde opdrachtwaarde of minder aanvragen per maand is het bedrag kleiner — maar de maandprijs van de agent schaalt evenredig mee naar beneden, dus de verhouding blijft grofweg gelijk.
 
 Belangrijk: snelheid alleen werkt niet. Een snel antwoord dat inhoudelijk niet klopt, kost meer dan een langzaam antwoord dat wel klopt. De winst zit in sneller én goed — niet in sneller alleen.
 
@@ -70,11 +70,11 @@ Elke ochtend staat er al een sortering klaar voordat iemand van het team de mail
 
 | Soort mail | Wat de agent doet | Wie verstuurt |
 |---|---|---|
-| Offerteaanvraag | Velden eruit halen, offerte-concept klaarzetten | Jij, of de agent (instelbaar) |
+| Offerteaanvraag | Compleetheid checken, ontbrekende info direct opvragen | Agent (automatisch) |
 | Klantvraag | Concept-antwoord opstellen | Jij, of de agent (instelbaar) |
 | Factuur | Doorzetten naar de map Facturen | — |
 | Nieuwsbrief | Archiveren | — |
 
-Welke categorieën automatisch verstuurd worden en welke als concept blijven staan, spreek je af tijdens de inventarisatie — de exacte afspraken staan in het voorstel.
+Bij offertes gaat het altijd om het aanvullen van ontbrekende informatie, nooit om het opstellen van de offerte zelf — dat blijft mensenwerk, alleen zonder de vertraging ervoor. Welke overige categorieën automatisch verstuurd worden en welke als concept blijven staan, spreek je af tijdens de inventarisatie — de exacte afspraken staan in het voorstel.
 
 Setup begint vanaf € 500, het maandbedrag vanaf € 40 per taak. Bekijk alle pakketten op de [tarieven-pagina](/tarieven).
