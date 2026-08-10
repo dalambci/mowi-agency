@@ -68,7 +68,7 @@ function sheetHtml({ title, requestText, note }) {
   <p class="sub">Eén A4 om direct door te sturen naar wie de koppeling aan de andere kant beheert.</p>
   <pre>${escapedRequest}</pre>
   ${note ? `<p class="note">${note}</p>` : ""}
-  <div class="footer">Mowi &middot; 085 333 5800 &middot; contact@mowi.agency &middot; Overtoom 149, Amsterdam &middot; KVK 71290877</div>
+  <div class="footer">Mowi &middot; 085 333 5800 &middot; contact@mowi.agency &middot; Haarlemmerstraat 43, Zandvoort &middot; KVK 71290877</div>
 </body>
 </html>`;
 }

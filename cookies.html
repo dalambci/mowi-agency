@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact — Mowi</title>
-  <meta name="description" content="Plan een vrijblijvende kennismaking van 30 minuten met Mowi, of neem direct contact op." />
+  <title>Cookie- en trackingverklaring — Mowi</title>
+  <meta name="description" content="Welke technologieën mowi.agency gebruikt om de website te laten werken en te analyseren, en waarom er geen cookiebanner nodig is." />
+  <meta name="robots" content="noindex" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -17,16 +18,13 @@
   <script src="js/broken-image-guard.js?v=20260805-1"></script>
 </head>
 <body>
-
-  <!-- ===== Header ===== -->
   <header class="site-header">
     <div class="header-bar">
       <span class="header-cta-slot">
-        <a href="#calendly-widget" class="header-cta" data-event="CTA Click">
+        <a href="contact#calendly-widget" class="header-cta" data-event="CTA Click">
           <span class="header-cta-full">Gratis adviesgesprek</span><span class="header-cta-short">Adviesgesprek</span>
         </a>
       </span>
-
       <nav class="main-nav" id="main-nav" aria-label="Hoofdmenu">
         <ul class="nav-group">
           <li class="nav-dropdown">
@@ -34,7 +32,6 @@
               Products
               <span class="nav-dropdown-icon" aria-hidden="true"></span>
             </button>
-            <!-- English labels are deliberate here — see CLAUDE.md's Language & tone exception. -->
             <div class="nav-megamenu" id="products-menu">
               <div class="nav-megamenu-col">
                 <p class="nav-megamenu-label">Platform</p>
@@ -60,13 +57,11 @@
         </ul>
         <ul class="nav-group">
           <li><a href="cases">Cases</a></li>
-          <li><a href="contact" aria-current="page">Contact</a></li>
+          <li><a href="contact">Contact</a></li>
         </ul>
-        <!-- Same CTA, shown only inside the open mobile menu -->
-        <a href="#calendly-widget" class="btn btn-primary header-cta-mobile" data-event="CTA Click">Gratis adviesgesprek</a>
+        <a href="contact#calendly-widget" class="btn btn-primary header-cta-mobile" data-event="CTA Click">Gratis adviesgesprek</a>
         <a href="https://dashboard.mowi.agency/login" class="header-dashboard-mobile" target="_blank" rel="noopener">Dashboard log in</a>
       </nav>
-
       <div class="header-logo-cell">
         <a href="https://dashboard.mowi.agency/login" class="header-dashboard-btn" aria-label="Dashboard inloggen" target="_blank" rel="noopener">
           <span class="header-dashboard-icon" aria-hidden="true"></span>
@@ -76,78 +71,51 @@
           <img src="assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
         </a>
       </div>
-
       <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="main-nav" aria-label="Menu openen">
         <span></span><span></span><span></span>
       </button>
     </div>
   </header>
 
-  <main>
-    <!-- ===== Hero =====
-         Calendly widget lives inside the hero now, as the visual half of
-         .hero-with-visual (same side-by-side-on-desktop/stacked-on-mobile
-         pattern as /agentic-ai + every /agents/* page) — sits to the right
-         of the heading from 64rem up instead of underneath it. Website &
-         Conversion plan, 2.3 (CTA hygiene): booking is the only path on this
-         page now — the Formspree contact form that used to sit beside this
-         card was removed on purpose, not lost. See the vault's decisions
-         log (2026-08-04) if it ever needs restoring. -->
-    <section class="container hero">
-      <div class="breadcrumb"><a href="/">Home</a> / Contact</div>
-      <div class="hero-with-visual contact-hero-visual">
-        <div style="max-width: 44rem;">
-          <h1 class="contact-heading">Plan een vrijblijvende kennismaking.</h1>
-          <p class="lede" style="margin-top: 1.5rem;">
-            In 30 minuten bespreken we uw situatie: welke problemen spelen er, wie is Mowi, wie bent u — en
-            kunnen we een oplossing bieden? Bij een goede match plannen we vervolgens een afspraak op locatie.
-          </p>
-        </div>
+  <main class="blog-article container">
+    <p class="blog-breadcrumb"><a href="/">Home</a> &rsaquo; <a href="privacyverklaring">Privacyverklaring</a> &rsaquo; Cookies</p>
 
-        <!-- Calendly inline embed. Widget script is loaded once at the bottom of this page. -->
-        <!-- id targeted by the header CTA button (site-wide) so it can jump straight here. -->
-        <div class="card" data-reveal id="calendly-widget">
-          <span class="eyebrow">Plan direct</span>
-          <h2 class="prose-heading">Kies een moment dat u past.</h2>
-          <p style="color: var(--color-gray-600); margin-top: 0.75rem;">
-            30 minuten, online en vrijblijvend. U weet daarna precies wat de volgende stap zou zijn.
-          </p>
-          <div class="calendly-inline-widget" data-url="https://calendly.com/contact-mowi/30min?hide_gdpr_banner=1&embed_type=Inline&embed_domain=mowi.agency" style="min-width: 280px; height: 630px; margin-top: 1.5rem;"></div>
-        </div>
-      </div>
-    </section>
+    <!-- CONCEPT-gate: wacht op de P0-4 Calendly click-to-load-fix live vóór publicatie. Zie Legal/STATUS.md. -->
+    <div style="border-left: 3px solid var(--color-border); background: var(--color-gray-50, #f7f7f5); padding: 1rem 1.25rem; border-radius: 0.5rem; margin-bottom: 2rem; font-size: 0.9375rem; color: var(--color-gray-600);">
+      <strong>Concept.</strong> Deze pagina beschrijft het beoogde gedrag van de boekingswidget (pas laden na een actieve klik). Publicatie wacht tot die aanpassing live staat.
+    </div>
 
-    <!-- ===== Direct contact ===== -->
-    <section class="section section-tint">
-      <div class="container">
-        <div class="section-head center" data-reveal>
-          <span class="eyebrow">Liever direct contact?</span>
-          <h2>Bel of mail ons.</h2>
-        </div>
+    <h1>Cookie- en trackingverklaring</h1>
+    <p class="blog-meta">Laatst bijgewerkt: 10 augustus 2026</p>
 
-        <div class="grid grid-4 contact-info-grid">
-          <div class="card text-center" data-reveal>
-            <h3>Telefoon</h3>
-            <p><a href="tel:+31853335800">085 333 5800</a></p>
-          </div>
-          <div class="card text-center" data-reveal>
-            <h3>E-mail</h3>
-            <p><a href="mailto:contact@mowi.agency">contact@mowi.agency</a></p>
-          </div>
-          <div class="card text-center" data-reveal>
-            <h3>Adres</h3>
-            <p>Haarlemmerstraat 43<br>Zandvoort</p>
-          </div>
-          <div class="card text-center" data-reveal>
-            <h3>KVK</h3>
-            <p>71290877</p>
-          </div>
-        </div>
-      </div>
-    </section>
+    <p>Deze verklaring legt uit welke technologieën mowi.agency gebruikt om de website te laten werken en te analyseren, en waarom wij bewust hebben gekozen om geen cookiebanner nodig te hebben.</p>
+
+    <h2>1. Wat zijn cookies en trackingtechnologieën</h2>
+    <p>Cookies zijn kleine bestandjes die een website op uw apparaat kan opslaan om u te herkennen of uw gedrag te volgen. Er bestaan ook cookieloze trackingtechnologieën, die zonder opslag op uw apparaat toch gebruik meten. Voor beide geldt: zodra iets wordt opgeslagen op uw apparaat voor iets anders dan het strikt noodzakelijk laten functioneren van de site, is toestemming vereist (art. 11.7a Telecommunicatiewet).</p>
+
+    <h2>2. Analytics: Plausible</h2>
+    <p>Voor websitestatistieken gebruiken wij <strong>Plausible Analytics</strong>, gehost in de EU (Estland). Plausible plaatst geen cookies, gebruikt geen unieke identifiers en herleidt geen statistiek naar een individuele bezoeker. De gegevens die wij zien zijn uitsluitend geaggregeerd (bijvoorbeeld: aantal paginaweergaven, herkomst van bezoekers) — er wordt geen persoonsprofiel van u opgebouwd.</p>
+    <p>Wij hebben bewust voor Plausible gekozen in plaats van Google Analytics. Als bedrijf dat AVG-conformiteit als onderdeel van ons eigen product verkoopt, past privacy-by-design bij onze eigen website: omdat Plausible geen persoonsgegevens verwerkt via cookies of vergelijkbare technologie, is hiervoor geen toestemming van u vereist en tonen wij geen cookiebanner voor dit onderdeel.</p>
+
+    <h2>3. Calendly (afsprakenwidget op de contactpagina)</h2>
+    <p>Op onze contactpagina bieden wij de mogelijkheid om direct een afspraak in te plannen via Calendly. Deze widget wordt <strong>niet automatisch geladen</strong> wanneer u de pagina bezoekt. Pas wanneer u zelf actief klikt op de knop "Toon agenda van Calendly" wordt het Calendly-script ingeladen en verschijnt de agenda.</p>
+    <p>Zodra u op deze knop klikt en de widget laadt, kan Calendly eigen cookies of vergelijkbare trackingtechnologie plaatsen voor de werking van hun dienst. Dit gebeurt buiten onze zeggenschap — wij verwijzen u hiervoor naar Calendly's eigen <a href="https://calendly.com/privacy" target="_blank" rel="noopener">cookieverklaring en privacybeleid</a>. Omdat deze technologie pas wordt geplaatst na uw actieve keuze om de widget te tonen, is voor dit onderdeel geen aparte cookiebanner nodig: uw klik ís de toestemming.</p>
+
+    <h2>4. Geen overige tracking</h2>
+    <p>Wij plaatsen geen advertentiepixels, geen Google Analytics en geen social-media-trackingpixels (zoals Meta Pixel of LinkedIn Insight Tag) op onze website.</p>
+
+    <h2>5. Hoe kunt u dit beheren</h2>
+    <p>Omdat Plausible geen cookies gebruikt, is er voor dit onderdeel niets te beheren of te weigeren. Voor Calendly geldt: u bepaalt zelf of deze derde partij iets op uw apparaat plaatst, simpelweg door wel of niet op "Toon agenda van Calendly" te klikken. Klikt u niet, dan wordt er niets geladen. Daarnaast kunt u via uw browserinstellingen altijd cookies van derde partijen beperken of verwijderen, mocht u de Calendly-widget wel gebruiken.</p>
+
+    <h2>6. Contact</h2>
+    <p>Vragen over deze verklaring? Neem contact op via <a href="mailto:contact@mowi.agency">contact@mowi.agency</a> of <a href="tel:+31853335800">085 333 5800</a>.</p>
+
+    <h2>Gerelateerde documenten</h2>
+    <ul>
+      <li><a href="privacyverklaring">Privacyverklaring</a></li>
+    </ul>
   </main>
 
-  <!-- ===== Footer ===== -->
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-brand">
@@ -157,7 +125,6 @@
         </span>
         <p>AI-automatisering, Power BI dashboards en trainingen voor MKB-bedrijven in Nederland en Vlaanderen.</p>
       </div>
-
       <nav class="footer-nav" aria-label="Footermenu">
         <span class="footer-heading">Navigatie</span>
         <a href="/">Home</a>
@@ -169,12 +136,10 @@
         <a href="cases">Cases</a>
         <a href="contact">Contact</a>
       </nav>
-
       <nav class="footer-support" aria-label="Supportmenu">
         <span class="footer-heading">Support</span>
         <a href="docs/">Documentatie</a>
       </nav>
-
       <div class="footer-contact">
         <span class="footer-heading">Contact</span>
         <p>085 333 5800</p>
@@ -184,7 +149,6 @@
         <p><a href="/colofon">Volledige bedrijfsgegevens</a></p>
       </div>
     </div>
-
     <div class="container footer-bottom">
       <p>© 2026 Mowi · Nederland &amp; België</p>
       <div class="footer-legal">
@@ -195,6 +159,5 @@
   </footer>
 
   <script src="js/main.js?v=20260805-16"></script>
-  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 </body>
 </html>
