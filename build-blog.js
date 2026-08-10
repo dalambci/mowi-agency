@@ -325,7 +325,6 @@ function footerHtml() {
         <span class="footer-heading">Contact</span>
         <p>085 333 5800</p>
         <p>contact@mowi.agency</p>
-        <p><a href="/colofon">Bedrijfsgegevens (KvK, adres, BTW)</a></p>
       </div>
     </div>
 
@@ -334,6 +333,7 @@ function footerHtml() {
       <div class="footer-legal">
         <a href="/privacyverklaring">Privacyverklaring</a>
         <a href="/algemene-voorwaarden">Algemene voorwaarden</a>
+        <a href="/colofon">Colofon</a>
       </div>
     </div>
   </footer>
