@@ -333,7 +333,6 @@ function footerHtml() {
       <div class="footer-legal">
         <a href="/privacyverklaring">Privacyverklaring</a>
         <a href="/algemene-voorwaarden">Algemene voorwaarden</a>
-        <a href="/bedrijfsgegevens">Bedrijfsgegevens</a>
       </div>
     </div>
   </footer>
