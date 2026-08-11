@@ -294,7 +294,7 @@ function headerHtml() {
               </div>
             </div>
           </li>
-          <li><a href="/contact">Contact sales</a></li>
+          <li><a href="/contact">Demo</a></li>
         </ul>
         <a href="/pricing" class="btn btn-primary header-cta-mobile" data-event="CTA Click">Start gratis</a>
         <a href="https://my.mowi.agency/login" class="header-dashboard-mobile" target="_blank" rel="noopener">Dashboard log in</a>
