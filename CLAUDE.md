@@ -198,7 +198,7 @@ retype credentials from scratch or falling back to a password:
   split, etc.), this rule does not travel with the repo — recreate it on the new host first, or
   every docs link will 404.
 - Every docs page follows the same shell: `.docs-header` (slim, wordmark + "Terug naar website"
-  + "Inloggen" linking to `https://dashboard.mowi.agency/login`) → `.docs-sidebar` (mount point
+  + "Inloggen" linking to `https://my.mowi.agency/login`) → `.docs-sidebar` (mount point
   only, populated by JS) → `.docs-content-wrap` (`.docs-column` + `.docs-toc`). Reusable
   components live in `css/docs.css`: `.docs-steps` (numbered steps with circles), `.docs-prereqs`
   (prerequisites checklist box), `.docs-callout` with `-note` / `-warning` / `-result` modifiers
