@@ -4265,10 +4265,29 @@ a.pill:hover {
   color: var(--color-white);
 }
 
-/* CTA matches the homepage Diensten section's 3-card treatment (.card-link
-   arrow-link, not a filled button) — .card-featured a's existing white-link
-   override (further up this file) already makes this legible on the dark
-   "Groei" card for free, same as it does for Diensten's own featured card. */
+/* The three cards below Proefmaand each get their own real button (Sal,
+   2026-08-11 — they were arrow text-links, which read as weak next to the
+   trial card's filled button and were easy to miss as the actual CTA).
+   margin-top:auto pins them to the bottom of each flex column so all three
+   land on the same line regardless of how long the feature list above is;
+   width:100% overrides .btn's inline-flex/min-width:180px so they fill the
+   card instead of sitting as a narrow pill in a 357px column. */
+.pricing-card-cta {
+  margin-top: auto;
+  width: 100%;
+}
+
+/* The gap goes on the element BEFORE the CTA, not on the CTA's own margin-top —
+   that one is spent on the auto bottom-pin above, and setting it here would
+   silently override the pin and let the buttons float up to different heights.
+   Matters because the tallest card in the row has no spare space for the auto
+   margin to absorb, so without this its button would butt straight against the
+   content above it. :has() is already used elsewhere in this file. */
+.pricing-card > :has(+ .pricing-card-cta) {
+  margin-bottom: 2rem;
+}
+
+/* Still used by the maatwerk row below the grid and the Trainingen link. */
 .pricing-card .card-link {
   margin-top: auto;
   padding-top: 2rem;

@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260811-7" />
+  <link rel="stylesheet" href="css/style.css?v=20260811-8" />
   <link rel="icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="shortcut icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260804-3" />
@@ -165,7 +165,7 @@
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Maandelijks opzegbaar</span></li>
           </ul>
 
-          <a href="https://my.mowi.agency/aanmelden" class="card-link" data-event="Signup Started" data-event-card="email-triage">Start gratis →</a>
+          <a href="https://my.mowi.agency/aanmelden" class="btn btn-primary pricing-card-cta" data-event="Signup Started" data-event-card="email-triage">Start gratis</a>
         </div>
 
         <!-- Phone agent (binnenkort) -->
@@ -188,7 +188,10 @@
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Maandelijks opzegbaar</span></li>
           </ul>
 
-          <a href="agents/phone-agent" class="card-link" data-event="CTA Click" data-event-card="phone-agent">Meer over de Phone agent →</a>
+          <!-- Outlined, not filled: this is the one card you can't buy yet, so it
+               reads as the secondary action beside the two black ones. Still a
+               real button with a full-contrast black border, per Sal's ask. -->
+          <a href="agents/phone-agent" class="btn btn-secondary pricing-card-cta" data-event="CTA Click" data-event-card="phone-agent">Meer over de Phone agent</a>
         </div>
 
         <!-- Custom — the one interactive card. Prices live in data-price on each
@@ -225,7 +228,7 @@
           <p class="pricing-custom-note" data-empty-note hidden>Selecteer minimaal één agent.</p>
           <p class="pricing-custom-note" data-soon-note hidden>De Phone agent is nog niet zelf aan te sluiten — wij nemen contact met u op zodra hij live gaat.</p>
 
-          <a href="https://my.mowi.agency/aanmelden" class="card-link" data-event="Signup Started" data-event-card="custom">Start gratis →</a>
+          <a href="https://my.mowi.agency/aanmelden" class="btn btn-primary pricing-card-cta" data-event="Signup Started" data-event-card="custom">Start gratis</a>
         </div>
       </div>
 
@@ -405,6 +408,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=20260811-7"></script>
+  <script src="js/main.js?v=20260811-8"></script>
 </body>
 </html>
