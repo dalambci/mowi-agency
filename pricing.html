@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260811-11" />
+  <link rel="stylesheet" href="css/style.css?v=20260811-12" />
   <link rel="icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="shortcut icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260804-3" />
@@ -110,9 +110,10 @@
          Structure follows the "trial first, then one widget per product, then a
          build-your-own widget" pattern Sal picked (usenaive.ai/pricing): the free
          trial is settled as its own full-width card BEFORE any price is shown, so
-         the first number a visitor reads is €0 rather than €40. The per-agent
-         cards below are the actual catalogue; .pricing-custom is the only
-         interactive one. -->
+         the first number a visitor reads is €0 rather than €40. The 3-card row is
+         the actual catalogue (Email agent, Call agent, Custom agent — the last of
+         those on-request rather than self-serve); .pricing-pakket below it is the
+         only interactive part of the page. -->
     <section class="container section pricing-width" id="pakketten">
       <div class="section-head pakketten-head" data-reveal>
         <h2>Eerste maand gratis.</h2>
@@ -172,8 +173,11 @@
         <div class="card pricing-card" data-reveal>
           <h3>Call agent</h3>
           <!-- "Binnenkort" moved into the copy when the badges were removed —
-               without it this card reads as buyable today, which it isn't. -->
-          <p class="pricing-card-desc">Binnenkort beschikbaar. Beantwoordt binnenkomende gesprekken op uw bestaande nummer.</p>
+               without it this card reads as buyable today, which it isn't.
+               Shortened 2026-08-11 (was two sentences, wrapped a full line
+               longer than Email agent's — see .pricing-grid .pricing-card-desc
+               for the height-floor fix that backs this up structurally). -->
+          <p class="pricing-card-desc">Binnenkort beschikbaar — beantwoordt gesprekken op uw eigen nummer.</p>
 
           <div class="pricing-price">
             <span class="pricing-price-trial">Eerste maand gratis</span>
@@ -198,11 +202,46 @@
           <a href="agents/phone-agent" class="btn pricing-card-cta pricing-cta-soon" aria-label="Binnenkort — meer over de Call agent" data-event="CTA Click" data-event-card="phone-agent">Binnenkort</a>
         </div>
 
-        <!-- Custom — the one interactive card. Prices live in data-price on each
-             checkbox rather than in js/main.js, so a price change is a one-place
-             HTML edit and can never drift from the number printed beside it. -->
-        <div class="card pricing-card pricing-custom" data-reveal data-pricing-calculator>
-          <h3>Custom</h3>
+        <!-- Custom agent — on-request, purpose-built for one client's own
+             process/systems, not a self-serve product like the two above.
+             Secondary (outlined) CTA, same treatment logic as Call agent's
+             muted one: this isn't the same one-click action as "Start
+             gratis", so it shouldn't look identical to it. -->
+        <div class="card pricing-card" data-reveal>
+          <h3>Custom agent</h3>
+          <p class="pricing-card-desc">Een AI-agent op maat, gebouwd rond uw eigen proces — alleen op aanvraag.</p>
+
+          <div class="pricing-price">
+            <span class="pricing-price-trial">Op maat gebouwd</span>
+            <span class="pricing-price-monthly">Op aanvraag</span>
+          </div>
+
+          <ul class="pricing-features">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Gebouwd rond uw eigen proces en systemen</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Volledig op maat, geen sjabloon</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Dezelfde monitoring en run-historie als elke agent</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Vast aanspreekpunt tijdens de bouw</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Maandelijks opzegbaar, zoals elke agent</span></li>
+          </ul>
+
+          <a href="contact#calendly-widget" class="btn btn-secondary pricing-card-cta" data-event="CTA Click" data-event-card="custom-agent">Plan een kennismaking</a>
+        </div>
+      </div>
+
+      <!-- Pakket — the renamed/relocated "Custom" build-your-own card (Sal,
+           2026-08-11): pushed out of the 3-card grid above and down to its
+           own full-width row, same width treatment as Proefmaand at the top
+           of this section (see .pricing-trial, .pricing-pakket in
+           css/style.css — shared grid rule, not just matching values).
+           Prices live in data-price on each checkbox rather than in
+           js/main.js, so a price change is a one-place HTML edit and can
+           never drift from the number printed beside it; the calculator
+           script (js/main.js) only cares about the data-* attributes below,
+           not this markup's structure, so relocating/restyling this card
+           needed no JS changes. -->
+      <div class="card pricing-pakket" data-reveal data-pricing-calculator>
+        <div class="pricing-pakket-main">
+          <h3>Pakket</h3>
           <p class="pricing-card-desc">Kies welke agents u afneemt en zie direct wat u per maand betaalt.</p>
 
           <fieldset class="pricing-options">
@@ -223,16 +262,18 @@
             </label>
           </fieldset>
 
+          <p class="pricing-custom-note" data-empty-note hidden>Selecteer minimaal één agent.</p>
+          <p class="pricing-custom-note" data-soon-note hidden>De Call agent is nog niet zelf aan te sluiten — wij nemen contact met u op zodra hij live gaat.</p>
+        </div>
+
+        <div class="pricing-pakket-side">
           <div class="pricing-price">
             <span class="pricing-price-trial">Totaal per maand</span>
             <!-- aria-live so the recalculated total is announced, not silently swapped -->
             <span class="pricing-price-monthly" aria-live="polite">€<span data-total-out>40</span> <small>/maand excl. btw</small></span>
           </div>
 
-          <p class="pricing-custom-note" data-empty-note hidden>Selecteer minimaal één agent.</p>
-          <p class="pricing-custom-note" data-soon-note hidden>De Call agent is nog niet zelf aan te sluiten — wij nemen contact met u op zodra hij live gaat.</p>
-
-          <a href="https://my.mowi.agency/aanmelden" class="btn btn-primary pricing-card-cta" data-event="Signup Started" data-event-card="custom">Start gratis</a>
+          <a href="https://my.mowi.agency/aanmelden" class="btn btn-primary pricing-pakket-cta" data-event="Signup Started" data-event-card="pakket">Start gratis</a>
         </div>
       </div>
 
@@ -412,6 +453,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=20260811-11"></script>
+  <script src="js/main.js?v=20260811-12"></script>
 </body>
 </html>

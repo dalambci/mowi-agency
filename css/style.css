@@ -4221,6 +4221,18 @@ a.pill:hover {
   color: var(--color-gray-600);
 }
 
+/* Scoped to the 3-card row only (not Proefmaand/Pakket, which have no row
+   siblings to align against). Email/Call/Custom agent's descriptions run
+   different lengths (Call's used to wrap a full line longer than Email's),
+   which pushed the price below it down by that same line — reserving a
+   floor of 3 lines here means the price always starts at the same y
+   regardless of how the description above it wraps. min-height, not a
+   fixed height: a future copy edit that runs longer than 3 lines still
+   grows the box instead of clipping/overlapping. */
+.pricing-grid .pricing-card-desc {
+  min-height: 3lh;
+}
+
 .pricing-card.card-featured .pricing-card-desc {
   color: rgba(255, 255, 255, 0.7);
 }
@@ -4375,15 +4387,23 @@ a.pill:hover {
    elevation/hover as everywhere else) but deliberately NOT .pricing-card — that
    class's equal-height flex column and h3 offsets are tuned for grid siblings,
    which this card has none of. */
-.pricing-trial {
+/* .pricing-pakket (the renamed/relocated "Custom" build-your-own card,
+   pushed out of the 3-card grid and down to full width, Sal 2026-08-11)
+   shares this exact grid mechanic — same selector list — specifically so
+   it stays "just like Proefmaand" by construction: if this rule ever
+   changes, both cards move together instead of silently drifting apart. */
+.pricing-trial,
+.pricing-pakket {
   display: grid;
   gap: 2rem;
 }
 
-/* Two columns only once there's room for the bullet list to sit beside the
-   price without either column going narrow enough to wrap awkwardly. */
+/* Two columns only once there's room for the second column (Proefmaand's
+   bullet list / Pakket's price+CTA) to sit beside the main content without
+   either column going narrow enough to wrap awkwardly. */
 @media (min-width: 64rem) {
-  .pricing-trial {
+  .pricing-trial,
+  .pricing-pakket {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 3.5rem;
     align-items: center;
@@ -4430,11 +4450,66 @@ a.pill:hover {
   margin-top: 1.5rem;
 }
 
-/* --- Pricing: Custom (build-your-own) ----------------------------------------
-   The only interactive card on the page. Real <input type="checkbox">es are
-   kept in the DOM and focusable (opacity/size are handled below, not
-   display:none) so keyboard and screen-reader users get native checkbox
-   semantics for free; .pricing-option-mark is the drawn box. */
+/* --- Pricing: Pakket (build-your-own) -----------------------------------------
+   The only interactive card on the page — renamed from "Custom" and moved out
+   of the 3-card grid to its own full-width row below it, Sal 2026-08-11 (a
+   new static "Custom agent" card took its old grid slot instead — see the
+   HTML). Real <input type="checkbox">es are kept in the DOM and focusable
+   (opacity/size are handled below, not display:none) so keyboard and
+   screen-reader users get native checkbox semantics for free;
+   .pricing-option-mark is the drawn box. */
+.pricing-pakket {
+  margin-top: 1.5rem;
+}
+
+/* Mirrors .pricing-trial-main/.pricing-trial-features: two named children,
+   main content first (source order = mobile stacking order), price+CTA
+   second. Grid column sizing itself comes from the shared .pricing-trial,
+   .pricing-pakket rule above. */
+.pricing-pakket-main h3 {
+  margin: 0;
+}
+
+.pricing-pakket-side {
+  display: flex;
+  flex-direction: column;
+}
+
+/* The price block's own margin-top/padding-top/border-top exist to space it
+   off content stacked ABOVE it in the same column — right on mobile, where
+   .pricing-pakket-side stacks below .pricing-pakket-main, but wrong at
+   64rem+ where it's the first (only) thing in its own grid column: with
+   align-items:center on the parent, that leftover top space would pull the
+   whole side column visibly off-center. Same fix .pricing-trial-features
+   needed for the same reason. */
+@media (min-width: 64rem) {
+  .pricing-pakket-side .pricing-price {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+  }
+}
+
+.pricing-pakket-cta {
+  margin-top: 1.75rem;
+  width: 100%;
+}
+
+/* Two checkboxes stretched to the full ~38rem column width (half of a
+   76rem-capped full-width card) would each read as an oversized touch
+   target with a lot of empty space — the "make sure items adjust to the
+   new width" ask. Side by side once there's room, same 40rem tablet
+   threshold every other 2-up layout on this page/site uses. */
+@media (min-width: 40rem) {
+  .pricing-pakket .pricing-options {
+    flex-direction: row;
+  }
+
+  .pricing-pakket .pricing-option {
+    flex: 1 1 0;
+  }
+}
+
 .pricing-options {
   display: flex;
   flex-direction: column;
