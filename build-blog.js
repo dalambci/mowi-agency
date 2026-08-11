@@ -16,7 +16,19 @@ const ROOT = __dirname;
 const CONTENT_DIR = path.join(ROOT, "content", "blog");
 const OUTPUT_DIR = path.join(ROOT, "blog");
 const SITE_URL = "https://mowi.agency";
-const CSS_VERSION = "20260811-1"; // bump alongside every css/style.css edit
+/* Read from index.html rather than hand-maintained here. This WAS a literal
+   with a "bump alongside every css/style.css edit" comment, and on 2026-08-11
+   it silently missed three consecutive bumps — so regenerating the blog
+   rewrote its pages back to a stale ?v=, which is exactly the 30-day stale-CSS
+   bug CLAUDE.md's cache-busting section exists to prevent. A comment is not a
+   mechanism; deriving it means the blog can never disagree with the rest of
+   the site. Fails loudly rather than guessing if the pattern ever moves. */
+const CSS_VERSION = (() => {
+  const html = fs.readFileSync(path.join(ROOT, "index.html"), "utf8");
+  const match = html.match(/css\/style\.css\?v=([0-9-]+)/);
+  if (!match) throw new Error("build-blog: no ?v= found on index.html's style.css link — check the cache-busting convention in CLAUDE.md");
+  return match[1];
+})();
 // Website & Conversion plan, Phase 1: Plausible, no cookie banner needed.
 // data-domain must exactly match the account Sal creates at plausible.io.
 const PLAUSIBLE_SNIPPET = `<script defer data-domain="mowi.agency" src="https://plausible.io/js/script.js"></script>`;
@@ -265,8 +277,24 @@ function headerHtml() {
           <li><a href="/pricing">Pricing</a></li>
         </ul>
         <ul class="nav-group">
-          <li><a href="/cases">Cases</a></li>
-          <li><a href="/contact">Contact</a></li>
+          <li class="nav-dropdown">
+            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="resources-menu" aria-haspopup="true">
+              Resources
+              <span class="nav-dropdown-icon" aria-hidden="true"></span>
+            </button>
+            <!-- One unlabelled column: the trigger already says "Resources", so a
+                 .nav-megamenu-label here would only repeat it. -narrow drops the
+                 27rem min-width the two-column Products panel needs. -->
+            <div class="nav-megamenu nav-megamenu-narrow" id="resources-menu">
+              <div class="nav-megamenu-col">
+                <ul>
+                  <li><a href="/docs/">Documentation</a></li>
+                  <li><a href="/blog/" aria-current="page">Blog</a></li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li><a href="/contact">Contact sales</a></li>
         </ul>
         <a href="/pricing" class="btn btn-primary header-cta-mobile" data-event="CTA Click">Start gratis</a>
         <a href="https://my.mowi.agency/login" class="header-dashboard-mobile" target="_blank" rel="noopener">Dashboard log in</a>
