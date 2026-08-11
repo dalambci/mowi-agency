@@ -1089,3 +1089,33 @@ if (agentFeedCard && agentFeedList && !prefersReducedMotion) {
 
   pauseWhenOffscreen(agentFeedCard, startFeed, stopFeed);
 }
+
+// --- Pricing calculator (/tarieven "Custom" card) ---------------------------
+// Reads prices from each checkbox's data-price rather than a lookup table here,
+// so the number JS sums and the number printed beside the label can never drift
+// apart — a price change is a single HTML edit. Guarded by the container query,
+// so every other page loading main.js does nothing.
+document.querySelectorAll("[data-pricing-calculator]").forEach((widget) => {
+  const boxes = Array.from(widget.querySelectorAll('input[type="checkbox"]'));
+  const totalOut = widget.querySelector("[data-total-out]");
+  const emptyNote = widget.querySelector("[data-empty-note]");
+  const soonNote = widget.querySelector("[data-soon-note]");
+
+  if (!boxes.length || !totalOut) return;
+
+  function updateTotal() {
+    const checked = boxes.filter((box) => box.checked);
+    const total = checked.reduce((sum, box) => sum + Number(box.dataset.price || 0), 0);
+
+    totalOut.textContent = String(total);
+    // Both notes are advisory, not errors — the CTA stays usable either way,
+    // since signup can still start with nothing pre-selected.
+    if (emptyNote) emptyNote.hidden = checked.length > 0;
+    if (soonNote) soonNote.hidden = !checked.some((box) => "soon" in box.dataset);
+  }
+
+  boxes.forEach((box) => box.addEventListener("change", updateTotal));
+  // Run once on load so a browser that restored previous checkbox state on a
+  // back/forward navigation doesn't leave a total contradicting the boxes.
+  updateTotal();
+});

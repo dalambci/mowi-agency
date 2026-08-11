@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260811-1" />
+  <link rel="stylesheet" href="css/style.css?v=20260811-2" />
   <link rel="icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="shortcut icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260804-3" />
@@ -87,20 +87,49 @@
       <div class="breadcrumb"><a href="/">Home</a> / Tarieven</div>
     </section>
 
-    <!-- ===== Pakketten ===== -->
+    <!-- ===== Pakketten =====
+         Structure follows the "trial first, then one widget per product, then a
+         build-your-own widget" pattern Sal picked (usenaive.ai/pricing): the free
+         trial is settled as its own full-width card BEFORE any price is shown, so
+         the first number a visitor reads is €0 rather than €40. The per-agent
+         cards below are the actual catalogue; .pricing-custom is the only
+         interactive one. -->
     <section class="container section" id="pakketten">
       <div class="section-head pakketten-head" data-reveal>
-        <h2>Eerste maand gratis. Geen setupkosten.</h2>
+        <h2>Heldere tarieven. Eerste maand gratis.</h2>
         <p class="lede" style="margin-top: 1rem;">
-          Sluit zelf een agent aan en test hem 30 dagen kosteloos. Bevalt hij? Dan loopt het abonnement
-          automatisch door — maandelijks opzegbaar, geen verrassingen. U geeft uw betaalgegevens nu op,
-          de eerste incasso volgt pas na 30 dagen. Prijzen zijn excl. btw.
+          Eén vast maandbedrag per agent — geen setupkosten, maandelijks opzegbaar. Begin met een
+          gratis proefmaand, of stel hieronder zelf samen wat u nodig heeft. Prijzen zijn excl. btw.
         </p>
       </div>
 
-      <div class="grid grid-2">
+      <!-- Free trial — deliberately full-width and dark so it reads as the
+           starting point above the catalogue, not as a fourth option beside it. -->
+      <div class="card card-featured pricing-trial" data-reveal>
+        <div class="pricing-trial-main">
+          <span class="pricing-badge">Gratis proberen</span>
+          <h3>Proefmaand</h3>
+          <p class="pricing-card-desc">Eén agent naar keuze, 30 dagen lang kosteloos.</p>
+          <div class="pricing-price">
+            <span class="pricing-price-trial">Daarna vanaf €40 /maand — of opzeggen</span>
+            <span class="pricing-price-monthly">€0 <small>/30 dagen</small></span>
+          </div>
+          <a href="https://my.mowi.agency/aanmelden" class="btn btn-secondary pricing-trial-cta" data-event="Signup Started" data-event-card="proefmaand">Start gratis</a>
+        </div>
+
+        <ul class="pricing-features pricing-trial-features">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>1 agent naar keuze, volledig werkend</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Zelf aan te sluiten in enkele minuten</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Geen setupkosten, geen jaarcontract</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Eerste incasso pas na 30 dagen</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Volledige run-historie in uw dashboard</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Opzeggen vóór dag 30 kost u niets</span></li>
+        </ul>
+      </div>
+
+      <div class="grid grid-3 pricing-grid">
         <!-- Email triage (live) -->
-        <div class="card card-featured pricing-card" data-reveal>
+        <div class="card pricing-card" data-reveal>
           <span class="pricing-badge">Nu te proberen</span>
           <h3>Email triage</h3>
           <p class="pricing-card-desc">Sorteert, beantwoordt en signaleert — zelf aan te sluiten in enkele minuten.</p>
@@ -142,6 +171,44 @@
           </ul>
 
           <a href="agents/phone-agent" class="card-link" data-event="CTA Click" data-event-card="phone-agent">Meer over de Phone agent →</a>
+        </div>
+
+        <!-- Custom — the one interactive card. Prices live in data-price on each
+             checkbox rather than in js/main.js, so a price change is a one-place
+             HTML edit and can never drift from the number printed beside it. -->
+        <div class="card pricing-card pricing-custom" data-reveal data-pricing-calculator>
+          <span class="pricing-badge">Zelf samenstellen</span>
+          <h3>Custom</h3>
+          <p class="pricing-card-desc">Kies welke agents u afneemt en zie direct wat u per maand betaalt.</p>
+
+          <fieldset class="pricing-options">
+            <legend class="sr-only">Kies uw agents</legend>
+
+            <label class="pricing-option">
+              <input type="checkbox" data-price="40" value="email-triage" checked />
+              <span class="pricing-option-mark" aria-hidden="true"></span>
+              <span class="pricing-option-name">Email triage</span>
+              <span class="pricing-option-price">€40</span>
+            </label>
+
+            <label class="pricing-option">
+              <input type="checkbox" data-price="80" value="phone-agent" data-soon />
+              <span class="pricing-option-mark" aria-hidden="true"></span>
+              <span class="pricing-option-name">Phone agent <span class="pricing-option-tag">binnenkort</span></span>
+              <span class="pricing-option-price">€80</span>
+            </label>
+          </fieldset>
+
+          <div class="pricing-price">
+            <span class="pricing-price-trial">Totaal per maand</span>
+            <!-- aria-live so the recalculated total is announced, not silently swapped -->
+            <span class="pricing-price-monthly" aria-live="polite">€<span data-total-out>40</span> <small>/maand excl. btw</small></span>
+          </div>
+
+          <p class="pricing-custom-note" data-empty-note hidden>Selecteer minimaal één agent.</p>
+          <p class="pricing-custom-note" data-soon-note hidden>De Phone agent is nog niet zelf aan te sluiten — wij nemen contact met u op zodra hij live gaat.</p>
+
+          <a href="https://my.mowi.agency/aanmelden" class="card-link" data-event="Signup Started" data-event-card="custom">Start gratis →</a>
         </div>
       </div>
 
@@ -321,6 +388,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=20260811-1"></script>
+  <script src="js/main.js?v=20260811-2"></script>
 </body>
 </html>
