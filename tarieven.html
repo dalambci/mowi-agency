@@ -22,7 +22,10 @@
   <header class="site-header">
     <div class="header-bar">
       <span class="header-cta-slot">
-        <a href="https://my.mowi.agency/aanmelden" class="header-cta" data-event="Signup Started">
+        <!-- #pakketten, not /tarieven, on this one page only: everywhere else the
+             header CTA points here, but a self-link would be a dead click — this
+             scrolls to the cards instead. -->
+        <a href="#pakketten" class="header-cta" data-event="CTA Click">
           <span class="header-cta-full">Start gratis</span><span class="header-cta-short">Start gratis</span>
         </a>
       </span>
@@ -60,7 +63,7 @@
           <li><a href="contact">Contact</a></li>
         </ul>
         <!-- Same CTA, shown only inside the open mobile menu -->
-        <a href="https://my.mowi.agency/aanmelden" class="btn btn-primary header-cta-mobile" data-event="Signup Started">Start gratis</a>
+        <a href="#pakketten" class="btn btn-primary header-cta-mobile" data-event="CTA Click">Start gratis</a>
         <a href="https://my.mowi.agency/login" class="header-dashboard-mobile" target="_blank" rel="noopener">Dashboard log in</a>
       </nav>
 
@@ -96,7 +99,7 @@
          interactive one. -->
     <section class="container section pricing-section" id="pakketten">
       <div class="section-head pakketten-head" data-reveal>
-        <h2>Heldere tarieven. Eerste maand gratis.</h2>
+        <h2>Eerste maand gratis.</h2>
         <p class="lede" style="margin-top: 1rem;">
           Eén vast maandbedrag per agent — geen setupkosten, maandelijks opzegbaar. Begin met een
           gratis proefmaand, of stel hieronder zelf samen wat u nodig heeft. Prijzen zijn excl. btw.
