@@ -62,11 +62,12 @@ backstop in case something important didn't get written down.
 - Multi-tenant reminder (same as above): that server has a dozen+ other app folders. Only ever
   touch `ktzphwhvnh` — confirm `ls ~/applications/ktzphwhvnh/public_html` looks like this repo
   (index.html, CLAUDE.md, css/, js/, reference/) before pulling if there's ever any doubt.
-- **Which pages actually go stale (observed twice on 2026-08-11):** it is specifically the
-  **directory-index paths — `/` and `/blog/`** — that Varnish serves stale after a deploy. Every
-  explicit-slug page (`/tarieven`, `/cases`, `/agents/email-triage`, …) picked up the new build
-  immediately both times. So a spot-check of one inner page will happily show a deploy as "landed"
-  while the homepage is still serving the old one; **always verify `/` specifically.** Fast check:
+- **Which pages actually go stale (observed across three deploys on 2026-08-11):** it is the
+  **directory-index paths**, and **`/` every single time** — `/blog/` was stale on one deploy and
+  current on the next, so treat it as "sometimes" and `/` as "always". Every explicit-slug page
+  (`/pricing`, `/cases`, `/agents/email-triage`, …) picked up the new build immediately on all
+  three. So a spot-check of one inner page will happily show a deploy as "landed" while the
+  homepage is still serving the old one; **always verify `/` specifically.** Fast check:
   `curl -sI https://mowi.agency/` and compare `Last-Modified` against the deploy time — `X-Cache:
   HIT` with an `Age` in the hundreds/thousands and a stale `Last-Modified` is the tell. Comparing
   `Content-Length` against the new file's real size catches it too. A `?nocache=$(date +%s)` fetch
