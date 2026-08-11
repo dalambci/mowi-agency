@@ -4301,6 +4301,20 @@ a.pill:hover {
   width: 100%;
 }
 
+/* The Call agent card's "Binnenkort". Reuses .btn purely for the shared box
+   (same height, same bottom alignment as the two real buttons beside it) but
+   deliberately drops the black fill and black border: this states availability
+   rather than offering an action, and dressing it like the live CTAs would
+   invite a click it can't service. Text stays at --color-gray-600 rather than
+   anything fainter — a disabled control is exempt from contrast minimums, but
+   it still has to be readable. */
+.pricing-cta-soon {
+  background: transparent;
+  color: var(--color-gray-600);
+  border-color: var(--color-border);
+  cursor: default;
+}
+
 /* The gap goes on the element BEFORE the CTA, not on the CTA's own margin-top —
    that one is spent on the auto bottom-pin above, and setting it here would
    silently override the pin and let the buttons float up to different heights.

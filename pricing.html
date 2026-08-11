@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260811-9" />
+  <link rel="stylesheet" href="css/style.css?v=20260811-10" />
   <link rel="icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="shortcut icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260804-3" />
@@ -146,9 +146,9 @@
       </div>
 
       <div class="grid grid-3 pricing-grid">
-        <!-- Email triage (live) -->
+        <!-- Email agent (live) -->
         <div class="card pricing-card" data-reveal>
-          <h3>Email triage</h3>
+          <h3>Email agent</h3>
           <p class="pricing-card-desc">Sorteert, beantwoordt en signaleert — zelf aan te sluiten in enkele minuten.</p>
 
           <div class="pricing-price">
@@ -168,9 +168,9 @@
           <a href="https://my.mowi.agency/aanmelden" class="btn btn-primary pricing-card-cta" data-event="Signup Started" data-event-card="email-triage">Start gratis</a>
         </div>
 
-        <!-- Phone agent (binnenkort) -->
+        <!-- Call agent (binnenkort) -->
         <div class="card pricing-card" data-reveal>
-          <h3>Phone agent</h3>
+          <h3>Call agent</h3>
           <!-- "Binnenkort" moved into the copy when the badges were removed —
                without it this card reads as buyable today, which it isn't. -->
           <p class="pricing-card-desc">Binnenkort beschikbaar. Beantwoordt binnenkomende gesprekken op uw bestaande nummer.</p>
@@ -188,10 +188,13 @@
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Maandelijks opzegbaar</span></li>
           </ul>
 
-          <!-- Outlined, not filled: this is the one card you can't buy yet, so it
-               reads as the secondary action beside the two black ones. Still a
-               real button with a full-contrast black border, per Sal's ask. -->
-          <a href="agents/phone-agent" class="btn btn-secondary pricing-card-cta" data-event="CTA Click" data-event-card="phone-agent">Meer over de Phone agent</a>
+          <!-- A <span>, not an <a>: "Binnenkort" states availability, it isn't an
+               action, so there is deliberately nothing here to click or tab to.
+               Muted rather than black/outlined like its two neighbours, which is
+               the point — it should not read as an available call to action.
+               Note this leaves the card with no link to agents/phone-agent; the
+               Products > Call nav item is now the only route to that page. -->
+          <span class="btn pricing-card-cta pricing-cta-soon" aria-disabled="true">Binnenkort</span>
         </div>
 
         <!-- Custom — the one interactive card. Prices live in data-price on each
@@ -207,14 +210,14 @@
             <label class="pricing-option">
               <input type="checkbox" data-price="40" value="email-triage" checked />
               <span class="pricing-option-mark" aria-hidden="true"></span>
-              <span class="pricing-option-name">Email triage</span>
+              <span class="pricing-option-name">Email agent</span>
               <span class="pricing-option-price">€40</span>
             </label>
 
             <label class="pricing-option">
               <input type="checkbox" data-price="80" value="phone-agent" data-soon />
               <span class="pricing-option-mark" aria-hidden="true"></span>
-              <span class="pricing-option-name">Phone agent <span class="pricing-option-tag">binnenkort</span></span>
+              <span class="pricing-option-name">Call agent <span class="pricing-option-tag">binnenkort</span></span>
               <span class="pricing-option-price">€80</span>
             </label>
           </fieldset>
@@ -226,7 +229,7 @@
           </div>
 
           <p class="pricing-custom-note" data-empty-note hidden>Selecteer minimaal één agent.</p>
-          <p class="pricing-custom-note" data-soon-note hidden>De Phone agent is nog niet zelf aan te sluiten — wij nemen contact met u op zodra hij live gaat.</p>
+          <p class="pricing-custom-note" data-soon-note hidden>De Call agent is nog niet zelf aan te sluiten — wij nemen contact met u op zodra hij live gaat.</p>
 
           <a href="https://my.mowi.agency/aanmelden" class="btn btn-primary pricing-card-cta" data-event="Signup Started" data-event-card="custom">Start gratis</a>
         </div>
@@ -408,6 +411,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=20260811-9"></script>
+  <script src="js/main.js?v=20260811-10"></script>
 </body>
 </html>
