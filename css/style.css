@@ -1802,7 +1802,7 @@ h3 {
 }
 
 /* .hero's padding-bottom (4rem/6rem above) exists to leave room below a big
-   h1/lede/CTA block before the next section starts — on /tarieven the hero
+   h1/lede/CTA block before the next section starts — on /pricing the hero
    holds nothing but the breadcrumb, so that same padding just reads as a
    large dead gap. Zeroed here; the breadcrumb's own spacing (margin-bottom
    mobile, padding-block ≥40rem) is left as the only air below it. */
@@ -4111,7 +4111,7 @@ a.pill:hover {
   margin-top: 1.25rem;
 }
 
-/* --- Pricing (/tarieven) -----------------------------------------------------
+/* --- Pricing (/pricing) -----------------------------------------------------
    Card anatomy inspired by vuewer.com/pricing (price anchor + checkmark
    bullet list + single request button) — reinterpreted with this site's own
    tokens/copy, never their text or assets. Built on top of the existing
@@ -4130,12 +4130,16 @@ a.pill:hover {
    changing .section-head/h2 globally. */
 /* The page's own container is --container-width: 100rem (1600px). That's fine
    for a full-bleed hero, but it made the trial card read as a vast black slab
-   and stretched the three cards beside it into letterboxes. Capping the whole
-   pricing section (not just the dark card — the grid had the same problem)
-   keeps card proportions sane and the two blocks aligned with each other.
-   Same technique the FAQ (48rem) and "Altijd inbegrepen" (56rem) sections
-   already use on this page. */
-.pricing-section {
+   and stretched the three cards beside it into letterboxes.
+
+   Applied to EVERY full-width section on this page, not just the card block:
+   capping only the cards left the breadcrumb, "Zelf live" and the closing CTA
+   sitting 24rem wider, so their left edges no longer lined up with the cards
+   between them (this is what Sal spotted on the breadcrumb). The two
+   deliberately narrow reading sections ("Altijd inbegrepen" 56rem, FAQ 48rem)
+   stay as they are — they're centered, so they read as intentional insets
+   rather than misalignment. */
+.pricing-width {
   max-width: 76rem;
 }
 

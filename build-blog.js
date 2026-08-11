@@ -232,7 +232,7 @@ function headerHtml() {
   return `  <header class="site-header">
     <div class="header-bar">
       <span class="header-cta-slot">
-        <a href="https://my.mowi.agency/aanmelden" class="header-cta" data-event="Signup Started">
+        <a href="/pricing" class="header-cta" data-event="CTA Click">
           <span class="header-cta-full">Start gratis</span><span class="header-cta-short">Start gratis</span>
         </a>
       </span>
@@ -254,21 +254,21 @@ function headerHtml() {
                 </ul>
               </div>
               <div class="nav-megamenu-col">
-                <p class="nav-megamenu-label">Automations</p>
+                <p class="nav-megamenu-label">Agents</p>
                 <ul>
-                  <li><a href="/agents/email-triage">Email triage</a></li>
-                  <li><a href="/agents/phone-agent">Phone agent</a></li>
+                  <li><a href="/agents/email-triage">Email</a></li>
+                  <li><a href="/agents/phone-agent">Call</a></li>
                 </ul>
               </div>
             </div>
           </li>
-          <li><a href="/tarieven">Tarieven</a></li>
+          <li><a href="/pricing">Pricing</a></li>
         </ul>
         <ul class="nav-group">
           <li><a href="/cases">Cases</a></li>
           <li><a href="/contact">Contact</a></li>
         </ul>
-        <a href="https://my.mowi.agency/aanmelden" class="btn btn-primary header-cta-mobile" data-event="Signup Started">Start gratis</a>
+        <a href="/pricing" class="btn btn-primary header-cta-mobile" data-event="CTA Click">Start gratis</a>
         <a href="https://my.mowi.agency/login" class="header-dashboard-mobile" target="_blank" rel="noopener">Dashboard log in</a>
       </nav>
 
@@ -307,7 +307,7 @@ function footerHtml() {
         <a href="/agentic-ai">Agentic AI</a>
         <a href="/power-bi-dashboards">Power BI</a>
         <a href="/trainingen">Trainingen</a>
-        <a href="/tarieven">Tarieven</a>
+        <a href="/pricing">Tarieven</a>
         <a href="/blog/">Blog</a>
         <a href="/cases">Cases</a>
         <a href="/contact">Contact</a>
@@ -495,7 +495,7 @@ ${footerHtml()}
 
 function buildSitemap(posts) {
   const staticPages = [
-    "", "cases", "contact", "agentic-ai", "power-bi-dashboards", "trainingen", "tarieven", "docs/",
+    "", "cases", "contact", "agentic-ai", "power-bi-dashboards", "trainingen", "pricing", "docs/",
   ];
   // docs/, agents/ are read from disk rather than hand-listed, so a new page
   // in either folder is in the sitemap the next time this script runs — no

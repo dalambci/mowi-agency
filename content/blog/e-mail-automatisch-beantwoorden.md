@@ -77,4 +77,4 @@ Elke ochtend staat er al een sortering klaar voordat iemand van het team de mail
 
 Bij offertes gaat het altijd om het aanvullen van ontbrekende informatie, nooit om het opstellen van de offerte zelf — dat blijft mensenwerk, alleen zonder de vertraging ervoor. Welke overige categorieën automatisch verstuurd worden en welke als concept blijven staan, spreek je af tijdens de inventarisatie — de exacte afspraken staan in het voorstel.
 
-Setup begint vanaf € 500, het maandbedrag vanaf € 40 per taak. Bekijk alle pakketten op de [tarieven-pagina](/tarieven).
+Setup begint vanaf € 500, het maandbedrag vanaf € 40 per taak. Bekijk alle pakketten op de [tarieven-pagina](/pricing).

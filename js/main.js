@@ -1045,7 +1045,7 @@ if (agentFeedCard && agentFeedList && !prefersReducedMotion) {
   pauseWhenOffscreen(agentFeedCard, startFeed, stopFeed);
 }
 
-// --- Pricing calculator (/tarieven "Custom" card) ---------------------------
+// --- Pricing calculator (/pricing "Custom" card) ---------------------------
 // Reads prices from each checkbox's data-price rather than a lookup table here,
 // so the number JS sums and the number printed beside the label can never drift
 // apart — a price change is a single HTML edit. Guarded by the container query,
