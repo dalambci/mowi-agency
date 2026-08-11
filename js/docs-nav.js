@@ -32,19 +32,7 @@ var DOCS_NAV = [
   {
     category: "Agents",
     items: [
-      { title: "CRM sync", href: "agent-crm-sync" },
-      { title: "Email triage", href: "agent-email-triage" },
-      { title: "Invoice processing", href: "agent-invoice-processing" },
-      { title: "Lead enrichment", href: "agent-lead-enrichment" },
-      { title: "Report generator", href: "agent-report-generator" }
-    ]
-  },
-  {
-    category: "Koppelingen",
-    items: [
-      { title: "Salesforce", href: "koppeling-salesforce" },
-      { title: "Exact Online", href: "koppeling-exact-online" },
-      { title: "AFAS", href: "koppeling-afas" }
+      { title: "Email triage", href: "agent-email-triage" }
     ]
   },
   {

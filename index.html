@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mowi — AI-automatisering en Power BI dashboards voor het MKB</title>
-  <meta name="description" content="Mowi automatiseert de terugkerende taken die uw team elke week uren kosten en bouwt de Power BI dashboards die uw cijfers live inzichtelijk maken. Voor MKB-bedrijven in Nederland en Vlaanderen." />
+  <title>Mowi — AI-agents die uw werk overnemen, eerste maand gratis</title>
+  <meta name="description" content="Sluit binnen enkele minuten uw eigen AI-agent aan en zie hem meteen aan het werk — de eerste maand gratis, daarna vanaf €40/maand excl. btw. Voor MKB-bedrijven in Nederland en Vlaanderen." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260806-1" />
+  <link rel="stylesheet" href="css/style.css?v=20260811-1" />
   <link rel="icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="shortcut icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260804-3" />
@@ -25,8 +25,8 @@
   <header class="site-header">
     <div class="header-bar">
       <span class="header-cta-slot">
-        <a href="contact#calendly-widget" class="header-cta" data-event="CTA Click">
-          <span class="header-cta-full">Gratis adviesgesprek</span><span class="header-cta-short">Adviesgesprek</span>
+        <a href="https://dashboard.mowi.agency/aanmelden" class="header-cta" data-event="Signup Started">
+          <span class="header-cta-full">Start gratis</span><span class="header-cta-short">Start gratis</span>
         </a>
       </span>
 
@@ -50,11 +50,8 @@
               <div class="nav-megamenu-col">
                 <p class="nav-megamenu-label">Automations</p>
                 <ul>
-                  <li><a href="agents/crm-sync">CRM sync</a></li>
                   <li><a href="agents/email-triage">Email triage</a></li>
-                  <li><a href="agents/invoice-processing">Invoice processing</a></li>
-                  <li><a href="agents/lead-enrichment">Lead enrichment</a></li>
-                  <li><a href="agents/report-generator">Report generator</a></li>
+                  <li><a href="agents/phone-agent">Phone agent</a></li>
                 </ul>
               </div>
             </div>
@@ -66,7 +63,7 @@
           <li><a href="contact">Contact</a></li>
         </ul>
         <!-- Same CTA, shown only inside the open mobile menu -->
-        <a href="contact#calendly-widget" class="btn btn-primary header-cta-mobile" data-event="CTA Click">Gratis adviesgesprek</a>
+        <a href="https://dashboard.mowi.agency/aanmelden" class="btn btn-primary header-cta-mobile" data-event="Signup Started">Start gratis</a>
         <a href="https://dashboard.mowi.agency/login" class="header-dashboard-mobile" target="_blank" rel="noopener">Dashboard log in</a>
       </nav>
 
@@ -106,25 +103,30 @@
              buttons) replaces the generic fade-in — see the "Hero entrance
              animation" section in css/style.css and js/main.js. -->
         <div class="hero-frame-col hero-frame-content">
-          <span class="eyebrow hero-badge-reveal">AI · Business intelligence · MKB</span>
+          <span class="eyebrow hero-badge-reveal">AI-agents · Eerste maand gratis</span>
 
-          <h1 class="hero-heading-reveal">AI-automatisering die uw team tijd teruggeeft — Power BI houdt u op koers.</h1>
+          <h1 class="hero-heading-reveal">Uw eerste AI-collega staat vandaag aan het werk.</h1>
 
           <p class="lede hero-reveal hero-reveal-delay-1" style="margin-top: 1.5rem; max-width: 34rem;">
-            Stop met sturen op onderbuikgevoel en verouderde Excel-lijstjes. Mowi automatiseert
-            de terugkerende taken die uw team elke week uren kosten en zorgt dat uw cijfers live
-            inzichtelijk zijn. Voor MKB-bedrijven vanaf circa 20 medewerkers, in Nederland en
-            Vlaanderen.
+            Koppel uw mailbox, kies uw categorieën, en de Email-agent sorteert uw post, schrijft
+            concept-antwoorden en vraagt zelf de ontbrekende gegevens op voor een offerte —
+            terwijl u iets anders doet. Zelf uitproberen, zonder setupkosten en zonder contract.
           </p>
 
           <div class="hero-actions">
             <span class="btn-slot hero-reveal hero-reveal-delay-2">
-              <a href="contact#calendly-widget" class="btn btn-primary" data-event="CTA Click">Plan kennismaking — 20 min</a>
+              <a href="https://dashboard.mowi.agency/aanmelden" class="btn btn-primary" data-event="Signup Started">Start gratis — eerste maand</a>
             </span>
             <span class="btn-slot hero-reveal hero-reveal-delay-3">
-              <a href="agentic-ai" class="btn btn-secondary">Ontdek AI-automatisering</a>
+              <a href="agents/email-triage" class="btn btn-secondary">Bekijk de Email-agent</a>
             </span>
           </div>
+
+          <p class="lede hero-reveal hero-reveal-delay-3" style="margin-top: 1rem; font-size: 0.875rem;">
+            Eerste maand gratis · daarna €40 per maand excl. btw · betaalgegevens nu, eerste incasso
+            na 30 dagen · maandelijks opzegbaar. Liever eerst overleggen?
+            <a href="contact#calendly-widget" data-event="CTA Click" style="text-decoration: underline;">Plan een kennismaking</a>.
+          </p>
         </div>
 
         <div class="hero-frame-col"></div>
@@ -196,8 +198,8 @@
 
     <!-- ===== Stats strip =====
          The three single-number stats count up from 0 on scroll-into-view
-         (js/main.js). "2–6 wk" is a range, not a single number, so it stays
-         static text — counting up to a range doesn't read as meaningful. -->
+         (js/main.js). "€0" stays static text, same as any non-plain-integer
+         value — counting up to it doesn't read as meaningful. -->
     <section class="container section" data-reveal>
       <div class="stats-bar">
         <div>
@@ -213,81 +215,82 @@
           <div class="stat-label">klantbeoordeling</div>
         </div>
         <div>
-          <div class="stat-number">2–6 wk</div>
-          <div class="stat-label">tot werkend resultaat</div>
+          <div class="stat-number">€0</div>
+          <div class="stat-label">setupkosten</div>
         </div>
       </div>
     </section>
 
-    <!-- ===== Diensten ===== -->
+    <!-- ===== Producten ===== -->
     <section class="container section" id="diensten">
       <div class="section-head" data-reveal>
-        <span class="eyebrow">Diensten</span>
-        <h2>Eén partner voor slimmer werken.</h2>
+        <span class="eyebrow">Producten</span>
+        <h2>Agents die u vandaag al kunt aanzetten.</h2>
       </div>
 
       <div class="grid grid-3">
         <div class="card card-featured" data-reveal>
-          <div class="card-icon">AI</div>
-          <h3>AI-automatisering</h3>
-          <p>Facturen verwerken, offertes opstellen, klantvragen beantwoorden, data overtikken: we brengen per
-            organisatie in kaart welke taken u beter kunt wegautomatiseren — en regelen dat van A tot Z.</p>
-          <a href="agentic-ai" class="card-link">Ontdek wat AI voor uw processen kan →</a>
+          <span class="pill" style="margin-bottom: 0.75rem; display: inline-block;">Nu te proberen</span>
+          <h3>Email-agent</h3>
+          <p>Sorteert uw inbox, schrijft concept-antwoorden en vraagt zelf ontbrekende offerte-informatie op.
+            Eerste maand gratis, daarna €40/maand excl. btw.</p>
+          <a href="agents/email-triage" class="card-link">Bekijk de Email-agent →</a>
+        </div>
+
+        <div class="card" data-reveal>
+          <span class="pill" style="margin-bottom: 0.75rem; display: inline-block;">Binnenkort</span>
+          <h3>Phone agent</h3>
+          <p>Beantwoordt binnenkomende gesprekken op uw bestaande nummer en verbindt door wanneer dat nodig is.</p>
+          <a href="agents/phone-agent" class="card-link">Bekijk de Phone agent →</a>
         </div>
 
         <div class="card" data-reveal>
           <div class="card-icon">BI</div>
           <h3>Power BI dashboards</h3>
           <p>Al uw cijfers — omzet, marge, voorraad, productie — actueel in één overzicht, automatisch gevuld vanuit
-            uw ERP, CRM of Excel. Standaard in twee weken; maatwerk in twee tot zes weken.</p>
+            uw ERP, CRM of Excel.</p>
           <a href="power-bi-dashboards" class="card-link">Bekijk onze dashboards →</a>
         </div>
-
-        <div class="card" data-reveal>
-          <div class="card-icon">TR</div>
-          <h3>Trainingen</h3>
-          <p>Liever zelf aan het stuur? We trainen uw team op locatie in Power BI en Automatiseren met AI. Eén dag,
-            en iedereen uit uw team kan aanschuiven.</p>
-          <a href="trainingen" class="card-link">Bekijk de trainingen →</a>
-        </div>
       </div>
+
+      <p class="muted" style="margin-top: 2rem;">
+        Liever zelf leren werken met AI en Power BI? <a href="trainingen" class="card-link" style="display: inline;">Bekijk onze trainingen →</a>
+      </p>
     </section>
 
-    <!-- ===== Wat we automatiseren ===== -->
+    <!-- ===== Wat de Email-agent doet ===== -->
     <section class="section section-tint">
       <div class="container">
         <div class="section-head center" data-reveal>
-          <span class="eyebrow">Mogelijkheden</span>
-          <h2>Wat we voor u kunnen automatiseren.</h2>
+          <span class="eyebrow">Vandaag al mogelijk</span>
+          <h2>Wat de Email-agent vandaag al doet.</h2>
         </div>
 
         <div class="grid grid-3">
           <div class="card" data-reveal>
-            <h3>Factuur- &amp; documentverwerking</h3>
-            <p>Inkomende documenten lezen, controleren en boeken — zonder overtypen.</p>
-            <a href="agents/invoice-processing" class="card-link">Bekijk Invoice processing →</a>
+            <h3>Automatische categorisering</h3>
+            <p>Elke binnenkomende mail wordt gelezen en in de juiste categorie gezet — voordat uw team eraan begint.</p>
           </div>
           <div class="card" data-reveal>
-            <h3>Offertes &amp; aanvragen</h3>
-            <p>Aanvragen automatisch omzetten in een kloppende, verzendklare offerte.</p>
+            <h3>Concept-antwoorden</h3>
+            <p>Klantvragen krijgen een kant-en-klaar concept-antwoord op basis van uw eigen FAQ.</p>
           </div>
           <div class="card" data-reveal>
-            <h3>Klantvragen &amp; helpdesk</h3>
-            <p>Veelgestelde vragen direct beantwoord, 24/7, zonder wachttijd.</p>
+            <h3>Offerte-informatie automatisch opgevraagd</h3>
+            <p>Mist een offerteaanvraag gegevens? De agent vraagt ze zelf na — sneller antwoord, sneller order.</p>
           </div>
           <div class="card" data-reveal>
-            <h3>Data-invoer &amp; overzetten</h3>
-            <p>Gegevens die nu tussen systemen worden overgetikt, stromen vanzelf door.</p>
-            <a href="agents/crm-sync" class="card-link">Bekijk CRM sync →</a>
+            <h3>Proefdraaien zonder risico</h3>
+            <p>Bekijk eerst wat de agent zou doen, voordat u hem daadwerkelijk laat versturen.</p>
           </div>
           <div class="card" data-reveal>
-            <h3>Rapportages &amp; samenvattingen</h3>
-            <p>Terugkerende rapportages stellen zichzelf samen, elke week opnieuw.</p>
-            <a href="agents/report-generator" class="card-link">Bekijk Report generator →</a>
+            <h3>Blocklist voor afzenders</h3>
+            <p>Bepaal zelf welke afzenders de agent altijd moet negeren.</p>
           </div>
           <div class="card" data-reveal>
-            <h3>Planning &amp; routes</h3>
-            <p>Capaciteit en routes automatisch optimaliseren op basis van actuele data.</p>
+            <h3>Volledige run-historie</h3>
+            <p>Elke actie is zichtbaar in uw dashboard, inclusief 'Needs attention' bij storingen.</p>
+            <a href="agents/email-triage" class="card-link">Bekijk de Email-agent →</a>
           </div>
         </div>
       </div>
@@ -299,8 +302,9 @@
         <span class="eyebrow">Voor wie</span>
         <h2>Gemaakt voor bedrijven waar de datacomplexiteit groeit.</h2>
         <p class="lede" style="margin-top: 1rem;">
-          Mowi werkt voor MKB-bedrijven vanaf zo'n 20 medewerkers — met name in productie, groothandel en
-          logistiek. We koppelen met vrijwel elk systeem, van AFAS en Exact tot Excel.
+          De Email-agent is voor elk bedrijf dat een mailbox heeft, direct zelf te starten. Voor grotere
+          maatwerktrajecten — met name in productie, groothandel en logistiek — werkt Mowi met MKB-bedrijven
+          vanaf circa 20 medewerkers en koppelt met vrijwel elk systeem, van AFAS en Exact tot Excel.
         </p>
       </div>
 
@@ -320,8 +324,8 @@
       </div>
 
       <div class="pill-row" style="margin-top: 2rem;" data-reveal>
-        <a href="koppelingen/afas" class="pill">AFAS</a>
-        <a href="koppelingen/exact-online" class="pill">Exact</a>
+        <span class="pill">AFAS</span>
+        <span class="pill">Exact</span>
         <span class="pill">Microsoft Dynamics</span>
         <span class="pill">SAP</span>
         <span class="pill">Epicor</span>
@@ -375,7 +379,7 @@
       </p>
       <div class="text-center" style="margin-top: 2rem;">
         <span class="btn-slot">
-          <a href="contact#calendly-widget" class="btn btn-primary" data-event="CTA Click">Plan een kennismaking</a>
+          <a href="https://dashboard.mowi.agency/aanmelden" class="btn btn-primary" data-event="Signup Started">Start gratis — eerste maand</a>
         </span>
       </div>
     </section>
@@ -444,25 +448,25 @@
     <section class="container section">
       <div class="section-head center" data-reveal>
         <span class="eyebrow">Werkwijze</span>
-        <h2>Klein beginnen, meetbaar resultaat.</h2>
+        <h2>Klein beginnen, meteen resultaat.</h2>
       </div>
 
       <div class="steps">
         <div class="step" data-reveal>
-          <h3>Taken-scan</h3>
-          <p>30 minuten, online. We brengen in kaart welke taken zich lenen voor automatisering.</p>
+          <h3>Account aanmaken</h3>
+          <p>Gratis, direct te starten — geen kennismaking vooraf nodig.</p>
         </div>
         <div class="step" data-reveal>
-          <h3>Eén proces eerst</h3>
-          <p>We starten met het proces met de meeste winst, niet met alles tegelijk.</p>
+          <h3>Mailbox koppelen</h3>
+          <p>Verbind uw mailbox met één klik en stel uw categorieën in.</p>
         </div>
         <div class="step" data-reveal>
-          <h3>Bouwen &amp; aansluiten</h3>
-          <p>Gekoppeld aan uw systemen. Standaard in 2 weken, maatwerk in 2–6 weken.</p>
+          <h3>Proefdraaien</h3>
+          <p>Bekijk eerst wat de agent zou doen, zonder dat er iets wordt verstuurd.</p>
         </div>
         <div class="step" data-reveal>
-          <h3>Meten &amp; uitbreiden</h3>
-          <p>We meten het resultaat en breiden uit naar het volgende proces.</p>
+          <h3>Activeren &amp; uitbreiden</h3>
+          <p>Tevreden? Zet de agent aan en breid uit naar de Phone agent zodra die live is.</p>
         </div>
       </div>
     </section>
@@ -470,15 +474,15 @@
     <!-- ===== CTA ===== -->
     <section class="container section">
       <div class="cta-band" data-reveal>
-        <h2>Benieuwd wat er in uw bedrijf te winnen valt?</h2>
-        <p>In een kennismaking van 30 minuten kijken we naar uw situatie: welke problemen spelen er, wat is er
-          mogelijk, en zijn we een goede match? Vrijblijvend.</p>
+        <h2>Waarom nog wachten?</h2>
+        <p>Uw team verliest deze week weer uren aan werk dat een agent net zo goed kan doen. Start vandaag
+          gratis en zie het resultaat morgen al in uw dashboard.</p>
         <div class="cta-actions">
           <span class="btn-slot">
-            <a href="contact#calendly-widget" class="btn btn-secondary" data-event="CTA Click">Plan uw kennismaking</a>
+            <a href="https://dashboard.mowi.agency/aanmelden" class="btn btn-secondary" data-event="Signup Started">Start gratis — eerste maand</a>
           </span>
         </div>
-        <p class="cta-alt">Liever direct contact? 085 333 5800 · <a href="mailto:contact@mowi.agency">contact@mowi.agency</a></p>
+        <p class="cta-alt">Liever eerst overleggen? <a href="contact#calendly-widget" data-event="CTA Click">Plan een kennismaking</a> · 085 333 5800 · <a href="mailto:contact@mowi.agency">contact@mowi.agency</a></p>
       </div>
     </section>
 
@@ -492,67 +496,78 @@
       <div class="accordion" data-reveal>
         <div class="accordion-item">
           <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-1">
-            Wat kost een automatisering of dashboard?
+            Wat kost het?
             <span class="accordion-icon">+</span>
           </button>
           <div class="accordion-panel" id="faq-1">
-            <p>Dat hangt af van de complexiteit en het aantal systemen dat we koppelen. Na een gratis
-              kennismaking van 30 minuten weet u een vaste prijs — geen verrassingen achteraf.</p>
+            <p>De eerste maand is gratis. Daarna €40 per maand excl. btw voor de Email-agent — geen setupkosten,
+              geen verborgen kosten. Zie <a href="tarieven">Tarieven</a> voor het volledige overzicht.</p>
           </div>
         </div>
 
         <div class="accordion-item">
           <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-2">
-            Hoe snel staat een automatisering live?
+            Wat gebeurt er na de gratis maand?
             <span class="accordion-icon">+</span>
           </button>
           <div class="accordion-panel" id="faq-2">
-            <p>De meeste automatiseringen en dashboards staan binnen twee tot zes weken live, afhankelijk van
-              de complexiteit. We beginnen altijd met het proces dat de meeste tijd bespaart.</p>
+            <p>Uw abonnement loopt automatisch door tegen het reguliere maandbedrag. U ziet de datum vooraf in
+              uw dashboard, dus er komt geen verrassing.</p>
           </div>
         </div>
 
         <div class="accordion-item">
           <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-3">
-            Werkt dit met ons systeem?
+            Kan ik zomaar opzeggen?
             <span class="accordion-icon">+</span>
           </button>
           <div class="accordion-panel" id="faq-3">
-            <p>In de meeste gevallen wel. We koppelen met vrijwel elk ERP-, CRM- of boekhoudsysteem — van AFAS
-              en Exact tot maatwerksoftware. Geen match? Dan zeggen we dat eerlijk in de kennismaking.</p>
+            <p>Ja, maandelijks. Er geldt een opzegtermijn van 1 kalendermaand — een e-mail volstaat. Geen
+              jaarcontract, geen boetebeding.</p>
           </div>
         </div>
 
         <div class="accordion-item">
           <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-4">
-            Wat als het niet bevalt?
+            Werkt dit met Gmail en Outlook?
             <span class="accordion-icon">+</span>
           </button>
           <div class="accordion-panel" id="faq-4">
-            <p>U zit nergens aan vast. We werken met korte, overzichtelijke trajecten en bespreken vooraf wat u
-              kunt verwachten — geen jarenlange contracten of verborgen voorwaarden.</p>
+            <p>Ja, de Email-agent werkt met Gmail en Outlook / Microsoft 365. U koppelt uw mailbox zelf, in
+              enkele minuten.</p>
           </div>
         </div>
 
         <div class="accordion-item">
           <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-5">
-            Hoe zit het met onze data en privacy?
+            Verstuurt de agent zelf mails?
             <span class="accordion-icon">+</span>
           </button>
           <div class="accordion-panel" id="faq-5">
-            <p>Uw data blijft van u. We werken volgens de AVG, koppelen alleen met wat nodig is, en houden waar
-              gewenst een mens in de controle-loop bij geautomatiseerde processen.</p>
+            <p>Alleen na uw goedkeuring. U kunt de agent eerst laten proefdraaien en pas daarna automatisch
+              laten versturen — u bepaalt zelf wanneer u dat vertrouwt.</p>
           </div>
         </div>
 
         <div class="accordion-item">
           <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-6">
-            Heb ik technische kennis nodig om dit te gebruiken?
+            Hoe zit het met onze data en privacy?
             <span class="accordion-icon">+</span>
           </button>
           <div class="accordion-panel" id="faq-6">
-            <p>Nee. Wij bouwen de automatisering of het dashboard, dragen het over en trainen uw team zodat
-              iedereen er meteen mee uit de voeten kan.</p>
+            <p>Uw data blijft van u. We werken volgens de AVG en houden waar gewenst een mens in de
+              controle-loop bij geautomatiseerde processen.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-7">
+            Kan Mowi het voor mij inrichten?
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-panel" id="faq-7">
+            <p>Ja. Liever niet zelf koppelen? Ons implementatieteam richt de agent op aanvraag voor u in —
+              <a href="contact#calendly-widget">plan een kennismaking</a> om de mogelijkheden te bespreken.</p>
           </div>
         </div>
       </div>
@@ -604,6 +619,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=20260805-16"></script>
+  <script src="js/main.js?v=20260811-1"></script>
 </body>
 </html>

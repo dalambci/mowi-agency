@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Email triage — inbox automatisch sorteren met AI | Mowi</title>
-  <meta name="description" content="Mowi's Email triage-agent sorteert met AI elke binnenkomende mail — voordat uw team eraan begint. Voor MKB-bedrijven in Nederland en Vlaanderen." />
+  <meta name="description" content="Mowi's Email triage-agent sorteert met AI elke binnenkomende mail — voordat uw team eraan begint. Eerste maand gratis, zelf te starten." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=20260806-1" />
+  <link rel="stylesheet" href="../css/style.css?v=20260811-1" />
   <link rel="icon" href="../assets/icon-192.png?v=20260804-3" />
   <link rel="shortcut icon" href="../assets/icon-192.png?v=20260804-3" />
   <link rel="apple-touch-icon" href="../assets/apple-icon-180.png?v=20260804-3" />
@@ -23,8 +23,8 @@
   <header class="site-header">
     <div class="header-bar">
       <span class="header-cta-slot">
-        <a href="../contact#calendly-widget" class="header-cta" data-event="CTA Click">
-          <span class="header-cta-full">Gratis adviesgesprek</span><span class="header-cta-short">Adviesgesprek</span>
+        <a href="https://dashboard.mowi.agency/aanmelden" class="header-cta" data-event="Signup Started">
+          <span class="header-cta-full">Start gratis</span><span class="header-cta-short">Start gratis</span>
         </a>
       </span>
 
@@ -48,11 +48,8 @@
               <div class="nav-megamenu-col">
                 <p class="nav-megamenu-label">Automations</p>
                 <ul>
-                  <li><a href="crm-sync">CRM sync</a></li>
                   <li><a href="email-triage" aria-current="page">Email triage</a></li>
-                  <li><a href="invoice-processing">Invoice processing</a></li>
-                  <li><a href="lead-enrichment">Lead enrichment</a></li>
-                  <li><a href="report-generator">Report generator</a></li>
+                  <li><a href="phone-agent">Phone agent</a></li>
                 </ul>
               </div>
             </div>
@@ -64,7 +61,7 @@
           <li><a href="../contact">Contact</a></li>
         </ul>
         <!-- Same CTA, shown only inside the open mobile menu -->
-        <a href="../contact#calendly-widget" class="btn btn-primary header-cta-mobile" data-event="CTA Click">Gratis adviesgesprek</a>
+        <a href="https://dashboard.mowi.agency/aanmelden" class="btn btn-primary header-cta-mobile" data-event="Signup Started">Start gratis</a>
         <a href="https://dashboard.mowi.agency/login" class="header-dashboard-mobile" target="_blank" rel="noopener">Dashboard log in</a>
       </nav>
 
@@ -97,10 +94,14 @@
           </p>
           <div class="hero-actions">
             <span class="btn-slot">
-              <a href="../contact#calendly-widget" class="btn btn-primary" data-event="CTA Click">Plan een kennismaking</a>
+              <a href="https://dashboard.mowi.agency/aanmelden" class="btn btn-primary" data-event="Signup Started">Start gratis — eerste maand</a>
             </span>
           </div>
-          <a href="../docs/agent-email-triage" class="card-link" style="margin-top: 1rem; display: inline-block;">Bekijk de documentatie →</a>
+          <p class="lede" style="margin-top: 1rem; font-size: 0.875rem;">
+            Eerste maand gratis · daarna €40 per maand excl. btw · betaalgegevens nu, eerste
+            incasso na 30 dagen · maandelijks opzegbaar.
+          </p>
+          <a href="../docs/agent-email-triage" class="card-link" style="margin-top: 0.5rem; display: inline-block;">Bekijk de documentatie →</a>
         </div>
 
         <!-- Hero showcase: mail -> Mowi -> outcome. This page uses the
@@ -183,13 +184,15 @@
                that's how js/main.js pairs a task with its result and its
                connector line. -->
           <div class="showcase-col showcase-col-result">
-            <!-- The offerte time-saver: three fields the agent already
-                 extracted from the mail, a totals skeleton, the "klaargezet"
-                 (not "verstuurd") badge, and the closing line making the
-                 human-sends-it point explicit in copy too, not just in the
-                 word choice above. -->
+            <!-- The offerte time-saver: two fields the agent already
+                 extracted from the mail, one it spotted as missing, and the
+                 auto-reply asking for exactly that. Deliberately short —
+                 this card sets the height of the whole hero-showcase's
+                 result column (see .hero-showcase.is-fluid's own comment),
+                 so it stays lean rather than growing with every extra
+                 example field. -->
             <div class="showcase-endpoint showcase-offerte-card">
-              <span class="showcase-compose-header">Offerte-concept</span>
+              <span class="showcase-compose-header">Offerteaanvraag</span>
               <div class="showcase-offerte-field">
                 <span class="showcase-offerte-field-label">Klant</span>
                 <span class="showcase-offerte-field-value">De Vries B.V.</span>
@@ -204,21 +207,18 @@
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7" /></svg>
                 </span>
               </div>
-              <div class="showcase-offerte-field">
+              <div class="showcase-offerte-field is-missing">
                 <span class="showcase-offerte-field-label">Gewenste datum</span>
-                <span class="showcase-offerte-field-value">september</span>
-                <span class="showcase-check">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7" /></svg>
-                </span>
+                <span class="showcase-offerte-field-value">ontbreekt</span>
+                <span class="showcase-missing" aria-hidden="true">?</span>
               </div>
-              <span class="showcase-compose-skeleton"></span>
+              <p class="showcase-compose-line showcase-offerte-ask">Om uw offerte te maken: wat is de gewenste startdatum?</p>
               <span class="showcase-compose-badge">
                 <span class="showcase-check">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7" /></svg>
                 </span>
-                Offerte klaargezet
+                Vraag automatisch verstuurd
               </span>
-              <span class="showcase-offerte-closing">Alleen nog versturen</span>
             </div>
 
             <div class="showcase-endpoint showcase-compose">
@@ -270,8 +270,8 @@
             <p>Elke binnenkomende mail wordt gelezen en in de juiste categorie gezet — voordat uw team eraan begint.</p>
           </div>
           <div class="card" data-reveal>
-            <h3>Meldingen bij urgentie</h3>
-            <p>Urgente mails blijven niet onopgemerkt liggen. <!-- VERIFY tegen v1-featureset: alerting-gedrag niet bevestigd in docs/agent-email-triage.html, alleen categorisering + Needs attention bij storingen --></p>
+            <h3>Concept-antwoorden</h3>
+            <p>Voor herkenbare klantvragen stelt de agent een concept-antwoord op, klaar om te controleren en te versturen.</p>
           </div>
           <div class="card" data-reveal>
             <h3>Volledige zichtbaarheid</h3>
@@ -304,8 +304,6 @@
       <div class="pill-row" style="justify-content: center;" data-reveal>
         <span class="pill">Gmail</span>
         <span class="pill">Outlook / Microsoft 365</span>
-        <span class="pill">Elke IMAP-mailbox</span>
-        <!-- VERIFY: matrix uit het implementatieplan, nog niet bevestigd tegen de huidige v1-koppelmethode (docs/agent-email-triage.html beschrijft Google/Microsoft account-autorisatie, geen losstaande IMAP-inlog). -->
       </div>
     </section>
 
@@ -320,7 +318,7 @@
         <div class="steps steps-3">
           <div class="step" data-reveal>
             <h3>Koppelen</h3>
-            <p>Uw mailbox veilig verbinden, samen of via de handleiding.</p>
+            <p>Uw mailbox veilig verbinden met één klik — via Google of Microsoft.</p>
           </div>
           <div class="step" data-reveal>
             <h3>Afstemmen</h3>
@@ -341,7 +339,7 @@
         <h2>Vaste, voorspelbare kosten.</h2>
       </div>
       <div class="text-center" data-reveal>
-        <p class="pricing-line">Vanaf <strong>€[PRICE_EMAIL_TRIAGE]</strong> per maand &middot; eenmalige setup op basis van de inventarisatie &middot; exacte prijs in uw voorstel.</p>
+        <p class="pricing-line"><strong>€40</strong> per maand excl. btw &middot; eerste maand gratis &middot; maandelijks opzegbaar &middot; fair-use-grens: [FAIR_USE_OMSCHRIJVING].</p>
       </div>
     </section>
 
@@ -361,10 +359,10 @@
           <div class="accordion-panel" id="faq-et-1">
             <p>
               De agent leest de inhoud van elke binnenkomende mail in de gekoppelde mailbox om te bepalen in welke
-              categorie deze hoort. De koppeling zelf wordt door Mowi's implementatieteam ingericht, in overleg met
-              u of uw IT-partner. Specifieke techniek zoals encryptie en bewaartermijnen bevestigen we pas zodra
-              dat met Mowi is vastgesteld <!-- VERIFY: zie docs/it-beveiliging.html, deze claims staan daar bewust nog niet --> —
-              vraag er in de kennismaking gerust naar.
+              categorie deze hoort. U koppelt uw mailbox zelf via Google of Microsoft; lukt dat niet, dan helpt
+              Mowi's implementatieteam u op aanvraag verder. Specifieke techniek zoals encryptie en
+              bewaartermijnen bevestigen we pas zodra dat met Mowi is vastgesteld <!-- VERIFY: zie docs/it-beveiliging.html, deze claims staan daar bewust nog niet --> —
+              vraag er gerust naar.
             </p>
           </div>
         </div>
@@ -376,19 +374,44 @@
           <div class="accordion-panel" id="faq-et-2">
             <p>
               Storingen ziet u altijd direct terug onder 'Needs attention' in uw dashboard, zodat niets stil
-              blijft liggen. <!-- VERIFY: exact gedrag bij een e-mail die de agent niet zeker kan categoriseren is niet bevestigd in v1 — navragen bij Mowi voordat dit hard wordt toegezegd --> Vraag naar de actuele werkwijze in de kennismaking.
+              blijft liggen. <!-- VERIFY: exact gedrag bij een e-mail die de agent niet zeker kan categoriseren is niet bevestigd in v1 — navragen bij Mowi voordat dit hard wordt toegezegd -->
             </p>
           </div>
         </div>
         <div class="accordion-item">
           <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-et-3">
-            Zitten we ergens aan vast?
+            Wat gebeurt er na de gratis maand?
             <span class="accordion-icon">+</span>
           </button>
           <div class="accordion-panel" id="faq-et-3">
             <p>
-              U zit nergens aan vast. We werken met korte, overzichtelijke afspraken en bespreken vooraf wat u kunt
-              verwachten — geen jarenlange contracten of verborgen voorwaarden.
+              Na 30 dagen loopt uw abonnement automatisch door tegen €40 per maand excl. btw, via automatische
+              incasso op de betaalmethode die u bij aanmelden heeft opgegeven. U ziet de datum vooraf in uw
+              dashboard. Wilt u niet doorgaan, dan zegt u op vóór die datum.
+            </p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-et-4">
+            Verstuurt de agent zelf mails?
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-panel" id="faq-et-4">
+            <p>
+              Alleen na uw goedkeuring. U kunt de agent eerst laten proefdraaien en pas daarna automatisch laten
+              versturen — u bepaalt zelf wanneer u dat vertrouwt.
+            </p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-et-5">
+            Zitten we ergens aan vast?
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-panel" id="faq-et-5">
+            <p>
+              U zit nergens aan vast. Maandelijks opzegbaar met een opzegtermijn van 1 kalendermaand — geen
+              jaarcontract, geen verborgen voorwaarden.
             </p>
           </div>
         </div>
@@ -399,13 +422,13 @@
     <section class="container section">
       <div class="cta-band" data-reveal>
         <h2>Klaar om uw inbox uit handen te geven?</h2>
-        <p>In een kennismaking van 30 minuten kijken we of Email triage bij uw situatie past. Vrijblijvend.</p>
+        <p>Sluit uw mailbox aan en zie de agent vandaag nog aan het werk. Eerste maand gratis.</p>
         <div class="cta-actions">
           <span class="btn-slot">
-            <a href="../contact#calendly-widget" class="btn btn-secondary" data-event="CTA Click">Plan uw kennismaking</a>
+            <a href="https://dashboard.mowi.agency/aanmelden" class="btn btn-secondary" data-event="Signup Started">Start gratis — eerste maand</a>
           </span>
         </div>
-        <p class="cta-alt">Liever direct contact? 085 333 5800 · <a href="mailto:contact@mowi.agency">contact@mowi.agency</a></p>
+        <p class="cta-alt">Liever eerst overleggen? <a href="../contact#calendly-widget" data-event="CTA Click">Plan een kennismaking</a> · 085 333 5800 · <a href="mailto:contact@mowi.agency">contact@mowi.agency</a></p>
       </div>
     </section>
 
@@ -455,6 +478,6 @@
     </div>
   </footer>
 
-  <script src="../js/main.js?v=20260805-16"></script>
+  <script src="../js/main.js?v=20260811-1"></script>
 </body>
 </html>

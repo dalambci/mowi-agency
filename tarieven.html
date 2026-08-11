@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tarieven — AI-agents voor het MKB | Mowi</title>
-  <meta name="description" content="Een eenmalige setup op basis van de inventarisatie, daarna een vast maandbedrag per agent — alles inbegrepen. Bekijk de pakketten." />
+  <title>Tarieven — probeer AI-agents een maand gratis | Mowi</title>
+  <meta name="description" content="Eerste maand gratis, daarna een vast maandbedrag per agent — geen setupkosten, maandelijks opzegbaar. Bekijk de tarieven." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260806-1" />
+  <link rel="stylesheet" href="css/style.css?v=20260811-1" />
   <link rel="icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="shortcut icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260804-3" />
@@ -22,8 +22,8 @@
   <header class="site-header">
     <div class="header-bar">
       <span class="header-cta-slot">
-        <a href="contact#calendly-widget" class="header-cta" data-event="CTA Click">
-          <span class="header-cta-full">Gratis adviesgesprek</span><span class="header-cta-short">Adviesgesprek</span>
+        <a href="https://dashboard.mowi.agency/aanmelden" class="header-cta" data-event="Signup Started">
+          <span class="header-cta-full">Start gratis</span><span class="header-cta-short">Start gratis</span>
         </a>
       </span>
 
@@ -47,11 +47,8 @@
               <div class="nav-megamenu-col">
                 <p class="nav-megamenu-label">Automations</p>
                 <ul>
-                  <li><a href="agents/crm-sync">CRM sync</a></li>
                   <li><a href="agents/email-triage">Email triage</a></li>
-                  <li><a href="agents/invoice-processing">Invoice processing</a></li>
-                  <li><a href="agents/lead-enrichment">Lead enrichment</a></li>
-                  <li><a href="agents/report-generator">Report generator</a></li>
+                  <li><a href="agents/phone-agent">Phone agent</a></li>
                 </ul>
               </div>
             </div>
@@ -63,7 +60,7 @@
           <li><a href="contact">Contact</a></li>
         </ul>
         <!-- Same CTA, shown only inside the open mobile menu -->
-        <a href="contact#calendly-widget" class="btn btn-primary header-cta-mobile" data-event="CTA Click">Gratis adviesgesprek</a>
+        <a href="https://dashboard.mowi.agency/aanmelden" class="btn btn-primary header-cta-mobile" data-event="Signup Started">Start gratis</a>
         <a href="https://dashboard.mowi.agency/login" class="header-dashboard-mobile" target="_blank" rel="noopener">Dashboard log in</a>
       </nav>
 
@@ -93,79 +90,64 @@
     <!-- ===== Pakketten ===== -->
     <section class="container section" id="pakketten">
       <div class="section-head pakketten-head" data-reveal>
-        <h2>Kies wat past. Groei wanneer u wilt.</h2>
+        <h2>Eerste maand gratis. Geen setupkosten.</h2>
+        <p class="lede" style="margin-top: 1rem;">
+          Sluit zelf een agent aan en test hem 30 dagen kosteloos. Bevalt hij? Dan loopt het abonnement
+          automatisch door — maandelijks opzegbaar, geen verrassingen. U geeft uw betaalgegevens nu op,
+          de eerste incasso volgt pas na 30 dagen. Prijzen zijn excl. btw.
+        </p>
       </div>
 
-      <div class="grid grid-3">
-        <!-- Start -->
-        <div class="card pricing-card" data-reveal>
-          <h3>Start</h3>
-          <p class="pricing-card-desc">1 agent naar keuze.</p>
-
-          <div class="pricing-price">
-            <span class="pricing-price-setup">Setup vanaf €500</span>
-            <span class="pricing-price-monthly">vanaf €40 <small>/maand</small></span>
-          </div>
-
-          <ul class="pricing-features">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>1 agent volledig ingericht</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Inventarisatie op locatie</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Koppeling met uw systeem</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Dashboard-toegang</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Monitoring via Needs attention</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Training voor uw team</span></li>
-          </ul>
-
-          <a href="contact#calendly-widget" class="card-link" data-event="CTA Click" data-event-card="start">Vraag een voorstel aan →</a>
-        </div>
-
-        <!-- Groei (featured) -->
+      <div class="grid grid-2">
+        <!-- Email triage (live) -->
         <div class="card card-featured pricing-card" data-reveal>
-          <span class="pricing-badge">Aangeraden</span>
-          <h3>Groei</h3>
-          <p class="pricing-card-desc">2–3 agents naar keuze.</p>
+          <span class="pricing-badge">Nu te proberen</span>
+          <h3>Email triage</h3>
+          <p class="pricing-card-desc">Sorteert, beantwoordt en signaleert — zelf aan te sluiten in enkele minuten.</p>
 
           <div class="pricing-price">
-            <span class="pricing-price-setup">Setup vanaf €1.000</span>
-            <span class="pricing-price-monthly">vanaf €60 <small>/maand</small></span>
+            <span class="pricing-price-trial">Eerste maand gratis</span>
+            <span class="pricing-price-monthly">€40 <small>/maand excl. btw</small></span>
           </div>
 
           <ul class="pricing-features">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>2–3 agents naar keuze</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Alles uit Start</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Agents werken samen (bijv. Email triage → Invoice processing)</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Prioriteit bij storingen</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Kwartaal-optimalisatie op basis van run-data</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Mailbox koppelen in enkele minuten</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Automatische categorisering</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Concept-antwoorden op klantvragen</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Ontbrekende offerte-informatie automatisch opgevraagd</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Volledige run-historie in uw dashboard</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Maandelijks opzegbaar</span></li>
           </ul>
 
-          <a href="contact#calendly-widget" class="card-link" data-event="CTA Click" data-event-card="groei">Vraag een voorstel aan →</a>
+          <a href="https://dashboard.mowi.agency/aanmelden" class="card-link" data-event="Signup Started" data-event-card="email-triage">Start gratis →</a>
         </div>
 
-        <!-- Compleet -->
+        <!-- Phone agent (binnenkort) -->
         <div class="card pricing-card" data-reveal>
-          <h3>Compleet</h3>
-          <p class="pricing-card-desc">Alle vijf agents + Power BI dashboard-traject.</p>
+          <span class="pricing-badge">Binnenkort</span>
+          <h3>Phone agent</h3>
+          <p class="pricing-card-desc">Beantwoordt binnenkomende gesprekken op uw bestaande nummer.</p>
 
           <div class="pricing-price">
-            <span class="pricing-price-setup">Setup vanaf €2.000</span>
-            <span class="pricing-price-monthly">vanaf €150 <small>/maand</small></span>
+            <span class="pricing-price-trial">Eerste maand gratis</span>
+            <span class="pricing-price-monthly">€80 <small>/maand excl. btw</small></span>
           </div>
 
           <ul class="pricing-features">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Alle vijf agents</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Power BI dashboard inbegrepen</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Alles uit Groei</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Jaarlijkse strategiesessie</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Eerste keuze bij nieuwe agent-types</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Uw eigen nummer, gewoon doorgeschakeld</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Antwoordt op basis van uw eigen website</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Verbindt door naar een collega wanneer nodig</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Samenvatting en transcript per gesprek</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Maandelijks opzegbaar</span></li>
           </ul>
 
-          <a href="contact#calendly-widget" class="card-link" data-event="CTA Click" data-event-card="compleet">Vraag een voorstel aan →</a>
+          <a href="agents/phone-agent" class="card-link" data-event="CTA Click" data-event-card="phone-agent">Meer over de Phone agent →</a>
         </div>
       </div>
 
       <div class="pricing-maatwerk" data-reveal>
-        <p>Maatwerk of twijfel? Elke offerte start met een gratis adviesgesprek — exacte prijzen staan altijd in uw voorstel.</p>
-        <a href="contact#calendly-widget" class="card-link" data-event="CTA Click" data-event-card="maatwerk">Plan een adviesgesprek →</a>
+        <p><strong>Liever laten inrichten?</strong> Wij kunnen uw agent volledig voor u opzetten en koppelen — prijs op aanvraag, afhankelijk van uw systemen.</p>
+        <a href="contact#calendly-widget" class="card-link" data-event="CTA Click" data-event-card="maatwerk">Plan een kennismaking →</a>
       </div>
     </section>
 
@@ -184,7 +166,7 @@
         <ul class="check-list" data-reveal>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Continue updates naar de nieuwste AI-modellen zodra ze beschikbaar zijn</span></li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Onderhoud en storingsherstel</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Koppelingen die blijven werken, ook als Exact, AFAS of uw CRM hun API wijzigt</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Koppeling die blijft werken, ook als Gmail of Microsoft 365 iets wijzigt</span></li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>24/7 monitoring met Needs attention in uw dashboard</span></li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Volledige run-historie — u ziet precies wat elke agent doet</span></li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Beveiligingsupdates, encryptie en dagelijkse backups</span></li>
@@ -196,25 +178,25 @@
       </div>
     </section>
 
-    <!-- ===== Setup-uitleg ===== -->
+    <!-- ===== Zelf live ===== -->
     <section class="container section">
       <div class="section-head center" data-reveal>
-        <span class="eyebrow">De eenmalige setup</span>
-        <h2>Wat er gebeurt voordat een agent live gaat.</h2>
+        <span class="eyebrow">Aan de slag</span>
+        <h2>Zelf live in een paar minuten.</h2>
       </div>
 
       <div class="steps steps-3">
         <div class="step" data-reveal>
-          <h3>Inventarisatie op locatie</h3>
-          <p>We brengen bij u op locatie in kaart welke taken zich lenen voor automatisering en welke systemen erbij horen.</p>
+          <h3>Account aanmaken</h3>
+          <p>Registreer gratis en kies de agent waarmee u wilt beginnen.</p>
         </div>
         <div class="step" data-reveal>
-          <h3>Bouwen en koppelen</h3>
-          <p>De agent wordt gebouwd en gekoppeld aan uw systemen, zodat hij precies past bij uw manier van werken.</p>
+          <h3>Mailbox koppelen</h3>
+          <p>Verbind uw mailbox met één klik — geen technische kennis nodig.</p>
         </div>
         <div class="step" data-reveal>
-          <h3>Training en livegang</h3>
-          <p>Uw team leert ermee werken en de agent gaat live, zichtbaar in uw dashboard.</p>
+          <h3>Proefdraaien en activeren</h3>
+          <p>Bekijk eerst wat de agent zou doen, en zet hem pas aan als u tevreden bent.</p>
         </div>
       </div>
 
@@ -234,20 +216,20 @@
       <div class="accordion" data-reveal>
         <div class="accordion-item">
           <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-tv-1">
-            Waarom een setup-fee?
+            Wat gebeurt er na de gratis maand?
             <span class="accordion-icon">+</span>
           </button>
           <div class="accordion-panel" id="faq-tv-1">
-            <p>De setup-fee dekt het eenmalige werk voordat een agent live gaat: de inventarisatie op locatie, het bouwen en koppelen aan uw systemen, en de training van uw team. Het maandbedrag daarna is alleen voor het draaiend houden en optimaliseren van de agent.</p>
+            <p>Na 30 dagen loopt uw abonnement automatisch door tegen het reguliere maandbedrag. U ziet de datum vooraf in uw dashboard. Wilt u niet doorgaan, dan zegt u op vóór die datum.</p>
           </div>
         </div>
         <div class="accordion-item">
           <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-tv-2">
-            Wat als we willen stoppen?
+            Kan ik maandelijks opzeggen?
             <span class="accordion-icon">+</span>
           </button>
           <div class="accordion-panel" id="faq-tv-2">
-            <p>U kunt maandelijks opzeggen. De exacte voorwaarden staan in uw voorstel.</p>
+            <p>Ja. Er geldt een opzegtermijn van 1 kalendermaand; een e-mail naar uw contactpersoon bij Mowi volstaat. Geen jaarcontract, geen boetebeding.</p>
           </div>
         </div>
         <div class="accordion-item">
@@ -256,16 +238,16 @@
             <span class="accordion-icon">+</span>
           </button>
           <div class="accordion-panel" id="faq-tv-3">
-            <p>Elk pakket werkt met een fair-use-grens: [FAIR_USE_OMSCHRIJVING]. Deze grens is altijd transparant zichtbaar in uw dashboard, samen met het actuele verbruik.</p>
+            <p>Elke agent werkt met een fair-use-grens: [FAIR_USE_OMSCHRIJVING]. Deze grens is altijd transparant zichtbaar in uw dashboard, samen met het actuele verbruik.</p>
           </div>
         </div>
         <div class="accordion-item">
           <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-tv-4">
-            Kunnen we later agents toevoegen?
+            Kan Mowi het voor mij inrichten?
             <span class="accordion-icon">+</span>
           </button>
           <div class="accordion-panel" id="faq-tv-4">
-            <p>Ja, u kunt op elk moment opschalen naar een volgend pakket of een extra agent toevoegen. We bespreken dat graag in een adviesgesprek, samen met wat dat voor uw setup en maandbedrag betekent.</p>
+            <p>Ja. Lukt het zelf koppelen niet, of wilt u het liever uitbesteden, dan richt ons implementatieteam de agent op aanvraag voor u in. Prijs hangt af van uw systemen — bespreken we in een kennismaking.</p>
           </div>
         </div>
         <div class="accordion-item">
@@ -283,14 +265,14 @@
     <!-- ===== CTA ===== -->
     <section class="container section">
       <div class="cta-band" data-reveal>
-        <h2>Klaar voor duidelijkheid over uw prijs?</h2>
-        <p>In een gratis adviesgesprek van 30 minuten bespreken we uw situatie en ontvangt u een voorstel op maat.</p>
+        <h2>Klaar om het zelf te proberen?</h2>
+        <p>Start vandaag nog gratis, en betaal pas als u overtuigd bent.</p>
         <div class="cta-actions">
           <span class="btn-slot">
-            <a href="contact#calendly-widget" class="btn btn-secondary" data-event="CTA Click" data-event-card="maatwerk">Gratis adviesgesprek</a>
+            <a href="https://dashboard.mowi.agency/aanmelden" class="btn btn-secondary" data-event="Signup Started" data-event-card="maatwerk">Start gratis — eerste maand</a>
           </span>
         </div>
-        <p class="cta-alt">Liever direct contact? 085 333 5800 · <a href="mailto:contact@mowi.agency">contact@mowi.agency</a></p>
+        <p class="cta-alt">Liever eerst overleggen? <a href="contact#calendly-widget" data-event="CTA Click">Plan een kennismaking</a> · 085 333 5800 · <a href="mailto:contact@mowi.agency">contact@mowi.agency</a></p>
       </div>
     </section>
   </main>
@@ -339,6 +321,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=20260805-16"></script>
+  <script src="js/main.js?v=20260811-1"></script>
 </body>
 </html>

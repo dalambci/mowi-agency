@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260806-1" />
+  <link rel="stylesheet" href="css/style.css?v=20260811-1" />
   <link rel="icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="shortcut icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260804-3" />
@@ -22,8 +22,8 @@
   <header class="site-header">
     <div class="header-bar">
       <span class="header-cta-slot">
-        <a href="contact#calendly-widget" class="header-cta" data-event="CTA Click">
-          <span class="header-cta-full">Gratis adviesgesprek</span><span class="header-cta-short">Adviesgesprek</span>
+        <a href="https://dashboard.mowi.agency/aanmelden" class="header-cta" data-event="Signup Started">
+          <span class="header-cta-full">Start gratis</span><span class="header-cta-short">Start gratis</span>
         </a>
       </span>
 
@@ -47,11 +47,8 @@
               <div class="nav-megamenu-col">
                 <p class="nav-megamenu-label">Automations</p>
                 <ul>
-                  <li><a href="agents/crm-sync">CRM sync</a></li>
                   <li><a href="agents/email-triage">Email triage</a></li>
-                  <li><a href="agents/invoice-processing">Invoice processing</a></li>
-                  <li><a href="agents/lead-enrichment">Lead enrichment</a></li>
-                  <li><a href="agents/report-generator">Report generator</a></li>
+                  <li><a href="agents/phone-agent">Phone agent</a></li>
                 </ul>
               </div>
             </div>
@@ -63,7 +60,7 @@
           <li><a href="contact">Contact</a></li>
         </ul>
         <!-- Same CTA, shown only inside the open mobile menu -->
-        <a href="contact#calendly-widget" class="btn btn-primary header-cta-mobile" data-event="CTA Click">Gratis adviesgesprek</a>
+        <a href="https://dashboard.mowi.agency/aanmelden" class="btn btn-primary header-cta-mobile" data-event="Signup Started">Start gratis</a>
         <a href="https://dashboard.mowi.agency/login" class="header-dashboard-mobile" target="_blank" rel="noopener">Dashboard log in</a>
       </nav>
 
@@ -89,14 +86,18 @@
       <div class="breadcrumb"><a href="/">Home</a> / AI-automatisering</div>
       <div class="hero-with-visual">
         <div>
-          <h1>Terugkerende taken wegautomatiseren met Agentic AI.</h1>
+          <h1>Terugkerende taken verdwijnen. Uw team niet.</h1>
           <p class="lede" style="margin-top: 1.5rem;">
             Facturen verwerken, offertes opstellen, klantvragen beantwoorden, data overtikken: we brengen per
-            organisatie in kaart welke taken u beter kunt wegautomatiseren — en regelen dat vervolgens van A tot Z.
+            organisatie in kaart welke taken u beter kunt wegautomatiseren — en bouwen dat op maat, van A tot Z.
+            Onze eigen Email-agent is direct te proberen; voor grotere maatwerktrajecten begint het hier.
           </p>
           <div class="hero-actions">
             <span class="btn-slot">
               <a href="contact#calendly-widget" class="btn btn-primary" data-event="CTA Click">Ontdek in 30 minuten wat u kunt automatiseren</a>
+            </span>
+            <span class="btn-slot">
+              <a href="agents/email-triage" class="btn btn-secondary">Probeer de Email-agent gratis</a>
             </span>
           </div>
         </div>
@@ -265,7 +266,6 @@
             </span>
             <h3>Factuur- &amp; documentverwerking</h3>
             <p>Inkomende documenten lezen, controleren en boeken.</p>
-            <a href="agents/invoice-processing" class="card-link">Bekijk Invoice processing →</a>
           </div>
           <div class="card" data-reveal>
             <span class="task-icon" aria-hidden="true">
@@ -306,7 +306,6 @@
             </span>
             <h3>Data-invoer &amp; overzetten</h3>
             <p>Gegevens stromen automatisch door tussen systemen.</p>
-            <a href="agents/crm-sync" class="card-link">Bekijk CRM sync →</a>
           </div>
           <div class="card" data-reveal>
             <span class="task-icon" aria-hidden="true">
@@ -319,7 +318,6 @@
             </span>
             <h3>Rapportages &amp; samenvattingen</h3>
             <p>Terugkerende rapportages stellen zichzelf samen.</p>
-            <a href="agents/report-generator" class="card-link">Bekijk Report generator →</a>
           </div>
           <div class="card" data-reveal>
             <span class="task-icon" aria-hidden="true">
@@ -347,11 +345,11 @@
         <p class="koppelt-label">Mowi koppelt met</p>
 
         <div class="pill-row" style="justify-content: center;">
-          <a href="koppelingen/afas" class="pill">AFAS</a>
-          <a href="koppelingen/exact-online" class="pill">Exact Online</a>
-          <a href="koppelingen/snelstart" class="pill">SnelStart</a>
+          <span class="pill">AFAS</span>
+          <span class="pill">Exact Online</span>
+          <span class="pill">SnelStart</span>
           <span class="pill">Twinfield</span>
-          <a href="koppelingen/pipedrive" class="pill">Pipedrive</a>
+          <span class="pill">Pipedrive</span>
           <span class="pill">HubSpot</span>
           <span class="pill">Salesforce</span>
           <span class="pill">Microsoft Dynamics</span>
@@ -561,6 +559,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=20260805-16"></script>
+  <script src="js/main.js?v=20260811-1"></script>
 </body>
 </html>

@@ -3708,17 +3708,14 @@ a.pill:hover {
 }
 
 /* Offerte-concept card (email-triage only, Offerteaanvraag's result) — the
-   agent's biggest time-saver, so deliberately the richest/tallest card in
-   the showcase: three field rows that visibly fill in one by one (see
-   js/main.js's playOfferteBeat), a totals-line skeleton, the "Offerte
-   klaargezet" badge (reuses .showcase-compose-badge/-header/-skeleton as-is
-   — same visual language, no reason to duplicate them), and a muted
-   closing line making the human-in-the-loop point explicit: the agent
-   fills it in, a person still has to press send. Allowed to be taller than
-   every other card on the page — that's the whole point of decoupling the
-   result column's height from the task column's (see .hero-showcase.is-
-   fluid above) — so nothing here is size-constrained the way the fixed-
-   stage cards are. */
+   agent's biggest time-saver: two found field rows and one missing one
+   (with its own amber "?" marker), an auto-typed follow-up question asking
+   for exactly what's missing (see js/main.js's playOfferteBeat), and the
+   "Vraag automatisch verstuurd" badge (reuses .showcase-compose-badge/
+   -header as-is — same visual language, no reason to duplicate them).
+   Deliberately kept lean (3 fields, no closing line) — this card sets the
+   .is-fluid result column's height (see .hero-showcase.is-fluid above), so
+   letting it grow unchecked pushes the whole hero out of proportion. */
 .showcase-offerte-card {
   width: 100%;
   display: flex;
@@ -3731,14 +3728,14 @@ a.pill:hover {
   padding: 0.5rem 0.625rem;
   /* Same font-load-reflow defense as .showcase-compose above — settled
      measurement, not computed, for the same reason. */
-  min-height: 8.125rem;
+  min-height: 8.75rem;
 }
 
 @media (min-width: 43.75rem) {
   .showcase-offerte-card {
     gap: 0.3125rem;
     padding: 0.75rem 0.875rem;
-    min-height: 10.375rem;
+    min-height: 11rem;
   }
 }
 
@@ -3789,10 +3786,79 @@ a.pill:hover {
   flex-shrink: 0;
 }
 
+/* Missing-field state: value reads as a placeholder rather than a found
+   fact, and the trailing mark is amber (reusing --color-accent, same as the
+   live agent-feed widget's "Needs attention" state — see its own comment)
+   instead of the found-fields' green check. This is the whole point of the
+   beat: the agent notices what's missing, not just what's already there. */
+.showcase-offerte-field.is-missing .showcase-offerte-field-value {
+  color: var(--color-text-muted);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.showcase-missing {
+  width: 0.8125rem;
+  height: 0.8125rem;
+  flex-shrink: 0;
+  margin-left: auto;
+  border-radius: 50%; /* matches .showcase-check's own exception */
+  background: var(--color-accent);
+  color: var(--color-white);
+  font-size: 0.5625rem;
+  font-weight: 700;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 43.75rem) {
+  .showcase-missing {
+    width: 1.125rem;
+    height: 1.125rem;
+    font-size: 0.6875rem;
+  }
+}
+
+/* The agent's auto-generated follow-up question, typed in the same style as
+   .showcase-compose-line (see typeInto/playOfferteBeat in js/main.js).
+   min-height reserves its full two-line height from first paint — same
+   font-load-reflow defense as the rest of this card (see its own comment
+   above), and load-bearing here specifically because the hub->result SVG
+   connector line is computed from this card's real bounding box: if the
+   line grew taller only once typing finished, the connector would visibly
+   drift mid-beat instead of staying put. */
+.showcase-offerte-ask {
+  margin: 0;
+  padding-top: 0.375rem;
+  border-top: 1px solid var(--color-border);
+  font-size: 0.5625rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--color-text);
+  min-height: 1.9rem;
+  /* Override .showcase-compose-line's single-line nowrap/ellipsis truncation
+     — that class is built for a short "…" line, this one is a full question
+     meant to wrap across the two lines min-height already reserves. */
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+}
+
+@media (min-width: 43.75rem) {
+  .showcase-offerte-ask {
+    padding-top: 0.5rem;
+    font-size: 0.6875rem;
+    min-height: 2.3rem;
+  }
+}
+
 /* Explicitly NOT "Offerte verstuurd" anywhere in this card, including here
-   — the agent prepares it, a human sends it. See CLAUDE.md-adjacent product
-   framing: this is the one place on the site that draws that line visually,
-   not just in copy. */
+   — the agent chases the missing information, a human still turns the
+   answer into the actual offerte. See CLAUDE.md-adjacent product framing:
+   this is the one place on the site that draws that line visually, not
+   just in copy. */
 .showcase-offerte-closing {
   font-size: 0.5rem;
   color: var(--color-text-muted);
@@ -4197,13 +4263,13 @@ a.pill:hover {
   border-top-color: rgba(255, 255, 255, 0.2);
 }
 
-.pricing-price-setup {
+.pricing-price-trial {
   display: block;
   font-size: 0.875rem;
   color: var(--color-gray-600);
 }
 
-.pricing-card.card-featured .pricing-price-setup {
+.pricing-card.card-featured .pricing-price-trial {
   color: rgba(255, 255, 255, 0.6);
 }
 

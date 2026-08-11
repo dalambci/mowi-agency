@@ -16,7 +16,7 @@ const ROOT = __dirname;
 const CONTENT_DIR = path.join(ROOT, "content", "blog");
 const OUTPUT_DIR = path.join(ROOT, "blog");
 const SITE_URL = "https://mowi.agency";
-const CSS_VERSION = "20260806-1"; // bump alongside every css/style.css edit
+const CSS_VERSION = "20260811-1"; // bump alongside every css/style.css edit
 // Website & Conversion plan, Phase 1: Plausible, no cookie banner needed.
 // data-domain must exactly match the account Sal creates at plausible.io.
 const PLAUSIBLE_SNIPPET = `<script defer data-domain="mowi.agency" src="https://plausible.io/js/script.js"></script>`;
@@ -232,8 +232,8 @@ function headerHtml() {
   return `  <header class="site-header">
     <div class="header-bar">
       <span class="header-cta-slot">
-        <a href="/contact#calendly-widget" class="header-cta" data-event="CTA Click">
-          <span class="header-cta-full">Gratis adviesgesprek</span><span class="header-cta-short">Adviesgesprek</span>
+        <a href="https://dashboard.mowi.agency/aanmelden" class="header-cta" data-event="Signup Started">
+          <span class="header-cta-full">Start gratis</span><span class="header-cta-short">Start gratis</span>
         </a>
       </span>
 
@@ -256,11 +256,8 @@ function headerHtml() {
               <div class="nav-megamenu-col">
                 <p class="nav-megamenu-label">Automations</p>
                 <ul>
-                  <li><a href="/agents/crm-sync">CRM sync</a></li>
                   <li><a href="/agents/email-triage">Email triage</a></li>
-                  <li><a href="/agents/invoice-processing">Invoice processing</a></li>
-                  <li><a href="/agents/lead-enrichment">Lead enrichment</a></li>
-                  <li><a href="/agents/report-generator">Report generator</a></li>
+                  <li><a href="/agents/phone-agent">Phone agent</a></li>
                 </ul>
               </div>
             </div>
@@ -271,7 +268,7 @@ function headerHtml() {
           <li><a href="/cases">Cases</a></li>
           <li><a href="/contact">Contact</a></li>
         </ul>
-        <a href="/contact#calendly-widget" class="btn btn-primary header-cta-mobile" data-event="CTA Click">Gratis adviesgesprek</a>
+        <a href="https://dashboard.mowi.agency/aanmelden" class="btn btn-primary header-cta-mobile" data-event="Signup Started">Start gratis</a>
         <a href="https://dashboard.mowi.agency/login" class="header-dashboard-mobile" target="_blank" rel="noopener">Dashboard log in</a>
       </nav>
 
@@ -438,7 +435,8 @@ ${headerHtml()}
 
     <div class="blog-cta">
       <p>Benieuwd wat dit voor uw situatie betekent?</p>
-      <a href="/contact#calendly-widget" class="btn btn-primary" data-event="CTA Click">Plan een kennismaking</a>
+      <a href="https://dashboard.mowi.agency/aanmelden" class="btn btn-primary" data-event="Signup Started">Start gratis — eerste maand</a>
+      <p class="cta-alt">Liever eerst overleggen? <a href="/contact#calendly-widget" data-event="CTA Click">Plan een kennismaking</a></p>
     </div>
   </main>
 ${footerHtml()}
@@ -499,19 +497,19 @@ function buildSitemap(posts) {
   const staticPages = [
     "", "cases", "contact", "agentic-ai", "power-bi-dashboards", "trainingen", "tarieven", "docs/",
   ];
-  // docs/, agents/, koppelingen/ are all read from disk rather than hand-listed,
-  // so a new page in any of those folders is in the sitemap the next time this
-  // script runs — no separate "don't forget the sitemap" step to remember.
+  // docs/, agents/ are read from disk rather than hand-listed, so a new page
+  // in either folder is in the sitemap the next time this script runs — no
+  // separate "don't forget the sitemap" step to remember. koppelingen/ no
+  // longer exists (those pages sold agents that were removed from the
+  // product lineup — see the vault's decisions log) — dropped from here too.
   const readFolderSlugs = (folder) =>
     fs.readdirSync(path.join(ROOT, folder)).filter((f) => f.endsWith(".html")).map((f) => folder + "/" + f.replace(/\.html$/, ""));
   const docsSlugs = readFolderSlugs("docs");
   const agentSlugs = readFolderSlugs("agents");
-  const koppelingenSlugs = readFolderSlugs("koppelingen");
   const urls = [
     ...staticPages.map((p) => `${SITE_URL}/${p}`),
     ...docsSlugs.map((p) => `${SITE_URL}/${p}`),
     ...agentSlugs.map((p) => `${SITE_URL}/${p}`),
-    ...koppelingenSlugs.map((p) => `${SITE_URL}/${p}`),
     `${SITE_URL}/blog`,
     ...posts.map((p) => `${SITE_URL}/blog/${p.slug}`),
   ];

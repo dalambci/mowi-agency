@@ -624,6 +624,23 @@ const showcaseEl = document.querySelector(".hero-showcase");
 const showcaseLinesSvg = document.getElementById("showcaseLines");
 const SVG_NS = "http://www.w3.org/2000/svg";
 
+// Types `text` into el at a fixed rate ("watching the agent write", not
+// reading along), then calls done(). Shared by the compose card's reply
+// line and the offerte card's auto-generated follow-up question.
+function typeInto(el, text, done) {
+  let charIndex = 0;
+  function typeChar() {
+    el.textContent = text.slice(0, charIndex);
+    if (charIndex < text.length) {
+      charIndex += 1;
+      setTimeout(typeChar, 14); // fast — "watching the agent write", not reading along
+      return;
+    }
+    done();
+  }
+  typeChar();
+}
+
 // Types cardEl's line letter by letter (compose cards only — every other
 // card type has no .showcase-compose-line and just holds for a flat
 // ~1200ms), then fades in its one skeleton line and finally the "Concept
@@ -645,14 +662,7 @@ function typeComposeCard(cardEl, onDone) {
   if (skeleton) skeleton.classList.add("is-hidden");
   if (badge) badge.classList.add("is-hidden");
 
-  let charIndex = 0;
-  function typeChar() {
-    lineEl.textContent = fullText.slice(0, charIndex);
-    if (charIndex < fullText.length) {
-      charIndex += 1;
-      setTimeout(typeChar, 14); // fast — "watching the agent write", not reading along
-      return;
-    }
+  typeInto(lineEl, fullText, () => {
     setTimeout(() => {
       if (skeleton) skeleton.classList.remove("is-hidden");
       setTimeout(() => {
@@ -660,42 +670,57 @@ function typeComposeCard(cardEl, onDone) {
         setTimeout(onDone, 350); // hold on the finished badge briefly before the cycle moves on
       }, 250);
     }, 150); // brief pause between "typing stops" and "skeleton appears"
-  }
-  typeChar();
+  });
 }
 
 // Reveals cardEl's field rows one at a time (each a fade+slide-in, not a
-// per-character type — three separate "fill" actions in ~1.5s reads as
-// "quick fill", not a typing effect, which is reserved for prose), then the
-// totals skeleton, then the "Offerte klaargezet" badge, then the closing
-// "Alleen nog versturen" line. ~2.5-3s end to end. Calls onDone once it's
-// sat on the finished state for a beat. Offerteaanvraag's own beat — the
-// biggest time-saver, deliberately the longest/richest reveal on the page.
+// per-character type — quick "fill" actions, not a typing effect, which is
+// reserved for prose): two fields the agent found, one it's missing, then
+// types out the auto-reply asking for exactly that, then the "Vraag
+// automatisch verstuurd" badge. Calls onDone once it's sat on the finished
+// state for a beat. Offerteaanvraag's own beat — the biggest time-saver:
+// the agent doesn't just file the mail, it notices what's missing and
+// chases it down automatically. Deliberately kept to 3 fields/no closing
+// line — this card sets the .is-fluid result column's height, see the
+// HTML's own comment on .showcase-offerte-card.
 function playOfferteBeat(cardEl, onDone) {
   const fields = [...cardEl.querySelectorAll(".showcase-offerte-field")];
-  const skeleton = cardEl.querySelector(".showcase-compose-skeleton");
+  const askEl = cardEl.querySelector(".showcase-offerte-ask");
   const badge = cardEl.querySelector(".showcase-compose-badge");
   const closing = cardEl.querySelector(".showcase-offerte-closing");
 
   fields.forEach((f) => f.classList.add("is-hidden"));
-  if (skeleton) skeleton.classList.add("is-hidden");
   if (badge) badge.classList.add("is-hidden");
   if (closing) closing.classList.add("is-hidden");
+  // Same dataset.fullText stash-and-clear as the compose card's line — see
+  // its own comment above — so the finished sentence never flashes before
+  // typing starts.
+  let askFullText = "";
+  if (askEl) {
+    askFullText = askEl.dataset.fullText || askEl.textContent;
+    askEl.textContent = "";
+  }
 
-  const FIELD_STAGGER = 450;
+  const FIELD_STAGGER = 400;
   fields.forEach((f, idx) => {
     setTimeout(() => f.classList.remove("is-hidden"), 200 + idx * FIELD_STAGGER);
   });
 
   setTimeout(() => {
-    if (skeleton) skeleton.classList.remove("is-hidden");
-    setTimeout(() => {
+    function revealBadgeThenClosing() {
       if (badge) badge.classList.remove("is-hidden");
       setTimeout(() => {
         if (closing) closing.classList.remove("is-hidden");
-        setTimeout(onDone, 450); // hold on the finished card, longest of the three reveal types — this is the beat that has to land
+        setTimeout(onDone, 450); // hold on the finished card, longest of the reveal types — this is the beat that has to land
       }, 300);
-    }, 300);
+    }
+    if (!askEl) {
+      revealBadgeThenClosing();
+      return;
+    }
+    typeInto(askEl, askFullText, () => {
+      setTimeout(revealBadgeThenClosing, 150); // brief pause between "typing stops" and the badge appearing
+    });
   }, 200 + fields.length * FIELD_STAGGER);
 }
 
@@ -804,10 +829,16 @@ if (showcaseHub && !prefersReducedMotion) {
         n.classList.add("is-hidden")
       );
     } else if (el.classList.contains("showcase-offerte-card")) {
+      // Ask line follows .showcase-compose-line's own convention (stash +
+      // clear text, no is-hidden class — it's driven by its content, not
+      // its opacity) rather than the field/badge/closing convention below.
+      const askEl = el.querySelector(".showcase-offerte-ask");
+      if (askEl) {
+        askEl.dataset.fullText = askEl.textContent;
+        askEl.textContent = "";
+      }
       el
-        .querySelectorAll(
-          ".showcase-offerte-field, .showcase-compose-skeleton, .showcase-compose-badge, .showcase-offerte-closing"
-        )
+        .querySelectorAll(".showcase-offerte-field, .showcase-compose-badge, .showcase-offerte-closing")
         .forEach((n) => n.classList.add("is-hidden"));
     }
   });
@@ -883,7 +914,7 @@ if (
 
       // Swap content to the result while parked at the hub (identical
       // transform to where phase 1 ended, so nothing visibly jumps). The
-      // offerte card is deliberately rich/wide (three field rows) — cloning
+      // offerte card is deliberately rich/wide (four field rows) — cloning
       // its full innerHTML into the ghost read as a long line of text
       // stretching almost out of the viewport while still mid-flight, a
       // real visual bug caught live, not in the automated sweeps (nothing
@@ -894,7 +925,7 @@ if (
       // reveals it properly.
       showcaseGhost.className = "showcase-ghost showcase-result";
       showcaseGhost.innerHTML = resultEl.classList.contains("showcase-offerte-card")
-        ? '<span class="showcase-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7" /></svg></span><span>Offerte-concept</span>'
+        ? '<span class="showcase-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7" /></svg></span><span>Vraag verstuurd</span>'
         : resultEl.innerHTML;
       showcaseGhost.style.transition = "none";
       showcaseGhost.style.transform = `translate(${toHub.x}px, ${toHub.y}px) scale(0.2)`;

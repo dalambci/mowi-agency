@@ -17,7 +17,7 @@ faq:
   - q: "Wat als de agent een fout maakt?"
     a: "Het \"Needs attention\"-systeem signaleert het direct; het uitgangspunt is dat het altijd opgelost kan worden."
   - q: "Werkt dit met Exact Online of AFAS?"
-    a: "Ja — beide koppelingen zijn beschikbaar: [Exact Online](/koppelingen/exact-online) en [AFAS](/koppelingen/afas)."
+    a: "Als losse zelfserviceagent nog niet — dat soort koppelingen bouwen we op dit moment op maat. Neem contact op om de mogelijkheden te bespreken."
   - q: "Hoe lang duurt de opstart?"
     a: "Via de vaste werkwijze: kennismaking (30 min) → inventarisatie op locatie → build → koppeling → training en nazorg."
 ---
