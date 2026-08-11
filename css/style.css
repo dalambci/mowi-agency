@@ -1379,6 +1379,17 @@ h3 {
     min-width: 0; /* lets long item text actually wrap instead of overflowing its column */
   }
 
+  /* Products has two columns, so flex:1 gives each a 50% half that lines up
+     with the 2-up nav grid above. Resources has one, and flex:1 stretched it
+     to the full width — its items then sat wider than every other row in the
+     sheet. Pinning a lone column to the same half keeps single- and
+     two-column panels aligned with each other and with the nav grid.
+     :only-child rather than a class, so any future one-column menu inherits
+     it without needing to know about this rule. */
+  .nav-megamenu-col:only-child {
+    flex: 0 0 50%;
+  }
+
   /* Overrides the base rule's gap:0.5rem — rows are separated by hairline
      borders here (see .nav-megamenu-col li below), not empty space. */
   .nav-megamenu-col ul {
