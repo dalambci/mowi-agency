@@ -166,7 +166,7 @@
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Maandelijks opzegbaar</span></li>
           </ul>
 
-          <a href="https://my.mowi.agency/aanmelden" class="btn btn-primary pricing-card-cta" data-event="Signup Started" data-event-card="email-triage">Start gratis</a>
+          <a href="https://my.mowi.agency/aanmelden?agent=email" class="btn btn-primary pricing-card-cta" data-event="Signup Started" data-event-card="email-triage">Start gratis</a>
         </div>
 
         <!-- Call agent (binnenkort) -->
@@ -264,6 +264,10 @@
 
           <p class="pricing-custom-note" data-empty-note hidden>Selecteer minimaal één agent.</p>
           <p class="pricing-custom-note" data-soon-note hidden>De Call agent is nog niet zelf aan te sluiten — wij nemen contact met u op zodra hij live gaat.</p>
+          <!-- Not yet reachable today — Call is data-soon, so only one box is
+               tickable — but becomes wrong the day Call goes on sale, so it's
+               added now rather than left for that deploy to remember. -->
+          <p class="pricing-custom-note">De proefmaand geldt voor één agent; een tweede agent betaalt u direct.</p>
         </div>
 
         <div class="pricing-pakket-side">
@@ -349,6 +353,15 @@
           </button>
           <div class="accordion-panel" id="faq-tv-1">
             <p>Na 30 dagen loopt uw abonnement automatisch door tegen het reguliere maandbedrag. U ziet de datum vooraf in uw dashboard. Wilt u niet doorgaan, dan zegt u op vóór die datum.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-tv-1b">
+            Kan ik meerdere agents tegelijk uitproberen?
+            <span class="accordion-icon" aria-hidden="true"></span>
+          </button>
+          <div class="accordion-panel" id="faq-tv-1b">
+            <p>De proefmaand geldt voor één agent naar keuze. Wilt u er tijdens die maand een tweede bij, dan betaalt u die direct — uw eerste agent blijft gratis tot dag 30.</p>
           </div>
         </div>
         <div class="accordion-item">
