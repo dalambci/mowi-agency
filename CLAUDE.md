@@ -62,6 +62,15 @@ backstop in case something important didn't get written down.
 - Multi-tenant reminder (same as above): that server has a dozen+ other app folders. Only ever
   touch `ktzphwhvnh` — confirm `ls ~/applications/ktzphwhvnh/public_html` looks like this repo
   (index.html, CLAUDE.md, css/, js/, reference/) before pulling if there's ever any doubt.
+- **Every deploy's last step is purging Varnish, not just `git pull`.** Confirmed 2026-08-11: this
+  app sits behind Cloudways' Varnish full-page cache (response headers show `X-Cache: HIT` /
+  `Age: <seconds since cached>` on a plain `curl -sI https://mowi.agency/`), and a `git pull` does
+  **not** invalidate it — real visitors kept getting served pre-deploy pages for up to ~an hour
+  after a push looked complete. There is no SSH-level purge access (`varnishadm` needs a sudo
+  password that isn't available here); it must be done in the Cloudways dashboard: open the
+  `ktzphwhvnh` application → **Application Management → Varnish** → **Purge**. Verify it worked
+  with the same `curl -sI` check — `Age` should reset to a small number (or the header disappear
+  entirely on the very next request).
 
 ### If this section is ever missing or wrong
 This was reconstructed once already (2026-08-03) after the details above weren't written down
