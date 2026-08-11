@@ -1909,32 +1909,6 @@ h3 {
   margin-left: 0.5rem;
 }
 
-/* --- Stats bar ----------------------------------------------------------------- */
-.stats-bar {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
-  text-align: center;
-}
-
-@media (min-width: 48rem) {
-  .stats-bar {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-.stat-number {
-  font-size: clamp(1.75rem, 2.5vw, 2.5rem);
-  font-weight: 800;
-  letter-spacing: var(--tracking-tight);
-}
-
-.stat-label {
-  color: var(--color-gray-500);
-  font-size: 0.875rem;
-  margin-top: 0.25rem;
-}
-
 /* --- Logo marquee (real app/integration logos, see index.html comment) -------- */
 .logo-marquee {
   overflow: hidden;
@@ -2187,31 +2161,6 @@ h3 {
 
 .case-block p {
   color: var(--color-gray-600);
-}
-
-/* --- Testimonial ---------------------------------------------------------------- */
-.testimonial {
-  background: var(--color-ink);
-  color: var(--color-white);
-  border-radius: var(--radius-3xl);
-  padding: 3rem;
-  text-align: center;
-}
-
-.testimonial blockquote {
-  font-size: clamp(1.25rem, 2vw, 1.625rem);
-  font-weight: 600;
-  letter-spacing: var(--tracking-tight);
-  line-height: 1.4;
-  margin: 0;
-}
-
-.testimonial cite {
-  display: block;
-  margin-top: 1.5rem;
-  font-style: normal;
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 0.9375rem;
 }
 
 /* --- Numbered steps (werkwijze) --------------------------------------------------- */
@@ -4179,6 +4128,17 @@ a.pill:hover {
    read oversized as the very first thing on the page: 50% less margin,
    20% smaller heading, no eyebrow. Scoped to this one instance rather than
    changing .section-head/h2 globally. */
+/* The page's own container is --container-width: 100rem (1600px). That's fine
+   for a full-bleed hero, but it made the trial card read as a vast black slab
+   and stretched the three cards beside it into letterboxes. Capping the whole
+   pricing section (not just the dark card — the grid had the same problem)
+   keeps card proportions sane and the two blocks aligned with each other.
+   Same technique the FAQ (48rem) and "Altijd inbegrepen" (56rem) sections
+   already use on this page. */
+.pricing-section {
+  max-width: 76rem;
+}
+
 .pakketten-head {
   margin-bottom: 1.5rem;
 }
@@ -4194,55 +4154,11 @@ a.pill:hover {
   height: 100%;
 }
 
-/* Absolutely positioned (relative to the card's own padding box — top:0/
-   left:0 lands it exactly where it used to sit in-flow, at every card
-   padding breakpoint, with no manual matching needed) specifically so it
-   takes the "Aangeraden" badge out of the layout flow. In-flow, it was
-   pushing Groei's h3 below Start/Compleet's, since only Groei has a badge —
-   now all three h3s start at the same fixed offset (see .pricing-card h3)
-   regardless of which card actually has a badge. top:0/left:0 lands on the
-   card's PADDING edge though, 1px inside its border — leaving a 1px sliver
-   of the card's own surface visible past the badge's corner (.card's
-   border-width is a fixed 1px, so -1px here cancels it exactly, flush with
-   the true outer corner). */
-.pricing-badge {
-  position: absolute;
-  top: -1px;
-  left: -1px;
-  display: inline-flex;
-  padding: 0.3rem 0.75rem;
-  background: var(--color-accent);
-  color: var(--color-white);
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-wide);
-}
-
-/* Sized so the gap from the "Aangeraden" badge's own bottom edge to the
-   title matches the 0.5rem gap from the title down to .pricing-card-desc
-   below it (badge height is a constant ~29px regardless of breakpoint,
-   while .card's own padding-top grows 24px -> 40px -> 48px — so the margin
-   needed to hold that same 0.5rem gap shrinks, then goes negative, as
-   padding-top overtakes the badge's height), plus a flat +5px on top per
-   Sal's ask. Titles still land on the same row on Start/Compleet, which
-   have no badge to measure against, because this margin is one flat value
-   applied to every card's h3 equally. */
-.pricing-card h3 {
-  margin-top: 1.125rem;
-}
-
-@media (min-width: 40rem) {
-  .pricing-card h3 {
-    margin-top: 0.125rem;
-  }
-}
-
-@media (min-width: 64rem) {
-  .pricing-card h3 {
-    margin-top: -0.375rem;
-  }
-}
+/* .pricing-badge and the .pricing-card h3 margin-top ladder that went with it
+   were removed 2026-08-11 (Sal: drop the orange label on every card). Those
+   h3 offsets existed ONLY to clear the absolutely-positioned badge at each
+   padding breakpoint — with no badge they were pushing every title off .card's
+   own padding for no reason, so they went too rather than being zeroed out. */
 
 .pricing-card-desc {
   margin-top: 0.5rem;
@@ -4362,9 +4278,6 @@ a.pill:hover {
    class's equal-height flex column and h3 offsets are tuned for grid siblings,
    which this card has none of. */
 .pricing-trial {
-  /* .pricing-badge is absolutely positioned against its nearest positioned
-     ancestor; without this it would escape to the page. */
-  position: relative;
   display: grid;
   gap: 2rem;
 }
@@ -4377,13 +4290,6 @@ a.pill:hover {
     gap: 3.5rem;
     align-items: center;
   }
-}
-
-/* Clears the absolutely positioned badge above it, same idea as
-   .pricing-card h3 but a single value — this card is never in a grid row with
-   badge-less siblings to line up against. */
-.pricing-trial h3 {
-  margin-top: 1.25rem;
 }
 
 /* The .card.card-featured overrides further up this file cover h3 and <p>

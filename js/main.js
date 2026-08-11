@@ -291,51 +291,6 @@ if (heroContent) {
   }
 }
 
-// --- Animated stat counters -------------------------------------------------
-// Numbers marked with [data-count="N"] count up from 0 to N once the stats
-// strip scrolls into view. All counters in the strip start together (one
-// observer on the shared container) so they read as a single moment, not a
-// trickle. Surrounding text ("jaar", "+", "/5", …) stays in the markup as
-// plain text next to the span, untouched by this script.
-const statsBar = document.querySelector(".stats-bar");
-const countEls = statsBar ? statsBar.querySelectorAll("[data-count]") : [];
-
-function animateCount(el) {
-  const target = parseInt(el.getAttribute("data-count"), 10);
-  const duration = 900;
-  const startTime = performance.now();
-
-  function tick(now) {
-    const progress = Math.min((now - startTime) / duration, 1);
-    const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
-    el.textContent = Math.round(target * eased);
-    if (progress < 1) requestAnimationFrame(tick);
-  }
-
-  requestAnimationFrame(tick);
-}
-
-if (countEls.length) {
-  if (prefersReducedMotion || !("IntersectionObserver" in window)) {
-    countEls.forEach((el) => {
-      el.textContent = el.getAttribute("data-count");
-    });
-  } else {
-    const statsObserver = new IntersectionObserver(
-      (entries, observer) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            countEls.forEach(animateCount);
-            observer.disconnect();
-          }
-        });
-      },
-      { threshold: 0.5 }
-    );
-    statsObserver.observe(statsBar);
-  }
-}
-
 // --- Magnetic button hover ---------------------------------------------------
 // Reproduced 1:1 from vuewer.com's own buttons — inspected live via DevTools,
 // not just the reference doc's summary. Their nav "Start" pill AND their

@@ -116,15 +116,23 @@ retype credentials from scratch or falling back to a password:
 
 ## Language & tone
 - All visible site text is in **Dutch**, formal **"u"** form (never "je/jij").
-- **Exception:** the header nav's "Products" mega-menu (see `.nav-megamenu` in `css/style.css`)
-  uses English labels deliberately — category labels ("Platform", "Automations") and most item
-  names ("BI dashboard", "CRM sync", "Email triage", "Invoice processing", "Lead enrichment",
-  "Report generator"). Keep these in English; don't translate them to Dutch. This is scoped to
-  that menu only — everything else on the site stays Dutch per the rule above. The Platform
-  column's first item, formerly the deliberately-Dutch "AI-automatisering" (matching that page's
-  old name/slug as an exception to the English-labels rule), was renamed to "Agentic AI" and the
-  page itself renamed from `ai-automatisering.html` to `agentic-ai.html` to match — the item now
-  fits the English-labels convention normally and is no longer an exception to it.
+- **Exception — the whole header nav, not just the mega-menu (widened 2026-08-11).** The "Products"
+  mega-menu (see `.nav-megamenu` in `css/style.css`) has always used English labels deliberately;
+  the top-level nav item "Tarieven" was renamed to **"Pricing"** on that date, so the exception now
+  covers the header nav generally. Keep these in English; don't translate them to Dutch. Everything
+  else on the site stays Dutch per the rule above — including the **footer**, whose nav still reads
+  "Tarieven" on purpose. Header and footer are deliberately allowed to differ here.
+- Current header labels, after the 2026-08-11 rename: category labels **"Platform"** and
+  **"Agents"** (was "Automations"), items **"Email"** (was "Email triage") and **"Call"** (was
+  "Phone agent"). The two were shortened because the "Agents" column label above them already
+  supplies the noun — they read as "Email agent" / "Call agent" in context, so repeating "agent"
+  in the item name was redundant. **Only the nav labels changed** — the pages, filenames, URLs
+  (`agents/email-triage`, `agents/phone-agent`, `tarieven`) and all body copy still use the full
+  names. Don't "fix" that inconsistency by renaming files; it's intentional.
+- The Platform column's first item, formerly the deliberately-Dutch "AI-automatisering" (matching
+  that page's old name/slug as an exception to the English-labels rule), was renamed to
+  "Agentic AI" and the page itself renamed from `ai-automatisering.html` to `agentic-ai.html` to
+  match — the item now fits the English-labels convention normally and is no longer an exception.
 
 ## Documentation section (setup guides for clients)
 - Structure, page anatomy, navigation anatomy, and writing rules are defined in

@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260811-2" />
+  <link rel="stylesheet" href="css/style.css?v=20260811-3" />
   <link rel="icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="shortcut icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260804-3" />
@@ -45,15 +45,15 @@
                 </ul>
               </div>
               <div class="nav-megamenu-col">
-                <p class="nav-megamenu-label">Automations</p>
+                <p class="nav-megamenu-label">Agents</p>
                 <ul>
-                  <li><a href="agents/email-triage">Email triage</a></li>
-                  <li><a href="agents/phone-agent">Phone agent</a></li>
+                  <li><a href="agents/email-triage">Email</a></li>
+                  <li><a href="agents/phone-agent">Call</a></li>
                 </ul>
               </div>
             </div>
           </li>
-          <li><a href="tarieven" aria-current="page">Tarieven</a></li>
+          <li><a href="tarieven" aria-current="page">Pricing</a></li>
         </ul>
         <ul class="nav-group">
           <li><a href="cases">Cases</a></li>
@@ -94,7 +94,7 @@
          the first number a visitor reads is €0 rather than €40. The per-agent
          cards below are the actual catalogue; .pricing-custom is the only
          interactive one. -->
-    <section class="container section" id="pakketten">
+    <section class="container section pricing-section" id="pakketten">
       <div class="section-head pakketten-head" data-reveal>
         <h2>Heldere tarieven. Eerste maand gratis.</h2>
         <p class="lede" style="margin-top: 1rem;">
@@ -107,7 +107,6 @@
            starting point above the catalogue, not as a fourth option beside it. -->
       <div class="card card-featured pricing-trial" data-reveal>
         <div class="pricing-trial-main">
-          <span class="pricing-badge">Gratis proberen</span>
           <h3>Proefmaand</h3>
           <p class="pricing-card-desc">Eén agent naar keuze, 30 dagen lang kosteloos.</p>
           <div class="pricing-price">
@@ -130,7 +129,6 @@
       <div class="grid grid-3 pricing-grid">
         <!-- Email triage (live) -->
         <div class="card pricing-card" data-reveal>
-          <span class="pricing-badge">Nu te proberen</span>
           <h3>Email triage</h3>
           <p class="pricing-card-desc">Sorteert, beantwoordt en signaleert — zelf aan te sluiten in enkele minuten.</p>
 
@@ -153,9 +151,10 @@
 
         <!-- Phone agent (binnenkort) -->
         <div class="card pricing-card" data-reveal>
-          <span class="pricing-badge">Binnenkort</span>
           <h3>Phone agent</h3>
-          <p class="pricing-card-desc">Beantwoordt binnenkomende gesprekken op uw bestaande nummer.</p>
+          <!-- "Binnenkort" moved into the copy when the badges were removed —
+               without it this card reads as buyable today, which it isn't. -->
+          <p class="pricing-card-desc">Binnenkort beschikbaar. Beantwoordt binnenkomende gesprekken op uw bestaande nummer.</p>
 
           <div class="pricing-price">
             <span class="pricing-price-trial">Eerste maand gratis</span>
@@ -177,7 +176,6 @@
              checkbox rather than in js/main.js, so a price change is a one-place
              HTML edit and can never drift from the number printed beside it. -->
         <div class="card pricing-card pricing-custom" data-reveal data-pricing-calculator>
-          <span class="pricing-badge">Zelf samenstellen</span>
           <h3>Custom</h3>
           <p class="pricing-card-desc">Kies welke agents u afneemt en zie direct wat u per maand betaalt.</p>
 
@@ -388,6 +386,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=20260811-2"></script>
+  <script src="js/main.js?v=20260811-3"></script>
 </body>
 </html>
