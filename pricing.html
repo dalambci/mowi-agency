@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260811-10" />
+  <link rel="stylesheet" href="css/style.css?v=20260811-11" />
   <link rel="icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="shortcut icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260804-3" />
@@ -188,13 +188,14 @@
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Maandelijks opzegbaar</span></li>
           </ul>
 
-          <!-- A <span>, not an <a>: "Binnenkort" states availability, it isn't an
-               action, so there is deliberately nothing here to click or tab to.
-               Muted rather than black/outlined like its two neighbours, which is
-               the point — it should not read as an available call to action.
-               Note this leaves the card with no link to agents/phone-agent; the
-               Products > Call nav item is now the only route to that page. -->
-          <span class="btn pricing-card-cta pricing-cta-soon" aria-disabled="true">Binnenkort</span>
+          <!-- Back to a real <a> (Sal: keep the links intact) — it had briefly been
+               a non-interactive <span>, which cost this card its only route to
+               /agents/phone-agent. Styled muted rather than black/outlined so it
+               still reads as "not buyable yet" beside the two live CTAs, with a
+               hover state (see .pricing-cta-soon) so it doesn't look inert.
+               aria-label starts with the visible word, satisfying WCAG 2.5.3
+               label-in-name while telling screen readers where it actually goes. -->
+          <a href="agents/phone-agent" class="btn pricing-card-cta pricing-cta-soon" aria-label="Binnenkort — meer over de Call agent" data-event="CTA Click" data-event-card="phone-agent">Binnenkort</a>
         </div>
 
         <!-- Custom — the one interactive card. Prices live in data-price on each
@@ -411,6 +412,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=20260811-10"></script>
+  <script src="js/main.js?v=20260811-11"></script>
 </body>
 </html>

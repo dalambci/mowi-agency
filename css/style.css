@@ -4312,7 +4312,16 @@ a.pill:hover {
   background: transparent;
   color: var(--color-gray-600);
   border-color: var(--color-border);
-  cursor: default;
+}
+
+/* It IS a link (to the Call agent page), so it has to answer the pointer —
+   without this the muted styling reads as a disabled control and nobody tries
+   it. Darkens to the same ink the live buttons use, rather than filling, so it
+   still never competes with them as a call to action. */
+.pricing-cta-soon:hover,
+.pricing-cta-soon:focus-visible {
+  color: var(--color-ink);
+  border-color: var(--color-ink);
 }
 
 /* The gap goes on the element BEFORE the CTA, not on the CTA's own margin-top —
