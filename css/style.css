@@ -1388,6 +1388,12 @@ h3 {
      it without needing to know about this rule. */
   .nav-megamenu-col:only-child {
     flex: 0 0 50%;
+    /* Continues the vertical grid line down from the RESOURCES|DEMO cell
+       divider above. Two-column panels get this line from
+       ".nav-megamenu-col + .nav-megamenu-col"'s border-left, which by
+       definition never matches a lone column — without it the Resources panel
+       had an open right-hand side and stopped tracking the grid. */
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
   }
 
   /* Overrides the base rule's gap:0.5rem — rows are separated by hairline
@@ -1436,6 +1442,16 @@ h3 {
 
   .nav-megamenu-col li:not(:first-child) {
     border-top: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  /* Closes off the shorter column. Rows are separated by border-top, so the
+     last item of a column has no line under it — fine for the tallest column,
+     whose last row ends at the panel's own bottom border, but the Agents
+     column ("Email", "Call") is one row shorter than Platform and just faded
+     into empty space. This continues the Platform column's own row divider
+     straight across, since equal row heights put them on the same line. */
+  .nav-megamenu-col li:last-child {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   }
 
   .nav-megamenu-col li a {
@@ -1505,7 +1521,15 @@ h3 {
      unintentional. Kept subtle on purpose (dim, not bright white) — it
      only needs to register as "this scrolls", not compete for attention
      with the actual menu items. */
+  /* TEMPORARILY HIDDEN (Sal, 2026-08-11): with only two Agents items the list
+     no longer overflows, so the indicator was drawing a rail next to content
+     that never scrolls. Hidden here rather than by ripping out
+     ensureScrollIndicator() in main.js — the menu is expected to grow past the
+     cap again, and this is a one-line revert when it does. Everything else
+     (the JS, the mask fade, .nav-megamenu-scroll) is left wired and working. */
   .nav-megamenu-scrollbar {
+    display: none;
+
     position: absolute;
     right: 0;
     width: 3px;
