@@ -2285,20 +2285,45 @@ h3 {
   color: var(--color-ink);
 }
 
+/* No border/box (Sal: the square outline around it has to go) and no text
+   glyph — a literal "+" character rotated 45° (the old approach) depends on
+   that glyph's own stroke widths/optical center being symmetric, which they
+   aren't at this size in this typeface, so the rotation read as an off-
+   center tilt rather than a clean +/- swap. Drawing both bars in CSS instead
+   guarantees they're identical and centered, so rotating the vertical one
+   90° lands it exactly on top of the horizontal one — a plus that becomes a
+   minus, not a wobble. */
 .accordion-icon {
   flex-shrink: 0;
+  position: relative;
   width: 1.5rem;
   height: 1.5rem;
-  border-radius: var(--radius-full);
-  border: 1px solid var(--color-border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.3s var(--ease-out);
 }
 
-.accordion-trigger[aria-expanded="true"] .accordion-icon {
-  transform: rotate(45deg);
+.accordion-icon::before,
+.accordion-icon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: var(--color-ink);
+  transition: transform 0.25s var(--ease-out);
+}
+
+.accordion-icon::before {
+  width: 0.75rem;
+  height: 2px;
+  transform: translate(-50%, -50%);
+}
+
+.accordion-icon::after {
+  width: 2px;
+  height: 0.75rem;
+  transform: translate(-50%, -50%);
+}
+
+.accordion-trigger[aria-expanded="true"] .accordion-icon::after {
+  transform: translate(-50%, -50%) rotate(90deg);
 }
 
 .accordion-panel {
@@ -4346,39 +4371,13 @@ a.pill:hover {
   margin-bottom: 2rem;
 }
 
-/* Still used by the maatwerk row below the grid and the Trainingen link. */
+/* No current caller — the maatwerk row this served was removed 2026-08-11
+   (Custom agent's card in the grid above now covers that "on request" case).
+   Left in rather than deleted: harmless, and a future card variant using
+   .card-link instead of .pricing-card-cta would need it again. */
 .pricing-card .card-link {
   margin-top: auto;
   padding-top: 2rem;
-}
-
-/* Slim full-width row below the 3 cards, for the maatwerk/twijfel note —
-   deliberately lighter-weight than .card (no hover lift, no shadow): it's
-   a footnote to the pricing grid above it, not a fourth competing option. */
-.pricing-maatwerk {
-  margin-top: 1.5rem;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 1.75rem 2rem;
-  background: var(--color-white);
-  border: 1px solid var(--color-border);
-}
-
-.pricing-maatwerk p {
-  color: var(--color-gray-600);
-  max-width: 38rem;
-}
-
-/* .card-link's own default margin-top:1rem (meant to sit below other card
-   content) is asymmetric with its margin-bottom:0 — inside this row's
-   align-items:center, that pushes the link below true vertical center
-   against the paragraph beside it. Zeroed here since there's no content
-   above it in this context to space away from. */
-.pricing-maatwerk .card-link {
-  margin-top: 0;
 }
 
 /* --- Pricing: free-trial card ------------------------------------------------
