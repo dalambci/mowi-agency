@@ -133,12 +133,20 @@ retype credentials from scratch or falling back to a password:
   else on the site stays Dutch per the rule above — including the **footer**, whose nav still reads
   "Tarieven" on purpose. Header and footer are deliberately allowed to differ here.
 - Current header labels, after the 2026-08-11 rename: category labels **"Platform"** and
-  **"Agents"** (was "Automations"), items **"Email"** (was "Email triage") and **"Call"** (was
-  "Phone agent"). The two were shortened because the "Agents" column label above them already
-  supplies the noun — they read as "Email agent" / "Call agent" in context, so repeating "agent"
-  in the item name was redundant. **Only the nav labels changed** — the pages, filenames, URLs
-  (`agents/email-triage`, `agents/phone-agent`, `tarieven`) and all body copy still use the full
-  names. Don't "fix" that inconsistency by renaming files; it's intentional.
+  **"Agents"** (was "Automations"), items **"Email"** and **"Call"**. The two are shortened because
+  the "Agents" column label above them already supplies the noun — they read as "Email agent" /
+  "Call agent" in context, so repeating "agent" in the item name was redundant.
+- **Product full names renamed 2026-08-12: "Email triage" → "E-mail agent", "Phone agent" →
+  "Call agent"**, sitewide in body copy, headings, meta tags, demo widgets, the two legal pages
+  (algemene-voorwaarden.html, privacyverklaring.html — Dutch compound forms "e-mailtriage-agent" /
+  "telefoon-agent" became "E-mailagent" / "Call-agent" there specifically, matching Dutch compound-
+  noun orthography rather than the English-style spaced form used everywhere else), and the
+  dashboard app (`Mowi Dashboard` — `config/agent_types.php`, `config/plans.php`, seeders, blade
+  headings). **Filenames, URLs, and route names deliberately did NOT change** — still
+  `agents/email-triage`, `agents/phone-agent`, dashboard route segments `/agents/telefoon-agent/...`
+  — this was an explicit scope decision (URL renames need redirect handling, a Cloudways Web Rule,
+  and touch far more files, for no benefit the text-only rename doesn't already give). If a future
+  session is asked to also rename the URLs, that is new work, not a continuation of this one.
 - The Platform column's first item, formerly the deliberately-Dutch "AI-automatisering" (matching
   that page's old name/slug as an exception to the English-labels rule), was renamed to
   "Agentic AI" and the page itself renamed from `ai-automatisering.html` to `agentic-ai.html` to
@@ -150,7 +158,7 @@ retype credentials from scratch or falling back to a password:
   `reference/style-vuewer.md`, not part of the shipped site. Follow it for every docs page.
 - Language: Dutch, formal **"u"** form, same as the rest of the site.
 - Agent and product names stay in English, per the existing Products mega-menu exception above
-  (e.g. "CRM sync", "Email triage", "Invoice processing", "Lead enrichment", "Report generator").
+  (e.g. "CRM sync", "E-mail agent", "Invoice processing", "Lead enrichment", "Report generator").
 - UI labels (button/menu names the client sees on their actual screen) are quoted **exactly**,
   in whatever language that screen shows them in — do not translate a UI label that's genuinely
   English on-screen into Dutch, or vice versa. Verify the real on-screen wording before writing

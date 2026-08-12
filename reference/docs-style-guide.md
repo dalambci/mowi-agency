@@ -146,7 +146,7 @@ Nothing below is built yet — this is the page list to review before any HTML/C
 ### Agents
 One page per agent, matching the Products mega-menu's Automations list exactly:
 - **CRM sync**
-- **Email triage**
+- **E-mail agent**
 - **Invoice processing**
 - **Lead enrichment**
 - **Report generator**

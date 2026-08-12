@@ -36,7 +36,7 @@ Een verkeerde inschatting is bijvoorbeeld een offerteaanvraag die als nieuwsbrie
 
 ## Hoe zie je dat er iets misging?
 
-Via "Needs attention" in het dashboard, en dat verschijnt op het moment zelf, niet achteraf. Bekijk de [Email triage-agent](/agents/email-triage) voor het volledige overzicht van wat je daar ziet.
+Via "Needs attention" in het dashboard, en dat verschijnt op het moment zelf, niet achteraf. Bekijk de [E-mail agent](/agents/email-triage) voor het volledige overzicht van wat je daar ziet.
 
 Op de detailpagina van de agent staat de status rechtsboven (Running of Paused) en daaronder Run history: tijdstip, status en aantal verwerkte taken per run. Staat een run op Failed, dan staat er een toelichting in de kolom Note — dat is precies de tekst die je aan Mowi doorgeeft om het probleem te melden.
 
@@ -54,7 +54,7 @@ Er is wel een situatie waarin een klant het wél merkt: als een koppeling langer
 
 ## Praktijkvoorbeeld: onze eigen inbox
 
-Mowi draait de Email triage-agent op de eigen inbox — gaat er iets mis, dan zien we dat zelf het eerst, via hetzelfde "Needs attention"-systeem dat klanten ook hebben. Er is geen apart, beter systeem achter de schermen: het is exact wat je zelf ook in je dashboard ziet.
+Mowi draait de E-mail agent op de eigen inbox — gaat er iets mis, dan zien we dat zelf het eerst, via hetzelfde "Needs attention"-systeem dat klanten ook hebben. Er is geen apart, beter systeem achter de schermen: het is exact wat je zelf ook in je dashboard ziet.
 
 Dat is ook waarom het zo is gebouwd: niet voor een demo, maar om zelf op te kunnen vertrouwen vóórdat het aan een klant werd aangeboden. Signaleert het voor de eigen mailbox iets te laat, dan is dat het eerste wat opvalt — nog voordat het bij een klant een rol speelt.
 
@@ -66,4 +66,4 @@ Dat is ook waarom het zo is gebouwd: niet voor een demo, maar om zelf op te kunn
 | Paused | Koppeling of proces staat stil | Neem contact op met Mowi |
 | Failed (bij een run) | Die specifieke run is mislukt | Bekijk de Note-kolom, meld dit bij Mowi |
 
-Meer weten over hoe dit er in de praktijk uitziet? Lees de [installatiehandleiding voor Email triage](/docs/agent-email-triage), of hoe de agent binnenkomende mail precies afhandelt in [Kan e-mail automatisch beantwoord worden zonder dat klanten het merken?](/blog/e-mail-automatisch-beantwoorden)
+Meer weten over hoe dit er in de praktijk uitziet? Lees de [installatiehandleiding voor de E-mail agent](/docs/agent-email-triage), of hoe de agent binnenkomende mail precies afhandelt in [Kan e-mail automatisch beantwoord worden zonder dat klanten het merken?](/blog/e-mail-automatisch-beantwoorden)

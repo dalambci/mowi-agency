@@ -30,7 +30,7 @@ Precies dan komt de vraag boven: kun je dit automatiseren zonder dat klanten mer
 
 ## Wat doet een e-mailagent precies met een binnenkomende mail?
 
-De agent leest elke binnenkomende mail, herkent om welk type het gaat, en routeert hem naar de juiste plek — vaak met een concept-antwoord er al bij. Bekijk de [Email triage-agent](/agents/email-triage) voor het volledige overzicht.
+De agent leest elke binnenkomende mail, herkent om welk type het gaat, en routeert hem naar de juiste plek — vaak met een concept-antwoord er al bij. Bekijk de [E-mail agent](/agents/email-triage) voor het volledige overzicht.
 
 Vier categorieën komen het meest voor: een offerteaanvraag, een klantvraag, een factuur en een nieuwsbrief. Bij een offerteaanvraag haalt de agent de relevante velden eruit — klant, omvang, gewenste datum — en controleert meteen of alles compleet is. Ontbreekt er iets, dan gaat de vraag om aanvulling direct terug naar de klant; de agent stelt zelf geen offerte op, dat blijft mensenwerk. Bij een klantvraag staat er wel een concept-antwoord klaar. Facturen gaan naar de map Facturen, nieuwsbrieven naar het archief.
 
@@ -62,7 +62,7 @@ Belangrijk: snelheid alleen werkt niet. Een snel antwoord dat inhoudelijk niet k
 
 ## Praktijkvoorbeeld: onze eigen inbox
 
-Mowi gebruikt de Email triage-agent op de eigen inbox, en dat is precies waarom we weten waar hij wel en niet op vertrouwd kan worden.
+Mowi gebruikt de E-mail agent op de eigen inbox, en dat is precies waarom we weten waar hij wel en niet op vertrouwd kan worden.
 
 Elke ochtend staat er al een sortering klaar voordat iemand van het team de mailbox opent: aanvragen bovenaan, facturen weg, nieuwsbrieven eruit. Loopt er iets vast — een mail die niet in een categorie past, een koppeling die hapert — dan verschijnt dat direct onder "Needs attention" in het dashboard, in plaats van dat het pas opvalt als een klant erover belt.
 

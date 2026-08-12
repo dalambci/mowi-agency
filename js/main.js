@@ -978,7 +978,7 @@ const agentFeedList = document.getElementById("agentFeedList");
 
 if (agentFeedCard && agentFeedList && !prefersReducedMotion) {
   const SCRIPT = [
-    { text: "Email triage — 14 mails gesorteerd", status: "done" },
+    { text: "E-mail agent — 14 mails gesorteerd", status: "done" },
     { text: "Invoice processing — 6 facturen verwerkt", status: "done" },
     {
       text: "Needs attention — koppeling verlopen",
