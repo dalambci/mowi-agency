@@ -75,10 +75,21 @@
                 "service-account") in plaats van een aparte sleutel per klant. U deelt uw agenda met dit
                 account, net zoals u een agenda met een collega zou delen — met precies de rechten die u
                 toekent. Voor deze koppeling is dat <strong>wijzigingen aanbrengen</strong>: nodig zodat de
-                agent afspraken kan inplannen als u dat aanzet, of alleen kan lezen als u dat liever niet
-                doet. U kunt de toegang op elk moment zelf intrekken, op dezelfde manier als bij een
-                collega.
+                agent afspraken kan inplannen als u dat aanzet. U kunt de toegang op elk moment zelf
+                intrekken, op dezelfde manier als bij een collega.
               </p>
+              <p>
+                Tip: maak hiervoor een <strong>aparte agenda</strong> aan (bijvoorbeeld "Afspraken") in
+                plaats van uw persoonlijke agenda te delen. Dan ziet de agent alleen de afspraken die voor
+                klanten bedoeld zijn, en blijft uw eigen agenda privé.
+              </p>
+
+              <div class="docs-callout docs-callout-note">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5.5"/><circle cx="12" cy="8" r=".3" fill="currentColor"/></svg>
+                <p>De schermafbeeldingen hieronder komen uit een Google-account dat op Engels staat.
+                  Welke taal u ziet, hangt af van uw eigen Google-instellingen — daarom staat bij elke
+                  knop zowel de Nederlandse als de Engelse naam.</p>
+              </div>
 
               <h2>De koppeling inrichten</h2>
 
@@ -122,30 +133,31 @@
                   <div class="docs-step-body">
                     <h3>Open de instellingen van uw agenda</h3>
                     <p>Open <strong>Google Agenda</strong> op een computer via
-                      <strong>calendar.google.com</strong>. Zoek links onder "Mijn agenda's" de agenda die
-                      de agent mag gebruiken, klik op de drie puntjes ernaast en kies
-                      <strong>Instellingen en delen</strong>.</p>
+                      <strong>calendar.google.com</strong>. Zoek links onder <strong>Mijn agenda's</strong>
+                      (<em>My calendars</em>) de agenda die de agent mag gebruiken, ga er met de muis
+                      overheen, klik op de drie puntjes en kies <strong>Instellingen en delen</strong>
+                      (<em>Settings and sharing</em>).</p>
                     <p class="docs-muted">U ziet nu de instellingenpagina van die agenda.</p>
                   </div>
                 </div>
-              </div>
 
-              <div class="docs-media">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 15l5-5 4 4 4-4 5 5"/><circle cx="8.5" cy="8.5" r="1.3"/></svg>
-                <span>Schermafbeelding volgt</span>
-              </div>
-              <p class="docs-media-caption">Mijn agenda's, met het menu Instellingen en delen open voor de gekozen agenda.</p>
-
-              <div class="docs-steps">
                 <div class="docs-step">
                   <span class="docs-step-num">4</span>
                   <div class="docs-step-body">
                     <h3>Deel de agenda met het Mowi-adres</h3>
-                    <p>Scroll naar "Delen met specifieke personen of groepen" en klik op
-                      <strong>Personen en groepen toevoegen</strong>. Plak het adres hieronder.</p>
+                    <p>Scroll naar <strong>Gedeeld met</strong> (<em>Shared with</em>) en klik op
+                      <strong>Personen en groepen toevoegen</strong> (<em>Add people and groups</em>).
+                      Plak daarna het adres hieronder.</p>
+                    <p class="docs-muted">U ziet nu het venster <strong>Delen met specifieke personen</strong>
+                      (<em>Share with specific people</em>).</p>
                   </div>
                 </div>
               </div>
+
+              <div class="docs-media docs-media--shot">
+                <img src="../assets/docs/koppeling-google-agenda-1.png" alt="De sectie Gedeeld met, met de knop Personen en groepen toevoegen" loading="lazy" />
+              </div>
+              <p class="docs-media-caption">De sectie "Gedeeld met" (Shared with), met de knop "Personen en groepen toevoegen".</p>
 
               <div class="docs-token-row" style="margin:8px 0 24px">
                 <div class="docs-token-value" id="serviceAccountEmailGoogleAgenda">mowi-booking@mowi-dashboard.iam.gserviceaccount.com</div>
@@ -155,51 +167,57 @@
                 </button>
               </div>
 
-              <div class="docs-media">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 15l5-5 4 4 4-4 5 5"/><circle cx="8.5" cy="8.5" r="1.3"/></svg>
-                <span>Schermafbeelding volgt</span>
-              </div>
-              <p class="docs-media-caption">"Delen met specifieke personen of groepen" met de knop "Personen en groepen toevoegen".</p>
-
               <div class="docs-steps">
                 <div class="docs-step">
                   <span class="docs-step-num">5</span>
                   <div class="docs-step-body">
                     <h3>Kies de juiste rechten</h3>
-                    <p>Kies bij rechten <strong>Wijzigingen aanbrengen in afspraken</strong> en klik op
-                      <strong>Verzenden</strong>.</p>
-                    <p class="docs-muted">Wilt u dat de agent alleen tijden voorstelt en nooit zelf
-                      inplant? Kies dan een lagere rechten-optie zoals "Alle details van afspraken zien" —
-                      houd er rekening mee dat het inplannen van afspraken dan niet mogelijk is; de agent
-                      kan dan alleen beschikbaarheid nog voorstellen.</p>
+                    <p>Kies onder <strong>Rechten</strong> (<em>Permission</em>) de optie
+                      <strong>Wijzigingen aanbrengen en alle afspraakgegevens bekijken</strong>
+                      (<em>Make changes and see all event details</em>) en klik op
+                      <strong>Verzenden</strong> (<em>Send</em>).</p>
+                    <p class="docs-muted">Het Mowi-adres staat nu in de lijst onder
+                      <strong>Gedeeld met</strong>, met die rechten erachter.</p>
                   </div>
                 </div>
               </div>
 
-              <div class="docs-media">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 15l5-5 4 4 4-4 5 5"/><circle cx="8.5" cy="8.5" r="1.3"/></svg>
-                <span>Schermafbeelding volgt</span>
+              <div class="docs-media docs-media--shot">
+                <img src="../assets/docs/koppeling-google-agenda-2.png" alt="Het rechten-menu met alle opties, waaronder Make changes and see all event details" loading="lazy" />
               </div>
-              <p class="docs-media-caption">Het deelvenster met het Mowi-adres ingevuld en de rechten-optie "Wijzigingen aanbrengen in afspraken".</p>
+              <p class="docs-media-caption">Alle rechten-opties. U heeft "Wijzigingen aanbrengen en alle afspraakgegevens bekijken" (Make changes and see all event details) nodig — de twee opties die alleen laten kijken zijn niet genoeg om afspraken in te plannen.</p>
+
+              <div class="docs-media docs-media--shot">
+                <img src="../assets/docs/koppeling-google-agenda-3.png" alt="Het deelvenster met het Mowi-adres ingevuld en de juiste rechten geselecteerd" loading="lazy" />
+              </div>
+              <p class="docs-media-caption">Het deelvenster met het Mowi-adres ingevuld en de juiste rechten gekozen, klaar om te verzenden.</p>
+
+              <div class="docs-callout docs-callout-warning">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4l9 16H3z"/><path d="M12 10v4"/><circle cx="12" cy="17" r=".4" fill="currentColor"/></svg>
+                <p>Kiest u een optie die alleen laten kijken toestaat (bijvoorbeeld <em>See all event
+                  details</em>)? Dan kan de agent wel vrije tijden voorstellen, maar nooit zelf een
+                  afspraak inplannen.</p>
+              </div>
 
               <div class="docs-steps">
                 <div class="docs-step">
                   <span class="docs-step-num">6</span>
                   <div class="docs-step-body">
                     <h3>Vind het Agenda-ID</h3>
-                    <p>Blijf op de instellingenpagina van de agenda en zoek de sectie
-                      <strong>Agenda integreren</strong>. Daar staat het <strong>Agenda-ID</strong> — bij
-                      uw hoofdagenda is dat meestal gewoon uw eigen Gmail-adres.</p>
-                    <p class="docs-muted">U heeft nu de waarde die u in het dashboard moet invullen.</p>
+                    <p>Blijf op de instellingenpagina van de agenda en scroll naar de sectie
+                      <strong>Agenda integreren</strong> (<em>Integrate calendar</em>). Daar staat het
+                      <strong>Agenda-ID</strong>.</p>
+                    <p class="docs-muted">Bij uw hoofdagenda is dit uw eigen Google-mailadres. Bij een
+                      aparte agenda (zoals in het voorbeeld hieronder) is het een lange code die eindigt
+                      op <code>@group.calendar.google.com</code>.</p>
                   </div>
                 </div>
               </div>
 
-              <div class="docs-media">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 15l5-5 4 4 4-4 5 5"/><circle cx="8.5" cy="8.5" r="1.3"/></svg>
-                <span>Schermafbeelding volgt</span>
+              <div class="docs-media docs-media--shot">
+                <img src="../assets/docs/koppeling-google-agenda-4.png" alt="De sectie Agenda integreren met het Agenda-ID" loading="lazy" />
               </div>
-              <p class="docs-media-caption">De sectie "Agenda integreren" met het Agenda-ID.</p>
+              <p class="docs-media-caption">De sectie "Agenda integreren" (Integrate calendar) met het Agenda-ID.</p>
 
               <div class="docs-steps">
                 <div class="docs-step">
@@ -244,8 +262,9 @@
               <p>
                 Controleer twee dingen: staat het vinkje <strong>"Agent mag zelf afspraken
                 inplannen"</strong> aan in het koppelingsformulier, en heeft u bij het delen van de agenda
-                gekozen voor <strong>"Wijzigingen aanbrengen in afspraken"</strong> (niet alleen
-                leestoegang)? Beide zijn nodig om zelf in te plannen.
+                gekozen voor <strong>Wijzigingen aanbrengen en alle afspraakgegevens bekijken</strong>
+                (<em>Make changes and see all event details</em>) en niet voor een optie die alleen laten
+                kijken toestaat? Beide zijn nodig om zelf in te plannen.
               </p>
 
               <h3>"Google Agenda is niet bereikbaar"</h3>
@@ -267,7 +286,7 @@ Beste [naam IT-partner],
 Voor de koppeling van ons Mowi-dashboard met Google Agenda willen we een agenda delen met een extern account. Kunt u het volgende voor ons regelen of mogelijk maken?
 
 1. Sta toe dat de agenda "[naam agenda]" gedeeld wordt met het externe account mowi-booking@mowi-dashboard.iam.gserviceaccount.com (dit is geen persoonlijk account, maar een vast, Mowi-eigen service-account).
-2. Ken dat account de rechten "Wijzigingen aanbrengen in afspraken" toe op die agenda.
+2. Ken dat account op die agenda de rechten "Wijzigingen aanbrengen en alle afspraakgegevens bekijken" toe (in het Engels: "Make changes and see all event details").
 
 Met vriendelijke groet,
 [uw naam]</div>

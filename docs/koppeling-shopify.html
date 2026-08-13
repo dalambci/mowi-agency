@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shopify koppelen — Documentatie — Mowi</title>
-  <meta name="description" content="Zo koppelt u uw Shopify-winkel aan het dashboard, zodat uw agent bestelstatus kan opzoeken en beantwoorden." />
+  <meta name="description" content="Zo koppelt u uw Shopify-winkel aan het dashboard: Mowi richt de koppeling voor u in, u keurt de toegang goed. Inclusief wat Mowi wel en niet mag zien." />
   <link rel="preconnect" href="https://fonts.bunny.net" />
   <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../css/docs.css?v=20260813" />
@@ -52,29 +52,46 @@
                 alleen lezend: er wordt nooit iets in uw winkel aangepast.
               </p>
               <p>
-                Na deze stappen is uw Shopify-winkel gekoppeld aan het dashboard en heeft u gecontroleerd
-                dat de koppeling werkt.
+                Op deze pagina leest u waarom Shopify deze koppeling anders werkt dan de andere, en welke
+                stappen u zelf zet om hem in gebruik te nemen.
               </p>
+
+              <div class="docs-callout docs-callout-warning">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4l9 16H3z"/><path d="M12 10v4"/><circle cx="12" cy="17" r=".4" fill="currentColor"/></svg>
+                <p><strong>Deze koppeling zet u niet zelf in elkaar.</strong> Shopify heeft de mogelijkheid
+                  om zelf een koppelsleutel aan te maken uit het winkelbeheer gehaald. Wij richten de
+                  koppeling daarom voor u in — u hoeft alleen contact op te nemen en één link te
+                  bevestigen.</p>
+              </div>
 
               <div class="docs-prereqs">
                 <div class="docs-prereqs-label">Vereisten</div>
                 <ul>
-                  <li>Eigenaar- of beheerdersrechten in uw Shopify-winkel, met toestemming om apps te
-                    ontwikkelen — of iemand die dat namens u kan doen.</li>
+                  <li>Eigenaar- of beheerdersrechten in uw Shopify-winkel (u moet de koppeling kunnen
+                    goedkeuren).</li>
+                  <li>Het <code>.myshopify.com</code>-adres van uw winkel bij de hand.</li>
                   <li>Toegang tot <strong>het dashboard</strong> (inloggegevens van uw organisatie).</li>
-                  <li>Een agent met de koppelingsstap in beeld — bijvoorbeeld tijdens het instellen van uw
-                    <strong>E-mail agent</strong> of <strong>Call agent</strong>, of later via uw profiel.</li>
                 </ul>
               </div>
 
-              <h2>Wat is een Admin API-token?</h2>
+              <h2>Waarom u dit niet zelf kunt instellen</h2>
               <p>
-                Shopify geeft externe toepassingen zoals Mowi geen toegang met uw eigen inloggegevens. In
-                plaats daarvan maakt u in uw Shopify-beheer een eigen app aan — uitsluitend voor uw eigen
-                winkel, niet gepubliceerd in de App Store — en kent u die app precies de rechten toe die
-                nodig zijn. Voor deze koppeling is dat alleen <strong>bestellingen lezen</strong>: Mowi kan
-                bestelstatus opzoeken, maar nooit iets aanpassen of verwijderen. U kunt de app op elk
-                moment zelf verwijderen in Shopify.
+                Bij WooCommerce maakt u zelf een sleutel aan in uw eigen webshopbeheer. Bij Shopify kan dat
+                niet meer. Shopify heeft het aanmaken van een eigen koppel-app uit het winkelbeheer
+                verwijderd: waar vroeger onder <strong>Instellingen</strong> → <strong>Apps</strong> een
+                knop stond om zelf een app te maken, verwijst die pagina nu alleen nog door naar een
+                aparte ontwikkelaarsomgeving. Ook toont Shopify de koppelsleutel niet meer op het scherm —
+                die moet via een technische uitwisseling opgehaald worden.
+                <!-- VERIFY: vastgesteld op 2026-08-13 in een echte Shopify-winkel (de pagina
+                     Instellingen > Apps > App development bood alleen nog "Build apps in Dev Dashboard")
+                     en bevestigd in Shopify's eigen documentatie: "You can no longer create new custom
+                     apps in the Shopify admin" en tokens verschijnen niet meer in de interface. Controleer
+                     opnieuw als Shopify dit terugdraait. -->
+              </p>
+              <p>
+                Het resultaat is hetzelfde als bij de andere koppelingen — alleen doen wij het technische
+                deel. U houdt de controle: u keurt de toegang goed, en u kunt die op elk moment weer
+                intrekken.
               </p>
 
               <h2>De koppeling inrichten</h2>
@@ -83,197 +100,105 @@
                 <div class="docs-step">
                   <span class="docs-step-num">1</span>
                   <div class="docs-step-body">
-                    <h3>Open de stap Koppelingen</h3>
-                    <p>Log in bij <strong>het dashboard</strong>, klik in de zijbalk op <strong>Agents</strong>
-                      en open de agent waarvoor u wilt koppelen. Klik op het tabblad <strong>Setup</strong>
-                      en daarna op stap <strong>2 Koppelingen</strong>.</p>
-                    <p class="docs-muted">U ziet nu een overzicht met tegels per systeem, gegroepeerd onder
-                      <strong>Webshops</strong>, <strong>CRM &amp; administratie</strong> en
-                      <strong>Reserveren &amp; afspraken</strong>.</p>
+                    <h3>Vraag de koppeling aan</h3>
+                    <p>Open <a href="https://my.mowi.agency/support" target="_blank" rel="noopener">Support</a>
+                      in het dashboard en meld dat u Shopify wilt koppelen. Vermeld daarbij het
+                      <code>.myshopify.com</code>-adres van uw winkel.</p>
+                    <p class="docs-muted">U ontvangt van ons één link waarmee u de koppeling goedkeurt.</p>
                   </div>
                 </div>
 
                 <div class="docs-step">
                   <span class="docs-step-num">2</span>
                   <div class="docs-step-body">
-                    <h3>Klik op de tegel Shopify</h3>
-                    <p>Klik onder <strong>Webshops</strong> op de tegel <strong>Shopify</strong>.</p>
-                    <p class="docs-muted">Het paneel klapt open met genummerde stappen en een formulier met
-                      de velden <strong>Shopify-adres</strong> en <strong>Admin API-token</strong>.</p>
+                    <h3>Keur de toegang goed</h3>
+                    <p>Open de link die u van ons krijgt terwijl u ingelogd bent in uw Shopify-winkel.
+                      Shopify laat u zien welke toegang wordt gevraagd — bestellingen en klantgegevens
+                      <strong>lezen</strong> — en u bevestigt dat.</p>
+                    <p class="docs-muted">Shopify stuurt u daarna terug naar Mowi en wij ronden de
+                      koppeling af.</p>
                   </div>
                 </div>
-              </div>
 
-              <div class="docs-media">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 15l5-5 4 4 4-4 5 5"/><circle cx="8.5" cy="8.5" r="1.3"/></svg>
-                <span>Schermafbeelding volgt</span>
-              </div>
-              <p class="docs-media-caption">De Shopify-tegel geopend, met de genummerde stappen en het koppelingsformulier.</p>
-
-              <div class="docs-steps">
                 <div class="docs-step">
                   <span class="docs-step-num">3</span>
                   <div class="docs-step-body">
-                    <h3>Open Apps ontwikkelen</h3>
-                    <p>Log in op het beheer van uw Shopify-winkel via
-                      <strong>admin.shopify.com</strong> en ga naar <strong>Instellingen</strong> →
-                      "Apps en verkoopkanalen" → "Apps ontwikkelen". Vraagt Shopify eerst om toestemming?
-                      Klik dan op "Aangepaste app-ontwikkeling toestaan".</p>
-                    <p class="docs-muted">U ziet nu een overzicht van apps die specifiek voor uw eigen
-                      winkel zijn gemaakt (mogelijk leeg).</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="docs-media">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 15l5-5 4 4 4-4 5 5"/><circle cx="8.5" cy="8.5" r="1.3"/></svg>
-                <span>Schermafbeelding volgt</span>
-              </div>
-              <p class="docs-media-caption">Instellingen → Apps en verkoopkanalen, met de knop "Apps ontwikkelen".</p>
-
-              <div class="docs-steps">
-                <div class="docs-step">
-                  <span class="docs-step-num">4</span>
-                  <div class="docs-step-body">
-                    <h3>Maak de app aan</h3>
-                    <p>Klik op <strong>App maken</strong> en geef de app een naam, bijvoorbeeld "Mowi".</p>
-                    <p class="docs-muted">U ziet nu de configuratiepagina van de nieuwe app.</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="docs-media">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 15l5-5 4 4 4-4 5 5"/><circle cx="8.5" cy="8.5" r="1.3"/></svg>
-                <span>Schermafbeelding volgt</span>
-              </div>
-              <p class="docs-media-caption">De dialoog "App maken" met het naamveld ingevuld.</p>
-
-              <div class="docs-steps">
-                <div class="docs-step">
-                  <span class="docs-step-num">5</span>
-                  <div class="docs-step-body">
-                    <h3>Geef de app leesrechten op bestellingen</h3>
-                    <p>Open het tabblad <strong>Configuratie</strong> → "Admin API-integratie" en vink bij
-                      <strong>Orders</strong> de leestoegang aan, inclusief toegang tot alle bestellingen
-                      (niet alleen de laatste 60 dagen). Klik op <strong>Opslaan</strong>.</p>
-                    <p class="docs-muted">U ziet nu een bevestiging dat de scopes zijn opgeslagen.</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="docs-media">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 15l5-5 4 4 4-4 5 5"/><circle cx="8.5" cy="8.5" r="1.3"/></svg>
-                <span>Schermafbeelding volgt</span>
-              </div>
-              <p class="docs-media-caption">Het scope-overzicht bij Admin API-integratie, met de leesrechten voor Orders aangevinkt — inclusief "alle bestellingen".</p>
-
-              <div class="docs-steps">
-                <div class="docs-step">
-                  <span class="docs-step-num">6</span>
-                  <div class="docs-step-body">
-                    <h3>Installeer de app</h3>
-                    <p>Open het tabblad <strong>API-referenties</strong> en klik op
-                      <strong>App installeren</strong>.</p>
-                    <p class="docs-muted">U ziet nu de sectie <strong>Admin API-toegangstoken</strong>.</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="docs-media">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 15l5-5 4 4 4-4 5 5"/><circle cx="8.5" cy="8.5" r="1.3"/></svg>
-                <span>Schermafbeelding volgt</span>
-              </div>
-              <p class="docs-media-caption">API-referenties, met de knop "App installeren".</p>
-
-              <div class="docs-steps">
-                <div class="docs-step">
-                  <span class="docs-step-num">7</span>
-                  <div class="docs-step-body">
-                    <h3>Toon en kopieer het token</h3>
-                    <p>Klik bij <strong>Admin API-toegangstoken</strong> op "Token één keer weergeven" en
-                      kopieer het token (begint met <code>shpat_</code>).</p>
-                    <p class="docs-muted">Het token wordt maar één keer getoond — kopieer het direct.</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="docs-media">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 15l5-5 4 4 4-4 5 5"/><circle cx="8.5" cy="8.5" r="1.3"/></svg>
-                <span>Schermafbeelding volgt</span>
-              </div>
-              <p class="docs-media-caption">Het eenmalig getoonde Admin API-toegangstoken (token op deze schermafbeelding onherkenbaar gemaakt).</p>
-
-              <div class="docs-callout docs-callout-warning">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4l9 16H3z"/><path d="M12 10v4"/><circle cx="12" cy="17" r=".4" fill="currentColor"/></svg>
-                <p>Kopieer het token direct nadat u het ziet. Sluit u het scherm zonder te kopiëren, dan
-                  moet u de app opnieuw uninstalleren en installeren om een nieuw token te krijgen.</p>
-              </div>
-
-              <div class="docs-steps">
-                <div class="docs-step">
-                  <span class="docs-step-num">8</span>
-                  <div class="docs-step-body">
-                    <h3>Vul het formulier in en koppel</h3>
-                    <p>Ga terug naar het dashboard en plak uw <code>.myshopify.com</code>-adres en het
-                      token in de bijbehorende velden. Klik op <strong>Koppelen</strong>.</p>
-                    <p class="docs-muted">Het dashboard test de verbinding meteen en toont een melding:
-                      <strong>"Koppeling opgeslagen en getest — de verbinding werkt."</strong> De status
-                      bij Shopify staat nu op <strong>Verbonden</strong>.</p>
+                    <h3>Controleer de status</h3>
+                    <p>Ga in het dashboard naar de stap <strong>Koppelingen</strong> en klik op de tegel
+                      <strong>Shopify</strong>.</p>
+                    <p class="docs-muted">De status staat op <strong>Verbonden</strong> zodra de koppeling
+                      werkt.</p>
                   </div>
                 </div>
               </div>
 
               <div class="docs-callout docs-callout-result">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8 12.5l2.5 2.5 5.5-6"/></svg>
-                <p><strong>U weet dat de koppeling actief is</strong> wanneer de Shopify-tegel de chip
-                  <strong>Verbonden</strong> toont en de melding na het koppelen een geslaagde test
-                  bevestigt.</p>
+                <p><strong>U weet dat de koppeling actief is</strong> wanneer de Shopify-tegel in de stap
+                  Koppelingen de chip <strong>Verbonden</strong> toont.</p>
               </div>
+
+              <h2>Wat Mowi wel en niet mag</h2>
+              <p>
+                De koppeling vraagt uitsluitend <strong>leesrechten</strong> op bestellingen en de
+                bijbehorende klantgegevens. Concreet betekent dat:
+              </p>
+              <ul>
+                <li>Wij kunnen een bestelling opzoeken en de status, verzenddatum en track&amp;trace-link
+                  teruggeven.</li>
+                <li>Wij kunnen niets in uw winkel wijzigen, aanmaken of verwijderen — geen producten, geen
+                  prijzen, geen bestellingen.</li>
+                <li>De agent controleert altijd eerst of het e-mailadres van de vraagsteller overeenkomt met
+                  de bestelling. Klopt dat niet, dan geeft hij geen gegevens vrij.</li>
+              </ul>
+              <p>
+                U kunt de toegang op elk moment intrekken: ga in uw Shopify-beheer naar
+                <strong>Instellingen</strong> → <strong>Apps</strong>, zoek de Mowi-app en verwijder hem.
+                De koppeling in het dashboard springt dan op <strong>Fout</strong>.
+              </p>
 
               <h2>Problemen oplossen</h2>
 
               <h3>"Het Admin API-token werd geweigerd (401)"</h3>
               <p>
-                Het token is ongeldig, ingetrokken, of de app is niet (meer) geïnstalleerd. Open de app in
-                Shopify, controleer of hij nog geïnstalleerd staat en of de Orders-leesrechten nog kloppen.
-                Is het token kwijt, dan moet u de app opnieuw installeren voor een nieuw token.
+                De toegang is ingetrokken of verlopen — bijvoorbeeld omdat de Mowi-app uit uw Shopify-winkel
+                is verwijderd. Neem contact op via Support; wij sturen u een nieuwe goedkeuringslink.
               </p>
 
               <h3>"Het Shopify-adres is niet gevonden (404)"</h3>
               <p>
-                Controleer of het <code>.myshopify.com</code>-adres klopt (geen typefout). Dit is het
-                oorspronkelijke Shopify-domein van uw winkel, niet per se het domein dat klanten zien.
-              </p>
-
-              <h3>"De webshop is niet bereikbaar"</h3>
-              <p>
-                Het dashboard kon geen verbinding maken met het opgegeven adres. Controleer of het adres
-                geen typefout bevat.
+                Het opgeslagen <code>.myshopify.com</code>-adres klopt niet. Let op: dit is het
+                oorspronkelijke Shopify-adres van uw winkel, niet per se het domein dat uw klanten zien.
+                U vindt het in uw Shopify-beheer onder <strong>Instellingen</strong> →
+                <strong>Domeinen</strong>.
               </p>
 
               <h3>Bestellingen ouder dan 60 dagen worden niet gevonden</h3>
               <p>
-                Controleer of bij stap 5 naast leestoegang op Orders ook <strong>"alle bestellingen"</strong>
-                is aangevinkt, niet alleen de standaard leestoegang. Zonder die optie doorzoekt Shopify's
-                API alleen de laatste 60 dagen.
+                Shopify doorzoekt standaard alleen de laatste 60 dagen. Wij vragen bij het inrichten
+                expliciet toegang tot álle bestellingen aan, dus dit hoort niet voor te komen. Merkt u het
+                toch? Neem contact op via Support — dan controleren wij de rechten van de koppeling.
               </p>
 
               <h2>Voor uw IT-partner</h2>
               <p>
-                Regelt uw IT-partner of Shopify-beheerder deze koppeling? Kopieer onderstaand verzoek en
+                Beheert een IT-partner of webshopbouwer uw Shopify-winkel? Kopieer onderstaand bericht en
                 stuur het door.
               </p>
               <div class="docs-token-row">
-                <div class="docs-token-value docs-token-value--block" id="itPartnerEmailShopify">Onderwerp: Shopify-koppeling voor Mowi instellen
+                <div class="docs-token-value docs-token-value--block" id="itPartnerEmailShopify">Onderwerp: Shopify-koppeling voor Mowi goedkeuren
 
 Beste [naam IT-partner],
 
-Voor de koppeling van ons Mowi-dashboard met onze Shopify-winkel hebben we het volgende nodig:
+Wij koppelen onze Shopify-winkel aan Mowi, zodat onze AI-agent de status van bestellingen kan opzoeken.
 
-1. Log in op admin.shopify.com en ga naar Instellingen > Apps en verkoopkanalen > Apps ontwikkelen (schakel "Aangepaste app-ontwikkeling toestaan" in als dat nog niet aanstaat).
-2. Maak een nieuwe app aan met de naam "Mowi".
-3. Geef de app onder Configuratie > Admin API-integratie alleen leestoegang tot Orders, inclusief toegang tot alle bestellingen (niet alleen de laatste 60 dagen) — geen schrijfrechten nodig.
-4. Installeer de app via het tabblad API-referenties en deel het eenmalig getoonde Admin API-toegangstoken via een veilig kanaal met ons, niet per e-mail in platte tekst.
+Mowi levert hiervoor een goedkeuringslink aan. Wat we van u nodig hebben:
+
+1. Open die link terwijl u ingelogd bent als eigenaar/beheerder van onze Shopify-winkel.
+2. Controleer op het goedkeuringsscherm dat er uitsluitend LEESrechten op bestellingen en klantgegevens gevraagd worden — geen schrijfrechten.
+3. Bevestig de installatie.
+
+Ons .myshopify.com-adres is: [uw-winkel].myshopify.com
 
 Met vriendelijke groet,
 [uw naam]</div>
@@ -285,8 +210,8 @@ Met vriendelijke groet,
 
               <h2>Volgende stappen</h2>
               <p>
-                Gebruikt u WordPress met WooCommerce in plaats van Shopify?
-                <a href="koppeling-woocommerce">Lees WooCommerce koppelen</a>.
+                Gebruikt u WordPress met WooCommerce in plaats van Shopify? Die koppeling stelt u wél
+                helemaal zelf in. <a href="koppeling-woocommerce">Lees WooCommerce koppelen</a>.
               </p>
               <p>
                 Werkt de koppeling niet zoals verwacht na deze stappen?
