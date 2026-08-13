@@ -260,17 +260,23 @@ retype credentials from scratch or falling back to a password:
   Exact Online, AFAS, Power BI) are grounded by fetching that tool's own official documentation
   (WebFetch/WebSearch), not recalled from memory.
 - **Two HTML comment markers flag unresolved precision gaps** — `<!-- DRAFT: ... -->` for steps
-  in our own platform where the screen/process doesn't exist yet or isn't confirmed (e.g. there
-  is currently no self-service "Koppelingen" UI in the dashboard at all — every agent/koppeling
-  page's connection step is honestly DRAFT-marked for this reason, and that's a real product gap,
-  not a doc-writing gap); `<!-- VERIFY: ... -->` for external-tool details found via secondary
-  sources (blog posts, community articles) rather than confirmed directly on the vendor's own
-  page (Salesforce's and Exact Online's help portals are JS-rendered SPAs that don't reliably
-  return real content to WebFetch — when a fetch returns only a loading/CSS-error shell, that's
-  the tool failing to render, not the page being empty; don't treat it as "nothing exists there").
-  Find every open one with: `grep -rn "DRAFT\|VERIFY" docs/*.html` (27 remain as of 2026-08-03:
-  23 DRAFT, 4 VERIFY — see chat history for the full grouped list, or re-run the grep and read
-  each comment, they're self-explanatory).
+  in our own platform where the screen/process doesn't exist yet or isn't confirmed;
+  `<!-- VERIFY: ... -->` for external-tool details found via secondary sources (blog posts,
+  community articles) rather than confirmed directly on the vendor's own page (some vendor help
+  portals are JS-rendered SPAs that don't reliably return real content to WebFetch — when a fetch
+  returns only a loading/CSS-error shell, that's the tool failing to render, not the page being
+  empty; don't treat it as "nothing exists there"). Find every open one with:
+  `grep -rn "DRAFT\|VERIFY" docs/*.html` — count and list change as pages are added/edited, so
+  re-run the grep rather than trusting a cached count here.
+  **Stale claim corrected 2026-08-13**: this note used to say there was no self-service
+  "Koppelingen" UI in the dashboard at all. That's no longer true — as of 2026-08-13 the dashboard
+  (`Mowi Dashboard` repo) has a real, working self-serve Koppelingen step
+  (`resources/views/profile/partials/update-shop-connection-form.blade.php`) for WooCommerce,
+  Shopify, Pipedrive and Google Agenda, with real click paths, not DRAFT markers — see
+  `docs/koppeling-woocommerce.html` etc. for the first pages written against it. The other
+  agent/koppeling pages (CRM sync, Invoice processing, Lead enrichment, Report generator, and any
+  future platform) may still need DRAFT markers until their own dashboard screens exist — check
+  the actual dashboard repo before assuming either way.
 - **Never guess security/network specifics.** `docs/it-beveiliging.html` and
   `docs/it-netwerkvereisten.html` deliberately omit encryption/retention/certification claims and
   all IP/domain/port values — a wrong firewall value is worse than none. Only add these once a

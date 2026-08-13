@@ -36,6 +36,15 @@ var DOCS_NAV = [
     ]
   },
   {
+    category: "Koppelingen",
+    items: [
+      { title: "WooCommerce", href: "koppeling-woocommerce" },
+      { title: "Shopify", href: "koppeling-shopify" },
+      { title: "Pipedrive", href: "koppeling-pipedrive" },
+      { title: "Google Agenda", href: "koppeling-google-agenda" }
+    ]
+  },
+  {
     category: "Voor uw IT-partner",
     items: [
       { title: "Overzicht voor IT-partners", href: "it-overzicht" },

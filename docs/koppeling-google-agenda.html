@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Google Agenda koppelen — Documentatie — Mowi</title>
+  <meta name="description" content="Zo koppelt u Google Agenda aan het dashboard, zodat uw agent beschikbaarheid kan controleren en afspraken kan voorstellen of inplannen." />
+  <link rel="preconnect" href="https://fonts.bunny.net" />
+  <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/docs.css?v=20260813" />
+  <link rel="icon" href="../assets/icon-192.png?v=20260804-3" />
+  <link rel="shortcut icon" href="../assets/icon-192.png?v=20260804-3" />
+  <link rel="apple-touch-icon" href="../assets/apple-icon-180.png?v=20260804-3" />
+  <link rel="apple-touch-icon-precomposed" href="../assets/apple-icon-180.png?v=20260804-3" />
+  <script defer data-domain="mowi.agency" src="https://plausible.io/js/script.js"></script>
+</head>
+<body class="docs" data-docs-href="koppeling-google-agenda">
+  <div class="docs-shell">
+    <header class="docs-header">
+      <div class="docs-header-inner">
+        <button class="docs-menu-toggle" id="docsMenuToggle" aria-expanded="false" aria-controls="docsSidebar" aria-label="Menu openen">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+        <a href="/" class="docs-wordmark" aria-label="Mowi - home">
+          <img src="../assets/mowi-icon.png" alt="" class="docs-wordmark-icon" />
+          <img src="../assets/mowi-wordmark.png" alt="Mowi" class="docs-wordmark-text" />
+        </a>
+        <span class="docs-header-divider" aria-hidden="true"></span>
+        <span class="docs-header-label">Documentatie</span>
+        <div class="docs-header-actions">
+          <a href="/" class="docs-header-link">Terug naar website</a>
+          <a href="https://my.mowi.agency/login" class="docs-header-link docs-header-link-primary" target="_blank" rel="noopener">Inloggen</a>
+        </div>
+      </div>
+    </header>
+    <div class="docs-body">
+      <div class="docs-sidebar-backdrop" id="docsSidebarBackdrop"></div>
+      <aside class="docs-sidebar" id="docsSidebar">
+        <nav class="docs-sidebar-nav" id="docsSidebarNav" aria-label="Documentatie-navigatie"></nav>
+      </aside>
+      <div class="docs-main">
+        <div class="docs-content-wrap">
+          <div class="docs-column">
+            <nav class="docs-breadcrumb" id="docsBreadcrumb" aria-label="Broodkruimel"></nav>
+
+            <article class="docs-article">
+              <h1>Google Agenda koppelen</h1>
+
+              <p class="docs-dek">
+                Via de Google Agenda-koppeling controleert uw agent een vrije plek in uw agenda en stelt
+                die voor aan de klant — of plant de afspraak direct in, als u dat toestaat. Deze koppeling
+                werkt anders dan de webshop- en CRM-koppelingen: u deelt uw agenda met één vast
+                Mowi-adres, in plaats van dat u zelf een sleutel aanmaakt.
+              </p>
+              <p>
+                Na deze stappen is een agenda gedeeld met Mowi, gekoppeld aan het dashboard, en heeft u
+                gecontroleerd dat de koppeling werkt.
+              </p>
+
+              <div class="docs-prereqs">
+                <div class="docs-prereqs-label">Vereisten</div>
+                <ul>
+                  <li>Een Google-account met een agenda die de agent mag gebruiken.</li>
+                  <li>Rechten om die agenda te delen — bij een privéaccount heeft u dit zelf; bij een
+                    Google Workspace-omgeving kan dit door uw beheerder beperkt zijn.</li>
+                  <li>Toegang tot <strong>het dashboard</strong> (inloggegevens van uw organisatie).</li>
+                  <li>Een agent met de koppelingsstap in beeld — bijvoorbeeld tijdens het instellen van uw
+                    <strong>Call agent</strong>, of later via uw profiel.</li>
+                </ul>
+              </div>
+
+              <h2>Waarom delen met een adres, in plaats van een sleutel?</h2>
+              <p>
+                Mowi gebruikt voor Google Agenda één vast, Mowi-eigen account (een
+                "service-account") in plaats van een aparte sleutel per klant. U deelt uw agenda met dit
+                account, net zoals u een agenda met een collega zou delen — met precies de rechten die u
+                toekent. Voor deze koppeling is dat <strong>wijzigingen aanbrengen</strong>: nodig zodat de
+                agent afspraken kan inplannen als u dat aanzet, of alleen kan lezen als u dat liever niet
+                doet. U kunt de toegang op elk moment zelf intrekken, op dezelfde manier als bij een
+                collega.
+              </p>
+
+              <h2>De koppeling inrichten</h2>
+
+              <div class="docs-steps">
+                <div class="docs-step">
+                  <span class="docs-step-num">1</span>
+                  <div class="docs-step-body">
+                    <h3>Open de stap Koppelingen</h3>
+                    <p>Log in bij <strong>het dashboard</strong>, klik in de zijbalk op <strong>Agents</strong>
+                      en open de agent waarvoor u wilt koppelen. Klik op het tabblad <strong>Setup</strong>
+                      en daarna op stap <strong>2 Koppelingen</strong>.</p>
+                    <p class="docs-muted">U ziet nu een overzicht met tegels per systeem, gegroepeerd onder
+                      <strong>Webshops</strong>, <strong>CRM &amp; administratie</strong> en
+                      <strong>Reserveren &amp; afspraken</strong>.</p>
+                  </div>
+                </div>
+
+                <div class="docs-step">
+                  <span class="docs-step-num">2</span>
+                  <div class="docs-step-body">
+                    <h3>Klik op de tegel Google Agenda</h3>
+                    <p>Klik onder <strong>Reserveren &amp; afspraken</strong> op de tegel
+                      <strong>Google Agenda</strong>.</p>
+                    <p class="docs-muted">Het paneel klapt open met genummerde stappen, het adres om mee te
+                      delen (met een <strong>Kopiëren</strong>-knop), en een formulier met de velden
+                      <strong>Agenda-ID</strong>, <strong>Duur van een afspraak</strong> en
+                      <strong>Openingstijden</strong>.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="docs-media">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 15l5-5 4 4 4-4 5 5"/><circle cx="8.5" cy="8.5" r="1.3"/></svg>
+                <span>Schermafbeelding volgt</span>
+              </div>
+              <p class="docs-media-caption">De Google Agenda-tegel geopend, met het te delen adres en het koppelingsformulier.</p>
+
+              <div class="docs-steps">
+                <div class="docs-step">
+                  <span class="docs-step-num">3</span>
+                  <div class="docs-step-body">
+                    <h3>Open de instellingen van uw agenda</h3>
+                    <p>Open <strong>Google Agenda</strong> op een computer via
+                      <strong>calendar.google.com</strong>. Zoek links onder "Mijn agenda's" de agenda die
+                      de agent mag gebruiken, klik op de drie puntjes ernaast en kies
+                      <strong>Instellingen en delen</strong>.</p>
+                    <p class="docs-muted">U ziet nu de instellingenpagina van die agenda.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="docs-media">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 15l5-5 4 4 4-4 5 5"/><circle cx="8.5" cy="8.5" r="1.3"/></svg>
+                <span>Schermafbeelding volgt</span>
+              </div>
+              <p class="docs-media-caption">Mijn agenda's, met het menu Instellingen en delen open voor de gekozen agenda.</p>
+
+              <div class="docs-steps">
+                <div class="docs-step">
+                  <span class="docs-step-num">4</span>
+                  <div class="docs-step-body">
+                    <h3>Deel de agenda met het Mowi-adres</h3>
+                    <p>Scroll naar "Delen met specifieke personen of groepen" en klik op
+                      <strong>Personen en groepen toevoegen</strong>. Plak het adres hieronder.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="docs-token-row" style="margin:8px 0 24px">
+                <div class="docs-token-value" id="serviceAccountEmailGoogleAgenda">mowi-booking@mowi-dashboard.iam.gserviceaccount.com</div>
+                <button type="button" class="docs-copy-btn" data-copy-target="serviceAccountEmailGoogleAgenda">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
+                  <span class="docs-copy-btn-label">Kopiëren</span>
+                </button>
+              </div>
+
+              <div class="docs-media">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 15l5-5 4 4 4-4 5 5"/><circle cx="8.5" cy="8.5" r="1.3"/></svg>
+                <span>Schermafbeelding volgt</span>
+              </div>
+              <p class="docs-media-caption">"Delen met specifieke personen of groepen" met de knop "Personen en groepen toevoegen".</p>
+
+              <div class="docs-steps">
+                <div class="docs-step">
+                  <span class="docs-step-num">5</span>
+                  <div class="docs-step-body">
+                    <h3>Kies de juiste rechten</h3>
+                    <p>Kies bij rechten <strong>Wijzigingen aanbrengen in afspraken</strong> en klik op
+                      <strong>Verzenden</strong>.</p>
+                    <p class="docs-muted">Wilt u dat de agent alleen tijden voorstelt en nooit zelf
+                      inplant? Kies dan een lagere rechten-optie zoals "Alle details van afspraken zien" —
+                      houd er rekening mee dat het inplannen van afspraken dan niet mogelijk is; de agent
+                      kan dan alleen beschikbaarheid nog voorstellen.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="docs-media">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 15l5-5 4 4 4-4 5 5"/><circle cx="8.5" cy="8.5" r="1.3"/></svg>
+                <span>Schermafbeelding volgt</span>
+              </div>
+              <p class="docs-media-caption">Het deelvenster met het Mowi-adres ingevuld en de rechten-optie "Wijzigingen aanbrengen in afspraken".</p>
+
+              <div class="docs-steps">
+                <div class="docs-step">
+                  <span class="docs-step-num">6</span>
+                  <div class="docs-step-body">
+                    <h3>Vind het Agenda-ID</h3>
+                    <p>Blijf op de instellingenpagina van de agenda en zoek de sectie
+                      <strong>Agenda integreren</strong>. Daar staat het <strong>Agenda-ID</strong> — bij
+                      uw hoofdagenda is dat meestal gewoon uw eigen Gmail-adres.</p>
+                    <p class="docs-muted">U heeft nu de waarde die u in het dashboard moet invullen.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="docs-media">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 15l5-5 4 4 4-4 5 5"/><circle cx="8.5" cy="8.5" r="1.3"/></svg>
+                <span>Schermafbeelding volgt</span>
+              </div>
+              <p class="docs-media-caption">De sectie "Agenda integreren" met het Agenda-ID.</p>
+
+              <div class="docs-steps">
+                <div class="docs-step">
+                  <span class="docs-step-num">7</span>
+                  <div class="docs-step-body">
+                    <h3>Vul het formulier in en koppel</h3>
+                    <p>Ga terug naar het dashboard en vul het <strong>Agenda-ID</strong> in. De duur van
+                      een afspraak en de openingstijden staan al op een standaardwaarde — pas ze aan indien
+                      gewenst. Klik op <strong>Koppelen</strong>.</p>
+                    <p class="docs-muted">Het dashboard test direct of de agent bij de agenda kan en toont
+                      een melding: <strong>"Koppeling opgeslagen en getest — de verbinding werkt."</strong>
+                      De status bij Google Agenda staat nu op <strong>Verbonden</strong>.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="docs-callout docs-callout-note">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5.5"/><circle cx="12" cy="8" r=".3" fill="currentColor"/></svg>
+                <p>Het vinkje <strong>"Agent mag zelf afspraken inplannen"</strong> in het formulier bepaalt
+                  of de agent een afspraak direct in uw agenda zet, of alleen beschikbare tijden voorstelt
+                  die u of uw team zelf bevestigt. Dit staat standaard uit.</p>
+              </div>
+
+              <div class="docs-callout docs-callout-result">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8 12.5l2.5 2.5 5.5-6"/></svg>
+                <p><strong>U weet dat de koppeling actief is</strong> wanneer de Google Agenda-tegel de chip
+                  <strong>Verbonden</strong> toont en de melding na het koppelen een geslaagde test
+                  bevestigt.</p>
+              </div>
+
+              <h2>Problemen oplossen</h2>
+
+              <h3>"De agenda is niet gevonden of nog niet gedeeld"</h3>
+              <p>
+                Controleer of u de agenda echt heeft gedeeld met
+                <code>mowi-booking@mowi-dashboard.iam.gserviceaccount.com</code> (geen typefout) en of het
+                <strong>Agenda-ID</strong> in het dashboard exact overeenkomt met het ID uit "Agenda
+                integreren" in Google Agenda.
+              </p>
+
+              <h3>De agent plant geen afspraken in, ondanks een geslaagde koppeling</h3>
+              <p>
+                Controleer twee dingen: staat het vinkje <strong>"Agent mag zelf afspraken
+                inplannen"</strong> aan in het koppelingsformulier, en heeft u bij het delen van de agenda
+                gekozen voor <strong>"Wijzigingen aanbrengen in afspraken"</strong> (niet alleen
+                leestoegang)? Beide zijn nodig om zelf in te plannen.
+              </p>
+
+              <h3>"Google Agenda is niet bereikbaar"</h3>
+              <p>
+                Het dashboard kon geen verbinding maken met Google. Probeer het later opnieuw, of
+                controleer de statuspagina van Google Workspace als het probleem aanhoudt.
+              </p>
+
+              <h2>Voor uw IT-partner</h2>
+              <p>
+                Beheert uw IT-partner de Google Workspace-omgeving en is delen met externe accounts
+                beperkt? Kopieer onderstaand verzoek en stuur het door.
+              </p>
+              <div class="docs-token-row">
+                <div class="docs-token-value docs-token-value--block" id="itPartnerEmailGoogleAgenda">Onderwerp: Google Agenda-koppeling voor Mowi instellen
+
+Beste [naam IT-partner],
+
+Voor de koppeling van ons Mowi-dashboard met Google Agenda willen we een agenda delen met een extern account. Kunt u het volgende voor ons regelen of mogelijk maken?
+
+1. Sta toe dat de agenda "[naam agenda]" gedeeld wordt met het externe account mowi-booking@mowi-dashboard.iam.gserviceaccount.com (dit is geen persoonlijk account, maar een vast, Mowi-eigen service-account).
+2. Ken dat account de rechten "Wijzigingen aanbrengen in afspraken" toe op die agenda.
+
+Met vriendelijke groet,
+[uw naam]</div>
+                <button type="button" class="docs-copy-btn" data-copy-target="itPartnerEmailGoogleAgenda">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
+                  <span class="docs-copy-btn-label">Kopiëren</span>
+                </button>
+              </div>
+
+              <h2>Volgende stappen</h2>
+              <p>
+                Wilt u dat uw agent ook klantgegevens herkent vanuit uw CRM?
+                <a href="koppeling-pipedrive">Lees Pipedrive koppelen</a>.
+              </p>
+              <p>
+                Werkt de koppeling niet zoals verwacht na deze stappen?
+                <a href="faq-koppeling-werkt-niet">Lees Een koppeling werkt niet meer</a>.
+              </p>
+            </article>
+
+            <nav class="docs-prevnext" id="docsPrevNext" aria-label="Vorige en volgende pagina"></nav>
+          </div>
+
+          <aside class="docs-toc" id="docsToc">
+            <div class="docs-toc-label">Op deze pagina</div>
+            <ol id="docsTocList"></ol>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/docs-nav.js?v=20260813-1"></script>
+  <script src="../js/docs.js?v=20260802"></script>
+</body>
+</html>
