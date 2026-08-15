@@ -978,15 +978,15 @@ const agentFeedList = document.getElementById("agentFeedList");
 
 if (agentFeedCard && agentFeedList && !prefersReducedMotion) {
   const SCRIPT = [
-    { text: "E-mail agent — 14 mails gesorteerd", status: "done" },
-    { text: "Invoice processing — 6 facturen verwerkt", status: "done" },
+    { text: "E-mail agent — 14 mails gesorteerd, 9 concepten klaargezet", status: "done" },
+    { text: "Webshop — orderstatus opgezocht, antwoord klaargezet", status: "done" },
     {
       text: "Needs attention — koppeling verlopen",
       status: "warning",
       resolvesTo: "Needs attention — opgelost",
     },
-    { text: "Report generator — rapport verzonden", status: "done" },
-    { text: "CRM sync — 9 leads bijgewerkt", status: "done" },
+    { text: "Call agent — gesprek aangenomen, terugbelverzoek genoteerd", status: "done" },
+    { text: "Agenda — afspraakvoorstel klaargezet", status: "done" },
   ];
   const MAX_ROWS = 4;
   let scriptIndex = 0;
