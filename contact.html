@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260811-14" />
+  <link rel="stylesheet" href="css/style.css?v=20260815" />
   <link rel="icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="shortcut icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260804-3" />
@@ -47,8 +47,8 @@
               <div class="nav-megamenu-col">
                 <p class="nav-megamenu-label">Agents</p>
                 <ul>
-                  <li><a href="agents/email-triage">Email</a></li>
-                  <li><a href="agents/phone-agent">Call</a></li>
+                  <li><a href="agents/email-triage">Email agent</a></li>
+                  <li><a href="agents/phone-agent">Call agent</a></li>
                 </ul>
               </div>
             </div>
@@ -128,6 +128,16 @@
           <p style="color: var(--color-gray-600); margin-top: 0.75rem;">
             30 minuten, online en vrijblijvend. U weet daarna precies wat de volgende stap zou zijn.
           </p>
+          <!-- Portrait sits between the intro copy and the calendar on
+               purpose: it answers "who am I giving 30 minutes to?" at the
+               exact moment the visitor is about to pick a slot. Width/height
+               attributes match the CSS size so the row doesn't reflow while
+               the image loads and shove the calendar down. -->
+          <div class="booking-host">
+            <img class="booking-host-photo" src="assets/sal-portret.jpg" alt="Portret van Sal, oprichter van Mowi" width="56" height="56" loading="lazy" decoding="async">
+            <p class="booking-host-text">U spreekt met <span class="booking-host-name">Sal</span>, oprichter van Mowi.</p>
+          </div>
+
           <div class="calendly-inline-widget" data-url="https://calendly.com/contact-mowi/30min?hide_gdpr_banner=1&embed_type=Inline&embed_domain=mowi.agency" style="min-width: 280px; height: 630px; margin-top: 1.5rem;"></div>
         </div>
       </div>
@@ -199,7 +209,7 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=20260811-14"></script>
+  <script src="js/main.js?v=20260815"></script>
   <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 </body>
 </html>

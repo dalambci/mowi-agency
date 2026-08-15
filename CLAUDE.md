@@ -132,10 +132,13 @@ retype credentials from scratch or falling back to a password:
   covers the header nav generally. Keep these in English; don't translate them to Dutch. Everything
   else on the site stays Dutch per the rule above — including the **footer**, whose nav still reads
   "Tarieven" on purpose. Header and footer are deliberately allowed to differ here.
-- Current header labels, after the 2026-08-11 rename: category labels **"Platform"** and
-  **"Agents"** (was "Automations"), items **"Email"** and **"Call"**. The two are shortened because
-  the "Agents" column label above them already supplies the noun — they read as "Email agent" /
-  "Call agent" in context, so repeating "agent" in the item name was redundant.
+- Current header labels: category labels **"Platform"** and **"Agents"** (was "Automations",
+  renamed 2026-08-11), items **"Email agent"** and **"Call agent"**. Those two item labels were
+  briefly shortened to just "Email" / "Call" on 2026-08-11, on the reasoning that the "Agents"
+  column label above them already supplied the noun — **superseded 2026-08-15 at Sal's request:
+  the full names are back.** Don't re-shorten them; the column heading isn't a reliable carrier
+  of the noun (it's easy to miss, and the labels have to survive being read on their own on
+  mobile, where the panel is a flat two-column grid).
 - **Product full names renamed 2026-08-12: "Email triage" → "E-mail agent", "Phone agent" →
   "Call agent"**, sitewide in body copy, headings, meta tags, demo widgets, the two legal pages
   (algemene-voorwaarden.html, privacyverklaring.html — Dutch compound forms "e-mailtriage-agent" /
