@@ -250,10 +250,13 @@ retype credentials from scratch or falling back to a password:
   triage agent page (`docs/agent-email-triage.html`) was written first and approved by the user
   as the template every other article copies — if in doubt about tone/structure/depth for a new
   or edited article, match that one.
-- The marketing footer has a dedicated **"Support"** column (`.footer-support`, its own grid
-  column in `.footer-inner` — 4 columns total: brand/nav/support/contact) that links to
-  `docs/index.html` as "Documentatie" — keep that link when editing any footer. It used to be a
-  flat item inside "Navigatie"; that changed 2026-08-03, don't move it back.
+- The marketing footer has a dedicated **"Resources"** column (`.footer-support` — the class
+  name kept its old "Support" spelling when the visible heading was renamed on 2026-08-15, to
+  avoid churning the CSS and every page; its own grid column in `.footer-inner` — 4 columns
+  total: brand/nav/resources/contact) that links to `docs/index.html` as "Documentatie" and to
+  `blog/` as "Blog" — keep both links when editing any footer. "Documentatie" used to be a flat
+  item inside "Navigatie" (moved out 2026-08-03) and "Blog" likewise (moved 2026-08-15); don't
+  move either back.
 
 ### Precision rules that produced this content — apply to every future edit
 - **Never invent a click-path.** Steps inside our own dashboard are grounded by reading the
