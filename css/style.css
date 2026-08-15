@@ -3147,41 +3147,6 @@ a.pill:hover {
   }
 }
 
-/* /contact only: the "who you'll actually meet" line inside the booking
-   card, sitting between the intro paragraph and the calendar itself. A
-   real face directly above a time-slot picker is the one place on the site
-   where a portrait does concrete work — the visitor is deciding whether to
-   give up half an hour to a stranger. */
-.booking-host {
-  display: flex;
-  align-items: center;
-  gap: 0.875rem;
-  margin-top: 1.5rem;
-}
-
-.booking-host-photo {
-  width: 3.5rem;
-  height: 3.5rem;
-  border-radius: 50%; /* deliberate exception to the square-corner rule: a portrait reads as a person, not a card */
-  object-fit: cover;
-  /* Photo's own backdrop is grey, so it would otherwise blur into the
-     card's white surface at this size — the hairline gives it an edge. */
-  border: 1px solid var(--color-border);
-  flex-shrink: 0;
-}
-
-.booking-host-text {
-  color: var(--color-text-muted);
-  font-size: 0.875rem;
-  line-height: 1.5;
-  margin: 0;
-}
-
-.booking-host-name {
-  color: var(--color-text);
-  font-weight: 600;
-}
-
 /* Shared task/result "card" look (reuses the site's own card language:
    white surface, hairline border, shadow-sm, square corners via
    --radius-md) and the small icon/check tokens inside them. Sized down for
