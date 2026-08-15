@@ -337,7 +337,6 @@ function footerHtml() {
         <a href="/trainingen">Trainingen</a>
         <a href="/pricing">Tarieven</a>
         <a href="/cases">Cases</a>
-        <a href="/contact">Contact sales</a>
       </nav>
 
       <nav class="footer-support" aria-label="Resourcesmenu">
@@ -348,6 +347,7 @@ function footerHtml() {
 
       <div class="footer-contact">
         <span class="footer-heading">Contact</span>
+        <a href="/contact">Contact sales</a>
         <a href="tel:+31853335800">085 333 5800</a>
         <a href="mailto:contact@mowi.agency">contact@mowi.agency</a>
       </div>

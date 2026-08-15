@@ -2872,6 +2872,19 @@ h3 {
   margin-top: 1rem;
 }
 
+/* .cta-alt is styled for a dark background (.cta-band elsewhere on the
+   site) — white text at low opacity. .blog-cta sits on the plain light
+   blog background, so without this override the link is white-on-white
+   and invisible (same bug already fixed once for .pricing-trial-cta,
+   see the comment above .card.card-featured .pricing-trial-cta). */
+.blog-cta .cta-alt {
+  color: var(--color-text-muted);
+}
+
+.blog-cta .cta-alt a {
+  color: var(--color-ink);
+}
+
 /* --- Blog index (listing page) --- */
 /* Same phantom-zone reasoning as .blog-breadcrumb above: a flat padding-top
    here produced a different VISIBLE gap per breakpoint (56px mobile vs 16px
