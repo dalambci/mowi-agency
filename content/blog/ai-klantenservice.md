@@ -7,7 +7,7 @@ updated:
 author: Sal
 tags: [klantenservice, agents, prijzen]
 video_id:
-draft: true
+draft: false
 sources: []
 faq:
   - q: "Is AI-klantenservice AVG-proof?"

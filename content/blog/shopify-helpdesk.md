@@ -7,7 +7,7 @@ updated:
 author: Sal
 tags: [email, webshop, agents]
 video_id:
-draft: true
+draft: false
 sources:
   - "[Gorgias — Pricing](https://www.gorgias.com/pricing)"
   - "[Zendesk — Prijzen](https://www.zendesk.nl/pricing/)"

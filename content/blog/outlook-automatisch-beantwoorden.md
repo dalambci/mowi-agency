@@ -7,7 +7,7 @@ updated:
 author: Sal
 tags: [email, outlook, agents]
 video_id:
-draft: true
+draft: false
 sources:
   - "[Automatische antwoorden instellen in Outlook — Microsoft Support](https://support.microsoft.com/nl-nl/outlook/mail/how-to-set-up-out-of-office-automatic-replies-in-outlook)"
   - "[Regels gebruiken om een afwezigheidsbericht te maken in Outlook — Microsoft Support](https://support.microsoft.com/nl-nl/office/regels-gebruiken-om-een-afwezigheidsbericht-te-maken-in-outlook-9f124e4a-749e-4288-a266-2d009686b403)"
