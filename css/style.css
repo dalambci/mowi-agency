@@ -2512,12 +2512,12 @@ h3 {
 }
 
 /* --- Footer -------------------------------------------------------------------------------- */
-/* Sits on the warm tint (same ground as .section-tint) so it reads as a
-   deliberate closing block instead of the page just running out. */
+/* White ground (per request — not the .section-tint wash): the border-top
+   hairline alone marks the footer off from the page. */
 .site-footer {
   margin-top: var(--section-gap);
   border-top: 1px solid var(--color-border);
-  background: var(--color-bg-tint);
+  background: var(--color-surface);
   padding-top: 4.5rem;
   padding-bottom: 2rem;
 }
