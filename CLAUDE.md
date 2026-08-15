@@ -130,8 +130,9 @@ retype credentials from scratch or falling back to a password:
   mega-menu (see `.nav-megamenu` in `css/style.css`) has always used English labels deliberately;
   the top-level nav item "Tarieven" was renamed to **"Pricing"** on that date, so the exception now
   covers the header nav generally. Keep these in English; don't translate them to Dutch. Everything
-  else on the site stays Dutch per the rule above — including the **footer**, whose nav still reads
-  "Tarieven" on purpose. Header and footer are deliberately allowed to differ here.
+  else on the site stays Dutch per the rule above. (The footer nav read "Tarieven" on purpose
+  until 2026-08-15, when the user's footer-regroup spec renamed it to "Pricing" — see the footer
+  rule further down.)
 - Current header labels: category labels **"Platform"** and **"Agents"** (was "Automations",
   renamed 2026-08-11), items **"Email agent"** and **"Call agent"**. Those two item labels were
   briefly shortened to just "Email" / "Call" on 2026-08-11, on the reasoning that the "Agents"
@@ -250,14 +251,16 @@ retype credentials from scratch or falling back to a password:
   triage agent page (`docs/agent-email-triage.html`) was written first and approved by the user
   as the template every other article copies — if in doubt about tone/structure/depth for a new
   or edited article, match that one.
-- The marketing footer's menu is **one flat unlabeled list** (`.footer-nav`, flowing in two
-  columns; `.footer-inner` is 3 zones on desktop: brand/nav/contact). The grouping labels
-  ("Navigatie"/"Support"→"Resources"/"Contact") existed until 2026-08-15 and were removed at
-  the user's request — don't reintroduce them. Link order is deliberate: Home, Agentic AI,
-  Contact sales (user wants it 3rd), Power BI, Trainingen, Tarieven, then the resources
-  cluster Documentatie/Blog/Cases at the end. Keep the "Documentatie" (→ `docs/index.html`)
-  and "Blog" links present in every footer. The unlabeled `.footer-contact` zone holds the
-  tel:/mailto: links.
+- The marketing footer's menu is **three unlabeled link groups** (`.footer-inner` is 4 zones
+  on desktop: brand | nav | resources | contact; on mobile the two link groups sit side by
+  side with brand and contact full-width). Heading labels ("Navigatie"/"Support"/"Contact")
+  existed until 2026-08-15 and were removed at the user's request — don't reintroduce them.
+  The grouping and order are the user's explicit spec (2026-08-15): group 1 Agentic AI /
+  Power BI / Trainingen / Pricing; group 2 Documentatie / Blog / Cases; group 3 (the
+  `.footer-contact` zone) tel / mailto / Contact sales. There is deliberately **no Home link**
+  (dropped from the user's spec) and the pricing item reads **"Pricing"**, overriding the
+  older footer-says-"Tarieven" note in the language rules above. Keep the "Documentatie"
+  (→ `docs/index.html`) and "Blog" links present in every footer.
 
 ### Precision rules that produced this content — apply to every future edit
 - **Never invent a click-path.** Steps inside our own dashboard are grounded by reading the
