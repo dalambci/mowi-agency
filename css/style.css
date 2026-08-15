@@ -2522,26 +2522,26 @@ h3 {
   padding-bottom: 2rem;
 }
 
-/* Mobile-first: a 2-across grid. Brand and the (wide) nav each span the full
-   width; Support and Contact — both short — share one row side by side, so
-   the footer never becomes one long single-file stack on phones. */
+/* Mobile-first: a 2-across grid where every zone spans the full width.
+   Desktop is three zones: brand | nav | contact. No grouping labels — one
+   flat menu list, per request 2026-08-15. */
 .footer-inner {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 2.5rem 1.5rem;
 }
 
-.footer-brand {
+.footer-brand, .footer-contact {
   grid-column: 1 / -1;
 }
 
 @media (min-width: 48rem) {
   .footer-inner {
-    grid-template-columns: 1.4fr 1.2fr 0.7fr 1fr;
+    grid-template-columns: 1.4fr 1.5fr 1fr;
     gap: 3rem 2rem;
   }
 
-  .footer-brand {
+  .footer-brand, .footer-contact {
     grid-column: auto;
   }
 }
@@ -2553,8 +2553,8 @@ h3 {
   line-height: 1.6;
 }
 
-/* Nav links flow in two columns at every size: 8 links become a compact 2×4
-   block instead of one tall column towering over Support/Contact. */
+/* Nav links flow in two columns at every size: 9 links become a compact
+   2-across block instead of one tall single column. */
 .footer-nav {
   grid-column: 1 / -1;
   display: grid;
@@ -2563,40 +2563,27 @@ h3 {
   align-content: start;
 }
 
-.footer-nav .footer-heading {
-  grid-column: 1 / -1;
-}
-
 @media (min-width: 48rem) {
   .footer-nav {
     grid-column: auto;
   }
 }
 
-.footer-support, .footer-contact {
+.footer-contact {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
 }
 
-.footer-nav a, .footer-support a, .footer-contact a, .footer-contact p {
+.footer-nav a, .footer-contact a, .footer-contact p {
   color: var(--color-gray-600);
   font-size: 0.9375rem;
   width: fit-content;
   transition: color 0.2s var(--ease-out);
 }
 
-.footer-nav a:hover, .footer-support a:hover, .footer-contact a:hover {
+.footer-nav a:hover, .footer-contact a:hover {
   color: var(--color-accent);
-}
-
-.footer-heading {
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-wide);
-  color: var(--color-ink);
-  margin-bottom: 0.75rem;
 }
 
 .footer-bottom {

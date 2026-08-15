@@ -330,24 +330,18 @@ function footerHtml() {
       </div>
 
       <nav class="footer-nav" aria-label="Footermenu">
-        <span class="footer-heading">Navigatie</span>
         <a href="/">Home</a>
         <a href="/agentic-ai">Agentic AI</a>
+        <a href="/contact">Contact sales</a>
         <a href="/power-bi-dashboards">Power BI</a>
         <a href="/trainingen">Trainingen</a>
         <a href="/pricing">Tarieven</a>
+        <a href="/docs/">Documentatie</a>
+        <a href="/blog/">Blog</a>
         <a href="/cases">Cases</a>
       </nav>
 
-      <nav class="footer-support" aria-label="Resourcesmenu">
-        <span class="footer-heading">Resources</span>
-        <a href="/docs/">Documentatie</a>
-        <a href="/blog/">Blog</a>
-      </nav>
-
       <div class="footer-contact">
-        <span class="footer-heading">Contact</span>
-        <a href="/contact">Contact sales</a>
         <a href="tel:+31853335800">085 333 5800</a>
         <a href="mailto:contact@mowi.agency">contact@mowi.agency</a>
       </div>

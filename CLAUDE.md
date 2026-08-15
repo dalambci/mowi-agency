@@ -250,13 +250,14 @@ retype credentials from scratch or falling back to a password:
   triage agent page (`docs/agent-email-triage.html`) was written first and approved by the user
   as the template every other article copies — if in doubt about tone/structure/depth for a new
   or edited article, match that one.
-- The marketing footer has a dedicated **"Resources"** column (`.footer-support` — the class
-  name kept its old "Support" spelling when the visible heading was renamed on 2026-08-15, to
-  avoid churning the CSS and every page; its own grid column in `.footer-inner` — 4 columns
-  total: brand/nav/resources/contact) that links to `docs/index.html` as "Documentatie" and to
-  `blog/` as "Blog" — keep both links when editing any footer. "Documentatie" used to be a flat
-  item inside "Navigatie" (moved out 2026-08-03) and "Blog" likewise (moved 2026-08-15); don't
-  move either back.
+- The marketing footer's menu is **one flat unlabeled list** (`.footer-nav`, flowing in two
+  columns; `.footer-inner` is 3 zones on desktop: brand/nav/contact). The grouping labels
+  ("Navigatie"/"Support"→"Resources"/"Contact") existed until 2026-08-15 and were removed at
+  the user's request — don't reintroduce them. Link order is deliberate: Home, Agentic AI,
+  Contact sales (user wants it 3rd), Power BI, Trainingen, Tarieven, then the resources
+  cluster Documentatie/Blog/Cases at the end. Keep the "Documentatie" (→ `docs/index.html`)
+  and "Blog" links present in every footer. The unlabeled `.footer-contact` zone holds the
+  tel:/mailto: links.
 
 ### Precision rules that produced this content — apply to every future edit
 - **Never invent a click-path.** Steps inside our own dashboard are grounded by reading the
