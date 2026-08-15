@@ -58,7 +58,7 @@ Bij twijfel — een boze klant, een uitzondering die niet in het patroon past �
 
 ## Praktijkvoorbeeld: onze eigen inbox
 
-[CHECK: vraag aan Sal — welk deel van de inkomende mail in Mowi's eigen inbox krijgt al automatisch een bruikbaar concept-antwoord klaar, en wat is een concreet voorbeeld van een mail die de agent zelfstandig heeft afgehandeld? Dit is het verplichte niet-generieke ingrediënt voor deze post, zie Rule 4.]
+Mowi draait de E-mail agent op de eigen inbox, verdeeld over twee herhalende categorieën: leads en klantvragen. Bij een lead checkt de agent meteen of alle informatie compleet is en stelt hij gelijk de volgende stap in het proces voor — welke informatie nog ontbreekt, of wat de logische vervolgactie is. Bij een klantvraag staat er een concept-antwoord klaar. Geen van beide gaat blind de deur uit: bij twijfel blijft het op concept staan voor een mens.
 
 [BEELD: screenshot van het dashboard met een klaarstaand concept-antwoord op een binnenkomende mail]
 

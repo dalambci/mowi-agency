@@ -61,8 +61,10 @@ Lees precies hoe dat werkt in [Wat gebeurt er als de e-mailagent een fout maakt?
 
 Dat hangt af van hoeveel werk het is en hoe repetitief. Bij veel terugkerend, voorspelbaar werk is een agent vaak goedkoper dan een nieuwe medewerker; bij werk dat veel uitzondering en beoordeling vraagt, blijft een mens de betere keuze. Lees de volledige vergelijking in [Is een AI-agent goedkoper dan een administratief medewerker?](/blog/ai-agent-of-medewerker)
 
-## Praktijkvoorbeeld: onze eigen inbox en de mening die de markt niet hardop zegt
+## Wat kan AI-klantenservice nog niet?
 
-[CHECK: vraag aan Sal — een getal uit Mowi's eigen inbox (bijv. aandeel mail dat automatisch een bruikbaar antwoord krijgt) plus een eerlijke mening die de markt liever niet hardop zegt (bijv. over chatbots als verkeerd startpunt voor de meeste mkb'ers, of over wat AI-klantenservice nu nog niet kan). Verplicht niet-generiek ingrediënt, zie Rule 4.]
+Waar de markt liever niet te veel over praat: AI-klantenservice kan vandaag nog geen accurate offerte zelfstandig opstellen. Te veel hangt af van het specifieke geval om dat aan een agent over te laten — dat blijft mensenwerk.
+
+Hetzelfde geldt voor het beoordelen van foto's van een situatie, bijvoorbeeld bij een schademelding of een werkbon. Bij Mowi's agents wordt dat automatisch geflagged voor beoordeling door een mens, in plaats van dat de agent zelf een oordeel velt. Niet omdat het onmogelijk is — maar omdat een verkeerd oordeel hier duurder is dan een half uur wachten op een mens.
 
 [BEELD: overzicht in het dashboard met meerdere actieve agents naast elkaar]

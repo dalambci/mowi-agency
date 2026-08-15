@@ -64,8 +64,10 @@ Voor een webshop die alle klantmail via die ene mailbox laat lopen, is dat vaak 
 
 Vooral snelheid: een standaardvraag krijgt binnen het vaste schema van de agent een concept- of automatisch antwoord, in plaats van dat hij wacht tot iemand de mailbox opent. Bij twijfel — een klacht, iets dat niet in het patroon past — gaat de mail naar een mens. Lees [Kan e-mail automatisch beantwoord worden zonder dat klanten het merken?](/blog/e-mail-automatisch-beantwoorden) en [Wat gebeurt er als de e-mailagent een fout maakt?](/blog/agent-maakt-een-fout)
 
-## Praktijkvoorbeeld
+## Hoe ziet dat er in de praktijk uit?
 
-[CHECK: vraag aan Sal — is er een webshop-klant of scanbezoek om een scène of getal uit te halen (bijv. aandeel WISMO-vragen in de mailbox, of tijdwinst per retourverzoek)? Zo niet: aggregaatcijfer uit Mowi's eigen inbox over het aandeel herhalende/standaardvragen. Verplicht niet-generiek ingrediënt, zie Rule 4.]
+Een herkenbaar patroon bij een kleine webshop: de mailbox stroomt vol met "waar blijft mijn bestelling" en "kan ik ruilen voor een andere maat" — steeds dezelfde soort vraag, net iets anders geformuleerd, vaak met het bestelnummer er al bij in de mail.
+
+Precies dat patroon maakt het geschikt om te automatiseren: de agent herkent het type vraag, koppelt hem aan de informatie die al in de mail staat, en zet een concept- of automatisch antwoord klaar. Wat overblijft voor de ondernemer is het deel dat er echt toe doet — de klacht, de uitzondering, de mail die om een menselijke beslissing vraagt.
 
 [BEELD: screenshot van een automatisch beantwoorde WISMO-vraag in het dashboard]
