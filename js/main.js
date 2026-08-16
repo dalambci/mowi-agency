@@ -1131,46 +1131,83 @@ if (agentFeedCard && agentFeedList && !prefersReducedMotion) {
 // look — once motion is confirmed allowed, so a JS failure or
 // reduced-motion leaves the honest static end state.
 function initHealthGauge(gaugeEl) {
-  const gaugeStroke = gaugeEl.querySelector(".gauge-stroke");
-  const gaugeText = gaugeEl.querySelector(".gauge-text");
+  const gaugeStroke = gaugeEl.querySelector(".gauge-arc");
+  const gaugeText = gaugeEl.querySelector(".gauge-score");
   if (!gaugeStroke || !gaugeText) return;
   const gaugeStart = Number(gaugeEl.dataset.gaugeStart || 0);
   const gaugeMax = Number(gaugeEl.dataset.gaugeMax || 100);
-  const GAUGE_CIRCUMFERENCE = 283; // 2 * PI * r(45), matches the SVG's r="45"
+  // Read the geometry off the SVG so it can't drift from the markup.
+  const GAUGE_CIRCUMFERENCE = 2 * Math.PI * parseFloat(gaugeStroke.getAttribute("r"));
+  const ARC_LENGTH = 0.75 * GAUGE_CIRCUMFERENCE; // 270° of track, as on the dashboard
   const gaugeSection = gaugeEl.closest("section");
   const healthSteps = gaugeSection ? Array.from(gaugeSection.querySelectorAll(".health-layout .step[data-health-at]")) : [];
   let gaugeAnimated = gaugeStart;
   let gaugeTarget = gaugeStart;
   let gaugeRaf = null;
 
-  const statusText = gaugeEl.querySelector(".gauge-status-text");
-  const statusDot = gaugeEl.querySelector(".gauge-status-dot");
+  const bandEl = gaugeEl.querySelector(".gauge-band");
 
-  function gaugeColor(value) {
-    if (value >= 90) return "#3e8e5e"; // deep green — the "op volle kracht" band; keep in sync with .gauge-stroke's static stroke and the .step::before chip
-    if (value >= 70) return "#69a86f"; // green
-    if (value >= 40) return "#d98a33"; // orange
-    return "#c94f44"; // red
+  // Bands and wording are the real dashboard's, copied from
+  // resources/views/components/health-gauge.blade.php so the marketing page
+  // can't drift from what a client actually sees. Keep in sync with the
+  // .gauge-arc / .gauge-band rules in css/style.css.
+  function gaugeBand(value) {
+    if (value >= 91) return "#1e681d"; // --gauge-green-dark
+    if (value >= 71) return "#4e9b4d"; // --gauge-green
+    if (value >= 41) return "#e07b1a"; // --gauge-orange
+    return "#dc2626"; // --gauge-red
   }
 
-  // Status label per band — same thresholds as gaugeColor, phrased as the
-  // dashboard would put it. The static HTML ships the top band's label.
+  // The score measures how well-TRAINED the agent is (kennisbank, profiel,
+  // koppelingen, actueel houden) — not whether it is live — so the labels
+  // are about training.
+  //
+  // The top band is worded "Optimaal getraind" here, where the dashboard
+  // currently says "Goed getraind" (71+) / "Perfect getraind" (100). That
+  // is a deliberate copy choice for the marketing page, not a copy of the
+  // component — if the dashboard's wording is brought in line later, this
+  // is the other half to change. The threshold stays 91 so the chip flips
+  // on exactly the same value as the arc's dark-green band, which is the
+  // one rule the dashboard component is explicit about: the chip must
+  // never contradict the arc.
   function gaugeStatus(value) {
-    if (value >= 90) return "Op volle kracht";
-    if (value >= 70) return "Bijna live…";
-    if (value >= 40) return "Wordt ingericht…";
-    return "Nog niet actief";
+    if (value >= 91) return ["Optimaal getraind", "success-dark"];
+    if (value >= 71) return ["Goed getraind", "success"];
+    if (value >= 41) return ["Goed op weg", "warn"];
+    return ["Nog te trainen", "neutral"];
   }
 
-  function renderGauge(value) {
-    gaugeText.textContent = Math.round(value);
-    gaugeStroke.setAttribute("stroke-dasharray", (value / 100) * GAUGE_CIRCUMFERENCE + " " + GAUGE_CIRCUMFERENCE);
-    gaugeStroke.style.stroke = gaugeColor(value);
-    if (statusText) statusText.textContent = gaugeStatus(value);
-    if (statusDot) statusDot.style.background = gaugeColor(value);
+  function updateHealthSteps(value) {
+    if (gaugeIsStacked()) {
+      const vh = window.innerHeight;
+      healthSteps.forEach((step) => {
+        const rect = step.getBoundingClientRect();
+        step.classList.toggle("is-health-done", rect.top + rect.height / 2 <= vh * GAUGE_STEP_LINE);
+      });
+      return;
+    }
     healthSteps.forEach((step) => {
       step.classList.toggle("is-health-done", value >= Number(step.dataset.healthAt));
     });
+  }
+
+  function renderGauge(value) {
+    const rounded = Math.round(value);
+    gaugeText.textContent = rounded;
+    // 270° of track, same as the dashboard's arc.
+    gaugeStroke.setAttribute(
+      "stroke-dasharray",
+      (ARC_LENGTH * (value / 100)).toFixed(2) + " " + GAUGE_CIRCUMFERENCE.toFixed(2)
+    );
+    gaugeStroke.style.stroke = gaugeBand(value);
+    // A round linecap still paints a dot at zero length — hide it instead.
+    gaugeStroke.style.opacity = rounded > 0 ? "1" : "0";
+    if (bandEl) {
+      const [label, cls] = gaugeStatus(value);
+      bandEl.textContent = label;
+      bandEl.className = "gauge-band " + cls;
+    }
+    updateHealthSteps(value);
   }
 
   function tickGauge() {
@@ -1186,11 +1223,49 @@ function initHealthGauge(gaugeEl) {
     gaugeRaf = requestAnimationFrame(tickGauge);
   }
 
+  // The dial's own travel drives the count on both layouts — it is the
+  // thing being watched, and measuring it rather than the whole cell
+  // matters, since the cell is much taller (title, padding, status chip)
+  // and would start the sweep well above the part anyone looks at.
+  const gaugeDial = gaugeEl.querySelector(".gauge-figure") || gaugeEl;
+
+  // `from`/`to` are fractions of viewport height: the dial's top passing
+  // `from` is progress 0, passing `to` is progress 1. A wider gap = more
+  // scroll distance for the same 0-100, i.e. a slower count. Both end
+  // while the dial is still well on screen, so the dark-green finish is
+  // read rather than glimpsed on the way out.
+  const GAUGE_SWEEP_DESKTOP = { from: 0.85, to: 0.4 };
+  const GAUGE_SWEEP_MOBILE = { from: 0.85, to: 0.35 };
+  // 48rem — the same breakpoint at which .health-layout goes two-column.
+  const GAUGE_MOBILE_MAX = 768;
+
+  // Stacked, the steps tick on their OWN position instead of on the gauge
+  // value: a step is done once its middle has passed this height. Tying
+  // them to the gauge only works when both are on screen together, which
+  // side by side they are and stacked they never are — the panel is ~920px
+  // in an ~845px viewport with the dial ~300px above the steps, so any
+  // single sweep either ticks the steps down at the bottom edge or finishes
+  // the gauge off-screen. Driving them separately gives each its own
+  // moment, and because they are never both visible on a phone, nothing
+  // ever looks out of sync.
+  const GAUGE_STEP_LINE = 0.55;
+
+  function gaugeIsStacked() {
+    return window.innerWidth <= GAUGE_MOBILE_MAX;
+  }
+
   function onGaugeScroll() {
-    const rect = gaugeEl.getBoundingClientRect();
+    // Steps first, and unconditionally: stacked they keep ticking after the
+    // dial has left the screen, by which point the gauge's own loop has
+    // stopped.
+    updateHealthSteps(gaugeAnimated);
+    const sweep = gaugeIsStacked() ? GAUGE_SWEEP_MOBILE : GAUGE_SWEEP_DESKTOP;
+    const rect = gaugeDial.getBoundingClientRect();
     const vh = window.innerHeight;
     if (rect.bottom < 0 || rect.top > vh) return; // off-screen: hold last value
-    const progress = Math.min(1, Math.max(0, 1 - (rect.top - vh * 0.1) / (vh * 0.9)));
+    const from = vh * sweep.from;
+    const to = vh * sweep.to;
+    const progress = Math.min(1, Math.max(0, (from - rect.top) / (from - to)));
     gaugeTarget = Math.round(gaugeStart + progress * (gaugeMax - gaugeStart));
     if (gaugeRaf === null) gaugeRaf = requestAnimationFrame(tickGauge);
   }

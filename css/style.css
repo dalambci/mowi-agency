@@ -4038,9 +4038,9 @@ a.pill:hover {
    logic), framed as the dashboard's agent-healthscore; each .step carries
    data-health-at="25|50|75|90" and .is-health-done is toggled both ways as
    the eased value crosses it. The plain HTML ships the finished state —
-   ring full at 100, deep-green stroke, every chip a green check, status
-   "Op volle kracht" — so no-JS and reduced-motion visitors see a complete,
-   honest section; JS only rewinds it and animates it forward. */
+   arc full at 100 in the dark-green band, every step a black check, chip
+   reading "Optimaal getraind" — so no-JS and reduced-motion visitors see a
+   complete, honest section; JS only rewinds it and animates it forward. */
 .health-layout {
   border: 1px solid var(--color-border);
   background: var(--color-white);
@@ -4061,7 +4061,10 @@ a.pill:hover {
   align-items: center;
   justify-content: center;
   padding: 2.5rem;
-  background: var(--color-bg-tint);
+  /* Solid, not the translucent --color-bg-tint: the gauge notches have to
+     paint this exact colour to cut through the track (see .gauge-notch). */
+  --gauge-cell-bg: #f6f5f4;
+  background: var(--gauge-cell-bg);
   border-bottom: 1px solid var(--color-border);
 }
 
@@ -4073,66 +4076,101 @@ a.pill:hover {
   }
 }
 
-.health-gauge svg {
+/* The gauge itself is a faithful copy of the real dashboard component
+   (mowi-dashboard resources/views/components/health-gauge.blade.php +
+   .health-gauge rules in its dashboard.css): a 270° arc with the gap at
+   the bottom, notches cut through the track at each band threshold, the
+   score as "N/100", and the status chip nestled in that bottom gap. It's
+   showing prospects the actual thing they'll get, so the geometry, the
+   band colours and the band wording are copied rather than invented —
+   values below are the dashboard's light-theme tokens (--gauge-*,
+   --success-*, --warn-*, --neutral-*). Bands and labels are duplicated in
+   js/main.js's gaugeBand()/gaugeStatus(); change both together, and keep
+   them matching the blade component's thresholds. */
+/* Same wording the dashboard puts above this gauge (its card-head reads
+   "Agent-gezondheid"), so the page names the thing exactly as a client
+   will see it named. */
+.health-gauge .gauge-title {
+  margin-bottom: 1.25rem;
+  text-align: center;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.health-gauge .gauge-figure {
+  position: relative;
   width: 11rem;
 }
 
 @media (min-width: 48rem) {
-  .health-gauge svg {
+  .health-gauge .gauge-figure {
     width: 13rem;
   }
 }
 
-.health-gauge .gauge-bg {
-  fill: none;
-  stroke: var(--color-border);
-  stroke-width: 8;
+.health-gauge svg {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
-.health-gauge .gauge-stroke {
+.health-gauge .gauge-track {
   fill: none;
-  stroke: #3e8e5e;
-  stroke-width: 8;
+  stroke: #ede9e5; /* dashboard --muted-bg-hover */
+  stroke-width: 10;
+  stroke-linecap: round;
+}
+
+.health-gauge .gauge-arc {
+  fill: none;
+  stroke: #1e681d; /* dashboard --gauge-green-dark; JS swaps per band */
+  stroke-width: 10;
   stroke-linecap: round;
   transition: stroke 0.3s ease-out;
 }
 
-.health-gauge .gauge-text {
-  font-size: 30px;
-  font-weight: 500;
+/* Notches read as segment dividers by cutting the cell's own background
+   through the track — so this must stay the same colour as the cell. */
+.health-gauge .gauge-notch {
+  stroke: var(--gauge-cell-bg);
+  stroke-width: 2.5;
+}
+
+.health-gauge .gauge-score {
+  font-size: 27px;
+  font-weight: 700;
   fill: var(--color-text);
-  font-family: monospace;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
 }
 
-.health-gauge .gauge-caption {
-  margin-top: 1rem;
-  text-align: center;
-  font-size: 0.8125rem;
+.health-gauge .gauge-max {
+  font-size: 12.5px;
   font-weight: 600;
-  letter-spacing: var(--tracking-wide);
-  text-transform: uppercase;
-  color: var(--color-text-muted);
+  fill: var(--color-text-muted);
+  letter-spacing: 0;
 }
 
-/* Live status line under the caption — dot + label follow the same color
-   bands as the ring (text per band lives in js/main.js's gaugeStatus()). */
-.health-gauge .gauge-status {
-  margin-top: 0.375rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.9375rem;
+.health-gauge .gauge-band {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 0.6875rem;
   font-weight: 600;
+  padding: 2px 9px;
+  border-radius: var(--radius-full); /* 0 site-wide — square, like every other chip here */
 }
 
-.health-gauge .gauge-status-dot {
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: var(--radius-full); /* radius tokens are 0 site-wide, so this stays square like every other dot-ish accent */
-  background: #3e8e5e;
-  flex-shrink: 0;
-  transition: background 0.3s ease-out;
-}
+/* Top band (91+) is filled with the arc's own dark green rather than the
+   pale success wash, so "Optimaal getraind" reads as the step up from
+   "Goed getraind" instead of looking identical to it. */
+.health-gauge .gauge-band.success-dark { background: #1e681d; color: #ffffff; }
+.health-gauge .gauge-band.success { background: #ebf7ea; color: #1e681d; }
+.health-gauge .gauge-band.warn { background: #fbe7c6; color: #7a4a00; }
+.health-gauge .gauge-band.neutral { background: #f5f2f0; color: #383633; }
 
 /* Steps cell: vertical checklist. Reuses .steps/.step so the CSS counter
    comes along; the number chip doubles as the checkbox. */
@@ -4169,8 +4207,12 @@ a.pill:hover {
   font-size: 0.9375rem;
   font-weight: 700;
   color: var(--color-white);
-  background: #3e8e5e; /* keep in sync with the >= 90 band in js/main.js's gaugeColor() */
-  border: 1px solid #3e8e5e;
+  /* Black, not the gauge's green: the gauge owns the colour scale (red ->
+     dark green), so keeping the checks neutral stops the two from reading
+     as one traffic-light system and keeps the ticks legible against the
+     tinted cell. */
+  background: var(--color-text);
+  border: 1px solid var(--color-text);
   letter-spacing: normal;
   transition: background 0.3s var(--ease-out), color 0.3s var(--ease-out), border-color 0.3s var(--ease-out);
 }
@@ -4183,9 +4225,9 @@ a.pill:hover {
   border-color: var(--color-border);
 }
 
-/* Connector rail between chips: green up to the last completed step, border
-   gray beyond it. Runs from the chip's bottom into the 1.75rem gap so it
-   meets the next chip. */
+/* Connector rail between chips: follows the chips (black up to the last
+   completed step, border gray beyond it). Runs from the chip's bottom into
+   the 1.75rem gap so it meets the next chip. */
 .health-layout .step::after {
   content: "";
   position: absolute;
@@ -4193,7 +4235,7 @@ a.pill:hover {
   top: 2.25rem;
   bottom: -1.75rem;
   width: 1px;
-  background: #3e8e5e;
+  background: var(--color-text);
   transition: background 0.3s var(--ease-out);
 }
 
@@ -4315,10 +4357,26 @@ a.pill:hover {
   align-items: center;
 }
 
+/* Visuals on the LEFT, copy on the right — mirrored from the hero directly
+   above it, which is copy-left/visual-right; running the same arrangement
+   twice made the two sections read as one repeated block. Done with grid
+   placement rather than DOM order so the heading still comes first in the
+   markup: on mobile this collapses to one column, where heading-then-visual
+   is the right reading order (and the right order for a screen reader). */
 @media (min-width: 64rem) {
   .concreet-layout {
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
     gap: 3rem;
+  }
+
+  .concreet-layout > .section-head {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .concreet-layout > .concreet-visuals {
+    grid-column: 1;
+    grid-row: 1;
   }
 }
 

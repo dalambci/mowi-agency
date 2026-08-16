@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260817-9" />
+  <link rel="stylesheet" href="css/style.css?v=20260818-7" />
   <link rel="icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="shortcut icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260804-3" />
@@ -368,34 +368,44 @@
     <!-- ===== Werkwijze =====
          Gauge-driven self-serve section: the agent-health gauge (see
          js/main.js's initHealthGauge and css/style.css's .health-gauge /
-         .health-layout) fills red -> orange -> green -> deep green as the
-         visitor scrolls, and each step checks off as the score passes its
-         data-health-at threshold — the last one landing together with the
-         deep-green 90+ band. The plain HTML below is the finished state
-         (gauge 100, all steps full opacity); JS only rewinds and animates
-         it when motion is allowed. -->
+         .health-layout) fills through the dashboard's own colour bands as
+         the visitor scrolls, and each step checks off as the score passes
+         its data-health-at threshold. The gauge is a copy of the real
+         dashboard component, so its bands and wording must keep matching
+         it — see the note on .health-gauge in css/style.css. The plain
+         HTML below is the finished state (gauge 100, all steps full
+         opacity); JS only rewinds and animates it when motion is allowed. -->
     <section class="container section">
       <div class="section-head center" data-reveal>
         <span class="eyebrow">Werkwijze</span>
         <h2>Klein beginnen, meteen resultaat.</h2>
         <p class="lede" style="margin-top: 1rem;">
-          Alles hieronder doet u zelf, zonder implementatietraject. Eenmaal live bewaakt de agent zijn
-          eigen gezondheid — vanaf 90+ presteert hij op volle kracht.
+          Alles hieronder doet u zelf, zonder implementatietraject. In uw dashboard ziet u precies hoe
+          goed uw agent getraind is — hoe vollediger zijn kennisbank en bedrijfsprofiel, hoe scherper
+          zijn antwoorden.
         </p>
       </div>
 
       <div class="health-layout" data-reveal>
         <div class="health-gauge" data-gauge data-gauge-start="0" data-gauge-max="100">
-          <svg viewBox="0 0 100 100" role="img" aria-label="Agent health: 100 van 100">
-            <circle class="gauge-bg" cx="50" cy="50" r="45" />
-            <circle class="gauge-stroke" cx="50" cy="50" r="45" transform="rotate(-90 50 50)" stroke-dasharray="283 283" />
-            <text class="gauge-text" x="50" y="60" text-anchor="middle">100</text>
-          </svg>
-          <p class="gauge-caption">Agent health</p>
-          <p class="gauge-status">
-            <span class="gauge-status-dot" aria-hidden="true"></span>
-            <span class="gauge-status-text">Op volle kracht</span>
-          </p>
+          <!-- Geometry copied from the dashboard's health-gauge component:
+               270° arc (gap at the bottom), notches at the 40/70/90 band
+               thresholds, score as "N/100", status chip in the gap. Static
+               markup is the finished state; js/main.js scroll-drives it. -->
+          <p class="gauge-title">Agent-gezondheid</p>
+          <div class="gauge-figure">
+            <svg viewBox="0 0 120 120" role="img" aria-label="Agent health: 100 van 100 — optimaal getraind">
+              <circle class="gauge-track" cx="60" cy="60" r="52.5"
+                      stroke-dasharray="247.40 329.87" transform="rotate(135 60 60)" />
+              <circle class="gauge-arc" cx="60" cy="60" r="52.5"
+                      stroke-dasharray="247.40 329.87" transform="rotate(135 60 60)" />
+              <line class="gauge-notch" x1="39.34" y1="19.46" x2="32.99" y2="6.99" />
+              <line class="gauge-notch" x1="96.81" y1="33.26" x2="108.14" y2="25.03" />
+              <line class="gauge-notch" x1="103.27" y1="74.06" x2="116.59" y2="78.39" />
+              <text x="60" y="58" text-anchor="middle" dominant-baseline="central"><tspan class="gauge-score">100</tspan><tspan class="gauge-max">/100</tspan></text>
+            </svg>
+            <span class="gauge-band success-dark">Optimaal getraind</span>
+          </div>
         </div>
 
         <div class="steps">
@@ -411,7 +421,7 @@
             <h3>Proefdraaien</h3>
             <p>Bekijk eerst wat de agent zou doen, zonder dat er iets wordt verstuurd.</p>
           </div>
-          <div class="step" data-health-at="90">
+          <div class="step" data-health-at="100">
             <h3>Activeren &amp; uitbreiden</h3>
             <p>Tevreden? Zet de agent aan en breid uit naar de Call agent zodra die live is.</p>
           </div>
@@ -565,6 +575,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=20260817-3"></script>
+  <script src="js/main.js?v=20260818-9"></script>
 </body>
 </html>
