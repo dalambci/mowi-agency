@@ -1068,7 +1068,12 @@ h3 {
        strip the cursor could pass through while moving from the trigger
        down into the panel, dropping the :hover and closing it mid-move. */
     top: 100%;
-    left: 0;
+    /* -1px, not 0: the trigger above pulls 1px left of its grid cell so its
+       border shares a pixel with the neighbouring cell's (see its margin in
+       the 48rem block). left:0 anchors to the CELL, which left the panel's
+       left border one pixel right of the trigger's, so the two edges didn't
+       line up. This follows the trigger instead. */
+    left: -1px;
     z-index: 60;
     display: flex;
     /* Same background, border weight/color and square corners as
