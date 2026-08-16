@@ -1725,11 +1725,10 @@ h3 {
    instead, driven by a --char-delay custom property per <span>. */
 /* Both .hero-badge-reveal and .hero-reveal only go invisible once their
    ancestor carries .reveal-armed — added by js/main.js right before it
-   starts observing, same safety reasoning as [data-reveal].reveal-armed
-   above. Without that gate, this content (the homepage's actual headline
-   and CTA) would be permanently invisible if js/main.js ever failed to
-   load — worse than any other reveal on the site, since it's the first
-   thing every visitor sees. */
+   starts observing. Without that gate, this content (the homepage's actual
+   headline and CTA) would be permanently invisible if js/main.js ever
+   failed to load — worse than most content on the site, since it's the
+   first thing every visitor sees. */
 .hero-frame-content.reveal-armed .hero-badge-reveal {
   opacity: 0;
   transform: scale(0.5);
@@ -1989,13 +1988,6 @@ h3 {
 
 .logo-track.reverse {
   animation-name: marquee-reverse;
-}
-
-/* Pause the loop on hover/focus so a curious visitor can read a tile —
-   pure CSS, no JS needed. */
-.logo-marquee:hover .logo-track,
-.logo-marquee:focus-within .logo-track {
-  animation-play-state: paused;
 }
 
 /* -33.333% = exactly one set-width out of the track's 3 duplicated sets
@@ -2347,33 +2339,6 @@ h3 {
   color: var(--color-gray-600);
   padding-bottom: 1.5rem;
   max-width: 40rem;
-}
-
-/* --- Scroll reveal ---------------------------------------------------------------------
-   Deliberately subtle: a short rise + fade, not a slide or a bounce — should
-   read as "the page is calm and just loaded in," never as a flourish.
-   [data-reveal] itself carries NO hidden state — only .reveal-armed does,
-   and js/main.js only adds .reveal-armed once it has actually set up the
-   IntersectionObserver that will reveal it again. If js/main.js fails to
-   load/run for any reason, .reveal-armed never gets added, so content just
-   stays at its normal, fully-visible default — it can never get stuck
-   invisible the way a bare `[data-reveal] { opacity: 0 }` default would. */
-[data-reveal].reveal-armed {
-  opacity: 0;
-  transform: translateY(16px);
-  /* A short delay before the transition starts (not just a longer
-     duration) is what makes this actually noticeable — without it, the
-     reveal fires the instant an element crosses the IntersectionObserver
-     threshold, which is often while it's still mid-scroll, so it reads as
-     "just appeared" rather than as a visible animation. Duration bumped
-     from 0.45s to 0.7s (delay unchanged) since the fade/rise itself was
-     still over too quickly to actually read as motion. */
-  transition: opacity 0.7s var(--ease-out) 0.15s, transform 0.7s var(--ease-out) 0.15s;
-}
-
-[data-reveal].is-visible {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 /* --- CTA band ---------------------------------------------------------------------------- */
@@ -4001,9 +3966,15 @@ a.pill:hover {
   max-width: 9.5rem; /* defensive cap only — no current logo's aspect ratio comes close */
 }
 
-.koppelt-marquee .row-a .logo-track { animation-duration: 44s; }
-.koppelt-marquee .row-b .logo-track { animation-duration: 52s; }
-.koppelt-marquee .row-c .logo-track { animation-duration: 47s; }
+/* These durations target ~40px/sec per row (matching the homepage marquee's
+   own speed) — recalculated from each row's real one-set pixel width now
+   that tiles are height-normalized (var, not the old fixed 6.5rem box).
+   Durations picked when tiles had a fixed width went stale and drifted the
+   pace down to ~26-29px/sec once real (often narrower) logo widths replaced
+   that fixed box — recompute these if row content changes again. */
+.koppelt-marquee .row-a .logo-track { animation-duration: 29s; }
+.koppelt-marquee .row-b .logo-track { animation-duration: 37s; }
+.koppelt-marquee .row-c .logo-track { animation-duration: 34s; }
 
 /* --- Agent-health bento panel (homepage Werkwijze + agentic-ai Aanpak) ------
    One bordered frame in the vuewer bento language (same family as
@@ -4265,36 +4236,10 @@ a.pill:hover {
   font-weight: 600;
 }
 
-/* --- Bewijs: before/after number emphasis ----------------------------------
-   Reuses the existing [data-reveal]/.reveal-armed/.is-visible mechanism
-   already on this card (see the base "Scroll reveal" rules earlier in this
-   file) instead of adding a second observer — the hidden "before-reveal"
-   state below is only ever applied once .reveal-armed is present, matching
-   this site's own established safety rule so the numbers can never get
-   stuck invisible if js/main.js fails to run. */
 .case-after {
   display: inline-block;
   color: var(--color-accent);
   font-weight: 800;
-}
-
-[data-reveal].reveal-armed .case-after {
-  opacity: 0.35;
-  transform: scale(0.82);
-  transition: opacity 0.5s var(--ease-out) 0.3s, transform 0.5s var(--ease-bounce) 0.3s;
-}
-
-[data-reveal].is-visible .case-after {
-  opacity: 1;
-  transform: scale(1);
-}
-
-.case-before {
-  transition: opacity 0.4s var(--ease-out) 0.3s;
-}
-
-[data-reveal].is-visible .case-before {
-  opacity: 0.55;
 }
 
 .case-arrow {
@@ -4302,30 +4247,8 @@ a.pill:hover {
   margin-inline: 0.25rem;
 }
 
-/* --- Aanpak: step numbers pop in on scroll ---------------------------------
-   The connecting line that used to sit above these (stroke-dashoffset
-   "progress bar") was removed 2026-08-06 per request — just the numbers
-   popping in now, staggered, gated by the same reveal-armed/is-visible pair
-   as everywhere else on the site so they can never get stuck invisible. */
 .steps-wrap {
   position: relative;
-}
-
-@media (min-width: 48rem) {
-  .step[data-reveal].reveal-armed::before {
-    opacity: 0;
-    transform: scale(0.4);
-    transition: opacity 0.4s var(--ease-out), transform 0.4s var(--ease-bounce);
-  }
-
-  .step[data-reveal].is-visible::before {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  .steps .step:nth-child(2)::before { transition-delay: 0.2s; }
-  .steps .step:nth-child(3)::before { transition-delay: 0.4s; }
-  .steps .step:nth-child(4)::before { transition-delay: 0.6s; }
 }
 
 /* --- Concreet section: text + visuals layout -------------------------------

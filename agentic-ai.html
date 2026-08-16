@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260816-7" />
+  <link rel="stylesheet" href="css/style.css?v=20260817-4" />
   <link rel="icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="shortcut icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260804-3" />
@@ -262,43 +262,6 @@
       </div>
     </section>
 
-    <!-- ===== Mogelijkheden ===== -->
-    <section class="section section-tint">
-      <div class="container">
-        <div class="section-head center" data-reveal>
-          <span class="eyebrow">Mogelijkheden</span>
-          <h2>Wat uw agents zelfstandig doen.</h2>
-        </div>
-
-        <div class="grid grid-3">
-          <div class="card" data-reveal>
-            <h3>Klantvragen beantwoorden</h3>
-            <p>Voor elke klantvraag staat direct een conceptantwoord klaar, in uw eigen toon.</p>
-          </div>
-          <div class="card" data-reveal>
-            <h3>Orderstatus opzoeken</h3>
-            <p>Gekoppeld aan uw webshop zoekt de agent de bestelling op en verwerkt de status in het antwoord.</p>
-          </div>
-          <div class="card" data-reveal>
-            <h3>Telefoon aannemen</h3>
-            <p>De Call agent neemt op, beantwoordt vragen over uw bedrijf en noteert terugbelverzoeken — ook buiten kantoortijden.</p>
-          </div>
-          <div class="card" data-reveal>
-            <h3>Klanten herkennen</h3>
-            <p>Herkent de afzender in uw CRM en gebruikt die context in het antwoord. E-mail en telefoon delen één geheugen.</p>
-          </div>
-          <div class="card" data-reveal>
-            <h3>Mailbox sorteren</h3>
-            <p>Elke mail in de juiste map, in de categorieën die u zelf inricht.</p>
-          </div>
-          <div class="card" data-reveal>
-            <h3>Afspraken voorstellen</h3>
-            <p>Kijkt in uw agenda en zet een afspraakvoorstel klaar op momenten dat u echt beschikbaar bent.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- ===== Mowi koppelt met =====
          3-row counter-scrolling logo marquee (top + bottom rows move right,
          middle row moves left) — reuses the homepage's pure-CSS
@@ -308,9 +271,13 @@
          Wix Bookings share wix.svg, Lightspeed eCom and Lightspeed Restaurant
          share lightspeed.svg — same parent brand, same mark. A visually-hidden
          list below keeps every name crawlable and accessible, since the
-         marquee rows themselves are aria-hidden. -->
-    <section class="container section" style="padding-block: 2.5rem;">
-      <p class="koppelt-label" data-reveal>Mowi koppelt met</p>
+         marquee rows themselves are aria-hidden. section-tint (bordered white
+         panel) gives this section contrast against Concreet before it and
+         Aanpak after it — see the section-background alternation note on
+         Aanpak below. -->
+    <section class="section section-tint">
+      <div class="container" style="padding-block: 2.5rem;">
+      <p class="koppelt-label" data-reveal>Koppel agents met 1 druk op de knop</p>
 
       <div class="koppelt-marquee" data-reveal>
         <div class="logo-marquee row-a" aria-hidden="true">
@@ -434,49 +401,15 @@
 
       <p class="sr-only">Mowi koppelt met: Gmail, Outlook / Microsoft 365, Google Agenda, WooCommerce, Shopify, Lightspeed eCom, CCV Shop, Shopware, Magento, Mijnwebwinkel, bol.com, Wix, PrestaShop, Exact Online, Pipedrive, Teamleader, HubSpot, AFAS, Moneybird, Zoho CRM, Odoo, Formitable / Zenchef, Guestplan, TheFork, Lightspeed Restaurant, Mews, Cubilis, SiteMinder, Salonized, Microsoft Bookings, Calendly, Wix Bookings.</p>
 
-      <p class="koppelt-note" data-reveal>Zelf aan te sluiten vanuit het dashboard. Ontbreekt uw systeem? Dan bouwen wij de koppeling voor u.</p>
-    </section>
-
-    <!-- ===== Bewijs ===== -->
-    <section class="container section">
-      <div class="section-head" data-reveal>
-        <span class="eyebrow">Controle</span>
-        <h2>U ziet alles. Er gaat niets vanzelf de deur uit.</h2>
-      </div>
-
-      <!-- Flipped hierarchy vs. a typical tag+detail card: the claim itself
-           is the big line (reuses .case-result as-is), one short supporting
-           line follows (.muted .text-sm) — scannable in one pass instead of
-           needing the full sentence to land the point. -->
-      <div class="grid grid-3">
-        <div class="case-card" data-reveal>
-          <p class="case-result">Test op uw laatste 20 e-mails</p>
-          <p class="muted text-sm">U beoordeelt elk resultaat vóór livegang.</p>
-        </div>
-        <div class="case-card" data-reveal>
-          <p class="case-result">Standaard alleen concepten</p>
-          <p class="muted text-sm">Auto-versturen zet u zelf aan, per categorie.</p>
-        </div>
-        <div class="case-card" data-reveal>
-          <p class="case-result">Storingen direct zichtbaar</p>
-          <p class="muted text-sm">Onder 'Needs attention' in uw dashboard.</p>
-        </div>
-        <div class="case-card" data-reveal>
-          <p class="case-result">Elke actie terug te lezen</p>
-          <p class="muted text-sm">Volledige historie in het dashboard.</p>
-        </div>
-        <div class="case-card" data-reveal>
-          <p class="case-result">Zelf bij te sturen</p>
-          <p class="muted text-sm">FAQ, toon en regels — direct actief.</p>
-        </div>
-        <div class="case-card" data-reveal>
-          <p class="case-result">Opzeggen is één pagina</p>
-          <p class="muted text-sm">Geen jaarcontract, maandelijks opzegbaar.</p>
-        </div>
+      <p class="koppelt-note" data-reveal>Ontbreekt uw systeem? Dan bouwen wij de koppeling voor u.</p>
       </div>
     </section>
 
     <!-- ===== Aanpak =====
+         Plain background (not section-tint): alternates with the tinted
+         marquee section above it, and .health-layout already carries its
+         own border/white-card styling below, so a section-tint wrapper here
+         would just double up the card look.
          Gauge-driven self-serve section, same component as the homepage's
          Werkwijze: the agent-health gauge (js/main.js initHealthGauge,
          css/style.css .health-gauge / .health-layout) fills red -> orange
@@ -484,17 +417,8 @@
          score passes its data-health-at threshold. Plain HTML below is the
          finished state; JS only rewinds and animates it when motion is
          allowed. -->
-    <section class="section section-tint">
+    <section class="section">
       <div class="container">
-        <div class="section-head center" data-reveal>
-          <span class="eyebrow">Aanpak</span>
-          <h2>Vandaag aan te sluiten, zonder implementatietraject.</h2>
-          <p class="lede" style="margin-top: 1rem;">
-            Vier stappen die u zelf doorloopt. Daarna bewaakt de agent zijn eigen gezondheid — vanaf 90+
-            presteert hij op volle kracht.
-          </p>
-        </div>
-
         <div class="health-layout" data-reveal>
           <div class="health-gauge" data-gauge data-gauge-start="0" data-gauge-max="100">
             <svg viewBox="0 0 100 100" role="img" aria-label="Agent health: 100 van 100">
@@ -542,8 +466,12 @@
       </div>
     </section>
 
-    <!-- ===== FAQ ===== -->
-    <section class="container section" style="max-width: 48rem;">
+    <!-- ===== FAQ =====
+         section-tint continues the alternation started at the marquee
+         section (tint / plain / tint), so this doesn't blend into the
+         plain Aanpak section right above it. -->
+    <section class="section section-tint">
+      <div class="container" style="max-width: 48rem;">
       <div class="section-head" data-reveal>
         <span class="eyebrow">Veelgestelde vragen</span>
         <h2>Nog vragen?</h2>
@@ -595,6 +523,7 @@
             <p>Uw e-mail blijft in uw eigen mailbox; de agent leest wat nodig is voor de taak. Een verwerkersovereenkomst is op aanvraag beschikbaar.</p>
           </div>
         </div>
+      </div>
       </div>
     </section>
 
@@ -653,6 +582,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=20260816-4"></script>
+  <script src="js/main.js?v=20260817-2"></script>
 </body>
 </html>

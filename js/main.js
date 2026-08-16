@@ -1,8 +1,7 @@
 /* Mowi — shared vanilla JS behaviour. No framework, no build step.
-   Two of the interactions requested for this site (the marquee pause-on-
-   hover and smooth-scroll to anchors like #afspraak) are pure CSS —
-   `animation-play-state` and `scroll-behavior: smooth` — and don't need any
-   JS. See css/style.css for those. */
+   One of the interactions requested for this site (smooth-scroll to
+   anchors like #afspraak) is pure CSS — `scroll-behavior: smooth` — and
+   doesn't need any JS. See css/style.css for that. */
 
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -197,36 +196,6 @@ function syncMegaMenuColumnHeights() {
 
 syncMegaMenuColumnHeights();
 window.addEventListener("resize", syncMegaMenuColumnHeights);
-
-// --- Scroll-reveal animations -----------------------------------------------
-// Elements with [data-reveal] fade/rise in once they enter the viewport.
-// The animation itself (timing, distance) lives in css/style.css — this just
-// flips the class at the right moment. Content only becomes invisible once
-// .reveal-armed is added here — if this script never runs, elements simply
-// never leave their normal, visible default (see the .reveal-armed comment
-// in css/style.css for why the hiding is opt-in, not opt-out).
-const revealTargets = document.querySelectorAll("[data-reveal]");
-
-if (revealTargets.length && "IntersectionObserver" in window) {
-  revealTargets.forEach((el) => el.classList.add("reveal-armed"));
-
-  const revealObserver = new IntersectionObserver(
-    (entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
-  );
-
-  revealTargets.forEach((el) => revealObserver.observe(el));
-} else {
-  // No IntersectionObserver support (or nothing to reveal): show everything.
-  revealTargets.forEach((el) => el.classList.add("is-visible"));
-}
 
 // --- Hero entrance animation -------------------------------------------------
 // Copied 1:1 from vuewer.com's own hero: fetched their live HTML + compiled
@@ -979,7 +948,6 @@ const agentFeedList = document.getElementById("agentFeedList");
 
 if (agentFeedCard && agentFeedList && !prefersReducedMotion) {
   const SCRIPT = [
-    { text: "E-mail agent — 14 mails gesorteerd, 9 concepten klaargezet", status: "done" },
     { text: "Webshop — orderstatus opgezocht, antwoord klaargezet", status: "done" },
     {
       text: "Needs attention — koppeling verlopen",
