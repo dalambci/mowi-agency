@@ -522,6 +522,104 @@ function pauseWhenOffscreen(el, onEnter, onLeave) {
   ).observe(el);
 }
 
+// --- Logo marquees ------------------------------------------------------------
+// The CSS keyframes (see .logo-track) are the baseline: with no JS the rows
+// still scroll, so this is an upgrade, not a dependency. When JS is available
+// it takes the animation over and drives the transform from elapsed time.
+//
+// Why: a long-running composited CSS animation can desync from the main
+// thread and, when it re-syncs, snap straight to where it "should" be — a
+// single-frame sideways jump of arbitrary size (observed in the wild as a
+// row leaping ~5 logo-widths at once, roughly half a loop, well beyond the
+// 0.004px seam error the geometry actually has). Driving it here makes the
+// position a pure function of elapsed time, and the per-frame delta is
+// clamped, so the very worst a stall can produce is CLAMP x speed — about
+// 10px at these speeds — instead of an unbounded jump. A dropped frame
+// self-corrects on the next one rather than accumulating.
+//
+// Speed still comes from each row's CSS animation-duration, so the pacing
+// stays tuned in the stylesheet next to the rest of the marquee rules.
+const logoTracks = document.querySelectorAll(".logo-track");
+
+if (logoTracks.length && !prefersReducedMotion) {
+  const MAX_FRAME_SECONDS = 0.25; // a stall longer than this must not teleport the row
+
+  logoTracks.forEach((track) => {
+    const durationSec = parseFloat(getComputedStyle(track).animationDuration) || 30;
+    // .reverse runs right-to-left in the keyframes; same distance, opposite way.
+    const movesRight = track.classList.contains("reverse");
+    let period = 0;
+    let speed = 0;
+    let travelled = 0;
+    let lastFrame = 0;
+    let rafId = null;
+    let running = false;
+
+    // One period = one of the three identical sets, each tile plus the margin
+    // it owns (see .logo-track in css/style.css for why spacing is margin).
+    function measure() {
+      const tiles = Array.from(track.children);
+      if (tiles.length < 3) return;
+      const perSet = tiles.length / 3;
+      let total = 0;
+      for (let i = 0; i < perSet; i++) {
+        total +=
+          tiles[i].getBoundingClientRect().width +
+          (parseFloat(getComputedStyle(tiles[i]).marginRight) || 0);
+      }
+      period = total;
+      speed = period / durationSec;
+    }
+
+    function render() {
+      const offset = movesRight ? travelled - period : -travelled;
+      track.style.transform = "translate3d(" + offset.toFixed(2) + "px, 0, 0)";
+    }
+
+    function frame(now) {
+      if (!running) return;
+      if (!lastFrame) lastFrame = now;
+      const delta = Math.min((now - lastFrame) / 1000, MAX_FRAME_SECONDS);
+      lastFrame = now;
+      travelled = (travelled + speed * delta) % period;
+      render();
+      rafId = requestAnimationFrame(frame);
+    }
+
+    function start() {
+      if (running || !period) return;
+      running = true;
+      lastFrame = 0; // resume from where it stopped, don't jump for the paused time
+      rafId = requestAnimationFrame(frame);
+    }
+
+    function stop() {
+      running = false;
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+
+    measure();
+    if (!period) return; // nothing measurable (no tiles) — leave the CSS animation alone
+
+    track.style.animation = "none"; // hand off from the keyframes
+    render();
+
+    // Re-measure on resize: tile widths are rem/aspect-ratio based, so the
+    // period changes with layout. Keep the same fraction of the loop so the
+    // row doesn't jump at the moment of the resize.
+    window.addEventListener("resize", () => {
+      const progress = period ? travelled / period : 0;
+      measure();
+      travelled = progress * period;
+      render();
+    });
+
+    pauseWhenOffscreen(track.closest(".logo-marquee") || track, start, stop);
+    start(); // covers browsers without IntersectionObserver; the observer stops it if off-screen
+  });
+}
+
 // --- Hero showcase: taak -> Mowi -> resultaat ---------------------------------
 // One 3-column grid with 4 fixed task/result rows, at every viewport width
 // (see css/style.css's own comment on .hero-showcase) — sized down for

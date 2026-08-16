@@ -1969,38 +1969,91 @@ h3 {
 
 /* --- Logo marquee (real app/integration logos, see index.html comment) -------- */
 .logo-marquee {
+  position: relative;
   overflow: hidden;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
 }
 
-/* Spacing lives on the track as a flex `gap` — this is safe with the
-   -33.333% reset below because that math only depends on each of the 3
-   sets being DOM-identical (so each repeat is exactly 1/3 of the track's
-   total width, gap included), not on any fixed per-tile width. */
+/* The soft edges are two painted gradient overlays, NOT a mask-image on this
+   container. A mask has to be re-applied over the moving track on every
+   composited frame; with GPU rasterization that showed up as occasional
+   one-frame flashes on individual rows (never reproducible in headless,
+   which rasterizes in software — 1199 captured frames showed no structural
+   fault, which is what pointed at compositing). Two static gradients
+   painted on top cost effectively nothing and look identical.
+
+   The fade has to end in whatever colour sits behind the row, so it's a
+   variable: --marquee-fade, defaulting to the page ground. Override it
+   wherever a marquee sits on something else (see .koppelt-marquee, which
+   sits on a white .section-tint panel). */
+.logo-marquee::before,
+.logo-marquee::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 10%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.logo-marquee::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--marquee-fade, var(--color-bg)), transparent);
+}
+
+.logo-marquee::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--marquee-fade, var(--color-bg)), transparent);
+}
+
+/* Spacing MUST live on each tile (margin-right), never as a flex `gap` on
+   the track. `gap` only sits BETWEEN items, so a track of 3 sets × N tiles
+   has 3N-1 gaps, not 3N — the last tile has no trailing space. That makes
+   the track one gap short of 3 whole periods, so one third of its width is
+   short of a real period by exactly gap/3, and the loop reset lands that
+   many pixels off the seam: a visible sideways jump once per cycle (it was
+   16px here before this was fixed — measured, not theorised). Margin-right
+   makes each tile own the space after it, so the track width is exactly
+   3 × (tiles + their margins) and the -1/3 reset always lands dead on a
+   seam. This holds for any tile count and any per-tile width, including
+   the variable widths the height-normalized sizing below produces. */
+/* These keyframes are the no-JS baseline. When js/main.js runs it sets
+   `animation: none` here and drives the same movement from elapsed time
+   instead — a long-running composited CSS animation can desync and then
+   snap to catch up, which showed as a row jumping sideways by several
+   logos at once. The per-row animation-duration below is still what sets
+   the speed in both paths, so pacing stays tuned here in the stylesheet. */
 .logo-track {
   display: flex;
   align-items: center;
-  gap: 4.5rem;
   width: max-content;
   animation: marquee 30s linear infinite;
+  /* Promote the track to its own compositing layer. Tile widths here are
+     fractional (logos are height-normalized, so widths follow each mark's
+     own aspect ratio), and the images carry a grayscale filter — without a
+     layer, every frame re-rasterizes filtered content at a new sub-pixel
+     offset, which shimmers along the logo edges. Composited, the layer is
+     rasterized once and only moved. */
+  will-change: transform;
 }
 
 .logo-track.reverse {
   animation-name: marquee-reverse;
 }
 
-/* -33.333% = exactly one set-width out of the track's 3 duplicated sets
-   (see index.html comment for why 3 sets, not 2). Same absolute distance
-   as the old -50%-of-2-sets version, so the scroll speed is unchanged —
-   only the reset fraction changes because the track is now 3 sets wide. */
+/* One third of the track = exactly one set-width, since the track holds 3
+   identical sets and each tile owns its trailing margin (see .logo-track).
+   Written to 4 decimals rather than 33.333%: one third is 33.3333...%, so
+   the shorter value leaves a residual of ~0.015px per loop on a ~4500px
+   track — sub-pixel, but free to remove. Extra digits cost nothing and
+   keep the seam exact. */
 @keyframes marquee {
   from { transform: translateX(0); }
-  to { transform: translateX(-33.333%); }
+  to { transform: translateX(-33.3333%); }
 }
 
 @keyframes marquee-reverse {
-  from { transform: translateX(-33.333%); }
+  from { transform: translateX(-33.3333%); }
   to { transform: translateX(0); }
 }
 
@@ -2019,6 +2072,7 @@ h3 {
   align-items: center;
   justify-content: center;
   height: 1.4rem;
+  margin-right: 4.5rem; /* trailing space per tile — see .logo-track on why not `gap` */
 }
 
 /* Grayscale strips each logo of its brand colour so the row reads as one
@@ -3952,14 +4006,14 @@ a.pill:hover {
   display: flex;
   flex-direction: column;
   gap: 1.75rem;
-}
-
-.koppelt-marquee .logo-track {
-  gap: 3rem;
+  /* These rows sit on the white .section-tint panel, not the page ground,
+     so the edge fade has to end in white (see .logo-marquee::before). */
+  --marquee-fade: var(--color-white);
 }
 
 .koppelt-marquee .logo-tile {
   height: 1.75rem;
+  margin-right: 3rem; /* tighter than the homepage row; per-tile, not `gap` — see .logo-track */
 }
 
 .koppelt-marquee .logo-tile img {
