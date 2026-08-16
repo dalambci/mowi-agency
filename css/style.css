@@ -952,6 +952,21 @@ h3 {
     height: calc(100% + 2px);
     width: calc(100% + 1px);
     margin: -1px 0 -1px -1px;
+    /* Visible at rest, not just on hover/[aria-current] — every cell in the
+       bar is a bordered cell, so the nav ones were the odd ones out with
+       nothing between them. Only safe now that the seams above collapse:
+       each of these borders shares its pixel with a neighbour's, so this
+       adds dividers without adding thickness. Hover still reads, because it
+       swaps this 85% hairline for solid --color-text (below). */
+    border-color: var(--color-header-line);
+    /* The other half of "one border per seam". Two 85%-alpha hairlines
+       compositing in the same pixel would come out at ~98% — darker than a
+       single one, so the nav stretch of the bar's frame would read heavier
+       than the CTA and logo stretches. An element's background paints over
+       its PARENT's border but under its OWN, so this hides the line beneath
+       and lets exactly one border show. Same colour as the bar itself, so
+       nothing changes visually. Hover's own background overrides it. */
+    background: var(--color-bg);
     justify-content: center;
     padding-inline: 0.625rem;
     /* Deliberately NOT white-space: nowrap, if a long label is ever added
