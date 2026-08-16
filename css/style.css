@@ -246,6 +246,37 @@ button {
   }
 }
 
+/* Denser rhythm for pages that carry an animation in nearly every section
+   (currently /agentic-ai: the marquee, the health gauge, the step ticks).
+   .section's padding stacks rather than collapsing, so the default put a
+   flat 192px of empty cream between every block at desktop — about a
+   quarter of a section's own height — which reads as dead travel on a page
+   you're meant to watch rather than as breathing room. Cut 25%, to 144px
+   between blocks (96px on mobile).
+
+   A body class, not a global change: the text-dense pages (/pricing,
+   /cases) have no animation to bind neighbouring sections together and do
+   use the extra air. Only the hero's BOTTOM is touched — its top is set by
+   .hero:has(.breadcrumb) to cancel the sticky header's overlap, which is a
+   different job and must not change. */
+.page-dense .section {
+  padding-block: 3rem;
+}
+
+.page-dense .hero {
+  padding-bottom: 3rem;
+}
+
+@media (min-width: 48rem) {
+  .page-dense .section {
+    padding-block: 4.5rem;
+  }
+
+  .page-dense .hero {
+    padding-bottom: 4.5rem;
+  }
+}
+
 /* Alternating sections use a white panel (not a darker sand tint) so the page
    stays mostly cream/white — contrast comes from the border + shadow instead
    of a darker background color. */
