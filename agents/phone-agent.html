@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Call agent — telefoon opnemen met AI | Mowi</title>
-  <meta name="description" content="Mowi's Call agent beantwoordt binnenkomende gesprekken, kent uw bedrijf via uw eigen website en legt elk gesprek vast in uw dashboard. Binnenkort beschikbaar." />
+  <title>Call agent — mis geen oproep meer met AI | Mowi</title>
+  <meta name="description" content="Mowi's Call agent neemt op via uw bestaande nummer, beantwoordt vragen vanuit uw eigen website en verbindt door zodra een mens nodig is. Binnenkort beschikbaar." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=20260815-6" />
+  <link rel="stylesheet" href="../css/style.css?v=20260816-7" />
   <link rel="icon" href="../assets/icon-192.png?v=20260804-3" />
   <link rel="shortcut icon" href="../assets/icon-192.png?v=20260804-3" />
   <link rel="apple-touch-icon" href="../assets/apple-icon-180.png?v=20260804-3" />
@@ -104,11 +104,10 @@
       <div class="hero-with-visual">
         <div>
           <span class="pill" style="margin-bottom: 1rem; display: inline-block;">Binnenkort</span>
-          <h1>Ook de telefoon, altijd opgenomen.</h1>
+          <h1>Elke oproep opgenomen. Ook die u nu mist.</h1>
           <p class="lede" style="margin-top: 1.5rem;">
-            De Call agent beantwoordt binnenkomende gesprekken op uw bestaande nummer, kent uw bedrijf via uw
-            eigen website en verbindt door naar een collega zodra dat nodig is. Elk gesprek staat na afloop
-            samengevat in uw dashboard.
+            De Call agent neemt op via uw bestaande nummer, beantwoordt vragen vanuit uw eigen website en
+            verbindt door zodra een mens nodig is. Elk gesprek staat samengevat in uw dashboard.
           </p>
           <div class="hero-actions">
             <span class="btn-slot">
@@ -233,21 +232,21 @@
       <div class="container">
         <div class="section-head center" data-reveal>
           <span class="eyebrow">Wat het doet</span>
-          <h2>Een collega die de telefoon nooit laat overgaan.</h2>
+          <h2>Een collega die nooit in gesprek is.</h2>
         </div>
 
         <div class="grid grid-3">
           <div class="card" data-reveal>
             <h3>Kent uw bedrijf</h3>
-            <p>De agent wordt opgezet vanaf uw eigen website en beantwoordt vragen op basis van wat daar al staat.</p>
+            <p>Opgezet vanaf uw eigen website. Antwoordt met wat daar staat — en verzint niets.</p>
           </div>
           <div class="card" data-reveal>
             <h3>Verbindt door wanneer nodig</h3>
-            <p>Vragen die een mens moet beantwoorden, worden doorverbonden volgens regels die u zelf instelt.</p>
+            <p>Vragen voor een mens gaan direct naar een collega, volgens regels die u instelt.</p>
           </div>
           <div class="card" data-reveal>
             <h3>Elk gesprek vastgelegd</h3>
-            <p>Samenvatting, transcript en eventuele lead staan na afloop klaar in uw dashboard.</p>
+            <p>Samenvatting, transcript en eventuele lead staan na afloop klaar.</p>
           </div>
         </div>
       </div>
@@ -288,6 +287,49 @@
           </div>
         </div>
       </div>
+    </section>
+
+    <!-- ===== Controle =====
+         Mirrors agentic-ai.html's proof section, same .case-card component
+         (flipped hierarchy: short bold claim + one small supporting line).
+         Grounded in the build plan's hard prompt guarantees — see
+         phone-assistent-agent-build-plan.md. -->
+    <section class="container section">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">Controle</span>
+        <h2>Kort van stof. Nooit uit de bocht.</h2>
+      </div>
+
+      <div class="grid grid-3">
+        <div class="case-card" data-reveal>
+          <p class="case-result">Verzint nooit een antwoord</p>
+          <p class="muted text-sm">Bij twijfel: "Ik zorg dat een collega u terugbelt."</p>
+        </div>
+        <div class="case-card" data-reveal>
+          <p class="case-result">Noemt geen prijzen of garanties</p>
+          <p class="muted text-sm">Tenzij u ze zelf heeft vastgelegd.</p>
+        </div>
+        <div class="case-card" data-reveal>
+          <p class="case-result">Maximaal twee zinnen per antwoord</p>
+          <p class="muted text-sm">Geen monoloog aan de telefoon.</p>
+        </div>
+        <div class="case-card" data-reveal>
+          <p class="case-result">U bepaalt het doorverbinden</p>
+          <p class="muted text-sm">Eigen regels, eigen nummer, altijd bij vraag naar een mens.</p>
+        </div>
+        <div class="case-card" data-reveal>
+          <p class="case-result">Elk gesprek terug te lezen</p>
+          <p class="muted text-sm">Transcript en samenvatting in uw dashboard.</p>
+        </div>
+        <div class="case-card" data-reveal>
+          <p class="case-result">Mislukt er iets, dan ziet u het</p>
+          <p class="muted text-sm">Mislukte doorverbindingen melden zichzelf.</p>
+        </div>
+      </div>
+
+      <p class="text-center muted" style="margin-top: 2.5rem;" data-reveal>
+        Wat de agent bewust niet doet: geen uitgaande belcampagnes, geen betalingen, geen toezeggingen namens u.
+      </p>
     </section>
 
     <!-- ===== Prijs ===== -->
@@ -366,7 +408,7 @@
     <section class="container section">
       <div class="cta-band" data-reveal>
         <h2>Wilt u als eerste weten wanneer dit live gaat?</h2>
-        <p>Zet u op de wachtlijst, of praat er eerst over in een vrijblijvende kennismaking.</p>
+        <p>Hoeveel oproepen mist u nu per week? Zet u op de wachtlijst — of hoor de agent eerst zelf.</p>
         <div class="cta-actions">
           <span class="btn-slot">
             <a href="../contact#calendly-widget" class="btn btn-secondary" data-event="CTA Click">Zet mij op de wachtlijst</a>
@@ -418,6 +460,6 @@
     </div>
   </footer>
 
-  <script src="../js/main.js?v=20260816"></script>
+  <script src="../js/main.js?v=20260816-4"></script>
 </body>
 </html>

@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260815-6" />
+  <link rel="stylesheet" href="css/style.css?v=20260816-7" />
   <link rel="icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="shortcut icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260804-3" />
@@ -148,24 +148,18 @@
         <div class="hero-frame-col"></div>
       </div>
 
-      <!-- Real logos of the apps/systems Mowi automates around (not client
-           logos — see CLAUDE.md, that rule only covers actual customers).
-           Each PNG in assets/logos/ had its background stripped to alpha
-           and was capped to a shared max dimension; .logo-tile then fits
-           every one to the exact same box via object-fit: contain so they
-           read as a uniform row despite very different source aspect
-           ratios. The track holds THREE identical sets of 9 tiles back to
-           back, animating exactly -33.333% (one set-width) per loop.
-
-           Two sets isn't enough: one set is ~1195px wide, but the site's
-           container can be up to 1600px (--container-width: 100rem). At
-           the point in the loop where set 1 has scrolled fully off and
-           set 2 is the only thing left to cover the container, set 2
-           alone (1195px) can't span a 1600px container — leaving real
-           blank space at the right edge for the last stretch of the loop.
-           A third set guarantees two full sets (~2390px) are always on
-           screen after any shift, comfortably covering the container at
-           any width the site actually uses.
+      <!-- Real logos of every system Mowi actually integrates with (not
+           client logos — see CLAUDE.md, that rule only covers actual
+           customers; same source set as agentic-ai.html's "Mowi koppelt
+           met" 3-row marquee, assets/logos/*). .logo-tile is height-
+           normalized (see css/style.css's own comment on that rule) so a
+           wide wordmark and a square icon-only mark still read as the same
+           size. The track holds THREE identical sets of all 30 logos back
+           to back, animating exactly -33.333% (one set-width) per loop —
+           same seam math as before, just a much wider set now that there
+           are 30 logos instead of 9, so the animation-duration below is
+           scaled up proportionally to keep the same gentle drift speed
+           rather than suddenly racing by.
 
            No loading="lazy" on the imgs, on purpose: every tile scrolls
            into view repeatedly via this transform animation (not real
@@ -177,35 +171,99 @@
         <p class="lede marquee-heading">Hierin automatiseren wij onder andere</p>
         <div class="logo-marquee" aria-hidden="true">
           <div class="logo-track">
-            <span class="logo-tile"><img src="assets/logos/afas.png" alt="AFAS"></span>
-            <span class="logo-tile"><img src="assets/logos/dynamics-365.png" alt="Microsoft Dynamics 365"></span>
-            <span class="logo-tile"><img src="assets/logos/exact.png" alt="Exact"></span>
+            <!-- 1st of 3 identical sets -->
+            <span class="logo-tile"><img src="assets/logos/gmail.svg" alt="Gmail"></span>
+            <span class="logo-tile"><img src="assets/logos/outlook.svg" alt="Outlook / Microsoft 365"></span>
+            <span class="logo-tile"><img src="assets/logos/google-agenda.svg" alt="Google Agenda"></span>
+            <span class="logo-tile"><img src="assets/logos/woocommerce.svg" alt="WooCommerce"></span>
+            <span class="logo-tile"><img src="assets/logos/shopify.svg" alt="Shopify"></span>
+            <span class="logo-tile"><img src="assets/logos/lightspeed.svg" alt="Lightspeed"></span>
+            <span class="logo-tile"><img src="assets/logos/ccv-shop.svg" alt="CCV Shop"></span>
+            <span class="logo-tile"><img src="assets/logos/shopware.svg" alt="Shopware"></span>
+            <span class="logo-tile"><img src="assets/logos/magento.svg" alt="Magento"></span>
+            <span class="logo-tile"><img src="assets/logos/mijnwebwinkel.svg" alt="Mijnwebwinkel"></span>
+            <span class="logo-tile"><img src="assets/logos/bol-com.svg" alt="bol.com"></span>
+            <span class="logo-tile"><img src="assets/logos/wix.svg" alt="Wix"></span>
+            <span class="logo-tile"><img src="assets/logos/prestashop.svg" alt="PrestaShop"></span>
+            <span class="logo-tile"><img src="assets/logos/exact.png" alt="Exact Online"></span>
+            <span class="logo-tile"><img src="assets/logos/pipedrive.svg" alt="Pipedrive"></span>
+            <span class="logo-tile"><img src="assets/logos/teamleader.svg" alt="Teamleader"></span>
             <span class="logo-tile"><img src="assets/logos/hubspot.png" alt="HubSpot"></span>
-            <span class="logo-tile"><img src="assets/logos/excel.png" alt="Microsoft Excel"></span>
+            <span class="logo-tile"><img src="assets/logos/afas.png" alt="AFAS"></span>
+            <span class="logo-tile"><img src="assets/logos/moneybird.svg" alt="Moneybird"></span>
+            <span class="logo-tile"><img src="assets/logos/zoho-crm.svg" alt="Zoho CRM"></span>
             <span class="logo-tile"><img src="assets/logos/odoo.png" alt="Odoo"></span>
-            <span class="logo-tile"><img src="assets/logos/salesforce.png" alt="Salesforce"></span>
-            <span class="logo-tile"><img src="assets/logos/sap.png" alt="SAP"></span>
-            <span class="logo-tile"><img src="assets/logos/twinfield.png" alt="Twinfield"></span>
+            <span class="logo-tile"><img src="assets/logos/formitable.svg" alt="Formitable"></span>
+            <span class="logo-tile"><img src="assets/logos/guestplan.svg" alt="Guestplan"></span>
+            <span class="logo-tile"><img src="assets/logos/thefork.svg" alt="TheFork"></span>
+            <span class="logo-tile"><img src="assets/logos/mews.svg" alt="Mews"></span>
+            <span class="logo-tile"><img src="assets/logos/cubilis.svg" alt="Cubilis"></span>
+            <span class="logo-tile"><img src="assets/logos/siteminder.svg" alt="SiteMinder"></span>
+            <span class="logo-tile"><img src="assets/logos/salonized.svg" alt="Salonized"></span>
+            <span class="logo-tile"><img src="assets/logos/microsoft.svg" alt="Microsoft Bookings"></span>
+            <span class="logo-tile"><img src="assets/logos/calendly.svg" alt="Calendly"></span>
             <!-- 2nd of 3 identical sets, for the seamless loop -->
-            <span class="logo-tile"><img src="assets/logos/afas.png" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/dynamics-365.png" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/gmail.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/outlook.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/google-agenda.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/woocommerce.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/shopify.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/lightspeed.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/ccv-shop.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/shopware.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/magento.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/mijnwebwinkel.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/bol-com.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/wix.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/prestashop.svg" alt=""></span>
             <span class="logo-tile"><img src="assets/logos/exact.png" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/pipedrive.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/teamleader.svg" alt=""></span>
             <span class="logo-tile"><img src="assets/logos/hubspot.png" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/excel.png" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/odoo.png" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/salesforce.png" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/sap.png" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/twinfield.png" alt=""></span>
-            <!-- 3rd of 3 identical sets -->
             <span class="logo-tile"><img src="assets/logos/afas.png" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/dynamics-365.png" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/exact.png" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/hubspot.png" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/excel.png" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/moneybird.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/zoho-crm.svg" alt=""></span>
             <span class="logo-tile"><img src="assets/logos/odoo.png" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/salesforce.png" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/sap.png" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/twinfield.png" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/formitable.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/guestplan.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/thefork.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/mews.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/cubilis.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/siteminder.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/salonized.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/microsoft.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/calendly.svg" alt=""></span>
+            <!-- 3rd of 3 identical sets, for the seamless loop -->
+            <span class="logo-tile"><img src="assets/logos/gmail.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/outlook.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/google-agenda.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/woocommerce.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/shopify.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/lightspeed.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/ccv-shop.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/shopware.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/magento.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/mijnwebwinkel.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/bol-com.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/wix.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/prestashop.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/exact.png" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/pipedrive.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/teamleader.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/hubspot.png" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/afas.png" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/moneybird.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/zoho-crm.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/odoo.png" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/formitable.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/guestplan.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/thefork.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/mews.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/cubilis.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/siteminder.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/salonized.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/microsoft.svg" alt=""></span>
+            <span class="logo-tile"><img src="assets/logos/calendly.svg" alt=""></span>
           </div>
         </div>
       </div>
@@ -307,29 +365,56 @@
     </section>
 
 
-    <!-- ===== Werkwijze ===== -->
+    <!-- ===== Werkwijze =====
+         Gauge-driven self-serve section: the agent-health gauge (see
+         js/main.js's initHealthGauge and css/style.css's .health-gauge /
+         .health-layout) fills red -> orange -> green -> deep green as the
+         visitor scrolls, and each step checks off as the score passes its
+         data-health-at threshold — the last one landing together with the
+         deep-green 90+ band. The plain HTML below is the finished state
+         (gauge 100, all steps full opacity); JS only rewinds and animates
+         it when motion is allowed. -->
     <section class="container section">
       <div class="section-head center" data-reveal>
         <span class="eyebrow">Werkwijze</span>
         <h2>Klein beginnen, meteen resultaat.</h2>
+        <p class="lede" style="margin-top: 1rem;">
+          Alles hieronder doet u zelf, zonder implementatietraject. Eenmaal live bewaakt de agent zijn
+          eigen gezondheid — vanaf 90+ presteert hij op volle kracht.
+        </p>
       </div>
 
-      <div class="steps">
-        <div class="step" data-reveal>
-          <h3>Account aanmaken</h3>
-          <p>Gratis, direct te starten — geen kennismaking vooraf nodig.</p>
+      <div class="health-layout" data-reveal>
+        <div class="health-gauge" data-gauge data-gauge-start="0" data-gauge-max="100">
+          <svg viewBox="0 0 100 100" role="img" aria-label="Agent health: 100 van 100">
+            <circle class="gauge-bg" cx="50" cy="50" r="45" />
+            <circle class="gauge-stroke" cx="50" cy="50" r="45" transform="rotate(-90 50 50)" stroke-dasharray="283 283" />
+            <text class="gauge-text" x="50" y="60" text-anchor="middle">100</text>
+          </svg>
+          <p class="gauge-caption">Agent health</p>
+          <p class="gauge-status">
+            <span class="gauge-status-dot" aria-hidden="true"></span>
+            <span class="gauge-status-text">Op volle kracht</span>
+          </p>
         </div>
-        <div class="step" data-reveal>
-          <h3>Mailbox koppelen</h3>
-          <p>Verbind uw mailbox met één klik en stel uw categorieën in.</p>
-        </div>
-        <div class="step" data-reveal>
-          <h3>Proefdraaien</h3>
-          <p>Bekijk eerst wat de agent zou doen, zonder dat er iets wordt verstuurd.</p>
-        </div>
-        <div class="step" data-reveal>
-          <h3>Activeren &amp; uitbreiden</h3>
-          <p>Tevreden? Zet de agent aan en breid uit naar de Call agent zodra die live is.</p>
+
+        <div class="steps">
+          <div class="step" data-health-at="25">
+            <h3>Account aanmaken</h3>
+            <p>Gratis, direct te starten — geen kennismaking vooraf nodig.</p>
+          </div>
+          <div class="step" data-health-at="50">
+            <h3>Mailbox koppelen</h3>
+            <p>Verbind uw mailbox met één klik en stel uw categorieën in.</p>
+          </div>
+          <div class="step" data-health-at="75">
+            <h3>Proefdraaien</h3>
+            <p>Bekijk eerst wat de agent zou doen, zonder dat er iets wordt verstuurd.</p>
+          </div>
+          <div class="step" data-health-at="90">
+            <h3>Activeren &amp; uitbreiden</h3>
+            <p>Tevreden? Zet de agent aan en breid uit naar de Call agent zodra die live is.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -480,6 +565,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=20260816"></script>
+  <script src="js/main.js?v=20260816-4"></script>
 </body>
 </html>

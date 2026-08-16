@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>E-mail agent — inbox automatisch sorteren met AI | Mowi</title>
-  <meta name="description" content="Mowi's E-mail agent sorteert met AI elke binnenkomende mail — voordat uw team eraan begint. Eerste 14 dagen gratis, zelf te starten." />
+  <title>E-mail agent — klantmail automatisch beantwoord met AI | Mowi</title>
+  <meta name="description" content="Mowi's E-mail agent stelt concept-antwoorden klaar, vraagt ontbrekende offerte-informatie automatisch op en houdt uw inbox gesorteerd. Eerste 14 dagen gratis, zelf te starten." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=20260815-6" />
+  <link rel="stylesheet" href="../css/style.css?v=20260816-7" />
   <link rel="icon" href="../assets/icon-192.png?v=20260804-3" />
   <link rel="shortcut icon" href="../assets/icon-192.png?v=20260804-3" />
   <link rel="apple-touch-icon" href="../assets/apple-icon-180.png?v=20260804-3" />
@@ -103,10 +103,10 @@
       <div class="breadcrumb"><a href="/">Home</a> / E-mail agent</div>
       <div class="hero-with-visual">
         <div>
-          <h1>Uw inbox, elke ochtend al gesorteerd.</h1>
+          <h1>Uw mail is al beantwoord. U klikt alleen nog op versturen.</h1>
           <p class="lede" style="margin-top: 1.5rem;">
-            De E-mail agent leest elke binnenkomende mail, herkent waar die over gaat en zet hem in de juiste
-            categorie — voordat uw team eraan begint.
+            De E-mail agent stelt concept-antwoorden klaar, vraagt ontbrekende offerte-informatie automatisch op
+            en houdt uw inbox gesorteerd. U controleert — en houdt de laatste klik.
           </p>
           <div class="hero-actions">
             <span class="btn-slot">
@@ -277,21 +277,36 @@
       <div class="container">
         <div class="section-head center" data-reveal>
           <span class="eyebrow">Wat het doet</span>
-          <h2>Uw mailbox, continu bijgehouden.</h2>
+          <h2>Niet alleen sorteren. Afhandelen.</h2>
         </div>
 
         <div class="grid grid-3">
           <div class="card" data-reveal>
-            <h3>Automatische categorisering</h3>
-            <p>Elke binnenkomende mail wordt gelezen en in de juiste categorie gezet — voordat uw team eraan begint.</p>
+            <h3>Conceptantwoorden</h3>
+            <p>Voor herkenbare klantvragen staat het antwoord klaar. In uw toon, klaar om te versturen.</p>
           </div>
           <div class="card" data-reveal>
-            <h3>Concept-antwoorden</h3>
-            <p>Voor herkenbare klantvragen stelt de agent een concept-antwoord op, klaar om te controleren en te versturen.</p>
+            <h3>Offertes sneller rond</h3>
+            <p>Ontbreekt informatie in een aanvraag? De agent vraagt er direct om. Aanvragen blijven niet liggen.</p>
           </div>
           <div class="card" data-reveal>
-            <h3>Volledige zichtbaarheid</h3>
-            <p>Elke run is zichtbaar in uw dashboard — inclusief de keren dat er iets misging.</p>
+            <h3>Leest bijlagen</h3>
+            <p>PDF's en documenten worden meegelezen en meegewogen in het antwoord.</p>
+          </div>
+          <div class="card" data-reveal>
+            <h3>Auto-versturen verdient u</h3>
+            <p>Standaard alleen concepten. Auto-versturen ontgrendelt u per categorie, na bewezen resultaat.</p>
+          </div>
+          <div class="card" data-reveal>
+            <h3>Sorteert vanzelf</h3>
+            <p>Elke mail in de juiste map, voordat uw team eraan begint.</p>
+          </div>
+          <div class="card" data-reveal>
+            <h3>Gedeeld geheugen</h3>
+            <!-- "Binnenkort" leads the description rather than a badge — see
+                 pricing.html's own comment: badges were removed sitewide
+                 2026-08-11 in favour of the word in the copy itself. -->
+            <p>Binnenkort: e-mail en telefoon delen één geheugen. De agent herkent klanten over kanalen heen.</p>
           </div>
         </div>
       </div>
@@ -348,6 +363,44 @@
       </div>
     </section>
 
+    <!-- ===== Controle =====
+         Mirrors agentic-ai.html's proof section: flipped hierarchy, short
+         bold claim (.case-result) + one small supporting line (.muted
+         .text-sm) per card, same .case-card component. -->
+    <section class="container section">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">Controle</span>
+        <h2>Eerst bewijzen. Dan pas versturen.</h2>
+      </div>
+
+      <div class="grid grid-3">
+        <div class="case-card" data-reveal>
+          <p class="case-result">Test op uw laatste 20 mails</p>
+          <p class="muted text-sm">U beoordeelt elk resultaat vóór livegang.</p>
+        </div>
+        <div class="case-card" data-reveal>
+          <p class="case-result">Standaard alleen concepten</p>
+          <p class="muted text-sm">Auto-versturen zet u zelf aan, per categorie.</p>
+        </div>
+        <div class="case-card" data-reveal>
+          <p class="case-result">Storingen direct zichtbaar</p>
+          <p class="muted text-sm">Onder 'Needs attention' in uw dashboard.</p>
+        </div>
+        <div class="case-card" data-reveal>
+          <p class="case-result">Elke run terug te lezen</p>
+          <p class="muted text-sm">Volledige historie, elke actie.</p>
+        </div>
+        <div class="case-card" data-reveal>
+          <p class="case-result">Zelf bij te sturen</p>
+          <p class="muted text-sm">FAQ, toon en regels — direct actief.</p>
+        </div>
+        <div class="case-card" data-reveal>
+          <p class="case-result">Maandelijks opzegbaar</p>
+          <p class="muted text-sm">Geen jaarcontract.</p>
+        </div>
+      </div>
+    </section>
+
     <!-- ===== Prijs ===== -->
     <section class="container section" style="max-width: 48rem;">
       <div class="section-head center" data-reveal>
@@ -389,8 +442,8 @@
           </button>
           <div class="accordion-panel" id="faq-et-2">
             <p>
-              Storingen ziet u altijd direct terug onder 'Needs attention' in uw dashboard, zodat niets stil
-              blijft liggen. <!-- VERIFY: exact gedrag bij een e-mail die de agent niet zeker kan categoriseren is niet bevestigd in v1 — navragen bij Mowi voordat dit hard wordt toegezegd -->
+              Die worden niet gegokt. Een mail met bijvoorbeeld een afbeelding als bijlage zet de agent als
+              'Needs attention' in uw dashboard, zodat u zelf beoordeelt en niets stil blijft liggen. <!-- VERIFY: exact gedrag bij een e-mail die de agent niet zeker kan categoriseren (los van afbeeldingsbijlagen) is niet bevestigd in v1 — navragen bij Mowi voordat dit hard wordt toegezegd -->
             </p>
           </div>
         </div>
@@ -440,7 +493,7 @@
     <section class="container section">
       <div class="cta-band" data-reveal>
         <h2>Klaar om uw inbox uit handen te geven?</h2>
-        <p>Sluit uw mailbox aan en zie de agent vandaag nog aan het werk. Eerste 14 dagen gratis.</p>
+        <p>Vandaag zelf aan te sluiten. Eerste 14 dagen gratis.</p>
         <div class="cta-actions">
           <span class="btn-slot">
             <a href="https://my.mowi.agency/aanmelden?agent=email" class="btn btn-secondary" data-event="Signup Started">Start gratis — 14 dagen</a>
@@ -492,6 +545,6 @@
     </div>
   </footer>
 
-  <script src="../js/main.js?v=20260816"></script>
+  <script src="../js/main.js?v=20260816-4"></script>
 </body>
 </html>

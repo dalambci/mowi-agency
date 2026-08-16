@@ -965,8 +965,9 @@ if (
   });
 }
 
-// "Mowi koppelt met" is a static row of pill labels (see css/style.css's
-// .koppelt-widget) — no JS needed, so there's nothing to wire up here.
+// "Mowi koppelt met" is a 3-row logo marquee built on the same pure-CSS
+// .logo-marquee/.logo-track pattern as the homepage strip (see css/style.css's
+// .koppelt-marquee) — no JS needed, so there's nothing to wire up here.
 
 // --- Live agent-feed widget ---------------------------------------------------
 // The 4 rows already in the HTML are a real, correct end state (also the
@@ -1043,6 +1044,103 @@ if (agentFeedCard && agentFeedList && !prefersReducedMotion) {
   }
 
   pauseWhenOffscreen(agentFeedCard, startFeed, stopFeed);
+}
+
+// --- Agent-health gauge (homepage Werkwijze + agentic-ai Aanpak) -------------
+// Vanilla port of vuewer.com's Alpine scroll gauge (0-100 "Performance
+// optimization" widget on their homepage), framed as the dashboard's
+// agent-healthscore: a scroll listener maps the element's own position in
+// the viewport to a 0-1 progress value (reaching 1 once the element's top
+// hits 10% down from the viewport top), and a requestAnimationFrame loop
+// eases the visible number/ring toward that target rather than snapping to
+// it — so it fills scrolling down and drains scrolling back up. The stroke
+// color tracks the score like a real health readout; the deep-green top
+// band starts at 90, matching the section ledes' "vanaf 90+ op volle
+// kracht" claim. The section's self-serve steps ride the same eased value:
+// each .health-layout .step carries data-health-at, and .is-health-done is
+// toggled both ways as the value crosses it, so steps check off on the way
+// down and un-check when the gauge drains. The plain HTML already shows the
+// finished state (ring full, text "100", deep-green stroke, all steps at
+// full opacity); this only takes over — and only arms the dimmed pending
+// look — once motion is confirmed allowed, so a JS failure or
+// reduced-motion leaves the honest static end state.
+function initHealthGauge(gaugeEl) {
+  const gaugeStroke = gaugeEl.querySelector(".gauge-stroke");
+  const gaugeText = gaugeEl.querySelector(".gauge-text");
+  if (!gaugeStroke || !gaugeText) return;
+  const gaugeStart = Number(gaugeEl.dataset.gaugeStart || 0);
+  const gaugeMax = Number(gaugeEl.dataset.gaugeMax || 100);
+  const GAUGE_CIRCUMFERENCE = 283; // 2 * PI * r(45), matches the SVG's r="45"
+  const gaugeSection = gaugeEl.closest("section");
+  const healthSteps = gaugeSection ? Array.from(gaugeSection.querySelectorAll(".health-layout .step[data-health-at]")) : [];
+  let gaugeAnimated = gaugeStart;
+  let gaugeTarget = gaugeStart;
+  let gaugeRaf = null;
+
+  const statusText = gaugeEl.querySelector(".gauge-status-text");
+  const statusDot = gaugeEl.querySelector(".gauge-status-dot");
+
+  function gaugeColor(value) {
+    if (value >= 90) return "#3e8e5e"; // deep green — the "op volle kracht" band; keep in sync with .gauge-stroke's static stroke and the .step::before chip
+    if (value >= 70) return "#69a86f"; // green
+    if (value >= 40) return "#d98a33"; // orange
+    return "#c94f44"; // red
+  }
+
+  // Status label per band — same thresholds as gaugeColor, phrased as the
+  // dashboard would put it. The static HTML ships the top band's label.
+  function gaugeStatus(value) {
+    if (value >= 90) return "Op volle kracht";
+    if (value >= 70) return "Bijna live…";
+    if (value >= 40) return "Wordt ingericht…";
+    return "Nog niet actief";
+  }
+
+  function renderGauge(value) {
+    gaugeText.textContent = Math.round(value);
+    gaugeStroke.setAttribute("stroke-dasharray", (value / 100) * GAUGE_CIRCUMFERENCE + " " + GAUGE_CIRCUMFERENCE);
+    gaugeStroke.style.stroke = gaugeColor(value);
+    if (statusText) statusText.textContent = gaugeStatus(value);
+    if (statusDot) statusDot.style.background = gaugeColor(value);
+    healthSteps.forEach((step) => {
+      step.classList.toggle("is-health-done", value >= Number(step.dataset.healthAt));
+    });
+  }
+
+  function tickGauge() {
+    const diff = gaugeTarget - gaugeAnimated;
+    if (Math.abs(diff) < 0.1) {
+      gaugeAnimated = gaugeTarget;
+      renderGauge(gaugeAnimated);
+      gaugeRaf = null;
+      return;
+    }
+    gaugeAnimated += diff * 0.1;
+    renderGauge(gaugeAnimated);
+    gaugeRaf = requestAnimationFrame(tickGauge);
+  }
+
+  function onGaugeScroll() {
+    const rect = gaugeEl.getBoundingClientRect();
+    const vh = window.innerHeight;
+    if (rect.bottom < 0 || rect.top > vh) return; // off-screen: hold last value
+    const progress = Math.min(1, Math.max(0, 1 - (rect.top - vh * 0.1) / (vh * 0.9)));
+    gaugeTarget = Math.round(gaugeStart + progress * (gaugeMax - gaugeStart));
+    if (gaugeRaf === null) gaugeRaf = requestAnimationFrame(tickGauge);
+  }
+
+  // Arm the dimmed pending state only now that this code is actually running
+  // (mirrors the .reveal-armed pattern) — pending styling hangs off
+  // .health-armed in css/style.css.
+  if (healthSteps.length) healthSteps[0].closest(".steps").classList.add("health-armed");
+
+  renderGauge(gaugeStart); // hand off from the static "100" to the animated start value
+  window.addEventListener("scroll", onGaugeScroll, { passive: true });
+  onGaugeScroll();
+}
+
+if (!prefersReducedMotion) {
+  document.querySelectorAll("[data-gauge]").forEach(initHealthGauge);
 }
 
 // --- Pricing calculator (/pricing "Custom" card) ---------------------------

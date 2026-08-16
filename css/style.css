@@ -1797,6 +1797,13 @@ h3 {
   padding-block: 2rem;
 }
 
+/* One set is ~30 logos wide now (vs. the original 9), so the default 30s
+   .logo-track duration would race by at over 3x the originally-tuned speed
+   — scaled up to keep the same gentle px/sec drift. */
+.hero-frame-logos .logo-track {
+  animation-duration: 100s;
+}
+
 /* A full sentence, not a short 2-3 word label, so it skips the all-caps
    .eyebrow treatment used for section labels like "Diensten" — that would
    hurt readability at this length. Carries the .lede class (see markup) to
@@ -1968,16 +1975,14 @@ h3 {
   mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
 }
 
-/* Spacing lives on each tile (margin-right), not as a flex `gap` on the
-   track — a `gap` splits unevenly whenever the tile count per set is odd
-   (9 tiles = 17 gaps across 2 sets, which can't divide evenly), so a
-   gap-based reset can land mid-gap instead of on a tile boundary. Margin
-   per tile makes each tile "own" the space after it, so the track width
-   is always an exact multiple of (tile + its margin), whatever the set
-   count — the -33.333% reset below always lands precisely on a seam. */
+/* Spacing lives on the track as a flex `gap` — this is safe with the
+   -33.333% reset below because that math only depends on each of the 3
+   sets being DOM-identical (so each repeat is exactly 1/3 of the track's
+   total width, gap included), not on any fixed per-tile width. */
 .logo-track {
   display: flex;
   align-items: center;
+  gap: 4.5rem;
   width: max-content;
   animation: marquee 30s linear infinite;
 }
@@ -2007,28 +2012,29 @@ h3 {
   to { transform: translateX(0); }
 }
 
-/* No card/background — logos sit directly on the page. Fixed box +
-   object-fit:contain on the img is what makes every logo "the same size"
-   despite very different source aspect ratios (a wide wordmark like
-   Dynamics 365 vs. a near-square mark like SAP) — each is scaled down to
-   fit the same box. */
+/* No card/background — logos sit directly on the page. Height-normalized,
+   not a fixed box + object-fit:contain: this row mixes wide wordmark logos
+   with square icon-only marks (some source SVGs ship every icon in a
+   uniform square regardless of the mark's real shape), and a fixed
+   width+height box makes a square mark read as tiny — object-fit:contain
+   scales the WHOLE box, dead space included. Giving every tile the same
+   HEIGHT and letting width follow each logo's own aspect ratio is what
+   actually reads as "same size" in a row (the standard approach for mixed
+   logo walls). */
 .logo-tile {
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 3.8rem;
   height: 1.4rem;
-  margin-right: 4.5rem;
 }
 
 /* Grayscale strips each logo of its brand colour so the row reads as one
    neutral set of marks rather than a clash of blues/reds/oranges. */
 .logo-tile img {
-  max-width: 100%;
-  max-height: 100%;
+  height: 100%;
   width: auto;
-  height: auto;
+  max-width: 7.5rem; /* defensive cap — no current logo's aspect ratio comes close */
   object-fit: contain;
   filter: grayscale(100%);
 }
@@ -3953,60 +3959,225 @@ a.pill:hover {
   pointer-events: none;
 }
 
-/* --- Task icons ("Zes soorten taken" cards) -------------------------------- */
-.task-icon {
-  display: block;
-  width: 2.75rem;
-  height: 2.75rem;
-  margin-bottom: 1.25rem;
-  color: var(--color-text);
-}
-
-.task-icon svg {
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-}
-
-.task-icon .ti-accent { stroke: var(--color-accent); }
-.task-icon .ti-accent-fill { fill: var(--color-accent); stroke: none; }
-.task-icon .ti-muted { stroke: var(--color-border); }
-
-/* One shared hover motion for every icon — the same up-right nudge as the
-   site's existing magnetic-hover buttons (js/main.js), so the icons pick up
-   the same "demeanor" as the rest of the site's motion language rather than
-   inventing a second one. */
-.task-icon .ti-move {
-  transition: transform 0.35s var(--ease-bounce);
-  transform-box: fill-box;
-  transform-origin: center;
-}
-
-.card:hover .task-icon .ti-move {
-  transform: translate(2px, -3px);
-}
-
 /* --- "Mowi koppelt met" -----------------------------------------------------
-   A static row of small pill labels (reuses .pill/.pill-row as-is, same
-   component the "werkt met" pills elsewhere on the site already use) — every
-   system shown at once, not a cycling reel. */
-.koppelt-widget {
-  max-width: 44rem;
-  margin-inline: auto;
-  text-align: center;
-}
-
+   Label/note text for the 3-row koppelt marquee below (see .koppelt-marquee). */
 .koppelt-label {
   font-size: 1.125rem;
   font-weight: 600;
   color: var(--color-text-muted);
   margin-bottom: 1.125rem;
+  text-align: center;
 }
 
 .koppelt-note {
-  margin-top: 1.125rem;
+  margin-top: 1.75rem;
   color: var(--color-text-muted);
   font-size: 0.9375rem;
+  text-align: center;
+}
+
+/* --- Koppelt marquee (agentic-ai "Mowi koppelt met") ------------------------
+   Three stacked rows built on the same height-normalized .logo-marquee/
+   .logo-track/.logo-tile base as the homepage marquee (see that block's own
+   comments for the sizing rationale and the 3-set/-33.333% seam math) — only
+   the deltas from the base are declared here: bigger tiles/gap for this
+   denser 3-row layout, and a slightly different speed per row for a less
+   mechanical, "independently drifting" feel. */
+.koppelt-marquee {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.koppelt-marquee .logo-track {
+  gap: 3rem;
+}
+
+.koppelt-marquee .logo-tile {
+  height: 1.75rem;
+}
+
+.koppelt-marquee .logo-tile img {
+  max-width: 9.5rem; /* defensive cap only — no current logo's aspect ratio comes close */
+}
+
+.koppelt-marquee .row-a .logo-track { animation-duration: 44s; }
+.koppelt-marquee .row-b .logo-track { animation-duration: 52s; }
+.koppelt-marquee .row-c .logo-track { animation-duration: 47s; }
+
+/* --- Agent-health bento panel (homepage Werkwijze + agentic-ai Aanpak) ------
+   One bordered frame in the vuewer bento language (same family as
+   .hero-frame and .browser-frame): tinted gauge cell left, checklist cell
+   right, split by an internal divider. The gauge is the vuewer scroll
+   gauge (see js/main.js's initHealthGauge for the scroll-progress/lerp
+   logic), framed as the dashboard's agent-healthscore; each .step carries
+   data-health-at="25|50|75|90" and .is-health-done is toggled both ways as
+   the eased value crosses it. The plain HTML ships the finished state —
+   ring full at 100, deep-green stroke, every chip a green check, status
+   "Op volle kracht" — so no-JS and reduced-motion visitors see a complete,
+   honest section; JS only rewinds it and animates it forward. */
+.health-layout {
+  border: 1px solid var(--color-border);
+  background: var(--color-white);
+  display: grid;
+}
+
+@media (min-width: 48rem) {
+  .health-layout {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+}
+
+/* Gauge cell: tinted like the hero frame's logo strip, divider toward the
+   steps cell (bottom edge stacked on mobile, right edge side-by-side). */
+.health-gauge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem;
+  background: var(--color-bg-tint);
+  border-bottom: 1px solid var(--color-border);
+}
+
+@media (min-width: 48rem) {
+  .health-gauge {
+    padding: 3rem;
+    border-bottom: none;
+    border-right: 1px solid var(--color-border);
+  }
+}
+
+.health-gauge svg {
+  width: 11rem;
+}
+
+@media (min-width: 48rem) {
+  .health-gauge svg {
+    width: 13rem;
+  }
+}
+
+.health-gauge .gauge-bg {
+  fill: none;
+  stroke: var(--color-border);
+  stroke-width: 8;
+}
+
+.health-gauge .gauge-stroke {
+  fill: none;
+  stroke: #3e8e5e;
+  stroke-width: 8;
+  stroke-linecap: round;
+  transition: stroke 0.3s ease-out;
+}
+
+.health-gauge .gauge-text {
+  font-size: 30px;
+  font-weight: 500;
+  fill: var(--color-text);
+  font-family: monospace;
+}
+
+.health-gauge .gauge-caption {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+/* Live status line under the caption — dot + label follow the same color
+   bands as the ring (text per band lives in js/main.js's gaugeStatus()). */
+.health-gauge .gauge-status {
+  margin-top: 0.375rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+.health-gauge .gauge-status-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: var(--radius-full); /* radius tokens are 0 site-wide, so this stays square like every other dot-ish accent */
+  background: #3e8e5e;
+  flex-shrink: 0;
+  transition: background 0.3s ease-out;
+}
+
+/* Steps cell: vertical checklist. Reuses .steps/.step so the CSS counter
+   comes along; the number chip doubles as the checkbox. */
+.health-layout .steps {
+  grid-template-columns: 1fr;
+  gap: 1.75rem;
+  padding: 2.5rem;
+  align-content: center;
+}
+
+@media (min-width: 48rem) {
+  .health-layout .steps {
+    padding: 3rem;
+  }
+}
+
+.health-layout .step {
+  padding-top: 0;
+  padding-left: 3.25rem;
+}
+
+/* Chip: the static (no-JS / reduced-motion) state is the finished one — a
+   deep-green check. The numbered pending look only exists under
+   .health-armed, which js/main.js adds once motion is confirmed allowed
+   (same safety contract as .reveal-armed). */
+.health-layout .step::before {
+  content: "\2713";
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.875rem;
+  height: 1.875rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--color-white);
+  background: #3e8e5e; /* keep in sync with the >= 90 band in js/main.js's gaugeColor() */
+  border: 1px solid #3e8e5e;
+  letter-spacing: normal;
+  transition: background 0.3s var(--ease-out), color 0.3s var(--ease-out), border-color 0.3s var(--ease-out);
+}
+
+.health-armed .step:not(.is-health-done)::before {
+  content: counter(step, decimal-leading-zero);
+  font-size: 0.8125rem;
+  color: var(--color-gray-500);
+  background: var(--color-white);
+  border-color: var(--color-border);
+}
+
+/* Connector rail between chips: green up to the last completed step, border
+   gray beyond it. Runs from the chip's bottom into the 1.75rem gap so it
+   meets the next chip. */
+.health-layout .step::after {
+  content: "";
+  position: absolute;
+  left: 0.9375rem;
+  top: 2.25rem;
+  bottom: -1.75rem;
+  width: 1px;
+  background: #3e8e5e;
+  transition: background 0.3s var(--ease-out);
+}
+
+.health-layout .step:last-child::after {
+  display: none;
+}
+
+.health-armed .step:not(.is-health-done)::after {
+  background: var(--color-border);
 }
 
 /* --- Live agent-feed widget ------------------------------------------------
