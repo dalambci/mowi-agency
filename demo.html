@@ -4,22 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Plan een demo — Mowi</title>
-  <meta name="description" content="Plan een vrijblijvende demo van 30 minuten met Sal, oprichter van Mowi. Een echte demo van het dashboard en de agents, met ruimte voor uw eigen situatie." />
+  <meta name="description" content="Plan een vrijblijvende demo van 30 minuten met [FULL_NAME], oprichter van Mowi. Een demo op uw eigen voorbeelden, met een eerlijk vervolgvoorstel." />
   <link rel="canonical" href="https://mowi.agency/demo" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Plan een demo" />
-  <meta property="og:description" content="Plan een vrijblijvende demo van 30 minuten met Sal, oprichter van Mowi. Een echte demo van het dashboard en de agents, met ruimte voor uw eigen situatie." />
+  <meta property="og:description" content="Plan een vrijblijvende demo van 30 minuten met [FULL_NAME], oprichter van Mowi. Een demo op uw eigen voorbeelden, met een eerlijk vervolgvoorstel." />
   <meta property="og:url" content="https://mowi.agency/demo" />
   <meta property="og:image" content="https://mowi.agency/assets/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Plan een demo" />
-  <meta name="twitter:description" content="Plan een vrijblijvende demo van 30 minuten met Sal, oprichter van Mowi. Een echte demo van het dashboard en de agents, met ruimte voor uw eigen situatie." />
+  <meta name="twitter:description" content="Plan een vrijblijvende demo van 30 minuten met [FULL_NAME], oprichter van Mowi. Een demo op uw eigen voorbeelden, met een eerlijk vervolgvoorstel." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260817" />
+  <link rel="stylesheet" href="css/style.css?v=20260818" />
   <link rel="icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="shortcut icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260804-3" />
@@ -30,14 +30,15 @@
 <body>
 
   <!-- ===== Header / navigation =====
-       Copied verbatim from reference/chrome-snippet.html (Stage 2), unmodified. -->
+       Copied verbatim from index.html / test.html (the canonical v2 source),
+       with aria-current="page" added to the header CTA since /demo is its
+       own destination — same convention the old demo.html used. -->
   <header class="site-header">
     <div class="header-bar">
-      <span class="header-cta-slot">
-        <a href="/demo" class="header-cta" data-event="Demo Click" aria-current="page">
-          <span class="header-cta-full">Plan een demo</span><span class="header-cta-short">Demo</span>
-        </a>
-      </span>
+      <a href="/" class="wordmark" aria-label="Mowi - home">
+        <img src="assets/mowi-icon.png" alt="" class="wordmark-icon" />
+        <img src="assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
+      </a>
 
       <nav class="main-nav" id="main-nav" aria-label="Hoofdmenu">
         <ul class="nav-group">
@@ -71,33 +72,17 @@
               </div>
             </div>
           </li>
-          <li><a href="/receptenboek">Receptenboek</a></li>
           <li><a href="/zo-werkt-het">How it works</a></li>
-        </ul>
-        <ul class="nav-group">
+          <li><a href="/docs/">Docs</a></li>
           <li><a href="/over">About</a></li>
-          <li class="nav-dropdown">
-            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="resources-menu" aria-haspopup="true">
-              Resources
-              <span class="nav-dropdown-icon" aria-hidden="true"></span>
-            </button>
-            <div class="nav-megamenu nav-megamenu-narrow" id="resources-menu">
-              <div class="nav-megamenu-col">
-                <ul>
-                  <li><a href="/docs/">Documentation</a></li>
-                  <li><a href="/blog/">Blog</a></li>
-                </ul>
-              </div>
-            </div>
-          </li>
-          <li><a href="https://my.mowi.agency/login" target="_blank" rel="noopener">Login</a></li>
+          <li><a href="/blog/">Blog</a></li>
         </ul>
       </nav>
 
-      <div class="header-logo-cell">
-        <a href="/" class="wordmark" aria-label="Mowi - home">
-          <img src="assets/mowi-icon.png" alt="" class="wordmark-icon" />
-          <img src="assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
+      <div class="header-actions">
+        <a href="https://my.mowi.agency/login" target="_blank" rel="noopener" class="header-login">Login</a>
+        <a href="/demo" class="header-cta" data-event="Demo Click" aria-current="page">
+          <span class="header-cta-full">Plan een demo</span><span class="header-cta-short">Demo</span>
         </a>
       </div>
 
@@ -108,59 +93,91 @@
   </header>
 
   <main>
-    <!-- ===== Hero =====
-         Calendly widget ported verbatim (same data-url, same widget.js, same
-         booking-host block with Sal's real portrait) from the old
-         contact.html — see that file's own comment for why booking is the
-         only path here. contact.html itself is untouched this stage; a
-         later stage turns it into a redirect stub. -->
-    <section class="container hero">
-      <div class="breadcrumb"><a href="/">Home</a> / Demo</div>
-      <div class="hero-with-visual contact-hero-visual">
-        <div style="max-width: 40rem;">
-          <h1 class="contact-heading">Plan een demo.</h1>
-          <p class="lede" style="margin-top: 1.5rem;">
-            30 minuten, vrijblijvend. We bespreken uw situatie en laten zien wat Mowi vandaag al voor u kan doen.
-          </p>
 
-          <ul class="check-list" style="margin-top: 1.75rem;">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Een echte demo van het dashboard en de agents</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Ruimte voor uw eigen situatie en systemen</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Geen verkooppraatje — past het niet, dan zeggen we dat ook</span></li>
-          </ul>
-        </div>
-
-        <!-- Calendly inline embed. Widget script is loaded once at the bottom of this page. -->
-        <div class="card" data-reveal id="calendly-widget">
-          <span class="eyebrow">Plan direct</span>
-          <h2 class="prose-heading">Kies een moment dat u past.</h2>
-          <p style="color: var(--color-gray-600); margin-top: 0.75rem;">
-            30 minuten, online en vrijblijvend. U weet daarna precies wat de volgende stap zou zijn.
-          </p>
-          <div class="booking-host">
-            <img class="booking-host-photo" src="assets/sal-portret.jpg" alt="Portret van Sal, oprichter van Mowi" width="56" height="56" loading="lazy" decoding="async">
-            <p class="booking-host-text">U spreekt met <span class="booking-host-name">Sal</span>, oprichter van Mowi.</p>
-          </div>
-
-          <div class="calendly-inline-widget" data-url="https://calendly.com/contact-mowi/30min?hide_gdpr_banner=1&embed_type=Inline&embed_domain=mowi.agency" style="min-width: 280px; height: 630px; margin-top: 1.5rem;"></div>
+    <!-- ===== 1. Hero =====
+         Short and direct — this page is the primary conversion destination,
+         not a page that still needs to make the case. -->
+    <section class="section">
+      <div class="container">
+        <div class="hero-inner">
+          <span class="text-kicker">Plan een demo</span>
+          <h1>U ziet het, <em class="h-emph">voordat</em> u kiest.</h1>
+          <p class="text-lead">30 minuten, vrijblijvend. U vertelt wat er speelt in uw bedrijf, en Mowi laat zien wat er vandaag al mogelijk is — op uw eigen voorbeelden.</p>
         </div>
       </div>
     </section>
 
-    <!-- ===== Direct contact ===== -->
-    <section class="section section-tint">
+    <!-- ===== 2. Calendly embed =====
+         Same #calendly-widget id, same calendly-inline-widget data-url
+         attribute and widget.js script pattern as the old demo.html/
+         contact.html (verified via grep across the repo — blog posts already
+         link to "/demo#calendly-widget", so this id must stay put). Only the
+         surrounding chrome is new; the booking mechanism itself is
+         unchanged. [CALENDLY_URL] per CLAUDE.md placeholder rules — no real
+         Calendly link has been confirmed for the v2 site yet. js/main.js
+         already listens for Calendly's "calendly.event_scheduled" postMessage
+         sitewide, so no page-specific script is needed beyond the widget
+         loader itself. -->
+    <section class="section-tint">
       <div class="container">
-        <div class="section-head center" data-reveal>
-          <span class="eyebrow">Liever direct contact?</span>
+        <div class="card" id="calendly-widget" style="max-width: 40rem; margin-inline: auto;">
+          <span class="text-kicker">Plan direct</span>
+          <h2 class="prose-heading">Kies een moment dat u past.</h2>
+          <p class="muted" style="margin-top: 0.75rem;">30 minuten, online en vrijblijvend. U weet daarna precies wat de volgende stap zou zijn.</p>
+
+          <div style="display: flex; align-items: center; gap: 0.75rem; margin-top: 1.5rem;">
+            <img src="assets/sal-portret.jpg" alt="" class="pull-quote-portrait" />
+            <p style="margin: 0;">U spreekt met <strong>[FULL_NAME]</strong>, oprichter van Mowi.</p>
+          </div>
+
+          <div class="calendly-inline-widget" data-url="[CALENDLY_URL]" style="min-width: 280px; height: 630px; margin-top: 1.5rem;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 3. Wat u kunt verwachten =====
+         Grounded in zo-werkt-het.html's own "Demo" step copy ("30 minuten,
+         met voorbeelden uit uw eigen branche") and the old demo.html's
+         real check-list claims — nothing new invented. -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head center">
+          <span class="text-kicker">Wat u kunt verwachten</span>
+          <h2>Geen verrassingen, wel duidelijkheid.</h2>
+        </div>
+        <div class="steps steps-3">
+          <div class="step">
+            <h3>30 minuten</h3>
+            <p>Kort en to-the-point — geen dagvullend traject, geen verplichting.</p>
+          </div>
+          <div class="step">
+            <h3>Op uw eigen voorbeelden</h3>
+            <p>Geen algemene pitch. U vertelt wat er speelt, en Mowi laat zien wat er vandaag al mogelijk is met uw eigen systemen.</p>
+          </div>
+          <div class="step">
+            <h3>Een eerlijk vervolgvoorstel</h3>
+            <p>Past Mowi niet bij uw situatie? Dan zeggen we dat ook — zonder verkooppraatje.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 4. Fallback contact =====
+         Real phone/email — already live elsewhere on the site (footer,
+         Organization JSON-LD on /). For anyone who'd rather not use
+         Calendly. -->
+    <section class="section-tint">
+      <div class="container">
+        <div class="section-head center">
+          <span class="text-kicker">Liever direct contact?</span>
           <h2>Bel of mail ons.</h2>
         </div>
-
-        <div class="grid grid-2 contact-info-grid">
-          <div class="card text-center" data-reveal>
+        <div class="grid grid-2">
+          <div class="card text-center">
             <h3>Telefoon</h3>
             <p><a href="tel:+31853335800">085 333 5800</a></p>
           </div>
-          <div class="card text-center" data-reveal>
+          <div class="card text-center">
             <h3>E-mail</h3>
             <p><a href="mailto:contact@mowi.agency">contact@mowi.agency</a></p>
           </div>
@@ -170,7 +187,12 @@
 
   </main>
 
-  <!-- ===== Footer ===== -->
+  <!-- No pre-footer CTA band on this page — /demo already IS the CTA
+       destination sitewide; a second "Plan een demo" band directly below
+       the booking widget would be redundant. Plain .site-footer only. -->
+
+  <!-- ===== Footer =====
+       Copied verbatim from index.html / test.html (the canonical v2 source). -->
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-brand">
@@ -184,7 +206,6 @@
       <nav class="footer-nav" aria-label="Footermenu">
         <span class="footer-heading">Platform</span>
         <a href="/workflows">Workflows met AI</a>
-        <a href="/receptenboek">Receptenboek</a>
         <a href="/koppelingen">Koppelingen</a>
         <a href="/vertrouwen">Vertrouwen</a>
         <a href="/zo-werkt-het">Zo werkt het</a>
@@ -219,7 +240,7 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=20260817"></script>
+  <script src="js/main.js?v=20260818"></script>
   <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 </body>
 </html>

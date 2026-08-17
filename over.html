@@ -4,22 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Over Mowi — Mowi</title>
-  <meta name="description" content="Nederlandse MKB-systemen praten niet met elkaar, en automatiseringstools zijn zelf weer een obstakel. Mowi is geen zelfbedieningstool maar een dienst met een gezicht — met Sal, oprichter, persoonlijk verantwoordelijk." />
+  <meta name="description" content="Nederlandse MKB-systemen praten niet met elkaar, en automatiseringstools zijn zelf weer een obstakel. Mowi is geen zelfbedieningstool maar een dienst met een gezicht — met [FULL_NAME], oprichter, persoonlijk verantwoordelijk." />
   <link rel="canonical" href="https://mowi.agency/over" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Over Mowi" />
-  <meta property="og:description" content="Nederlandse MKB-systemen praten niet met elkaar, en automatiseringstools zijn zelf weer een obstakel. Mowi is geen zelfbedieningstool maar een dienst met een gezicht — met Sal, oprichter, persoonlijk verantwoordelijk." />
+  <meta property="og:description" content="Nederlandse MKB-systemen praten niet met elkaar, en automatiseringstools zijn zelf weer een obstakel. Mowi is geen zelfbedieningstool maar een dienst met een gezicht — met [FULL_NAME], oprichter, persoonlijk verantwoordelijk." />
   <meta property="og:url" content="https://mowi.agency/over" />
   <meta property="og:image" content="https://mowi.agency/assets/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Over Mowi" />
-  <meta name="twitter:description" content="Nederlandse MKB-systemen praten niet met elkaar, en automatiseringstools zijn zelf weer een obstakel. Mowi is geen zelfbedieningstool maar een dienst met een gezicht — met Sal, oprichter, persoonlijk verantwoordelijk." />
+  <meta name="twitter:description" content="Nederlandse MKB-systemen praten niet met elkaar, en automatiseringstools zijn zelf weer een obstakel. Mowi is geen zelfbedieningstool maar een dienst met een gezicht — met [FULL_NAME], oprichter, persoonlijk verantwoordelijk." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260817" />
+  <link rel="stylesheet" href="css/style.css?v=20260818" />
   <link rel="icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="shortcut icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260804-3" />
@@ -30,14 +30,13 @@
 <body>
 
   <!-- ===== Header / navigation =====
-       Copied verbatim from reference/chrome-snippet.html (Stage 2), unmodified. -->
+       Copied verbatim from index.html / test.html (the canonical v2 source). -->
   <header class="site-header">
     <div class="header-bar">
-      <span class="header-cta-slot">
-        <a href="/demo" class="header-cta" data-event="Demo Click">
-          <span class="header-cta-full">Plan een demo</span><span class="header-cta-short">Demo</span>
-        </a>
-      </span>
+      <a href="/" class="wordmark" aria-label="Mowi - home">
+        <img src="assets/mowi-icon.png" alt="" class="wordmark-icon" />
+        <img src="assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
+      </a>
 
       <nav class="main-nav" id="main-nav" aria-label="Hoofdmenu">
         <ul class="nav-group">
@@ -71,33 +70,17 @@
               </div>
             </div>
           </li>
-          <li><a href="/receptenboek">Receptenboek</a></li>
           <li><a href="/zo-werkt-het">How it works</a></li>
-        </ul>
-        <ul class="nav-group">
+          <li><a href="/docs/">Docs</a></li>
           <li><a href="/over" aria-current="page">About</a></li>
-          <li class="nav-dropdown">
-            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="resources-menu" aria-haspopup="true">
-              Resources
-              <span class="nav-dropdown-icon" aria-hidden="true"></span>
-            </button>
-            <div class="nav-megamenu nav-megamenu-narrow" id="resources-menu">
-              <div class="nav-megamenu-col">
-                <ul>
-                  <li><a href="/docs/">Documentation</a></li>
-                  <li><a href="/blog/">Blog</a></li>
-                </ul>
-              </div>
-            </div>
-          </li>
-          <li><a href="https://my.mowi.agency/login" target="_blank" rel="noopener">Login</a></li>
+          <li><a href="/blog/">Blog</a></li>
         </ul>
       </nav>
 
-      <div class="header-logo-cell">
-        <a href="/" class="wordmark" aria-label="Mowi - home">
-          <img src="assets/mowi-icon.png" alt="" class="wordmark-icon" />
-          <img src="assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
+      <div class="header-actions">
+        <a href="https://my.mowi.agency/login" target="_blank" rel="noopener" class="header-login">Login</a>
+        <a href="/demo" class="header-cta" data-event="Demo Click">
+          <span class="header-cta-full">Plan een demo</span><span class="header-cta-short">Demo</span>
         </a>
       </div>
 
@@ -108,91 +91,128 @@
   </header>
 
   <main>
-    <!-- ===== Hero ===== -->
-    <section class="container hero">
-      <div class="breadcrumb"><a href="/">Home</a> / Over Mowi</div>
-      <div style="max-width: 40rem;">
-        <h1>Over Mowi.</h1>
-        <p class="lede" style="margin-top: 1.25rem;">
-          <em class="h-emph">Een dienst met een gezicht, geen tool waar u zich alleen doorheen klikt.</em>
-        </p>
-      </div>
-    </section>
 
-    <!-- ===== Story arc: probleem → tijdperk → hoe wij anders zijn =====
-         shapes.co's about-page SHAPE (problem → era → difference → founder),
-         never their text. Each beat kept honest to what Mowi actually is —
-         no invented scale, no claim beyond what index.html/workflows.html
-         already establish. -->
-    <section class="container section" style="max-width: 44rem;">
-      <div data-reveal>
-        <span class="eyebrow">Het probleem</span>
-        <h2>Systemen die niet met elkaar praten.</h2>
-        <p class="lede" style="margin-top: 1rem;">Uw webshop, uw CRM, uw agenda, uw mailbox — stuk voor stuk prima tools, die niets van elkaar weten. Wat overblijft, is handwerk: overtypen, opzoeken, dubbelchecken.</p>
-        <p style="margin-top: 1rem; color: var(--ink-muted);">En de automatiseringstools die dat zouden moeten oplossen, zijn zelf weer een obstakel: Engelstalige interfaces vol losse blokjes die u zelf aan elkaar moet knopen. Voor een MKB-eigenaar met een zaak te runnen is dat geen oplossing, maar een tweede baan.</p>
-      </div>
-    </section>
-
-    <section class="section section-tint">
-      <div class="container" style="max-width: 44rem;">
-        <div data-reveal>
-          <span class="eyebrow">Waarom nu</span>
-          <h2>AI maakt "u zegt het gewoon" mogelijk.</h2>
-          <p class="lede" style="margin-top: 1rem;">Een paar jaar geleden kon dit nog niet. Nu wel: u beschrijft in gewone taal wat u geregeld wilt hebben, en de configuratie volgt.</p>
-          <p style="margin-top: 1rem; color: var(--ink-muted);">Niet door de AI vrij te laten programmeren — dat zou onvoorspelbaar zijn — maar door hem te laten kiezen uit een gesloten set bouwstenen die Mowi vooraf gebouwd en getest heeft. Dezelfde reden waarom niets live gaat zonder uw akkoord.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="container section" style="max-width: 44rem;">
-      <div data-reveal>
-        <span class="eyebrow">Hoe wij anders zijn</span>
-        <h2>Geen zelfbedieningstool. Een dienst met een gezicht.</h2>
-        <p class="lede" style="margin-top: 1rem;">Mowi is bewust geen tool waar u zich voor aanmeldt en zelf mee aan de slag gaat. U plant een demo, en samen met Mowi richt u in wat u nodig heeft.</p>
-        <p style="margin-top: 1rem; color: var(--ink-muted);">Dat is een keuze, geen beperking: het betekent dat er bij de inrichting iemand meekijkt en meedenkt, in plaats van dat u er met een handleiding alleen voor staat.</p>
-      </div>
-    </section>
-
-    <!-- ===== Founder =====
-         Facts checked against the vault (Mowi brain/Home.md,
-         Dashboard/Mowi - Overview.md) before writing: confirms Sal as
-         founder of a one-person company, nothing more specific (no
-         credentials/years-of-experience/prior-company claims found or used).
-         One-founder model framed explicitly as a strength, not an apology —
-         per the task brief. -->
-    <section class="section section-tint">
+    <!-- ===== 1. Hero ===== -->
+    <section class="section">
       <div class="container">
-        <div class="hero-with-visual" style="align-items: center;">
-          <div class="card" data-reveal>
-            <div class="trust-photo">
-              <img src="assets/sal-portret.jpg" alt="Sal, oprichter van Mowi" />
-            </div>
-            <h3 style="margin-top: 1.25rem;">Sal</h3>
-            <p>Oprichter van Mowi.</p>
+        <div class="hero-inner">
+          <span class="text-kicker">Over Mowi</span>
+          <h1>Een dienst met een <em class="h-emph">gezicht.</em></h1>
+          <p class="text-lead">Geen tool waar u zich voor aanmeldt en zelf doorheen klikt. Mowi is een naam, een aanspreekpunt en een belofte: niets draait bij u totdat u het zelf heeft zien werken.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 2. Het probleem =====
+         Grounded verbatim in the old over.html's real content — nothing
+         invented, only the shell rebuilt. -->
+    <section class="section-tint">
+      <div class="container" style="max-width: 44rem;">
+        <span class="text-kicker">Het probleem</span>
+        <h2>Systemen die niet met elkaar praten.</h2>
+        <p class="text-lead" style="margin-top: 1rem;">Uw webshop, uw CRM, uw agenda, uw mailbox — stuk voor stuk prima tools, die niets van elkaar weten. Wat overblijft, is handwerk: overtypen, opzoeken, dubbelchecken.</p>
+        <p class="muted" style="margin-top: 1rem;">En de automatiseringstools die dat zouden moeten oplossen, zijn zelf weer een obstakel: Engelstalige interfaces vol losse blokjes die u zelf aan elkaar moet knopen. Voor een MKB-eigenaar met een zaak te runnen is dat geen oplossing, maar een tweede baan.</p>
+      </div>
+    </section>
+
+    <!-- ===== 3. Waarom nu =====
+         Same real claim already established on / and /workflows: bouwstenen,
+         geen vrije code, akkoord-gate. Nothing new asserted here. -->
+    <section class="section">
+      <div class="container" style="max-width: 44rem;">
+        <span class="text-kicker">Waarom nu</span>
+        <h2>AI maakt "u zegt het gewoon" mogelijk.</h2>
+        <p class="text-lead" style="margin-top: 1rem;">Een paar jaar geleden kon dit nog niet. Nu wel: u beschrijft in gewone taal wat u geregeld wilt hebben, en de configuratie volgt.</p>
+        <p class="muted" style="margin-top: 1rem;">Niet door de AI vrij te laten programmeren — dat zou onvoorspelbaar zijn — maar door hem te laten kiezen uit een gesloten set bouwstenen die Mowi vooraf gebouwd en getest heeft. Dezelfde reden waarom niets live gaat zonder uw akkoord.</p>
+      </div>
+    </section>
+
+    <!-- ===== 4. Founder story =====
+         Portrait treatment ported from vertrouwen.html's "Iemand
+         verantwoordelijk" section (closest existing precedent — same
+         img filter/border-radius, same [FULL_NAME] convention). Narrative
+         combines the old page's "hoe wij anders zijn" beat with the founder
+         introduction into one section, per this page's brief. No invented
+         biographical detail (no prior employer, no degree, no years of
+         experience) — only what index.html/vertrouwen.html already state:
+         one founder, personally responsible for every workflow. -->
+    <section class="section-tint">
+      <div class="container">
+        <div class="split-section" style="align-items: center;">
+          <div class="card">
+            <img src="assets/sal-portret.jpg" alt="" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-card); filter: grayscale(1);" />
+            <h3 style="margin-top: 1.25rem;">[FULL_NAME]</h3>
+            <p>Oprichter, Mowi</p>
           </div>
-          <div data-reveal>
-            <span class="eyebrow">Eén oprichter</span>
-            <h2>U weet precies wie er verantwoordelijk is.</h2>
-            <p class="lede" style="margin-top: 1rem;">Sal is oprichter van Mowi en persoonlijk verantwoordelijk voor elke klant en elke workflow die bij u draait.</p>
-            <p style="margin-top: 1rem; color: var(--ink-muted);">Geen team van wisselende contactpersonen, geen anoniem supportticket. Dat één-persoonsmodel is een bewuste keuze: het betekent dat de persoon die uw situatie kent, ook degene is die u aan de telefoon of in de demo krijgt.</p>
+          <div>
+            <span class="text-kicker">Eén oprichter</span>
+            <h2>Geen zelfbedieningstool. Een dienst met een gezicht.</h2>
+            <p class="text-lead" style="margin-top: 1rem;">Mowi is bewust geen tool waar u zich voor aanmeldt en zelf mee aan de slag gaat. U plant een demo, en samen met [FULL_NAME] richt u in wat u nodig heeft.</p>
+            <p class="muted" style="margin-top: 1rem;">[FULL_NAME] is oprichter van Mowi en persoonlijk verantwoordelijk voor elke klant en elke workflow die bij u draait. Geen team van wisselende contactpersonen, geen anoniem supportticket — de persoon die uw situatie kent, is ook degene die u in de demo of aan de telefoon krijgt.</p>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- ===== 5. Principes =====
+         Three principles named directly in this page's brief, plus a fourth
+         ("eerlijk als het niet past") grounded in the old demo.html's own
+         already-established check-list copy ("Geen verkooppraatje — past
+         het niet, dan zeggen we dat ook") — real substance, not invented. -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <span class="text-kicker">Hoe Mowi werkt</span>
+          <h2>Vier principes, zonder uitzondering.</h2>
+        </div>
+        <div class="grid grid-4">
+          <div class="card">
+            <h3>Geteste bouwstenen</h3>
+            <p>Mowi kiest alleen uit bouwstenen die vooraf gebouwd en getest zijn — nooit uit losse, vrij geschreven code.</p>
+          </div>
+          <div class="card">
+            <h3>Niets live zonder akkoord</h3>
+            <p>Elke workflow draait eerst als proef op uw eigen gegevens. Pas na uw akkoord gaat hij echt live.</p>
+          </div>
+          <div class="card">
+            <h3>Een vaste naam</h3>
+            <p>[FULL_NAME] is persoonlijk aanspreekbaar op elke workflow — geen ticketnummer, geen wisselende contactpersonen.</p>
+          </div>
+          <div class="card">
+            <h3>Eerlijk als het niet past</h3>
+            <p>Past Mowi niet bij uw situatie? Dan zeggen we dat ook — geen verkooppraatje om de deal alsnog te sluiten.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 6. Bedrijfsgegevens =====
+         Stable link per this page's brief, item 4 — /bedrijfsgegevens isn't
+         rebuilt until Stage 5, but the URL is already stable and valid. -->
+    <section class="section-tint">
+      <div class="container" style="max-width: 40rem; margin-inline: auto; text-align: center;">
+        <span class="text-kicker">Formele gegevens</span>
+        <h2>Zoekt u de bedrijfsgegevens?</h2>
+        <p class="text-lead" style="margin-top: 1rem;">KvK-nummer, adres en overige formele bedrijfsgegevens van Mowi staan op een aparte pagina.</p>
+        <p style="margin-top: 1.5rem;"><a href="/bedrijfsgegevens" class="btn btn-secondary">Bekijk bedrijfsgegevens</a></p>
       </div>
     </section>
 
   </main>
 
-  <!-- ===== Pre-footer CTA band ===== -->
+  <!-- ===== 7. Pre-footer CTA band =====
+       Full-bleed dark inverted band — must always immediately precede
+       <footer class="site-footer">. -->
   <section class="cta-prefooter">
-    <div class="container cta-prefooter-inner">
+    <div class="container">
       <h2>Uw bedrijf op de <em class="h-emph">automatische piloot.</em></h2>
-      <span class="btn-slot">
-        <a href="/demo" class="btn btn-primary" data-event="Demo Click">Plan een demo</a>
-      </span>
+      <a href="/demo" class="btn btn-primary" style="background: var(--ink-inverted); color: var(--ink); border-color: var(--ink-inverted);" data-event="Demo Click">Plan een demo</a>
+      <p class="cta-alt">of <a href="/zo-werkt-het">bekijk eerst hoe het werkt</a></p>
     </div>
   </section>
 
-  <!-- ===== Footer ===== -->
+  <!-- ===== Footer =====
+       Copied verbatim from index.html / test.html (the canonical v2 source). -->
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-brand">
@@ -206,7 +226,6 @@
       <nav class="footer-nav" aria-label="Footermenu">
         <span class="footer-heading">Platform</span>
         <a href="/workflows">Workflows met AI</a>
-        <a href="/receptenboek">Receptenboek</a>
         <a href="/koppelingen">Koppelingen</a>
         <a href="/vertrouwen">Vertrouwen</a>
         <a href="/zo-werkt-het">Zo werkt het</a>
@@ -241,6 +260,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=20260817"></script>
+  <script src="js/main.js?v=20260818"></script>
 </body>
 </html>
