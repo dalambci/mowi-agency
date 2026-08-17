@@ -1,1922 +1,432 @@
 /* ==========================================================================
-   Mowi — main stylesheet (rebuild v2, Stage 0: Foundation)
-   Full clean rewrite. Replaces the rebrand-era stylesheet (see git history
-   on branch `master` for that version — warm-bone + Mowi-orange accent,
-   mid-migration back-compat alias layer). This rebuild is monochrome only:
-   black ink on warm-bone paper, or bone-on-black in inverted sections.
-   No accent color, no colored tags, no color-coding anywhere.
+   Mowi — skeleton stylesheet (structure-first rebuild, 2026-08-18)
 
-   Plain CSS, no build step, no framework, no back-compat alias layer — every
-   page migrates to these token names in the same effort this file was
-   written in (some not-yet-rebuilt pages will look unstyled until their own
-   later build stage — expected, this is a feature branch).
+   Successor to the one-day monochrome v2 rebuild (see git history). The
+   founder's direction after reviewing v2 live: mirror shapes.co's chrome
+   STRUCTURE exactly — header, footer, spacing, the rounded footer panel —
+   on the Mowi dashboard's own light palette, with every page left blank
+   until real content exists. All nav/footer labels are shapes.co's own,
+   kept deliberately as placeholders: the founder renames them himself
+   later; the point right now is correct structure, not correct words.
 
-   ---- Organization -----------------------------------------------------
-   Sections are marked with dashed banner comments (see the one directly
-   below this) — kept from the previous system, a good convention, not
-   brand debt. Read top to
-   bottom: tokens -> reset -> layout primitives -> typography -> buttons ->
-   header/nav -> components (chat input, hero frame, pill tabs, card strip,
-   orb, logo wall, trust strip, pull quote, steps, accordion, cta band) ->
-   footer -> browser-frame -> utilities.
+   Palette source of truth: reference/dashboard-css/dashboard.css (the real
+   client dashboard). Page bg = the dashboard SIDEBAR color (#FCFBFA), per
+   the founder's explicit ask. The footer band greige comes from the same
+   dashboard family (its border/avatar tone), paralleling how shapes.co
+   pairs its page color with a darker band.
+
+   Footer recipe measured live on shapes.co (Playwright, 2026-08-18):
+   - full-width band, padding-top 120px
+   - pre-footer CTA block ON the band (headline+button left, visual right)
+   - then the footer panel: page-bg color, border-radius 30px 30px 0 0
+     (rounded top ONLY), inset from the sides (70px @1440 via container
+     margin 30 + padding 40; 20px @390), padding 60px (24px mobile),
+     running flush to the very bottom of the page.
+
+   Plain CSS, no build step, no framework.
    ========================================================================== */
 
 /* --- Design tokens -------------------------------------------------------- */
 :root {
-  /* Core palette — the ENTIRE palette. Black ink on warm-bone paper, or
-     bone-on-black inverted. No --accent, no hue anywhere in this file. */
-  --bg: #faf6ef;                     /* page background — warm bone, not neutral grey */
-  --bg-band: #f1e6d6;                /* alternating section band — a shade down from --bg */
-  --bg-inverted: #1c1712;            /* dark inverted section (trust/CTA bands, mobile nav sheet) */
-  --surface: #ffffff;                /* cards/panels on light backgrounds */
-  --surface-inverted: #262019;       /* cards/panels sitting on --bg-inverted — one step lighter */
-  --ink: #1c1712;                    /* body/heading text — warm near-black */
-  --ink-muted: #6b5f50;              /* secondary/muted text — warm grey-brown, not cool grey */
-  --ink-inverted: #faf6ef;           /* text on dark surfaces */
-  --ink-inverted-muted: rgba(250, 246, 239, 0.65);
+  /* Dashboard-derived neutrals — see header comment for provenance */
+  --bg: #fcfbfa;             /* page background AND footer panel — dashboard sidebar */
+  --band: #ece8e4;           /* footer band greige — dashboard border/avatar tone */
+  --surface: #ffffff;        /* header bar, cards */
+  --muted: #f5f2f0;          /* hover fills */
+  --ink: #121110;            /* primary text — dashboard --text */
+  --ink-2: #595653;          /* secondary text — dashboard --text-2 */
+  --ink-3: #8a8782;          /* tertiary text — dashboard --text-3 */
+  --border: #ece8e4;
 
-  --border: #e6d8c3;                 /* hairline borders on light surfaces — warm-tinted */
-  --border-inverted: rgba(250, 246, 239, 0.14); /* hairline borders on dark surfaces */
-  --border-strong: rgba(28, 23, 18, 0.82); /* header/segment dividers — bolder than the hairline */
-  --border-ink: var(--ink);          /* solid 1px black borders on cards/tags/secondary buttons */
-
-  /* Type */
   --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-serif-emph: "Instrument Serif", Georgia, "Times New Roman", serif;
+  /* Instrument Serif italic stays available for headline emphasis once
+     real content returns — unused in the blank skeleton but the pages all
+     load it, so keep the token. */
+  --font-serif-emph: "Instrument Serif", Georgia, serif;
 
-  --text-hero: clamp(2.75rem, 6.5vw, 5.5rem);
-  --text-h1: clamp(2.25rem, 4.5vw, 3.5rem);
-  --text-h2: clamp(1.75rem, 3vw, 2.5rem);
-  --text-h3: 1.25rem;
-  --text-lead: clamp(1.05rem, 1.4vw, 1.25rem);
-  --text-body: 1rem;
-  --text-small: 0.875rem;
-  --text-kicker: 0.8125rem;
-
-  --tracking-tighter: -0.03em;   /* hero/h1 display headings */
-  --tracking-tight: -0.02em;     /* h2 */
-  --tracking-normal: 0em;
-  --tracking-wide: 0.08em;       /* kickers/eyebrows, uppercase */
-
-  /* Space — 4px base */
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-5: 24px;
-  --space-6: 32px;
-  --space-7: 48px;
-  --space-8: 64px;
-  --space-9: 96px;
-  --space-10: 128px;
-
-  /* Radius — three steps only. No square-corner default anywhere except the
-     browser-window frame below, which stays literal 0 on purpose (a
-     deliberate hard-edged contrast against the pill/rounded system, same
-     reasoning the old system used — no dedicated token needed for a single
-     literal zero). */
+  --radius-header: 18px;     /* the floating header bar */
+  --radius-footer: 30px;     /* footer panel top corners — measured on shapes */
+  --radius-btn: 12px;        /* CTA buttons: rounded-rect, NOT full pill (measured) */
+  --radius-card: 12px;
   --radius-pill: 999px;
-  --radius-card: 20px;
-  --radius-frame: 28px;
 
-  /* Motion — one simple, non-bouncy ease for the small set of transitions
-     still in scope (color/border swaps, dropdown/accordion open-close,
-     opacity cross-fades). No "premium deceleration" curve, no overshoot/
-     bounce curve — those existed to sell hover-lift/pop motion, which is
-     cut. See CLAUDE.md's "No invented motion" constraint. */
-  --ease: cubic-bezier(0.4, 0, 0.2, 1);
-
-  --section-gap: 6rem; /* drives the footer's own top margin */
-
-  --container-width: 86.25rem; /* 1380px */
-  --container-pad: 1rem;
-
-  /* Content/prose typography (reference = /blog) — unchanged mechanism,
-     scoped to genuine prose headings/body, not the display scale above.
-     build-blog.js and the 3 shipped posts read these tokens directly. */
-  --content-h1-size: clamp(1.625rem, 1.35rem + 1vw, 2.125rem);
-  --content-h1-line-height: 1.25;
-  --content-h1-margin-bottom: 1.5rem;
-  --content-h2-size: 1.375rem;
-  --content-h2-margin-top: 2.5rem;
-  --content-h2-margin-bottom: 0.75rem;
-  --content-p-line-height: 1.7;
-  --content-p-margin-bottom: 1.25rem;
-
-  --breadcrumb-font-size: 0.875rem;
-  --breadcrumb-color: var(--ink-muted);
-  --breadcrumb-margin-bottom: 0.75rem;
+  /* shapes' inset rhythm: content sits 70px from the viewport edge @1440,
+     narrowing on smaller screens. One container serves header, band and
+     panel so all three align. */
+  --edge: 30px;              /* container side margin */
+  --gutter: 40px;            /* container side padding */
+  --footer-pad: 60px;        /* footer panel inner padding, desktop */
 }
 
-@media (min-width: 40rem) {
-  :root {
-    --container-pad: 1.5rem;
-    --breadcrumb-margin-bottom: 1.5rem;
-    --breadcrumb-space-block: 15px;
-  }
-}
-
-@media (min-width: 64rem) {
-  :root {
-    --section-gap: 8rem;
-    --container-pad: 3rem;
-  }
-}
-
-/* --- Reset ------------------------------------------------------------------ */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
+/* --- Reset ----------------------------------------------------------------- */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 body {
-  margin: 0;
   background: var(--bg);
   color: var(--ink);
   font-family: var(--font-sans);
   font-size: 1rem;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+ul { list-style: none; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 
-/* A whisper of paper grain across the whole page — static texture, not
-   motion, kept from the previous system because a warm bone canvas benefits
-   from a hint of grain rather than reading as flat digital color. Pure
-   CSS/SVG (feTurbulence), no image asset, fixed + pointer-events:none. */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  pointer-events: none;
-  opacity: 0.02;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-}
-
-img,
-svg {
-  max-width: 100%;
-  display: block;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-h1, h2, h3, h4, p, figure {
-  margin: 0;
-}
-
-button {
-  font-family: inherit;
-  cursor: pointer;
-}
-
-/* Visible keyboard-focus ring — ink-colored (never accent, there is none).
-   Only shows for keyboard focus, never for mouse/touch. */
-:focus-visible {
-  outline: 2px solid var(--ink);
-  outline-offset: 2px;
-}
-
-/* Global kill-switch every animation/transition on the site must honor. */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-
-/* Keep anchor targets (e.g. FAQ items, pill-tab hash targets) clear of the
-   sticky header. */
-[id] {
-  scroll-margin-top: 6rem;
-}
-
-/* --- Layout primitives -------------------------------------------------------
-   .container (max-width var(--container-width), centered, responsive
-   padding) + .section (vertical rhythm). Used together on every top-level
-   page section: <section class="section"><div class="container">...</div></section> */
+/* --- Layout primitives ----------------------------------------------------- */
 .container {
-  max-width: var(--container-width);
-  margin-inline: auto;
-  padding-inline: var(--container-pad);
+  margin: 0 var(--edge);
+  padding: 0 var(--gutter);
+}
+@media (max-width: 47.9rem) {
+  .container { margin: 0; padding: 0 20px; }
 }
 
-.section {
-  padding-block: var(--space-8);
-}
+/* main grows so the footer sits at the bottom even on blank pages */
+main { flex: 1 0 auto; }
 
-@media (min-width: 48rem) {
-  .section {
-    padding-block: var(--space-9);
-  }
-}
-
-/* Alternating sections get a full-bleed warm-greige band behind them —
-   contrast from a real background-color step, not a boxed white panel. */
-.section-tint {
-  background: var(--bg-band);
-}
-
-/* Full-bleed dark inverted section — trust/CTA bands, nothing else. */
-.section-inverted {
-  background: var(--bg-inverted);
-  color: var(--ink-inverted);
-}
-
-.section-inverted h1, .section-inverted h2, .section-inverted h3, .section-inverted h4 {
-  color: var(--ink-inverted);
-}
-
-.section-inverted .text-kicker,
-.section-inverted p {
-  color: var(--ink-inverted-muted);
-}
-
-.section-head {
-  max-width: 42rem;
-  margin-bottom: var(--space-6);
-}
-
-.section-head.center {
-  margin-inline: auto;
-  text-align: center;
-}
-
-/* Kicker/eyebrow — uppercase, factual, no hype. */
-.text-kicker {
-  display: inline-block;
-  font-size: var(--text-kicker);
-  font-weight: 700;
-  letter-spacing: var(--tracking-wide);
-  text-transform: uppercase;
-  color: var(--ink-muted);
-  margin-bottom: var(--space-3);
-}
-
-/* minmax(0, 1fr), not bare 1fr — a bare 1fr track's automatic minimum size
-   is its content's min-content width, so a long word can force a grid
-   wider than its container. minmax(0, 1fr) removes that floor. */
-.grid {
-  display: grid;
-  gap: var(--space-5);
-}
-
-.grid-2 { grid-template-columns: minmax(0, 1fr); }
-.grid-3 { grid-template-columns: minmax(0, 1fr); }
-.grid-4 { grid-template-columns: minmax(0, 1fr); }
-
-@media (min-width: 40rem) {
-  .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-
-@media (min-width: 64rem) {
-  .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-}
-
-/* --- Typography ---------------------------------------------------------------
-   Weight 800 on the display scale, tight tracking. Content convention (not
-   enforced in CSS): headlines carry exactly one serif-italic emphasis word
-   (.h-emph), never a whole heading in serif. */
-h1, h2, h3, h4 {
-  font-weight: 800;
-  color: var(--ink);
-  overflow-wrap: break-word; /* long Dutch compounds need this at narrow widths */
-}
-
-h1 {
-  font-size: var(--text-h1);
-  line-height: 1.05;
-  letter-spacing: var(--tracking-tighter);
-}
-
-.text-hero {
-  font-size: var(--text-hero);
-  font-weight: 800;
-  line-height: 1.02;
-  letter-spacing: var(--tracking-tighter);
-  color: var(--ink);
-}
-
-h2 {
-  font-size: var(--text-h2);
-  line-height: 1.15;
-  letter-spacing: var(--tracking-tight);
-}
-
-h3 {
-  font-size: var(--text-h3);
-  font-weight: 700;
-  line-height: 1.3;
-}
-
-h4 {
-  font-size: 1rem;
-  font-weight: 700;
-  line-height: 1.4;
-}
-
-/* Inline headline-emphasis pattern. Markup: <em class="h-emph">...</em>
-   inside any heading, e.g. "Vertel wat u geregeld wilt hebben.
-   <em class="h-emph">Mowi zet het aan het werk.</em>" — only the emphasized
-   span switches font/style; the rest stays Plus Jakarta Sans. Normal (not
-   tight) tracking and regular weight — Instrument Serif italic reads
-   cramped under a tight sans display tracking. */
-.h-emph {
-  font-family: var(--font-serif-emph);
-  font-style: italic;
-  font-weight: 400;
-  letter-spacing: var(--tracking-normal);
-}
-
-.text-lead {
-  font-size: var(--text-lead);
-  font-weight: 500;
-  color: var(--ink-muted);
-  line-height: 1.5;
-}
-
-.text-body {
-  font-size: var(--text-body);
-}
-
-.text-small {
-  font-size: var(--text-small);
-}
-
-.muted {
-  color: var(--ink-muted);
-}
-
-.text-center { text-align: center; }
-.mt-0 { margin-top: 0; }
-
-/* Compact content heading — a card/section title too small for the hero h1
-   scale but that still needs to read as a real headline. Uses the /blog
-   content-heading token instead of a one-off hardcoded font-size. */
-.prose-heading {
-  font-size: var(--content-h1-size);
-  line-height: var(--content-h1-line-height);
-}
-
-/* --- Buttons -------------------------------------------------------------------
-   Full-pill geometry — the one deliberate "loud" shape on the site. Two
-   variants only, neither one colored: solid black fill / bone text
-   (primary), or bone fill / black 1px border (secondary). Sentence case. */
-.btn {
+/* --- Buttons ---------------------------------------------------------------
+   Two styles, mirroring shapes: a dark rounded-rect primary and a plain
+   text link. No colored variant exists. */
+.btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  height: 3.25rem;
-  padding-inline: 1.75rem;
-  border-radius: var(--radius-pill);
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: var(--tracking-normal);
-  white-space: nowrap;
-  transition: background-color 0.15s var(--ease), color 0.15s var(--ease), border-color 0.15s var(--ease), opacity 0.15s var(--ease);
-  border: 1px solid transparent;
-}
-
-/* Buttons must wrap, not overflow, in narrow cards/columns. */
-@media (max-width: 30rem) {
-  .btn {
-    height: auto;
-    min-height: 3.25rem;
-    padding-block: 0.75rem;
-    white-space: normal;
-    text-align: center;
-  }
-}
-
-.btn-primary {
   background: var(--ink);
   color: var(--bg);
-  border-color: var(--ink);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  padding: 0.875rem 1.5rem;
+  border-radius: var(--radius-btn);
+  transition: opacity 0.15s ease;
 }
+.btn-primary:hover { opacity: 0.85; }
 
-.btn-primary:hover {
-  opacity: 0.82;
-}
-
-.btn-secondary {
-  background: var(--bg);
-  color: var(--ink);
-  border-color: var(--border-ink);
-}
-
-.btn-secondary:hover {
-  background: var(--bg-band);
-}
-
-/* Secondary button sitting on a dark/inverted surface (cta-band, footer,
-   mobile nav sheet) — bone fill/border on black, not black-on-black. */
-.section-inverted .btn-secondary,
-.cta-band .btn-secondary {
-  background: var(--ink-inverted);
-  color: var(--ink);
-  border-color: var(--ink-inverted);
-}
-
-.section-inverted .btn-secondary:hover,
-.cta-band .btn-secondary:hover {
-  opacity: 0.85;
-}
-
-.btn-block {
-  width: 100%;
-}
-
-/* --- Site header ----------------------------------------------------------------
-   New structure (deliberate change from the pre-rebuild header): logo left,
-   nav center, Login + "Plan een demo" pill right. Below 64rem (nav needs
-   more room than the old 48rem breakpoint gave it: Product▾ / How it works /
-   Docs / About / Blog is 5 items plus two header-actions, vs. the old
-   header's 4), .main-nav collapses into a full-height dark overlay sheet;
-   .header-actions (Login + CTA) stays visible in the compact bar at every
-   width — only the link LIST collapses, not the primary conversion actions. */
+/* --- Site header ------------------------------------------------------------
+   shapes.co pattern: a white, rounded bar floating inside the page margins,
+   sticky. Logo left → nav directly after → actions right. */
 .site-header {
   position: sticky;
-  top: var(--container-pad);
-  z-index: 50;
-  padding-inline: var(--container-pad);
-  transition: top 0.2s var(--ease);
+  top: 12px;
+  z-index: 100;
+  margin: 12px var(--edge) 0;
 }
-
-.site-header.is-scrolled {
-  top: 10px;
-}
-
-@media (max-width: 63.9375rem) {
-  .site-header.is-scrolled {
-    top: 0;
-  }
-}
-
 .header-bar {
-  max-width: var(--container-width);
-  margin-inline: auto;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: var(--space-4);
-  min-height: 4.25rem;
-  background: var(--bg);
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-card);
-  padding-inline: var(--space-4);
+  gap: 2.5rem;
+  background: var(--surface);
+  border-radius: var(--radius-header);
+  box-shadow: 0 1px 2px rgba(18, 17, 16, 0.05);
+  padding: 0.75rem 1.5rem;
+  min-height: 64px;
 }
+.wordmark { display: inline-flex; align-items: center; gap: 0.5rem; flex-shrink: 0; }
+.wordmark-icon { height: 26px; width: auto; }
+.wordmark-text { height: 17px; width: auto; }
 
-.wordmark {
+.main-nav { display: flex; flex: 1; }
+.main-nav > ul {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+.main-nav > ul > li > a,
+.nav-dropdown-trigger {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  flex-shrink: 0;
-}
-
-.wordmark-icon {
-  display: block;
-  height: 28px;
-  width: auto;
-}
-
-.wordmark-text {
-  display: block;
-  height: 18px;
-  width: auto;
-}
-
-.wordmark-lg .wordmark-icon {
-  height: 40px;
-}
-
-.wordmark-lg .wordmark-text {
-  height: 26px;
-}
-
-/* Wordmark placed on a dark/inverted surface (mobile nav sheet) — the PNGs
-   are black ink on a transparent background, so on --bg-inverted they'd be
-   invisible. invert(1) flips RGB only (alpha untouched, so transparency and
-   the texture/grain ramp both survive) turning black-on-transparent into
-   bone-on-transparent — the correct trick for this specific asset. */
-.section-inverted .wordmark-icon,
-.section-inverted .wordmark-text,
-body.nav-open .main-nav .wordmark-icon,
-body.nav-open .main-nav .wordmark-text {
-  filter: invert(1);
-}
-
-.main-nav {
-  display: none;
-}
-
-@media (min-width: 64rem) {
-  .main-nav {
-    display: flex;
-    flex: 1;
-    justify-content: center;
-  }
-}
-
-.nav-group {
-  display: flex;
-  align-items: center;
-  gap: var(--space-1);
-}
-
-.nav-group > li {
-  position: relative;
-}
-
-.nav-group > li > a,
-.nav-dropdown-trigger {
-  display: flex;
-  align-items: center;
   gap: 0.375rem;
+  padding: 0.5rem 0.875rem;
   font-size: 0.9375rem;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--ink);
-  background: none;
-  border: 1px solid transparent;
-  padding: 0.5rem 0.75rem;
-  border-radius: var(--radius-pill);
-  font-family: inherit;
-  cursor: pointer;
-  transition: background-color 0.15s var(--ease), border-color 0.15s var(--ease);
+  border-radius: 10px;
+  transition: background-color 0.15s ease;
 }
-
-/* Hover/active: a soft ink tint + border — never a color change on the text
-   itself. Active-page state reuses this exact box so it stays permanently
-   "current"-looking. */
-.nav-group > li > a:hover,
+.main-nav > ul > li > a:hover,
 .nav-dropdown-trigger:hover,
-.nav-group > li > a[aria-current="page"],
-.nav-dropdown-trigger[aria-current="page"] {
-  background: var(--bg-band);
-  border-color: var(--border);
-}
+.main-nav > ul > li > a[aria-current="page"] { background: var(--muted); }
 
+.nav-dropdown { position: relative; }
 .nav-dropdown-icon {
-  width: 0.4375rem;
-  height: 0.4375rem;
+  width: 8px; height: 8px;
   border-right: 1.5px solid currentColor;
   border-bottom: 1.5px solid currentColor;
   transform: rotate(45deg) translateY(-2px);
-  transition: transform 0.15s var(--ease);
-  flex-shrink: 0;
+  transition: transform 0.15s ease;
 }
-
 .nav-dropdown-trigger[aria-expanded="true"] .nav-dropdown-icon {
-  transform: rotate(225deg) translateY(0);
+  transform: rotate(225deg) translateY(-1px);
 }
 
-/* Desktop dropdown panel — opacity-only open/close per the "no invented
-   motion" constraint (no slide/translate, no bounce). Instant on mobile
-   (handled inside the nav sheet media query below). */
-.nav-megamenu {
+/* Dropdown panel — opacity-only open/close, keyed off aria-expanded. */
+.nav-menu {
   position: absolute;
-  top: calc(100% + 0.5rem);
+  top: calc(100% + 10px);
   left: 0;
-  z-index: 60;
-  min-width: 17rem;
-  background: var(--bg);
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-card);
-  box-shadow: 0 8px 24px rgba(28, 23, 18, 0.12);
-  padding: var(--space-3);
+  z-index: 110;
+  min-width: 21rem;
+  background: var(--surface);
+  border-radius: 14px;
+  box-shadow: 0 8px 30px rgba(18, 17, 16, 0.12);
+  padding: 0.5rem;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity 0.12s var(--ease), visibility 0s linear 0.12s;
+  transition: opacity 0.12s ease, visibility 0s linear 0.12s;
 }
-
-.nav-dropdown-trigger[aria-expanded="true"] + .nav-megamenu,
-.nav-dropdown:hover .nav-megamenu {
+.nav-dropdown-trigger[aria-expanded="true"] + .nav-menu {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
-  transition: opacity 0.12s var(--ease);
+  transition: opacity 0.12s ease;
 }
-
-.nav-dropdown:hover .nav-dropdown-icon {
-  transform: rotate(225deg) translateY(0);
-}
-
-.nav-megamenu-col ul {
-  display: flex;
-  flex-direction: column;
-  gap: 0.125rem;
-}
-
-.nav-megamenu-item-title {
+.nav-menu li a {
   display: block;
-  font-size: 0.9375rem;
-  font-weight: 700;
-  color: var(--ink);
+  padding: 0.625rem 0.75rem;
+  border-radius: 10px;
+  transition: background-color 0.15s ease;
 }
+.nav-menu li a:hover { background: var(--muted); }
+.nav-menu-item-title { display: block; font-size: 0.9375rem; font-weight: 600; }
+.nav-menu-item-desc { display: block; font-size: 0.8125rem; color: var(--ink-3); margin-top: 1px; }
 
-.nav-megamenu-item-desc {
-  display: block;
-  margin-top: 0.125rem;
-  font-size: 0.8125rem;
-  font-weight: 400;
-  color: var(--ink-muted);
-}
-
-.nav-megamenu-col li a {
-  display: block;
-  padding: 0.5rem 0.625rem;
-  border-radius: var(--radius-card);
-  transition: background-color 0.15s var(--ease);
-}
-
-.nav-megamenu-col li a:hover,
-.nav-megamenu-col li a[aria-current="page"] {
-  background: var(--bg-band);
-}
-
-/* --- Header actions (Login + "Plan een demo") ------------------------------
-   Stays visible at every width — see .site-header's own comment above for
-   why only the link LIST collapses on mobile, not these. This is the one
-   place a filled-black pill button belongs prominently; still monochrome,
-   just solid ink fill / bone text. */
 .header-actions {
   display: flex;
   align-items: center;
-  gap: var(--space-4);
+  gap: 1rem;
+  margin-left: auto;
   flex-shrink: 0;
 }
+.header-login { font-size: 0.9375rem; font-weight: 500; padding: 0.5rem 0.25rem; }
+.header-login:hover { color: var(--ink-2); }
 
-.header-login {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--ink);
-  white-space: nowrap;
-}
+/* Login + demo links inside the mobile nav sheet — hidden on desktop where
+   .header-actions covers them. */
+.nav-mobile-actions { display: none; }
 
-.header-login:hover {
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-.header-cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 2.75rem;
-  padding-inline: 1.25rem;
-  border-radius: var(--radius-pill);
-  background: var(--ink);
-  color: var(--bg);
-  font-size: 0.875rem;
-  font-weight: 700;
-  white-space: nowrap;
-  transition: opacity 0.15s var(--ease);
-}
-
-.header-cta:hover {
-  opacity: 0.82;
-}
-
-.header-cta-short {
-  display: none;
-}
-
-@media (max-width: 63.9375rem) {
-  .header-cta-full { display: none; }
-  .header-cta-short { display: inline; }
-}
-
-@media (min-width: 64rem) {
-  .header-cta {
-    height: 3rem;
-    padding-inline: 1.5rem;
-    font-size: 0.9375rem;
-  }
-}
-
-/* --- Mobile nav toggle + sheet --------------------------------------------- */
+/* Hamburger — mobile only */
 .nav-toggle {
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   gap: 5px;
-  width: 2.75rem;
-  height: 2.75rem;
-  flex-shrink: 0;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-pill);
-  background: none;
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  margin-left: auto;
 }
+.nav-toggle span { display: block; height: 2px; background: var(--ink); border-radius: 2px; }
 
-@media (min-width: 64rem) {
-  .nav-toggle {
-    display: none;
-  }
-}
-
-.nav-toggle span {
-  display: block;
-  width: 18px;
-  height: 2px;
-  background: var(--ink);
-  transition: transform 0.15s var(--ease), opacity 0.15s var(--ease);
-}
-
-.nav-toggle[aria-expanded="true"] span:nth-child(1) {
-  transform: translateY(7px) rotate(45deg);
-}
-
-.nav-toggle[aria-expanded="true"] span:nth-child(2) {
-  opacity: 0;
-}
-
-.nav-toggle[aria-expanded="true"] span:nth-child(3) {
-  transform: translateY(-7px) rotate(-45deg);
-}
-
-@media (max-width: 63.9375rem) {
-  body.nav-open::after {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background: rgba(28, 23, 18, 0.45);
-    z-index: 44;
-  }
-
+@media (max-width: 63.9rem) {
+  .site-header { margin: 12px 12px 0; }
+  .header-bar { gap: 1rem; padding: 0.625rem 1rem; min-height: 56px; }
+  /* shapes' mobile bar is logo + hamburger only — Login and the demo CTA
+     move into the nav sheet (they're listed there for mobile use). */
+  .header-actions { display: none; }
+  .nav-toggle { display: flex; }
+  .main-nav .nav-mobile-actions { display: block; border-top: 1px solid var(--border); margin-top: 0.5rem; padding-top: 0.5rem; }
+  .main-nav .nav-mobile-actions + .nav-mobile-actions { border-top: none; margin-top: 0; padding-top: 0; }
+  /* Nav collapses into a white sheet that extends the header bar downward */
   .main-nav {
-    display: block;
-    position: fixed;
-    inset: auto 0 0 0;
-    z-index: 45;
-    background: var(--bg-inverted);
-    padding: var(--space-4);
-    padding-top: var(--space-6);
-    border-top: 1px solid var(--border-inverted);
-    max-height: calc(100dvh - 6rem);
-    overflow-y: auto;
-    transform: translateY(100%);
-    visibility: hidden;
-    transition: transform 0.2s var(--ease), visibility 0s linear 0.2s;
-  }
-
-  .main-nav.is-open {
-    transform: translateY(0);
-    visibility: visible;
-    transition: transform 0.2s var(--ease);
-  }
-
-  .nav-group {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-  }
-
-  .nav-group > li > a,
-  .nav-dropdown-trigger {
-    width: 100%;
-    justify-content: space-between;
-    font-size: 1.0625rem;
-    color: var(--ink-inverted);
-    border: none;
-    border-bottom: 1px solid var(--border-inverted);
-    border-radius: 0;
-    padding: 1.125rem 0.5rem;
-  }
-
-  .nav-group > li > a:hover,
-  .nav-dropdown-trigger:hover,
-  .nav-group > li > a[aria-current="page"],
-  .nav-dropdown-trigger[aria-current="page"] {
-    background: rgba(250, 246, 239, 0.06);
-    border-color: var(--border-inverted);
-  }
-
-  .nav-megamenu {
-    position: static;
-    max-height: 0;
-    min-width: 0;
-    overflow: hidden;
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    background: none;
-    border: none;
-    box-shadow: none;
-    padding: 0;
-    transition: max-height 0.2s var(--ease);
-  }
-
-  .nav-dropdown-trigger[aria-expanded="true"] + .nav-megamenu {
-    max-height: 20rem;
-    padding-block: 0.5rem;
-  }
-
-  .nav-megamenu-item-title {
-    color: var(--ink-inverted);
-  }
-
-  .nav-megamenu-item-desc {
-    color: var(--ink-inverted-muted);
-  }
-
-  .nav-megamenu-col li a:hover {
-    background: rgba(250, 246, 239, 0.06);
-  }
-}
-
-/* --- Chat input ("describe what you want handled") -----------------------
-   The signature device: a pill field styled like a real text input but
-   built as a <div> (no real form submission), monochrome, JS-driven modes.
-   See js/main.js's initChatInput() doc comment for the full usage contract
-   (data-mode, data-prompts, data-results attributes). */
-.chat-input-frame {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-}
-
-.chat-input {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  background: var(--surface);
-  border: 1px solid var(--border-ink);
-  border-radius: var(--radius-pill);
-  padding: 0.5rem 0.5rem 0.5rem 1.5rem;
-  min-height: 3.75rem;
-}
-
-.chat-input-field {
-  flex: 1;
-  min-width: 0;
-  font-size: 1.0625rem;
-  line-height: 1.4;
-  overflow-wrap: break-word;
-}
-
-.chat-input-placeholder {
-  color: var(--ink-muted);
-}
-
-.chat-input-text {
-  color: var(--ink);
-}
-
-.chat-input-caret {
-  display: none;
-  width: 2px;
-  height: 1.1em;
-  margin-left: 2px;
-  background: var(--ink);
-  vertical-align: -0.18em;
-  animation: chat-caret-blink 1s steps(1, jump-none) infinite;
-}
-
-.chat-input.is-caret-visible .chat-input-caret {
-  display: inline-block;
-}
-
-@keyframes chat-caret-blink {
-  0%, 49% { opacity: 1; }
-  50%, 100% { opacity: 0; }
-}
-
-.chat-input-submit {
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.75rem;
-  height: 2.75rem;
-  border-radius: 50%;
-  background: var(--ink);
-  border: none;
-  color: var(--bg);
-}
-
-.chat-input-submit svg {
-  width: 1.125rem;
-  height: 1.125rem;
-}
-
-/* Response region: "Mowi denkt na…" + a plain 3-dot step loader (not a
-   continuous shimmer sweep), then a result line. Both start hidden — plain
-   HTML default is a real, correct static idle field (see initChatInput's
-   reduced-motion branch, which renders straight to a finished frame rather
-   than relying on this being visually empty). */
-.chat-input-thinking {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding-inline: 1.5rem;
-  font-size: 0.9375rem;
-  color: var(--ink-muted);
-}
-
-.chat-input-thinking[hidden] {
-  display: none;
-}
-
-.chat-input-dots {
-  display: inline-flex;
-  gap: 3px;
-}
-
-.chat-input-dots span {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--ink-muted);
-  animation: chat-dot-step 1.1s var(--ease) infinite;
-}
-
-.chat-input-dots span:nth-child(2) { animation-delay: 0.15s; }
-.chat-input-dots span:nth-child(3) { animation-delay: 0.3s; }
-
-@keyframes chat-dot-step {
-  0%, 80%, 100% { opacity: 0.25; }
-  40% { opacity: 1; }
-}
-
-.chat-input-result {
-  display: flex;
-  align-items: center;
-  gap: 0.625rem;
-  padding: 0.875rem 1.5rem;
-  border: 1px solid var(--border-ink);
-  border-radius: var(--radius-card);
-  background: var(--surface);
-  font-size: 0.9375rem;
-  font-weight: 600;
-}
-
-.chat-input-result[hidden] {
-  display: none;
-}
-
-.chat-input-result-check {
-  flex-shrink: 0;
-  width: 1.125rem;
-  height: 1.125rem;
-}
-
-/* --- Hero frame -------------------------------------------------------------
-   Rounded-28 container holding a .chat-input plus a couple of small
-   .status-card chips. Flat fill, black border — no gradient backdrop
-   (gradients read as color/mood-lighting). */
-.hero-frame {
-  border: 1px solid var(--border-ink);
-  border-radius: var(--radius-frame);
-  background: var(--surface);
-  padding: var(--space-6);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-5);
-}
-
-@media (min-width: 40rem) {
-  .hero-frame {
-    padding: var(--space-7);
-  }
-}
-
-.hero-frame-status-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-3);
-}
-
-.status-card {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 0.875rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-pill);
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--ink);
-  background: var(--bg);
-}
-
-.status-card-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--ink);
-  flex-shrink: 0;
-}
-
-/* --- Pill tabs ---------------------------------------------------------------
-   role="tablist"/"tab"/aria-selected + panels with [hidden]. Active tab:
-   black fill, bone text. Inactive: bone fill, black border. See
-   js/main.js's initPillTabs() for the click/keyboard/hash-sync wiring. */
-.pill-tablist {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-}
-
-.pill-tab {
-  display: inline-flex;
-  align-items: center;
-  height: 2.75rem;
-  padding-inline: 1.25rem;
-  border-radius: var(--radius-pill);
-  border: 1px solid var(--border-ink);
-  background: var(--bg);
-  color: var(--ink);
-  font-size: 0.9375rem;
-  font-weight: 600;
-  transition: background-color 0.15s var(--ease), color 0.15s var(--ease);
-}
-
-.pill-tab[aria-selected="true"] {
-  background: var(--ink);
-  color: var(--bg);
-}
-
-.pill-panels {
-  margin-top: var(--space-5);
-}
-
-.pill-panel[hidden] {
-  display: none;
-}
-
-/* --- Card strip ---------------------------------------------------------------
-   Horizontally scrollable row, native scroll + scroll-snap, edge-fade +
-   arrow affordance. See js/main.js's initCardStrip(). */
-.card-strip-wrap {
-  position: relative;
-}
-
-.card-strip {
-  display: flex;
-  gap: var(--space-4);
-  overflow-x: auto;
-  scroll-snap-type: x proximity;
-  scroll-padding-inline: var(--container-pad);
-  padding-block: 0.25rem;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 2%, #000 96%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 2%, #000 96%, transparent);
-}
-
-.card-strip::-webkit-scrollbar {
-  display: none;
-}
-
-.card-strip.is-dragging {
-  cursor: grabbing;
-  scroll-snap-type: none;
-  user-select: none;
-}
-
-.strip-card {
-  flex: 0 0 auto;
-  width: 17rem;
-  scroll-snap-align: start;
-  border: 1px solid var(--border-ink);
-  border-radius: var(--radius-card);
-  background: var(--surface);
-  padding: var(--space-5);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-}
-
-/* Bordered pill tag — black 1px border, transparent fill, uppercase text.
-   No fill color, ever: category differentiation comes from the label text
-   alone, never color-coding. */
-.strip-card-tag {
-  display: inline-flex;
-  align-self: flex-start;
-  padding: 0.25rem 0.75rem;
-  border: 1px solid var(--border-ink);
-  border-radius: var(--radius-pill);
-  font-size: 0.6875rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-wide);
-  color: var(--ink);
-}
-
-.strip-card p {
-  color: var(--ink-muted);
-  font-size: 0.9375rem;
-}
-
-.strip-card-visual {
-  margin-top: auto;
-  padding-top: var(--space-3);
-}
-
-.card-strip-arrow {
-  display: none;
-}
-
-@media (min-width: 48rem) {
-  .card-strip-arrow {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: none;
     position: absolute;
-    top: 50%;
-    right: -1.25rem;
-    transform: translateY(-50%);
-    width: 2.75rem;
-    height: 2.75rem;
-    border-radius: 50%;
-    border: 1px solid var(--border-ink);
-    background: var(--bg);
-    transition: opacity 0.15s var(--ease);
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    background: var(--surface);
+    border-radius: var(--radius-header);
+    box-shadow: 0 8px 30px rgba(18, 17, 16, 0.14);
+    padding: 0.75rem;
   }
-
-  .card-strip-arrow[data-at-end="true"] {
-    opacity: 0;
-    pointer-events: none;
+  .main-nav.is-open { display: block; }
+  .main-nav > ul { flex-direction: column; align-items: stretch; gap: 0; }
+  .main-nav > ul > li > a, .nav-dropdown-trigger { width: 100%; padding: 0.75rem 0.875rem; }
+  .nav-menu {
+    position: static;
+    min-width: 0;
+    box-shadow: none;
+    padding: 0 0 0 0.875rem;
+    display: none;
+    opacity: 1; visibility: visible; pointer-events: auto;
+    transition: none;
   }
+  .nav-dropdown-trigger[aria-expanded="true"] + .nav-menu { display: block; }
 }
 
-/* ==========================================================================
-   The orb — pixelated/halftone monochrome sphere
-   Built the same way CLAUDE.md's Branding section documents for
-   mowi-icon.png: a luminance-to-alpha dot/grain ramp, dense marks read
-   solid, sparse marks read faint. NOT a flat silhouette, NOT a color
-   gradient. Two layered dot grids (avoids a too-mechanical single-frequency
-   moire) clipped to a circle, then masked by a radial alpha gradient offset
-   toward one edge to fake sphere shading — dense/opaque near the "lit"
-   point, sparse/transparent fading out. No background fill behind the dots:
-   the page surface shows through the gaps, exactly like the real logo
-   asset's own alpha channel. Pure CSS, no external image, no animation. */
-.orb {
-  --orb-size: 5.5rem;
-  --orb-ink: var(--ink);
-  position: relative;
-  display: inline-block;
-  width: var(--orb-size);
-  height: var(--orb-size);
-  flex-shrink: 0;
-  border-radius: 50%;
-  border: 1px solid var(--border);
-  overflow: hidden;
+/* --- Footer -----------------------------------------------------------------
+   The full shapes.co recipe — see the header comment for the measured
+   values. Structure:
+     footer.footer-wrap            full-width greige band
+       .container
+         .footer-cta               pre-footer CTA on the band
+         .footer-panel             rounded-top light panel, flush to bottom
+           .footer-top             logo col + 3 link columns
+           .footer-badges          placeholder badge circles (no invented
+                                   certification claims — real badges only
+                                   once Mowi actually holds them)
+           .footer-bottom          © + legal links + social               */
+.footer-wrap {
+  background: var(--band);
+  padding-top: 120px;
+  margin-top: 6rem;
 }
 
-.section-inverted .orb,
-.cta-band .orb {
-  --orb-ink: var(--ink-inverted);
-  border-color: var(--border-inverted);
-}
-
-.orb::before {
-  content: "";
-  position: absolute;
-  inset: -12%;
-  background-image:
-    radial-gradient(circle, var(--orb-ink) 34%, transparent 36%),
-    radial-gradient(circle, var(--orb-ink) 30%, transparent 32%);
-  background-size: 15% 15%, 9% 9%;
-  background-position: 0 0, 4.5% 4.5%;
-  -webkit-mask-image: radial-gradient(circle at 68% 72%, #000 0%, #000 28%, rgba(0, 0, 0, 0.4) 58%, transparent 90%);
-  mask-image: radial-gradient(circle at 68% 72%, #000 0%, #000 28%, rgba(0, 0, 0, 0.4) 58%, transparent 90%);
-}
-
-/* "Thinking" state — a different static dot-density arrangement (denser,
-   centered) to represent a processing beat. Swapped via class, e.g. from
-   js/main.js during the chat-input's auto-play sequence — never a
-   continuous idle animation. */
-.orb.orb-thinking::before {
-  background-size: 10% 10%, 6% 6%;
-  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 0%, #000 45%, transparent 92%);
-  mask-image: radial-gradient(circle at 50% 50%, #000 0%, #000 45%, transparent 92%);
-}
-
-.orb-sm { --orb-size: 3rem; }
-.orb-md { --orb-size: 5.5rem; }
-.orb-lg { --orb-size: 9rem; }
-
-/* --- Logo wall ----------------------------------------------------------------
-   Bordered grid of cells, greyscale logos. Full color on hover is a
-   permitted hover *state change* (not a scroll animation) — the logos are
-   real third-party brand marks, their inherent color isn't "color-coding"
-   our own system. */
-.logo-wall {
+.footer-cta {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  border: 1px solid var(--border);
-  border-radius: var(--radius-card);
-  overflow: hidden;
-}
-
-@media (min-width: 40rem) {
-  .logo-wall {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
-@media (min-width: 64rem) {
-  .logo-wall {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
-
-.logo-wall-cell {
-  display: flex;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
   align-items: center;
-  justify-content: center;
-  aspect-ratio: 3 / 2;
-  padding: var(--space-5);
-  border: 1px solid var(--border);
-  margin: -1px 0 0 -1px; /* collapse doubled hairlines into a shared 1px grid */
+  padding-bottom: 4rem;
 }
-
-.logo-wall-cell img {
-  max-width: 100%;
-  max-height: 2.25rem;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  filter: grayscale(1);
-  transition: filter 0.15s var(--ease);
-}
-
-.logo-wall-cell:hover img {
-  filter: grayscale(0);
-}
-
-/* --- Trust strip ---------------------------------------------------------------
-   Icon + short-claim chips, black line-icon style (inline SVG strokes,
-   monochrome, no fill color). */
-.trust-strip {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-3);
-}
-
-.trust-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.625rem 1rem;
-  border: 1px solid var(--border-ink);
-  border-radius: var(--radius-pill);
-  font-size: 0.875rem;
-  font-weight: 600;
-}
-
-.section-inverted .trust-item {
-  border-color: var(--border-inverted);
-}
-
-.trust-item svg {
-  width: 1.125rem;
-  height: 1.125rem;
-  stroke: currentColor;
-  fill: none;
-  flex-shrink: 0;
-}
-
-/* --- Pull quote -----------------------------------------------------------
-   Large serif-italic opening quote mark, room for a circular portrait
-   (rendered greyscale via CSS filter — the source photo is in color). */
-.pull-quote {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-5);
-  max-width: 42rem;
-}
-
-.pull-quote-mark {
-  font-family: var(--font-serif-emph);
-  font-style: italic;
-  font-size: 4rem;
-  line-height: 1;
-  color: var(--ink);
-}
-
-.pull-quote-text {
-  font-size: var(--text-lead);
-  line-height: 1.5;
-  font-weight: 500;
-}
-
-.pull-quote-attribution {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-}
-
-.pull-quote-portrait {
-  width: 3.25rem;
-  height: 3.25rem;
-  border-radius: 50%;
-  object-fit: cover;
-  filter: grayscale(1);
-  flex-shrink: 0;
-}
-
-.pull-quote-name {
+.footer-cta-title {
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
   font-weight: 700;
-  font-size: 0.9375rem;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
 }
+/* Right-hand visual slot — intentionally empty in the skeleton. */
+.footer-cta-visual { min-height: 200px; }
 
-.pull-quote-role {
-  font-size: 0.8125rem;
-  color: var(--ink-muted);
-}
-
-/* --- Cards (generic) ------------------------------------------------------- */
-.card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-card);
-  padding: var(--space-5);
-}
-
-@media (min-width: 40rem) {
-  .card {
-    padding: var(--space-6);
-  }
-}
-
-.card p {
-  color: var(--ink-muted);
-  margin-top: 0.5rem;
-  overflow-wrap: break-word;
-}
-
-.card.card-featured {
-  background: var(--surface-inverted);
-  color: var(--ink-inverted);
-  border-color: var(--surface-inverted);
-}
-
-.card.card-featured h3 {
-  color: var(--ink-inverted);
-}
-
-.card.card-featured p {
-  color: var(--ink-inverted-muted);
-}
-
-/* Small pill tag — bordered, no fill, matches .strip-card-tag's language. */
-.pill {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.375rem 0.9rem;
-  border-radius: var(--radius-pill);
+.footer-panel {
   background: var(--bg);
-  border: 1px solid var(--border-ink);
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--ink);
+  border-radius: var(--radius-footer) var(--radius-footer) 0 0;
+  padding: var(--footer-pad);
 }
-
-.pill-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.625rem;
-}
-
-/* --- Numbered steps ---------------------------------------------------------- */
-.steps {
-  counter-reset: step;
+.footer-top {
   display: grid;
-  gap: var(--space-5);
+  grid-template-columns: 1fr auto;
+  gap: 3rem;
 }
+.footer-logo-col .wordmark-icon { height: 34px; }
+.footer-logo-col .wordmark-text { height: 22px; }
 
-@media (min-width: 48rem) {
-  .steps {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  .steps-3 {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  /* Stage 3 (/zo-werkt-het) — the base .steps 4-column grid leaves an
-     awkward 4+1 orphan row for a 5-item timeline (Demo/Intake/Configuratie/
-     Proefperiode/Live). 3-across at tablet width, full 5-across once there's
-     room, rather than inventing a whole new stepped-list component. */
-  .steps-5 {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (min-width: 64rem) {
-  .steps-5 {
-    grid-template-columns: repeat(5, 1fr);
-  }
-}
-
-.step {
-  position: relative;
-  padding-top: var(--space-7);
-}
-
-.step::before {
-  counter-increment: step;
-  content: counter(step, decimal-leading-zero);
-  position: absolute;
-  top: 0;
-  left: 0;
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: var(--ink-muted);
-  letter-spacing: var(--tracking-tight);
-}
-
-.step h3 {
-  margin-bottom: 0.5rem;
-}
-
-.step p {
-  color: var(--ink-muted);
-}
-
-/* --- FAQ accordion --------------------------------------------------------- */
-.accordion {
-  border-top: 1px solid var(--border);
-}
-
-.accordion-item {
-  border-bottom: 1px solid var(--border);
-}
-
-.accordion-trigger {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-4);
-  padding-block: var(--space-5);
-  background: none;
-  border: none;
-  text-align: left;
-  font-size: 1.0625rem;
-  font-weight: 700;
-  color: var(--ink);
-}
-
-.accordion-icon {
-  flex-shrink: 0;
-  position: relative;
-  width: 1.5rem;
-  height: 1.5rem;
-}
-
-.accordion-icon::before,
-.accordion-icon::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  background: var(--ink);
-  transition: transform 0.15s var(--ease);
-}
-
-.accordion-icon::before {
-  width: 0.75rem;
-  height: 2px;
-  transform: translate(-50%, -50%);
-}
-
-.accordion-icon::after {
-  width: 2px;
-  height: 0.75rem;
-  transform: translate(-50%, -50%);
-}
-
-.accordion-trigger[aria-expanded="true"] .accordion-icon::after {
-  transform: translate(-50%, -50%) rotate(90deg);
-}
-
-.accordion-panel {
-  overflow: hidden;
-  max-height: 0;
-  transition: max-height 0.2s var(--ease);
-}
-
-.accordion-panel p {
-  color: var(--ink-muted);
-  padding-bottom: var(--space-5);
-  max-width: 40rem;
-}
-
-/* --- CTA band (mid-page, rounded) ------------------------------------------- */
-.cta-band {
-  background: var(--bg-inverted);
-  color: var(--ink-inverted);
-  border-radius: var(--radius-frame);
-  padding: 3.5rem 2rem;
-  text-align: center;
-}
-
-.cta-band h2 {
-  color: var(--ink-inverted);
-}
-
-.cta-band p {
-  color: var(--ink-inverted-muted);
-  max-width: 36rem;
-  margin: var(--space-4) auto 0;
-}
-
-.cta-actions {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--space-4);
-  margin-top: var(--space-6);
-}
-
-.cta-alt {
-  margin-top: var(--space-5);
-  color: var(--ink-inverted-muted);
-  font-size: 0.875rem;
-}
-
-.cta-alt a {
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  color: rgba(250, 246, 239, 0.85);
-}
-
-/* --- Pre-footer CTA band (full-bleed, edge-to-edge) -------------------------
-   Appears on every page directly above the footer — Mowi's closing-
-   statement CTA. Full-bleed (no border-radius, unlike .cta-band) so it
-   reads as the site's final beat before the footer. */
-.cta-prefooter {
-  background: var(--bg-inverted);
-  color: var(--ink-inverted);
-  margin-top: var(--section-gap);
-  padding-block: 4.5rem;
-  text-align: center;
-}
-
-.cta-prefooter h2 {
-  color: var(--ink-inverted);
-  margin-inline: auto;
-  max-width: 34rem;
-}
-
-.cta-prefooter .btn {
-  margin-top: var(--space-6);
-}
-
-/* --- Forms ------------------------------------------------------------------- */
-.form-field {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin-bottom: var(--space-5);
-}
-
-.form-field label {
-  font-size: 0.875rem;
-  font-weight: 700;
-}
-
-.form-field input,
-.form-field textarea {
-  font-family: inherit;
-  font-size: 1rem;
-  padding: 0.75rem 1rem;
-  border-radius: var(--radius-card);
-  border: 1px solid var(--border-ink);
-  background: var(--surface);
-}
-
-.form-field input:focus,
-.form-field textarea:focus {
-  outline: 2px solid var(--ink);
-  outline-offset: 1px;
-}
-
-.form-note {
-  font-size: 0.8125rem;
-  color: var(--ink-muted);
-  margin-top: var(--space-4);
-}
-
-/* --- Footer -------------------------------------------------------------------------- */
-.site-footer {
-  margin-top: var(--section-gap);
-  border-top: 1px solid var(--border);
-  padding-top: var(--space-8);
-  padding-bottom: var(--space-5);
-}
-
-.cta-prefooter + .site-footer {
-  margin-top: 0;
-  border-top: none;
-}
-
-.footer-inner {
+.footer-menus {
   display: grid;
-  gap: var(--space-6);
+  grid-template-columns: repeat(3, minmax(150px, 200px));
+  gap: 2.5rem;
 }
-
-@media (min-width: 48rem) {
-  .footer-inner {
-    grid-template-columns: 1.3fr 1fr 0.7fr 1fr;
-  }
-}
-
-.footer-brand p {
-  color: var(--ink-muted);
-  margin-top: var(--space-4);
-  max-width: 22rem;
-}
-
-.footer-nav, .footer-support, .footer-contact {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.footer-nav a, .footer-support a, .footer-contact a, .footer-contact p {
-  color: var(--ink-muted);
+.footer-menu-heading {
   font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--ink-2);
+  margin-bottom: 1.125rem;
 }
+.footer-menus li { margin-bottom: 0.875rem; }
+.footer-menus li a { font-size: 0.9375rem; }
+.footer-menus li a:hover { color: var(--ink-2); }
 
-.footer-nav a:hover, .footer-support a:hover, .footer-contact a:hover {
-  color: var(--ink);
+.footer-badges {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
 }
-
-.footer-heading {
-  font-size: 0.8125rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-wide);
-  color: var(--ink-muted);
-  margin-bottom: 0.5rem;
+/* Empty placeholder circles — structure only. Never render a SOC2/GDPR/ISO
+   claim here that Mowi doesn't hold; swap in real marks when they exist. */
+.footer-badge {
+  width: 50px;
+  height: 50px;
+  border: 1px solid var(--ink-3);
+  border-radius: 50%;
 }
 
 .footer-bottom {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-4);
-  margin-top: var(--space-7);
-  padding-top: var(--space-5);
+  gap: 1rem;
   border-top: 1px solid var(--border);
-  color: var(--ink-muted);
+  margin-top: 1.5rem;
+  padding-top: 1.75rem;
   font-size: 0.875rem;
+  color: var(--ink-2);
+}
+.footer-legal { display: flex; align-items: center; gap: 1.25rem; }
+.footer-legal a:hover { color: var(--ink); }
+.footer-social {
+  display: inline-flex;
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  background: var(--ink-3);
+  color: var(--bg);
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6875rem;
+  font-weight: 700;
 }
 
-.footer-legal {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem 1.5rem;
+@media (max-width: 63.9rem) {
+  .footer-wrap { padding-top: 72px; margin-top: 4rem; }
+  .footer-cta { grid-template-columns: 1fr; padding-bottom: 3rem; }
+  .footer-cta-visual { min-height: 120px; }
+  .footer-panel { padding: 24px; }
+  .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+  .footer-menus { grid-template-columns: 1fr; gap: 2rem; }
+  .footer-badges { justify-content: flex-start; }
+  .footer-bottom { flex-direction: column-reverse; align-items: flex-start; gap: 1rem; }
 }
 
-.footer-legal a:hover {
-  color: var(--ink);
-}
-
-/* --- Blog (marketing content, marketing tokens — a calmer READING mode, not
-   the docs stylesheet; /docs/ CSS stays scoped to /docs/ only per project
-   rule) — every .blog-* class name below is unchanged; build-blog.js and 3
-   shipped posts reference these exact selectors. ------------------------------- */
+/* --- Legal / blog prose -----------------------------------------------------
+   The 6 legal pages and the generated blog posts keep their text inside the
+   skeleton shell; this is the minimal prose contract they need. Class names
+   are load-bearing for build-blog.js and the legal pages — don't rename. */
 .blog-article {
   max-width: 42rem;
-  margin-inline: auto;
-  padding-block: 0 5rem;
+  margin: 0 auto;
+  padding: 4rem 20px;
 }
-
-.blog-breadcrumb {
-  font-size: var(--breadcrumb-font-size);
-  color: var(--breadcrumb-color);
-  margin-top: calc(var(--container-pad) + 1.5rem);
-  margin-bottom: var(--breadcrumb-margin-bottom);
-}
-
-@media (min-width: 40rem) {
-  .blog-article .blog-breadcrumb {
-    margin-top: var(--container-pad);
-    padding-block: var(--breadcrumb-space-block);
-    margin-bottom: 0;
-  }
-}
-
-.blog-article h1 {
-  font-size: var(--content-h1-size);
-  line-height: var(--content-h1-line-height);
-  margin-bottom: var(--content-h1-margin-bottom);
-}
-
-.blog-article h2 {
-  font-size: var(--content-h2-size);
-  margin-top: var(--content-h2-margin-top);
-  margin-bottom: var(--content-h2-margin-bottom);
-}
-
-.blog-article p {
-  line-height: var(--content-p-line-height);
-  margin-bottom: var(--content-p-margin-bottom);
-}
-
-.blog-article a {
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-/* Lists inside prose (legal pages: rights lists, numbered wijzigingsbeleid
-   steps, "gerelateerde documenten"). Not needed by the 3 shipped blog posts
-   (no lists in their prose), so this was a genuine gap, not covered by the
-   .blog-article rules above — added for Stage 5 (legal shells). */
-.blog-article ul,
-.blog-article ol {
-  margin-bottom: var(--content-p-margin-bottom);
-  padding-left: 1.25rem;
-}
-
-.blog-article ul {
-  list-style: disc;
-}
-
-.blog-article ol {
-  list-style: decimal;
-}
-
-.blog-article li {
-  line-height: var(--content-p-line-height);
-  margin-bottom: 0.5rem;
-}
-
-/* "Laatst bijgewerkt: ..." byline under a legal page's h1. */
-.blog-meta {
-  font-size: var(--text-small);
-  color: var(--ink-muted);
-  margin-bottom: var(--content-p-margin-bottom);
-}
-
-/* Structured-data tables (privacyverklaring, algemene-voorwaarden,
-   bedrijfsgegevens, subverwerkers) — another genuine gap, no table styling
-   existed anywhere in the v2 stylesheet yet. Minimal, reuses existing
-   tokens only. */
-.blog-table-wrap {
-  overflow-x: auto;
-  margin-bottom: var(--content-p-margin-bottom);
-}
-
-.blog-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: var(--text-small);
-}
-
-.blog-table th,
-.blog-table td {
-  text-align: left;
-  padding: 0.625rem 0.75rem;
-  border: 1px solid var(--border);
-  vertical-align: top;
-}
-
-.blog-table th {
-  background: var(--bg-band);
-  font-weight: 700;
-}
-
-/* Small inline "concept / pending review" notice box on the legal pages —
-   same visual role as the pre-rebuild inline-styled divs, rebuilt with real
-   v2 tokens instead of the old --color-* variable names (which no longer
-   exist in this stylesheet and would have rendered broken). */
+.blog-article h1 { font-size: 2rem; font-weight: 700; line-height: 1.15; margin-bottom: 0.75rem; }
+.blog-article h2 { font-size: 1.375rem; font-weight: 700; margin: 2.25rem 0 0.75rem; }
+.blog-article h3 { font-size: 1.0625rem; font-weight: 700; margin: 1.75rem 0 0.5rem; }
+.blog-article p { margin-bottom: 1rem; color: var(--ink-2); }
+.blog-article strong { color: var(--ink); }
+.blog-article a { text-decoration: underline; text-underline-offset: 2px; }
+.blog-article ul, .blog-article ol { margin: 0 0 1rem 1.25rem; color: var(--ink-2); }
+.blog-article li { margin-bottom: 0.375rem; }
+.blog-meta { font-size: 0.875rem; color: var(--ink-3); margin-bottom: 2rem; }
+.blog-table-wrap { overflow-x: auto; margin-bottom: 1rem; }
+.blog-table { border-collapse: collapse; width: 100%; font-size: 0.9375rem; }
+.blog-table th, .blog-table td { border: 1px solid var(--border); padding: 0.5rem 0.75rem; text-align: left; vertical-align: top; }
+.blog-table th { background: var(--muted); font-weight: 600; }
+.blog-breadcrumb { font-size: 0.875rem; color: var(--ink-3); margin-bottom: 1.5rem; }
+.blog-breadcrumb a { text-decoration: underline; text-underline-offset: 2px; }
 .legal-notice {
-  border-left: 3px solid var(--border-ink);
-  background: var(--bg-band);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--ink-3);
+  background: var(--muted);
+  border-radius: var(--radius-card);
   padding: 1rem 1.25rem;
-  border-radius: 0.5rem;
   margin-bottom: 2rem;
   font-size: 0.9375rem;
-  color: var(--ink-muted);
+  color: var(--ink-2);
 }
 
-/* --- Browser-window-framed screenshot slot -------------------------------------
-   Hard-edged (border-radius: 0) on purpose — the one place the site stays
-   square, a deliberate contrast against the pill/rounded geometry
-   everywhere else. Renders only once a real file exists —
-   js/broken-image-guard.js hides the whole frame if the <img> 404s. */
-.browser-frame {
-  border: 1px solid var(--border);
-  border-radius: 0;
-  background: var(--surface);
-  overflow: hidden;
-}
-
-.browser-frame-bar {
-  display: flex;
-  gap: 0.375rem;
-  padding: 0.625rem 0.75rem;
-  background: var(--bg-band);
-  border-bottom: 1px solid var(--border);
-}
-
-.browser-frame-bar span {
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: 50%;
-  background: var(--border-ink);
-}
-
-.browser-frame img {
-  width: 100%;
-  height: auto;
+/* Blog index cards — minimal */
+.blog-index { max-width: 64rem; margin: 0 auto; padding: 4rem 20px; }
+.blog-index-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.25rem; margin-top: 2rem; }
+.blog-card {
   display: block;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: 1.5rem;
+  transition: border-color 0.15s ease;
 }
+.blog-card:hover { border-color: var(--ink-3); }
+.blog-card h2 { font-size: 1.0625rem; font-weight: 700; margin: 0.5rem 0; }
+.blog-card p { font-size: 0.9375rem; color: var(--ink-2); }
+.blog-card-date { font-size: 0.8125rem; color: var(--ink-3); }
 
-.browser-frame-compact {
-  margin-top: var(--space-4);
-}
-
-/* ==========================================================================
-   Homepage
-   Two genuinely page-specific layout needs not covered by an existing
-   primitive: centering the hero's headline stack (shapes.co-style, centered
-   hero rather than the two-column .hero-with-visual the old system used),
-   and a two-column split layout for the mid-page chat-demo-beside-copy
-   section. Everything else on / reuses existing components as-is. ---------- */
-.hero-inner {
-  max-width: 46rem;
-  margin-inline: auto;
-  text-align: center;
-}
-
-.hero-inner .text-lead {
-  max-width: 34rem;
-  margin: var(--space-5) auto 0;
-}
-
-.hero-cta {
-  margin-top: var(--space-6);
-  display: flex;
-  justify-content: center;
-}
-
-.split-section {
-  display: grid;
-  gap: var(--space-6);
-  align-items: center;
-}
-
-@media (min-width: 56rem) {
-  .split-section {
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-8);
-  }
-}
-
-/* ==========================================================================
-   Workflow recipe panels (Stage 2 — /workflows)
-   Each full recipe reuses .card for its container/border/padding and
-   .pill/.pill-row for status + "systems touched" tags — no new tag
-   component needed. The one genuinely new piece is the bullet list for a
-   recipe's "wat Mowi doet" steps: nothing else in the system needed a
-   marked list before this page. Monochrome dash marker, no icon/color. */
-.workflow-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin-top: 0.75rem;
-}
-
-.workflow-list li {
-  position: relative;
-  padding-left: 1.25rem;
-  color: var(--ink-muted);
-}
-
-.workflow-list li::before {
-  content: "\2013"; /* en dash */
-  position: absolute;
-  left: 0;
-  color: var(--ink);
-  font-weight: 700;
+/* --- Reduced motion ---------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+  html { scroll-behavior: auto; }
 }

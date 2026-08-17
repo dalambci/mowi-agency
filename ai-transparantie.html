@@ -9,18 +9,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260818" />
+  <link rel="stylesheet" href="css/style.css?v=20260818-2" />
   <link rel="icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="shortcut icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260804-3" />
   <link rel="apple-touch-icon-precomposed" href="assets/apple-icon-180.png?v=20260804-3" />
   <script defer data-domain="mowi.agency" src="https://plausible.io/js/script.js"></script>
-  <script src="js/broken-image-guard.js?v=20260805-1"></script>
 </head>
 <body>
 
-  <!-- ===== Header / navigation =====
-       Copied verbatim from index.html / test.html (the canonical v2 source). -->
   <header class="site-header">
     <div class="header-bar">
       <a href="/" class="wordmark" aria-label="Mowi - home">
@@ -29,49 +26,38 @@
       </a>
 
       <nav class="main-nav" id="main-nav" aria-label="Hoofdmenu">
-        <ul class="nav-group">
+        <ul>
+          <li><a href="/ai">AI</a></li>
           <li class="nav-dropdown">
             <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="product-menu" aria-haspopup="true">
               Product
               <span class="nav-dropdown-icon" aria-hidden="true"></span>
             </button>
-            <div class="nav-megamenu nav-megamenu-single" id="product-menu">
-              <div class="nav-megamenu-col">
-                <ul>
-                  <li>
-                    <a href="/workflows">
-                      <span class="nav-megamenu-item-title">Workflows</span>
-                      <span class="nav-megamenu-item-desc">Maak workflows met AI</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="/koppelingen">
-                      <span class="nav-megamenu-item-title">Koppelingen</span>
-                      <span class="nav-megamenu-item-desc">Uw systemen, één geheel</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="/vertrouwen">
-                      <span class="nav-megamenu-item-title">Vertrouwen</span>
-                      <span class="nav-megamenu-item-desc">Eerst proefdraaien, dan pas live</span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
+            <div class="nav-menu" id="product-menu">
+              <ul>
+                <li><a href="/people-directory"><span class="nav-menu-item-title">People Directory</span><span class="nav-menu-item-desc">One place for all employee data</span></a></li>
+                <li><a href="/time-off"><span class="nav-menu-item-title">Time Off</span><span class="nav-menu-item-desc">Smart holiday &amp; leave management</span></a></li>
+                <li><a href="/attendance"><span class="nav-menu-item-title">Attendance</span><span class="nav-menu-item-desc">Robust time tracking</span></a></li>
+                <li><a href="/workflows"><span class="nav-menu-item-title">Workflows</span><span class="nav-menu-item-desc">Put processes on autopilot</span></a></li>
+                <li><a href="/performance-growth"><span class="nav-menu-item-title">Performance &amp; Growth</span><span class="nav-menu-item-desc">Performance cycles that work</span></a></li>
+                <li><a href="/people-analytics"><span class="nav-menu-item-title">People Analytics</span><span class="nav-menu-item-desc">Insights that push businesses forward</span></a></li>
+                <li><a href="/surveys"><span class="nav-menu-item-title">Surveys</span><span class="nav-menu-item-desc">Run &amp; analyse any survey in minutes</span></a></li>
+                <li><a href="/docs-esign"><span class="nav-menu-item-title">Docs &amp; eSign</span><span class="nav-menu-item-desc">Centralise documents &amp; signatures</span></a></li>
+              </ul>
             </div>
           </li>
-          <li><a href="/zo-werkt-het">How it works</a></li>
-          <li><a href="/docs/">Docs</a></li>
-          <li><a href="/over">About</a></li>
-          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/vibe-hub">Vibe Hub</a></li>
+          <li><a href="/pricing">Pricing</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/careers">Careers</a></li>
+          <li class="nav-mobile-actions"><a href="https://my.mowi.agency/login" target="_blank" rel="noopener">Login</a></li>
+          <li class="nav-mobile-actions"><a href="/demo" data-event="Demo Click">Get a demo</a></li>
         </ul>
       </nav>
 
       <div class="header-actions">
         <a href="https://my.mowi.agency/login" target="_blank" rel="noopener" class="header-login">Login</a>
-        <a href="/demo" class="header-cta" data-event="Demo Click">
-          <span class="header-cta-full">Plan een demo</span><span class="header-cta-short">Demo</span>
-        </a>
+        <a href="/demo" class="btn-primary" data-event="Demo Click">Get a demo</a>
       </div>
 
       <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="main-nav" aria-label="Menu openen">
@@ -80,164 +66,154 @@
     </div>
   </header>
 
-  <main>
+  <main class="blog-article container">
 
-    <!-- ===== 1. Hero ===== -->
-    <section class="section">
-      <div class="container">
-        <div class="hero-inner">
-          <span class="text-kicker">AI-transparantie</span>
-          <h1>AI die zich <em class="h-emph">bekendmaakt.</em></h1>
-          <p class="text-lead">Mowi bouwt AI-workflows die e-mail en telefoongesprekken voor bedrijven afhandelen. Als u met een van onze workflows te maken krijgt — als bezoeker, als beller, of als medewerker van een klant — wilt u weten waar u aan toe bent. Deze pagina legt precies uit waar wij AI inzetten, wat die AI wel en niet beslist, en hoe wij u dat laten weten.</p>
-        </div>
+    <p class="blog-meta">AI-transparantie</p>
+    <h1>AI die zich <em>bekendmaakt.</em></h1>
+    <p>Mowi bouwt AI-workflows die e-mail en telefoongesprekken voor bedrijven afhandelen. Als u met een van onze workflows te maken krijgt — als bezoeker, als beller, of als medewerker van een klant — wilt u weten waar u aan toe bent. Deze pagina legt precies uit waar wij AI inzetten, wat die AI wel en niet beslist, en hoe wij u dat laten weten.</p>
 
-        <div class="card card-featured" style="max-width: 42rem; margin: var(--space-6) auto 0; text-align: center;">
-          <p style="color: var(--ink-inverted);">Ons uitgangspunt: we vertellen u precies wanneer u met AI spreekt, want dat hoort zo. Niet omdat de wet het verplicht — al doet die dat ook — maar omdat een assistent die zich voordoet als mens het vertrouwen breekt dat wij juist proberen te verdienen.</p>
-        </div>
-      </div>
-    </section>
+    <div class="legal-notice">
+      <p>Ons uitgangspunt: we vertellen u precies wanneer u met AI spreekt, want dat hoort zo. Niet omdat de wet het verplicht — al doet die dat ook — maar omdat een assistent die zich voordoet als mens het vertrouwen breekt dat wij juist proberen te verdienen.</p>
+    </div>
 
-    <!-- ===== 2. Waar gebruikt Mowi AI ===== -->
-    <section class="section section-tint">
-      <div class="container" style="max-width: 42rem;">
-        <h2>1. Waar gebruikt Mowi AI</h2>
-        <p style="margin-top: 1rem;">Mowi zet AI op dit moment op twee plekken in bij haar klanten:</p>
-        <ul class="workflow-list" style="margin-top: 1rem;">
-          <li><strong>E-mailclassificatie &amp; conceptantwoorden ("E-mail agent").</strong> De AI leest binnenkomende e-mail, sorteert deze naar de juiste categorie en stelt een conceptantwoord op. De AI verstuurt dit concept niet zelf naar de klant — zie punt 3 hieronder.</li>
-          <li><strong>Spraakgestuurde telefonie ("Call agent").</strong> De AI neemt inkomende telefoongesprekken op, beantwoordt vragen op basis van de website van het bedrijf dat u belt, en vat het gesprek samen voor de betreffende medewerker.</li>
-        </ul>
-        <p style="margin-top: 1rem;">Beide workflows zijn ondersteunend: ze bereiden werk voor of geven een eerste antwoord, maar nemen — zoals hieronder toegelicht — geen beslissingen met rechtsgevolg voor u.</p>
-      </div>
-    </section>
+    <h2>1. Waar gebruikt Mowi AI</h2>
+    <p>Mowi zet AI op dit moment op twee plekken in bij haar klanten:</p>
+    <ul>
+      <li><strong>E-mailclassificatie &amp; conceptantwoorden ("E-mail agent").</strong> De AI leest binnenkomende e-mail, sorteert deze naar de juiste categorie en stelt een conceptantwoord op. De AI verstuurt dit concept niet zelf naar de klant — zie punt 3 hieronder.</li>
+      <li><strong>Spraakgestuurde telefonie ("Call agent").</strong> De AI neemt inkomende telefoongesprekken op, beantwoordt vragen op basis van de website van het bedrijf dat u belt, en vat het gesprek samen voor de betreffende medewerker.</li>
+    </ul>
+    <p>Beide workflows zijn ondersteunend: ze bereiden werk voor of geven een eerste antwoord, maar nemen — zoals hieronder toegelicht — geen beslissingen met rechtsgevolg voor u.</p>
 
-    <!-- ===== 3. Bij de Call-agent: openingszin =====
-         The exact opening line is still an unresolved editorial/legal item
+    <!-- The exact opening line is still an unresolved editorial/legal item
          (per the old page's own "CONCEPT-gate" marker) — carried forward
          honestly rather than presented as final, and not invented further. -->
-    <section class="section">
-      <div class="container" style="max-width: 42rem;">
-        <h2>2. Bij de Call-agent: u weet het vanaf de eerste seconde</h2>
-        <p style="margin-top: 1rem;">Elk telefoongesprek met een Mowi Call-agent opent met deze mededeling, hardop uitgesproken, voordat er iets anders gebeurt:</p>
-        <blockquote style="border-left: 3px solid var(--border-ink); padding-left: 1.25rem; margin: 1.5rem 0; font-style: italic; color: var(--ink-muted);">
-          "U spreekt met de digitale assistent van {bedrijf}. Dit gesprek wordt opgenomen en automatisch samengevat. Zegt u 'medewerker', dan verbind ik u direct door."
-        </blockquote>
-        <div style="background: var(--surface); border: 1px solid var(--border-ink); border-radius: var(--radius-card); padding: 1rem 1.25rem; margin-bottom: 1.5rem;">
-          <p class="text-small" style="color: var(--ink-muted); margin: 0;"><strong style="color: var(--ink);">Concept.</strong> Deze exacte tekst ligt nog ter definitieve goedkeuring voor bij Mowi; zodra bevestigd is dit de vastgelegde zin.</p>
-        </div>
-        <p>Deze mededeling is <strong>niet overslaanbaar</strong> en <strong>niet door de klant aan te passen</strong> — het enige onderdeel dat wijzigt is de bedrijfsnaam zelf. Dat ligt vast om één reden: het is geen marketingkeuze, het is een wettelijke verplichting. Artikel 50 lid 1 van de Europese AI-verordening (AI Act) verplicht iedere aanbieder van een AI-systeem dat met mensen communiceert, ondubbelzinnig te laten weten dat de gebruiker met AI van doen heeft — vóór of bij het eerste contactmoment. Omdat Mowi deze Call-agents onder haar eigen merk aanbiedt, is Mowi voor deze verplichting de "aanbieder" onder de AI Act, niet de klant die de agent gebruikt. Mowi legt deze mededeling daarom zelf technisch vast, zodat geen enkele klant — bewust of onbewust — deze verplichting kan omzeilen.</p>
-        <p style="margin-top: 1rem;">Enkele aanvullende punten:</p>
-        <ul class="workflow-list" style="margin-top: 1rem;">
-          <li><strong>Bezwaar tegen opname.</strong> Maakt u tijdens het gesprek bezwaar tegen het opnemen, dan verbindt de agent u direct door naar een medewerker en wordt de opname van dat gesprek verwijderd.</li>
-          <li><strong>Belgische bellers.</strong> Voor bellers vanuit België gebruiken wij dezelfde openingszin; deze voldoet ruimschoots aan de Belgische minimumvereisten.</li>
-          <li><strong>Bewaartermijn.</strong> Geluidsopnames worden na 30 dagen verwijderd; tekstuele samenvattingen/transcripties worden maximaal 365 dagen bewaard, tenzij de klant van Mowi een kortere termijn heeft ingesteld.</li>
-        </ul>
-      </div>
-    </section>
+    <h2>2. Bij de Call-agent: u weet het vanaf de eerste seconde</h2>
+    <p>Elk telefoongesprek met een Mowi Call-agent opent met deze mededeling, hardop uitgesproken, voordat er iets anders gebeurt:</p>
+    <blockquote>
+      "U spreekt met de digitale assistent van {bedrijf}. Dit gesprek wordt opgenomen en automatisch samengevat. Zegt u 'medewerker', dan verbind ik u direct door."
+    </blockquote>
+    <div class="legal-notice">
+      <p><strong>Concept.</strong> Deze exacte tekst ligt nog ter definitieve goedkeuring voor bij Mowi; zodra bevestigd is dit de vastgelegde zin.</p>
+    </div>
+    <p>Deze mededeling is <strong>niet overslaanbaar</strong> en <strong>niet door de klant aan te passen</strong> — het enige onderdeel dat wijzigt is de bedrijfsnaam zelf. Dat ligt vast om één reden: het is geen marketingkeuze, het is een wettelijke verplichting. Artikel 50 lid 1 van de Europese AI-verordening (AI Act) verplicht iedere aanbieder van een AI-systeem dat met mensen communiceert, ondubbelzinnig te laten weten dat de gebruiker met AI van doen heeft — vóór of bij het eerste contactmoment. Omdat Mowi deze Call-agents onder haar eigen merk aanbiedt, is Mowi voor deze verplichting de "aanbieder" onder de AI Act, niet de klant die de agent gebruikt. Mowi legt deze mededeling daarom zelf technisch vast, zodat geen enkele klant — bewust of onbewust — deze verplichting kan omzeilen.</p>
+    <p>Enkele aanvullende punten:</p>
+    <ul>
+      <li><strong>Bezwaar tegen opname.</strong> Maakt u tijdens het gesprek bezwaar tegen het opnemen, dan verbindt de agent u direct door naar een medewerker en wordt de opname van dat gesprek verwijderd.</li>
+      <li><strong>Belgische bellers.</strong> Voor bellers vanuit België gebruiken wij dezelfde openingszin; deze voldoet ruimschoots aan de Belgische minimumvereisten.</li>
+      <li><strong>Bewaartermijn.</strong> Geluidsopnames worden na 30 dagen verwijderd; tekstuele samenvattingen/transcripties worden maximaal 365 dagen bewaard, tenzij de klant van Mowi een kortere termijn heeft ingesteld.</li>
+    </ul>
 
-    <!-- ===== 4. Menselijke controle ===== -->
-    <section class="section section-tint">
-      <div class="container" style="max-width: 42rem;">
-        <h2>3. Menselijke controle: een mens blijft aan het stuur</h2>
-        <p style="margin-top: 1rem;">Bij e-mail stelt de AI een <strong>concept</strong> op — meer niet. Een medewerker van het bedrijf dat u een e-mail stuurde, beoordeelt dat concept en verstuurt het pas na die beoordeling. Standaard verstuurt de AI dus nooit automatisch namens een bedrijf.</p>
-        <p style="margin-top: 1rem;">Een klant van Mowi kan hiervan alleen afwijken door <strong>expliciet en schriftelijk</strong> te kiezen voor een beperkte, geautoriseerde vorm van automatische afhandeling, per categorie e-mail apart aangevraagd. Deze afwijking is vastgelegd in de gebruiksvoorwaarden die Mowi met haar klanten afspreekt en is uitdrukkelijk uitgesloten voor elke situatie die rechtsgevolgen voor u zou kunnen hebben — zie punt 5.</p>
-        <p style="margin-top: 1rem;">Bij de Call-agent geldt hetzelfde principe: zegt u op enig moment "medewerker", dan verbindt de agent u direct door naar een mens. De AI is er om een eerste antwoord te geven en werk voor te bereiden, niet om het menselijke contact te vervangen wanneer u dat wilt.</p>
-      </div>
-    </section>
+    <h2>3. Menselijke controle: een mens blijft aan het stuur</h2>
+    <p>Bij e-mail stelt de AI een <strong>concept</strong> op — meer niet. Een medewerker van het bedrijf dat u een e-mail stuurde, beoordeelt dat concept en verstuurt het pas na die beoordeling. Standaard verstuurt de AI dus nooit automatisch namens een bedrijf.</p>
+    <p>Een klant van Mowi kan hiervan alleen afwijken door <strong>expliciet en schriftelijk</strong> te kiezen voor een beperkte, geautoriseerde vorm van automatische afhandeling, per categorie e-mail apart aangevraagd. Deze afwijking is vastgelegd in de gebruiksvoorwaarden die Mowi met haar klanten afspreekt en is uitdrukkelijk uitgesloten voor elke situatie die rechtsgevolgen voor u zou kunnen hebben — zie punt 5.</p>
+    <p>Bij de Call-agent geldt hetzelfde principe: zegt u op enig moment "medewerker", dan verbindt de agent u direct door naar een mens. De AI is er om een eerste antwoord te geven en werk voor te bereiden, niet om het menselijke contact te vervangen wanneer u dat wilt.</p>
 
-    <!-- ===== 5. Synthetische stem ===== -->
-    <section class="section">
-      <div class="container" style="max-width: 42rem;">
-        <h2>4. Synthetische stem: wie u hoort, en hoe wij dat markeren</h2>
-        <p style="margin-top: 1rem;">De stem van onze Call-agents is een AI-stem, geen menselijke medewerker. Twee dingen zijn hierbij belangrijk om helder te zijn:</p>
-        <p style="margin-top: 1rem;"><strong>Mowi kloont nooit de stem van een echt, herkenbaar persoon.</strong> Onze agents gebruiken uitsluitend bibliotheekstemmen van onze spraaktechnologie-leverancier ElevenLabs — synthetische stemmen die niet aan een specifiek bestaand persoon te herleiden zijn. Dit is een harde regel in onze eigen gebruiksvoorwaarden, mede omdat het klonen van een herkenbare stem al snel biometrische persoonsgegevens raakt (art. 9 AVG).</p>
-        <p style="margin-top: 1rem;"><strong>Voor de wettelijke markering van AI-gegenereerde audio steunt Mowi op de technologie van ElevenLabs.</strong> Artikel 50 lid 2 van de AI Act verplicht aanbieders om synthetische audio, beeld en video zo te markeren dat machinaal herkenbaar is dat het kunstmatig gegenereerd is. Mowi bouwt hiervoor geen eigen watermerkingstechnologie: wij vertrouwen op de ingebouwde watermerkingsvoorziening van ElevenLabs, onze onderliggende leverancier. Dat is een bewuste, gedocumenteerde keuze om op een gespecialiseerde externe partij te steunen in plaats van dit zelf te bouwen — geen eigen Mowi-technologie. Wij vinden het belangrijker dat u dit weet dan dat wij het verbloemen als "onze" oplossing.</p>
-      </div>
-    </section>
+    <h2>4. Synthetische stem: wie u hoort, en hoe wij dat markeren</h2>
+    <p>De stem van onze Call-agents is een AI-stem, geen menselijke medewerker. Twee dingen zijn hierbij belangrijk om helder te zijn:</p>
+    <p><strong>Mowi kloont nooit de stem van een echt, herkenbaar persoon.</strong> Onze agents gebruiken uitsluitend bibliotheekstemmen van onze spraaktechnologie-leverancier ElevenLabs — synthetische stemmen die niet aan een specifiek bestaand persoon te herleiden zijn. Dit is een harde regel in onze eigen gebruiksvoorwaarden, mede omdat het klonen van een herkenbare stem al snel biometrische persoonsgegevens raakt (art. 9 AVG).</p>
+    <p><strong>Voor de wettelijke markering van AI-gegenereerde audio steunt Mowi op de technologie van ElevenLabs.</strong> Artikel 50 lid 2 van de AI Act verplicht aanbieders om synthetische audio, beeld en video zo te markeren dat machinaal herkenbaar is dat het kunstmatig gegenereerd is. Mowi bouwt hiervoor geen eigen watermerkingstechnologie: wij vertrouwen op de ingebouwde watermerkingsvoorziening van ElevenLabs, onze onderliggende leverancier. Dat is een bewuste, gedocumenteerde keuze om op een gespecialiseerde externe partij te steunen in plaats van dit zelf te bouwen — geen eigen Mowi-technologie. Wij vinden het belangrijker dat u dit weet dan dat wij het verbloemen als "onze" oplossing.</p>
 
-    <!-- ===== 6. Wat de AI wel en niet beslist ===== -->
-    <section class="section section-tint">
-      <div class="container" style="max-width: 42rem;">
-        <h2>5. Wat onze AI wel en niet beslist</h2>
-        <p style="margin-top: 1rem;">Onze AI-workflows nemen <strong>geen geautomatiseerde besluiten met rechtsgevolg of vergelijkbaar aanmerkelijk effect voor u</strong>, zoals bedoeld in artikel 22 van de AVG. Dat betekent onder meer dat onze workflows geen beslissingen nemen over bijvoorbeeld krediet, verzekering, toelating of een vergelijkbare individuele beoordeling van u als persoon.</p>
-        <p style="margin-top: 1rem;">Wat onze workflows wél doen: e-mail sorteren, een conceptantwoord voorbereiden, een telefoongesprek beantwoorden en samenvatten voor een medewerker. Overal waar een besluit daadwerkelijk gevolgen voor u kan hebben, ligt de beoordeling en de beslissing bij een mens.</p>
-      </div>
-    </section>
+    <h2>5. Wat onze AI wel en niet beslist</h2>
+    <p>Onze AI-workflows nemen <strong>geen geautomatiseerde besluiten met rechtsgevolg of vergelijkbaar aanmerkelijk effect voor u</strong>, zoals bedoeld in artikel 22 van de AVG. Dat betekent onder meer dat onze workflows geen beslissingen nemen over bijvoorbeeld krediet, verzekering, toelating of een vergelijkbare individuele beoordeling van u als persoon.</p>
+    <p>Wat onze workflows wél doen: e-mail sorteren, een conceptantwoord voorbereiden, een telefoongesprek beantwoorden en samenvatten voor een medewerker. Overal waar een besluit daadwerkelijk gevolgen voor u kan hebben, ligt de beoordeling en de beslissing bij een mens.</p>
 
-    <!-- ===== 7. Vragen of zorgen ===== -->
-    <section class="section">
-      <div class="container" style="max-width: 42rem;">
-        <h2>6. Vragen of zorgen</h2>
-        <p style="margin-top: 1rem;">Heeft u een gesprek gevoerd met een AI-workflow van Mowi, of een e-mail ontvangen die (mede) door AI is voorbereid, en heeft u vragen of zorgen daarover? Neem contact op:</p>
-        <ul class="workflow-list" style="margin-top: 1rem;">
-          <li><strong>E-mail:</strong> <a href="mailto:contact@mowi.agency" style="text-decoration: underline; text-underline-offset: 3px;">contact@mowi.agency</a></li>
-          <li><strong>Telefoon:</strong> <a href="tel:+31853335800" style="text-decoration: underline; text-underline-offset: 3px;">085 333 5800</a></li>
-        </ul>
-        <p style="margin-top: 1rem;">Wilt u weten welke partijen namens Mowi persoonsgegevens verwerken (zoals Anthropic en ElevenLabs), of hoe lang gegevens bewaard blijven? Zie onze <a href="/subverwerkers" style="text-decoration: underline; text-underline-offset: 3px;">subverwerkerspagina</a> en ons <a href="/privacyverklaring" style="text-decoration: underline; text-underline-offset: 3px;">privacybeleid</a>.</p>
-      </div>
-    </section>
-
+    <h2>6. Vragen of zorgen</h2>
+    <p>Heeft u een gesprek gevoerd met een AI-workflow van Mowi, of een e-mail ontvangen die (mede) door AI is voorbereid, en heeft u vragen of zorgen daarover? Neem contact op:</p>
+    <ul>
+      <li><strong>E-mail:</strong> <a href="mailto:contact@mowi.agency">contact@mowi.agency</a></li>
+      <li><strong>Telefoon:</strong> <a href="tel:+31853335800">085 333 5800</a></li>
+    </ul>
+    <p>Wilt u weten welke partijen namens Mowi persoonsgegevens verwerken (zoals Anthropic en ElevenLabs), of hoe lang gegevens bewaard blijven? Zie onze <a href="/subverwerkers">subverwerkerspagina</a> en ons <a href="/privacyverklaring">privacybeleid</a>.</p>
   </main>
 
-  <!-- ===== 8. Pre-footer CTA band =====
-       Full-bleed dark inverted band — must always immediately precede
-       <footer class="site-footer">. -->
-  <section class="cta-prefooter">
+  <!-- ============================================================
+       CANONICAL FOOTER — the measured shapes.co recipe:
+       greige full-width band → pre-footer CTA on the band → light
+       rounded-top panel (page-bg color) flush to the page bottom.
+       CTA headline is a literal placeholder (shapes' own line) —
+       founder replaces it with Mowi's own.
+       ============================================================ -->
+  <footer class="footer-wrap">
     <div class="container">
-      <h2>Uw bedrijf op de <em class="h-emph">automatische piloot.</em></h2>
-      <a href="/demo" class="btn btn-primary" style="background: var(--ink-inverted); color: var(--ink); border-color: var(--ink-inverted);" data-event="Demo Click">Plan een demo</a>
-      <p class="cta-alt">of <a href="/vertrouwen">lees eerst over vertrouwen</a></p>
-    </div>
-  </section>
 
-  <!-- ===== Footer =====
-       Copied verbatim from index.html / test.html (the canonical v2 source). -->
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div class="footer-brand">
-        <span class="wordmark wordmark-lg">
-          <img src="assets/mowi-icon.png" alt="" class="wordmark-icon" />
-          <img src="assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
-        </span>
-        <p>Het conversationele automatiseringsplatform voor het Nederlandse MKB.</p>
+      <div class="footer-cta">
+        <div>
+          <h2 class="footer-cta-title">The new era<br />of people management</h2>
+          <a href="/demo" class="btn-primary" data-event="Demo Click">Get a demo</a>
+        </div>
+        <!-- Visual slot — intentionally empty until real artwork exists. -->
+        <div class="footer-cta-visual" aria-hidden="true"></div>
       </div>
 
-      <nav class="footer-nav" aria-label="Footermenu">
-        <span class="footer-heading">Platform</span>
-        <a href="/workflows">Workflows met AI</a>
-        <a href="/koppelingen">Koppelingen</a>
-        <a href="/vertrouwen">Vertrouwen</a>
-        <a href="/zo-werkt-het">Zo werkt het</a>
-      </nav>
+      <div class="footer-panel">
+        <div class="footer-top">
+          <div class="footer-logo-col">
+            <a href="/" class="wordmark" aria-label="Mowi - home">
+              <img src="assets/mowi-icon.png" alt="" class="wordmark-icon" />
+              <img src="assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
+            </a>
+          </div>
 
-      <nav class="footer-support" aria-label="Bronnenmenu">
-        <span class="footer-heading">Bronnen</span>
-        <a href="/blog/">Blog</a>
-        <a href="/docs/">Documentatie</a>
-      </nav>
+          <nav class="footer-menus" aria-label="Footer">
+            <div>
+              <h3 class="footer-menu-heading">Platform</h3>
+              <ul>
+                <li><a href="/ai">Agentic AI</a></li>
+                <li><a href="/vibe-hub">Vibe Hub</a></li>
+                <li><a href="/people-directory">People Directory</a></li>
+                <li><a href="/time-off">Time Off</a></li>
+                <li><a href="/attendance">Attendance</a></li>
+                <li><a href="/workflows">Workflows</a></li>
+                <li><a href="/performance-growth">Performance &amp; Growth</a></li>
+                <li><a href="/people-analytics">People Analytics</a></li>
+                <li><a href="/surveys">Surveys</a></li>
+                <li><a href="/docs-esign">Docs &amp; eSign</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="footer-menu-heading">Resources</h3>
+              <ul>
+                <li><a href="#">MCP</a></li>
+                <li><a href="#">API Documentation</a></li>
+                <li><a href="#">New Releases</a></li>
+                <li><a href="#">Integrations</a></li>
+                <li><a href="/docs/">Help Center</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="footer-menu-heading">Company</h3>
+              <ul>
+                <li><a href="/about">About</a></li>
+                <li><a href="/careers">Careers</a></li>
+                <li><a href="#">Partners</a></li>
+                <li><a href="#">Security</a></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
 
-      <div class="footer-contact">
-        <span class="footer-heading">Bedrijf &amp; contact</span>
-        <a href="/over">Over Mowi</a>
-        <a href="/demo">Plan een demo</a>
-        <p>085 333 5800</p>
-        <p>contact@mowi.agency</p>
-        <a href="https://my.mowi.agency/login" target="_blank" rel="noopener">Inloggen</a>
+        <!-- Structure-only placeholder circles. Real compliance marks go here
+             ONLY once Mowi actually holds them — never render an invented
+             SOC2/GDPR/ISO claim. -->
+        <div class="footer-badges" aria-hidden="true">
+          <span class="footer-badge"></span>
+          <span class="footer-badge"></span>
+          <span class="footer-badge"></span>
+        </div>
+
+        <div class="footer-bottom">
+          <span>&copy; 2026 Mowi. All rights reserved.</span>
+          <div class="footer-legal">
+            <a href="/algemene-voorwaarden">Terms of use</a>
+            <a href="/privacyverklaring">Privacy policy</a>
+            <a href="#" class="footer-social" aria-label="LinkedIn">in</a>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <div class="container footer-bottom">
-      <p>© 2026 Mowi · Nederland &amp; België</p>
-      <div class="footer-legal">
-        <a href="/privacyverklaring">Privacyverklaring</a>
-        <a href="/algemene-voorwaarden">Algemene voorwaarden</a>
-        <a href="/cookies">Cookies</a>
-        <a href="/ai-transparantie">AI-transparantie</a>
-        <a href="/bedrijfsgegevens">Bedrijfsgegevens</a>
-        <a href="/subverwerkers">Subverwerkers</a>
-      </div>
     </div>
   </footer>
 
-  <script src="js/main.js?v=20260818"></script>
+  <script src="js/main.js?v=20260818-2"></script>
 </body>
 </html>

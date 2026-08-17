@@ -32,10 +32,8 @@ const CSS_VERSION = (() => {
 // Website & Conversion plan, Phase 1: Plausible, no cookie banner needed.
 // data-domain must exactly match the account Sal creates at plausible.io.
 const PLAUSIBLE_SNIPPET = `<script defer data-domain="mowi.agency" src="https://plausible.io/js/script.js"></script>`;
-// Loaded from <head>, deliberately not bundled into main.js — see
-// js/broken-image-guard.js's own header comment for why (a race against
-// images already present in the initial HTML).
-const BROKEN_IMAGE_GUARD_SNIPPET = `<script src="/js/broken-image-guard.js?v=${CSS_VERSION}"></script>`;
+// broken-image-guard.js is deliberately gone from the skeleton shell —
+// test.html (the canonical shell) omits it, so the blog omits it too.
 
 // ---------------------------------------------------------------------------
 // Minimal YAML-frontmatter parser (subset: scalars, inline arrays, block
@@ -236,14 +234,13 @@ function formatDateNL(iso) {
 }
 
 // ---------------------------------------------------------------------------
-// Page shell — v2 rebuild (Stage 7). Copied verbatim from index.html/test.html
-// (the canonical v2 source — logo left, nav center, Login + "Plan een demo"
-// pill right; see test.html's own header comment). test.html is the
-// copy-paste source of truth site-wide; keep this in sync with it by hand,
-// same as every other rebuilt page — the site has no shared header/footer
-// template anywhere. "Blog" carries aria-current="page" on every blog page
-// (index and posts alike), matching how e.g. over.html marks "About" current
-// on /over.
+// Page shell — shapes-skeleton rebuild (2026-08-18). Copied from test.html
+// (the canonical shell; its labels are deliberate shapes.co placeholders the
+// founder renames later — do not "fix" them here either). Blog pages live in
+// blog/, so asset src paths are root-absolute (/assets/…) — nav/footer hrefs
+// were already root-absolute in test.html. test.html remains the copy-paste
+// source of truth; keep this in sync with it by hand. The skeleton nav has
+// no "Blog" item, so no aria-current is set on blog pages.
 // ---------------------------------------------------------------------------
 function headerHtml() {
   return `  <header class="site-header">
@@ -254,52 +251,38 @@ function headerHtml() {
       </a>
 
       <nav class="main-nav" id="main-nav" aria-label="Hoofdmenu">
-        <ul class="nav-group">
+        <ul>
+          <li><a href="/ai">AI</a></li>
           <li class="nav-dropdown">
             <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="product-menu" aria-haspopup="true">
               Product
               <span class="nav-dropdown-icon" aria-hidden="true"></span>
             </button>
-            <!-- English label is deliberate — see CLAUDE.md's Language & tone
-                 exception (header nav stays English sitewide). Single column,
-                 title + one-line Dutch descriptor per row. -->
-            <div class="nav-megamenu nav-megamenu-single" id="product-menu">
-              <div class="nav-megamenu-col">
-                <ul>
-                  <li>
-                    <a href="/workflows">
-                      <span class="nav-megamenu-item-title">Workflows</span>
-                      <span class="nav-megamenu-item-desc">Maak workflows met AI</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="/koppelingen">
-                      <span class="nav-megamenu-item-title">Koppelingen</span>
-                      <span class="nav-megamenu-item-desc">Uw systemen, één geheel</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="/vertrouwen">
-                      <span class="nav-megamenu-item-title">Vertrouwen</span>
-                      <span class="nav-megamenu-item-desc">Eerst proefdraaien, dan pas live</span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
+            <div class="nav-menu" id="product-menu">
+              <ul>
+                <li><a href="/people-directory"><span class="nav-menu-item-title">People Directory</span><span class="nav-menu-item-desc">One place for all employee data</span></a></li>
+                <li><a href="/time-off"><span class="nav-menu-item-title">Time Off</span><span class="nav-menu-item-desc">Smart holiday &amp; leave management</span></a></li>
+                <li><a href="/attendance"><span class="nav-menu-item-title">Attendance</span><span class="nav-menu-item-desc">Robust time tracking</span></a></li>
+                <li><a href="/workflows"><span class="nav-menu-item-title">Workflows</span><span class="nav-menu-item-desc">Put processes on autopilot</span></a></li>
+                <li><a href="/performance-growth"><span class="nav-menu-item-title">Performance &amp; Growth</span><span class="nav-menu-item-desc">Performance cycles that work</span></a></li>
+                <li><a href="/people-analytics"><span class="nav-menu-item-title">People Analytics</span><span class="nav-menu-item-desc">Insights that push businesses forward</span></a></li>
+                <li><a href="/surveys"><span class="nav-menu-item-title">Surveys</span><span class="nav-menu-item-desc">Run &amp; analyse any survey in minutes</span></a></li>
+                <li><a href="/docs-esign"><span class="nav-menu-item-title">Docs &amp; eSign</span><span class="nav-menu-item-desc">Centralise documents &amp; signatures</span></a></li>
+              </ul>
             </div>
           </li>
-          <li><a href="/zo-werkt-het">How it works</a></li>
-          <li><a href="/docs/">Docs</a></li>
-          <li><a href="/over">About</a></li>
-          <li><a href="/blog/" aria-current="page">Blog</a></li>
+          <li><a href="/vibe-hub">Vibe Hub</a></li>
+          <li><a href="/pricing">Pricing</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/careers">Careers</a></li>
+          <li class="nav-mobile-actions"><a href="https://my.mowi.agency/login" target="_blank" rel="noopener">Login</a></li>
+          <li class="nav-mobile-actions"><a href="/demo" data-event="Demo Click">Get a demo</a></li>
         </ul>
       </nav>
 
       <div class="header-actions">
         <a href="https://my.mowi.agency/login" target="_blank" rel="noopener" class="header-login">Login</a>
-        <a href="/demo" class="header-cta" data-event="Demo Click">
-          <span class="header-cta-full">Plan een demo</span><span class="header-cta-short">Demo</span>
-        </a>
+        <a href="/demo" class="btn-primary" data-event="Demo Click">Get a demo</a>
       </div>
 
       <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="main-nav" aria-label="Menu openen">
@@ -311,58 +294,84 @@ function headerHtml() {
 }
 
 function footerHtml() {
-  return `  <section class="cta-prefooter">
+  return `  <footer class="footer-wrap">
     <div class="container">
-      <h2>Uw bedrijf op de <em class="h-emph">automatische piloot.</em></h2>
-      <a href="/demo" class="btn btn-primary" style="background: var(--ink-inverted); color: var(--ink); border-color: var(--ink-inverted);" data-event="Demo Click">Plan een demo</a>
-      <p class="cta-alt">of <a href="/zo-werkt-het">bekijk eerst hoe het werkt</a></p>
-    </div>
-  </section>
 
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div class="footer-brand">
-        <span class="wordmark wordmark-lg">
-          <img src="/assets/mowi-icon.png" alt="" class="wordmark-icon" />
-          <img src="/assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
-        </span>
-        <p>Het conversationele automatiseringsplatform voor het Nederlandse MKB.</p>
+      <div class="footer-cta">
+        <div>
+          <h2 class="footer-cta-title">The new era<br />of people management</h2>
+          <a href="/demo" class="btn-primary" data-event="Demo Click">Get a demo</a>
+        </div>
+        <!-- Visual slot — intentionally empty until real artwork exists. -->
+        <div class="footer-cta-visual" aria-hidden="true"></div>
       </div>
 
-      <nav class="footer-nav" aria-label="Footermenu">
-        <span class="footer-heading">Platform</span>
-        <a href="/workflows">Workflows met AI</a>
-        <a href="/koppelingen">Koppelingen</a>
-        <a href="/vertrouwen">Vertrouwen</a>
-        <a href="/zo-werkt-het">Zo werkt het</a>
-      </nav>
+      <div class="footer-panel">
+        <div class="footer-top">
+          <div class="footer-logo-col">
+            <a href="/" class="wordmark" aria-label="Mowi - home">
+              <img src="/assets/mowi-icon.png" alt="" class="wordmark-icon" />
+              <img src="/assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
+            </a>
+          </div>
 
-      <nav class="footer-support" aria-label="Bronnenmenu">
-        <span class="footer-heading">Bronnen</span>
-        <a href="/blog/">Blog</a>
-        <a href="/docs/">Documentatie</a>
-      </nav>
+          <nav class="footer-menus" aria-label="Footer">
+            <div>
+              <h3 class="footer-menu-heading">Platform</h3>
+              <ul>
+                <li><a href="/ai">Agentic AI</a></li>
+                <li><a href="/vibe-hub">Vibe Hub</a></li>
+                <li><a href="/people-directory">People Directory</a></li>
+                <li><a href="/time-off">Time Off</a></li>
+                <li><a href="/attendance">Attendance</a></li>
+                <li><a href="/workflows">Workflows</a></li>
+                <li><a href="/performance-growth">Performance &amp; Growth</a></li>
+                <li><a href="/people-analytics">People Analytics</a></li>
+                <li><a href="/surveys">Surveys</a></li>
+                <li><a href="/docs-esign">Docs &amp; eSign</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="footer-menu-heading">Resources</h3>
+              <ul>
+                <li><a href="#">MCP</a></li>
+                <li><a href="#">API Documentation</a></li>
+                <li><a href="#">New Releases</a></li>
+                <li><a href="#">Integrations</a></li>
+                <li><a href="/docs/">Help Center</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="footer-menu-heading">Company</h3>
+              <ul>
+                <li><a href="/about">About</a></li>
+                <li><a href="/careers">Careers</a></li>
+                <li><a href="#">Partners</a></li>
+                <li><a href="#">Security</a></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
 
-      <div class="footer-contact">
-        <span class="footer-heading">Bedrijf &amp; contact</span>
-        <a href="/over">Over Mowi</a>
-        <a href="/demo">Plan een demo</a>
-        <p>085 333 5800</p>
-        <p>contact@mowi.agency</p>
-        <a href="https://my.mowi.agency/login" target="_blank" rel="noopener">Inloggen</a>
+        <!-- Structure-only placeholder circles. Real compliance marks go here
+             ONLY once Mowi actually holds them — never render an invented
+             SOC2/GDPR/ISO claim. -->
+        <div class="footer-badges" aria-hidden="true">
+          <span class="footer-badge"></span>
+          <span class="footer-badge"></span>
+          <span class="footer-badge"></span>
+        </div>
+
+        <div class="footer-bottom">
+          <span>&copy; 2026 Mowi. All rights reserved.</span>
+          <div class="footer-legal">
+            <a href="/algemene-voorwaarden">Terms of use</a>
+            <a href="/privacyverklaring">Privacy policy</a>
+            <a href="#" class="footer-social" aria-label="LinkedIn">in</a>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <div class="container footer-bottom">
-      <p>&copy; 2026 Mowi &middot; Nederland &amp; Belgi&euml;</p>
-      <div class="footer-legal">
-        <a href="/privacyverklaring">Privacyverklaring</a>
-        <a href="/algemene-voorwaarden">Algemene voorwaarden</a>
-        <a href="/cookies">Cookies</a>
-        <a href="/ai-transparantie">AI-transparantie</a>
-        <a href="/bedrijfsgegevens">Bedrijfsgegevens</a>
-        <a href="/subverwerkers">Subverwerkers</a>
-      </div>
     </div>
   </footer>
   <script src="/js/main.js?v=${CSS_VERSION}"></script>
@@ -452,7 +461,6 @@ function renderPost(post) {
   <link rel="apple-touch-icon" href="/assets/apple-icon-180.png?v=20260804-3" />
   <link rel="apple-touch-icon-precomposed" href="/assets/apple-icon-180.png?v=20260804-3" />
   ${PLAUSIBLE_SNIPPET}
-  ${BROKEN_IMAGE_GUARD_SNIPPET}
   ${articleJsonLd(post, url)}
 </head>
 <body>
@@ -474,19 +482,16 @@ ${footerHtml()}
 }
 
 function renderIndex(posts) {
-  // Card-based listing, built from the same .card/.grid-3 primitives every
-  // other v2 page uses (see workflows.html's card usage) rather than
-  // bespoke .blog-card/.blog-index-grid classes — those never got CSS in
-  // the v2 stylesheet rewrite (S0 deleted the old back-compat alias layer),
-  // so reusing the shared primitives is what actually renders styled.
-  // Kicker + .pill tags reuse the same components as the rest of the site.
+  // Minimal card listing on the skeleton stylesheet's own blog classes
+  // (.blog-index/.blog-index-grid/.blog-card/.blog-card-date — see
+  // css/style.css "Blog index cards"). No kickers/pills: those v2 classes
+  // no longer exist in the skeleton CSS.
   const cards = posts
     .map(
-      (p) => `      <a href="/blog/${p.slug}" class="card blog-card">
-        <span class="text-kicker">${formatDateNL(p.date)}</span>
-        <h3>${p.title}</h3>
+      (p) => `      <a href="/blog/${p.slug}" class="blog-card">
+        <span class="blog-card-date">${formatDateNL(p.date)}</span>
+        <h2>${p.title}</h2>
         <p>${p.description}</p>
-        ${p.tags && p.tags.length ? `<div class="pill-row" style="margin-top: 1rem;">${p.tags.map((t) => `<span class="pill">${t}</span>`).join("")}</div>` : ""}
       </a>`
     )
     .join("\n");
@@ -508,23 +513,17 @@ function renderIndex(posts) {
   <link rel="apple-touch-icon" href="/assets/apple-icon-180.png?v=20260804-3" />
   <link rel="apple-touch-icon-precomposed" href="/assets/apple-icon-180.png?v=20260804-3" />
   ${PLAUSIBLE_SNIPPET}
-  ${BROKEN_IMAGE_GUARD_SNIPPET}
 </head>
 <body>
 ${headerHtml()}
   <main>
-    <section class="section">
-      <div class="container">
-        <div class="section-head">
-          <span class="text-kicker">Blog</span>
-          <h1>Blog</h1>
-          <p class="text-lead" style="margin-top: 1rem;">Praktische antwoorden over AI-automatisering voor het MKB — kosten, koppelingen, en wat werkt in de praktijk.</p>
-        </div>
-        <div class="grid grid-3">
-${cards || '          <p class="muted">Binnenkort de eerste posts.</p>'}
-        </div>
+    <div class="blog-index">
+      <h1>Blog</h1>
+      <p>Praktische antwoorden over AI-automatisering voor het MKB — kosten, koppelingen, en wat werkt in de praktijk.</p>
+      <div class="blog-index-grid">
+${cards || "          <p>Binnenkort de eerste posts.</p>"}
       </div>
-    </section>
+    </div>
   </main>
 ${footerHtml()}
 </body>
