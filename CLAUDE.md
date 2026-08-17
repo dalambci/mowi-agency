@@ -53,10 +53,17 @@ docs shell token harmonization (content untouched) → S7 blog chrome regenerate
 as stubs, `blog-preview/` and the orphaned `hero-anim-trainingen.*` files deleted) → S9
 sitewide consistency sweep + this file's rewrite.
 
-**`rebuild-v2` is NOT merged to `master` and NOT deployed.** Don't assume any of the above
-is live, or even on `master`, until the founder has reviewed the branch and explicitly asked
-for it to be merged — then deployed per "Deploying to production" below, which is a wholly
-separate later step.
+**Merged to `master` and deployed to production 2026-08-18** (fast-forward merge, no conflicts;
+pushed to GitHub; pulled live on `ktzphwhvnh`/`134.209.193.67` — confirmed via
+`git log --oneline -1` on the server matching this repo's `master` tip). Deployed **with the
+`[FULL_NAME]`/`[CALENDLY_URL]` placeholders still literal** — a deliberate founder call, not an
+oversight; both need real values supplied and swapped in as a fast-follow. **Varnish was NOT
+purged as part of this deploy** (no SSH-level purge access, dashboard-only per "Deploying to
+production" below) — `/` (and possibly other directory-index paths) will keep serving the
+pre-deploy page to real visitors until someone purges it in the Cloudways dashboard
+(`ktzphwhvnh` → Application Management → Varnish → Purge). Explicit-slug pages
+(`/workflows`, `/vertrouwen`, etc.) already serve the new build immediately, confirmed live via
+`curl -sI`, matching this file's own documented staleness pattern.
 
 ## Total rebrand — 2026-08-17 (superseded by v2 above — kept for history, do not follow for design/nav/positioning specifics; git-reconciliation and deploy-mechanics facts below are still real history)
 A full 8-stage rebrand was executed on branch `rebrand` (commits `f85f6c3`..`591f862` plus a
@@ -81,13 +88,11 @@ contradicted the demo-gated pivot. Nothing was lost though — the pre-reconcili
 is preserved in full at branch/tag `archive/self-serve-rewrite-20260817` (pushed to GitHub)
 if any of it is ever wanted for reference.
 
-**As of the v2 rebuild, `master` still equals the *v1* rebrand (tip `40119b9`) — production
-is still not deployed even to v1, let alone v2.** Production (`mowi.agency`) has its own
-separate git checkout on the server and only updates when someone SSHes in and runs
-`git pull origin master` (see "Deploying to production" below) — merging `rebuild-v2` to
-`master` on GitHub will not push anything live by itself, and hasn't happened yet regardless.
-Do not assume either rebrand is live on `mowi.agency` until that deploy step has actually
-been run and verified.
+**Superseded 2026-08-18: `master` now equals the v2 rebuild (tip `9202974`), merged and
+deployed — see the "Total rebuild v2" section at the top of this file for the current state
+(including the still-pending Varnish purge).** This v1 rebrand's own content/design/nav
+specifics remain superseded by v2 as already noted; only this paragraph's git-mechanics
+history stays accurate as a record of what happened on 2026-08-17.
 
 ## Project memory (Obsidian)
 Long-term project knowledge lives in `c:\Users\SalP1\Desktop\Mowi brain\Mowi\`.
@@ -136,13 +141,12 @@ backstop in case something important didn't get written down.
   and does nothing; don't reach for one again for this.
 
 ## Deploying to production
-- **As of the v2 rebuild, production has not pulled even the v1 rebrand yet, let alone v2.**
-  `master`/`origin/master` on GitHub still points at `rebrand`'s tip (`40119b9`) — `rebuild-v2`
-  is a separate branch, not merged. Production is still serving whatever it last `git pull`'d,
-  which predates all of this. Don't assume `mowi.agency` shows either rebrand until someone
-  has actually merged the relevant branch to `master`, SSH'd in, run `git pull origin master`,
-  and it's been verified live (see the cache-busting/Varnish-purge notes further down — a pull
-  alone won't be visible to real visitors until those steps too).
+- **As of 2026-08-18, `master`/`origin/master` and production are both on the v2 rebuild**
+  (tip `9202974`) — merged, pushed, and pulled live on the server, confirmed via `git log` on
+  both ends. **Varnish has not been purged** — see the "Total rebuild v2" section at the top of
+  this file. Don't assume a *future* change is visible to real visitors just because it's on
+  `master` — always re-verify with the checks below (a `git pull` alone was never sufficient
+  even before this).
 - Production (`mowi.agency`, Cloudways app `ktzphwhvnh` on server `134.209.193.67`) has its own
   git checkout at `~/applications/ktzphwhvnh/public_html`, with `origin` pointed at this same
   GitHub repo (`https://github.com/dalambci/mowi-agency.git`). Deploying is: merge the branch
