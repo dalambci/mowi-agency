@@ -231,41 +231,57 @@
       </div>
     </section>
 
-    <!-- ===== Wat het doet ===== -->
-    <section class="section section-tint">
+    <!-- ===== Wat het doet =====
+         Concreet-style proof section, same pattern as agentic-ai.html's
+         "Concreet" — replaces the old 3-card feature grid AND the standalone
+         "Werkt met" number-forwarding section with one short claim shown
+         next to a live feed card. The number-forwarding reassurance
+         survives as this section's closing sentence rather than its own
+         beat. Plain background, matching the equivalent section on
+         agents/email-triage.html.
+         Static feed card, not cycling: this page's OWN 4 rows, no
+         id="agentFeedList" — that id is reserved for the homepage's single
+         cycling instance (see js/main.js's "Live agent-feed widget" block,
+         which requires the id to attach). Plain HTML is the finished
+         state either way. -->
+    <section class="section">
       <div class="container">
-        <div class="section-head center" data-reveal>
-          <span class="eyebrow">Wat het doet</span>
-          <h2>Een collega die nooit in gesprek is.</h2>
-        </div>
+        <div class="concreet-layout">
+          <div class="section-head" data-reveal style="margin-bottom: 0;">
+            <span class="eyebrow">Wat het doet</span>
+            <h2>Een collega die nooit in gesprek is.</h2>
+            <p class="lede" style="margin-top: 1rem;">
+              Opgezet vanuit uw eigen website, dus hij kent uw bedrijf voordat hij opneemt. Vragen voor een mens
+              gaan direct naar een collega, volgens regels die u instelt. Hij verzint nooit een antwoord en noemt
+              geen prijzen of garanties. Uw nummer blijft gewoon uw nummer — u schakelt het alleen door.
+            </p>
+          </div>
 
-        <div class="grid grid-3">
-          <div class="card" data-reveal>
-            <h3>Kent uw bedrijf</h3>
-            <p>Opgezet vanaf uw eigen website. Antwoordt met wat daar staat — en verzint niets.</p>
-          </div>
-          <div class="card" data-reveal>
-            <h3>Verbindt door wanneer nodig</h3>
-            <p>Vragen voor een mens gaan direct naar een collega, volgens regels die u instelt.</p>
-          </div>
-          <div class="card" data-reveal>
-            <h3>Elk gesprek vastgelegd</h3>
-            <p>Samenvatting, transcript en eventuele lead staan na afloop klaar.</p>
+          <div class="concreet-visuals">
+            <div class="agent-feed-card" data-reveal>
+              <p class="agent-feed-title">Live activiteit</p>
+              <ul class="agent-feed-list">
+                <li class="agent-feed-row is-done">
+                  <span class="agent-feed-dot" aria-hidden="true"></span>
+                  <span class="agent-feed-text">Gesprek aangenomen — terugbelverzoek genoteerd</span>
+                </li>
+                <li class="agent-feed-row is-done">
+                  <span class="agent-feed-dot" aria-hidden="true"></span>
+                  <span class="agent-feed-text">Doorverbonden naar collega — vraag buiten script</span>
+                </li>
+                <li class="agent-feed-row is-done">
+                  <span class="agent-feed-dot" aria-hidden="true"></span>
+                  <span class="agent-feed-text">Buiten kantooruren — vraag beantwoord, samenvatting klaargezet</span>
+                </li>
+                <li class="agent-feed-row is-done">
+                  <span class="agent-feed-dot" aria-hidden="true"></span>
+                  <span class="agent-feed-text">Transcript en samenvatting — terug te lezen in het dashboard</span>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
-    </section>
-
-    <!-- ===== Werkt met ===== -->
-    <section class="container section">
-      <div class="section-head center" data-reveal>
-        <span class="eyebrow">Werkt met</span>
-        <h2>Uw eigen nummer, gewoon doorgeschakeld.</h2>
-      </div>
-      <p class="lede text-center" style="max-width: 34rem; margin-inline: auto;">
-        Bellers draaien gewoon uw bestaande nummer — dat verandert niet. Op de achtergrond schakelt u dat nummer
-        door naar de agent, in enkele minuten in te stellen, ongeacht welke telefonieaanbieder u nu gebruikt.
-      </p>
     </section>
 
     <!-- ===== Koppel agents =====
@@ -467,66 +483,15 @@
       </div>
     </section>
 
-    <!-- ===== Controle =====
-         Mirrors agentic-ai.html's proof section, same .case-card component
-         (flipped hierarchy: short bold claim + one small supporting line).
-         Grounded in the build plan's hard prompt guarantees — see
-         phone-assistent-agent-build-plan.md. -->
-    <section class="section section-tint">
-      <div class="container">
-      <div class="section-head" data-reveal>
-        <span class="eyebrow">Controle</span>
-        <h2>Kort van stof. Nooit uit de bocht.</h2>
-      </div>
-
-      <div class="grid grid-3">
-        <div class="case-card" data-reveal>
-          <p class="case-result">Verzint nooit een antwoord</p>
-          <p class="muted text-sm">Bij twijfel: "Ik zorg dat een collega u terugbelt."</p>
-        </div>
-        <div class="case-card" data-reveal>
-          <p class="case-result">Noemt geen prijzen of garanties</p>
-          <p class="muted text-sm">Tenzij u ze zelf heeft vastgelegd.</p>
-        </div>
-        <div class="case-card" data-reveal>
-          <p class="case-result">Maximaal twee zinnen per antwoord</p>
-          <p class="muted text-sm">Geen monoloog aan de telefoon.</p>
-        </div>
-        <div class="case-card" data-reveal>
-          <p class="case-result">U bepaalt het doorverbinden</p>
-          <p class="muted text-sm">Eigen regels, eigen nummer, altijd bij vraag naar een mens.</p>
-        </div>
-        <div class="case-card" data-reveal>
-          <p class="case-result">Elk gesprek terug te lezen</p>
-          <p class="muted text-sm">Transcript en samenvatting in uw dashboard.</p>
-        </div>
-        <div class="case-card" data-reveal>
-          <p class="case-result">Mislukt er iets, dan ziet u het</p>
-          <p class="muted text-sm">Mislukte doorverbindingen melden zichzelf.</p>
-        </div>
-      </div>
-
-      <p class="text-center muted" style="margin-top: 2.5rem;" data-reveal>
-        Wat de agent bewust niet doet: geen uitgaande belcampagnes, geen betalingen, geen toezeggingen namens u.
-      </p>
-      </div>
-    </section>
-
-    <!-- ===== Prijs ===== -->
-    <section class="container section" style="max-width: 48rem;">
-      <div class="section-head center" data-reveal>
-        <span class="eyebrow">Prijs</span>
-        <h2>Vaste, voorspelbare kosten.</h2>
-      </div>
-      <div class="text-center" data-reveal>
-        <p class="pricing-line">€80 per maand excl. btw &middot; eerste 14 dagen gratis &middot; maandelijks opzegbaar. Fair-use-grens:
-          [FAIR_USE_OMSCHRIJVING].</p>
-      </div>
-    </section>
-
     <!-- ===== FAQ =====
          section-tint keeps the plain/tinted alternation running to the end
-         of the page, same as agentic-ai.html's FAQ. -->
+         of the page, same as agentic-ai.html's FAQ. Also carries the
+         content that used to be the standalone Controle and Prijs
+         sections — Controle's guarantees now live in the Wat het doet body
+         copy and feed rows plus the FAQ answers below; Prijs's one line
+         became the first FAQ item, keeping [FAIR_USE_OMSCHRIJVING] as a
+         literal placeholder (never substitute a real number). Waitlist
+         framing preserved throughout — the Call agent is not live yet. -->
     <section class="section section-tint">
       <div class="container" style="max-width: 48rem;">
       <div class="section-head" data-reveal>
@@ -535,6 +500,16 @@
       </div>
 
       <div class="accordion" data-reveal>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-pa-0">
+            Wat gaat het kosten?
+            <span class="accordion-icon" aria-hidden="true"></span>
+          </button>
+          <div class="accordion-panel" id="faq-pa-0">
+            <p>€80 per maand excl. btw zodra de agent live is. Eerste 14 dagen gratis, maandelijks opzegbaar.
+              Fair-use-grens: [FAIR_USE_OMSCHRIJVING].</p>
+          </div>
+        </div>
         <div class="accordion-item">
           <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-pa-1">
             Wanneer is dit beschikbaar?

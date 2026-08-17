@@ -109,8 +109,8 @@
         <div>
           <h1>Uw mail is al beantwoord. U klikt alleen nog op versturen.</h1>
           <p class="lede" style="margin-top: 1.5rem;">
-            De E-mail agent stelt concept-antwoorden klaar, vraagt ontbrekende offerte-informatie automatisch op
-            en houdt uw inbox gesorteerd. U controleert — en houdt de laatste klik.
+            De E-mail agent sorteert uw inbox, zet conceptantwoorden klaar en vraagt zelf ontbrekende
+            offerte-informatie op. U controleert — en houdt de laatste klik.
           </p>
           <div class="hero-actions">
             <span class="btn-slot">
@@ -276,56 +276,57 @@
       </div>
     </section>
 
-    <!-- ===== Wat het doet ===== -->
-    <section class="section section-tint">
+    <!-- ===== Wat het doet =====
+         Concreet-style proof section, same pattern as agentic-ai.html's
+         "Concreet" — replaces the old 6-card feature grid and the "Demo
+         binnenkort" placeholder poster (no video exists — dropped rather
+         than shipping a section whose only content is "coming soon") with
+         one short claim shown next to a live feed card. Plain background:
+         this is a text+visual pair, not a tinted band, so it reads as one
+         beat with the hero rather than competing with the marquee's tint
+         right after it.
+         Static feed card, not cycling: this page's OWN 4 rows, no
+         id="agentFeedList" — that id is reserved for the homepage's single
+         cycling instance (see js/main.js's "Live agent-feed widget" block,
+         which requires the id to attach). Plain HTML is the finished
+         state either way. -->
+    <section class="section">
       <div class="container">
-        <div class="section-head center" data-reveal>
-          <span class="eyebrow">Wat het doet</span>
-          <h2>Niet alleen sorteren. Afhandelen.</h2>
-        </div>
+        <div class="concreet-layout">
+          <div class="section-head" data-reveal style="margin-bottom: 0;">
+            <span class="eyebrow">Wat het doet</span>
+            <h2>Niet alleen sorteren. Afhandelen.</h2>
+            <p class="lede" style="margin-top: 1rem;">
+              Voor herkenbare klantvragen staat het antwoord klaar, in uw toon. Bijlagen worden meegelezen,
+              offerteaanvragen zonder gegevens krijgen zelf een vraag terug. Standaard verstuurt de agent niets
+              — auto-versturen ontgrendelt u per categorie, na bewezen resultaat, en elke actie is terug te
+              lezen.
+            </p>
+          </div>
 
-        <div class="grid grid-3">
-          <div class="card" data-reveal>
-            <h3>Conceptantwoorden</h3>
-            <p>Voor herkenbare klantvragen staat het antwoord klaar. In uw toon, klaar om te versturen.</p>
+          <div class="concreet-visuals">
+            <div class="agent-feed-card" data-reveal>
+              <p class="agent-feed-title">Live activiteit</p>
+              <ul class="agent-feed-list">
+                <li class="agent-feed-row is-done">
+                  <span class="agent-feed-dot" aria-hidden="true"></span>
+                  <span class="agent-feed-text">Inbox — 14 mails gesorteerd, 9 concepten klaargezet</span>
+                </li>
+                <li class="agent-feed-row is-done">
+                  <span class="agent-feed-dot" aria-hidden="true"></span>
+                  <span class="agent-feed-text">Offerteaanvraag — ontbrekende gegevens opgevraagd</span>
+                </li>
+                <li class="agent-feed-row is-done">
+                  <span class="agent-feed-dot" aria-hidden="true"></span>
+                  <span class="agent-feed-text">Needs attention — opgelost</span>
+                </li>
+                <li class="agent-feed-row is-done">
+                  <span class="agent-feed-dot" aria-hidden="true"></span>
+                  <span class="agent-feed-text">Bijlage gelezen — meegewogen in het concept</span>
+                </li>
+              </ul>
+            </div>
           </div>
-          <div class="card" data-reveal>
-            <h3>Offertes sneller rond</h3>
-            <p>Ontbreekt informatie in een aanvraag? De agent vraagt er direct om. Aanvragen blijven niet liggen.</p>
-          </div>
-          <div class="card" data-reveal>
-            <h3>Leest bijlagen</h3>
-            <p>PDF's en documenten worden meegelezen en meegewogen in het antwoord.</p>
-          </div>
-          <div class="card" data-reveal>
-            <h3>Auto-versturen verdient u</h3>
-            <p>Standaard alleen concepten. Auto-versturen ontgrendelt u per categorie, na bewezen resultaat.</p>
-          </div>
-          <div class="card" data-reveal>
-            <h3>Sorteert vanzelf</h3>
-            <p>Elke mail in de juiste map, voordat uw team eraan begint.</p>
-          </div>
-          <div class="card" data-reveal>
-            <h3>Gedeeld geheugen</h3>
-            <!-- "Binnenkort" leads the description rather than a badge — see
-                 pricing.html's own comment: badges were removed sitewide
-                 2026-08-11 in favour of the word in the copy itself. -->
-            <p>Binnenkort: e-mail en telefoon delen één geheugen. De agent herkent klanten over kanalen heen.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== Demo ===== -->
-    <section class="container section" style="max-width: 48rem;">
-      <div class="section-head center" data-reveal>
-        <span class="eyebrow">Demo</span>
-        <h2>Zie de agent aan het werk.</h2>
-      </div>
-      <div class="demo-video" data-reveal>
-        <div class="demo-video-poster">
-          <span class="demo-video-agent">E-mail agent</span>
-          <span class="demo-video-soon">Demo binnenkort</span>
         </div>
       </div>
     </section>
@@ -529,60 +530,14 @@
       </div>
     </section>
 
-    <!-- ===== Controle =====
-         Mirrors agentic-ai.html's proof section: flipped hierarchy, short
-         bold claim (.case-result) + one small supporting line (.muted
-         .text-sm) per card, same .case-card component. -->
-    <section class="section section-tint">
-      <div class="container">
-      <div class="section-head" data-reveal>
-        <span class="eyebrow">Controle</span>
-        <h2>Eerst bewijzen. Dan pas versturen.</h2>
-      </div>
-
-      <div class="grid grid-3">
-        <div class="case-card" data-reveal>
-          <p class="case-result">Test op uw laatste 20 mails</p>
-          <p class="muted text-sm">U beoordeelt elk resultaat vóór livegang.</p>
-        </div>
-        <div class="case-card" data-reveal>
-          <p class="case-result">Standaard alleen concepten</p>
-          <p class="muted text-sm">Auto-versturen zet u zelf aan, per categorie.</p>
-        </div>
-        <div class="case-card" data-reveal>
-          <p class="case-result">Storingen direct zichtbaar</p>
-          <p class="muted text-sm">Onder 'Needs attention' in uw dashboard.</p>
-        </div>
-        <div class="case-card" data-reveal>
-          <p class="case-result">Elke run terug te lezen</p>
-          <p class="muted text-sm">Volledige historie, elke actie.</p>
-        </div>
-        <div class="case-card" data-reveal>
-          <p class="case-result">Zelf bij te sturen</p>
-          <p class="muted text-sm">FAQ, toon en regels — direct actief.</p>
-        </div>
-        <div class="case-card" data-reveal>
-          <p class="case-result">Maandelijks opzegbaar</p>
-          <p class="muted text-sm">Geen jaarcontract.</p>
-        </div>
-      </div>
-      </div>
-    </section>
-
-    <!-- ===== Prijs ===== -->
-    <section class="container section" style="max-width: 48rem;">
-      <div class="section-head center" data-reveal>
-        <span class="eyebrow">Prijs</span>
-        <h2>Vaste, voorspelbare kosten.</h2>
-      </div>
-      <div class="text-center" data-reveal>
-        <p class="pricing-line"><strong>€40</strong> per maand excl. btw &middot; eerste 14 dagen gratis &middot; maandelijks opzegbaar &middot; fair-use-grens: [FAIR_USE_OMSCHRIJVING].</p>
-      </div>
-    </section>
-
     <!-- ===== FAQ =====
          section-tint keeps the plain/tinted alternation running to the end
-         of the page, same as agentic-ai.html's FAQ. -->
+         of the page, same as agentic-ai.html's FAQ. Also carries the
+         content that used to be the standalone Controle and Prijs
+         sections — Controle's guarantees now live in the Wat het doet feed
+         rows and the FAQ answers below; Prijs's one line became the first
+         FAQ item, keeping [FAIR_USE_OMSCHRIJVING] as a literal placeholder
+         (never substitute a real number). -->
     <section class="section section-tint">
       <div class="container" style="max-width: 48rem;">
       <div class="section-head" data-reveal>
@@ -591,6 +546,16 @@
       </div>
 
       <div class="accordion" data-reveal>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-et-0">
+            Wat kost het?
+            <span class="accordion-icon" aria-hidden="true"></span>
+          </button>
+          <div class="accordion-panel" id="faq-et-0">
+            <p>€40 per maand excl. btw. Geen setupkosten, koppelingen inbegrepen, maandelijks opzegbaar met
+              een opzegtermijn van 1 kalendermaand. Fair-use-grens: [FAIR_USE_OMSCHRIJVING].</p>
+          </div>
+        </div>
         <div class="accordion-item">
           <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-et-1">
             Wat leest de agent precies, en wat gebeurt er met onze data?
@@ -665,7 +630,7 @@
     <section class="container section">
       <div class="cta-band" data-reveal>
         <h2>Klaar om uw inbox uit handen te geven?</h2>
-        <p>Vandaag zelf aan te sluiten. Eerste 14 dagen gratis.</p>
+        <p>Vandaag zelf aan te sluiten. Eerste 14 dagen gratis, daarna €40/maand excl. btw.</p>
         <div class="cta-actions">
           <span class="btn-slot">
             <a href="https://my.mowi.agency/aanmelden?agent=email" class="btn btn-secondary" data-event="Signup Started">Start gratis — 14 dagen</a>

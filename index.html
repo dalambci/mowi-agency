@@ -288,15 +288,14 @@
         <div class="card card-featured" data-reveal>
           <span class="pill" style="margin-bottom: 0.75rem; display: inline-block;">Nu te proberen</span>
           <h3>E-mail agent</h3>
-          <p>Sorteert uw inbox, schrijft concept-antwoorden en vraagt zelf ontbrekende offerte-informatie op.
-            Eerste 14 dagen gratis, daarna €40/maand excl. btw.</p>
+          <p>Sorteert uw inbox en zet conceptantwoorden klaar.</p>
           <a href="agents/email-triage" class="card-link">Bekijk de E-mail agent →</a>
         </div>
 
         <div class="card" data-reveal>
           <span class="pill" style="margin-bottom: 0.75rem; display: inline-block;">Binnenkort</span>
           <h3>Call agent</h3>
-          <p>Beantwoordt binnenkomende gesprekken op uw bestaande nummer en verbindt door wanneer dat nodig is.</p>
+          <p>Neemt binnenkomende gesprekken aan en verbindt door wanneer nodig.</p>
           <a href="agents/phone-agent" class="card-link">Bekijk de Call agent →</a>
         </div>
 
@@ -307,59 +306,71 @@
       </p>
     </section>
 
-    <!-- ===== Wat de E-mail agent doet ===== -->
+    <!-- ===== Vandaag al aan het werk =====
+         Concreet-style proof section, same pattern as agentic-ai.html's
+         "Concreet" — replaces a 6-card feature grid that only covered the
+         E-mail agent (duplicating that page's own content) with one short
+         claim shown across BOTH channels via the live feed card. Feature
+         detail lives on the agent pages, not here.
+         Cycling feed card, not static: this is the page's only
+         .agent-feed-card, so it carries the id="agentFeedList"
+         js/main.js hooks onto (see that file's "Live agent-feed widget"
+         block) — the agent pages get their OWN static (non-id) copies. -->
     <section class="section section-tint">
       <div class="container">
-        <div class="section-head center" data-reveal>
-          <span class="eyebrow">Vandaag al mogelijk</span>
-          <h2>Wat de E-mail agent vandaag al doet.</h2>
-        </div>
+        <div class="concreet-layout">
+          <div class="section-head" data-reveal style="margin-bottom: 0;">
+            <span class="eyebrow">Vandaag al aan het werk</span>
+            <h2>U ziet elke actie. U houdt de regie.</h2>
+            <p class="lede" style="margin-top: 1rem;">
+              Uw agents sorteren mail, zoeken orderstatus op, nemen gesprekken aan en zetten antwoorden klaar —
+              in de systemen die u al gebruikt. Alles wat ze doen ziet u live in uw dashboard, en niets gaat de
+              deur uit zonder uw regels.
+            </p>
+            <a href="agents/email-triage" class="card-link" style="margin-top: 1rem; display: inline-block;">Bekijk de E-mail agent →</a>
+          </div>
 
-        <div class="grid grid-3">
-          <div class="card" data-reveal>
-            <h3>Automatische categorisering</h3>
-            <p>Elke binnenkomende mail wordt gelezen en in de juiste categorie gezet — voordat uw team eraan begint.</p>
-          </div>
-          <div class="card" data-reveal>
-            <h3>Concept-antwoorden</h3>
-            <p>Klantvragen krijgen een kant-en-klaar concept-antwoord op basis van uw eigen FAQ.</p>
-          </div>
-          <div class="card" data-reveal>
-            <h3>Offerte-informatie automatisch opgevraagd</h3>
-            <p>Mist een offerteaanvraag gegevens? De agent vraagt ze zelf na — sneller antwoord, sneller order.</p>
-          </div>
-          <div class="card" data-reveal>
-            <h3>Proefdraaien zonder risico</h3>
-            <p>Bekijk eerst wat de agent zou doen, voordat u hem daadwerkelijk laat versturen.</p>
-          </div>
-          <div class="card" data-reveal>
-            <h3>Blocklist voor afzenders</h3>
-            <p>Bepaal zelf welke afzenders de agent altijd moet negeren.</p>
-          </div>
-          <div class="card" data-reveal>
-            <h3>Volledige run-historie</h3>
-            <p>Elke actie is zichtbaar in uw dashboard, inclusief 'Needs attention' bij storingen.</p>
-            <a href="agents/email-triage" class="card-link">Bekijk de E-mail agent →</a>
+          <div class="concreet-visuals">
+            <div class="agent-feed-card" data-reveal>
+              <p class="agent-feed-title">Live activiteit</p>
+              <ul class="agent-feed-list" id="agentFeedList">
+                <li class="agent-feed-row is-done">
+                  <span class="agent-feed-dot" aria-hidden="true"></span>
+                  <span class="agent-feed-text">E-mail agent — 14 mails gesorteerd, 9 concepten klaargezet</span>
+                </li>
+                <li class="agent-feed-row is-done">
+                  <span class="agent-feed-dot" aria-hidden="true"></span>
+                  <span class="agent-feed-text">Webshop — orderstatus opgezocht, antwoord klaargezet</span>
+                </li>
+                <li class="agent-feed-row is-done">
+                  <span class="agent-feed-dot" aria-hidden="true"></span>
+                  <span class="agent-feed-text">Needs attention — opgelost</span>
+                </li>
+                <li class="agent-feed-row is-done">
+                  <span class="agent-feed-dot" aria-hidden="true"></span>
+                  <span class="agent-feed-text">Call agent — gesprek aangenomen, terugbelverzoek genoteerd</span>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ===== De kloof groeit (FOMO) =====
-         Website & Conversion plan, 2.1. Works on logic only — deliberately no
+         Statement band, not an essay: works on logic only — deliberately no
          statistics here (an invented number would poison the trust the rest
-         of the site is built on). -->
+         of the site is built on) — cut to one sentence per Sal's request to
+         match agentic-ai.html's text/animation ratio. The argument used to
+         run ~90 words; the claim survives, the essay doesn't. -->
     <section class="container section" data-reveal>
       <div class="section-head center">
         <span class="eyebrow">Waarom nu</span>
         <h2>De kloof groeit.</h2>
       </div>
       <p class="lede text-center" style="max-width: 40rem; margin-inline: auto;">
-        Bedrijven die AI inzetten werken sneller, goedkoper en met minder fouten dan bedrijven
-        die het uitstellen — en dat verschil wordt elk kwartaal groter. Niet omdat AI magie is,
-        maar omdat elk geautomatiseerd proces uren vrijmaakt die uw concurrent nu al ergens
-        anders in investeert. De vraag is niet óf u automatiseert, maar of u vooroploopt of
-        achteraan aansluit.
+        Elk geautomatiseerd proces maakt uren vrij die uw concurrent al ergens anders in investeert —
+        de vraag is niet óf u automatiseert, maar wanneer.
       </p>
       <div class="text-center" style="margin-top: 2rem;">
         <span class="btn-slot">
@@ -384,9 +395,8 @@
         <span class="eyebrow">Werkwijze</span>
         <h2>Klein beginnen, meteen resultaat.</h2>
         <p class="lede" style="margin-top: 1rem;">
-          Alles hieronder doet u zelf, zonder implementatietraject. In uw dashboard ziet u precies hoe
-          goed uw agent getraind is — hoe vollediger zijn kennisbank en bedrijfsprofiel, hoe scherper
-          zijn antwoorden.
+          Alles hieronder doet u zelf, zonder implementatietraject. Het dashboard laat zien hoe goed
+          uw agent getraind is.
         </p>
       </div>
 
@@ -453,8 +463,8 @@
             <span class="accordion-icon" aria-hidden="true"></span>
           </button>
           <div class="accordion-panel" id="faq-1">
-            <p>De eerste 14 dagen zijn gratis. Daarna €40 per maand excl. btw voor de E-mail agent — geen setupkosten,
-              geen verborgen kosten. Zie <a href="pricing">Tarieven</a> voor het volledige overzicht.</p>
+            <p>Eerste 14 dagen gratis, daarna €40/maand excl. btw voor de E-mail agent — geen setupkosten.
+              Zie <a href="pricing">Tarieven</a> voor het volledige overzicht.</p>
           </div>
         </div>
 
@@ -464,10 +474,8 @@
             <span class="accordion-icon" aria-hidden="true"></span>
           </button>
           <div class="accordion-panel" id="faq-2">
-            <p>U voegt in uw dashboard betaalgegevens toe om zonder onderbreking door te blijven werken —
-              dat kan al vanaf dag één, maar hoeft pas tegen het einde van de proefperiode. Daarna loopt
-              uw abonnement automatisch door tegen het reguliere maandbedrag; u ziet de datum vooraf in
-              uw dashboard, dus er komt geen verrassing.</p>
+            <p>U voegt pas betaalgegevens toe tegen het einde van de proefperiode — de datum ziet u vooraf
+              in uw dashboard, dus er komt geen verrassing. Daarna loopt uw abonnement automatisch door.</p>
           </div>
         </div>
 
