@@ -3091,6 +3091,51 @@ a.pill:hover {
   justify-content: center;
 }
 
+/* --- Hub variant: .mowi-orb instead of .showcase-hub-plate ------------------
+   Stage 4 (/workflows) — the orb stands in for "the AI doing the work" as
+   the hub every task/result card flies through, instead of the plain
+   dot/plate agentic-ai.html still uses (that file's own
+   .showcase-hub-plate/-pulse rules above are untouched — this only adds a
+   second, opt-in hub visual scoped to `.showcase-hub .mowi-orb`, selected
+   by putting a bare `.mowi-orb` inside `.showcase-hub` instead of the
+   plate/pulse markup). Mirrors the plate's own 3-step responsive sizing
+   EXACTLY, including the 1024-1365px ("iPad Pro") shrink documented above
+   on .showcase-task/.showcase-result — same regression zone, same fix,
+   just re-expressed as --orb-size instead of width/height. */
+.showcase-hub .mowi-orb {
+  --orb-size: 2.5rem;
+}
+
+@media (min-width: 43.75rem) {
+  .showcase-hub .mowi-orb {
+    --orb-size: 4.25rem;
+  }
+}
+
+/* Must come after the 43.75rem block above — same specificity, source
+   order decides (see the .showcase-task/.showcase-result comment on this
+   same 1024-1365px zone). */
+@media (min-width: 64rem) and (max-width: 85.3125rem) {
+  .showcase-hub .mowi-orb {
+    --orb-size: 3rem;
+  }
+}
+
+/* Same processing-pulse/pause hooks js/main.js already toggles on
+   .showcase-hub (is-processing on card arrival, is-paused when scrolled
+   off-screen) — re-targeted at the orb instead of the old plate/pulse-ring
+   pair. Overriding `animation` here fully replaces the orb's own
+   mowi-orb-breathe animation for exactly the is-processing burst; removing
+   the class reverts to that base breathe animation automatically. */
+.showcase-hub.is-processing .mowi-orb {
+  animation: showcase-process-pulse 0.6s var(--ease-bounce);
+}
+
+.showcase-hub.is-paused .mowi-orb,
+.showcase-hub.is-paused .mowi-orb::after {
+  animation-play-state: paused;
+}
+
 .showcase-ghost {
   position: absolute;
   z-index: 5;
@@ -3590,6 +3635,56 @@ a.pill:hover {
   color: var(--ink-inverted);
   text-decoration: underline;
   text-underline-offset: 3px;
+}
+
+/* ==========================================================================
+   Statement reveal — Stage 4, /workflows signature interaction
+   A single trust sentence whose words individually fade/color in as the
+   section scrolls into view. Inspired by (not copied from) shapes.co's
+   scroll-pinned word-color-reveal on /ai-page, deliberately built WITHOUT
+   scroll-pinning — no position:sticky, no scroll-position math. Each word
+   is a real <span class="sr-word"> hand-wrapped in the HTML (not built by
+   JS); js/main.js only assigns a --word-delay custom property per word and
+   toggles two classes via a plain IntersectionObserver.
+
+   Reveal-safety, and a STRONGER guarantee than the generic [data-reveal]
+   pattern above: .sr-word has NO opacity/color rule outside
+   `.statement-reveal.reveal-armed` below, so the sentence renders at full
+   opacity/final color by default. js/main.js only ever adds
+   .reveal-armed — the dim starting state — when it is actually about to
+   observe the element AND prefers-reduced-motion is NOT set (same
+   convention .configurator-demo/.hero-showcase use: those gate on
+   !prefersReducedMotion in JS rather than relying on the global
+   transition-duration:0.001ms kill-switch alone). No-JS or reduced-motion:
+   .reveal-armed is never added, so every word simply stays at its normal,
+   fully-visible, final-color default from first paint. Reusable name/
+   pattern for later stages that want the same per-word scroll reveal
+   elsewhere on the site. */
+.statement-reveal {
+  max-width: 46rem;
+  margin-inline: auto;
+  text-align: center;
+  font-size: clamp(1.5rem, 1.05rem + 1.8vw, 2.5rem);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: var(--tracking-tight);
+  color: var(--ink);
+}
+
+.sr-word {
+  display: inline-block;
+}
+
+.statement-reveal.reveal-armed .sr-word {
+  opacity: 0.25;
+  color: var(--ink-muted);
+  transition: opacity 0.6s var(--ease-out), color 0.6s var(--ease-out);
+  transition-delay: var(--word-delay, 0s);
+}
+
+.statement-reveal.is-visible .sr-word {
+  opacity: 1;
+  color: var(--ink);
 }
 
 /* --- Utilities (general) -------------------------------------------------------- */

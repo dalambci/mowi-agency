@@ -1126,6 +1126,47 @@ if (configuratorDemo && !prefersReducedMotion) {
   }
 }
 
+// --- Statement reveal (Stage 4, /workflows signature interaction) -----------
+// Each word is a real <span class="sr-word"> already in the HTML (hand-
+// wrapped, not built here) — full-opacity/final-color is the reveal-safety
+// default (see css/style.css's .statement-reveal comment). Only when motion
+// is allowed do we assign a staggered --word-delay per word and arm the dim
+// starting state, then reveal it with one IntersectionObserver per section —
+// no scroll-position math, no position:sticky, just a threshold crossing.
+// Gated on !prefersReducedMotion in JS (not just the CSS kill-switch), same
+// stronger convention as .configurator-demo/.hero-showcase below: if motion
+// is off, .reveal-armed is never added and the sentence stays at its normal
+// fully-visible default from first paint.
+document.querySelectorAll(".statement-reveal").forEach((el) => {
+  if (prefersReducedMotion) return;
+  const words = [...el.querySelectorAll(".sr-word")];
+  if (!words.length) return;
+
+  words.forEach((word, i) => {
+    word.style.setProperty("--word-delay", `${(i * 0.06).toFixed(2)}s`);
+  });
+
+  if (!("IntersectionObserver" in window)) {
+    // No IntersectionObserver support: skip arming entirely rather than
+    // risk permanently-dim text with no way to ever reveal it.
+    return;
+  }
+
+  el.classList.add("reveal-armed");
+  const statementObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          el.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.4 }
+  );
+  statementObserver.observe(el);
+});
+
 // --- Pricing calculator (/pricing "Custom" card) ---------------------------
 // Reads prices from each checkbox's data-price rather than a lookup table here,
 // so the number JS sums and the number printed beside the label can never drift

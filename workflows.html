@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Workflows met AI — Mowi</title>
+  <meta name="description" content="Beschrijf in gewone taal welke workflow u wilt. Mowi bouwt hem uit geteste bouwstenen, laat hem proefdraaien op uw eigen gegevens, en zet hem pas live na uw akkoord." />
+  <link rel="canonical" href="https://mowi.agency/workflows" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css?v=20260815" />
+  <link rel="icon" href="assets/icon-192.png?v=20260804-3" />
+  <link rel="shortcut icon" href="assets/icon-192.png?v=20260804-3" />
+  <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260804-3" />
+  <link rel="apple-touch-icon-precomposed" href="assets/apple-icon-180.png?v=20260804-3" />
+  <script defer data-domain="mowi.agency" src="https://plausible.io/js/script.js"></script>
+  <script src="js/broken-image-guard.js?v=20260805-1"></script>
+  <!-- FAQPage structured data — mirrors the FAQ accordion in <main> 1:1, same
+       format as index.html's own hand-written FAQPage block (this page isn't
+       part of the blog build either). -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Kan de AI dingen verzinnen die ik niet wilde?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Nee. De configurator kiest alleen uit een gesloten set bouwstenen die vooraf gebouwd en getest zijn — nooit losse code, nooit rechtstreekse toegang tot een API. Elke stap die iets verandert draait bovendien eerst als proef, en gaat pas live na uw bevestiging."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Hoeveel workflows kan ik maken?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Zoveel als u nodig heeft, opgebouwd uit wat er vandaag beschikbaar is. We beloven geen onbeperkte mogelijkheden — wat kan, kan; wat nog niet kan, hoort u eerlijk in plaats van dat de AI net doet alsof."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Wat als mijn systeem nog niet gekoppeld is?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Vandaag koppelt Mowi met WooCommerce, Shopify, Pipedrive en Google Agenda, plus uw mailbox en telefoonnummer. Nieuwe koppelingen bouwen we op klantvraag — kijk op /koppelingen voor het actuele overzicht."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Wat als de proefdraai iets verkeerds laat zien?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Dan past u de opdracht aan of bevestigt u hem niet — er verandert nooit iets aan uw systeem vóórdat u akkoord geeft. Een verkeerde proef kost u alleen tijd, nooit een foute actie in uw webshop, agenda of CRM."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ===== Header / navigation =====
+       Copied verbatim from reference/chrome-snippet.html (Stage 2) — same
+       chrome as every other root-level page, unmodified. -->
+  <header class="site-header">
+    <div class="header-bar">
+      <span class="header-cta-slot">
+        <a href="/demo" class="header-cta" data-event="Demo Click">
+          <span class="header-cta-full">Plan een demo</span><span class="header-cta-short">Demo</span>
+        </a>
+      </span>
+
+      <nav class="main-nav" id="main-nav" aria-label="Hoofdmenu">
+        <ul class="nav-group">
+          <li class="nav-dropdown">
+            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="product-menu" aria-haspopup="true">
+              Product
+              <span class="nav-dropdown-icon" aria-hidden="true"></span>
+            </button>
+            <div class="nav-megamenu nav-megamenu-single" id="product-menu">
+              <div class="nav-megamenu-col">
+                <ul>
+                  <li>
+                    <a href="/workflows" aria-current="page">
+                      <span class="nav-megamenu-item-title">Workflows</span>
+                      <span class="nav-megamenu-item-desc">Maak workflows met AI</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/koppelingen">
+                      <span class="nav-megamenu-item-title">Koppelingen</span>
+                      <span class="nav-megamenu-item-desc">Uw systemen, één geheel</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/vertrouwen">
+                      <span class="nav-megamenu-item-title">Vertrouwen</span>
+                      <span class="nav-megamenu-item-desc">Eerst proefdraaien, dan pas live</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li><a href="/receptenboek">Receptenboek</a></li>
+          <li><a href="/zo-werkt-het">How it works</a></li>
+        </ul>
+        <ul class="nav-group">
+          <li><a href="/over">About</a></li>
+          <li class="nav-dropdown">
+            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="resources-menu" aria-haspopup="true">
+              Resources
+              <span class="nav-dropdown-icon" aria-hidden="true"></span>
+            </button>
+            <div class="nav-megamenu nav-megamenu-narrow" id="resources-menu">
+              <div class="nav-megamenu-col">
+                <ul>
+                  <li><a href="/docs/">Documentation</a></li>
+                  <li><a href="/blog/">Blog</a></li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li><a href="https://my.mowi.agency/login" target="_blank" rel="noopener">Login</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-logo-cell">
+        <a href="/" class="wordmark" aria-label="Mowi - home">
+          <img src="assets/mowi-icon.png" alt="" class="wordmark-icon" />
+          <img src="assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
+        </a>
+      </div>
+
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="main-nav" aria-label="Menu openen">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== 1. Hero =====
+         Deliberately restrained (shapes.co's /ai-page hero has almost no
+         visual clutter) — headline, one-line serif-emphasis subline, one
+         CTA. No configurator demo here; that's section 3's job. The small
+         orb is a quiet visual anchor only, not a demo. -->
+    <section class="container hero">
+      <div class="breadcrumb"><a href="/">Home</a> / Workflows</div>
+      <div style="max-width: 40rem;">
+        <span class="mowi-orb mowi-orb--sm" aria-hidden="true" style="margin-bottom: 1.75rem;"></span>
+        <h1>Maak workflows met AI.</h1>
+        <p class="lede" style="margin-top: 1.25rem;">
+          <em class="h-emph">U beschrijft het. Mowi bouwt het — en laat het eerst proefdraaien.</em>
+        </p>
+        <div class="hero-actions" style="margin-top: 2rem;">
+          <span class="btn-slot">
+            <a href="/demo" class="btn btn-primary" data-event="Demo Click">Plan een demo</a>
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 2. Statement reveal =====
+         The page's signature interaction: a single trust sentence whose
+         words individually fade/color in as the section scrolls into view.
+         Inspired by (not copied from) shapes.co's scroll-pinned word-color
+         reveal on /ai-page, adapted to plain vanilla JS WITHOUT scroll
+         pinning — no position:sticky, no scroll-position math, just an
+         IntersectionObserver flipping one class plus a per-word
+         transition-delay (--word-delay, set by js/main.js). Reveal-safety:
+         every word below is real, complete Dutch text at full opacity/final
+         color by default — js/main.js only arms the dim starting state, and
+         only when prefers-reduced-motion is NOT set (same stronger
+         guarantee .configurator-demo/.hero-showcase use, see css/style.css's
+         .statement-reveal comment). No-JS or reduced-motion: the sentence
+         below is already the finished, fully-visible statement. -->
+    <section class="section" style="padding-block: 5rem;">
+      <div class="container">
+        <p class="statement-reveal">
+          <span class="sr-word">Mowi</span>
+          <span class="sr-word">werkt</span>
+          <span class="sr-word">op</span>
+          <span class="sr-word">uw</span>
+          <span class="sr-word">echte</span>
+          <span class="sr-word">gegevens,</span>
+          <span class="sr-word">binnen</span>
+          <span class="sr-word">uw</span>
+          <span class="sr-word">eigen</span>
+          <span class="sr-word">koppelingen</span>
+          <span class="sr-word">—</span>
+          <span class="sr-word">en</span>
+          <span class="sr-word">niets</span>
+          <span class="sr-word">gaat</span>
+          <span class="sr-word">live</span>
+          <span class="sr-word">zonder</span>
+          <span class="sr-word">uw</span>
+          <span class="sr-word">akkoord.</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== 3. Beschrijf het, en het bestaat (speed) =====
+         Full, long-form .configurator-demo — same reusable component
+         index.html's hero introduced (Stage 3), same classes, a SECOND
+         script for site-wide variety rather than the homepage's daily-
+         agenda example. Verified against config/capabilities.php's Manifest
+         Standard v1 (Mowi Dashboard repo) before writing: illustrates
+         'order.list_recent' (a real, read-only operation — "Haalt alle
+         bestellingen op die sinds een bepaald aantal dagen geleden zijn
+         geplaatst..., nieuwste eerst. Geschikt voor periodieke
+         samenvattingen", days_back param 1-31, so "afgelopen 3 dagen" is a
+         valid value), run on a weekly schedule — v1 flows are schedule- or
+         manual-triggered only per that file's own docblock, matching this
+         script exactly. Sample dry-run numbers are round/generic, same
+         convention as the homepage's own dry-run card — never dressed up as
+         real customer data. -->
+    <section class="section section-tint">
+      <div class="container">
+        <div class="section-head center" data-reveal>
+          <span class="eyebrow">Zo werkt het</span>
+          <h2>Beschrijf het, en het bestaat.</h2>
+          <p class="lede" style="margin-top: 1rem;">U typt de opdracht in gewone taal. Mowi zet hem om in een workflow — en laat eerst zien wat hij zou doen, voordat er iets verandert.</p>
+        </div>
+
+        <div class="configurator-demo-wrap" style="max-width: 40rem; margin-inline: auto;" data-reveal>
+          <div class="configurator-demo">
+            <div class="configurator-demo-avatar">
+              <span class="mowi-orb mowi-orb--sm" aria-hidden="true"></span>
+            </div>
+
+            <div class="configurator-thread">
+              <div class="configurator-bubble configurator-bubble-user">
+                <p>Stuur mij elke maandagochtend een overzicht van alle bestellingen die in het weekend zijn binnengekomen.</p>
+              </div>
+
+              <div class="configurator-bubble configurator-bubble-mowi">
+                <p>Begrepen. Elke maandag om 08:00 uur haal ik alle bestellingen op van de afgelopen 3 dagen uit uw webshop, en stuur ik u een overzicht — zodat u nooit zelf hoeft na te tellen wat er is binnengekomen.</p>
+              </div>
+
+              <div class="configurator-dryrun configurator-reveal">
+                <span class="configurator-dryrun-label">Proefdraai — voorbeeldresultaat</span>
+                <div class="configurator-dryrun-row"><span>Zaterdag</span><span>4 nieuwe bestellingen</span></div>
+                <div class="configurator-dryrun-row"><span>Zondag</span><span>7 nieuwe bestellingen</span></div>
+                <div class="configurator-dryrun-row"><span>Totaal afgelopen 3 dagen</span><span>11 bestellingen</span></div>
+              </div>
+
+              <div class="configurator-confirm-row">
+                <span class="configurator-confirm-btn is-confirmed">
+                  <span class="configurator-confirm-check" aria-hidden="true"></span>
+                  Bevestigen
+                </span>
+                <span class="configurator-live-badge configurator-reveal">
+                  <span class="configurator-live-dot" aria-hidden="true"></span>
+                  Live — draait elke maandag om 08:00
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <p class="configurator-demo-caption">Voorbeeld van een gesprek met de configurator — geen echte productscreenshot, geen live klantdata.</p>
+        </div>
+
+        <p class="lede" style="max-width: 38rem; margin: 3rem auto 0; text-align: center;" data-reveal>De AI schrijft geen code. Hij kiest uit bouwstenen die wij vooraf gebouwd en getest hebben — daarom kan een workflow nooit iets doen dat wij niet hebben goedgekeurd.</p>
+      </div>
+    </section>
+
+    <!-- ===== 4. Eerst proefdraaien, dan pas live (trust) =====
+         Mechanical detail behind the dry-run gate: what it actually checks,
+         run against real recent data, and that nothing is written/sent
+         until a human confirms. .browser-frame slot degrades gracefully via
+         js/broken-image-guard.js — assets/screenshots/flow-dry-run.png
+         doesn't exist yet. -->
+    <section class="container section">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">Vertrouwen</span>
+        <h2>Eerst proefdraaien, dan pas live.</h2>
+      </div>
+
+      <div class="grid grid-2" style="align-items: center; gap: 3rem;">
+        <div data-reveal>
+          <p>Een proefdraai gebruikt dezelfde koppeling en dezelfde recente gegevens als de echte workflow — dezelfde bestellingen, dezelfde agenda, dezelfde klantcontacten die er nu al zijn. Hij laat precies zien wat de workflow zou hebben gedaan: welke bestelling gevonden zou zijn, welk tijdslot voorgesteld zou zijn, welk antwoord verstuurd zou zijn.</p>
+          <p style="margin-top: 1rem;">Er verandert daarbij niets. Geen boeking, geen verstuurd bericht, geen wijziging in uw systeem — tot u de proef heeft gezien en bevestigt. Pas dan gaat de workflow live.</p>
+
+          <ul class="check-list" style="margin-top: 1.75rem;">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Draait op uw eigen, recente gegevens — geen nepdata</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Laat het exacte resultaat zien, vóórdat het echt is</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Niets wordt verstuurd, geboekt of gewijzigd zonder uw bevestiging</span></li>
+          </ul>
+        </div>
+
+        <div class="browser-frame" data-reveal>
+          <div class="browser-frame-bar" aria-hidden="true"><span></span><span></span><span></span></div>
+          <img src="assets/screenshots/flow-dry-run.png" alt="Mowi dashboard — proefdraai van een workflow" loading="lazy" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 5. Alles zichtbaar in het dashboard (depth/control) =====
+         Hero-showcase engine relocated here from agentic-ai.html (that file
+         still exists on disk, not yet deleted — a later stage handles
+         redirects). Same grid/class structure, same js/main.js functions
+         (drawShowcaseLines()/runDesktopStep()/typeInto()/pauseWhenOffscreen()
+         — all selector-based, so no JS changes were needed to relocate
+         this), restyled only by swapping the old plain hub
+         dot/plate (.showcase-hub-plate/.showcase-hub-pulse) for a
+         .mowi-orb — see css/style.css's own comment on ".showcase-hub
+         .mowi-orb" for the added sizing/state rules that make that swap
+         work, including preserving the exact 1024-1365px ("iPad Pro") width
+         fix .showcase-task/.showcase-result already carry (documented past
+         regression zone for this component).
+
+         4 task->result pairs, reframed around workflow RUNS instead of the
+         old generic agent tasks — each grounded in a real Manifest Standard
+         v1 operation (config/capabilities.php, Mowi Dashboard repo):
+           1. booking.check_availability (read)
+           2. order.find_by_number / order.find_by_email (read)
+           3. crm.find_person_by_phone (read)
+           4. booking.create (action — requires per-step human confirmation
+              before it may run live, which is exactly what "Voorstel klaar
+              — wacht op bevestiging" states; never "Afspraak geboekt", which
+              would misrepresent the confirm gate). -->
+    <section class="section section-tint">
+      <div class="container">
+        <div class="hero-with-visual">
+          <div data-reveal>
+            <span class="eyebrow">In één overzicht</span>
+            <h2>Alles zichtbaar in het dashboard.</h2>
+            <p class="lede" style="margin-top: 1rem;">Elke workflow die u maakt draait zichtbaar. In het dashboard ziet u welke aanvraag binnenkwam, wat Mowi daarmee deed, en wat het resultaat was — voor elke workflow, op één plek.</p>
+
+            <div class="browser-frame browser-frame-compact">
+              <div class="browser-frame-bar" aria-hidden="true"><span></span><span></span><span></span></div>
+              <img src="assets/screenshots/flows-overview.png" alt="Mowi dashboard — overzicht van actieve workflows" loading="lazy" />
+            </div>
+
+            <a href="https://my.mowi.agency/login" class="card-link" target="_blank" rel="noopener">Bekijk het dashboard →</a>
+          </div>
+
+          <div class="hero-showcase" aria-hidden="true">
+            <!-- Real connector lines, drawn/positioned by js/main.js from
+                 actual element geometry — see drawShowcaseLines(). -->
+            <svg class="showcase-lines" id="showcaseLines"></svg>
+
+            <div class="showcase-task" style="grid-row: 1;">
+              <span class="showcase-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="4" y="5" width="16" height="15" rx="3" />
+                  <path d="M4 10h16M8 3v4M16 3v4" />
+                </svg>
+              </span>
+              <span>Nieuwe agenda-aanvraag</span>
+            </div>
+            <div class="showcase-task" style="grid-row: 2;">
+              <span class="showcase-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="5" y="3" width="14" height="18" rx="3" />
+                  <path d="M8.5 8h7M8.5 12h7M8.5 16h4" />
+                </svg>
+              </span>
+              <span>Order-vraag binnengekomen</span>
+            </div>
+            <div class="showcase-task" style="grid-row: 3;">
+              <span class="showcase-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="7" y="2" width="10" height="20" rx="3" />
+                  <path d="M11 18h2" />
+                </svg>
+              </span>
+              <span>Klant belt met een vraag</span>
+            </div>
+            <div class="showcase-task" style="grid-row: 4;">
+              <span class="showcase-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="4" y="5" width="16" height="15" rx="3" />
+                  <path d="M4 10h16" />
+                  <circle cx="16" cy="15.5" r="3.25" />
+                  <path d="M16 14v1.5l1 1" />
+                </svg>
+              </span>
+              <span>Afspraakverzoek ontvangen</span>
+            </div>
+
+            <!-- Hub: .mowi-orb stands in for "the AI doing the work" here,
+                 same visual motif as the configurator-demo avatar above —
+                 see css/style.css's ".showcase-hub .mowi-orb" comment. -->
+            <div class="showcase-hub">
+              <span class="mowi-orb mowi-orb--sm" aria-hidden="true"></span>
+            </div>
+
+            <div class="showcase-endpoint showcase-result" style="grid-row: 1;">
+              <span class="showcase-check">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7" /></svg>
+              </span>
+              <span>Beschikbaarheid gecontroleerd</span>
+            </div>
+            <div class="showcase-endpoint showcase-result" style="grid-row: 2;">
+              <span class="showcase-check">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7" /></svg>
+              </span>
+              <span>Bestelling opgezocht</span>
+            </div>
+            <div class="showcase-endpoint showcase-result" style="grid-row: 3;">
+              <span class="showcase-check">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7" /></svg>
+              </span>
+              <span>Contact opgezocht in het CRM</span>
+            </div>
+            <div class="showcase-endpoint showcase-result" style="grid-row: 4;">
+              <span class="showcase-check">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7" /></svg>
+              </span>
+              <span>Voorstel klaar — wacht op bevestiging</span>
+            </div>
+
+            <div class="showcase-ghost" id="showcaseGhost"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 6. Kan iets nog niet? Dan hoort u dat — eerlijk (safety net) =====
+         Reuses .trust-band-dark exactly as index.html's own "Niets gaat
+         live zonder uw akkoord" band does (same component, new copy) — the
+         honesty-as-differentiator argument: when a request falls outside
+         the closed Manifest Standard v1 set, the configurator says so
+         plainly instead of hallucinating a fake success, and the request
+         becomes a real roadmap signal to Sal (already established sitewide
+         as the founder personally reachable on every workflow — see
+         index.html's "Iemand verantwoordelijk" card) rather than silently
+         disappearing. Directly grounded in the manifest's own docblock: "an
+         operation not listed here does not exist for the configurator, full
+         stop." No SLA/response-time claim is made — that would be invented. -->
+    <section class="trust-band-dark">
+      <div class="container trust-band-dark-inner" data-reveal>
+        <h2>Kan iets nog niet? Dan hoort u dat — eerlijk.</h2>
+        <p>Vraagt u iets dat buiten de bouwstenen valt die Mowi vandaag kent, dan verzint de configurator geen antwoord. U krijgt gewoon te horen dat het (nog) niet kan — en uw vraag gaat als concreet signaal naar Sal, oprichter van Mowi, in plaats van dat hij onopgemerkt blijft liggen.</p>
+        <a href="/vertrouwen">Meer over vertrouwen →</a>
+      </div>
+    </section>
+
+    <!-- ===== 7. Receptenboek teaser =====
+         Same 3 recipes/wording as index.html's own teaser, for site-wide
+         consistency — nothing new invented here. -->
+    <section class="container section">
+      <div class="section-head center" data-reveal>
+        <span class="eyebrow">Receptenboek</span>
+        <h2>Drie recepten om mee te beginnen.</h2>
+      </div>
+
+      <div class="grid grid-3">
+        <div class="card" data-reveal>
+          <span class="pill pill-accent" style="margin-bottom: 0.75rem; display: inline-block;">Live</span>
+          <h3>Inbox-triage</h3>
+          <p>Elke binnenkomende mail automatisch gecategoriseerd en, waar mogelijk, van een concept-antwoord voorzien.</p>
+          <a href="/receptenboek" class="card-link">Bekijk recept →</a>
+        </div>
+        <div class="card" data-reveal>
+          <span class="pill pill-accent" style="margin-bottom: 0.75rem; display: inline-block;">Live</span>
+          <h3>Offerteaanvraag-opvolging</h3>
+          <p>Ontbrekende gegevens in een offerteaanvraag worden automatisch bij de klant nagevraagd — sneller antwoord, sneller order.</p>
+          <a href="/receptenboek" class="card-link">Bekijk recept →</a>
+        </div>
+        <div class="card" data-reveal>
+          <span class="pill pill-accent" style="margin-bottom: 0.75rem; display: inline-block;">Live</span>
+          <h3>Order-status opzoeken</h3>
+          <p>Een klant vraagt naar zijn bestelling — Mowi zoekt hem op in uw webshop en heeft het antwoord klaar.</p>
+          <a href="/receptenboek" class="card-link">Bekijk recept →</a>
+        </div>
+      </div>
+
+      <p class="text-center" style="margin-top: 2.5rem;">
+        <a href="/receptenboek" class="card-link" style="display: inline;">Bekijk alle recepten in het Receptenboek →</a>
+      </p>
+    </section>
+
+    <!-- ===== 8. FAQ =====
+         Matches the FAQPage JSON-LD in <head> 1:1 — keep both in sync. -->
+    <section class="container section" style="max-width: 48rem;">
+      <div class="section-head center" data-reveal>
+        <span class="eyebrow">Veelgestelde vragen</span>
+        <h2>Vragen? Antwoorden.</h2>
+      </div>
+
+      <div class="accordion" data-reveal>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-1">
+            Kan de AI dingen verzinnen die ik niet wilde?
+            <span class="accordion-icon" aria-hidden="true"></span>
+          </button>
+          <div class="accordion-panel" id="faq-1">
+            <p>Nee. De configurator kiest alleen uit een gesloten set bouwstenen die vooraf gebouwd en getest zijn — nooit losse code, nooit rechtstreekse toegang tot een API. Elke stap die iets verandert draait bovendien eerst als proef, en gaat pas live na uw bevestiging.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-2">
+            Hoeveel workflows kan ik maken?
+            <span class="accordion-icon" aria-hidden="true"></span>
+          </button>
+          <div class="accordion-panel" id="faq-2">
+            <p>Zoveel als u nodig heeft, opgebouwd uit wat er vandaag beschikbaar is. We beloven geen onbeperkte mogelijkheden — wat kan, kan; wat nog niet kan, hoort u eerlijk in plaats van dat de AI net doet alsof.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-3">
+            Wat als mijn systeem nog niet gekoppeld is?
+            <span class="accordion-icon" aria-hidden="true"></span>
+          </button>
+          <div class="accordion-panel" id="faq-3">
+            <p>Vandaag koppelt Mowi met WooCommerce, Shopify, Pipedrive en Google Agenda, plus uw mailbox en telefoonnummer. Nieuwe koppelingen bouwen we op klantvraag — kijk op <a href="/koppelingen" style="text-decoration: underline;">/koppelingen</a> voor het actuele overzicht.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-4">
+            Wat als de proefdraai iets verkeerds laat zien?
+            <span class="accordion-icon" aria-hidden="true"></span>
+          </button>
+          <div class="accordion-panel" id="faq-4">
+            <p>Dan past u de opdracht aan of bevestigt u hem niet — er verandert nooit iets aan uw systeem vóórdat u akkoord geeft. Een verkeerde proef kost u alleen tijd, nooit een foute actie in uw webshop, agenda of CRM.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== Pre-footer CTA band ===== -->
+  <section class="cta-prefooter">
+    <div class="container cta-prefooter-inner">
+      <h2>Uw bedrijf op de <em class="h-emph">automatische piloot.</em></h2>
+      <span class="btn-slot">
+        <a href="/demo" class="btn btn-primary" data-event="Demo Click">Plan een demo</a>
+      </span>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="wordmark wordmark-lg">
+          <img src="assets/mowi-icon.png" alt="" class="wordmark-icon" />
+          <img src="assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
+        </span>
+        <p>Het conversationele automatiseringsplatform voor het Nederlandse MKB.</p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Footermenu">
+        <span class="footer-heading">Platform</span>
+        <a href="/workflows">Workflows met AI</a>
+        <a href="/receptenboek">Receptenboek</a>
+        <a href="/koppelingen">Koppelingen</a>
+        <a href="/vertrouwen">Vertrouwen</a>
+        <a href="/zo-werkt-het">Zo werkt het</a>
+      </nav>
+
+      <nav class="footer-support" aria-label="Bronnenmenu">
+        <span class="footer-heading">Bronnen</span>
+        <a href="/blog/">Blog</a>
+        <a href="/docs/">Documentatie</a>
+      </nav>
+
+      <div class="footer-contact">
+        <span class="footer-heading">Bedrijf &amp; contact</span>
+        <a href="/over">Over Mowi</a>
+        <a href="/demo">Plan een demo</a>
+        <p>085 333 5800</p>
+        <p>contact@mowi.agency</p>
+        <a href="https://my.mowi.agency/login" target="_blank" rel="noopener">Inloggen</a>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>© 2026 Mowi · Nederland &amp; België</p>
+      <div class="footer-legal">
+        <a href="/privacyverklaring">Privacyverklaring</a>
+        <a href="/algemene-voorwaarden">Algemene voorwaarden</a>
+        <a href="/cookies">Cookies</a>
+        <a href="/ai-transparantie">AI-transparantie</a>
+        <a href="/bedrijfsgegevens">Bedrijfsgegevens</a>
+        <a href="/subverwerkers">Subverwerkers</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js?v=20260815"></script>
+</body>
+</html>
