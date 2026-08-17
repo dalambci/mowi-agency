@@ -3,18 +3,91 @@
 This is a marketing website for an AI automation business. These rules are durable and
 apply to all future work in this repo, not just the current task.
 
-## Total rebrand — 2026-08-17 (branch `rebrand`, built but not merged/deployed)
+## Total rebuild v2 — 2026-08-18 (branch `rebuild-v2`, built but NOT merged/deployed)
+A full 10-stage rebuild was executed on branch `rebuild-v2` off `master`, at the founder's
+explicit request to throw away the entire prior implementation ("don't keep anything we
+already have") and rebuild it from scratch, using **elevenlabs.io** and **shapes.co** as
+explicit visual/structural references. This is a second, deeper pass on top of the
+"Total rebrand" described further below — that rebrand had already pivoted the site's
+*positioning* to demo-gated/conversational-workflow-automation and had already cited
+shapes.co as visual inspiration in its own CSS header comment, but its own token layer
+admitted it was an unfinished mid-migration patch job (a back-compat alias block explicitly
+marked "DELETE once every page has been migrated" — that migration was never finished). v2
+redid the same direction properly, once, in full, with three hard constraints the founder
+added mid-build that override anything below describing the pre-v2 (orange-accent) system:
+
+1. **Monochrome only — no color anywhere.** No accent hue, no color-coded tags. Black ink
+   on warm-bone background (`--bg:#faf6ef`, unchanged from before — a warmth/paper quality,
+   not a hue), or bone-on-black in inverted sections. Emphasis is carried by weight, size,
+   the serif-italic word, and black fills — never by color.
+2. **The orb motif is a pixelated/halftone sphere**, built the same way `mowi-icon.png`'s
+   own texture already works (see Branding below): a luminance-to-alpha dot/grain ramp, not
+   a flat silhouette and not a color gradient. Pure CSS (layered `radial-gradient`/masking),
+   monochrome.
+3. **No invented motion.** Only animation actually observed live on the two reference sites
+   is in scope — concretely, shapes.co's own hero chat-input auto-playing an example
+   question into a "Thinking…" state with no click involved. That one pattern survives as
+   the `.chat-input` component's auto-play mode. Everything else the v1 rebrand had
+   (scroll-reveal-on-intersection fades, magnetic-hover button pointer-tracking, an orb
+   pulse/rotate idle animation) was cut — content just sits in normal document flow, hover
+   states change color/border only, tab/accordion/dropdown switches are instant or a simple
+   opacity cross-fade.
+
+**What "don't keep anything" turned out to mean in practice:** positioning, copy, page
+structure, and the entire design system were rebuilt from zero. Four things were carried
+over with content untouched (only their outer shell/CSS integration rebuilt), per the
+founder's explicit scope: the Mowi logo/favicon assets, the docs section's articles, the
+blog generator + its posts, and the 6 legal pages' legal text. See "Design system",
+"Navigation", "Content & positioning", and "Folder structure" below for the current reality
+— every section has been rewritten in place to describe v2, with the pre-v2 wording kept
+underneath and marked superseded per this file's own "never delete history" rule.
+
+**Stage-by-stage summary** (10 stages, one commit each on `rebuild-v2`, screenshot-QA'd at
+1440px/390px before each commit): S0 foundation (tokens/primitives/components in
+`css/style.css`+`js/main.js`, `test.html` rebuilt as the v2 styleguide) → S1 homepage → S2
+`workflows.html` (absorbs the retired Receptenboek, see "Content & positioning") +
+`koppelingen.html` → S3 `zo-werkt-het.html`+`vertrouwen.html`+`ai-transparantie.html` → S4
+`over.html`+`demo.html` → S5 legal/business-info shells (text verbatim, chrome only) → S6
+docs shell token harmonization (content untouched) → S7 blog chrome regenerated via
+`build-blog.js` (post prose untouched) → S8 redirect stubs + cleanup (Receptenboek retired
+as stubs, `blog-preview/` and the orphaned `hero-anim-trainingen.*` files deleted) → S9
+sitewide consistency sweep + this file's rewrite.
+
+**`rebuild-v2` is NOT merged to `master` and NOT deployed.** Don't assume any of the above
+is live, or even on `master`, until the founder has reviewed the branch and explicitly asked
+for it to be merged — then deployed per "Deploying to production" below, which is a wholly
+separate later step.
+
+## Total rebrand — 2026-08-17 (superseded by v2 above — kept for history, do not follow for design/nav/positioning specifics; git-reconciliation and deploy-mechanics facts below are still real history)
 A full 8-stage rebrand was executed on branch `rebrand` (commits `f85f6c3`..`591f862` plus a
 final Stage 8 cache-bust/blog-rebuild/QA/docs pass), moving the site from a self-serve
 pricing/signup model to a **demo-gated, conversational workflow-automation platform**
-positioning. This file has been updated throughout to describe the site **as it now is**
-post-rebrand; anywhere an older rule described the pre-rebrand nav, pricing model, or
-design system, it has been rewritten in place (git history still has the old wording if
-ever needed) or explicitly marked superseded. See "Content & positioning", "Navigation",
-"Pricing / business model", "Design system", and "Folder structure" below for the current
-reality. **As of 2026-08-17 this branch has not been merged to `master` or deployed** —
-production (`mowi.agency`) is still serving the pre-rebrand site. Do not assume the rebrand
-is live; check which branch is actually checked out before describing "the current site."
+positioning — that positioning itself is still current (v2 didn't change *what Mowi sells*,
+only how the site expresses it; see "Content & positioning" below). Anywhere below this
+section describes visual design, navigation labels, or the Receptenboek-as-pages structure,
+treat it as pre-v2 and prefer the sections above/marked-current instead.
+
+**Git reconciliation (2026-08-17, same day):** a second machine had independently pushed 31
+commits to `origin/master` continuing the *old* self-serve direction (new self-serve blog
+posts, a broader "every possible platform" logo set, self-serve CTAs) — done before that
+machine knew about that day's masterplan pivot. Since the pivot supersedes that direction,
+`master` was reset to `rebrand`'s tip and force-pushed: `origin/master` became `rebrand`'s
+8-stage history (tip `40119b9`). Checked first whether anything from those 31 commits was
+worth pulling forward — it wasn't: `rebrand`'s own `koppelingen.html` referenced only its own
+12 deliberately-curated logos (none of the 31 commits' ~23 extra ones), and the 3 new blog
+posts from those commits contained self-serve CTAs/pricing ("Start gratis — 14 dagen",
+`my.mowi.agency/aanmelden` signup, per-agent self-serve pricing tables) that directly
+contradicted the demo-gated pivot. Nothing was lost though — the pre-reconciliation `master`
+is preserved in full at branch/tag `archive/self-serve-rewrite-20260817` (pushed to GitHub)
+if any of it is ever wanted for reference.
+
+**As of the v2 rebuild, `master` still equals the *v1* rebrand (tip `40119b9`) — production
+is still not deployed even to v1, let alone v2.** Production (`mowi.agency`) has its own
+separate git checkout on the server and only updates when someone SSHes in and runs
+`git pull origin master` (see "Deploying to production" below) — merging `rebuild-v2` to
+`master` on GitHub will not push anything live by itself, and hasn't happened yet regardless.
+Do not assume either rebrand is live on `mowi.agency` until that deploy step has actually
+been run and verified.
 
 ## Project memory (Obsidian)
 Long-term project knowledge lives in `c:\Users\SalP1\Desktop\Mowi brain\Mowi\`.
@@ -37,11 +110,15 @@ backstop in case something important didn't get written down.
 ## Dev tooling (not part of the shipped site)
 - `serve.js` / `start-local-server.bat` — local static server for manual testing at
   `http://localhost:8765`.
-- `screenshot.js` — Playwright script that takes full-page screenshots of the homepage at
-  1440px and 390px (`node screenshot.js [outputDir] [url]`). Requires the local server
-  running first. Scrolls through the page in steps before capturing — the site's
-  scroll-reveal animations are IntersectionObserver-driven, so a screenshot tool that doesn't
-  actually scroll the real viewport will capture below-the-fold content as still invisible.
+- `screenshot.js` — Playwright script that takes full-page screenshots of a page at 1440px
+  and 390px (`node screenshot.js [outputDir] [url]`). Requires the local server running
+  first. Scrolls through the page in steps before capturing. **Note (v2):** this scrolling
+  behavior was originally load-bearing because v1's design had `IntersectionObserver`-driven
+  scroll-reveal animations that wouldn't fire without a real viewport scroll. v2 deliberately
+  has no scroll-reveal at all (see "Design system" — motion is limited to what's actually
+  observed on the reference sites), so a plain `fullPage` screenshot would technically
+  suffice now — the step-scrolling was left in place anyway since it's harmless and costs
+  little, not because it's still required.
   Output goes to `screenshots/` by default (gitignore-worthy, not a deliverable).
 - Playwright is also useful for genuine mobile-width testing — browser-extension-based
   automation in this environment could not reliably resize its own viewport, so Playwright is
@@ -59,17 +136,18 @@ backstop in case something important didn't get written down.
   and does nothing; don't reach for one again for this.
 
 ## Deploying to production
-- **As of 2026-08-17, `master` (what production actually serves) is still the pre-rebrand site.**
-  The total rebrand (this file's "Total rebrand" note near the top) lives entirely on branch
-  `rebrand`, deliberately not merged — do not push, merge, or deploy it without the founder's
-  explicit go-ahead, and don't assume `git pull origin master` on the server would pick up any
-  of the rebrand's pages until that merge happens. `docs/` is identical on both branches
-  (confirmed zero diff), so anything docs-only is safe to reason about either way.
+- **As of the v2 rebuild, production has not pulled even the v1 rebrand yet, let alone v2.**
+  `master`/`origin/master` on GitHub still points at `rebrand`'s tip (`40119b9`) — `rebuild-v2`
+  is a separate branch, not merged. Production is still serving whatever it last `git pull`'d,
+  which predates all of this. Don't assume `mowi.agency` shows either rebrand until someone
+  has actually merged the relevant branch to `master`, SSH'd in, run `git pull origin master`,
+  and it's been verified live (see the cache-busting/Varnish-purge notes further down — a pull
+  alone won't be visible to real visitors until those steps too).
 - Production (`mowi.agency`, Cloudways app `ktzphwhvnh` on server `134.209.193.67`) has its own
   git checkout at `~/applications/ktzphwhvnh/public_html`, with `origin` pointed at this same
-  GitHub repo (`https://github.com/dalambci/mowi-agency.git`). Deploying is: push to GitHub,
-  then SSH in and `git pull origin master` in that directory (plain fast-forward — the server
-  checkout should never have local commits of its own).
+  GitHub repo (`https://github.com/dalambci/mowi-agency.git`). Deploying is: merge the branch
+  to `master`, push to GitHub, then SSH in and `git pull origin master` in that directory
+  (plain fast-forward — the server checkout should never have local commits of its own).
 - SSH access uses a dedicated key at `~/.ssh/mowi_cloudways` (already present in this dev
   environment, not passphrase-protected) — connect with
   `ssh -i ~/.ssh/mowi_cloudways master_jhjtpcszem@134.209.193.67`, no password needed.
@@ -129,7 +207,7 @@ retype credentials from scratch or falling back to a password:
 
 ## Cache-busting — bump this on every CSS/JS change
 - `css/style.css` and `js/main.js` are referenced from every page with a `?v=YYYYMMDD` query
-  string (e.g. `css/style.css?v=20260802`), matching a `Cache-Control: public, max-age=2592000`
+  string (e.g. `css/style.css?v=20260818`), matching a `Cache-Control: public, max-age=2592000`
   (30-day) header set at the server. Without the version string, a browser that already cached
   the file simply keeps serving that stale copy for up to 30 days after a deploy — it doesn't
   even revalidate with the server, so redeploying alone does not fix it for a visitor who's
@@ -140,14 +218,14 @@ retype credentials from scratch or falling back to a password:
   value on all `<link>`/`<script>` tags referencing them, across every HTML page**, so browsers
   are forced to fetch the new file immediately rather than waiting out the cache. Use the
   current date (`YYYYMMDD`); if multiple deploys land same-day, append `-2`, `-3`, etc.
-  **Latest coordinated bump: `20260817`** (Stage 8, end of the total rebrand — Stages 1-7 had
-  left several different `?v=` values scattered across pages after touching `style.css`/
-  `main.js` repeatedly without a final sync; Stage 8 did one pass bumping every page that loads
-  either file to the same value). Applies to every root marketing page, `receptenboek/*`, the 6
-  legal pages, `test.html`, and `blog/*` (whose version is auto-derived by `build-blog.js` from
+  **Latest coordinated bump: `20260818`** (v2 rebuild Stage 9 — every real page loading either
+  file was swept and verified on this exact string, including `test.html` which had drifted one
+  version behind after Stage 0). Applies to every root marketing page, the 6 legal pages,
+  `test.html`, and `blog/*` (whose version is auto-derived by `build-blog.js` from
   `index.html`'s own `?v=` — see its `CSS_VERSION` regex — don't hardcode it separately there).
-  Does **not** apply to the 9 redirect stubs (they don't load either file) or to `docs/*` (own
-  separate `docs.css`/`docs.js` versioning, untouched by this rule).
+  Does **not** apply to the 15 redirect stubs (root stubs, `agents/*`, and — new in v2 —
+  `receptenboek.html` + `receptenboek/*`, none of which load either file) or to `docs/*` (own
+  separate `docs.css`/`docs.js` versioning, untouched by this rule — currently `docs.css?v=20260817`).
 - **Separate from the above:** production also has a page-level HTTP cache in front of nginx
   (confirmed 2026-08-03 — `curl -sI https://mowi.agency/` showed `X-Cache: HIT` and `Age: 252`;
   likely Varnish, which Cloudways commonly bundles). This caches whole HTML responses, not just
@@ -161,33 +239,36 @@ retype credentials from scratch or falling back to a password:
 
 ## Language & tone
 - All visible site text is in **Dutch**, formal **"u"** form (never "je/jij").
-- **Exception — the whole header nav, not just the dropdown.** The header nav (see
-  `.nav-megamenu` in `css/style.css`) has always used English labels deliberately. Keep these
-  in English; don't translate them to Dutch. Everything else on the site stays Dutch per the
-  rule above.
+- **Exception — the whole header nav, not just the dropdown.** The header nav has always used
+  English labels deliberately (unchanged through both rebrands). Keep these in English; don't
+  translate them to Dutch. Everything else on the site stays Dutch per the rule above.
 
-### Navigation — current, post-rebrand (2026-08-17)
-The header nav is (left to right): **"Plan een demo"** CTA pill → **"Product"** dropdown
-(single column: **Workflows** / **Koppelingen** / **Vertrouwen**, each with a one-line Dutch
-descriptor, shapes.co-style) → **"Receptenboek"** → **"How it works"** (links to
-`/zo-werkt-het`) → **"About"** (links to `/over`) → **"Resources"** dropdown (Documentation,
-Blog) → **"Login"** (external, `https://my.mowi.agency/login`, `target="_blank"`). The
-Mowi wordmark sits in its own logo cell; there is no separate dashboard-login icon button
-next to it any more (that was folded into the "Login" nav item). The footer nav still uses
-Dutch labels ("Tarieven"-era footer wording has been retired along with the pricing page it
-pointed to — footer now links to `/zo-werkt-het`, `/blog/`, `/over`, `/demo`, `Inloggen`, and
-the legal pages) — header and footer are deliberately allowed to differ on language per the
-exception above.
+### Navigation — current, v2 (2026-08-18)
+The header is now **logo-left / nav-center / actions-right** (a deliberate structural change
+from v1's CTA-left/logo-right layout — neither reference site used that inversion, and the
+full teardown was the moment to fix it): Mowi wordmark → centered `<nav>` with **"Product"**
+dropdown (single column: **Workflows** / **Koppelingen** / **Vertrouwen**, each with a
+one-line Dutch descriptor) → **"How it works"** (`/zo-werkt-het`) → **"Docs"** (promoted out
+of the old "Resources" dropdown to a flat top-level link — both reference sites treat docs as
+first-class nav, not buried; `/docs/`) → **"About"** (`/over`) → **"Blog"** (flat link,
+`/blog/` — with Docs promoted out, a one-item "Resources" dropdown was pointless, so it was
+removed entirely) → right-aligned `.header-actions`: **"Login"** (external,
+`https://my.mowi.agency/login`, `target="_blank"`) + **"Plan een demo"** pill CTA. There is no
+separate dashboard-login icon button (folded into "Login"). **"Receptenboek" is gone from the
+nav entirely** — see "Content & positioning" below for where that content went. The footer
+still uses Dutch labels, 4 columns (brand / Platform / Bronnen / Bedrijf & Contact) — header
+and footer are deliberately allowed to differ on language per the exception above.
 
-**Superseded 2026-08-17 (total rebrand) — kept for history, do not follow:** the pre-rebrand
-nav had a "Products" mega-menu with two columns ("Platform": Agentic AI / Power BI /
-Trainingen, and "Agents": Email agent / Call agent), a top-level "Pricing" link, and a
-"Contact sales" / "Demo" CTA pointing at `/contact` or `/tarieven`/`/pricing`. All of those
-pages (`agentic-ai.html`, `power-bi-dashboards.html`, `trainingen.html`, `pricing.html`,
-`tarieven.html`, `cases.html`, `agents/email-triage.html`, `agents/phone-agent.html`,
-`contact.html`) are now **client-side redirect stubs** (see Folder structure below), not real
-content — don't add new links to them, and don't resurrect the old label names above for the
-current nav.
+**Superseded 2026-08-17→18 — kept for history, do not follow:** v1's nav was CTA-left/
+logo-right, with a flat "Receptenboek" link and a "Resources" dropdown (Documentation + Blog)
+between "About" and "Login". Before that, the pre-rebrand nav had a "Products" mega-menu with
+two columns ("Platform": Agentic AI / Power BI / Trainingen, and "Agents": Email agent / Call
+agent), a top-level "Pricing" link, and a "Contact sales" / "Demo" CTA pointing at `/contact`
+or `/tarieven`/`/pricing`. All of those pages (`agentic-ai.html`, `power-bi-dashboards.html`,
+`trainingen.html`, `pricing.html`, `tarieven.html`, `cases.html`, `agents/email-triage.html`,
+`agents/phone-agent.html`, `contact.html`) are, and remain, **client-side redirect stubs**
+(see Folder structure below), not real content — don't add new links to them, and don't
+resurrect any of the old label names above for the current nav.
 
 ## Documentation section (setup guides for clients)
 - Structure, page anatomy, navigation anatomy, and writing rules are defined in
@@ -205,12 +286,24 @@ current nav.
 - Information architecture (categories + initial page list) is proposed in
   `reference/docs-style-guide.md` §4. Treat that as the working IA once approved; update this
   file's Folder structure section below if/when the docs section adds new folders.
+- **v2 rebuild note:** the docs section's IA, article content, and JS mechanisms (`docs.js`,
+  `docs-nav.js`, sidebar/breadcrumb/TOC generation) were explicitly out of scope for the v2
+  teardown and are byte-for-byte unchanged. Only `css/docs.css`'s own numeric tokens were
+  lightly harmonized — its spacing scale (`--docs-space-1..7`) now mirrors the marketing
+  site's 4px-based `--space-*` progression where a value already landed on that scale; radius
+  and color stayed pinned to the real dashboard's own CSS (`reference/dashboard-css/`), which
+  remains the actual source of truth for this section, not the marketing palette. `docs.css`
+  bumped to `?v=20260817` across all 17 docs pages. "Docs" is now promoted to a top-level
+  marketing-nav item (see Navigation above) instead of living inside a "Resources" dropdown.
 
 ### Docs are visually a dashboard extension, not a marketing page
 - Docs pages are styled to match the **client dashboard** (a separate Laravel app at
   `c:\Users\SalP1\Desktop\Mowi Dashboard` — not part of this repo), not this site's own
   marketing design. Calm neutrals, no accent hue, no display-sized headings, no marquees, no
-  scroll-reveal animation.
+  scroll-reveal animation. This was already true before the v2 rebuild and remains true
+  now that the marketing site itself is also monochrome — the two sections still look
+  distinct (Inter vs. Plus Jakarta Sans/Instrument Serif, dashboard-grey vs. warm-bone, 8px
+  vs. pill-family radius), they just no longer clash on "has color vs. doesn't."
 - Style source of truth: `reference/dashboard-css/` (a copy of the dashboard's own
   `resources/css/dashboard.css`, plus a README summarizing the extracted tokens) — study/
   inspiration only, same status as `reference/style-vuewer.md`. If the dashboard's CSS ever
@@ -232,36 +325,33 @@ current nav.
   (see below) — the sidebar, breadcrumb, and prev/next everywhere else update automatically.
 
 ### Extensionless URLs (site-wide) depend on Cloudways Web Rules, not just link edits
-- All internal links — root marketing pages (`/cases`, `/contact`, `/agentic-ai`,
-  `/power-bi-dashboards`, `/trainingen`) and docs links (sidebar, breadcrumb, prev/next,
+- All internal links — root marketing pages and docs links (sidebar, breadcrumb, prev/next,
   in-article cross-links, e.g. `/docs/agent-crm-sync`) — point to extensionless URLs. The files
   on disk still end in `.html`; only the URL is clean.
 - This only works via **Internal Rewrite** rules configured directly in the Cloudways dashboard
   (app `mowi.agency` / 6590002 → **Web Rules → Rewrite Rules**, not anything in this repo or in
   nginx config files we have access to — see the SSH/root-permission note under "Deploying to
   production" above). The docs rule — `^/docs/([a-z0-9-]+)$` → `/docs/$1.html`, Action
-  **Internal rewrite** — was verified 2026-08-03 against all 19 articles (right status code *and*
+  **Internal rewrite** — was verified 2026-08-03 against every article (right status code *and*
   right page content) plus collateral checks, all correct.
 - Root-level marketing pages resolve extensionlessly too, confirmed **not** via an explicit slug
-  list (that was this paragraph's own earlier, wrong claim, corrected 2026-08-05 with hard
-  evidence): after `/ai-automatisering` was renamed to `/agentic-ai`, the new clean URL worked in
-  production **immediately**, with no Cloudways change made — and a `curl` to `/test` (never on
-  any documented slug list, dev-only, not meant to have a clean URL at all) also resolved to
-  `test.html`, while a genuinely nonexistent slug correctly 404'd. That rules out an explicit
-  per-slug allowlist; the real mechanism generically tries `<path>.html` for any unmatched path
-  and 404s if it doesn't exist on disk. Whether that's a Cloudways Web Rule written more broadly
-  than previously assumed, or plain nginx `try_files` configured at the server-block level (this
-  repo's SSH user has no root/nginx-config access to check directly — see the SSH/root-permission
-  note under "Deploying to production" above) is unconfirmed either way. **Practical upshot: a
-  newly-added or renamed root-level `.html` page does not need any Cloudways dashboard step to get
-  a working clean URL** — it already works, verify with a `curl` if in doubt rather than assuming
-  a manual step is owed.
-- The account's Web Rules quota showed **24/25 remaining** after adding the docs rule (2026-08-03,
-  a real, confirmed rule — see above). A second root-level rule was believed added shortly after,
-  which would've brought it to 23/25, but 2026-08-05's finding above casts doubt on whether that
-  second rule is what's actually doing the work (a generic nginx fallback would explain the same
-  observed behavior without consuming a quota slot at all) — re-check the actual quota number in
-  the dashboard rather than trusting 23 vs. 24 from memory.
+  list (corrected 2026-08-05 with hard evidence): after `/ai-automatisering` was renamed to
+  `/agentic-ai`, the new clean URL worked in production **immediately**, with no Cloudways
+  change made — and a `curl` to `/test` (never on any documented slug list, dev-only, not meant
+  to have a clean URL at all) also resolved to `test.html`, while a genuinely nonexistent slug
+  correctly 404'd. That rules out an explicit per-slug allowlist; the real mechanism generically
+  tries `<path>.html` for any unmatched path and 404s if it doesn't exist on disk. Whether that's
+  a Cloudways Web Rule written more broadly than previously assumed, or plain nginx `try_files`
+  configured at the server-block level (this repo's SSH user has no root/nginx-config access to
+  check directly) is unconfirmed either way. **Practical upshot: a newly-added or renamed
+  root-level `.html` page does not need any Cloudways dashboard step to get a working clean
+  URL** — it already works, verify with a `curl` if in doubt rather than assuming a manual step
+  is owed. This is also how `/workflows#email-agent`-style hash anchors on real pages resolve
+  fine — the hash is client-side only, irrelevant to server-side routing.
+- The account's Web Rules quota showed **24/25 remaining** after adding the docs rule
+  (2026-08-03) — re-check the actual quota number in the dashboard rather than trusting a
+  remembered figure, since the root-level mechanism above may not be consuming a rule slot at
+  all (a generic nginx fallback would explain the same behavior without using one).
 - `serve.js` (local dev server) mirrors both rules generically (falls back to appending `.html`
   to any unresolved extensionless path, not just under `/docs/`) so local testing matches
   production once the second rule is added. If the live rules ever change, update `serve.js` to
@@ -277,22 +367,20 @@ current nav.
   (the `-result` variant is for "U ziet nu ..." expected-result confirmations), `.docs-media`
   (grey rounded image placeholder + caption, for screenshots to be added later), and
   `.docs-token-row` / `.docs-copy-btn` (copyable key/URL blocks with a working clipboard button).
-- All 19 approved articles + `docs/index.html` (overview, dashboard-style category cards) exist
-  and have **real written content** (as of 2026-08-03) — not stubs. Every article follows the
+- `docs/index.html` (overview, dashboard-style category cards) plus **16 articles** exist with
+  real written content, confirmed by direct inventory (not the older, inaccurate "19 articles"
+  figure this file used to carry — recount with `ls docs/*.html` if this number is ever in
+  doubt, ownership of the exact count drifts as pages are added). Every article follows the
   same anatomy: two-sentence "what this does," one-line goal, prerequisites box, numbered steps
   with "U ziet nu ..." results, image placeholders, troubleshooting, next steps. The Email
   triage agent page (`docs/agent-email-triage.html`) was written first and approved by the user
   as the template every other article copies — if in doubt about tone/structure/depth for a new
   or edited article, match that one.
-- The marketing footer has a dedicated column (`.footer-support`, its own grid column in
-  `.footer-inner` — 4 columns total: brand/nav/support/contact) that links to `docs/index.html`
-  as "Documentatie" — keep that link when editing any footer. It used to be a flat item inside
-  "Navigatie"; that changed 2026-08-03, don't move it back. **Updated 2026-08-17 (total
-  rebrand):** the Stage 2 rebrand renamed this column's heading from "Support" to **"Bronnen"**
-  (Dutch for "Resources") and folded the blog link into it too — it's now Blog + Documentatie
-  together under "Bronnen", still its own dedicated grid column, same `.footer-support` class
-  and same "keep it a real column, don't flatten it back into Navigatie" rule as before, just
-  under the new heading text.
+- The marketing footer has a dedicated column (`.footer-support`-style column in
+  `.footer-inner` — 4 columns total: brand/Platform/Bronnen/Bedrijf & Contact) whose "Bronnen"
+  heading holds Blog + Documentatie together, linking to `docs/index.html` as "Documentatie" —
+  keep that link when editing any footer, and keep it a real dedicated column, don't flatten it
+  back into the platform/nav column.
 
 ### Precision rules that produced this content — apply to every future edit
 - **Never invent a click-path.** Steps inside our own dashboard are grounded by reading the
@@ -310,15 +398,13 @@ current nav.
   empty; don't treat it as "nothing exists there"). Find every open one with:
   `grep -rn "DRAFT\|VERIFY" docs/*.html` — count and list change as pages are added/edited, so
   re-run the grep rather than trusting a cached count here.
-  **Stale claim corrected 2026-08-13**: this note used to say there was no self-service
-  "Koppelingen" UI in the dashboard at all. That's no longer true — as of 2026-08-13 the dashboard
-  (`Mowi Dashboard` repo) has a real, working self-serve Koppelingen step
-  (`resources/views/profile/partials/update-shop-connection-form.blade.php`) for WooCommerce,
-  Shopify, Pipedrive and Google Agenda, with real click paths, not DRAFT markers — see
-  `docs/koppeling-woocommerce.html` etc. for the first pages written against it. The other
-  agent/koppeling pages (CRM sync, Invoice processing, Lead enrichment, Report generator, and any
-  future platform) may still need DRAFT markers until their own dashboard screens exist — check
-  the actual dashboard repo before assuming either way.
+  As of 2026-08-13 the dashboard (`Mowi Dashboard` repo) has a real, working self-serve
+  Koppelingen step (`resources/views/profile/partials/update-shop-connection-form.blade.php`)
+  for WooCommerce, Shopify, Pipedrive and Google Agenda, with real click paths, not DRAFT
+  markers — see `docs/koppeling-woocommerce.html` etc. The other agent/koppeling pages (CRM
+  sync, Invoice processing, Lead enrichment, Report generator, and any future platform) may
+  still need DRAFT markers until their own dashboard screens exist — check the actual dashboard
+  repo before assuming either way.
 - **Never guess security/network specifics.** `docs/it-beveiliging.html` and
   `docs/it-netwerkvereisten.html` deliberately omit encryption/retention/certification claims and
   all IP/domain/port values — a wrong firewall value is worse than none. Only add these once a
@@ -345,61 +431,107 @@ current nav.
 ## Content & positioning
 - Content is adapted from `reference/content-data-vista.md` (our own prior business
   website — safe to reuse/adapt in full: text, numbers, stats, client names, case studies) —
-  historical source; the rebrand below has since rewritten most of what actually ships.
-- **Current positioning, post total-rebrand (2026-08-17):** Mowi is a **conversational
-  workflow-automation platform** for the Dutch MKB/SMB — "u zegt het, en het werkt." The
-  product story is: describe what you want done in plain language, Mowi configures it from
-  tested building blocks (never freeform code), nothing goes live without your approval, and
-  there's always a named person accountable (not an anonymous support queue). Primary proof
-  device is the `.configurator-demo` component (a scripted but real, verified-against-the-
-  dashboard conversation) reused across `index.html`/`workflows.html`. The Receptenboek
-  (`/receptenboek`) — a gallery of concrete "recipes" (Order-status, Agenda-samenvatting,
-  Offerte-opvolging, E-mail agent, Call agent) — replaced the old abstract "Agents" mega-menu
-  column as the way products are shown.
-- **Superseded 2026-08-17 — kept for history, do not follow:** the site used to be pitched
+  historical source; both rebrands have since rewritten most of what actually ships.
+- **Current positioning, unchanged by v2:** Mowi is a **conversational workflow-automation
+  platform** for the Dutch MKB/SMB — "u zegt het, en het werkt." The product story is:
+  describe what you want done in plain language, Mowi configures it from tested building
+  blocks (never freeform code), nothing goes live without your approval, and there's always
+  a named person accountable (not an anonymous support queue). v2 didn't change any of this —
+  only how it's expressed visually and structurally.
+- **Receptenboek retired as standalone pages (v2, 2026-08-18) — its content lives on now,
+  reshaped.** v1 showed concrete workflow examples via a `/receptenboek` hub page linking to 5
+  separate recipe detail pages. v2 folds all of that content directly into `workflows.html`
+  as full recipe panels inside a pill-tab category switcher (E-mail · Telefonie · Orders ·
+  Offertes · Agenda · CRM & data — 5 original recipes plus 3 lighter new ones: invoice
+  processing, lead enrichment, report generation), each panel addressable by a stable hash id
+  (`#email-agent`, `#call-agent`, `#order-status`, `#offerte-opvolging`,
+  `#agenda-samenvatting`, `#crm-sync`) that both the homepage's capability-card strip and
+  external links use. The old `/receptenboek` URLs are now redirect stubs pointing at the
+  matching `/workflows#<anchor>` (see Folder structure). No indexed page count was preserved
+  1:1 (6 URLs collapsed into 1), a deliberate trade-off judged acceptable for a young,
+  demo-gated site — every deep link still resolves to real, matching content via the anchor.
+  The "recept"/Receptenboek vocabulary is retired sitewide too — everything is a **workflow**
+  now, one term, less jargon.
+- **Superseded 2026-08-17 (v1 rebrand) — kept for history:** the site used to be pitched
   AI-first with "AI-automatisering is the main/lead service; Power BI dashboards and
-  trainingen are supporting/secondary services." **Power BI dashboards, trainingen, and the
-  "Cases" page are dropped from the site entirely** as part of the rebrand — don't reintroduce
-  them as services or nav items; their old pages are now redirect stubs (see Folder structure).
-- **Pricing / business model — current, post-rebrand:** the site is **demo-gated with no
-  published self-serve prices**. There is no `/pricing` or `/tarieven` content page, no
-  `€40`/`€80` self-serve monthly rates displayed anywhere live, no "Start gratis" /
-  "14 dagen gratis proefperiode" signup CTA, and no `my.mowi.agency/aanmelden` link on any real
-  page. The primary CTA sitewide is **"Plan een demo"**, linking to `/demo` (a page with a
-  Calendly booking widget). Login (`https://my.mowi.agency/login`) is still linked, for
-  existing customers. **Known, already-flagged contradiction (not yet fixed, fast-follow per
-  the founder):** `algemene-voorwaarden.html` (arts. 4.2, 4.5, 4.8, 5.1) still describes a
-  self-serve €40/€80-per-agent monthly pricing model with a 14-day free trial and references a
-  live price list at `mowi.agency/pricing` that no longer exists as a real page. Don't silently
-  rewrite the AV's legal text without founder/legal sign-off, but don't reintroduce the old
-  pricing model to the rest of the site either — the AV is the one page still lagging behind on
-  purpose. The 3 existing blog posts also still contain old self-serve pricing/CTA copy
-  (`€1.000` setup + `€50`/maand in one post, "Start gratis — 14 dagen" CTAs linking to
-  `my.mowi.agency/aanmelden` in all three) — also a known, deliberately-not-rewritten editorial
-  gap (blog prose is out of scope for chrome-only regeneration via `build-blog.js`); flag rather
-  than silently edit post bodies.
+  trainingen are supporting/secondary services." Power BI dashboards, trainingen, and the
+  original "Cases" page were dropped entirely as part of that rebrand — don't reintroduce
+  them as services or nav items; their old pages remain redirect stubs (see Folder structure).
+- **Pricing / business model — unchanged by v2:** the site is **demo-gated with no published
+  self-serve prices**. There is no `/pricing` or `/tarieven` content page, no `€40`/`€80`
+  self-serve monthly rates displayed anywhere live, no "Start gratis" / "14 dagen gratis
+  proefperiode" signup CTA, and no `my.mowi.agency/aanmelden` link on any real page. The
+  primary CTA sitewide is **"Plan een demo"**, linking to `/demo` (a page with a Calendly
+  booking widget, currently the literal `[CALENDLY_URL]` placeholder — no real Calendly link
+  has been supplied yet, see Placeholders below). Login (`https://my.mowi.agency/login`) is
+  still linked, for existing customers. `zo-werkt-het.html` now carries an explicit,
+  plain-Dutch explanation of *why* there's no price list (grounded in the same real FAQ
+  answer used sitewide — pricing depends on what's automated, discussed honestly at the demo,
+  nobody pays for building blocks they don't use — no invented numbers or ranges anywhere).
+  **Known, already-flagged contradiction (not yet fixed, fast-follow per the founder, v2
+  deliberately left this exactly as v1 left it):** `algemene-voorwaarden.html` (arts. 4.2,
+  4.5, 4.8, 5.1) still describes a self-serve €40/€80-per-agent monthly pricing model with a
+  14-day free trial and references a live price list at `mowi.agency/pricing` that no longer
+  exists as a real page. Don't silently rewrite the AV's legal text without founder/legal
+  sign-off, but don't reintroduce the old pricing model to the rest of the site either — the
+  AV is the one page still lagging behind on purpose. The 3 existing blog posts also still
+  contain old self-serve pricing/CTA copy (`€1.000` setup + `€50`/maand in one post — visible
+  in that post's own text/frontmatter) — also a known, deliberately-not-rewritten editorial
+  gap (blog *prose* is out of scope for chrome-only regeneration via `build-blog.js`; v2's
+  Stage 7 did remove one piece of *template* chrome that had duplicated this problem — a
+  hardcoded per-article "Start gratis — 14 dagen" CTA block that every post used to get
+  regardless of its own body text — but left the post bodies themselves untouched). Flag
+  rather than silently edit post bodies.
 
 ## Design system
-- **Current, post total-rebrand (2026-08-17):** `css/style.css` implements a **warm-light
-  palette with a Mowi-orange accent** (`--bg: #faf6ef`, a warm "bone" off-white, explicitly
-  *not* neutral grey — aliased as `--color-bg`; `--accent: #e8590c` orange, used sparingly for
-  primary CTAs/highlights, not as a wash), **pill-shaped buttons** (fully
-  rounded, not the old square-cornered style), an **orb component** (the small gradient sphere
-  used as the configurator-demo's "AI" avatar and as a recurring motif), and **Instrument Serif**
-  italic for emphasis spans (`.h-emph`) inside otherwise-sans (Plus Jakarta Sans) headings —
-  see `test.html` for a live rendered reference of every primitive. This supersedes the
-  square-corners/vuewer-inspired system below for all current and future work.
-- **Superseded 2026-08-17 — prior-era reference only:**
-  - Visual style used to follow `reference/style-vuewer.md` (inspired-by, never copied — that
-    provenance rule still applies to *any* future reference-site study, just not to the current
-    design language, which is now Mowi's own). Never copy a reference site's actual text,
-    images, project screenshots, client logos, or brand assets regardless of era — only design
-    *patterns*, reinterpreted with our own content.
-  - Base page background used to be paired with **white** as the secondary/contrast surface,
-    square/sharp corners, and a different (non-orange, non-orb, non-Instrument-Serif) type and
-    color system. If you find visual-style guidance elsewhere in this file or in code comments
-    that references square corners, a non-orange accent, or vuewer patterns as if current,
-    treat it as pre-rebrand and prefer this section.
+- **Current, v2 (2026-08-18) — monochrome.** `css/style.css` implements a **black-and-white
+  system on the same warm-bone canvas as before** (`--bg:#faf6ef`, unchanged — a warmth/paper
+  quality, not a hue; `--ink:#1c1712` near-black; `--bg-inverted:#1c1712` for dark bands) —
+  **there is no accent color anywhere.** No `--accent` token exists in the stylesheet at all.
+  Emphasis is carried by weight, size, the `.h-emph` serif-italic word (unchanged mechanism —
+  Instrument Serif italic mixed into otherwise-sans Plus Jakarta Sans headings), and solid
+  black/bone fills — never by hue. Buttons: solid-black-fill/bone-text (primary) or
+  bone-fill/black-border (secondary), fully pill-shaped (unchanged from v1), no third color
+  variant ever. Category tags (e.g. on the workflows/capability cards) are plain black-bordered
+  pills with text, not color-coded.
+  The **orb** motif survives conceptually but is rebuilt as a **pixelated/halftone sphere** —
+  a dot-matrix pattern (CSS `radial-gradient`s on a repeating grid, masked to a circle, with
+  density/opacity modulated to fake sphere shading) in the same luminance-to-alpha spirit as
+  the real `mowi-icon.png` logo texture (see Branding below), pure black-on-bone or
+  bone-on-black, never a gradient color blob. Size modifiers `.orb-sm`/`.orb-md`/`.orb-lg`,
+  plus a `.orb-thinking` variant (a different static dot-density state, not a continuous
+  animation) used inside the chat-input's conversation demo.
+  **Motion is deliberately minimal and reference-grounded** — see the "Total rebuild v2"
+  section at the top of this file for the exact rule and its one exception (the chat-input
+  auto-play demo). No scroll-reveal, no magnetic-hover, no idle orb animation exist in v2's
+  `js/main.js` at all — this is a hard constraint, not a stylistic default, don't reintroduce
+  any of them without the founder explicitly loosening the rule.
+  New components introduced in v2, all monochrome: `.chat-input` (the flagship "describe what
+  you want" pill component, `initChatInput(el, opts)` in `js/main.js` — reads `data-mode`
+  [`idle`|`auto-play`], `data-prompts`/`data-results` pipe-separated off the element; respects
+  `prefers-reduced-motion`), `.hero-frame` (rounded-28 container holding a chat-input + small
+  status chips), `.pill-tabs` (`initPillTabs(container)` — `role="tablist"` wiring,
+  hash-activatable, used on `workflows.html`'s category switcher), `.card-strip`
+  (`initCardStrip(track)` — scroll-snap horizontal card row with drag support, used for the
+  homepage's capability-card teaser), `.logo-wall` (bordered grid, greyscale-until-hover
+  logo cells), `.trust-strip`, `.pull-quote` (serif-italic opening mark + greyscale portrait).
+  See `test.html` for a live rendered reference of every primitive — it was rebuilt in v2 as
+  the canonical styleguide and is also the copy-paste source for the exact header/footer
+  markup every other page must match.
+- **Superseded 2026-08-17→18 (v1 rebrand) — prior-era reference only, do not follow:** v1 had
+  a **warm-light palette with a Mowi-orange accent** (`--accent:#e8590c`, used sparingly for
+  primary CTAs/highlights) and a gradient-color orb. If you find visual-style guidance
+  elsewhere in this file, in code comments, or in git history that references an orange
+  accent, colored category tags, magnetic-hover buttons, or scroll-reveal-on-intersection as
+  if current, treat it as pre-v2 and prefer the section above.
+- **Superseded 2026-08-17 (older still) — prior-era reference only:** before the v1 rebrand,
+  visual style followed `reference/style-vuewer.md` (inspired-by, never copied — that
+  provenance rule still applies to *any* future reference-site study, including v2's own use
+  of elevenlabs.io/shapes.co: never copy a reference site's actual text, images, project
+  screenshots, client logos, or brand assets, only design *patterns*, reinterpreted with our
+  own content). That era's base page background was paired with **white** as the secondary/
+  contrast surface, square/sharp corners, and a different, non-orange/non-orb/non-Instrument-
+  Serif type and color system.
 
 ## Placeholders — use literally, never invent real values
 Wherever personal/business details belong, insert these placeholders verbatim in the code:
@@ -411,6 +543,19 @@ Wherever personal/business details belong, insert these placeholders verbatim in
 - `[CALENDLY_URL]`
 
 `[BRAND_NAME]` is resolved: the brand is **Mowi** (real name and logo now in use — see Branding below).
+
+**v2 note:** `[FULL_NAME]` is now used consistently across every page v2 rebuilt that
+references the founder by name in new copy — the homepage pull-quote, `vertrouwen.html`'s
+"vaste contactpersoon" section, `over.html`'s founder story, and `demo.html`'s "u spreekt
+met" line — because the founder's real name still hasn't been explicitly cleared for public-
+facing marketing copy in this session. Real values that were already live and unambiguous
+before v2 (phone `+31853335800`, email `contact@mowi.agency`, the business's real KVK/BTW/
+address on `bedrijfsgegevens.html`, legally required and unchanged) stay real; those aren't
+placeholders, they're already-confirmed facts. Known pre-existing exception, not fixed by v2:
+the 3 blog posts' bylines still show the real first name from their markdown frontmatter
+(pre-existing content, out of scope for a chrome-only regeneration — see "Content &
+positioning" above) — this predates and is independent of the `[FULL_NAME]` convention used
+in v2's own new copy, not a new inconsistency introduced by this rebuild.
 
 ## Branding
 - The brand name is **Mowi**. Use it literally in text (titles, copy, footer copyright, alt
@@ -431,6 +576,12 @@ Wherever personal/business details belong, insert these placeholders verbatim in
     textured art style, reapply that same ramp approach, not the old flat-silhouette
     threshold method. Previous flat-silhouette versions are kept as
     `mowi-icon-v1-backup.png` / `mowi-wordmark-v1-backup.png` for reference.
+  - **v2's `.orb` component reuses this exact luminance-to-alpha texture philosophy** — see
+    "Design system" above — so the site's real logo art and its recurring AI-motif now share
+    one consistent visual language instead of the logo being textured and the orb being a
+    smooth color gradient (v1's approach). If the orb's dot-matrix technique is ever revisited,
+    keep it visually consistent with how the real logo's grain actually reads, not just
+    internally consistent with itself.
   - These are noticeably larger files than flat-silhouette logos would be (textured alpha
     channels compress less well than flat shapes) — worth optimizing (e.g. pngquant) before
     a real production launch, not urgent for now.
@@ -459,7 +610,13 @@ Wherever personal/business details belong, insert these placeholders verbatim in
   the two drift apart.
 - **No client logos and no invented logos.** Wherever a *client* logo strip/marquee appears,
   use neutral grey placeholder tiles (simple rounded blocks containing the word "logo"). Real
-  client logos come later. This does not apply to Mowi's own logo, which is real and final.
+  client logos come later. This does not apply to Mowi's own logo (real and final) or to the
+  12 real integration/partner logos in `assets/logos/` (WooCommerce, Shopify, HubSpot,
+  Salesforce, Exact, AFAS, SAP, Odoo, Dynamics 365, Twinfield, Excel, plus Pipedrive as a
+  text-pill fallback since no logo file exists on disk for it) used on `koppelingen.html` and
+  the homepage's integrations wall — those are genuine, factual integration claims, not
+  customer-logo social proof, and stay in full color/grayscale-on-hover per the logo-wall
+  component, not as grey placeholder tiles.
 
 ## Quality bar
 - Every page must work well on mobile (responsive layout, touch-friendly targets).
@@ -469,26 +626,36 @@ Wherever personal/business details belong, insert these placeholders verbatim in
 ## Folder structure
 - `index.html` in the project root.
 - All other marketing pages as `.html` files in the root (no subfolders per page), **except**
-  `receptenboek/` (added 2026-08-17 rebrand — see below).
-- **Current real content pages, post total-rebrand (2026-08-17):** `index.html` (homepage),
-  `workflows.html` (flagship "Maak workflows met AI" page), `koppelingen.html`, `vertrouwen.html`,
-  `over.html` ("About"), `zo-werkt-het.html` ("How it works"), `demo.html` (the "Plan een demo"
-  destination, Calendly-embedded), `receptenboek.html` (gallery overview) plus a dedicated
-  `receptenboek/` folder holding 5 recipe detail pages (`agenda-samenvatting.html`,
-  `call-agent.html`, `email-agent.html`, `offerte-opvolging.html`, `order-status.html` — each
-  references shared assets one level up via `../`, same convention as `docs/`), and the existing
-  `blog/` (generated by `build-blog.js`, unchanged mechanism) and 6 legal pages
-  (`privacyverklaring.html`, `algemene-voorwaarden.html`, `cookies.html`, `ai-transparantie.html`,
-  `bedrijfsgegevens.html`, `subverwerkers.html`).
-- **Redirect stubs, not real content (added Stage 7 of the rebrand, 2026-08-17):** `pricing.html`,
-  `tarieven.html`, `power-bi-dashboards.html`, `trainingen.html`, `cases.html`,
-  `agentic-ai.html`, `agents/email-triage.html`, `agents/phone-agent.html`, `contact.html` — each
-  is a minimal client-side redirect (`<meta http-equiv="refresh">` + `window.location.replace()`
-  + `rel="canonical"` + `noindex, follow`) pointing at the page that replaced it (see the HTML
-  comment in each stub for its specific target and reasoning). These do **not** load
-  `css/style.css` or `js/main.js` — no header/footer chrome, so they're excluded from the
-  sitewide cache-bust `?v=` bump. Don't add new content to them; if a stub's old URL needs to
-  become a real page again, that's new work, not a revival of the stub file.
+  `receptenboek/` — which as of v2 is no longer real content, see below.
+- **Current real content pages, v2 (2026-08-18):** `index.html` (homepage), `workflows.html`
+  (flagship page — absorbs the retired Receptenboek content as pill-tabbed recipe panels, see
+  "Content & positioning"), `koppelingen.html`, `vertrouwen.html`, `over.html` ("About"),
+  `zo-werkt-het.html` ("How it works"), `demo.html` (the "Plan een demo" destination,
+  Calendly-embedded via the `[CALENDLY_URL]` placeholder), `ai-transparantie.html`, plus the
+  existing `blog/` (generated by `build-blog.js`, chrome regenerated for v2, post prose
+  untouched) and 6 legal pages (`privacyverklaring.html`, `algemene-voorwaarden.html`,
+  `cookies.html`, `ai-transparantie.html` counts as one of the 6 per this file's own
+  historical convention, `bedrijfsgegevens.html`, `subverwerkers.html` — legal *text*
+  verbatim, shells restyled for v2). `test.html` is the v2 design-system styleguide (rebuilt
+  Stage 0) and the canonical source for header/footer markup — not a real marketing page, but
+  load-bearing for future dev work, don't delete it.
+- **Redirect stubs, not real content:** `pricing.html`, `tarieven.html`,
+  `power-bi-dashboards.html`, `trainingen.html`, `cases.html`, `agentic-ai.html`,
+  `agents/email-triage.html`, `agents/phone-agent.html`, `contact.html` (added in the v1
+  rebrand's Stage 7) **plus, new in v2's Stage 8:** `receptenboek.html` and all 5 files under
+  `receptenboek/` (`agenda-samenvatting.html`, `call-agent.html`, `email-agent.html`,
+  `offerte-opvolging.html`, `order-status.html`) — each now a minimal client-side redirect
+  pointing at `/workflows` or `/workflows#<recipe-anchor>`. Every stub (15 total) follows one
+  exact pattern: `<meta name="robots" content="noindex, follow">` + `<meta http-equiv=
+  "refresh">` + `rel="canonical"` + a fallback `<a>` + `window.location.replace()` (not
+  `.href`, to avoid back-button redirect loops) — see the HTML comment in each stub for its
+  specific target and reasoning. **No stub may redirect to another stub** — v2's Stage 8 fixed
+  three v1 stubs (`cases.html`, `agents/email-triage.html`, `agents/phone-agent.html`) that
+  used to chain through `/receptenboek*` URLs, retargeting them straight at `/workflows`/
+  `/workflows#<anchor>` once those became stubs too. These do **not** load `css/style.css` or
+  `js/main.js` — no header/footer chrome, so they're excluded from the sitewide cache-bust
+  `?v=` bump. Don't add new content to them; if a stub's old URL needs to become a real page
+  again, that's new work, not a revival of the stub file.
 - `docs/` — the entire documentation section lives here: `docs/index.html` is the overview page,
   every article is `docs/<slug>.html` with **no `docs-` filename prefix** (the folder itself is
   the namespace — e.g. `docs/agent-crm-sync.html`, not `docs/docs-agent-crm-sync.html`). Pages in
@@ -500,6 +667,16 @@ Wherever personal/business details belong, insert these placeholders verbatim in
   the two are never mixed on the same page).
 - `js/` — vanilla JS (`main.js` marketing behavior; `docs-nav.js` + `docs.js` for the docs
   section — both live in the shared `js/` folder, not inside `docs/`, and are loaded by every
-  docs page via `../js/...`).
-- `assets/` — images/icons/etc.
-- `reference/` — research docs (content source, style sources) — not part of the shipped site.
+  docs page via `../js/...`; `broken-image-guard.js`, a small `<img>`-error fallback still
+  referenced by every real marketing/legal/blog page — confirmed still live and doing real
+  work as of v2's Stage 8, don't remove it without re-checking that).
+- `assets/` — images/icons/logos/etc. `assets/logos/` holds the 12 real integration logos
+  (see Branding above).
+- `reference/` — research docs (content source, style sources, the dashboard CSS snapshot) —
+  not part of the shipped site.
+- **Deleted in v2's Stage 8** (confirmed orphaned via repo-wide grep before removal, don't
+  recreate without a real reason): `css/hero-anim-trainingen.css` and
+  `js/hero-anim-trainingen.js` (belonged only to `trainingen.html`, which has been a redirect
+  stub since the v1 rebrand and never loaded either file), and the untracked `blog-preview/`
+  folder (stray preview/test build artifacts, duplicates of real `blog/` posts plus template
+  scratch files — never part of the shipped site).
