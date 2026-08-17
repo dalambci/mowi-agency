@@ -3,529 +3,604 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="noindex" />
-  <title>Design systeem — Mowi</title>
-  <!-- Dev-only style guide (rebrand era). Not part of the shipped site — not
-       linked from any real page, no header/footer chrome, just the raw
-       design-system primitives for review. Deliberately does NOT load
-       js/main.js (same as before this rebrand) — this page only needs to
-       render final/finished states for a visual review, not live
-       interactivity; a couple of components below (accordion, hero
-       showcase) simply show their static/closed/first-frame appearance. -->
+  <title>Mowi — Styleguide (v2)</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <!--
+    Rebuild v2 — Stage 0: Foundation styleguide.
+
+    This page is the CANONICAL copy-paste source for the header and footer
+    markup — every later-stage page copies the <header class="site-header">
+    block and the <footer class="site-footer"> block from here verbatim (no
+    templating in this codebase). If either changes, update it here first,
+    then propagate. It also renders one live example of every shared
+    primitive/component in css/style.css and js/main.js, as a reference for
+    later build stages.
+
+    Monochrome only: black ink (#1c1712) on warm-bone (#faf6ef), or
+    bone-on-black inverted. No accent color anywhere on this page.
+  -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260817" />
-  <style>
-    /* Styling for this style-guide page only — not part of the design system itself. */
-    .ds-block {
-      padding-block: 3rem;
-      border-top: 1px solid var(--border);
-    }
-
-    .ds-block:first-of-type {
-      border-top: none;
-    }
-
-    .ds-caption {
-      margin-top: 1rem;
-      font-size: 0.8125rem;
-      color: var(--ink-muted);
-    }
-
-    .ds-caption code {
-      background: var(--color-bg-tint-strong);
-      padding: 0.125rem 0.375rem;
-      border-radius: 0.25rem;
-      font-size: 0.8125rem;
-    }
-
-    .ds-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .ds-swatch-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
-      gap: 1.25rem;
-    }
-
-    .ds-swatch {
-      border: 1px solid var(--border);
-      border-radius: var(--radius-card);
-      overflow: hidden;
-      background: var(--surface);
-    }
-
-    .ds-swatch-fill {
-      height: 5rem;
-    }
-
-    .ds-swatch-meta {
-      padding: 0.75rem 1rem;
-    }
-
-    .ds-swatch-name {
-      font-weight: 600;
-      font-size: 0.875rem;
-    }
-
-    .ds-swatch-value {
-      font-size: 0.8125rem;
-      color: var(--ink-muted);
-      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-    }
-
-    /* Dark-inverted demo band, for reviewing tokens/components on
-       --bg-inverted rather than the page's own light background. */
-    .ds-inverted {
-      background: var(--bg-inverted);
-      color: var(--ink-inverted);
-      border-radius: var(--radius-3xl);
-      padding: 2.5rem;
-    }
-
-    .ds-inverted .ds-swatch {
-      background: var(--surface-inverted);
-      border-color: var(--border-inverted);
-    }
-
-    .ds-inverted .ds-swatch-value {
-      color: var(--ink-inverted-muted);
-    }
-
-    .ds-section-demo {
-      border: 1px dashed var(--border);
-      border-radius: var(--radius-card);
-      background: var(--color-bg-tint);
-    }
-
-    .ds-section-demo-inner {
-      border: 1px dashed var(--accent);
-      padding-block: 2.5rem;
-      text-align: center;
-      color: var(--ink-muted);
-      font-size: 0.875rem;
-    }
-
-    .ds-orb-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: flex-end;
-      gap: 2.5rem;
-    }
-
-    .ds-orb-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .ds-orb-item span {
-      font-size: 0.8125rem;
-      color: var(--ink-muted);
-      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-    }
-  </style>
+  <link rel="stylesheet" href="css/style.css?v=20260817-2" />
+  <link rel="icon" href="assets/icon-192.png?v=20260804-3" />
+  <link rel="shortcut icon" href="assets/icon-192.png?v=20260804-3" />
+  <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260804-3" />
+  <link rel="apple-touch-icon-precomposed" href="assets/apple-icon-180.png?v=20260804-3" />
+  <script defer data-domain="mowi.agency" src="https://plausible.io/js/script.js"></script>
+  <script src="js/broken-image-guard.js?v=20260805-1"></script>
 </head>
 <body>
 
-  <header class="container" style="padding-block: 3rem 1rem;">
-    <span class="eyebrow">Intern &middot; niet onderdeel van de live site</span>
-    <h1 style="font-size: clamp(2rem, 3vw + 1rem, 3.5rem);">Design systeem.</h1>
-    <p class="lede" style="margin-top: 0.75rem; max-width: 40rem;">
-      Alle herbruikbare bouwstenen uit <code>css/style.css</code> — rebrand-stijl, warme lichte
-      basis met Mowi-oranje als enige uitgesproken kleur. Gebruik deze pagina om het systeem te
-      controleren voordat volgende stages er echte pagina's op bouwen.
-    </p>
-  </header>
+  <!-- ===== Header / navigation =====
+       Canonical v2 header markup — copy this whole <header> block verbatim
+       into every rebuilt page. Logo left / nav center / actions right.
+       Below 64rem the nav link list collapses into a full-height dark
+       overlay sheet (js/main.js toggles #main-nav's .is-open class +
+       aria-expanded on #navToggle); Login + "Plan een demo" stay visible in
+       the compact bar at every width. -->
+  <header class="site-header">
+    <div class="header-bar">
+      <a href="/" class="wordmark" aria-label="Mowi - home">
+        <img src="assets/mowi-icon.png" alt="" class="wordmark-icon" />
+        <img src="assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
+      </a>
 
-  <main class="container">
+      <nav class="main-nav" id="main-nav" aria-label="Hoofdmenu">
+        <ul class="nav-group">
+          <li class="nav-dropdown">
+            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="product-menu" aria-haspopup="true">
+              Product
+              <span class="nav-dropdown-icon" aria-hidden="true"></span>
+            </button>
+            <!-- English label is deliberate — see CLAUDE.md's Language & tone
+                 exception (header nav stays English sitewide). Single column,
+                 title + one-line Dutch descriptor per row. -->
+            <div class="nav-megamenu nav-megamenu-single" id="product-menu">
+              <div class="nav-megamenu-col">
+                <ul>
+                  <li>
+                    <a href="/workflows">
+                      <span class="nav-megamenu-item-title">Workflows</span>
+                      <span class="nav-megamenu-item-desc">Maak workflows met AI</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/koppelingen">
+                      <span class="nav-megamenu-item-title">Koppelingen</span>
+                      <span class="nav-megamenu-item-desc">Uw systemen, één geheel</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/vertrouwen">
+                      <span class="nav-megamenu-item-title">Vertrouwen</span>
+                      <span class="nav-megamenu-item-desc">Eerst proefdraaien, dan pas live</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li><a href="/zo-werkt-het">How it works</a></li>
+          <li><a href="/docs/">Docs</a></li>
+          <li><a href="/over">About</a></li>
+          <li><a href="/blog/">Blog</a></li>
+        </ul>
+      </nav>
 
-    <!-- ===== Colors ===== -->
-    <section class="ds-block">
-      <span class="eyebrow">Kleuren</span>
-      <h2>Palet — licht.</h2>
-      <p class="ds-caption">Alle waarden zijn CSS custom properties op <code>:root</code> in <code>css/style.css</code>.</p>
-
-      <div class="ds-swatch-grid" style="margin-top: 1.5rem;">
-        <div class="ds-swatch">
-          <div class="ds-swatch-fill" style="background: var(--bg);"></div>
-          <div class="ds-swatch-meta">
-            <div class="ds-swatch-name">Background</div>
-            <div class="ds-swatch-value">--bg &middot; #faf6ef</div>
-          </div>
-        </div>
-        <div class="ds-swatch">
-          <div class="ds-swatch-fill" style="background: var(--bg-band);"></div>
-          <div class="ds-swatch-meta">
-            <div class="ds-swatch-name">Background band</div>
-            <div class="ds-swatch-value">--bg-band &middot; #f1e6d6</div>
-          </div>
-        </div>
-        <div class="ds-swatch">
-          <div class="ds-swatch-fill" style="background: var(--surface); border-bottom: 1px solid var(--border);"></div>
-          <div class="ds-swatch-meta">
-            <div class="ds-swatch-name">Surface</div>
-            <div class="ds-swatch-value">--surface &middot; #ffffff</div>
-          </div>
-        </div>
-        <div class="ds-swatch">
-          <div class="ds-swatch-fill" style="background: var(--ink);"></div>
-          <div class="ds-swatch-meta">
-            <div class="ds-swatch-name">Ink</div>
-            <div class="ds-swatch-value">--ink &middot; #1c1712</div>
-          </div>
-        </div>
-        <div class="ds-swatch">
-          <div class="ds-swatch-fill" style="background: var(--ink-muted);"></div>
-          <div class="ds-swatch-meta">
-            <div class="ds-swatch-name">Ink muted</div>
-            <div class="ds-swatch-value">--ink-muted &middot; #6b5f50</div>
-          </div>
-        </div>
-        <div class="ds-swatch">
-          <div class="ds-swatch-fill" style="background: var(--accent);"></div>
-          <div class="ds-swatch-meta">
-            <div class="ds-swatch-name">Accent — Mowi orange</div>
-            <div class="ds-swatch-value">--accent &middot; #e8590c</div>
-          </div>
-        </div>
-        <div class="ds-swatch">
-          <div class="ds-swatch-fill" style="background: var(--accent-hover);"></div>
-          <div class="ds-swatch-meta">
-            <div class="ds-swatch-name">Accent hover</div>
-            <div class="ds-swatch-value">--accent-hover &middot; #c94b09</div>
-          </div>
-        </div>
-        <div class="ds-swatch">
-          <div class="ds-swatch-fill" style="background: var(--accent-soft);"></div>
-          <div class="ds-swatch-meta">
-            <div class="ds-swatch-name">Accent soft</div>
-            <div class="ds-swatch-value">--accent-soft &middot; rgba(232,89,12,.12)</div>
-          </div>
-        </div>
-        <div class="ds-swatch">
-          <div class="ds-swatch-fill" style="background: var(--border);"></div>
-          <div class="ds-swatch-meta">
-            <div class="ds-swatch-name">Border</div>
-            <div class="ds-swatch-value">--border &middot; #e6d8c3</div>
-          </div>
-        </div>
+      <div class="header-actions">
+        <a href="https://my.mowi.agency/login" target="_blank" rel="noopener" class="header-login">Login</a>
+        <a href="/demo" class="header-cta" data-event="Demo Click">
+          <span class="header-cta-full">Plan een demo</span><span class="header-cta-short">Demo</span>
+        </a>
       </div>
 
-      <h2 style="margin-top: 3rem;">Palet — donker (inverted).</h2>
-      <p class="ds-caption">
-        Alleen voor vertrouwen/CTA-secties en het mobiele navigatiescherm — nooit de standaard
-        paginakleur. Getoond hier op een echte <code>--bg-inverted</code> band, zoals op de site.
-      </p>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="main-nav" aria-label="Menu openen">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
 
-      <div class="ds-inverted" style="margin-top: 1.5rem;">
-        <div class="ds-swatch-grid">
-          <div class="ds-swatch">
-            <div class="ds-swatch-fill" style="background: var(--bg-inverted);"></div>
-            <div class="ds-swatch-meta">
-              <div class="ds-swatch-name">Background inverted</div>
-              <div class="ds-swatch-value">--bg-inverted &middot; #1c1712</div>
-            </div>
+  <main>
+
+    <section class="section">
+      <div class="container">
+        <span class="text-kicker">Rebuild v2 — Stage 0</span>
+        <h1>Styleguide. <em class="h-emph">Elke bouwsteen op één pagina.</em></h1>
+        <p class="text-lead" style="max-width: 40rem; margin-top: 1rem;">
+          Zwart op bone-wit, of bone-wit op zwart. Geen accentkleur, geen
+          gekleurde labels — dit is de complete kleurenset. Deze pagina is de
+          levende referentie voor elke volgende bouwfase.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== Type scale ===== -->
+    <section class="section section-tint">
+      <div class="container">
+        <div class="section-head">
+          <span class="text-kicker">Typografie</span>
+          <h2>Type-schaal.</h2>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+          <div>
+            <div class="text-hero">Aa Automatiseren</div>
+            <p class="text-small muted">--text-hero — clamp(2.75rem, 6.5vw, 5.5rem), 800, -0.03em</p>
           </div>
-          <div class="ds-swatch">
-            <div class="ds-swatch-fill" style="background: var(--surface-inverted);"></div>
-            <div class="ds-swatch-meta">
-              <div class="ds-swatch-name">Surface inverted</div>
-              <div class="ds-swatch-value">--surface-inverted &middot; #262019</div>
-            </div>
+          <div>
+            <h1 style="margin: 0;">Aa Workflows met AI</h1>
+            <p class="text-small muted">--text-h1 (h1 default) — clamp(2.25rem, 4.5vw, 3.5rem)</p>
           </div>
-          <div class="ds-swatch">
-            <div class="ds-swatch-fill" style="background: var(--ink-inverted);"></div>
-            <div class="ds-swatch-meta">
-              <div class="ds-swatch-name">Ink inverted</div>
-              <div class="ds-swatch-value">--ink-inverted &middot; #faf6ef</div>
-            </div>
+          <div>
+            <h2 style="margin: 0;">Aa Koppelingen</h2>
+            <p class="text-small muted">--text-h2 (h2 default) — clamp(1.75rem, 3vw, 2.5rem)</p>
           </div>
-          <div class="ds-swatch">
-            <div class="ds-swatch-fill" style="background: var(--accent);"></div>
-            <div class="ds-swatch-meta">
-              <div class="ds-swatch-name">Accent (unchanged on dark)</div>
-              <div class="ds-swatch-value">--accent &middot; #e8590c</div>
-            </div>
+          <div>
+            <h3 style="margin: 0;">Aa Vertrouwen</h3>
+            <p class="text-small muted">--text-h3 (h3 default) — 1.25rem</p>
+          </div>
+          <div>
+            <p class="text-lead" style="margin: 0;">Aa Vertel wat u geregeld wilt hebben.</p>
+            <p class="text-small muted">--text-lead — clamp(1.05rem, 1.4vw, 1.25rem)</p>
+          </div>
+          <div>
+            <p class="text-body" style="margin: 0;">Aa Niets gaat live zonder uw akkoord.</p>
+            <p class="text-small muted">--text-body — 1rem</p>
+          </div>
+          <div>
+            <p class="text-small" style="margin: 0;">Aa Geteste bouwstenen, nooit losse code.</p>
+            <p class="text-small muted">--text-small — 0.875rem</p>
+          </div>
+          <div>
+            <span class="text-kicker">Aa Zo werkt het</span>
+            <p class="text-small muted">--text-kicker — 0.8125rem, uppercase, +0.08em</p>
+          </div>
+          <div>
+            <h2 style="margin: 0;">Beschrijf het. <em class="h-emph">Mowi regelt het.</em></h2>
+            <p class="text-small muted">.h-emph — Instrument Serif italic, inline emphasis word</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ===== Typography ===== -->
-    <section class="ds-block">
-      <span class="eyebrow">Typografie</span>
-      <h2>Rustige koppen, één sierlijke uitzondering.</h2>
-      <p class="ds-caption">
-        Lettertype: <code>Plus Jakarta Sans</code> (ongewijzigd t.o.v. voor de rebrand — blog en
-        juridische pagina's leunen erop). Nieuw: <code>Instrument Serif</code> italic, uitsluitend
-        voor het <code>.h-emph</code>-patroon hieronder.
-      </p>
-
-      <div style="margin-top: 2rem; display: flex; flex-direction: column; gap: 1.5rem;">
-        <div>
-          <h1>Vertel wat u geregeld wilt hebben. <em class="h-emph">Mowi zet het aan het werk.</em></h1>
-          <p class="ds-caption">h1 &middot; clamp(2.5rem, 5vw + 1rem, 5.625rem) &middot; line-height 1.05 &middot; weight 600 &middot; <code>.h-emph</code> inline</p>
+    <!-- ===== Spacing scale ===== -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <span class="text-kicker">Ruimte</span>
+          <h2>Spacing-schaal.</h2>
         </div>
-        <div>
-          <h2>Wat het oplevert.</h2>
-          <p class="ds-caption">h2 &middot; clamp(2rem, 2.5vw + 1rem, 3rem) &middot; line-height 1.15</p>
-        </div>
-        <div>
-          <h3>Robuuste automatiseringen.</h3>
-          <p class="ds-caption">h3 &middot; 1.375rem &middot; line-height 1.3</p>
-        </div>
-        <div>
-          <p class="lede">
-            Dit is een lede-paragraaf: iets groter en rustiger dan gewone platte tekst,
-            bedoeld als introductiezin onder een kop.
-          </p>
-          <p class="ds-caption">.lede</p>
-        </div>
-        <div>
-          <p>
-            Dit is gewone platte tekst (een standaard <code>&lt;p&gt;</code>), zoals die in de
-            body van de pagina wordt gebruikt.
-          </p>
-          <p class="ds-caption">standaard &lt;p&gt;</p>
-        </div>
-        <div>
-          <p class="muted">Dit is gedempte tekst, voor bijschriften en minder belangrijke info.</p>
-          <p class="ds-caption">.muted</p>
+        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+          <div style="display: flex; align-items: center; gap: 1rem;"><span style="width: 4px; height: 1.25rem; background: var(--ink);"></span><span class="text-small muted">--space-1 — 4px</span></div>
+          <div style="display: flex; align-items: center; gap: 1rem;"><span style="width: 8px; height: 1.25rem; background: var(--ink);"></span><span class="text-small muted">--space-2 — 8px</span></div>
+          <div style="display: flex; align-items: center; gap: 1rem;"><span style="width: 12px; height: 1.25rem; background: var(--ink);"></span><span class="text-small muted">--space-3 — 12px</span></div>
+          <div style="display: flex; align-items: center; gap: 1rem;"><span style="width: 16px; height: 1.25rem; background: var(--ink);"></span><span class="text-small muted">--space-4 — 16px</span></div>
+          <div style="display: flex; align-items: center; gap: 1rem;"><span style="width: 24px; height: 1.25rem; background: var(--ink);"></span><span class="text-small muted">--space-5 — 24px</span></div>
+          <div style="display: flex; align-items: center; gap: 1rem;"><span style="width: 32px; height: 1.25rem; background: var(--ink);"></span><span class="text-small muted">--space-6 — 32px</span></div>
+          <div style="display: flex; align-items: center; gap: 1rem;"><span style="width: 48px; height: 1.25rem; background: var(--ink);"></span><span class="text-small muted">--space-7 — 48px</span></div>
+          <div style="display: flex; align-items: center; gap: 1rem;"><span style="width: 64px; height: 1.25rem; background: var(--ink);"></span><span class="text-small muted">--space-8 — 64px</span></div>
+          <div style="display: flex; align-items: center; gap: 1rem;"><span style="width: 96px; height: 1.25rem; background: var(--ink);"></span><span class="text-small muted">--space-9 — 96px</span></div>
+          <div style="display: flex; align-items: center; gap: 1rem;"><span style="width: 128px; height: 1.25rem; background: var(--ink);"></span><span class="text-small muted">--space-10 — 128px</span></div>
         </div>
       </div>
     </section>
 
     <!-- ===== Buttons ===== -->
-    <section class="ds-block">
-      <span class="eyebrow">Knoppen</span>
-      <h2>Volledig pill.</h2>
-
-      <div class="ds-row" style="margin-top: 1.5rem;">
-        <span class="btn-slot">
-          <a href="#" class="btn btn-primary">Plan een kennismaking</a>
-        </span>
-        <span class="btn-slot">
-          <a href="#" class="btn btn-secondary">Bekijk de cases</a>
-        </span>
-      </div>
-      <p class="ds-caption">.btn.btn-primary (accent fill) &middot; .btn.btn-secondary (rand, licht) &middot; radius: var(--radius-pill)</p>
-    </section>
-
-    <!-- ===== Cards ===== -->
-    <section class="ds-block">
-      <span class="eyebrow">Kaart</span>
-      <h2>Licht en donker (inverted).</h2>
-
-      <div class="grid grid-2" style="margin-top: 1.5rem;">
-        <div class="card">
-          <div class="card-icon">AI</div>
-          <h3>AI-automatisering</h3>
-          <p>Facturen verwerken, offertes opstellen, klantvragen beantwoorden — automatisch,
-            van A tot Z.</p>
-          <a href="#" class="card-link">Meer informatie →</a>
+    <section class="section section-tint">
+      <div class="container">
+        <div class="section-head">
+          <span class="text-kicker">Knoppen</span>
+          <h2>Primair &amp; secundair.</h2>
         </div>
-        <div class="card card-featured">
-          <div class="card-icon">AI</div>
-          <h3>Uitgelicht</h3>
-          <p>De .card-featured-variant — dezelfde class als vóór de rebrand, nu met de
-            donkere inverted-tokens.</p>
-          <span class="btn-slot">
-            <a href="#" class="btn btn-secondary">Knop op donkere kaart</a>
-          </span>
+        <div style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;">
+          <a href="#" class="btn btn-primary" onclick="return false;">Plan een demo</a>
+          <a href="#" class="btn btn-secondary" onclick="return false;">Meer informatie</a>
         </div>
       </div>
-      <p class="ds-caption">.card &middot; radius: var(--radius-card) (8px) &middot; .card.card-featured voor de donkere variant — let op: de link-kleur-fix houdt .btn-secondary hierbinnen leesbaar.</p>
     </section>
 
-    <!-- ===== Pill / badge ===== -->
-    <section class="ds-block">
-      <span class="eyebrow">Pill / badge</span>
-      <h2>Kleine labels.</h2>
-
-      <div class="ds-row" style="margin-top: 1.5rem;">
-        <span class="pill">AFAS</span>
-        <span class="pill">Exact</span>
-        <span class="pill">Microsoft Dynamics</span>
-        <span class="pill pill-accent">Nieuw</span>
+    <section class="section-inverted" style="padding-block: var(--space-8);">
+      <div class="container">
+        <p class="text-small" style="color: var(--ink-inverted-muted); margin-bottom: 1rem;">Op donkere achtergrond</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;">
+          <a href="#" class="btn btn-primary" style="background: var(--ink-inverted); color: var(--ink); border-color: var(--ink-inverted);" onclick="return false;">Plan een demo</a>
+          <a href="#" class="btn btn-secondary" onclick="return false;">Meer informatie</a>
+        </div>
       </div>
-      <p class="ds-caption">.pill &middot; .pill.pill-accent (accentvariant, spaarzaam gebruiken)</p>
     </section>
 
-    <!-- ===== Accordion ===== -->
-    <section class="ds-block">
-      <span class="eyebrow">Accordion</span>
-      <h2>Veelgestelde vragen.</h2>
-      <p class="ds-caption">Statische weergave (deze pagina laadt bewust geen js/main.js) — open/dicht-gedrag draait op echte pagina's.</p>
+    <!-- ===== Chat input ===== -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <span class="text-kicker">Het gesprek</span>
+          <h2>Chat input.</h2>
+          <p class="text-lead" style="margin-top: 0.5rem;">Idle-status (statisch) en auto-play (getypt, gescript — zie js/main.js initChatInput()).</p>
+        </div>
 
-      <div class="accordion" style="margin-top: 1.5rem; max-width: 34rem;">
-        <div class="accordion-item">
-          <button class="accordion-trigger" aria-expanded="false" aria-controls="ds-faq-1">
-            Hoe snel is een agent operationeel?
-            <span class="accordion-icon" aria-hidden="true"></span>
+        <div style="display: flex; flex-direction: column; gap: 2rem;">
+          <div>
+            <p class="text-small muted" style="margin-bottom: 0.75rem;">Idle</p>
+            <div class="chat-input" data-mode="idle">
+              <div class="chat-input-field">
+                <span class="chat-input-placeholder" data-chat-placeholder>Beschrijf wat u geregeld wilt hebben…</span>
+              </div>
+              <button type="button" class="chat-input-submit" aria-label="Versturen">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <p class="text-small muted" style="margin-bottom: 0.75rem;">Auto-play</p>
+            <div class="hero-frame">
+              <div class="chat-input-frame">
+                <div class="chat-input" data-mode="auto-play"
+                  data-prompts="Vat mijn agenda van morgen samen.|Stuur een offerte-follow-up naar klanten die 5 dagen stil zijn.|Verwerk deze factuur en zet 'm klaar voor goedkeuring."
+                  data-results="Agenda-samenvatting verstuurd — 6 afspraken, 1 conflict gevonden.|Offerte-opvolging verstuurd — 4 klanten benaderd.|Factuur verwerkt — klaar voor uw goedkeuring.">
+                  <div class="chat-input-field">
+                    <span class="chat-input-text" data-chat-text></span><span class="chat-input-caret" data-chat-caret aria-hidden="true"></span>
+                    <span class="chat-input-placeholder" data-chat-placeholder>Beschrijf wat u geregeld wilt hebben…</span>
+                  </div>
+                  <button type="button" class="chat-input-submit" aria-label="Versturen">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
+                  </button>
+                </div>
+                <div class="chat-input-thinking" data-chat-thinking hidden>
+                  Mowi denkt na…
+                  <span class="chat-input-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+                </div>
+                <div class="chat-input-result" data-chat-result hidden>
+                  <svg class="chat-input-result-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7" /></svg>
+                </div>
+              </div>
+
+              <div class="hero-frame-status-row">
+                <span class="status-card"><span class="status-card-dot" aria-hidden="true"></span>Order #4521 verwerkt</span>
+                <span class="status-card"><span class="status-card-dot" aria-hidden="true"></span>E-mailtriage — 12 mails gesorteerd</span>
+                <span class="status-card"><span class="status-card-dot" aria-hidden="true"></span>CRM-synchronisatie actief</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Pill tabs ===== -->
+    <section class="section section-tint">
+      <div class="container">
+        <div class="section-head">
+          <span class="text-kicker">Categorieën</span>
+          <h2>Pill tabs.</h2>
+        </div>
+
+        <div data-pill-tabs>
+          <div class="pill-tablist" role="tablist" aria-label="Voorbeeldworkflows">
+            <button class="pill-tab" role="tab" id="tab-email-agent" aria-selected="true" aria-controls="email-agent">E-mailtriage</button>
+            <button class="pill-tab" role="tab" id="tab-orderstatus" aria-selected="false" aria-controls="orderstatus" tabindex="-1">Orderstatus</button>
+            <button class="pill-tab" role="tab" id="tab-agenda" aria-selected="false" aria-controls="agenda" tabindex="-1">Agenda-samenvatting</button>
+            <button class="pill-tab" role="tab" id="tab-crm" aria-selected="false" aria-controls="crm" tabindex="-1">CRM-synchronisatie</button>
+          </div>
+          <div class="pill-panels">
+            <div class="pill-panel" id="email-agent" role="tabpanel" aria-labelledby="tab-email-agent">
+              <h3>E-mailtriage</h3>
+              <p class="muted" style="margin-top: 0.5rem; max-width: 34rem;">Mowi sorteert binnenkomende post, beantwoordt veelgestelde vragen en zet de rest klaar voor een collega.</p>
+            </div>
+            <div class="pill-panel" id="orderstatus" role="tabpanel" aria-labelledby="tab-orderstatus" hidden>
+              <h3>Orderstatus</h3>
+              <p class="muted" style="margin-top: 0.5rem; max-width: 34rem;">Klanten vragen naar hun bestelling in gewone taal — Mowi zoekt het op en antwoordt direct.</p>
+            </div>
+            <div class="pill-panel" id="agenda" role="tabpanel" aria-labelledby="tab-agenda" hidden>
+              <h3>Agenda-samenvatting</h3>
+              <p class="muted" style="margin-top: 0.5rem; max-width: 34rem;">Elke ochtend een kort overzicht van de dag, inclusief conflicten en vrije gaten.</p>
+            </div>
+            <div class="pill-panel" id="crm" role="tabpanel" aria-labelledby="tab-crm" hidden>
+              <h3>CRM-synchronisatie</h3>
+              <p class="muted" style="margin-top: 0.5rem; max-width: 34rem;">Nieuwe leads en wijzigingen blijven automatisch gelijk tussen uw systemen.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Card strip ===== -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <span class="text-kicker">Workflows</span>
+          <h2>Card strip.</h2>
+        </div>
+      </div>
+      <div class="container">
+        <div class="card-strip-wrap">
+          <div class="card-strip" data-card-strip>
+            <article class="strip-card">
+              <span class="strip-card-tag">E-mail</span>
+              <h3>E-mailtriage</h3>
+              <p>Sorteert, labelt en beantwoordt binnenkomende post automatisch.</p>
+              <div class="strip-card-visual"><div class="orb orb-sm"></div></div>
+            </article>
+            <article class="strip-card">
+              <span class="strip-card-tag">Orders</span>
+              <h3>Orderstatus</h3>
+              <p>Beantwoordt statusvragen direct vanuit uw webshop-data.</p>
+              <div class="strip-card-visual"><div class="orb orb-sm"></div></div>
+            </article>
+            <article class="strip-card">
+              <span class="strip-card-tag">Offertes</span>
+              <h3>Offerte-opvolging</h3>
+              <p>Herinnert klanten die stil zijn gevallen, automatisch en op tijd.</p>
+              <div class="strip-card-visual"><div class="orb orb-sm"></div></div>
+            </article>
+            <article class="strip-card">
+              <span class="strip-card-tag">Agenda</span>
+              <h3>Agenda-samenvatting</h3>
+              <p>Een dagelijkse samenvatting van afspraken en conflicten.</p>
+              <div class="strip-card-visual"><div class="orb orb-sm"></div></div>
+            </article>
+            <article class="strip-card">
+              <span class="strip-card-tag">CRM &amp; data</span>
+              <h3>CRM-synchronisatie</h3>
+              <p>Houdt leads en klantgegevens gelijk tussen systemen.</p>
+              <div class="strip-card-visual"><div class="orb orb-sm"></div></div>
+            </article>
+          </div>
+          <button class="card-strip-arrow" data-card-strip-arrow aria-label="Verder scrollen">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
           </button>
-          <div class="accordion-panel" id="ds-faq-1">
-            <p>Na de inventarisatie stellen we een agent samen uit geteste bouwstenen — geen maatwerkcode.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Orb ===== -->
+    <section class="section section-tint">
+      <div class="container">
+        <div class="section-head">
+          <span class="text-kicker">De orb</span>
+          <h2>Halftoon-bol.</h2>
+          <p class="text-lead" style="margin-top: 0.5rem;">Puur CSS: twee lagen puntenraster, geklemd tot een cirkel, gemaskeerd door een radiale alfa-verloop — geen kleurverloop, geen animatie.</p>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 2.5rem;">
+          <div style="text-align: center;"><div class="orb orb-sm"></div><p class="text-small muted" style="margin-top: 0.5rem;">.orb-sm</p></div>
+          <div style="text-align: center;"><div class="orb orb-md"></div><p class="text-small muted" style="margin-top: 0.5rem;">.orb-md</p></div>
+          <div style="text-align: center;"><div class="orb orb-lg"></div><p class="text-small muted" style="margin-top: 0.5rem;">.orb-lg</p></div>
+          <div style="text-align: center;"><div class="orb orb-lg orb-thinking"></div><p class="text-small muted" style="margin-top: 0.5rem;">.orb-thinking (statische variant)</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Logo wall ===== -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <span class="text-kicker">Koppelingen</span>
+          <h2>Logo wall.</h2>
+          <p class="text-lead" style="margin-top: 0.5rem;">Placeholder-cellen hier — echte koppelingslogo's worden bedraad in een latere bouwfase.</p>
+        </div>
+        <div class="logo-wall">
+          <div class="logo-wall-cell"><span class="text-small muted">logo</span></div>
+          <div class="logo-wall-cell"><span class="text-small muted">logo</span></div>
+          <div class="logo-wall-cell"><span class="text-small muted">logo</span></div>
+          <div class="logo-wall-cell"><span class="text-small muted">logo</span></div>
+          <div class="logo-wall-cell"><span class="text-small muted">logo</span></div>
+          <div class="logo-wall-cell"><span class="text-small muted">logo</span></div>
+          <div class="logo-wall-cell"><span class="text-small muted">logo</span></div>
+          <div class="logo-wall-cell"><span class="text-small muted">logo</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Trust strip ===== -->
+    <section class="section section-tint">
+      <div class="container">
+        <div class="section-head">
+          <span class="text-kicker">Vertrouwen</span>
+          <h2>Trust strip.</h2>
+        </div>
+        <div class="trust-strip">
+          <span class="trust-item">
+            <svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" /></svg>
+            Eerst proefdraaien
+          </span>
+          <span class="trust-item">
+            <svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="10" rx="1.5" /><path d="M8 10V7a4 4 0 0 1 8 0v3" /></svg>
+            Niets live zonder akkoord
+          </span>
+          <span class="trust-item">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" /><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7" /></svg>
+            Vaste contactpersoon
+          </span>
+          <span class="trust-item">
+            <svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z" /></svg>
+            Subverwerkers inzichtelijk
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Pull quote ===== -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <span class="text-kicker">Oprichter</span>
+          <h2>Pull quote.</h2>
+        </div>
+        <blockquote class="pull-quote">
+          <span class="pull-quote-mark" aria-hidden="true">&ldquo;</span>
+          <p class="pull-quote-text">Wij bouwen niets dat u niet eerst heeft zien werken. Dat is niet voorzichtigheid — dat is hoe automatisering hoort te gaan.</p>
+          <div class="pull-quote-attribution">
+            <img src="assets/sal-portret.jpg" alt="" class="pull-quote-portrait" />
+            <div>
+              <div class="pull-quote-name">Sal</div>
+              <div class="pull-quote-role">Oprichter, Mowi</div>
+            </div>
           </div>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ===== Numbered steps ===== -->
+    <section class="section section-tint">
+      <div class="container">
+        <div class="section-head">
+          <span class="text-kicker">Zo werkt het</span>
+          <h2>Genummerde stappen.</h2>
         </div>
-        <div class="accordion-item">
-          <button class="accordion-trigger" aria-expanded="false" aria-controls="ds-faq-2">
-            Werkt dit met mijn boekhoudpakket?
-            <span class="accordion-icon" aria-hidden="true"></span>
-          </button>
-          <div class="accordion-panel" id="ds-faq-2">
-            <p>Mowi koppelt met de gangbare Nederlandse pakketten — zie de koppelingen-sectie hieronder.</p>
+        <div class="steps steps-3">
+          <div class="step">
+            <h3>Beschrijven</h3>
+            <p>U vertelt in gewone taal wat u geregeld wilt hebben.</p>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== Steps ===== -->
-    <section class="ds-block">
-      <span class="eyebrow">Genummerde stappen</span>
-      <h2>Werkwijze.</h2>
-
-      <div class="steps steps-3" style="margin-top: 1.5rem;">
-        <div class="step">
-          <h3>Kennismaking</h3>
-          <p>30 minuten, vrijblijvend — we kijken naar uw situatie.</p>
-        </div>
-        <div class="step">
-          <h3>Configuratie</h3>
-          <p>Een AI stelt een workflow samen uit geteste bouwstenen.</p>
-        </div>
-        <div class="step">
-          <h3>Live</h3>
-          <p>De agent draait, bewaakt, en meldt zich bij uitzonderingen.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== The AI orb ===== -->
-    <section class="ds-block">
-      <span class="eyebrow">De AI-orb</span>
-      <h2>Nieuw visueel primitief.</h2>
-      <p class="ds-caption">
-        <code>.mowi-orb</code> &middot; pure CSS/SVG-vrije gradient-bol, ademende puls-animatie,
-        respecteert <code>prefers-reduced-motion</code> volledig (bevriest naar een statische
-        gradient). Grootte via <code>--orb-size</code> — hier via modifier-classes, maar ook
-        instelbaar per instantie met een inline <code>style="--orb-size: …"</code>.
-      </p>
-
-      <div class="ds-orb-row" style="margin-top: 2rem;">
-        <div class="ds-orb-item">
-          <span class="mowi-orb mowi-orb--xs"></span>
-          <span>--xs (2rem)</span>
-        </div>
-        <div class="ds-orb-item">
-          <span class="mowi-orb mowi-orb--sm"></span>
-          <span>--sm (3.5rem)</span>
-        </div>
-        <div class="ds-orb-item">
-          <span class="mowi-orb mowi-orb--md"></span>
-          <span>--md (6rem)</span>
-        </div>
-        <div class="ds-orb-item">
-          <span class="mowi-orb mowi-orb--lg"></span>
-          <span>--lg (10rem)</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== Hero showcase (ported engine) ===== -->
-    <section class="ds-block">
-      <span class="eyebrow">Hero showcase</span>
-      <h2>Taak → Mowi → resultaat.</h2>
-      <p class="ds-caption">
-        Zelfde markup/CSS-klassen als op /agentic-ai — hier statisch gerenderd (geen
-        js/main.js op deze pagina, dus geen reis-animatie of getekende lijnen), puur om te
-        bevestigen dat de geporteerde showcase-CSS nog klopt met de nieuwe tokens.
-      </p>
-
-      <div class="hero-showcase" aria-hidden="true" style="margin-top: 1.5rem; max-width: 40rem;">
-        <svg class="showcase-lines" id="showcaseLines"></svg>
-
-        <div class="showcase-task" style="grid-row: 1;">
-          <span class="showcase-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="5" y="3" width="14" height="18" rx="2" />
-              <path d="M8.5 8h7M8.5 12h7M8.5 16h4" />
-            </svg>
-          </span>
-          <span>Inkomende factuur</span>
-        </div>
-        <div class="showcase-task" style="grid-row: 2;">
-          <span class="showcase-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M22 2L11 13" />
-              <path d="M22 2l-7 20-4-9-9-4 20-7z" />
-            </svg>
-          </span>
-          <span>Klantvraag</span>
-        </div>
-
-        <div class="showcase-hub">
-          <div class="showcase-hub-pulse"></div>
-          <div class="showcase-hub-plate">
-            <img src="assets/mowi-icon.png" alt="" />
+          <div class="step">
+            <h3>Proefdraaien</h3>
+            <p>Mowi configureert het uit geteste bouwstenen en toont het resultaat.</p>
           </div>
-        </div>
-
-        <div class="showcase-endpoint showcase-result" style="grid-row: 1;">
-          <span class="showcase-check">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7" /></svg>
-          </span>
-          <span>Geboekt in uw boekhouding</span>
-        </div>
-        <div class="showcase-endpoint showcase-result" style="grid-row: 2;">
-          <span class="showcase-check">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7" /></svg>
-          </span>
-          <span>Beantwoord</span>
-        </div>
-
-        <div class="showcase-ghost" id="showcaseGhost"></div>
-      </div>
-    </section>
-
-    <!-- ===== Section container ===== -->
-    <section class="ds-block">
-      <span class="eyebrow">Section container</span>
-      <h2>Breedte en band.</h2>
-      <p class="ds-caption">
-        .container (max-breedte var(--container-width), 1380px, gecentreerd) + .section (ruime
-        verticale ritmiek). .section-tint geeft de sectie zelf een volle --bg-band-achtergrond
-        i.p.v. een gebokste witte panel-truc.
-      </p>
-
-      <div class="ds-section-demo" style="margin-top: 1.5rem;">
-        <div class="container">
-          <div class="ds-section-demo-inner">
-            .container binnen .ds-section-demo &middot; max-width: var(--container-width)
+          <div class="step">
+            <h3>Live na akkoord</h3>
+            <p>Pas na uw bevestiging gaat de workflow echt live.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section section-tint" style="border-radius: var(--radius-card); margin-block: 1rem;">
-      <div class="container ds-block" style="border-top: none;">
-        <span class="eyebrow">.section-tint</span>
-        <h2>Een afwisselende band.</h2>
-        <p class="ds-caption">Volle-breedte var(--bg-band) achter deze sectie, geen boxed panel.</p>
+    <!-- ===== FAQ accordion ===== -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <span class="text-kicker">Vragen</span>
+          <h2>FAQ accordion.</h2>
+        </div>
+        <div class="accordion">
+          <div class="accordion-item">
+            <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-1">
+              Wat kost het?
+              <span class="accordion-icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion-panel" id="faq-1">
+              <p>Dat hangt af van wat u wilt automatiseren. We bespreken een eerlijk tarief tijdens de demo.</p>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-2">
+              Moet ik zelf iets bouwen?
+              <span class="accordion-icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion-panel" id="faq-2">
+              <p>Nee. U beschrijft in gewone taal wat u geregeld wilt hebben, Mowi configureert het uit geteste bouwstenen.</p>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-3">
+              Wat als de AI het fout heeft?
+              <span class="accordion-icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion-panel" id="faq-3">
+              <p>Elke stap die iets verandert draait eerst als proef, zodat u het resultaat ziet vóórdat het echt is.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA band ===== -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <span class="text-kicker">CTA band</span>
+          <h2>Afsluitende call-to-action.</h2>
+        </div>
+        <div class="cta-band">
+          <h2>Klaar om te zien hoe dit werkt?</h2>
+          <p>Plan een demo en ontdek wat Mowi voor uw bedrijf kan regelen.</p>
+          <div class="cta-actions">
+            <a href="#" class="btn btn-primary" style="background: var(--ink-inverted); color: var(--ink); border-color: var(--ink-inverted);" onclick="return false;">Plan een demo</a>
+            <a href="#" class="btn btn-secondary" onclick="return false;">Meer informatie</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Browser-window frame ===== -->
+    <section class="section section-tint">
+      <div class="container">
+        <div class="section-head">
+          <span class="text-kicker">Schermafbeeldingen</span>
+          <h2>Browser-window frame.</h2>
+          <p class="text-lead" style="margin-top: 0.5rem;">Hard-edged (border-radius: 0) — een bewuste tegenstelling met de pil-vormige rest van het systeem.</p>
+        </div>
+        <div class="browser-frame" style="max-width: 40rem;">
+          <div class="browser-frame-bar">
+            <span></span><span></span><span></span>
+          </div>
+          <div style="aspect-ratio: 16 / 10; display: flex; align-items: center; justify-content: center; background: var(--bg-band);">
+            <span class="text-small muted">schermafbeelding volgt</span>
+          </div>
+        </div>
       </div>
     </section>
 
   </main>
 
-  <footer class="container" style="padding-block: 3rem; color: var(--ink-muted); font-size: 0.875rem;">
-    Design systeem overzicht &middot; niet gekoppeld vanuit de live site.
+  <!-- ===== Pre-footer CTA band =====
+       Full-bleed dark inverted band, appears on every page directly above
+       the footer — must always immediately precede <footer class="site-footer">. -->
+  <section class="cta-prefooter">
+    <div class="container">
+      <h2>Uw bedrijf op de <em class="h-emph">automatische piloot.</em></h2>
+      <a href="/demo" class="btn btn-primary" style="background: var(--ink-inverted); color: var(--ink); border-color: var(--ink-inverted);" data-event="Demo Click" onclick="return false;">Plan een demo</a>
+    </div>
+  </section>
+
+  <!-- ===== Footer =====
+       Canonical v2 footer markup — copy this whole <footer> block verbatim
+       into every rebuilt page. -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="wordmark wordmark-lg">
+          <img src="assets/mowi-icon.png" alt="" class="wordmark-icon" />
+          <img src="assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
+        </span>
+        <p>Het conversationele automatiseringsplatform voor het Nederlandse MKB.</p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Footermenu">
+        <span class="footer-heading">Platform</span>
+        <a href="/workflows">Workflows met AI</a>
+        <a href="/koppelingen">Koppelingen</a>
+        <a href="/vertrouwen">Vertrouwen</a>
+        <a href="/zo-werkt-het">Zo werkt het</a>
+      </nav>
+
+      <nav class="footer-support" aria-label="Bronnenmenu">
+        <span class="footer-heading">Bronnen</span>
+        <a href="/blog/">Blog</a>
+        <a href="/docs/">Documentatie</a>
+      </nav>
+
+      <div class="footer-contact">
+        <span class="footer-heading">Bedrijf &amp; contact</span>
+        <a href="/over">Over Mowi</a>
+        <a href="/demo">Plan een demo</a>
+        <p>085 333 5800</p>
+        <p>contact@mowi.agency</p>
+        <a href="https://my.mowi.agency/login" target="_blank" rel="noopener">Inloggen</a>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>© 2026 Mowi · Nederland &amp; België</p>
+      <div class="footer-legal">
+        <a href="/privacyverklaring">Privacyverklaring</a>
+        <a href="/algemene-voorwaarden">Algemene voorwaarden</a>
+        <a href="/cookies">Cookies</a>
+        <a href="/ai-transparantie">AI-transparantie</a>
+        <a href="/bedrijfsgegevens">Bedrijfsgegevens</a>
+        <a href="/subverwerkers">Subverwerkers</a>
+      </div>
+    </div>
   </footer>
 
+  <script src="js/main.js?v=20260817-2"></script>
 </body>
 </html>

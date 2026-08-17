@@ -1,145 +1,99 @@
 /* ==========================================================================
-   Mowi — main stylesheet (rebrand era)
-   Successor to the vuewer.com-inspired stylesheet this project shipped
-   with originally (see git history for that version — square corners,
-   bold segmented header, near-black terracotta accent). This is Stage 1 of
-   a multi-stage rebrand: Mowi repositions from "two AI agents sold
-   self-serve" to "the conversational automation platform" — describe a
-   workflow in Dutch, an AI configures it from a curated, tested set of
-   building blocks. Structurally modeled on shapes.co (an AI-native HR
-   platform) — patterns only, never their copy/assets/hex values.
+   Mowi — main stylesheet (rebuild v2, Stage 0: Foundation)
+   Full clean rewrite. Replaces the rebrand-era stylesheet (see git history
+   on branch `master` for that version — warm-bone + Mowi-orange accent,
+   mid-migration back-compat alias layer). This rebuild is monochrome only:
+   black ink on warm-bone paper, or bone-on-black in inverted sections.
+   No accent color, no colored tags, no color-coding anywhere.
 
-   Plain CSS, no build step, no framework.
+   Plain CSS, no build step, no framework, no back-compat alias layer — every
+   page migrates to these token names in the same effort this file was
+   written in (some not-yet-rebuilt pages will look unstyled until their own
+   later build stage — expected, this is a feature branch).
 
-   ---- Token architecture ---------------------------------------------------
-   Every component below reads CSS custom properties, never raw hex — see
-   the :root block. Three families:
-     1. Semantic tokens (--bg, --ink, --accent, --surface, --border, ...) —
-        the real vocabulary. New code should only ever reference these.
-     2. Back-compat aliases (--color-ink, --color-text, --color-bg, ...) —
-        map the OLD (pre-rebrand) token names onto the new semantic tokens,
-        so pages not yet rebuilt in this multi-stage rebrand (legal pages,
-        blog posts, docs-adjacent inline styles) don't visually break
-        outright even though nobody has touched their markup yet. DELETE
-        these once every page has been migrated to the new token names — a
-        later QA stage's job, not this one.
-     3. Content/prose tokens (--content-h1-size, --breadcrumb-*, ...) — the
-        blog's own typographic contract. build-blog.js and 3 shipped posts
-        read these class names directly; do not rename them.
+   ---- Organization -----------------------------------------------------
+   Sections are marked with dashed banner comments (see the one directly
+   below this) — kept from the previous system, a good convention, not
+   brand debt. Read top to
+   bottom: tokens -> reset -> layout primitives -> typography -> buttons ->
+   header/nav -> components (chat input, hero frame, pill tabs, card strip,
+   orb, logo wall, trust strip, pull quote, steps, accordion, cta band) ->
+   footer -> browser-frame -> utilities.
    ========================================================================== */
 
 /* --- Design tokens -------------------------------------------------------- */
 :root {
-  /* ---- Core palette: warm light, shapes.co-patterned (bone canvas, warm
-     near-black ink, one loud accent) — NOT dark-mode-default. Dark is used
-     only for inverted trust/CTA bands and the mobile nav sheet, never the
-     page default. */
-  --bg: #faf6ef;                    /* page background — warm bone, not neutral grey */
-  --bg-band: #f1e6d6;                /* alternating section band — warm greige, a shade down from --bg */
-  --bg-inverted: #1c1712;            /* dark inverted section (trust/CTA bands only) — warm near-black, not pure #000 */
+  /* Core palette — the ENTIRE palette. Black ink on warm-bone paper, or
+     bone-on-black inverted. No --accent, no hue anywhere in this file. */
+  --bg: #faf6ef;                     /* page background — warm bone, not neutral grey */
+  --bg-band: #f1e6d6;                /* alternating section band — a shade down from --bg */
+  --bg-inverted: #1c1712;            /* dark inverted section (trust/CTA bands, mobile nav sheet) */
   --surface: #ffffff;                /* cards/panels on light backgrounds */
-  --surface-inverted: #262019;       /* cards/panels sitting on --bg-inverted — one step lighter, for elevation */
-  --ink: #1c1712;                    /* body/heading text — warm near-black, matches --bg-inverted intentionally */
+  --surface-inverted: #262019;       /* cards/panels sitting on --bg-inverted — one step lighter */
+  --ink: #1c1712;                    /* body/heading text — warm near-black */
   --ink-muted: #6b5f50;              /* secondary/muted text — warm grey-brown, not cool grey */
   --ink-inverted: #faf6ef;           /* text on dark surfaces */
   --ink-inverted-muted: rgba(250, 246, 239, 0.65);
 
-  /* Mowi orange — a hotter, louder evolution of the old terracotta
-     (#b5622f). Picked to sit solidly in orange territory (~19° hue) with
-     real saturation, deliberately clear of shapes.co's egg-yellow (#ffdd00,
-     ~50° hue) on one side and the old muted terracotta on the other — this
-     reads as "AI energy / ignition", not "brand yellow" or "earthy clay".
-     The one loud color in the system; everything else stays restrained. */
-  --accent: #e8590c;
-  --accent-hover: #c94b09;           /* ~15% darker, for hover/active states */
-  --accent-ink: #fff8f2;             /* text/icon color when placed ON --accent */
-  --accent-soft: rgba(232, 89, 12, 0.12); /* translucent tint for backgrounds/highlights, same pattern as before */
-
   --border: #e6d8c3;                 /* hairline borders on light surfaces — warm-tinted */
   --border-inverted: rgba(250, 246, 239, 0.14); /* hairline borders on dark surfaces */
-  --border-strong: rgba(28, 23, 18, 0.82); /* header's own segment dividers — bolder than the general hairline */
+  --border-strong: rgba(28, 23, 18, 0.82); /* header/segment dividers — bolder than the hairline */
+  --border-ink: var(--ink);          /* solid 1px black borders on cards/tags/secondary buttons */
 
-  /* Back-compat aliases — old token names, still referenced by legal pages'
-     inline <style> blocks and by anything else not yet migrated. Map 1:1
-     onto the semantic tokens above; never given their own values. */
-  --color-bg: var(--bg);
-  --color-surface: var(--surface);
-  --color-white: var(--surface);
-  --color-text: var(--ink);
-  --color-ink: var(--ink);
-  --color-text-muted: var(--ink-muted);
-  --color-accent: var(--accent);
-  --color-accent-soft: var(--accent-soft);
-  --color-border: var(--border);
-  --color-header-line: var(--border-strong);
-  --color-gray-900: var(--ink);
-  --color-gray-600: var(--ink-muted);
-  --color-gray-500: #8a7c69;
-  --color-gray-400: #bcae97;
-  --color-bg-tint: rgba(28, 23, 18, 0.04);
-  --color-bg-tint-strong: rgba(28, 23, 18, 0.06);
-
-  /* Type — Plus Jakarta Sans stays the workhorse (loaded via Google Fonts
-     <link> in every page's <head>; unchanged from before this rebrand, blog
-     and legal pages depend on it too). New: Instrument Serif italic, used
-     ONLY for the inline headline-emphasis pattern (.h-emph below) — mirrors
-     shapes.co's sans+serif-italic headline signature without using their
-     fonts. Every page's <head> needs an added Google Fonts <link> for
-     Instrument Serif — not yet added anywhere except test.html in this
-     stage; a later stage rolls that <link> out sitewide. */
+  /* Type */
   --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-serif-emph: "Instrument Serif", Georgia, "Times New Roman", serif;
 
-  /* Tracking scale — --tracking-tighter alone moves (-0.05em -> -0.04em,
-     still deliberately tight for large display headings); the other three
-     are unchanged. */
-  --tracking-tighter: -0.04em;
-  --tracking-tight: -0.025em;
+  --text-hero: clamp(2.75rem, 6.5vw, 5.5rem);
+  --text-h1: clamp(2.25rem, 4.5vw, 3.5rem);
+  --text-h2: clamp(1.75rem, 3vw, 2.5rem);
+  --text-h3: 1.25rem;
+  --text-lead: clamp(1.05rem, 1.4vw, 1.25rem);
+  --text-body: 1rem;
+  --text-small: 0.875rem;
+  --text-kicker: 0.8125rem;
+
+  --tracking-tighter: -0.03em;   /* hero/h1 display headings */
+  --tracking-tight: -0.02em;     /* h2 */
   --tracking-normal: 0em;
-  --tracking-wide: 0.025em;
+  --tracking-wide: 0.08em;       /* kickers/eyebrows, uppercase */
 
-  /* Radius scale — retires "square corners everywhere." --radius-media
-     stays 0 on purpose: screenshots/browser-frames stay hard-edged, a
-     deliberate square-vs-pill contrast against the new pill buttons/badges
-     (borrowed from shapes.co's own contrast, not their values). */
-  --radius-pill: 9999px;
-  --radius-card: 0.5rem;   /* 8px */
-  --radius-media: 0;
+  /* Space — 4px base */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 128px;
 
-  /* Back-compat radius aliases — old code referenced a 6-step scale that
-     used to be zeroed out entirely; now resolves to real roundedness so
-     not-yet-migrated components (data-card, cta-band, section-tint's old
-     panel treatment, etc.) pick up the new geometry automatically. */
-  --radius-md: var(--radius-card);
-  --radius-lg: var(--radius-card);
-  --radius-xl: 1rem;
-  --radius-2xl: 1.25rem;
-  --radius-3xl: 1.5rem;
-  --radius-full: var(--radius-pill);
+  /* Radius — three steps only. No square-corner default anywhere except the
+     browser-window frame below, which stays literal 0 on purpose (a
+     deliberate hard-edged contrast against the pill/rounded system, same
+     reasoning the old system used — no dedicated token needed for a single
+     literal zero). */
+  --radius-pill: 999px;
+  --radius-card: 20px;
+  --radius-frame: 28px;
 
-  /* Shadows — soft, low-opacity, warm-tinted black (not cool grey), used sparingly */
-  --shadow-sm: 0 1px 3px 0 rgba(28, 23, 18, 0.08), 0 1px 2px -1px rgba(28, 23, 18, 0.08);
-  --shadow-md: 0 4px 6px -1px rgba(28, 23, 18, 0.08), 0 2px 4px -2px rgba(28, 23, 18, 0.08);
-  --shadow-lg: 0 10px 15px -3px rgba(28, 23, 18, 0.1), 0 4px 6px -4px rgba(28, 23, 18, 0.1);
-
-  /* Motion — --ease-out: fast, premium deceleration for reveal-on-scroll.
-     --ease-bounce: slight-overshoot curve for small hover lifts/pops. */
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-bounce: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  /* Motion — one simple, non-bouncy ease for the small set of transitions
+     still in scope (color/border swaps, dropdown/accordion open-close,
+     opacity cross-fades). No "premium deceleration" curve, no overshoot/
+     bounce curve — those existed to sell hover-lift/pop motion, which is
+     cut. See CLAUDE.md's "No invented motion" constraint. */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
 
   --section-gap: 6rem; /* drives the footer's own top margin */
 
-  /* Container width: 1380px (was 1600px) — tighter measure to match the
-     new, less maximal layout language. Padding steps unchanged (16px ->
-     24px at >=40rem -> 48px at >=64rem). */
   --container-width: 86.25rem; /* 1380px */
   --container-pad: 1rem;
 
-  /* ---- Content/prose typography (reference = /blog) ---------------------
-     Scoped to genuine prose/content headings and body copy — NOT the hero
-     h1/h2 display scale, which stays a deliberately larger marketing
-     component. Ported forward unchanged; blog posts and build-blog.js read
-     these class names/tokens directly. */
+  /* Content/prose typography (reference = /blog) — unchanged mechanism,
+     scoped to genuine prose headings/body, not the display scale above.
+     build-blog.js and the 3 shipped posts read these tokens directly. */
   --content-h1-size: clamp(1.625rem, 1.35rem + 1vw, 2.125rem);
   --content-h1-line-height: 1.25;
   --content-h1-margin-bottom: 1.5rem;
@@ -149,7 +103,6 @@
   --content-p-line-height: 1.7;
   --content-p-margin-bottom: 1.25rem;
 
-  /* ---- Breadcrumb (reference = /blog's .blog-breadcrumb) — unchanged mechanism */
   --breadcrumb-font-size: 0.875rem;
   --breadcrumb-color: var(--ink-muted);
   --breadcrumb-margin-bottom: 0.75rem;
@@ -192,13 +145,10 @@ body {
   position: relative;
 }
 
-/* A whisper of paper grain across the whole page — kept from the previous
-   system (see git history) because a warm bone canvas still benefits from
-   a hint of texture rather than reading as flat digital color, same as it
-   did on the old palette. Trimmed to a lower opacity here (0.02, was
-   0.035) — the new lighter/warmer background shows noise more readily than
-   the old near-grey one did. Pure CSS/SVG (feTurbulence), no image asset,
-   fixed + pointer-events:none so it never affects layout/scroll/interaction. */
+/* A whisper of paper grain across the whole page — static texture, not
+   motion, kept from the previous system because a warm bone canvas benefits
+   from a hint of grain rather than reading as flat digital color. Pure
+   CSS/SVG (feTurbulence), no image asset, fixed + pointer-events:none. */
 body::before {
   content: "";
   position: fixed;
@@ -236,17 +186,14 @@ button {
   cursor: pointer;
 }
 
-/* Visible keyboard-focus ring, accent-colored — new in this stage (the old
-   system had no explicit focus-visible treatment). Low-risk addition:
-   only shows for keyboard focus, never for mouse/touch. */
+/* Visible keyboard-focus ring — ink-colored (never accent, there is none).
+   Only shows for keyboard focus, never for mouse/touch. */
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--ink);
   outline-offset: 2px;
 }
 
-/* Respect reduced-motion preference for all animations on the site —
-   unchanged mechanism, still the global kill-switch every animation on
-   the site (including the new orb component) must honor. */
+/* Global kill-switch every animation/transition on the site must honor. */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
@@ -256,16 +203,16 @@ button {
   }
 }
 
-/* Keep anchor targets (e.g. #afspraak, FAQ items) clear of the sticky header */
+/* Keep anchor targets (e.g. FAQ items, pill-tab hash targets) clear of the
+   sticky header. */
 [id] {
   scroll-margin-top: 6rem;
 }
 
 /* --- Layout primitives -------------------------------------------------------
    .container (max-width var(--container-width), centered, responsive
-   padding) + .section (vertical rhythm, 64px mobile / 96px desktop). Used
-   together on every top-level page section:
-   <section class="section"><div class="container">...</div></section> */
+   padding) + .section (vertical rhythm). Used together on every top-level
+   page section: <section class="section"><div class="container">...</div></section> */
 .container {
   max-width: var(--container-width);
   margin-inline: auto;
@@ -273,29 +220,39 @@ button {
 }
 
 .section {
-  padding-block: 4rem;
+  padding-block: var(--space-8);
 }
 
 @media (min-width: 48rem) {
   .section {
-    padding-block: 6rem;
+    padding-block: var(--space-9);
   }
 }
 
-/* Alternating sections get a full-bleed warm-greige band (--bg-band) behind
-   them — contrast comes from a genuinely different background color now,
-   not a boxed white panel floating on an already-near-white page (the old
-   mechanism). Still "contrast from border/elevation" for anything raised
-   ON TOP of the band (a .card sitting inside one still gets its own
-   border/shadow against the band) — just the band itself is a real color
-   step, not a mud tone, matching --bg-band's own definition above. */
+/* Alternating sections get a full-bleed warm-greige band behind them —
+   contrast from a real background-color step, not a boxed white panel. */
 .section-tint {
   background: var(--bg-band);
 }
 
+/* Full-bleed dark inverted section — trust/CTA bands, nothing else. */
+.section-inverted {
+  background: var(--bg-inverted);
+  color: var(--ink-inverted);
+}
+
+.section-inverted h1, .section-inverted h2, .section-inverted h3, .section-inverted h4 {
+  color: var(--ink-inverted);
+}
+
+.section-inverted .text-kicker,
+.section-inverted p {
+  color: var(--ink-inverted-muted);
+}
+
 .section-head {
   max-width: 42rem;
-  margin-bottom: 3rem;
+  margin-bottom: var(--space-6);
 }
 
 .section-head.center {
@@ -303,22 +260,23 @@ button {
   text-align: center;
 }
 
-.eyebrow {
+/* Kicker/eyebrow — uppercase, factual, no hype. */
+.text-kicker {
   display: inline-block;
-  font-size: 0.8125rem;
-  font-weight: 600;
+  font-size: var(--text-kicker);
+  font-weight: 700;
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
-  color: var(--color-gray-500);
-  margin-bottom: 0.75rem;
+  color: var(--ink-muted);
+  margin-bottom: var(--space-3);
 }
 
 /* minmax(0, 1fr), not bare 1fr — a bare 1fr track's automatic minimum size
-   is its content's min-content width, so a long word/label can force a
-   grid wider than its container. minmax(0, 1fr) removes that floor. */
+   is its content's min-content width, so a long word can force a grid
+   wider than its container. minmax(0, 1fr) removes that floor. */
 .grid {
   display: grid;
-  gap: 1.5rem;
+  gap: var(--space-5);
 }
 
 .grid-2 { grid-template-columns: minmax(0, 1fr); }
@@ -336,53 +294,53 @@ button {
 }
 
 /* --- Typography ---------------------------------------------------------------
-   Weight 500-600 (not 800 like the old system), tight tracking, line-height
-   ~1.05 on the display h1. Content convention (not enforced in CSS):
-   section headings end with a period — e.g. "Wat het oplevert." */
+   Weight 800 on the display scale, tight tracking. Content convention (not
+   enforced in CSS): headlines carry exactly one serif-italic emphasis word
+   (.h-emph), never a whole heading in serif. */
 h1, h2, h3, h4 {
-  font-weight: 600;
-  letter-spacing: var(--tracking-tight);
+  font-weight: 800;
   color: var(--ink);
-  overflow-wrap: break-word; /* long Dutch compounds ("wegautomatiseren") need this at narrow widths */
+  overflow-wrap: break-word; /* long Dutch compounds need this at narrow widths */
 }
 
-/* Fluid clamp, not a step-scale — one formula instead of 5 discrete
-   device-tier breakpoints (the old system's iPad-Pro-specific hacks are
-   gone; a fluid clamp doesn't need them). Caps at 5.625rem (~90px) desktop,
-   matching the "up to ~5.5rem" spec. */
 h1 {
-  font-size: clamp(2.5rem, 5vw + 1rem, 5.625rem);
+  font-size: var(--text-h1);
   line-height: 1.05;
   letter-spacing: var(--tracking-tighter);
 }
 
-/* Contact page's own heading — ~80% of the shared h1 scale at every width,
-   same relationship the old step-scale version had, expressed as a scaled
-   clamp instead of 5 separate overrides. */
-.contact-heading {
-  font-size: clamp(2rem, 4vw + 0.8rem, 4.5rem);
-  line-height: 1.05;
+.text-hero {
+  font-size: var(--text-hero);
+  font-weight: 800;
+  line-height: 1.02;
   letter-spacing: var(--tracking-tighter);
+  color: var(--ink);
 }
 
 h2 {
-  font-size: clamp(2rem, 2.5vw + 1rem, 3rem);
+  font-size: var(--text-h2);
   line-height: 1.15;
+  letter-spacing: var(--tracking-tight);
 }
 
 h3 {
-  font-size: 1.375rem;
+  font-size: var(--text-h3);
+  font-weight: 700;
   line-height: 1.3;
 }
 
-/* Inline headline-emphasis pattern — the shapes.co-patterned sans+serif-
-   italic signature. Markup: <em class="h-emph">...</em> inside any
-   heading, e.g. "Vertel wat u geregeld wilt hebben.
+h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+/* Inline headline-emphasis pattern. Markup: <em class="h-emph">...</em>
+   inside any heading, e.g. "Vertel wat u geregeld wilt hebben.
    <em class="h-emph">Mowi zet het aan het werk.</em>" — only the emphasized
-   span switches font/style; the rest of the heading stays Plus Jakarta
-   Sans at its normal weight. Normal (not tight) tracking and a lighter
-   weight than the surrounding heading — Instrument Serif italic reads
-   cramped under the same -0.04em tracking a sans display face wants. */
+   span switches font/style; the rest stays Plus Jakarta Sans. Normal (not
+   tight) tracking and regular weight — Instrument Serif italic reads
+   cramped under a tight sans display tracking. */
 .h-emph {
   font-family: var(--font-serif-emph);
   font-style: italic;
@@ -390,27 +348,27 @@ h3 {
   letter-spacing: var(--tracking-normal);
 }
 
-.lede {
-  font-size: 1.125rem;
+.text-lead {
+  font-size: var(--text-lead);
   font-weight: 500;
-  color: var(--color-gray-600);
+  color: var(--ink-muted);
   line-height: 1.5;
 }
 
-@media (min-width: 40rem) {
-  .lede {
-    font-size: 1.5rem;
-    line-height: calc(2 / 1.5);
-  }
+.text-body {
+  font-size: var(--text-body);
 }
 
-.text-sm {
-  font-size: 0.875rem;
+.text-small {
+  font-size: var(--text-small);
 }
 
 .muted {
-  color: var(--color-gray-500);
+  color: var(--ink-muted);
 }
+
+.text-center { text-align: center; }
+.mt-0 { margin-top: 0; }
 
 /* Compact content heading — a card/section title too small for the hero h1
    scale but that still needs to read as a real headline. Uses the /blog
@@ -421,9 +379,9 @@ h3 {
 }
 
 /* --- Buttons -------------------------------------------------------------------
-   Full-pill geometry (--radius-pill) — the one deliberate "loud" shape on
-   the site, paired with the one loud color (--accent). Sentence case, not
-   uppercase (the old system's vuewer-style bold-uppercase label is gone). */
+   Full-pill geometry — the one deliberate "loud" shape on the site. Two
+   variants only, neither one colored: solid black fill / bone text
+   (primary), or bone fill / black 1px border (secondary). Sentence case. */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -433,18 +391,14 @@ h3 {
   padding-inline: 1.75rem;
   border-radius: var(--radius-pill);
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: var(--tracking-normal);
   white-space: nowrap;
-  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: background-color 0.15s var(--ease), color 0.15s var(--ease), border-color 0.15s var(--ease), opacity 0.15s var(--ease);
   border: 1px solid transparent;
 }
 
-/* Buttons must wrap, not overflow, in narrow cards/columns — the same fix
-   the old .pricing-card buttons needed, generalized: below 30rem (or
-   inside any container narrower than the label needs), let the button grow
-   past its fixed height and wrap its text rather than spill past its
-   container's edge. */
+/* Buttons must wrap, not overflow, in narrow cards/columns. */
 @media (max-width: 30rem) {
   .btn {
     height: auto;
@@ -456,75 +410,64 @@ h3 {
 }
 
 .btn-primary {
-  background: var(--accent);
-  color: var(--accent-ink);
+  background: var(--ink);
+  color: var(--bg);
+  border-color: var(--ink);
 }
 
 .btn-primary:hover {
-  background: var(--accent-hover);
+  opacity: 0.82;
 }
 
 .btn-secondary {
-  background: var(--surface);
+  background: var(--bg);
   color: var(--ink);
-  border-color: var(--border);
+  border-color: var(--border-ink);
 }
 
 .btn-secondary:hover {
-  border-color: var(--ink);
+  background: var(--bg-band);
+}
+
+/* Secondary button sitting on a dark/inverted surface (cta-band, footer,
+   mobile nav sheet) — bone fill/border on black, not black-on-black. */
+.section-inverted .btn-secondary,
+.cta-band .btn-secondary {
+  background: var(--ink-inverted);
+  color: var(--ink);
+  border-color: var(--ink-inverted);
+}
+
+.section-inverted .btn-secondary:hover,
+.cta-band .btn-secondary:hover {
+  opacity: 0.85;
 }
 
 .btn-block {
   width: 100%;
 }
 
-/* --- Magnetic-hover "slot" wrapper ---------------------------------------------
-   Ported from the old system: each button sits inside a second, static,
-   unmoving pill-shaped box exactly its own size — js/main.js's magnetic
-   hover only translates the visible .btn inside, so on hover it visibly
-   slides a few px out of this fixed slot. Slot itself is now pill-shaped
-   (--radius-pill) to match the button geometry, instead of the old square
-   box. Markup unchanged: wrap the existing button in <span class="btn-slot">. */
-.btn-slot {
-  display: inline-flex;
-  border-radius: var(--radius-pill);
-  border: 1px solid var(--border);
-  background: var(--bg);
-  overflow: hidden;
-}
-
-.btn-slot:has(.btn-secondary) {
-  background: var(--bg-band);
-}
-
-.btn-slot:has(.btn-block) {
-  display: flex;
-  width: 100%;
-}
-
 /* --- Site header ----------------------------------------------------------------
-   A bordered bar that floats inset from the viewport edge, same
-   segmented-cell structure as before (CTA / nav / logo, divided by
-   hairlines) but restyled: warm bone fill, --border-strong dividers
-   instead of solid black, --radius-card outer corners instead of square.
-   Below 48rem it collapses to a compact [logo | hamburger] bar; the full
-   nav + CTA move into a slide-down/up mobile panel instead. Class names,
-   breakpoints (47.9375rem / 48rem / 80rem) and structure are unchanged —
-   js/main.js and a later chrome-rewrite stage both depend on these
-   selectors staying stable. */
+   New structure (deliberate change from the pre-rebuild header): logo left,
+   nav center, Login + "Plan een demo" pill right. Below 64rem (nav needs
+   more room than the old 48rem breakpoint gave it: Product▾ / How it works /
+   Docs / About / Blog is 5 items plus two header-actions, vs. the old
+   header's 4), .main-nav collapses into a full-height dark overlay sheet;
+   .header-actions (Login + CTA) stays visible in the compact bar at every
+   width — only the link LIST collapses, not the primary conversion actions. */
 .site-header {
   position: sticky;
   top: var(--container-pad);
   z-index: 50;
   padding-inline: var(--container-pad);
-  transition: top 0.3s var(--ease-out);
+  transition: top 0.2s var(--ease);
 }
 
 .site-header.is-scrolled {
   top: 10px;
 }
 
-@media (max-width: 47.9375rem) {
+@media (max-width: 63.9375rem) {
   .site-header.is-scrolled {
     top: 0;
   }
@@ -534,39 +477,21 @@ h3 {
   max-width: var(--container-width);
   margin-inline: auto;
   display: flex;
-  align-items: stretch;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  min-height: 4.25rem;
   background: var(--bg);
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-card);
-  box-shadow: var(--shadow-sm);
-  /* No overflow:hidden here (Stage 2 fix, 2026-08-17) — it used to clip the
-     CTA cell's solid-orange fill to the bar's own rounded corners, but that
-     also clipped the desktop .nav-megamenu dropdown panel, which is
-     positioned via `top: 100%` and so sits almost entirely BELOW this box's
-     own border box. Verified this silently broke the dropdown site-wide
-     (confirmed on unmodified contact.html before touching anything here —
-     hovering "Products" flips the trigger's aria-expanded/icon but the
-     panel itself was clipped to a ~1px sliver). Fixed the corner-clipping
-     need directly on .header-cta below (matching border-radius on its own
-     left edge) instead of clipping the whole bar. */
-}
-
-/* Column ratio widened for Stage 2's nav (2026-08-17): CTA / nav / logo,
-   was 1 : 2.2 : 1 — the nav now carries 6 top-level items (was 4) and the
-   logo cell lost its icon-only login button (Login is now a plain nav item,
-   see .main-nav below), so it needs less width than before. */
-@media (min-width: 48rem) {
-  .header-bar {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 3.4fr) minmax(0, 0.9fr);
-    min-height: 4.5rem;
-  }
+  padding-inline: var(--space-4);
 }
 
 .wordmark {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
+  flex-shrink: 0;
 }
 
 .wordmark-icon {
@@ -589,229 +514,66 @@ h3 {
   height: 26px;
 }
 
-.header-bar .header-logo-cell {
-  display: flex;
-  align-items: center;
-  gap: 0.625rem;
-  flex-shrink: 0;
-  padding-inline: 0.875rem;
-  border-left: 1px solid var(--border-strong);
-}
-
-@media (min-width: 48rem) {
-  .header-bar .header-logo-cell {
-    justify-content: center;
-  }
-
-  .header-bar .header-dashboard-btn {
-    order: 2;
-  }
-
-  .header-bar .wordmark {
-    order: 1;
-    flex: 1;
-    justify-content: center;
-  }
-}
-
-@media (min-width: 80rem) {
-  .header-bar .header-logo-cell {
-    padding-inline: 1.5rem;
-  }
-
-  .header-bar .wordmark-icon {
-    height: 40px;
-  }
-
-  .header-bar .wordmark-text {
-    height: 26px;
-  }
-}
-
-.header-dashboard-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  color: var(--ink);
-  transition: opacity 0.2s ease;
-}
-
-.header-dashboard-btn:hover {
-  opacity: 0.6;
-}
-
-.header-dashboard-icon {
-  width: 1.15rem;
-  height: 1.15rem;
-  background-color: currentColor;
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='8' r='4'/%3E%3Cpath d='M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7'/%3E%3C/svg%3E") center / contain no-repeat;
-  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='8' r='4'/%3E%3Cpath d='M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7'/%3E%3C/svg%3E") center / contain no-repeat;
-}
-
-@media (min-width: 80rem) {
-  .header-dashboard-icon {
-    width: 1.4375rem;
-    height: 1.4375rem;
-  }
-}
-
-/* CTA cell — carries the ONE loud accent color in the header. Slot wrapper
-   (.header-cta-slot) mirrors .btn-slot's static-box-left-behind mechanism
-   above; display:contents below 48rem removes it from the box tree
-   entirely there, matching the old system's reasoning exactly. */
-.header-cta-slot {
-  display: contents;
-}
-
-@media (min-width: 48rem) {
-  .header-cta-slot {
-    display: flex;
-    border-right: 1px solid var(--border-strong);
-  }
-}
-
-.header-cta {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-inline: 0.875rem;
-  background: var(--accent);
-  color: var(--accent-ink);
-  font-size: 0.875rem;
-  font-weight: 600;
-  text-align: center;
-  transition: background-color 0.2s ease;
-}
-
-.header-cta:hover {
-  background: var(--accent-hover);
-}
-
-@media (min-width: 48rem) {
-  .header-cta {
-    flex: 1;
-    /* .header-cta is the leftmost, solid-fill cell at this breakpoint (see
-       .header-bar's own comment on why overflow:hidden was removed) — round
-       its own left edge to match the bar's corner instead of relying on
-       parent clipping. */
-    border-top-left-radius: var(--radius-card);
-    border-bottom-left-radius: var(--radius-card);
-  }
-}
-
-@media (min-width: 80rem) {
-  .header-cta {
-    padding-inline: 1.5rem;
-    font-size: 1.0625rem;
-    white-space: nowrap;
-  }
-}
-
-.header-cta-short {
-  display: none;
-}
-
-@media (min-width: 48rem) and (max-width: 79.9375rem) {
-  .header-cta-full {
-    display: none;
-  }
-
-  .header-cta-short {
-    display: inline;
-  }
-}
-
-.header-cta-mobile {
-  display: none;
-}
-
-.header-dashboard-mobile {
-  display: none;
+/* Wordmark placed on a dark/inverted surface (mobile nav sheet) — the PNGs
+   are black ink on a transparent background, so on --bg-inverted they'd be
+   invisible. invert(1) flips RGB only (alpha untouched, so transparency and
+   the texture/grain ramp both survive) turning black-on-transparent into
+   bone-on-transparent — the correct trick for this specific asset. */
+.section-inverted .wordmark-icon,
+.section-inverted .wordmark-text,
+body.nav-open .main-nav .wordmark-icon,
+body.nav-open .main-nav .wordmark-text {
+  filter: invert(1);
 }
 
 .main-nav {
-  display: contents;
+  display: none;
 }
 
-/* flex, not a hardcoded `repeat(N, ...)` grid (pre-Stage-2) — Stage 2 grew
-   the nav from 4 top-level items to 6 (Product▾ / Receptenboek / How it
-   works / About / Resources▾ / Login), and pages not yet migrated to the
-   new chrome still render only 4. A fixed column count would either
-   starve the new 6-item nav or leave two empty trailing columns on
-   not-yet-migrated pages; flex with an explicit equal-share basis on each
-   <li> (below) self-adjusts to whatever item count is actually in the
-   markup, so both coexist correctly during the multi-stage rebrand. */
-@media (min-width: 48rem) {
+@media (min-width: 64rem) {
   .main-nav {
     display: flex;
-    align-items: stretch;
-  }
-
-  .main-nav > .nav-group > li {
-    flex: 1 1 0;
-    min-width: 0;
+    flex: 1;
+    justify-content: center;
   }
 }
 
 .nav-group {
-  display: contents;
-}
-
-.main-nav > .nav-group > li > a,
-.main-nav .nav-dropdown-trigger {
   display: flex;
   align-items: center;
-  gap: 0.375rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--ink);
-  background: none;
-  border: 1px solid transparent; /* reserves the hover border's space so nothing shifts when it appears */
-  padding: 0;
-  font-family: inherit;
-  cursor: pointer;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  gap: var(--space-1);
 }
 
-/* Hover/active: a soft accent tint + border, not a color change on the
-   text itself — active-page state reuses this exact box so it stays
-   permanently "current"-looking. */
-.main-nav > .nav-group > li > a:hover,
-.main-nav .nav-dropdown-trigger:hover,
-.main-nav > .nav-group > li > a[aria-current="page"],
-.main-nav .nav-dropdown-trigger[aria-current="page"] {
-  background: var(--accent-soft);
-  border-color: var(--accent);
-}
-
-.nav-dropdown {
+.nav-group > li {
   position: relative;
 }
 
-@media (min-width: 48rem) {
-  .nav-dropdown {
-    height: 100%;
-  }
-
-  .main-nav > .nav-group > li > a,
-  .main-nav .nav-dropdown-trigger {
-    height: 100%;
-    width: 100%;
-    justify-content: center;
-    padding-inline: 0.625rem;
-  }
+.nav-group > li > a,
+.nav-dropdown-trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--ink);
+  background: none;
+  border: 1px solid transparent;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-pill);
+  font-family: inherit;
+  cursor: pointer;
+  transition: background-color 0.15s var(--ease), border-color 0.15s var(--ease);
 }
 
-/* Stage 2: font-size/padding trimmed slightly from the pre-rebrand values
-   (1.0625rem/1.5rem) — 6 items need to fit where 4 used to, and this still
-   reads comfortably at >=80rem. */
-@media (min-width: 80rem) {
-  .main-nav > .nav-group > li > a,
-  .main-nav .nav-dropdown-trigger {
-    font-size: 1rem;
-    padding-inline: 1rem;
-  }
+/* Hover/active: a soft ink tint + border — never a color change on the text
+   itself. Active-page state reuses this exact box so it stays permanently
+   "current"-looking. */
+.nav-group > li > a:hover,
+.nav-dropdown-trigger:hover,
+.nav-group > li > a[aria-current="page"],
+.nav-dropdown-trigger[aria-current="page"] {
+  background: var(--bg-band);
+  border-color: var(--border);
 }
 
 .nav-dropdown-icon {
@@ -819,71 +581,57 @@ h3 {
   height: 0.4375rem;
   border-right: 1.5px solid currentColor;
   border-bottom: 1.5px solid currentColor;
-  transform: rotate(45deg) translateY(-3px);
-  transition: transform 0.2s var(--ease-out);
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform 0.15s var(--ease);
   flex-shrink: 0;
 }
 
 .nav-dropdown-trigger[aria-expanded="true"] .nav-dropdown-icon {
-  transform: rotate(225deg) translateY(-1px);
+  transform: rotate(225deg) translateY(0);
 }
 
-/* Base/mobile: max-height accordion, same mechanism as before. NOTE: a
-   later stage replaces the two-column Products layout below with a single
-   Product-dropdown-with-descriptions — this CSS keeps that old two-column
-   layout functionally working (restyled to new tokens) but gets no further
-   investment beyond that per this stage's brief. */
+/* Desktop dropdown panel — opacity-only open/close per the "no invented
+   motion" constraint (no slide/translate, no bounce). Instant on mobile
+   (handled inside the nav sheet media query below). */
 .nav-megamenu {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s var(--ease-out);
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  z-index: 60;
+  min-width: 17rem;
+  background: var(--bg);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-card);
+  box-shadow: 0 8px 24px rgba(28, 23, 18, 0.12);
+  padding: var(--space-3);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.12s var(--ease), visibility 0s linear 0.12s;
 }
 
-.nav-dropdown-trigger[aria-expanded="true"] + .nav-megamenu {
-  max-height: 26rem;
+.nav-dropdown-trigger[aria-expanded="true"] + .nav-megamenu,
+.nav-dropdown:hover .nav-megamenu {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: opacity 0.12s var(--ease);
 }
 
-.nav-megamenu-label {
-  font-size: 0.859375rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-wide);
-  margin: 0 0 0.375rem;
+.nav-dropdown:hover .nav-dropdown-icon {
+  transform: rotate(225deg) translateY(0);
 }
 
 .nav-megamenu-col ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.125rem;
 }
 
-.nav-megamenu-col li {
-  font-size: 0.9375rem;
-  line-height: 1.3;
-  color: var(--ink);
-  cursor: pointer;
-  transition: color 0.2s ease, background-color 0.2s ease;
-}
-
-.nav-megamenu-col li a {
-  display: block;
-  color: inherit;
-  text-decoration: none;
-  transition: color 0.2s ease, background-color 0.2s ease;
-}
-
-/* Product dropdown's shapes.co-style rows (Stage 2): a short title plus a
-   one-line Dutch descriptor, stacked — the descriptor reads like the
-   linked page's own H1, not a generic tagline. Base rules cover both the
-   mobile accordion and the desktop panel; .nav-megamenu-single below
-   overrides wrapping/spacing for the desktop panel specifically. */
 .nav-megamenu-item-title {
   display: block;
   font-size: 0.9375rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--ink);
 }
 
@@ -895,119 +643,105 @@ h3 {
   color: var(--ink-muted);
 }
 
-@media (min-width: 48rem) {
-  .nav-megamenu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: 60;
-    display: flex;
-    background: var(--bg);
-    border: 1px solid var(--border-strong);
-    border-radius: var(--radius-card);
-    box-shadow: var(--shadow-md);
-    padding: 1.25rem 0;
-    min-width: 27rem;
-    max-height: none;
-    overflow: visible;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transform: translateY(-0.375rem);
-    transition: opacity 0.18s var(--ease-out), transform 0.18s var(--ease-out),
-      visibility 0s linear 0.18s;
-  }
-
-  .nav-megamenu-narrow {
-    min-width: 12rem;
-  }
-
-  /* Product dropdown (Stage 2) — single wide column, title+descriptor rows.
-     Wider than -narrow (a bare label list) but narrower than the old
-     two-column Products panel's 27rem default. */
-  .nav-megamenu-single {
-    min-width: 22rem;
-  }
-
-  .nav-megamenu-single .nav-megamenu-col li,
-  .nav-megamenu-single .nav-megamenu-col li a {
-    white-space: normal; /* descriptors need to wrap; the default panel assumes short nowrap labels */
-  }
-
-  .nav-megamenu-single .nav-megamenu-col li a {
-    padding-block: 0.625rem; /* a bit more breathing room for two-line rows */
-  }
-
-  .nav-dropdown-trigger[aria-expanded="true"] + .nav-megamenu,
-  .nav-dropdown:hover .nav-megamenu {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transform: translateY(0);
-    transition: opacity 0.18s var(--ease-out), transform 0.18s var(--ease-out);
-  }
-
-  .nav-dropdown:hover .nav-dropdown-icon {
-    transform: rotate(225deg) translateY(-1px);
-  }
-
-  .nav-megamenu-col {
-    display: flex;
-    flex-direction: column;
-    min-width: 11rem;
-    padding-inline: 1.5rem;
-  }
-
-  .nav-megamenu-label {
-    color: var(--color-gray-500);
-  }
-
-  .nav-megamenu-col li {
-    white-space: nowrap;
-  }
-
-  .nav-megamenu-col li a,
-  .nav-megamenu-col li:not(:has(a)) {
-    border: 1px solid transparent;
-    padding: 0.3125rem 0.5rem;
-    margin: -0.3125rem -0.5rem;
-    border-radius: var(--radius-card);
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-  }
-
-  .nav-megamenu-col li a:hover,
-  .nav-megamenu-col li a[aria-current="page"],
-  .nav-megamenu-col li:not(:has(a)):hover {
-    background: var(--accent-soft);
-    border-color: var(--accent);
-  }
+.nav-megamenu-col li a {
+  display: block;
+  padding: 0.5rem 0.625rem;
+  border-radius: var(--radius-card);
+  transition: background-color 0.15s var(--ease);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .nav-megamenu {
-    transition: none;
-  }
+.nav-megamenu-col li a:hover,
+.nav-megamenu-col li a[aria-current="page"] {
+  background: var(--bg-band);
 }
 
-.nav-toggle {
+/* --- Header actions (Login + "Plan een demo") ------------------------------
+   Stays visible at every width — see .site-header's own comment above for
+   why only the link LIST collapses on mobile, not these. This is the one
+   place a filled-black pill button belongs prominently; still monochrome,
+   just solid ink fill / bone text. */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex-shrink: 0;
+}
+
+.header-login {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.header-login:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.header-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.75rem;
+  padding-inline: 1.25rem;
+  border-radius: var(--radius-pill);
+  background: var(--ink);
+  color: var(--bg);
+  font-size: 0.875rem;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: opacity 0.15s var(--ease);
+}
+
+.header-cta:hover {
+  opacity: 0.82;
+}
+
+.header-cta-short {
   display: none;
+}
+
+@media (max-width: 63.9375rem) {
+  .header-cta-full { display: none; }
+  .header-cta-short { display: inline; }
+}
+
+@media (min-width: 64rem) {
+  .header-cta {
+    height: 3rem;
+    padding-inline: 1.5rem;
+    font-size: 0.9375rem;
+  }
+}
+
+/* --- Mobile nav toggle + sheet --------------------------------------------- */
+.nav-toggle {
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 5px;
-  width: 3.75rem;
+  width: 2.75rem;
+  height: 2.75rem;
   flex-shrink: 0;
-  border: none;
-  border-left: 1px solid var(--border-strong);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
   background: none;
+}
+
+@media (min-width: 64rem) {
+  .nav-toggle {
+    display: none;
+  }
 }
 
 .nav-toggle span {
   display: block;
-  width: 22px;
+  width: 18px;
   height: 2px;
   background: var(--ink);
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  transition: transform 0.15s var(--ease), opacity 0.15s var(--ease);
 }
 
 .nav-toggle[aria-expanded="true"] span:nth-child(1) {
@@ -1022,61 +756,7 @@ h3 {
   transform: translateY(-7px) rotate(-45deg);
 }
 
-/* Mobile header + menu — matches vuewer-era live testing at 390-440px,
-   ported unchanged structurally: hamburger/CTA/logo stay visible
-   (reordered via flex `order`, DOM order untouched), nav panel is a
-   bottom sheet flush to the screen edges with a dimmed backdrop. Restyled
-   to the new dark-inverted tokens (--bg-inverted/--ink-inverted) instead
-   of flat black/white — same "this is an overlay, it can go dark" logic
-   as the trust/CTA bands elsewhere on the site. */
-@media (max-width: 47.9375rem) {
-  .header-bar {
-    min-height: 3.5625rem;
-  }
-
-  .header-bar .header-logo-cell {
-    order: 2;
-    margin-inline: auto;
-    padding-inline: 1.0625rem;
-    border-left: none;
-  }
-
-  .header-bar .wordmark-icon {
-    height: clamp(28px, 9vw, 34px);
-  }
-
-  .header-bar .wordmark-text {
-    height: clamp(28px, 9vw, 34px);
-  }
-
-  .header-dashboard-btn {
-    display: none;
-  }
-
-  .header-cta {
-    order: 1;
-    width: 3.75rem;
-    padding-inline: 0;
-    font-size: 0; /* hides the label visually only — still in the accessible name */
-    position: relative;
-  }
-
-  .header-cta::before {
-    content: "";
-    width: 24px;
-    height: 24px;
-    background-color: currentColor;
-    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='4' y1='12' x2='20' y2='12'/%3E%3Cpolyline points='13 5 20 12 13 19'/%3E%3C/svg%3E") center / contain no-repeat;
-    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='4' y1='12' x2='20' y2='12'/%3E%3Cpolyline points='13 5 20 12 13 19'/%3E%3C/svg%3E") center / contain no-repeat;
-  }
-
-  .nav-toggle {
-    display: flex;
-    order: 0;
-    border-left: none;
-    border-right: 1px solid var(--border-strong);
-  }
-
+@media (max-width: 63.9375rem) {
   body.nav-open::after {
     content: "";
     position: fixed;
@@ -1086,460 +766,634 @@ h3 {
   }
 
   .main-nav {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-auto-flow: dense;
-    align-content: start;
+    display: block;
     position: fixed;
     inset: auto 0 0 0;
     z-index: 45;
     background: var(--bg-inverted);
-    padding-inline: var(--container-pad);
-    padding-block: 0 var(--container-pad);
-    border: none;
+    padding: var(--space-4);
+    padding-top: var(--space-6);
     border-top: 1px solid var(--border-inverted);
-    border-radius: 0;
     max-height: calc(100dvh - 6rem);
     overflow-y: auto;
     transform: translateY(100%);
     visibility: hidden;
-    transition: transform 0.3s var(--ease-out), visibility 0s linear 0.3s;
-    box-shadow: 0 -10px 30px rgba(28, 23, 18, 0.3);
+    transition: transform 0.2s var(--ease), visibility 0s linear 0.2s;
   }
 
   .main-nav.is-open {
     transform: translateY(0);
     visibility: visible;
-    transition: transform 0.3s var(--ease-out);
+    transition: transform 0.2s var(--ease);
   }
 
-  .nav-dropdown {
-    display: contents;
-  }
-
-  .nav-megamenu {
-    grid-column: 1 / -1;
-  }
-
-  .main-nav > .nav-group > li > a,
-  .main-nav .nav-dropdown-trigger {
-    font-size: 1.0625rem;
-    color: var(--ink-inverted);
-    justify-content: center;
-    text-align: center;
-    border: 1px solid var(--border-inverted);
-    padding: 1.75rem 1rem;
-    min-height: 5rem;
-  }
-
-  .main-nav > .nav-group > li > a:hover,
-  .main-nav .nav-dropdown-trigger:hover,
-  .main-nav > .nav-group > li > a[aria-current="page"],
-  .main-nav .nav-dropdown-trigger[aria-current="page"] {
-    background: rgba(250, 246, 239, 0.08);
-    color: var(--ink-inverted);
-    border-color: var(--border-inverted);
-  }
-
-  .nav-dropdown-trigger {
-    width: 100%;
-  }
-
-  .nav-megamenu {
-    display: flex;
-  }
-
-  .nav-dropdown-trigger[aria-expanded="true"] + .nav-megamenu {
-    border: 1px solid var(--border-inverted);
-    border-top: none;
-  }
-
-  .nav-megamenu-col {
-    position: relative;
-    flex: 1;
-    min-width: 0;
-  }
-
-  .nav-megamenu-col:only-child {
-    flex: 0 0 50%;
-    border-right: 1px solid var(--border-inverted);
-  }
-
-  .nav-megamenu-col ul {
+  .nav-group {
+    flex-direction: column;
+    align-items: stretch;
     gap: 0;
   }
 
-  .nav-megamenu-col + .nav-megamenu-col {
-    border-left: 1px solid var(--border-inverted);
+  .nav-group > li > a,
+  .nav-dropdown-trigger {
+    width: 100%;
+    justify-content: space-between;
+    font-size: 1.0625rem;
+    color: var(--ink-inverted);
+    border: none;
+    border-bottom: 1px solid var(--border-inverted);
+    border-radius: 0;
+    padding: 1.125rem 0.5rem;
   }
 
-  .nav-megamenu-label {
-    font-size: 0.6875rem;
-    padding: 0.5rem 0.5rem 0.25rem;
-    color: var(--ink-inverted-muted);
+  .nav-group > li > a:hover,
+  .nav-dropdown-trigger:hover,
+  .nav-group > li > a[aria-current="page"],
+  .nav-dropdown-trigger[aria-current="page"] {
+    background: rgba(250, 246, 239, 0.06);
+    border-color: var(--border-inverted);
   }
 
-  .nav-megamenu-col li {
-    font-size: 0.875rem;
-    line-height: 1.2;
-    color: rgba(250, 246, 239, 0.85);
-    padding: 0.75rem 0.5rem;
+  .nav-megamenu {
+    position: static;
+    max-height: 0;
+    min-width: 0;
+    overflow: hidden;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    background: none;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    transition: max-height 0.2s var(--ease);
+  }
+
+  .nav-dropdown-trigger[aria-expanded="true"] + .nav-megamenu {
+    max-height: 20rem;
+    padding-block: 0.5rem;
   }
 
   .nav-megamenu-item-title {
-    color: inherit;
+    color: var(--ink-inverted);
   }
 
   .nav-megamenu-item-desc {
-    color: rgba(250, 246, 239, 0.55);
+    color: var(--ink-inverted-muted);
   }
 
-  .nav-megamenu-col li:not(:first-child) {
-    border-top: 1px solid var(--border-inverted);
-  }
-
-  .nav-megamenu-col li:last-child {
-    border-bottom: 1px solid var(--border-inverted);
-  }
-
-  .nav-megamenu-col li a {
-    display: block;
-    margin: -0.75rem -0.5rem;
-    padding: 0.75rem 0.5rem;
-    color: inherit;
-  }
-
-  .nav-megamenu-col li a:hover,
-  .nav-megamenu-col li a[aria-current="page"],
-  .nav-megamenu-col li:not(:has(a)):hover {
-    background: rgba(250, 246, 239, 0.08);
-    color: var(--ink-inverted);
-  }
-
-  /* Column-height sync (Platform vs Automations) — set as an inline style
-     by syncMegaMenuColumnHeights() in main.js at runtime; this just
-     supplies the scrollbar/clip/fade behavior once JS sets that height. */
-  .nav-megamenu-col ul.nav-megamenu-scroll {
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-    scrollbar-width: none;
-  }
-
-  .nav-megamenu-col ul.nav-megamenu-scroll::-webkit-scrollbar {
-    display: none;
-  }
-
-  .nav-megamenu-col ul.nav-megamenu-scroll.is-at-bottom {
-    -webkit-mask-image: none;
-    mask-image: none;
-  }
-
-  .main-nav .header-cta-mobile {
-    display: none;
-  }
-
-  .header-dashboard-mobile {
-    grid-column: 1 / -1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    margin-top: 0.75rem;
-    padding: 1.25rem 1rem;
-    font-size: 1.0625rem;
-    font-weight: 600;
-    color: var(--ink-inverted);
-    border: 1px solid var(--border-inverted);
-    border-radius: var(--radius-card);
-  }
-
-  .header-dashboard-mobile:hover {
-    background: var(--ink-inverted);
-    color: var(--ink);
-    border-color: var(--ink-inverted);
-  }
-
-  /* Custom-drawn scroll indicator (native scrollbar is unreliable on iOS
-     Safari) — created lazily by ensureScrollIndicator() in main.js.
-     TEMPORARILY HIDDEN: ported from the old system, still display:none
-     there (only 2 "Agents" items today, so the list they'd indicate
-     doesn't currently overflow) — one-line revert (delete this
-     `display: none`) once the menu grows past the cap again. */
-  .nav-megamenu-scrollbar {
-    display: none;
-    position: absolute;
-    right: 0;
-    width: 3px;
+  .nav-megamenu-col li a:hover {
     background: rgba(250, 246, 239, 0.06);
-    pointer-events: none;
-  }
-
-  .nav-megamenu-scrollbar-thumb {
-    position: absolute;
-    left: 0;
-    width: 100%;
-    background: rgba(250, 246, 239, 0.2);
   }
 }
 
-/* --- Hero (basic — no bordered frame; see header comment re: deleted
-   .hero-frame* family) --------------------------------------------------------- */
-.hero {
-  padding-top: 1.75rem;
-  padding-bottom: 4rem;
-}
-
-@media (min-width: 48rem) {
-  .hero {
-    padding-block: 6rem;
-  }
-}
-
-.hero.hero-crumb-only {
-  padding-bottom: 0;
-}
-
-#pakketten {
-  padding-top: 0;
-}
-
-/* Cancels the sticky header's own reserved-flow-height overlap (see
-   .site-header's `top: var(--container-pad)`) so a breadcrumb sitting
-   directly in the hero isn't rendered underneath the header. */
-@media (min-width: 40rem) {
-  .hero:has(.breadcrumb) {
-    padding-block-start: var(--container-pad);
-  }
-}
-
-.hero-grid {
-  display: grid;
-  gap: 3rem;
-  align-items: center;
-}
-
-@media (min-width: 64rem) {
-  .hero-grid {
-    grid-template-columns: 1.1fr 0.9fr;
-  }
-}
-
-.hero-actions {
+/* --- Chat input ("describe what you want handled") -----------------------
+   The signature device: a pill field styled like a real text input but
+   built as a <div> (no real form submission), monochrome, JS-driven modes.
+   See js/main.js's initChatInput() doc comment for the full usage contract
+   (data-mode, data-prompts, data-results attributes). */
+.chat-input-frame {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-top: 2rem;
+  flex-direction: column;
+  gap: var(--space-3);
 }
 
-.data-card {
+.chat-input {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
   background: var(--surface);
-  border-radius: var(--radius-3xl);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-lg);
-  padding: 1.75rem;
+  border: 1px solid var(--border-ink);
+  border-radius: var(--radius-pill);
+  padding: 0.5rem 0.5rem 0.5rem 1.5rem;
+  min-height: 3.75rem;
 }
 
-.data-card-row {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  padding-block: 0.75rem;
-  border-bottom: 1px solid var(--border);
+.chat-input-field {
+  flex: 1;
+  min-width: 0;
+  font-size: 1.0625rem;
+  line-height: 1.4;
+  overflow-wrap: break-word;
 }
 
-.data-card-row:last-child {
-  border-bottom: none;
+.chat-input-placeholder {
+  color: var(--ink-muted);
 }
 
-.data-card-label {
-  color: var(--color-gray-500);
-  font-size: 0.9375rem;
+.chat-input-text {
+  color: var(--ink);
 }
 
-.data-card-value {
-  font-size: 1.25rem;
-  font-weight: 700;
+.chat-input-caret {
+  display: none;
+  width: 2px;
+  height: 1.1em;
+  margin-left: 2px;
+  background: var(--ink);
+  vertical-align: -0.18em;
+  animation: chat-caret-blink 1s steps(1, jump-none) infinite;
 }
 
-.data-card-delta {
-  color: #16a34a;
-  font-size: 0.875rem;
-  font-weight: 600;
-  margin-left: 0.5rem;
+.chat-input.is-caret-visible .chat-input-caret {
+  display: inline-block;
 }
 
-/* --- Logo marquee (real app/integration logos) --------------------------------
-   Mechanics unchanged: spacing lives on each tile (not a flex `gap`) so the
-   -33.333% keyframe reset always lands on a tile boundary regardless of
-   set count; pause-on-hover/focus is pure CSS. */
-.logo-marquee {
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+@keyframes chat-caret-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
 }
 
-.logo-track {
-  display: flex;
-  align-items: center;
-  width: max-content;
-  animation: marquee 30s linear infinite;
-}
-
-.logo-track.reverse {
-  animation-name: marquee-reverse;
-}
-
-.logo-marquee:hover .logo-track,
-.logo-marquee:focus-within .logo-track {
-  animation-play-state: paused;
-}
-
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-33.333%); }
-}
-
-@keyframes marquee-reverse {
-  from { transform: translateX(-33.333%); }
-  to { transform: translateX(0); }
-}
-
-.logo-tile {
+.chat-input-submit {
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 3.8rem;
-  height: 1.4rem;
-  margin-right: 4.5rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: var(--ink);
+  border: none;
+  color: var(--bg);
 }
 
-.logo-tile img {
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  filter: grayscale(100%);
+.chat-input-submit svg {
+  width: 1.125rem;
+  height: 1.125rem;
 }
 
-/* --- Cards ---------------------------------------------------------------------
-   --radius-card (8px), not the old --radius-md (6px, itself now aliased to
-   --radius-card anyway). */
-.card {
-  background: var(--surface);
-  border: 1px solid var(--border);
+/* Response region: "Mowi denkt na…" + a plain 3-dot step loader (not a
+   continuous shimmer sweep), then a result line. Both start hidden — plain
+   HTML default is a real, correct static idle field (see initChatInput's
+   reduced-motion branch, which renders straight to a finished frame rather
+   than relying on this being visually empty). */
+.chat-input-thinking {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-inline: 1.5rem;
+  font-size: 0.9375rem;
+  color: var(--ink-muted);
+}
+
+.chat-input-thinking[hidden] {
+  display: none;
+}
+
+.chat-input-dots {
+  display: inline-flex;
+  gap: 3px;
+}
+
+.chat-input-dots span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--ink-muted);
+  animation: chat-dot-step 1.1s var(--ease) infinite;
+}
+
+.chat-input-dots span:nth-child(2) { animation-delay: 0.15s; }
+.chat-input-dots span:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes chat-dot-step {
+  0%, 80%, 100% { opacity: 0.25; }
+  40% { opacity: 1; }
+}
+
+.chat-input-result {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.875rem 1.5rem;
+  border: 1px solid var(--border-ink);
   border-radius: var(--radius-card);
-  padding: 1.5rem;
-  transition: transform 0.3s var(--ease-bounce), box-shadow 0.3s ease;
+  background: var(--surface);
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+.chat-input-result[hidden] {
+  display: none;
+}
+
+.chat-input-result-check {
+  flex-shrink: 0;
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+/* --- Hero frame -------------------------------------------------------------
+   Rounded-28 container holding a .chat-input plus a couple of small
+   .status-card chips. Flat fill, black border — no gradient backdrop
+   (gradients read as color/mood-lighting). */
+.hero-frame {
+  border: 1px solid var(--border-ink);
+  border-radius: var(--radius-frame);
+  background: var(--surface);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
 }
 
 @media (min-width: 40rem) {
-  .card {
-    padding: 2.5rem;
+  .hero-frame {
+    padding: var(--space-7);
+  }
+}
+
+.hero-frame-status-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.status-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.875rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--bg);
+}
+
+.status-card-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ink);
+  flex-shrink: 0;
+}
+
+/* --- Pill tabs ---------------------------------------------------------------
+   role="tablist"/"tab"/aria-selected + panels with [hidden]. Active tab:
+   black fill, bone text. Inactive: bone fill, black border. See
+   js/main.js's initPillTabs() for the click/keyboard/hash-sync wiring. */
+.pill-tablist {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.pill-tab {
+  display: inline-flex;
+  align-items: center;
+  height: 2.75rem;
+  padding-inline: 1.25rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-ink);
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  transition: background-color 0.15s var(--ease), color 0.15s var(--ease);
+}
+
+.pill-tab[aria-selected="true"] {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.pill-panels {
+  margin-top: var(--space-5);
+}
+
+.pill-panel[hidden] {
+  display: none;
+}
+
+/* --- Card strip ---------------------------------------------------------------
+   Horizontally scrollable row, native scroll + scroll-snap, edge-fade +
+   arrow affordance. See js/main.js's initCardStrip(). */
+.card-strip-wrap {
+  position: relative;
+}
+
+.card-strip {
+  display: flex;
+  gap: var(--space-4);
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scroll-padding-inline: var(--container-pad);
+  padding-block: 0.25rem;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 2%, #000 96%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 2%, #000 96%, transparent);
+}
+
+.card-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.card-strip.is-dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
+  user-select: none;
+}
+
+.strip-card {
+  flex: 0 0 auto;
+  width: 17rem;
+  scroll-snap-align: start;
+  border: 1px solid var(--border-ink);
+  border-radius: var(--radius-card);
+  background: var(--surface);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* Bordered pill tag — black 1px border, transparent fill, uppercase text.
+   No fill color, ever: category differentiation comes from the label text
+   alone, never color-coding. */
+.strip-card-tag {
+  display: inline-flex;
+  align-self: flex-start;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--border-ink);
+  border-radius: var(--radius-pill);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--ink);
+}
+
+.strip-card p {
+  color: var(--ink-muted);
+  font-size: 0.9375rem;
+}
+
+.strip-card-visual {
+  margin-top: auto;
+  padding-top: var(--space-3);
+}
+
+.card-strip-arrow {
+  display: none;
+}
+
+@media (min-width: 48rem) {
+  .card-strip-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    right: -1.25rem;
+    transform: translateY(-50%);
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    border: 1px solid var(--border-ink);
+    background: var(--bg);
+    transition: opacity 0.15s var(--ease);
+  }
+
+  .card-strip-arrow[data-at-end="true"] {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+/* ==========================================================================
+   The orb — pixelated/halftone monochrome sphere
+   Built the same way CLAUDE.md's Branding section documents for
+   mowi-icon.png: a luminance-to-alpha dot/grain ramp, dense marks read
+   solid, sparse marks read faint. NOT a flat silhouette, NOT a color
+   gradient. Two layered dot grids (avoids a too-mechanical single-frequency
+   moire) clipped to a circle, then masked by a radial alpha gradient offset
+   toward one edge to fake sphere shading — dense/opaque near the "lit"
+   point, sparse/transparent fading out. No background fill behind the dots:
+   the page surface shows through the gaps, exactly like the real logo
+   asset's own alpha channel. Pure CSS, no external image, no animation. */
+.orb {
+  --orb-size: 5.5rem;
+  --orb-ink: var(--ink);
+  position: relative;
+  display: inline-block;
+  width: var(--orb-size);
+  height: var(--orb-size);
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.section-inverted .orb,
+.cta-band .orb {
+  --orb-ink: var(--ink-inverted);
+  border-color: var(--border-inverted);
+}
+
+.orb::before {
+  content: "";
+  position: absolute;
+  inset: -12%;
+  background-image:
+    radial-gradient(circle, var(--orb-ink) 34%, transparent 36%),
+    radial-gradient(circle, var(--orb-ink) 30%, transparent 32%);
+  background-size: 15% 15%, 9% 9%;
+  background-position: 0 0, 4.5% 4.5%;
+  -webkit-mask-image: radial-gradient(circle at 68% 72%, #000 0%, #000 28%, rgba(0, 0, 0, 0.4) 58%, transparent 90%);
+  mask-image: radial-gradient(circle at 68% 72%, #000 0%, #000 28%, rgba(0, 0, 0, 0.4) 58%, transparent 90%);
+}
+
+/* "Thinking" state — a different static dot-density arrangement (denser,
+   centered) to represent a processing beat. Swapped via class, e.g. from
+   js/main.js during the chat-input's auto-play sequence — never a
+   continuous idle animation. */
+.orb.orb-thinking::before {
+  background-size: 10% 10%, 6% 6%;
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 0%, #000 45%, transparent 92%);
+  mask-image: radial-gradient(circle at 50% 50%, #000 0%, #000 45%, transparent 92%);
+}
+
+.orb-sm { --orb-size: 3rem; }
+.orb-md { --orb-size: 5.5rem; }
+.orb-lg { --orb-size: 9rem; }
+
+/* --- Logo wall ----------------------------------------------------------------
+   Bordered grid of cells, greyscale logos. Full color on hover is a
+   permitted hover *state change* (not a scroll animation) — the logos are
+   real third-party brand marks, their inherent color isn't "color-coding"
+   our own system. */
+.logo-wall {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+
+@media (min-width: 40rem) {
+  .logo-wall {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
 @media (min-width: 64rem) {
-  .card {
-    padding: 3rem;
+  .logo-wall {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
-.contact-info-grid .card {
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-}
-
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-md);
-}
-
-.card-icon {
-  width: 2.75rem;
-  height: 2.75rem;
-  border-radius: var(--radius-lg);
-  background: var(--ink);
-  color: var(--surface);
+.logo-wall-cell {
   display: flex;
   align-items: center;
   justify-content: center;
+  aspect-ratio: 3 / 2;
+  padding: var(--space-5);
+  border: 1px solid var(--border);
+  margin: -1px 0 0 -1px; /* collapse doubled hairlines into a shared 1px grid */
+}
+
+.logo-wall-cell img {
+  max-width: 100%;
+  max-height: 2.25rem;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: grayscale(1);
+  transition: filter 0.15s var(--ease);
+}
+
+.logo-wall-cell:hover img {
+  filter: grayscale(0);
+}
+
+/* --- Trust strip ---------------------------------------------------------------
+   Icon + short-claim chips, black line-icon style (inline SVG strokes,
+   monochrome, no fill color). */
+.trust-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.trust-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1rem;
+  border: 1px solid var(--border-ink);
+  border-radius: var(--radius-pill);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.section-inverted .trust-item {
+  border-color: var(--border-inverted);
+}
+
+.trust-item svg {
+  width: 1.125rem;
+  height: 1.125rem;
+  stroke: currentColor;
+  fill: none;
+  flex-shrink: 0;
+}
+
+/* --- Pull quote -----------------------------------------------------------
+   Large serif-italic opening quote mark, room for a circular portrait
+   (rendered greyscale via CSS filter — the source photo is in color). */
+.pull-quote {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  max-width: 42rem;
+}
+
+.pull-quote-mark {
+  font-family: var(--font-serif-emph);
+  font-style: italic;
+  font-size: 4rem;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.pull-quote-text {
+  font-size: var(--text-lead);
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.pull-quote-attribution {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.pull-quote-portrait {
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 50%;
+  object-fit: cover;
+  filter: grayscale(1);
+  flex-shrink: 0;
+}
+
+.pull-quote-name {
   font-weight: 700;
-  margin-bottom: 1.25rem;
+  font-size: 0.9375rem;
+}
+
+.pull-quote-role {
+  font-size: 0.8125rem;
+  color: var(--ink-muted);
+}
+
+/* --- Cards (generic) ------------------------------------------------------- */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: var(--space-5);
+}
+
+@media (min-width: 40rem) {
+  .card {
+    padding: var(--space-6);
+  }
 }
 
 .card p {
-  color: var(--color-gray-600);
+  color: var(--ink-muted);
   margin-top: 0.5rem;
   overflow-wrap: break-word;
 }
 
-/* Inverted/dark card variant — kept the original name (.card-featured,
-   still referenced by index.html/pricing.html markup this stage doesn't
-   touch) rather than renaming it. Uses the dark-inverted surface tokens,
-   not a plain "ink" background — reads as a genuine dark card, matching
-   the same bg-inverted family the trust/CTA bands use. */
 .card.card-featured {
   background: var(--surface-inverted);
   color: var(--ink-inverted);
   border-color: var(--surface-inverted);
 }
 
-.card.card-featured h3,
-.card.card-featured .card-icon {
+.card.card-featured h3 {
   color: var(--ink-inverted);
-}
-
-.card.card-featured .card-icon {
-  background: rgba(250, 246, 239, 0.15);
 }
 
 .card.card-featured p {
   color: var(--ink-inverted-muted);
 }
 
-.card.card-featured a {
-  color: var(--ink-inverted);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-/* Specificity lesson carried forward from the old system: `.card-featured
-   a` above sets every link's color, including a `.btn-secondary` that
-   happens to sit inside one — without this override, a light-on-light
-   secondary button on a dark card would be nearly invisible. Scoped
-   selector (not just relying on source order) so this survives future
-   reordering of the file. */
-.card-featured .btn-secondary {
-  color: var(--ink);
-  background: var(--surface);
-  border-color: var(--surface);
-  text-decoration: none;
-}
-
-.card-link {
-  display: inline-block;
-  margin-top: 1rem;
-  font-weight: 600;
-  font-size: 0.9375rem;
-}
-
-/* Small pill tag, e.g. system-integration names — already pill-shaped
-   before this rebrand; now reads var(--radius-pill) explicitly instead of
-   the old --radius-full alias. */
+/* Small pill tag — bordered, no fill, matches .strip-card-tag's language. */
 .pill {
   display: inline-flex;
   align-items: center;
   padding: 0.375rem 0.9rem;
   border-radius: var(--radius-pill);
-  background: var(--surface);
-  border: 1px solid var(--border);
+  background: var(--bg);
+  border: 1px solid var(--border-ink);
   font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--color-gray-600);
+  font-weight: 600;
+  color: var(--ink);
 }
 
 .pill-row {
@@ -1548,69 +1402,11 @@ h3 {
   gap: 0.625rem;
 }
 
-.pill-accent {
-  background: var(--accent-soft);
-  border-color: transparent;
-  color: var(--accent);
-}
-
-a.pill {
-  transition: border-color 0.2s ease, color 0.2s ease;
-}
-
-a.pill:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
-/* --- Case cards ------------------------------------------------------------------ */
-.case-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-2xl);
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.case-tag {
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--color-gray-500);
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-wide);
-}
-
-.case-result {
-  font-size: 1.375rem;
-  font-weight: 700;
-  letter-spacing: var(--tracking-tight);
-}
-
-.case-block {
-  border-top: 1px solid var(--border);
-  padding-top: 1rem;
-}
-
-.case-block h4 {
-  font-size: 0.875rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-wide);
-  color: var(--color-gray-500);
-  margin-bottom: 0.375rem;
-}
-
-.case-block p {
-  color: var(--color-gray-600);
-}
-
-/* --- Numbered steps (werkwijze) ------------------------------------------------- */
+/* --- Numbered steps ---------------------------------------------------------- */
 .steps {
   counter-reset: step;
   display: grid;
-  gap: 1.5rem;
+  gap: var(--space-5);
 }
 
 @media (min-width: 48rem) {
@@ -1625,7 +1421,7 @@ a.pill:hover {
 
 .step {
   position: relative;
-  padding-top: 3rem;
+  padding-top: var(--space-7);
 }
 
 .step::before {
@@ -1635,8 +1431,8 @@ a.pill:hover {
   top: 0;
   left: 0;
   font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--color-gray-400);
+  font-weight: 800;
+  color: var(--ink-muted);
   letter-spacing: var(--tracking-tight);
 }
 
@@ -1645,10 +1441,10 @@ a.pill:hover {
 }
 
 .step p {
-  color: var(--color-gray-600);
+  color: var(--ink-muted);
 }
 
-/* --- Accordion (FAQ) -------------------------------------------------------------- */
+/* --- FAQ accordion --------------------------------------------------------- */
 .accordion {
   border-top: 1px solid var(--border);
 }
@@ -1662,13 +1458,13 @@ a.pill:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  padding-block: 1.5rem;
+  gap: var(--space-4);
+  padding-block: var(--space-5);
   background: none;
   border: none;
   text-align: left;
   font-size: 1.0625rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--ink);
 }
 
@@ -1686,7 +1482,7 @@ a.pill:hover {
   top: 50%;
   left: 50%;
   background: var(--ink);
-  transition: transform 0.25s var(--ease-out);
+  transition: transform 0.15s var(--ease);
 }
 
 .accordion-icon::before {
@@ -1708,44 +1504,20 @@ a.pill:hover {
 .accordion-panel {
   overflow: hidden;
   max-height: 0;
-  opacity: 0;
-  transition: max-height 0.35s var(--ease-out), opacity 0.25s ease;
-}
-
-.accordion-panel.is-open {
-  opacity: 1;
+  transition: max-height 0.2s var(--ease);
 }
 
 .accordion-panel p {
-  color: var(--color-gray-600);
-  padding-bottom: 1.5rem;
+  color: var(--ink-muted);
+  padding-bottom: var(--space-5);
   max-width: 40rem;
 }
 
-/* --- Scroll reveal (safety pattern) -----------------------------------------------
-   [data-reveal] carries NO hidden state of its own — only .reveal-armed
-   does, and js/main.js only adds .reveal-armed once it has actually set up
-   the IntersectionObserver that will reveal it again. If js/main.js fails
-   to load/run for any reason, .reveal-armed never gets added, so content
-   stays at its normal, fully-visible default. This mechanism is verbatim
-   from before the rebrand — nothing about it changes here, only the timing
-   values it animates toward (opacity/translateY) stay the same too. */
-[data-reveal].reveal-armed {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.7s var(--ease-out) 0.15s, transform 0.7s var(--ease-out) 0.15s;
-}
-
-[data-reveal].is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* --- CTA band ---------------------------------------------------------------------- */
+/* --- CTA band (mid-page, rounded) ------------------------------------------- */
 .cta-band {
   background: var(--bg-inverted);
   color: var(--ink-inverted);
-  border-radius: var(--radius-3xl);
+  border-radius: var(--radius-frame);
   padding: 3.5rem 2rem;
   text-align: center;
 }
@@ -1757,24 +1529,19 @@ a.pill:hover {
 .cta-band p {
   color: var(--ink-inverted-muted);
   max-width: 36rem;
-  margin: 1rem auto 0;
-}
-
-.cta-band .btn-secondary {
-  background: var(--ink-inverted);
-  color: var(--ink);
+  margin: var(--space-4) auto 0;
 }
 
 .cta-actions {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1rem;
-  margin-top: 2rem;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
 }
 
 .cta-alt {
-  margin-top: 1.5rem;
+  margin-top: var(--space-5);
   color: var(--ink-inverted-muted);
   font-size: 0.875rem;
 }
@@ -1782,110 +1549,13 @@ a.pill:hover {
 .cta-alt a {
   text-decoration: underline;
   text-underline-offset: 3px;
-  color: rgba(250, 246, 239, 0.8);
+  color: rgba(250, 246, 239, 0.85);
 }
 
-/* --- Forms --------------------------------------------------------------------------- */
-.form-field {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin-bottom: 1.25rem;
-}
-
-.form-field label {
-  font-size: 0.875rem;
-  font-weight: 600;
-}
-
-.form-field input,
-.form-field textarea {
-  font-family: inherit;
-  font-size: 1rem;
-  padding: 0.75rem 1rem;
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--border);
-  background: var(--surface);
-}
-
-.form-field input:focus,
-.form-field textarea:focus {
-  outline: 2px solid var(--accent);
-  outline-offset: 1px;
-}
-
-.form-note {
-  font-size: 0.8125rem;
-  color: var(--color-gray-500);
-  margin-top: 1rem;
-}
-
-.form-success[hidden] {
-  display: none;
-}
-
-.form-success {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-  margin-top: 1.5rem;
-  padding: 1.25rem;
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--border);
-  background: var(--accent-soft);
-}
-
-.form-success-icon {
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 1.75rem;
-  height: 1.75rem;
-  border-radius: 50%;
-  background: var(--accent);
-  color: var(--accent-ink);
-  font-size: 0.875rem;
-  font-weight: 700;
-}
-
-.form-success p {
-  margin: 0;
-  font-size: 0.9375rem;
-  line-height: 1.5;
-}
-
-/* --- Breadcrumb ---------------------------------------------------------------------- */
-.breadcrumb {
-  font-size: var(--breadcrumb-font-size);
-  color: var(--breadcrumb-color);
-  margin-bottom: var(--breadcrumb-margin-bottom);
-}
-
-@media (min-width: 40rem) {
-  .breadcrumb {
-    padding-block: var(--breadcrumb-space-block);
-    margin-bottom: 0;
-  }
-}
-
-.breadcrumb a {
-  color: var(--breadcrumb-color);
-}
-
-.breadcrumb a:hover {
-  color: var(--ink);
-}
-
-/* --- Pre-footer CTA band ---------------------------------------------------
-   Full-bleed dark inverted band appearing on every page directly above the
-   footer — Mowi's own closing-statement CTA, patterned after shapes.co's
-   own pre-footer band ("The new era of people management") but with
-   entirely original copy/markup. New in Stage 2 (2026-08-17). Deliberately
-   edge-to-edge (no border-radius, unlike the rounded mid-page .cta-band)
-   so it reads as the site's final beat before the footer, not another card
-   in the flow — same full-bleed-background + inner .container pattern as
-   .section-tint elsewhere on the site. */
+/* --- Pre-footer CTA band (full-bleed, edge-to-edge) -------------------------
+   Appears on every page directly above the footer — Mowi's closing-
+   statement CTA. Full-bleed (no border-radius, unlike .cta-band) so it
+   reads as the site's final beat before the footer. */
 .cta-prefooter {
   background: var(--bg-inverted);
   color: var(--ink-inverted);
@@ -1900,24 +1570,53 @@ a.pill:hover {
   max-width: 34rem;
 }
 
-.cta-prefooter .btn-slot {
-  display: inline-flex;
-  margin-top: 2rem;
-  background: var(--bg-inverted);
-  border-color: var(--border-inverted);
+.cta-prefooter .btn {
+  margin-top: var(--space-6);
+}
+
+/* --- Forms ------------------------------------------------------------------- */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: var(--space-5);
+}
+
+.form-field label {
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.form-field input,
+.form-field textarea {
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border-ink);
+  background: var(--surface);
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+  outline: 2px solid var(--ink);
+  outline-offset: 1px;
+}
+
+.form-note {
+  font-size: 0.8125rem;
+  color: var(--ink-muted);
+  margin-top: var(--space-4);
 }
 
 /* --- Footer -------------------------------------------------------------------------- */
 .site-footer {
   margin-top: var(--section-gap);
   border-top: 1px solid var(--border);
-  padding-top: 4rem;
-  padding-bottom: 2rem;
+  padding-top: var(--space-8);
+  padding-bottom: var(--space-5);
 }
 
-/* Every page's footer is now directly preceded by .cta-prefooter (Stage 2)
-   — its own dark band already provides the visual break, so don't stack a
-   second top-margin + hairline border right underneath it. */
 .cta-prefooter + .site-footer {
   margin-top: 0;
   border-top: none;
@@ -1925,7 +1624,7 @@ a.pill:hover {
 
 .footer-inner {
   display: grid;
-  gap: 2.5rem;
+  gap: var(--space-6);
 }
 
 @media (min-width: 48rem) {
@@ -1935,8 +1634,8 @@ a.pill:hover {
 }
 
 .footer-brand p {
-  color: var(--color-gray-600);
-  margin-top: 1rem;
+  color: var(--ink-muted);
+  margin-top: var(--space-4);
   max-width: 22rem;
 }
 
@@ -1947,7 +1646,7 @@ a.pill:hover {
 }
 
 .footer-nav a, .footer-support a, .footer-contact a, .footer-contact p {
-  color: var(--color-gray-600);
+  color: var(--ink-muted);
   font-size: 0.9375rem;
 }
 
@@ -1960,7 +1659,7 @@ a.pill:hover {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: var(--tracking-wide);
-  color: var(--color-gray-500);
+  color: var(--ink-muted);
   margin-bottom: 0.5rem;
 }
 
@@ -1969,17 +1668,14 @@ a.pill:hover {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  margin-top: 3rem;
-  padding-top: 2rem;
+  gap: var(--space-4);
+  margin-top: var(--space-7);
+  padding-top: var(--space-5);
   border-top: 1px solid var(--border);
-  color: var(--color-gray-500);
+  color: var(--ink-muted);
   font-size: 0.875rem;
 }
 
-/* flex-wrap added in Stage 2 — the legal row grew from 2 links to 6, so it
-   needs to wrap onto multiple lines on narrow viewports instead of
-   overflowing. */
 .footer-legal {
   display: flex;
   flex-wrap: wrap;
@@ -1989,10 +1685,6 @@ a.pill:hover {
 .footer-legal a:hover {
   color: var(--ink);
 }
-
-/* --- Utilities ------------------------------------------------------------------------ */
-.text-center { text-align: center; }
-.mt-0 { margin-top: 0; }
 
 /* --- Blog (marketing content, marketing tokens — a calmer READING mode, not
    the docs stylesheet; /docs/ CSS stays scoped to /docs/ only per project
@@ -2019,24 +1711,10 @@ a.pill:hover {
   }
 }
 
-.blog-breadcrumb a {
-  color: var(--breadcrumb-color);
-}
-
-.blog-breadcrumb a:hover {
-  color: var(--ink);
-}
-
 .blog-article h1 {
   font-size: var(--content-h1-size);
   line-height: var(--content-h1-line-height);
   margin-bottom: var(--content-h1-margin-bottom);
-}
-
-.blog-meta {
-  font-size: 0.9375rem;
-  color: var(--color-text-muted);
-  margin-bottom: 2rem;
 }
 
 .blog-article h2 {
@@ -2047,1247 +1725,23 @@ a.pill:hover {
 
 .blog-article p {
   line-height: var(--content-p-line-height);
-  color: var(--color-text);
   margin-bottom: var(--content-p-margin-bottom);
 }
 
-.blog-direct-answer {
-  background: var(--accent-soft);
-  border-left: 3px solid var(--accent);
-  border-radius: 0 var(--radius-card) var(--radius-card) 0;
-  padding: 1.25rem 1.5rem;
-  margin-bottom: 2rem;
-}
-
-.blog-direct-answer p {
-  margin-bottom: 0;
-  font-size: 1.0625rem;
-}
-
-.blog-table-wrap {
-  overflow-x: auto;
-  margin-bottom: 1.5rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-card);
-}
-
-.blog-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.9375rem;
-}
-
-.blog-table th,
-.blog-table td {
-  padding: 0.75rem 1rem;
-  text-align: left;
-  border-bottom: 1px solid var(--border);
-  white-space: nowrap;
-}
-
-.blog-table th {
-  background: var(--color-bg-tint);
-  font-weight: 600;
-}
-
-.blog-figure {
-  margin-bottom: 1.5rem;
-}
-
-.blog-figure img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: var(--radius-media); /* screenshots stay square, deliberately */
-}
-
-.blog-figure figcaption {
-  font-size: 0.8125rem;
-  color: var(--color-text-muted);
-  margin-top: 0.5rem;
-}
-
-.blog-media-placeholder {
-  background: var(--color-bg-tint);
-  border: 1px dashed var(--border);
-  padding: 3rem 1.5rem;
-  text-align: center;
-  color: var(--color-text-muted);
-  font-size: 0.875rem;
-  margin-bottom: 1.5rem;
-}
-
-.blog-video-facade {
-  position: relative;
-  aspect-ratio: 16 / 9;
-  background: var(--bg-inverted);
-  margin-bottom: 1.5rem;
-  cursor: pointer;
-  overflow: hidden;
-}
-
-.blog-video-facade img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.blog-video-facade .blog-video-play {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.blog-video-facade .blog-video-play span {
-  width: 4rem;
-  height: 4rem;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.9);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  color: var(--ink);
-}
-
-.blog-video-facade iframe {
-  width: 100%;
-  height: 100%;
-  border: 0;
-  display: block;
-}
-
-.blog-faq {
-  margin-top: 2.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--border);
-}
-
-.blog-faq h2 {
-  margin-top: 0;
-}
-
-.blog-faq-item {
-  margin-bottom: 1.25rem;
-}
-
-.blog-faq-item p {
-  margin-bottom: 0;
-}
-
-.blog-faq-item .blog-faq-q {
-  font-weight: 600;
-  margin-bottom: 0.375rem;
-}
-
-.blog-sources {
-  margin-top: 2rem;
-  font-size: 0.875rem;
-  color: var(--color-text-muted);
-}
-
-.blog-sources li {
-  margin-bottom: 0.375rem;
-}
-
-.blog-cta {
-  margin-top: 2.5rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--border);
-  text-align: center;
-}
-
-.blog-cta .btn-primary {
-  margin-top: 1rem;
-}
-
-/* --- Blog index (listing page) --- */
-.blog-index-intro {
-  padding-top: calc(var(--container-pad) + 1.5rem);
-}
-
-.blog-index-intro h1 {
-  font-size: var(--content-h1-size);
-  line-height: var(--content-h1-line-height);
-  margin-bottom: 0;
-}
-
-.blog-index-intro p {
-  max-width: 42rem;
-  color: var(--color-text-muted);
-  margin-top: 0.5rem;
-  margin-bottom: 1.5rem;
-}
-
-.blog-index-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-}
-
-@media (min-width: 48rem) {
-  .blog-index-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-
-.blog-card-date {
-  font-size: 0.8125rem;
-  color: var(--color-text-muted);
-  margin-bottom: 0.5rem;
-}
-
-.blog-card h3 {
-  margin-bottom: 0.5rem;
-}
-
-.blog-card-tags {
-  display: flex;
-  gap: 0.5rem;
-  margin-top: 1rem;
-  flex-wrap: wrap;
-}
-
-.blog-card-tags span {
-  font-size: 0.75rem;
-  padding: 0.2rem 0.6rem;
-  border-radius: var(--radius-pill);
-  background: var(--accent-soft);
-  color: var(--accent);
-}
-
-/* ==========================================================================
-   Shared marketing-page primitives (Website & Conversion plan, Phase 0)
-   Reusable across /agents/ and /koppelingen/ pages. 0.1 (primary CTA) has
-   no CSS of its own — reuses .cta-band + .btn-slot > .btn-primary above.
-   ========================================================================== */
-
-/* 0.2 Trust block — every marketing page, directly above the footer. */
-.trust-list {
-  display: grid;
-  gap: 1.75rem;
-}
-
-@media (min-width: 48rem) {
-  .trust-list {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-.trust-item {
-  display: flex;
-  gap: 1rem;
-  align-items: flex-start;
-}
-
-.trust-item p {
-  color: var(--color-gray-600);
-}
-
-.trust-photo {
-  width: 3.5rem;
-  height: 3.5rem;
-  flex-shrink: 0;
-  border-radius: 50%;
-  overflow: hidden;
-  background: var(--color-bg-tint);
-  border: 1px dashed var(--border);
-}
-
-.trust-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* 0.3 Pricing line — one consistent "vanaf €X per maand" pattern, reused on
-   every agent page. Placeholder tokens (e.g. [PRICE_EMAIL_TRIAGE]) render
-   literally until real numbers exist — never invent a number here. */
-.pricing-line {
-  display: inline-block;
-  padding: 1.25rem 1.5rem;
-  border-radius: var(--radius-card);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  font-size: 1.0625rem;
-  color: var(--color-gray-600);
-}
-
-.pricing-line strong {
-  color: var(--ink);
-  font-weight: 700;
-}
-
-/* 0.4 Video slot — 16:9. No file yet -> a calm "Demo binnenkort" poster,
-   never a broken player. Once a real file lands, markup adds .has-video +
-   data-video-src and js/main.js upgrades it to click-to-play. */
-.demo-video {
-  position: relative;
-  aspect-ratio: 16 / 9;
-  background: var(--bg-inverted);
-  overflow: hidden;
-  border-radius: var(--radius-media);
-}
-
-.demo-video-poster {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.375rem;
-  color: var(--ink-inverted);
-  text-align: center;
-  padding: 1.5rem;
-}
-
-.demo-video-agent {
-  font-size: 1.0625rem;
-  font-weight: 700;
-}
-
-.demo-video-soon {
-  font-size: 0.875rem;
-  color: var(--ink-inverted-muted);
-}
-
-.demo-video-play {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 0;
-  background: transparent;
-  padding: 0;
-}
-
-.demo-video-play span {
-  width: 4rem;
-  height: 4rem;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.9);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  color: var(--ink);
-}
-
-.demo-video video {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-/* 0.5 "Werkt met" pills — reuses .pill/.pill-row + a.pill:hover above. */
-/* 0.6 IT-sheet download — reuses .btn.btn-secondary as-is. */
-
-/* ==========================================================================
-   Illustration + widget system
-   Every rule below is scoped to page-specific classes; the .hero-showcase
-   component is fully generic — each page supplies its own 4 task/result
-   pairs in HTML, css/js need no per-page changes. js/main.js's
-   drawShowcaseLines()/runDesktopStep()/typeInto()/typeComposeCard()/
-   playOfferteBeat() all depend on the class names in this section staying
-   exactly as they are.
-
-   --- Illustration system spec ---------------------------------------------
-   One consistent visual language for every inline SVG built for this
-   system:
-   - Stroke width 1.5 (SVG user units) everywhere — one weight, never mixed.
-   - Corner radius rx="3" on every rounded rect — one radius, everywhere.
-   - Max 3 colors, all existing tokens, no new hex values introduced:
-       currentColor / var(--ink)     — primary line art
-       var(--accent)                 — exactly ONE highlight per
-                                        illustration (the "what matters"
-                                        element)
-       var(--border)                 — secondary/background shapes (the
-                                        "before" state, a receding element)
-   - No faces, no mascots, no tech clichés (gears, lightbulbs, circuit
-     boards, robots). Abstract geometric shapes only: rects, circles, paths.
-   - fill="none" + stroke on every path/rect, except small solid accent
-     dots/nodes, which alone may use fill.
-   Inline <svg> only (never <img>) so every illustration inherits these CSS
-   variables directly — no separate light/dark asset ever needed.
-   ========================================================================== */
-
-/* --- Hero showcase: taak -> Mowi -> resultaat ------------------------------
-   One 3-column/4-row grid at every viewport width (sized down for phones
-   via CSS, not swapped for a different component). Every card renders its
-   real final content in plain HTML with no hidden state of its own — JS
-   only ever ADDS a transient .is-pending class to a result card it's about
-   to animate in; if js/main.js never runs, or prefers-reduced-motion is
-   set, nothing is ever hidden in the first place. */
-.hero-with-visual {
-  display: grid;
-  gap: 2rem;
-}
-
-@media (min-width: 64rem) {
-  .hero-with-visual {
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-    gap: 3rem;
-    align-items: center;
-  }
-}
-
-@media (max-width: 63.9375rem) {
-  .contact-hero-visual {
-    gap: 1.5rem;
-  }
-}
-
-@media (min-width: 64rem) {
-  .contact-hero-visual {
-    align-items: start;
-  }
-}
-
-/* /contact only: a real face directly above a time-slot picker — the one
-   place on the site a portrait does concrete work. */
-.booking-host {
-  display: flex;
-  align-items: center;
-  gap: 0.875rem;
-  margin-top: 1.5rem;
-}
-
-.booking-host-photo {
-  width: 3.5rem;
-  height: 3.5rem;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 1px solid var(--border);
-  flex-shrink: 0;
-}
-
-.booking-host-text {
-  color: var(--color-text-muted);
-  font-size: 0.875rem;
-  line-height: 1.5;
-  margin: 0;
-}
-
-.booking-host-name {
-  color: var(--color-text);
-  font-weight: 600;
-}
-
-/* Shared task/result "card" look — reuses the card language (surface,
-   hairline border, shadow-sm, --radius-card). Sized down for phones by
-   default (same component everywhere, not a separate mobile version) and
-   back up to full size from ~700px. */
-.showcase-task,
-.showcase-result {
-  display: flex;
-  align-items: center;
-  gap: 0.375rem;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-card);
-  padding: 0.375rem 0.5rem;
-  font-size: 0.625rem;
-  font-weight: 600;
-  line-height: 1.25;
-  color: var(--ink);
-  box-shadow: var(--shadow-sm);
-}
-
-@media (min-width: 43.75rem) {
-  .showcase-task,
-  .showcase-result {
-    gap: 0.625rem;
-    padding: 0.625rem 0.875rem;
-    font-size: 0.8125rem;
-    line-height: 1.3;
-  }
-}
-
-.showcase-task.is-active {
-  border-color: var(--accent);
-}
-
-/* min-height reserves 2-line space from first paint regardless of which
-   font is active (Plus Jakarta Sans loads async) — a font swap changes
-   nothing about the box, only the text inside it. .is-fluid only. */
-.hero-showcase.is-fluid .showcase-task {
-  min-height: 2.5rem;
-}
-
-@media (min-width: 43.75rem) {
-  .hero-showcase.is-fluid .showcase-task {
-    min-height: 3.5rem;
-  }
-}
-
-.showcase-icon {
-  width: 0.9375rem;
-  height: 0.9375rem;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-text-muted);
-}
-
-@media (min-width: 43.75rem) {
-  .showcase-icon {
-    width: 1.375rem;
-    height: 1.375rem;
-  }
-}
-
-.showcase-icon svg {
-  width: 100%;
-  height: 100%;
-}
-
-/* Green is a deliberate one-off exception to the ink/accent/border palette
-   — "done" needs a color the rest of the site's tokens don't have. Scoped
-   locally, not a new global token (same convention as before the rebrand). */
-.showcase-check {
-  width: 0.8125rem;
-  height: 0.8125rem;
-  flex-shrink: 0;
-  border-radius: 50%;
-  background: #4a7a52;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-@media (min-width: 43.75rem) {
-  .showcase-check {
-    width: 1.125rem;
-    height: 1.125rem;
-  }
-}
-
-.showcase-check svg {
-  width: 0.5rem;
-  height: 0.5rem;
-}
-
-@media (min-width: 43.75rem) {
-  .showcase-check svg {
-    width: 0.65rem;
-    height: 0.65rem;
-  }
-}
-
-/* The hub: a genuinely rounded "soft container" — an explicit exception to
-   the site's card/media radius tokens, since this one element reads as a
-   distinct platform/product surface, not another card. */
-.showcase-hub-plate {
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 0.85rem;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  z-index: 1;
-}
-
-@media (min-width: 43.75rem) {
-  .showcase-hub-plate {
-    width: 4.25rem;
-    height: 4.25rem;
-    border-radius: 1.25rem;
-  }
-}
-
-.showcase-hub-plate img {
-  width: 68%;
-  height: auto;
-}
-
-.showcase-hub-pulse {
-  position: absolute;
-  inset: 0;
-  border-radius: 0.85rem;
-  border: 1.5px solid var(--accent);
-  opacity: 0.5;
-  animation: showcase-idle-pulse 2.8s var(--ease-out) infinite;
-}
-
-@media (min-width: 43.75rem) {
-  .showcase-hub-pulse {
-    border-radius: 1.25rem;
-  }
-}
-
-@keyframes showcase-idle-pulse {
-  0% { transform: scale(1); opacity: 0.45; }
-  100% { transform: scale(1.3); opacity: 0; }
-}
-
-.showcase-hub.is-processing .showcase-hub-plate {
-  animation: showcase-process-pulse 0.6s var(--ease-bounce);
-}
-
-@keyframes showcase-process-pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.08); }
-}
-
-.showcase-hub.is-paused .showcase-hub-pulse {
-  animation-play-state: paused;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .showcase-hub-pulse {
-    display: none;
-  }
-}
-
-.hero-showcase {
-  display: grid;
-  position: relative;
-  overflow: hidden;
-  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-  grid-template-rows: repeat(4, auto);
-  align-items: center;
-  column-gap: 0.625rem;
-  row-gap: 0.5rem;
-}
-
-@media (min-width: 43.75rem) {
-  .hero-showcase {
-    column-gap: 1.75rem;
-    row-gap: 0.625rem;
-  }
-}
-
-/* .is-fluid (email-triage only): no fixed height, no cap on result-card
-   count/height — the task column and hub are grouped into their own
-   sub-grid (.showcase-left-group) so the result column's height can never
-   feed back into where the task column/hub sit. */
-.hero-showcase.is-fluid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  grid-template-rows: none;
-  align-items: start;
-  column-gap: 0.625rem;
-}
-
-@media (min-width: 43.75rem) {
-  .hero-showcase.is-fluid {
-    column-gap: 1.75rem;
-  }
-}
-
-.showcase-left-group {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: center;
-  column-gap: 0.625rem;
-}
-
-@media (min-width: 43.75rem) {
-  .showcase-left-group {
-    column-gap: 1rem;
-  }
-}
-
-.hero-showcase.is-fluid .showcase-col-result {
-  grid-column: 2;
-}
-
-.showcase-col {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-@media (min-width: 43.75rem) {
-  .showcase-col {
-    gap: 0.625rem;
-  }
-}
-
-/* 1024-1365px ("iPad Pro" width, whatever the actual device): the
-   task/result column only has ~148px, so cards shrink for exactly this
-   width range — pure width-based, no touch/pointer detection. Must come
-   after every other `(min-width: 43.75rem)` block touching these same
-   selectors (same specificity, source order decides). */
-@media (min-width: 64rem) and (max-width: 85.3125rem) {
-  .showcase-task,
-  .showcase-result {
-    gap: 0.5rem;
-    padding: 0.5rem 0.625rem;
-    font-size: 0.75rem;
-    line-height: 1.25;
-  }
-
-  .showcase-icon {
-    width: 1.125rem;
-    height: 1.125rem;
-  }
-
-  .showcase-check {
-    width: 1rem;
-    height: 1rem;
-  }
-
-  .showcase-check svg {
-    width: 0.55rem;
-    height: 0.55rem;
-  }
-
-  .showcase-hub-plate {
-    width: 3rem;
-    height: 3rem;
-  }
-}
-
-.showcase-lines {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  overflow: visible;
-  pointer-events: none;
-}
-
-.showcase-lines line {
-  stroke: var(--border);
-  stroke-width: 1.5;
-  transition: stroke 0.3s ease;
-}
-
-.showcase-lines line.is-active {
-  stroke: var(--accent);
-}
-
-.showcase-lines line[data-side="result"] {
-  stroke-dasharray: 1;
-  stroke-dashoffset: 0;
-  transition: stroke 0.3s ease, stroke-dashoffset 0.5s var(--ease-out);
-}
-
-.showcase-lines line[data-side="result"].is-hidden {
-  stroke-dashoffset: 1;
-}
-
-.showcase-task {
-  grid-column: 1;
-  position: relative;
-  z-index: 1;
-}
-
-.showcase-result {
-  grid-column: 3;
-  position: relative;
-  z-index: 1;
-}
-
-/* Shared by every result-side card type (.showcase-result, .showcase-
-   compose, .showcase-offerte-card) — one is-pending/reveal treatment and
-   one JS marker class (querySelectorAll(".showcase-endpoint")). is-pending
-   is only ever added by JS (gated behind !prefersReducedMotion), so the
-   base/no-modifier state is also the reduced-motion/no-JS end state. */
-.showcase-endpoint {
-  opacity: 1;
-  transform: scale(1);
-  transition: opacity 0.4s ease, transform 0.4s var(--ease-bounce);
-}
-
-.showcase-endpoint.is-pending {
-  opacity: 0;
-  transform: scale(0.85);
-}
-
-/* Compact concept-reply card — the agent visibly drafting a response.
-   Default/no-modifier state is the FINISHED look — also the
-   reduced-motion/no-JS end state. min-height defends against a measured
-   font-load reflow (fallback font vs. Plus Jakarta Sans). */
-.showcase-compose {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 0.1875rem;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-card);
-  box-shadow: var(--shadow-sm);
-  padding: 0.375rem 0.5rem;
-  min-height: 4.25rem;
-}
-
-@media (min-width: 43.75rem) {
-  .showcase-compose {
-    gap: 0.25rem;
-    padding: 0.625rem 0.75rem;
-    min-height: 5.625rem;
-  }
-}
-
-.showcase-compose-headrow {
-  display: flex;
-  align-items: center;
-  gap: 0.375rem;
-}
-
-.showcase-compose-header {
-  font-size: 0.5rem;
-  font-weight: 700;
-  letter-spacing: var(--tracking-wide);
-  text-transform: uppercase;
-  color: var(--color-text-muted);
-}
-
-@media (min-width: 43.75rem) {
-  .showcase-compose-header {
-    font-size: 0.625rem;
-  }
-}
-
-.showcase-compose-tag {
-  font-size: 0.5rem;
-  font-weight: 700;
-  color: var(--accent);
-  background: var(--accent-soft);
-  border-radius: var(--radius-pill);
-  padding: 0.0625rem 0.375rem;
-}
-
-@media (min-width: 43.75rem) {
-  .showcase-compose-tag {
-    font-size: 0.5625rem;
-  }
-}
-
-.showcase-compose-line {
-  margin: 0;
-  font-size: 0.5625rem;
-  font-weight: 600;
-  line-height: 1.3;
-  color: var(--ink);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-@media (min-width: 43.75rem) {
-  .showcase-compose-line {
-    font-size: 0.75rem;
-  }
-}
-
-/* Deliberately not real text — one placeholder bar standing in for the
-   rest of a reply the demo doesn't need to fully write out. */
-.showcase-compose-skeleton {
-  display: block;
-  height: 0.375rem;
-  width: 70%;
-  border-radius: var(--radius-pill);
-  background: var(--border);
-  opacity: 1;
-  transition: opacity 0.3s ease;
-}
-
-@media (min-width: 43.75rem) {
-  .showcase-compose-skeleton {
-    height: 0.5rem;
-  }
-}
-
-.showcase-compose-skeleton.is-hidden {
-  opacity: 0;
-}
-
-.showcase-compose-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-  font-size: 0.5rem;
-  font-weight: 700;
-  color: #4a7a52;
-  opacity: 1;
-  transform: scale(1);
-  transition: opacity 0.3s ease, transform 0.3s var(--ease-bounce);
-}
-
-@media (min-width: 43.75rem) {
-  .showcase-compose-badge {
-    font-size: 0.625rem;
-  }
-}
-
-.showcase-compose-badge.is-hidden {
-  opacity: 0;
-  transform: scale(0.85);
-}
-
-.showcase-compose-badge .showcase-check {
-  width: 0.625rem;
-  height: 0.625rem;
-}
-
-@media (min-width: 43.75rem) {
-  .showcase-compose-badge .showcase-check {
-    width: 0.8125rem;
-    height: 0.8125rem;
-  }
-}
-
-.showcase-compose-badge .showcase-check svg {
-  width: 0.4rem;
-  height: 0.4rem;
-}
-
-/* Offerte-concept card (email-triage only) — two found field rows, one
-   missing (amber "?" marker), an auto-typed follow-up question, then the
-   "Vraag automatisch verstuurd" badge. */
-.showcase-offerte-card {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-card);
-  box-shadow: var(--shadow-sm);
-  padding: 0.5rem 0.625rem;
-  min-height: 8.75rem;
-}
-
-@media (min-width: 43.75rem) {
-  .showcase-offerte-card {
-    gap: 0.3125rem;
-    padding: 0.75rem 0.875rem;
-    min-height: 11rem;
-  }
-}
-
-.showcase-offerte-field {
-  display: flex;
-  align-items: center;
-  gap: 0.375rem;
-  font-size: 0.5625rem;
-  opacity: 1;
-  transform: translateX(0);
-  transition: opacity 0.3s ease, transform 0.3s var(--ease-out);
-}
-
-@media (min-width: 43.75rem) {
-  .showcase-offerte-field {
-    gap: 0.5rem;
-    font-size: 0.6875rem;
-  }
-}
-
-.showcase-offerte-field.is-hidden {
-  opacity: 0;
-  transform: translateX(-6px);
-}
-
-.showcase-offerte-field-label {
-  color: var(--color-text-muted);
-  flex-shrink: 0;
-}
-
-.showcase-offerte-field-value {
-  flex: 1 1 auto;
-  min-width: 0;
-  color: var(--ink);
-  font-weight: 600;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.showcase-offerte-field .showcase-check {
-  margin-left: auto;
-  flex-shrink: 0;
-}
-
-.showcase-offerte-field.is-missing .showcase-offerte-field-value {
-  color: var(--color-text-muted);
-  font-style: italic;
-  font-weight: 400;
-}
-
-.showcase-missing {
-  width: 0.8125rem;
-  height: 0.8125rem;
-  flex-shrink: 0;
-  margin-left: auto;
-  border-radius: 50%;
-  background: var(--accent);
-  color: var(--accent-ink);
-  font-size: 0.5625rem;
-  font-weight: 700;
-  line-height: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-@media (min-width: 43.75rem) {
-  .showcase-missing {
-    width: 1.125rem;
-    height: 1.125rem;
-    font-size: 0.6875rem;
-  }
-}
-
-.showcase-offerte-ask {
-  margin: 0;
-  padding-top: 0.375rem;
-  border-top: 1px solid var(--border);
-  font-size: 0.5625rem;
-  font-weight: 600;
-  line-height: 1.35;
-  color: var(--ink);
-  min-height: 1.9rem;
-  white-space: normal;
-  overflow: visible;
-  text-overflow: clip;
-}
-
-@media (min-width: 43.75rem) {
-  .showcase-offerte-ask {
-    padding-top: 0.5rem;
-    font-size: 0.6875rem;
-    min-height: 2.3rem;
-  }
-}
-
-.showcase-offerte-closing {
-  font-size: 0.5rem;
-  color: var(--color-text-muted);
-  font-style: italic;
-  opacity: 1;
-  transition: opacity 0.3s ease;
-}
-
-@media (min-width: 43.75rem) {
-  .showcase-offerte-closing {
-    font-size: 0.625rem;
-  }
-}
-
-.showcase-offerte-closing.is-hidden {
-  opacity: 0;
-}
-
-.showcase-hub {
-  grid-column: 2;
-  grid-row: 1 / -1;
-  position: relative;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* --- Hub variant: .mowi-orb instead of .showcase-hub-plate ------------------
-   Stage 4 (/workflows) — the orb stands in for "the AI doing the work" as
-   the hub every task/result card flies through, instead of the plain
-   dot/plate agentic-ai.html still uses (that file's own
-   .showcase-hub-plate/-pulse rules above are untouched — this only adds a
-   second, opt-in hub visual scoped to `.showcase-hub .mowi-orb`, selected
-   by putting a bare `.mowi-orb` inside `.showcase-hub` instead of the
-   plate/pulse markup). Mirrors the plate's own 3-step responsive sizing
-   EXACTLY, including the 1024-1365px ("iPad Pro") shrink documented above
-   on .showcase-task/.showcase-result — same regression zone, same fix,
-   just re-expressed as --orb-size instead of width/height. */
-.showcase-hub .mowi-orb {
-  --orb-size: 2.5rem;
-}
-
-@media (min-width: 43.75rem) {
-  .showcase-hub .mowi-orb {
-    --orb-size: 4.25rem;
-  }
-}
-
-/* Must come after the 43.75rem block above — same specificity, source
-   order decides (see the .showcase-task/.showcase-result comment on this
-   same 1024-1365px zone). */
-@media (min-width: 64rem) and (max-width: 85.3125rem) {
-  .showcase-hub .mowi-orb {
-    --orb-size: 3rem;
-  }
-}
-
-/* Same processing-pulse/pause hooks js/main.js already toggles on
-   .showcase-hub (is-processing on card arrival, is-paused when scrolled
-   off-screen) — re-targeted at the orb instead of the old plate/pulse-ring
-   pair. Overriding `animation` here fully replaces the orb's own
-   mowi-orb-breathe animation for exactly the is-processing burst; removing
-   the class reverts to that base breathe animation automatically. */
-.showcase-hub.is-processing .mowi-orb {
-  animation: showcase-process-pulse 0.6s var(--ease-bounce);
-}
-
-.showcase-hub.is-paused .mowi-orb,
-.showcase-hub.is-paused .mowi-orb::after {
-  animation-play-state: paused;
-}
-
-.showcase-ghost {
-  position: absolute;
-  z-index: 5;
-  opacity: 0;
-  pointer-events: none;
-}
-
-/* --- Task icons ("Zes soorten taken" cards) ---------------------------------- */
-.task-icon {
-  display: block;
-  width: 2.75rem;
-  height: 2.75rem;
-  margin-bottom: 1.25rem;
-  color: var(--ink);
-}
-
-.task-icon svg {
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-}
-
-.task-icon .ti-accent { stroke: var(--accent); }
-.task-icon .ti-accent-fill { fill: var(--accent); stroke: none; }
-.task-icon .ti-muted { stroke: var(--border); }
-
-.task-icon .ti-move {
-  transition: transform 0.35s var(--ease-bounce);
-  transform-box: fill-box;
-  transform-origin: center;
-}
-
-.card:hover .task-icon .ti-move {
-  transform: translate(2px, -3px);
-}
-
-/* --- "Mowi koppelt met" ------------------------------------------------------
-   Static row of small pill labels (reuses .pill/.pill-row as-is) — every
-   system shown at once, not a cycling reel. */
-.koppelt-widget {
-  max-width: 44rem;
-  margin-inline: auto;
-  text-align: center;
-}
-
-.koppelt-label {
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: var(--color-text-muted);
-  margin-bottom: 1.125rem;
-}
-
-.koppelt-note {
-  margin-top: 1.125rem;
-  color: var(--color-text-muted);
-  font-size: 0.9375rem;
-}
-
-.trust-item-media {
-  flex-direction: column;
-}
-
-.trust-item-media .browser-frame {
-  margin-top: 1rem;
-  width: 100%;
-}
-
-/* --- Bewijs: before/after number emphasis ------------------------------------
-   Reuses the [data-reveal]/.reveal-armed/.is-visible mechanism above
-   instead of a second observer. */
-.case-after {
-  display: inline-block;
-  color: var(--accent);
-  font-weight: 800;
-}
-
-[data-reveal].reveal-armed .case-after {
-  opacity: 0.35;
-  transform: scale(0.82);
-  transition: opacity 0.5s var(--ease-out) 0.3s, transform 0.5s var(--ease-bounce) 0.3s;
-}
-
-[data-reveal].is-visible .case-after {
-  opacity: 1;
-  transform: scale(1);
-}
-
-.case-before {
-  transition: opacity 0.4s var(--ease-out) 0.3s;
-}
-
-[data-reveal].is-visible .case-before {
-  opacity: 0.55;
-}
-
-.case-arrow {
-  color: var(--color-gray-400);
-  margin-inline: 0.25rem;
-}
-
-/* --- Aanpak: step numbers pop in on scroll ------------------------------------ */
-.steps-wrap {
-  position: relative;
-}
-
-@media (min-width: 48rem) {
-  .step[data-reveal].reveal-armed::before {
-    opacity: 0;
-    transform: scale(0.4);
-    transition: opacity 0.4s var(--ease-out), transform 0.4s var(--ease-bounce);
-  }
-
-  .step[data-reveal].is-visible::before {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  .steps .step:nth-child(2)::before { transition-delay: 0.2s; }
-  .steps .step:nth-child(3)::before { transition-delay: 0.4s; }
-  .steps .step:nth-child(4)::before { transition-delay: 0.6s; }
-}
-
-/* --- Concreet section: text + visuals layout ---------------------------------- */
-.concreet-layout {
-  display: grid;
-  gap: 2rem;
-  align-items: center;
-}
-
-@media (min-width: 64rem) {
-  .concreet-layout {
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-    gap: 3rem;
-  }
-}
-
-.concreet-visuals {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+.blog-article a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 /* --- Browser-window-framed screenshot slot -------------------------------------
-   Renders only once a real file exists — js/broken-image-guard.js hides
-   the WHOLE frame (chrome bar included) if the <img> 404s. --radius-media
-   (0) on purpose: screenshots are the one place the site stays hard-edged,
-   a deliberate contrast against the pill geometry everywhere else. */
+   Hard-edged (border-radius: 0) on purpose — the one place the site stays
+   square, a deliberate contrast against the pill/rounded geometry
+   everywhere else. Renders only once a real file exists —
+   js/broken-image-guard.js hides the whole frame if the <img> 404s. */
 .browser-frame {
   border: 1px solid var(--border);
-  border-radius: var(--radius-media);
+  border-radius: 0;
   background: var(--surface);
-  box-shadow: var(--shadow-sm);
   overflow: hidden;
 }
 
@@ -3295,7 +1749,7 @@ a.pill:hover {
   display: flex;
   gap: 0.375rem;
   padding: 0.625rem 0.75rem;
-  background: var(--color-bg-tint);
+  background: var(--bg-band);
   border-bottom: 1px solid var(--border);
 }
 
@@ -3303,7 +1757,7 @@ a.pill:hover {
   width: 0.5rem;
   height: 0.5rem;
   border-radius: 50%;
-  background: var(--border);
+  background: var(--border-ink);
 }
 
 .browser-frame img {
@@ -3313,669 +1767,5 @@ a.pill:hover {
 }
 
 .browser-frame-compact {
-  margin-top: 1.25rem;
-}
-
-/* ==========================================================================
-   The AI orb — new hero visual primitive
-   A pure CSS/SVG-free gradient sphere in Mowi-orange tones, standing in for
-   "the AI" the way ElevenLabs' site uses an orb — the avatar for a future
-   "configurator conversation" demo UI, and a candidate hub for the
-   task->hub->result showcase above. Reusable/parameterizable: size is
-   entirely driven by --orb-size, settable per-instance via a size modifier
-   class OR an inline style="--orb-size: 6rem". No external assets, no
-   libraries — a radial-gradient sphere + two pseudo-elements (a specular
-   highlight, a soft pulsing halo) + one breathing keyframe animation.
-   ========================================================================== */
-.mowi-orb {
-  --orb-size: 8rem;
-  position: relative;
-  display: inline-block;
-  width: var(--orb-size);
-  height: var(--orb-size);
-  flex-shrink: 0;
-  border-radius: 50%;
-  isolation: isolate;
-  background:
-    radial-gradient(circle at 34% 28%, #ffcda1 0%, #ffab63 16%, var(--accent) 46%, #b23e08 76%, #6e2405 100%);
-  box-shadow:
-    inset 0 0 calc(var(--orb-size) * 0.22) rgba(28, 12, 2, 0.35),
-    inset 0 calc(var(--orb-size) * -0.08) calc(var(--orb-size) * 0.18) rgba(28, 12, 2, 0.25);
-  animation: mowi-orb-breathe 4.5s var(--ease-out) infinite;
-}
-
-/* Specular highlight — a small, soft off-center bloom, the detail that
-   reads "sphere" rather than "flat circle". */
-.mowi-orb::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background: radial-gradient(circle at 30% 24%, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0) 32%);
-  mix-blend-mode: screen;
-}
-
-/* Soft outer halo — pulses on its own slightly offset cycle so the whole
-   thing reads as "breathing" rather than a single uniform pulse. Sits
-   behind the sphere (z-index via isolation on the parent). */
-.mowi-orb::after {
-  content: "";
-  position: absolute;
-  inset: -22%;
-  z-index: -1;
-  border-radius: 50%;
-  background: radial-gradient(circle, var(--accent-soft) 0%, rgba(232, 89, 12, 0) 70%);
-  animation: mowi-orb-halo 4.5s var(--ease-out) infinite;
-}
-
-@keyframes mowi-orb-breathe {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.035); }
-}
-
-@keyframes mowi-orb-halo {
-  0%, 100% { opacity: 0.55; transform: scale(1); }
-  50% { opacity: 0.9; transform: scale(1.12); }
-}
-
-/* Freezes to a static gradient state — no motion, no exceptions. The
-   sphere itself (background/box-shadow) is already a complete, correctly-
-   lit "resting" image with the animation stopped mid-keyframe; nothing
-   about the orb's basic legibility depends on the animation running. */
-@media (prefers-reduced-motion: reduce) {
-  .mowi-orb,
-  .mowi-orb::after {
-    animation: none;
-  }
-}
-
-/* Size presets — all just set --orb-size; use directly on .mowi-orb or
-   layer a size class alongside it (<div class="mowi-orb mowi-orb--lg">).
-   An inline style="--orb-size: …" works too for one-off sizes. */
-.mowi-orb--xs { --orb-size: 2rem; }
-.mowi-orb--sm { --orb-size: 3.5rem; }
-.mowi-orb--md { --orb-size: 6rem; }
-.mowi-orb--lg { --orb-size: 10rem; }
-.mowi-orb--xl { --orb-size: 16rem; }
-
-/* ==========================================================================
-   Configurator conversation demo — Stage 3, homepage hero centerpiece
-   Illustrates the whole product mechanic in one glance: a client states a
-   request in plain Dutch -> Mowi restates exactly what it understood -> a
-   dry-run result proves it actually works -> a human confirms -> it goes
-   live. This is a REUSABLE pattern, not a one-off — later stages (the
-   /workflows flagship page especially) are expected to reuse or extend
-   .configurator-demo rather than invent a second version of the same idea.
-
-   Reveal-safety: every bubble/row/badge below is real, complete, correct
-   Dutch copy in plain HTML from first paint — .configurator-confirm-btn
-   ships with .is-confirmed already on it and .configurator-reveal elements
-   ship WITHOUT .is-pending, so the static/no-JS/reduced-motion state is
-   already the finished conversation (request -> understood -> proven ->
-   confirmed -> live). js/main.js only ever clears the two bubbles' text and
-   adds .is-pending immediately before retyping/restaging the exact same
-   content — identical convention to the hero showcase's
-   .showcase-compose/.showcase-offerte-card cards above (see their own
-   comments), gated the same way behind !prefersReducedMotion. */
-.configurator-demo {
-  display: flex;
-  gap: 1rem;
-  align-items: flex-start;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-card);
-  box-shadow: var(--shadow-lg);
-  padding: 1.5rem;
-}
-
-.configurator-demo-avatar {
-  flex-shrink: 0;
-  padding-top: 0.25rem;
-}
-
-.configurator-thread {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  min-width: 0;
-  flex: 1;
-}
-
-.configurator-bubble {
-  border-radius: var(--radius-card);
-  padding: 0.75rem 1rem;
-  font-size: 0.9375rem;
-  line-height: 1.45;
-  /* Floor, not a fixed width — a flex item with empty text (js/main.js
-     clears it right before typing it back in) would otherwise shrink to a
-     padding-only square for a moment, since flex items size to their
-     content by default. min() keeps that floor from overflowing a
-     narrower container (mobile) once max-width below also applies. */
-  min-width: min(14rem, 100%);
-}
-
-.configurator-bubble p {
-  margin: 0;
-  /* Reserves space at the copy's real, final length so the bubble never
-     resizes/jumps while js/main.js types it back in character by
-     character. */
-  min-height: 1.45em;
-}
-
-.configurator-bubble-user {
-  background: var(--bg-band);
-  color: var(--ink);
-  align-self: flex-end;
-  max-width: 90%;
-}
-
-.configurator-bubble-mowi {
-  background: var(--accent-soft);
-  color: var(--ink);
-  align-self: flex-start;
-  max-width: 92%;
-}
-
-.configurator-dryrun {
-  background: var(--bg);
-  border: 1px dashed var(--border);
-  border-radius: var(--radius-card);
-  padding: 0.875rem 1rem;
-}
-
-.configurator-dryrun-label {
-  display: block;
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-wide);
-  color: var(--ink-muted);
-  margin-bottom: 0.625rem;
-}
-
-.configurator-dryrun-row {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 1rem;
-  padding-block: 0.3125rem;
-  font-size: 0.875rem;
-}
-
-.configurator-dryrun-row span:first-child {
-  color: var(--ink-muted);
-}
-
-.configurator-dryrun-row span:last-child {
-  font-weight: 600;
-}
-
-.configurator-confirm-row {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-}
-
-/* A styled <span>, not a real <button> — this is a fixed illustration, not
-   a live control, and a non-functional <button> would be a genuine a11y/UX
-   trap (it looks clickable but does nothing). */
-.configurator-confirm-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4375rem;
-  padding: 0.5rem 1rem;
-  border-radius: var(--radius-pill);
-  border: 1px solid var(--border);
-  background: var(--surface);
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--ink);
-  transition: border-color 0.3s ease, color 0.3s ease;
-}
-
-.configurator-confirm-check {
-  width: 0.625rem;
-  height: 0.625rem;
-  border-radius: 50%;
-  border: 1.5px solid currentColor;
-  opacity: 0.4;
-  transition: opacity 0.3s ease, background-color 0.3s ease;
-}
-
-.configurator-confirm-btn.is-confirmed {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
-.configurator-confirm-btn.is-confirmed .configurator-confirm-check {
-  background: var(--accent);
-  opacity: 1;
-}
-
-/* Green is a deliberate one-off "done" exception, same as .showcase-check
-   above — not a new global token. */
-.configurator-live-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.375rem;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: #2f7d3c;
-}
-
-.configurator-live-dot {
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: 50%;
-  background: currentColor;
-}
-
-.configurator-demo-caption {
-  margin-top: 0.75rem;
-  font-size: 0.8125rem;
-  color: var(--ink-muted);
-  text-align: center;
-}
-
-/* Staged-reveal elements — see the header comment above for exactly when
-   .is-pending is (and isn't) applied. */
-.configurator-reveal {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-  transition: opacity 0.35s ease, transform 0.35s var(--ease-bounce);
-}
-
-.configurator-reveal.is-pending {
-  opacity: 0;
-  transform: translateY(6px) scale(0.97);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .configurator-confirm-btn,
-  .configurator-confirm-check,
-  .configurator-reveal {
-    transition: none;
-  }
-}
-
-/* ==========================================================================
-   Dark trust band — Stage 3, in-page section
-   Same dark-inverted visual language as .cta-prefooter (var(--bg-inverted)/
-   var(--ink-inverted)) but a DISTINCT, non-full-bleed-CTA in-page section —
-   states the dry-run/confirm mechanic as a trust argument on its own beat,
-   not a closing call to action. Reusable name/pattern for later stages that
-   need the same "nothing happens without you" statement elsewhere on the
-   site (e.g. /vertrouwen itself). */
-.trust-band-dark {
-  background: var(--bg-inverted);
-  color: var(--ink-inverted);
-  padding-block: 4.5rem;
-}
-
-.trust-band-dark-inner {
-  max-width: 40rem;
-  margin-inline: auto;
-  text-align: center;
-}
-
-.trust-band-dark h2 {
-  color: var(--ink-inverted);
-}
-
-.trust-band-dark p {
-  color: var(--ink-inverted-muted);
-  margin-top: 1rem;
-}
-
-.trust-band-dark a {
-  display: inline-block;
-  margin-top: 1.5rem;
-  font-weight: 600;
-  color: var(--ink-inverted);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-/* ==========================================================================
-   Statement reveal — Stage 4, /workflows signature interaction
-   A single trust sentence whose words individually fade/color in as the
-   section scrolls into view. Inspired by (not copied from) shapes.co's
-   scroll-pinned word-color-reveal on /ai-page, deliberately built WITHOUT
-   scroll-pinning — no position:sticky, no scroll-position math. Each word
-   is a real <span class="sr-word"> hand-wrapped in the HTML (not built by
-   JS); js/main.js only assigns a --word-delay custom property per word and
-   toggles two classes via a plain IntersectionObserver.
-
-   Reveal-safety, and a STRONGER guarantee than the generic [data-reveal]
-   pattern above: .sr-word has NO opacity/color rule outside
-   `.statement-reveal.reveal-armed` below, so the sentence renders at full
-   opacity/final color by default. js/main.js only ever adds
-   .reveal-armed — the dim starting state — when it is actually about to
-   observe the element AND prefers-reduced-motion is NOT set (same
-   convention .configurator-demo/.hero-showcase use: those gate on
-   !prefersReducedMotion in JS rather than relying on the global
-   transition-duration:0.001ms kill-switch alone). No-JS or reduced-motion:
-   .reveal-armed is never added, so every word simply stays at its normal,
-   fully-visible, final-color default from first paint. Reusable name/
-   pattern for later stages that want the same per-word scroll reveal
-   elsewhere on the site. */
-.statement-reveal {
-  max-width: 46rem;
-  margin-inline: auto;
-  text-align: center;
-  font-size: clamp(1.5rem, 1.05rem + 1.8vw, 2.5rem);
-  font-weight: 600;
-  line-height: 1.4;
-  letter-spacing: var(--tracking-tight);
-  color: var(--ink);
-}
-
-.sr-word {
-  display: inline-block;
-}
-
-.statement-reveal.reveal-armed .sr-word {
-  opacity: 0.25;
-  color: var(--ink-muted);
-  transition: opacity 0.6s var(--ease-out), color 0.6s var(--ease-out);
-  transition-delay: var(--word-delay, 0s);
-}
-
-.statement-reveal.is-visible .sr-word {
-  opacity: 1;
-  color: var(--ink);
-}
-
-/* --- Utilities (general) -------------------------------------------------------- */
-/* Hides content visually while leaving it available to screen readers. */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-/* Two-column checkmark list ("Altijd inbegrepen" pattern) — single column
-   below 40rem, matching every other 2-up grid's mobile behavior. */
-.check-list {
-  display: grid;
-  gap: 1.25rem;
-  margin-top: 2.5rem;
-}
-
-@media (min-width: 40rem) {
-  .check-list {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 3rem;
-  }
-}
-
-.check-list li {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-}
-
-.check-list svg {
-  flex-shrink: 0;
-  width: 1.25rem;
-  height: 1.25rem;
-  margin-top: 0.15rem;
-  color: var(--accent);
-}
-
-/* ==========================================================================
-   Receptenboek — cover-tile + recipe-card system (Stage 5, 2026-08-17)
-   Honesty constraint driving this whole block: no product screenshot exists
-   for any recipe yet, and none should be faked. Every recipe "cover" is a
-   designed illustration tile (tinted panel + one inline-SVG icon), built to
-   the same illustration-system spec already documented above (stroke-width
-   1.5, rx="3", max 3 token colors, no mascots/tech clichés) — never allowed
-   to read as a real screenshot. Square (aspect-ratio: 1), matching the
-   design system's "square media" convention (--radius-media: 0 already
-   establishes screenshots stay hard-edged; recipe covers follow the same
-   hard-edged, non-pill geometry for the same reason).
-
-   Tints are picked via [data-tint] rather than a modifier-class-per-category
-   so a category only ever needs one attribute, and every value is derived
-   from existing tokens via color-mix() — no new hex introduced anywhere in
-   this block. -------------------------------------------------------------- */
-.recipe-cover {
-  aspect-ratio: 1;
-  width: 100%;
-  border-radius: var(--radius-media);
-  border: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.recipe-cover svg {
-  width: 38%;
-  height: 38%;
-  color: var(--ink);
-}
-
-.recipe-cover[data-tint="mail"] { background: var(--accent-soft); }
-.recipe-cover[data-tint="phone"] { background: color-mix(in srgb, var(--ink) 7%, var(--bg) 93%); }
-.recipe-cover[data-tint="webshop"] { background: color-mix(in srgb, var(--accent) 20%, var(--bg-band) 80%); }
-.recipe-cover[data-tint="agenda"] { background: var(--bg-band); }
-.recipe-cover[data-tint="crm"] { background: color-mix(in srgb, var(--ink) 11%, var(--bg-band) 89%); }
-/* "Op de planning" idea cards get a visibly duller, more washed-out tile —
-   a deliberate visual demotion vs. Live/Binnenkort covers, matching the
-   bigger honesty gap ("idee — nog niets gebouwd") those cards carry. */
-.recipe-cover[data-tint="idea"] {
-  background: color-mix(in srgb, var(--border) 45%, var(--bg) 55%);
-  border-style: dashed;
-}
-
-.recipe-cover[data-tint="idea"] svg {
-  color: var(--ink-muted);
-}
-
-/* Card wrapper — overrides .card's own padding (compound selector for
-   specificity, so this wins regardless of source order) since the cover
-   tile needs to bleed to the card's own edges; body copy gets its own
-   padding via .recipe-card-body. */
-.card.recipe-card {
-  padding: 0;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
-.recipe-card-body {
-  padding: 1.5rem;
-}
-
-@media (min-width: 40rem) {
-  .recipe-card-body {
-    padding: 1.75rem;
-  }
-}
-
-.recipe-card-meta {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.875rem;
-}
-
-/* Category tag — plain, quiet, distinct from the status pill next to it. */
-.recipe-tag {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.375rem 0.75rem;
-  border-radius: var(--radius-pill);
-  background: var(--bg-band);
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--ink-muted);
-}
-
-.recipe-card h3 {
-  font-size: 1.25rem;
-}
-
-.recipe-card p {
-  margin-top: 0.625rem;
-}
-
-.recipe-attribution {
-  margin-top: 1rem;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--ink-muted);
-}
-
-/* "Op de planning" status pill — deliberately NOT the same solid-bordered
-   look as "Binnenkort" (.pill) or the filled "Live" look (.pill-accent):
-   dashed + no fill reads as "idea, not yet under construction", the bigger
-   honesty gap this status represents. */
-.pill-muted {
-  background: transparent;
-  border: 1px dashed var(--border);
-  color: var(--ink-muted);
-}
-
-/* --- Recipe detail page: "Wat zit erin?" breakdown -----------------------
-   The proof device — trigger/condities/acties/koppelingen, pulled straight
-   from what's real (config/capabilities.php's Manifest Standard v1, or an
-   already-shipped agent's documented feature set). Definition-list styling
-   kept deliberately plain — this section's job is to read as a factual
-   spec sheet, not a marketing block. */
-.recipe-breakdown {
-  border-top: 1px solid var(--border);
-}
-
-.recipe-breakdown-row {
-  display: grid;
-  gap: 0.25rem;
-  padding-block: 1.5rem;
-  border-bottom: 1px solid var(--border);
-}
-
-@media (min-width: 40rem) {
-  .recipe-breakdown-row {
-    grid-template-columns: 12rem minmax(0, 1fr);
-    gap: 1.5rem;
-  }
-}
-
-.recipe-breakdown-row dt {
-  font-size: 0.8125rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-wide);
-  color: var(--color-gray-500);
-}
-
-.recipe-breakdown-row dd {
-  margin: 0;
-  color: var(--ink);
-}
-
-.recipe-breakdown-row dd ul {
-  display: grid;
-  gap: 0.375rem;
-}
-
-.recipe-breakdown-row dd li {
-  padding-left: 1.125rem;
-  position: relative;
-}
-
-.recipe-breakdown-row dd li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.55em;
-  width: 0.375rem;
-  height: 0.375rem;
-  border-radius: 50%;
-  background: var(--accent);
-}
-
-/* Scenario bullets ("Wanneer gebruikt u het?") — reuses .check-list's grid
-   rhythm but with a plain accent dot instead of a checkmark icon (these are
-   situations, not completed/verified items). */
-.recipe-scenarios {
-  display: grid;
-  gap: 1rem;
-  margin-top: 1.25rem;
-}
-
-.recipe-scenarios li {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-}
-
-.recipe-scenarios li::before {
-  content: "";
-  flex-shrink: 0;
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: 50%;
-  background: var(--accent);
-  margin-top: 0.5em;
-}
-
-/* Small honest note under a CTA that can't be self-served yet (Binnenkort
-   recipes) — quiet, not alarming. */
-.recipe-cta-note {
-  margin-top: 0.75rem;
-  font-size: 0.875rem;
-  color: var(--ink-muted);
-}
-
-/* --- Stage 6: /koppelingen logo cards --------------------------------------
-   New component — nothing existing fit both "live, full-colour brand mark"
-   and "planned, muted roadmap tile" in one family. Sits on top of .card
-   (border/radius/hover already come from there); this just adds the fixed-
-   height logo slot + two visual states. Live tiles show the brand's real
-   colour (WooCommerce/Shopify/Google Agenda — see assets/logos/); planned
-   tiles (the existing AFAS/Exact/SAP/... set, already roadmap-only per
-   index.html's own comment) get grayscale+reduced opacity, same "not real
-   yet" signal .pill-muted gives its badge, so the two rows never look like
-   they carry equal status even at a glance. */
-.logo-card {
-  text-align: center;
-}
-
-.logo-card-mark {
-  height: 2.75rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1.5rem;
-}
-
-.logo-card-mark img {
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-}
-
-.logo-card-mark.is-planned img {
-  filter: grayscale(100%);
-  opacity: 0.55;
-}
-
-/* Text-pill fallback for an integration whose logo wasn't cleanly
-   sourceable (Pipedrive, Stage 6) — same visual weight as the logo slot
-   above it so the "Vandaag live" row still reads as one grid. */
-.logo-card-mark.is-pill-fallback {
-  height: auto;
-  margin-bottom: 1.25rem;
+  margin-top: var(--space-4);
 }
