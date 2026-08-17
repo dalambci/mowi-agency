@@ -7,32 +7,38 @@
   <!-- Redirect stub. /cases was a live, publicly-deployed case-studies page
        until the Stage 7 rebrand cleanup on 2026-08-17, when it was replaced
        by /receptenboek — concrete, ready-made automations, the closest
-       equivalent in the rebranded site to what /cases used to show. Without
-       this file the old URL 404s for anyone who bookmarked it, and for every
-       external link and search result still pointing at it.
+       equivalent in the rebranded site to what /cases used to show. As of
+       the Stage 8 rebuild cleanup (also 2026-08-17), /receptenboek itself
+       became a redirect stub (the gallery was retired as standalone pages —
+       its 5 recipes folded into /workflows as full recipe panels), so this
+       file is retargeted straight at /workflows rather than bouncing
+       through /receptenboek, to avoid a needless redirect chain (/cases ->
+       /receptenboek -> /workflows). Without this file the old URL 404s for
+       anyone who bookmarked it, and for every external link and search
+       result still pointing at it.
 
        This is a client-side redirect, NOT a real 301 — a static host can't
        issue one from a file. It works for humans immediately; search engines
        treat it as a weaker signal than a server 301, which is what
        rel="canonical" below is for. If the old URL turns out to matter for
        SEO, add a proper 301 as a Cloudways Web Rule (app mowi.agency /
-       6590002 -> Web Rules -> Redirect, ^/cases$ -> /receptenboek) and
+       6590002 -> Web Rules -> Redirect, ^/cases$ -> /workflows) and
        delete this file.
 
        noindex keeps this stub itself out of search results — without it the
        stub can rank in place of the real page. -->
   <meta name="robots" content="noindex, follow" />
-  <meta http-equiv="refresh" content="0; url=/receptenboek" />
-  <link rel="canonical" href="https://mowi.agency/receptenboek" />
+  <meta http-equiv="refresh" content="0; url=/workflows" />
+  <link rel="canonical" href="https://mowi.agency/workflows" />
 
-  <title>Verplaatst naar /receptenboek — Mowi</title>
+  <title>Verplaatst naar /workflows — Mowi</title>
 </head>
 <body>
-  <p>Deze pagina is verhuisd naar <a href="/receptenboek">mowi.agency/receptenboek</a>.</p>
+  <p>Deze pagina is verhuisd naar <a href="/workflows">mowi.agency/workflows</a>.</p>
 
   <!-- replace(), not href: keeps the dead URL out of the back-button history,
-       so "terug" from /receptenboek doesn't bounce the visitor straight back here
+       so "terug" from /workflows doesn't bounce the visitor straight back here
        and into a redirect loop. -->
-  <script>window.location.replace("/receptenboek");</script>
+  <script>window.location.replace("/workflows");</script>
 </body>
 </html>
