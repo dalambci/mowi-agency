@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/style.css?v=20260818-4" />
+  <link rel="stylesheet" href="/css/style.css?v=20260818-5" />
   <link rel="icon" href="/assets/icon-192.png?v=20260804-3" />
   <link rel="shortcut icon" href="/assets/icon-192.png?v=20260804-3" />
   <link rel="apple-touch-icon" href="/assets/apple-icon-180.png?v=20260804-3" />
@@ -26,7 +26,7 @@
 
       <nav class="main-nav" id="main-nav" aria-label="Hoofdmenu">
         <ul>
-          <li><a href="/ai">AI</a></li>
+          <li><a href="/zo-werkt-het">Zo werkt het</a></li>
           <li class="nav-dropdown">
             <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="product-menu" aria-haspopup="true">
               Product
@@ -34,26 +34,27 @@
             </button>
             <div class="nav-menu" id="product-menu">
               <ul>
-                <li><a href="/people-directory"><span class="nav-menu-item-title">People Directory</span><span class="nav-menu-item-desc">One place for all employee data</span></a></li>
-                <li><a href="/time-off"><span class="nav-menu-item-title">Time Off</span><span class="nav-menu-item-desc">Smart holiday &amp; leave management</span></a></li>
-                <li><a href="/attendance"><span class="nav-menu-item-title">Attendance</span><span class="nav-menu-item-desc">Robust time tracking</span></a></li>
-                <li><a href="/workflows"><span class="nav-menu-item-title">Workflows</span><span class="nav-menu-item-desc">Put processes on autopilot</span></a></li>
-                <li><a href="/performance-growth"><span class="nav-menu-item-title">Performance &amp; Growth</span><span class="nav-menu-item-desc">Performance cycles that work</span></a></li>
-                <li><a href="/people-analytics"><span class="nav-menu-item-title">People Analytics</span><span class="nav-menu-item-desc">Insights that push businesses forward</span></a></li>
-                <li><a href="/docs-esign"><span class="nav-menu-item-title">Docs &amp; eSign</span><span class="nav-menu-item-desc">Centralise documents &amp; signatures</span></a></li>
+                <li><a href="/workflows"><span class="nav-menu-item-title">Alle workflows</span><span class="nav-menu-item-desc">Het volledige overzicht van wat Mowi automatiseert</span></a></li>
+                <li><a href="/workflows#email-agent"><span class="nav-menu-item-title">E-mail agent</span><span class="nav-menu-item-desc">Sorteert en beantwoordt uw e-mail</span></a></li>
+                <li><a href="/workflows#call-agent"><span class="nav-menu-item-title">Call agent</span><span class="nav-menu-item-desc">Neemt binnenkomende gesprekken aan</span></a></li>
+                <li><a href="/workflows#order-status"><span class="nav-menu-item-title">Orderstatus</span><span class="nav-menu-item-desc">Zoekt bestellingen op in uw webshop</span></a></li>
+                <li><a href="/workflows#offerte-opvolging"><span class="nav-menu-item-title">Offerte-opvolging</span><span class="nav-menu-item-desc">Controleert en volgt offerteaanvragen op</span></a></li>
+                <li><a href="/workflows#agenda-samenvatting"><span class="nav-menu-item-title">Agenda-samenvatting</span><span class="nav-menu-item-desc">Uw agenda samengevat, op uw tijdstip</span></a></li>
+                <li><a href="/workflows#crm-sync"><span class="nav-menu-item-title">CRM-synchronisatie</span><span class="nav-menu-item-desc">Herkent klanten en houdt uw CRM bij</span></a></li>
+                <li><a href="/koppelingen"><span class="nav-menu-item-title">Koppelingen</span><span class="nav-menu-item-desc">Werkt met uw webshop, CRM en agenda</span></a></li>
               </ul>
             </div>
           </li>
           <li><a href="/templates">Templates</a></li>
-          <li><a href="/pricing">Pricing</a></li>
-          <li class="nav-mobile-actions"><a href="https://my.mowi.agency/login" target="_blank" rel="noopener">Login</a></li>
-          <li class="nav-mobile-actions"><a href="/demo" class="btn-primary" data-event="Demo Click">Get a demo</a></li>
+          <li><a href="/pricing">Prijzen</a></li>
+          <li class="nav-mobile-actions"><a href="https://my.mowi.agency/login" target="_blank" rel="noopener">Inloggen</a></li>
+          <li class="nav-mobile-actions"><a href="/demo" class="btn-primary" data-event="Demo Click">Plan een demo</a></li>
         </ul>
       </nav>
 
       <div class="header-actions">
-        <a href="https://my.mowi.agency/login" target="_blank" rel="noopener" class="header-login">Login</a>
-        <a href="/demo" class="btn-primary" data-event="Demo Click">Get a demo</a>
+        <a href="https://my.mowi.agency/login" target="_blank" rel="noopener" class="header-login">Inloggen</a>
+        <a href="/demo" class="btn-primary" data-event="Demo Click">Plan een demo</a>
       </div>
 
       <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="main-nav" aria-label="Menu openen">
@@ -90,8 +91,8 @@
 
       <div class="footer-cta">
         <div>
-          <h2 class="footer-cta-title">The new era<br />of people management</h2>
-          <a href="/demo" class="btn-primary" data-event="Demo Click">Get a demo</a>
+          <h2 class="footer-cta-title">U zegt het.<br />En het werkt.</h2>
+          <a href="/demo" class="btn-primary" data-event="Demo Click">Plan een demo</a>
         </div>
         <!-- Visual slot — intentionally empty until real artwork exists. -->
         <div class="footer-cta-visual" aria-hidden="true"></div>
@@ -110,42 +111,44 @@
             <div>
               <h3 class="footer-menu-heading">Platform</h3>
               <ul>
-                <li><a href="/ai">Agentic AI</a></li>
+                <li><a href="/workflows">Alle workflows</a></li>
+                <li><a href="/workflows#email-agent">E-mail agent</a></li>
+                <li><a href="/workflows#call-agent">Call agent</a></li>
+                <li><a href="/workflows#order-status">Orderstatus</a></li>
+                <li><a href="/workflows#offerte-opvolging">Offerte-opvolging</a></li>
+                <li><a href="/workflows#agenda-samenvatting">Agenda-samenvatting</a></li>
+                <li><a href="/workflows#crm-sync">CRM-synchronisatie</a></li>
+                <li><a href="/koppelingen">Koppelingen</a></li>
                 <li><a href="/templates">Templates</a></li>
-                <li><a href="/people-directory">People Directory</a></li>
-                <li><a href="/time-off">Time Off</a></li>
-                <li><a href="/attendance">Attendance</a></li>
-                <li><a href="/workflows">Workflows</a></li>
-                <li><a href="/performance-growth">Performance &amp; Growth</a></li>
-                <li><a href="/people-analytics">People Analytics</a></li>
-                <li><a href="/docs-esign">Docs &amp; eSign</a></li>
               </ul>
             </div>
             <div>
-              <h3 class="footer-menu-heading">Resources</h3>
+              <h3 class="footer-menu-heading">Bronnen</h3>
               <ul>
-                <li><a href="#">MCP</a></li>
-                <li><a href="#">API Documentation</a></li>
-                <li><a href="#">New Releases</a></li>
-                <li><a href="#">Integrations</a></li>
-                <li><a href="/docs/">Help Center</a></li>
+                <li><a href="/docs/">Documentatie</a></li>
+                <li><a href="/blog/">Blog</a></li>
+                <li><a href="/zo-werkt-het">Zo werkt het</a></li>
+                <li><a href="/vertrouwen">Vertrouwen</a></li>
+                <li><a href="/ai-transparantie">AI-transparantie</a></li>
               </ul>
             </div>
             <div>
-              <h3 class="footer-menu-heading">Company</h3>
+              <h3 class="footer-menu-heading">Bedrijf &amp; Contact</h3>
               <ul>
-                <li><a href="#">Partners</a></li>
-                <li><a href="#">Security</a></li>
+                <li><a href="mailto:contact@mowi.agency">contact@mowi.agency</a></li>
+                <li><a href="tel:+31853335800">+31 85 333 58 00</a></li>
+                <li><a href="/bedrijfsgegevens">Bedrijfsgegevens</a></li>
+                <li><a href="/subverwerkers">Subverwerkers</a></li>
               </ul>
             </div>
           </nav>
         </div>
 
-        <!-- "Currently working on" is load-bearing honesty: Mowi does NOT hold
-             these marks yet. Never present them as held/certified — the label
-             stays until a real certificate exists. -->
+        <!-- Het "Hier werken we aan"-label is bewuste eerlijkheid: Mowi heeft
+             deze certificeringen NOG NIET. Nooit als behaald presenteren — het
+             label blijft staan tot er een echt certificaat is. -->
         <div class="footer-badges">
-          <p class="footer-badges-label">Currently working on</p>
+          <p class="footer-badges-label">Hier werken we aan</p>
           <div class="footer-badges-row">
             <span class="footer-badge">SOC&nbsp;2</span>
             <span class="footer-badge">GDPR</span>
@@ -154,10 +157,11 @@
         </div>
 
         <div class="footer-bottom">
-          <span>&copy; 2026 Mowi. All rights reserved.</span>
+          <span>&copy; 2026 Mowi. Alle rechten voorbehouden.</span>
           <div class="footer-legal">
-            <a href="/algemene-voorwaarden">Terms of use</a>
-            <a href="/privacyverklaring">Privacy policy</a>
+            <a href="/algemene-voorwaarden">Algemene voorwaarden</a>
+            <a href="/privacyverklaring">Privacyverklaring</a>
+            <a href="/cookies">Cookies</a>
             <a href="#" class="footer-social" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg></a>
           </div>
         </div>
@@ -165,7 +169,7 @@
 
     </div>
   </footer>
-  <script src="/js/main.js?v=20260818-4"></script>
+  <script src="/js/main.js?v=20260818-5"></script>
   <script>
     document.querySelectorAll(".blog-video-facade").forEach(function (el) {
       el.addEventListener("click", function () {

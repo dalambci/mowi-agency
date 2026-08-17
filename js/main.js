@@ -17,6 +17,10 @@
     if (!navToggle || !mainNav) return;
     navToggle.setAttribute("aria-expanded", "false");
     mainNav.classList.remove("is-open");
+    // Unlock background scroll (locked while the mobile sheet is open — the
+    // sheet itself scrolls via its own max-height/overflow, mobile only; the
+    // hamburger doesn't exist on desktop so this never fires there).
+    document.body.classList.remove("nav-open");
   }
 
   if (navToggle && mainNav) {
@@ -27,6 +31,7 @@
       } else {
         navToggle.setAttribute("aria-expanded", "true");
         mainNav.classList.add("is-open");
+        document.body.classList.add("nav-open");
       }
     });
   }

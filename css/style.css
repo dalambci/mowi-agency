@@ -250,8 +250,14 @@ main { flex: 1 0 auto; }
     /* same measured shapes.co dropdown shadow as .nav-menu above */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.07);
     padding: 0.75rem;
+    /* Sheet scrolls internally; the page behind it is locked via body.nav-open */
+    max-height: calc(100vh - 100px);
+    max-height: calc(100dvh - 100px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
   .main-nav.is-open { display: block; }
+  body.nav-open { overflow: hidden; }
   .main-nav > ul { flex-direction: column; align-items: stretch; gap: 0; }
   .main-nav > ul > li > a, .nav-dropdown-trigger { width: 100%; padding: 0.75rem 0.875rem; }
   .nav-menu {
