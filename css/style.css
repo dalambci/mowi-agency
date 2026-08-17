@@ -1806,3 +1806,31 @@ body.nav-open .main-nav .wordmark-text {
     gap: var(--space-8);
   }
 }
+
+/* ==========================================================================
+   Workflow recipe panels (Stage 2 — /workflows)
+   Each full recipe reuses .card for its container/border/padding and
+   .pill/.pill-row for status + "systems touched" tags — no new tag
+   component needed. The one genuinely new piece is the bullet list for a
+   recipe's "wat Mowi doet" steps: nothing else in the system needed a
+   marked list before this page. Monochrome dash marker, no icon/color. */
+.workflow-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.workflow-list li {
+  position: relative;
+  padding-left: 1.25rem;
+  color: var(--ink-muted);
+}
+
+.workflow-list li::before {
+  content: "\2013"; /* en dash */
+  position: absolute;
+  left: 0;
+  color: var(--ink);
+  font-weight: 700;
+}
