@@ -81,6 +81,13 @@
         trigger.setAttribute("aria-expanded", "false");
       }
     });
+    // Same for the mobile nav sheet: a tap anywhere outside the sheet (and
+    // outside the hamburger, which toggles it itself) closes it. Desktop is
+    // untouched — is-open only ever exists on mobile.
+    if (mainNav && mainNav.classList.contains("is-open") &&
+        !mainNav.contains(event.target) && !navToggle.contains(event.target)) {
+      closeMobileNav();
+    }
   });
 
   // Escape closes an open dropdown (and the mobile sheet) and restores focus.

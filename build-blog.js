@@ -356,9 +356,9 @@ function footerHtml() {
         <div class="footer-badges">
           <p class="footer-badges-label">Hier werken we aan</p>
           <div class="footer-badges-row">
-            <span class="footer-badge">SOC&nbsp;2</span>
-            <span class="footer-badge">GDPR</span>
-            <span class="footer-badge">ISO 27001</span>
+            <img src="/assets/badges/soc2.png" alt="SOC 2 Type II" class="footer-badge" width="50" height="50" />
+            <img src="/assets/badges/gdpr.png" alt="GDPR" class="footer-badge" width="50" height="50" />
+            <img src="/assets/badges/iso27001.png" alt="ISO 27001" class="footer-badge" width="50" height="50" />
           </div>
         </div>
 
