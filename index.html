@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260818-11" />
+  <link rel="stylesheet" href="css/style.css?v=20260819-1" />
   <link rel="icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="shortcut icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260804-3" />
@@ -152,124 +152,150 @@
         <div class="hero-frame-col"></div>
       </div>
 
-      <!-- Real logos of every system Mowi actually integrates with (not
-           client logos — see CLAUDE.md, that rule only covers actual
-           customers; same source set as agentic-ai.html's "Mowi koppelt
-           met" 3-row marquee, assets/logos/*). .logo-tile is height-
-           normalized (see css/style.css's own comment on that rule) so a
-           wide wordmark and a square icon-only mark still read as the same
-           size. The track holds THREE identical sets of all 30 logos back
-           to back, animating exactly -33.333% (one set-width) per loop —
-           same seam math as before, just a much wider set now that there
-           are 30 logos instead of 9, so the animation-duration below is
-           scaled up proportionally to keep the same gentle drift speed
-           rather than suddenly racing by.
-
-           No loading="lazy" on the imgs, on purpose: every tile scrolls
-           into view repeatedly via this transform animation (not real
-           page scroll), and the browser's lazy-load intersection check
-           doesn't reliably keep up with that — tiles would render blank
-           for a few seconds mid-loop before their deferred fetch/decode
-           finished. -->
+      <!-- 3-row counter-scrolling integration marquee (top and bottom rows
+           drift right, middle row left) — the same .koppelt-marquee block as
+           agentic-ai.html's "Koppel agents" band, here living INSIDE the hero
+           frame below the divider instead of as its own tinted section.
+           Duplicated markup, not generated: no build step, and the logos stay
+           crawlable in the HTML source (see CLAUDE.md). If you add an
+           integration, update index.html, agentic-ai.html,
+           agents/email-triage.html and agents/phone-agent.html alike.
+           The inline --marquee-fade override matters: .koppelt-marquee
+           defaults its edge fade to white for the .section-tint panels it
+           normally sits on, but .hero-frame's background is var(--color-bg)
+           (cream) — without the override the rows get faint white smears at
+           both edges. Real integration logos, not client logos (CLAUDE.md's
+           rule covers actual customers only).
+           No loading="lazy" on the imgs, on purpose: every tile scrolls into
+           view repeatedly via the transform animation (not real page scroll),
+           and the browser's lazy-load intersection check doesn't reliably
+           keep up with that — tiles would render blank for a few seconds
+           mid-loop before their deferred fetch/decode finished. -->
       <div class="hero-frame-logos">
         <p class="lede marquee-heading">Koppel agents met 1 druk op de knop</p>
-        <div class="logo-marquee" aria-hidden="true">
-          <div class="logo-track">
-            <!-- 1st of 3 identical sets -->
-            <span class="logo-tile"><img src="assets/logos/gmail.svg" alt="Gmail"></span>
-            <span class="logo-tile"><img src="assets/logos/outlook.svg" alt="Outlook / Microsoft 365"></span>
-            <span class="logo-tile"><img src="assets/logos/google-agenda.svg" alt="Google Agenda"></span>
-            <span class="logo-tile"><img src="assets/logos/woocommerce.svg" alt="WooCommerce"></span>
-            <span class="logo-tile"><img src="assets/logos/shopify.svg" alt="Shopify"></span>
-            <span class="logo-tile"><img src="assets/logos/lightspeed.svg" alt="Lightspeed"></span>
-            <span class="logo-tile"><img src="assets/logos/ccv-shop.svg" alt="CCV Shop"></span>
-            <span class="logo-tile"><img src="assets/logos/shopware.svg" alt="Shopware"></span>
-            <span class="logo-tile"><img src="assets/logos/magento.svg" alt="Magento"></span>
-            <span class="logo-tile"><img src="assets/logos/mijnwebwinkel.svg" alt="Mijnwebwinkel"></span>
-            <span class="logo-tile"><img src="assets/logos/bol-com.svg" alt="bol.com"></span>
-            <span class="logo-tile"><img src="assets/logos/wix.svg" alt="Wix"></span>
-            <span class="logo-tile"><img src="assets/logos/prestashop.svg" alt="PrestaShop"></span>
-            <span class="logo-tile"><img src="assets/logos/exact.png" alt="Exact Online"></span>
-            <span class="logo-tile"><img src="assets/logos/pipedrive.svg" alt="Pipedrive"></span>
-            <span class="logo-tile"><img src="assets/logos/teamleader.svg" alt="Teamleader"></span>
-            <span class="logo-tile"><img src="assets/logos/hubspot.png" alt="HubSpot"></span>
-            <span class="logo-tile"><img src="assets/logos/afas.png" alt="AFAS"></span>
-            <span class="logo-tile"><img src="assets/logos/moneybird.svg" alt="Moneybird"></span>
-            <span class="logo-tile"><img src="assets/logos/zoho-crm.svg" alt="Zoho CRM"></span>
-            <span class="logo-tile"><img src="assets/logos/odoo.png" alt="Odoo"></span>
-            <span class="logo-tile"><img src="assets/logos/formitable.svg" alt="Formitable"></span>
-            <span class="logo-tile"><img src="assets/logos/guestplan.svg" alt="Guestplan"></span>
-            <span class="logo-tile"><img src="assets/logos/thefork.svg" alt="TheFork"></span>
-            <span class="logo-tile"><img src="assets/logos/mews.svg" alt="Mews"></span>
-            <span class="logo-tile"><img src="assets/logos/cubilis.svg" alt="Cubilis"></span>
-            <span class="logo-tile"><img src="assets/logos/siteminder.svg" alt="SiteMinder"></span>
-            <span class="logo-tile"><img src="assets/logos/salonized.svg" alt="Salonized"></span>
-            <span class="logo-tile"><img src="assets/logos/microsoft.svg" alt="Microsoft Bookings"></span>
-            <span class="logo-tile"><img src="assets/logos/calendly.svg" alt="Calendly"></span>
-            <!-- 2nd of 3 identical sets, for the seamless loop -->
-            <span class="logo-tile"><img src="assets/logos/gmail.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/outlook.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/google-agenda.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/woocommerce.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/shopify.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/lightspeed.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/ccv-shop.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/shopware.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/magento.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/mijnwebwinkel.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/bol-com.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/wix.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/prestashop.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/exact.png" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/pipedrive.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/teamleader.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/hubspot.png" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/afas.png" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/moneybird.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/zoho-crm.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/odoo.png" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/formitable.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/guestplan.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/thefork.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/mews.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/cubilis.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/siteminder.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/salonized.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/microsoft.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/calendly.svg" alt=""></span>
-            <!-- 3rd of 3 identical sets, for the seamless loop -->
-            <span class="logo-tile"><img src="assets/logos/gmail.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/outlook.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/google-agenda.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/woocommerce.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/shopify.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/lightspeed.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/ccv-shop.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/shopware.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/magento.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/mijnwebwinkel.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/bol-com.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/wix.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/prestashop.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/exact.png" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/pipedrive.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/teamleader.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/hubspot.png" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/afas.png" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/moneybird.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/zoho-crm.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/odoo.png" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/formitable.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/guestplan.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/thefork.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/mews.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/cubilis.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/siteminder.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/salonized.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/microsoft.svg" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/calendly.svg" alt=""></span>
+  <div class="koppelt-marquee" data-reveal style="--marquee-fade: var(--color-bg);">
+          <div class="logo-marquee row-a" aria-hidden="true">
+            <div class="logo-track reverse">
+              <!-- set 1 of 3 -->
+              <span class="logo-tile"><img src="assets/logos/gmail.svg" alt="Gmail"></span>
+              <span class="logo-tile"><img src="assets/logos/outlook.svg" alt="Outlook / Microsoft 365"></span>
+              <span class="logo-tile"><img src="assets/logos/google-agenda.svg" alt="Google Agenda"></span>
+              <span class="logo-tile"><img src="assets/logos/woocommerce.svg" alt="WooCommerce"></span>
+              <span class="logo-tile"><img src="assets/logos/shopify.svg" alt="Shopify"></span>
+              <span class="logo-tile"><img src="assets/logos/lightspeed.svg" alt="Lightspeed eCom"></span>
+              <span class="logo-tile"><img src="assets/logos/ccv-shop.svg" alt="CCV Shop"></span>
+              <span class="logo-tile"><img src="assets/logos/shopware.svg" alt="Shopware"></span>
+              <span class="logo-tile"><img src="assets/logos/magento.svg" alt="Magento"></span>
+              <span class="logo-tile"><img src="assets/logos/mijnwebwinkel.svg" alt="Mijnwebwinkel"></span>
+              <span class="logo-tile"><img src="assets/logos/bol-com.svg" alt="bol.com"></span>
+              <!-- set 2 of 3 -->
+              <span class="logo-tile"><img src="assets/logos/gmail.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/outlook.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/google-agenda.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/woocommerce.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/shopify.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/lightspeed.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/ccv-shop.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/shopware.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/magento.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/mijnwebwinkel.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/bol-com.svg" alt=""></span>
+              <!-- set 3 of 3 -->
+              <span class="logo-tile"><img src="assets/logos/gmail.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/outlook.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/google-agenda.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/woocommerce.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/shopify.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/lightspeed.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/ccv-shop.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/shopware.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/magento.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/mijnwebwinkel.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/bol-com.svg" alt=""></span>
+            </div>
+          </div>
+          <div class="logo-marquee row-b" aria-hidden="true">
+            <div class="logo-track">
+              <!-- set 1 of 3 -->
+              <span class="logo-tile"><img src="assets/logos/wix.svg" alt="Wix"></span>
+              <span class="logo-tile"><img src="assets/logos/prestashop.svg" alt="PrestaShop"></span>
+              <span class="logo-tile"><img src="assets/logos/exact.png" alt="Exact Online"></span>
+              <span class="logo-tile"><img src="assets/logos/pipedrive.svg" alt="Pipedrive"></span>
+              <span class="logo-tile"><img src="assets/logos/teamleader.svg" alt="Teamleader"></span>
+              <span class="logo-tile"><img src="assets/logos/hubspot.png" alt="HubSpot"></span>
+              <span class="logo-tile"><img src="assets/logos/afas.png" alt="AFAS"></span>
+              <span class="logo-tile"><img src="assets/logos/moneybird.svg" alt="Moneybird"></span>
+              <span class="logo-tile"><img src="assets/logos/zoho-crm.svg" alt="Zoho CRM"></span>
+              <span class="logo-tile"><img src="assets/logos/odoo.png" alt="Odoo"></span>
+              <span class="logo-tile"><img src="assets/logos/formitable.svg" alt="Formitable / Zenchef"></span>
+              <!-- set 2 of 3 -->
+              <span class="logo-tile"><img src="assets/logos/wix.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/prestashop.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/exact.png" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/pipedrive.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/teamleader.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/hubspot.png" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/afas.png" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/moneybird.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/zoho-crm.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/odoo.png" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/formitable.svg" alt=""></span>
+              <!-- set 3 of 3 -->
+              <span class="logo-tile"><img src="assets/logos/wix.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/prestashop.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/exact.png" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/pipedrive.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/teamleader.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/hubspot.png" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/afas.png" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/moneybird.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/zoho-crm.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/odoo.png" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/formitable.svg" alt=""></span>
+            </div>
+          </div>
+          <div class="logo-marquee row-c" aria-hidden="true">
+            <div class="logo-track reverse">
+              <!-- set 1 of 3 -->
+              <span class="logo-tile"><img src="assets/logos/guestplan.svg" alt="Guestplan"></span>
+              <span class="logo-tile"><img src="assets/logos/thefork.svg" alt="TheFork"></span>
+              <span class="logo-tile"><img src="assets/logos/lightspeed.svg" alt="Lightspeed Restaurant"></span>
+              <span class="logo-tile"><img src="assets/logos/mews.svg" alt="Mews"></span>
+              <span class="logo-tile"><img src="assets/logos/cubilis.svg" alt="Cubilis"></span>
+              <span class="logo-tile"><img src="assets/logos/siteminder.svg" alt="SiteMinder"></span>
+              <span class="logo-tile"><img src="assets/logos/salonized.svg" alt="Salonized"></span>
+              <span class="logo-tile"><img src="assets/logos/microsoft.svg" alt="Microsoft Bookings"></span>
+              <span class="logo-tile"><img src="assets/logos/calendly.svg" alt="Calendly"></span>
+              <span class="logo-tile"><img src="assets/logos/wix.svg" alt="Wix Bookings"></span>
+              <!-- set 2 of 3 -->
+              <span class="logo-tile"><img src="assets/logos/guestplan.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/thefork.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/lightspeed.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/mews.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/cubilis.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/siteminder.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/salonized.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/microsoft.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/calendly.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/wix.svg" alt=""></span>
+              <!-- set 3 of 3 -->
+              <span class="logo-tile"><img src="assets/logos/guestplan.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/thefork.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/lightspeed.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/mews.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/cubilis.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/siteminder.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/salonized.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/microsoft.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/calendly.svg" alt=""></span>
+              <span class="logo-tile"><img src="assets/logos/wix.svg" alt=""></span>
+            </div>
           </div>
         </div>
+
+        <p class="sr-only">Mowi koppelt met: Gmail, Outlook / Microsoft 365, Google Agenda, WooCommerce, Shopify, Lightspeed eCom, CCV Shop, Shopware, Magento, Mijnwebwinkel, bol.com, Wix, PrestaShop, Exact Online, Pipedrive, Teamleader, HubSpot, AFAS, Moneybird, Zoho CRM, Odoo, Formitable / Zenchef, Guestplan, TheFork, Lightspeed Restaurant, Mews, Cubilis, SiteMinder, Salonized, Microsoft Bookings, Calendly, Wix Bookings.</p>
+
+        <p class="koppelt-note" data-reveal>Ontbreekt uw systeem? Dan bouwen wij de koppeling voor u.</p>
       </div>
     </div>
     </div>
@@ -533,6 +559,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=20260818-11"></script>
+  <script src="js/main.js?v=20260819-1"></script>
 </body>
 </html>

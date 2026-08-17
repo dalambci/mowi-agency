@@ -1906,13 +1906,6 @@ h3 {
   padding-block: 2rem;
 }
 
-/* One set is ~30 logos wide now (vs. the original 9), so the default 30s
-   .logo-track duration would race by at over 3x the originally-tuned speed
-   — scaled up to keep the same gentle px/sec drift. */
-.hero-frame-logos .logo-track {
-  animation-duration: 100s;
-}
-
 /* A full sentence, not a short 2-3 word label, so it skips the all-caps
    .eyebrow treatment used for section labels like "Diensten" — that would
    hurt readability at this length. Carries the .lede class (see markup) to
