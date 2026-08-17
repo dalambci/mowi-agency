@@ -38,24 +38,32 @@ backstop in case something important didn't get written down.
 ## HTTPS enforcement lives in Cloudways, not this repo
 - The production host was serving plain `http://mowi.agency` with a 200 OK instead of
   redirecting to HTTPS. Fixed via Cloudways' own dashboard toggle: app **mowi.agency**
-  (Cloudways app ID 6590002, folder `ktzphwhvnh` — this Cloudways account hosts several
-  unrelated client sites, so double-check the app ID/domain before touching anything there) →
+  (app ID and folder are in Claude's private memory, see the note at the top of "Deploying to
+  production" — this Cloudways account hosts several unrelated client sites, so double-check the
+  app ID/domain before touching anything there) →
   **Application Settings → HTTPS Redirection**. That's the correct fix — nginx serves this
   site's static files directly (confirmed via the `Server: nginx` response header) without
   ever handing off to Apache, so an `.htaccess` file (tried first) is silently never consulted
   and does nothing; don't reach for one again for this.
 
 ## Deploying to production
-- Production (`mowi.agency`, Cloudways app `ktzphwhvnh` on server `134.209.193.67`) has its own
-  git checkout at `~/applications/ktzphwhvnh/public_html`, with `origin` pointed at this same
-  GitHub repo (`https://github.com/dalambci/mowi-agency.git`). Deploying is: push to GitHub,
-  then SSH in and `git pull origin master` in that directory (plain fast-forward — the server
-  checkout should never have local commits of its own).
+- **The server IP, SSH username and Cloudways app ID are deliberately NOT in this file.** This
+  repo is public on GitHub, and this file is additionally served at `https://mowi.agency/CLAUDE.md`
+  (HTTP 200, confirmed 2026-08-17), so anything written here is published twice over. Those
+  identifiers live in Claude Code's private memory instead — look for the "Mowi agency deploy
+  access" entry, which holds the exact `ssh` command, the app ID and the purge path. **Do not
+  paste them back into this file, or into any tracked file.** No credential has ever been
+  committed here (169 commits scanned 2026-08-17: no private key, password, token, `.pem` or
+  `.env`) — keep it that way.
+- Production has its own git checkout at `~/applications/<app-folder>/public_html`, with `origin`
+  pointed at this same GitHub repo (`https://github.com/dalambci/mowi-agency.git`). Deploying is:
+  push to GitHub, then SSH in and `git pull origin master` in that directory (plain fast-forward
+  — the server checkout should never have local commits of its own).
 - SSH access uses a dedicated key at `~/.ssh/mowi_cloudways` (already present in this dev
-  environment, not passphrase-protected) — connect with
-  `ssh -i ~/.ssh/mowi_cloudways master_jhjtpcszem@134.209.193.67`, no password needed. Never
-  authenticate with a password here even if one is offered/pasted in chat — entering a password
-  into an auth prompt on the user's behalf is a hard no regardless of the source; use the key.
+  environment, not passphrase-protected); the user and host to pair it with are in memory as
+  above. Never authenticate with a password here even if one is offered/pasted in chat —
+  entering a password into an auth prompt on the user's behalf is a hard no regardless of the
+  source; use the key.
 - `git push origin master` from this repo may be blocked by Claude Code's own permission
   classifier (separate from any GitHub-side issue) — if so, ask the user to approve it or run it
   themselves; retrying after approval works fine.
@@ -120,7 +128,7 @@ retype credentials from scratch or falling back to a password:
   **So an HTML-only deploy is invisible to anyone who has visited before.** Nothing in this repo
   fixes it: the header comes from `/etc/nginx/expires_static`
   (`add_header Cache-Control "public, max-age=2592000";`) which is root-owned; the app's
-  `conf/custom-resp.vcl` Varnish hook is root-owned too (**not** writable by `master_jhjtpcszem`
+  `conf/custom-resp.vcl` Varnish hook is root-owned too (**not** writable by our SSH user
   despite sitting in the app folder — verified by `touch`, permission denied); `sudo` needs a
   password; and the site's vhost is unreadable. Fixing it means asking Cloudways support to stop
   applying `expires_static` to `text/html` for app `ktzphwhvnh` — assets keep the long cache,
@@ -224,7 +232,7 @@ retype credentials from scratch or falling back to a password:
   in-article cross-links, e.g. `/docs/agent-crm-sync`) — point to extensionless URLs. The files
   on disk still end in `.html`; only the URL is clean.
 - This only works via **Internal Rewrite** rules configured directly in the Cloudways dashboard
-  (app `mowi.agency` / 6590002 → **Web Rules → Rewrite Rules**, not anything in this repo or in
+  (app `mowi.agency` → **Web Rules → Rewrite Rules**, not anything in this repo or in
   nginx config files we have access to — see the SSH/root-permission note under "Deploying to
   production" above). The docs rule — `^/docs/([a-z0-9-]+)$` → `/docs/$1.html`, Action
   **Internal rewrite** — was verified 2026-08-03 against all 19 articles (right status code *and*
