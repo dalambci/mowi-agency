@@ -1,7 +1,20 @@
 # Project rules (permanent — apply in every session)
 
-This is a brand-new marketing website for an AI automation business. These rules are
-durable and apply to all future work in this repo, not just the current task.
+This is a marketing website for an AI automation business. These rules are durable and
+apply to all future work in this repo, not just the current task.
+
+## Total rebrand — 2026-08-17 (branch `rebrand`, built but not merged/deployed)
+A full 8-stage rebrand was executed on branch `rebrand` (commits `f85f6c3`..`591f862` plus a
+final Stage 8 cache-bust/blog-rebuild/QA/docs pass), moving the site from a self-serve
+pricing/signup model to a **demo-gated, conversational workflow-automation platform**
+positioning. This file has been updated throughout to describe the site **as it now is**
+post-rebrand; anywhere an older rule described the pre-rebrand nav, pricing model, or
+design system, it has been rewritten in place (git history still has the old wording if
+ever needed) or explicitly marked superseded. See "Content & positioning", "Navigation",
+"Pricing / business model", "Design system", and "Folder structure" below for the current
+reality. **As of 2026-08-17 this branch has not been merged to `master` or deployed** —
+production (`mowi.agency`) is still serving the pre-rebrand site. Do not assume the rebrand
+is live; check which branch is actually checked out before describing "the current site."
 
 ## Project memory (Obsidian)
 Long-term project knowledge lives in `c:\Users\SalP1\Desktop\Mowi brain\Mowi\`.
@@ -46,6 +59,12 @@ backstop in case something important didn't get written down.
   and does nothing; don't reach for one again for this.
 
 ## Deploying to production
+- **As of 2026-08-17, `master` (what production actually serves) is still the pre-rebrand site.**
+  The total rebrand (this file's "Total rebrand" note near the top) lives entirely on branch
+  `rebrand`, deliberately not merged — do not push, merge, or deploy it without the founder's
+  explicit go-ahead, and don't assume `git pull origin master` on the server would pick up any
+  of the rebrand's pages until that merge happens. `docs/` is identical on both branches
+  (confirmed zero diff), so anything docs-only is safe to reason about either way.
 - Production (`mowi.agency`, Cloudways app `ktzphwhvnh` on server `134.209.193.67`) has its own
   git checkout at `~/applications/ktzphwhvnh/public_html`, with `origin` pointed at this same
   GitHub repo (`https://github.com/dalambci/mowi-agency.git`). Deploying is: push to GitHub,
@@ -53,7 +72,15 @@ backstop in case something important didn't get written down.
   checkout should never have local commits of its own).
 - SSH access uses a dedicated key at `~/.ssh/mowi_cloudways` (already present in this dev
   environment, not passphrase-protected) — connect with
-  `ssh -i ~/.ssh/mowi_cloudways master_jhjtpcszem@134.209.193.67`, no password needed. Never
+  `ssh -i ~/.ssh/mowi_cloudways master_jhjtpcszem@134.209.193.67`, no password needed.
+  **The `-i` is not optional without config** (diagnosed 2026-08-15 from a "SSH keeps rejecting
+  me" report): plain `ssh master_jhjtpcszem@134.209.193.67` offers only the default
+  `~/.ssh/id_ed25519` (the GitHub key) and dies with `Permission denied (publickey,password)` —
+  the server is fine, the right key is simply never tried, because ssh only auto-offers
+  default-named keys. `~/.ssh/config` now carries a `Host mowi` block (plus one matching the raw
+  IP) pinning this key with `IdentitiesOnly yes`, so bare `ssh mowi` works in both Git Bash and
+  Windows OpenSSH. That file is outside this repo — if it's ever lost, re-add it or go back to
+  passing `-i` explicitly. Never
   authenticate with a password here even if one is offered/pasted in chat — entering a password
   into an auth prompt on the user's behalf is a hard no regardless of the source; use the key.
 - `git push origin master` from this repo may be blocked by Claude Code's own permission
@@ -113,6 +140,14 @@ retype credentials from scratch or falling back to a password:
   value on all `<link>`/`<script>` tags referencing them, across every HTML page**, so browsers
   are forced to fetch the new file immediately rather than waiting out the cache. Use the
   current date (`YYYYMMDD`); if multiple deploys land same-day, append `-2`, `-3`, etc.
+  **Latest coordinated bump: `20260817`** (Stage 8, end of the total rebrand — Stages 1-7 had
+  left several different `?v=` values scattered across pages after touching `style.css`/
+  `main.js` repeatedly without a final sync; Stage 8 did one pass bumping every page that loads
+  either file to the same value). Applies to every root marketing page, `receptenboek/*`, the 6
+  legal pages, `test.html`, and `blog/*` (whose version is auto-derived by `build-blog.js` from
+  `index.html`'s own `?v=` — see its `CSS_VERSION` regex — don't hardcode it separately there).
+  Does **not** apply to the 9 redirect stubs (they don't load either file) or to `docs/*` (own
+  separate `docs.css`/`docs.js` versioning, untouched by this rule).
 - **Separate from the above:** production also has a page-level HTTP cache in front of nginx
   (confirmed 2026-08-03 — `curl -sI https://mowi.agency/` showed `X-Cache: HIT` and `Age: 252`;
   likely Varnish, which Cloudways commonly bundles). This caches whole HTML responses, not just
@@ -126,41 +161,40 @@ retype credentials from scratch or falling back to a password:
 
 ## Language & tone
 - All visible site text is in **Dutch**, formal **"u"** form (never "je/jij").
-- **Exception — the whole header nav, not just the mega-menu (widened 2026-08-11).** The "Products"
-  mega-menu (see `.nav-megamenu` in `css/style.css`) has always used English labels deliberately;
-  the top-level nav item "Tarieven" was renamed to **"Pricing"** on that date, so the exception now
-  covers the header nav generally. Keep these in English; don't translate them to Dutch. Everything
-  else on the site stays Dutch per the rule above — including the **footer**, whose nav still reads
-  "Tarieven" on purpose. Header and footer are deliberately allowed to differ here.
-- Current header labels: category labels **"Platform"** and **"Agents"** (was "Automations",
-  renamed 2026-08-11), items **"Email agent"** and **"Call agent"**. Those two item labels were
-  briefly shortened to just "Email" / "Call" on 2026-08-11, on the reasoning that the "Agents"
-  column label above them already supplied the noun — **superseded 2026-08-15 at Sal's request:
-  the full names are back.** Don't re-shorten them; the column heading isn't a reliable carrier
-  of the noun (it's easy to miss, and the labels have to survive being read on their own on
-  mobile, where the panel is a flat two-column grid).
-- **Product full names renamed 2026-08-12: "Email triage" → "E-mail agent", "Phone agent" →
-  "Call agent"**, sitewide in body copy, headings, meta tags, demo widgets, the two legal pages
-  (algemene-voorwaarden.html, privacyverklaring.html — Dutch compound forms "e-mailtriage-agent" /
-  "telefoon-agent" became "E-mailagent" / "Call-agent" there specifically, matching Dutch compound-
-  noun orthography rather than the English-style spaced form used everywhere else), and the
-  dashboard app (`Mowi Dashboard` — `config/agent_types.php`, `config/plans.php`, seeders, blade
-  headings). **Filenames, URLs, and route names deliberately did NOT change** — still
-  `agents/email-triage`, `agents/phone-agent`, dashboard route segments `/agents/telefoon-agent/...`
-  — this was an explicit scope decision (URL renames need redirect handling, a Cloudways Web Rule,
-  and touch far more files, for no benefit the text-only rename doesn't already give). If a future
-  session is asked to also rename the URLs, that is new work, not a continuation of this one.
-- The Platform column's first item, formerly the deliberately-Dutch "AI-automatisering" (matching
-  that page's old name/slug as an exception to the English-labels rule), was renamed to
-  "Agentic AI" and the page itself renamed from `ai-automatisering.html` to `agentic-ai.html` to
-  match — the item now fits the English-labels convention normally and is no longer an exception.
+- **Exception — the whole header nav, not just the dropdown.** The header nav (see
+  `.nav-megamenu` in `css/style.css`) has always used English labels deliberately. Keep these
+  in English; don't translate them to Dutch. Everything else on the site stays Dutch per the
+  rule above.
+
+### Navigation — current, post-rebrand (2026-08-17)
+The header nav is (left to right): **"Plan een demo"** CTA pill → **"Product"** dropdown
+(single column: **Workflows** / **Koppelingen** / **Vertrouwen**, each with a one-line Dutch
+descriptor, shapes.co-style) → **"Receptenboek"** → **"How it works"** (links to
+`/zo-werkt-het`) → **"About"** (links to `/over`) → **"Resources"** dropdown (Documentation,
+Blog) → **"Login"** (external, `https://my.mowi.agency/login`, `target="_blank"`). The
+Mowi wordmark sits in its own logo cell; there is no separate dashboard-login icon button
+next to it any more (that was folded into the "Login" nav item). The footer nav still uses
+Dutch labels ("Tarieven"-era footer wording has been retired along with the pricing page it
+pointed to — footer now links to `/zo-werkt-het`, `/blog/`, `/over`, `/demo`, `Inloggen`, and
+the legal pages) — header and footer are deliberately allowed to differ on language per the
+exception above.
+
+**Superseded 2026-08-17 (total rebrand) — kept for history, do not follow:** the pre-rebrand
+nav had a "Products" mega-menu with two columns ("Platform": Agentic AI / Power BI /
+Trainingen, and "Agents": Email agent / Call agent), a top-level "Pricing" link, and a
+"Contact sales" / "Demo" CTA pointing at `/contact` or `/tarieven`/`/pricing`. All of those
+pages (`agentic-ai.html`, `power-bi-dashboards.html`, `trainingen.html`, `pricing.html`,
+`tarieven.html`, `cases.html`, `agents/email-triage.html`, `agents/phone-agent.html`,
+`contact.html`) are now **client-side redirect stubs** (see Folder structure below), not real
+content — don't add new links to them, and don't resurrect the old label names above for the
+current nav.
 
 ## Documentation section (setup guides for clients)
 - Structure, page anatomy, navigation anatomy, and writing rules are defined in
   `reference/docs-style-guide.md` — study/inspiration only, same status as
   `reference/style-vuewer.md`, not part of the shipped site. Follow it for every docs page.
 - Language: Dutch, formal **"u"** form, same as the rest of the site.
-- Agent and product names stay in English, per the existing Products mega-menu exception above
+- Agent and product names stay in English, per the header-nav English exception above
   (e.g. "CRM sync", "E-mail agent", "Invoice processing", "Lead enrichment", "Report generator").
 - UI labels (button/menu names the client sees on their actual screen) are quoted **exactly**,
   in whatever language that screen shows them in — do not translate a UI label that's genuinely
@@ -250,10 +284,15 @@ retype credentials from scratch or falling back to a password:
   triage agent page (`docs/agent-email-triage.html`) was written first and approved by the user
   as the template every other article copies — if in doubt about tone/structure/depth for a new
   or edited article, match that one.
-- The marketing footer has a dedicated **"Support"** column (`.footer-support`, its own grid
-  column in `.footer-inner` — 4 columns total: brand/nav/support/contact) that links to
-  `docs/index.html` as "Documentatie" — keep that link when editing any footer. It used to be a
-  flat item inside "Navigatie"; that changed 2026-08-03, don't move it back.
+- The marketing footer has a dedicated column (`.footer-support`, its own grid column in
+  `.footer-inner` — 4 columns total: brand/nav/support/contact) that links to `docs/index.html`
+  as "Documentatie" — keep that link when editing any footer. It used to be a flat item inside
+  "Navigatie"; that changed 2026-08-03, don't move it back. **Updated 2026-08-17 (total
+  rebrand):** the Stage 2 rebrand renamed this column's heading from "Support" to **"Bronnen"**
+  (Dutch for "Resources") and folded the blog link into it too — it's now Blog + Documentatie
+  together under "Bronnen", still its own dedicated grid column, same `.footer-support` class
+  and same "keep it a real column, don't flatten it back into Navigatie" rule as before, just
+  under the new heading text.
 
 ### Precision rules that produced this content — apply to every future edit
 - **Never invent a click-path.** Steps inside our own dashboard are grounded by reading the
@@ -303,22 +342,64 @@ retype credentials from scratch or falling back to a password:
   admin, with the unconfirmed part left VERIFY. Re-check this if Salesforce ships further changes
   before this page is considered final.
 
-## Content
+## Content & positioning
 - Content is adapted from `reference/content-data-vista.md` (our own prior business
-  website — safe to reuse/adapt in full: text, numbers, stats, client names, case studies).
-- The angle is **AI-first**: AI-automatisering is the main/lead service. Power BI dashboards
-  and trainingen are supporting/secondary services, not the headline.
+  website — safe to reuse/adapt in full: text, numbers, stats, client names, case studies) —
+  historical source; the rebrand below has since rewritten most of what actually ships.
+- **Current positioning, post total-rebrand (2026-08-17):** Mowi is a **conversational
+  workflow-automation platform** for the Dutch MKB/SMB — "u zegt het, en het werkt." The
+  product story is: describe what you want done in plain language, Mowi configures it from
+  tested building blocks (never freeform code), nothing goes live without your approval, and
+  there's always a named person accountable (not an anonymous support queue). Primary proof
+  device is the `.configurator-demo` component (a scripted but real, verified-against-the-
+  dashboard conversation) reused across `index.html`/`workflows.html`. The Receptenboek
+  (`/receptenboek`) — a gallery of concrete "recipes" (Order-status, Agenda-samenvatting,
+  Offerte-opvolging, E-mail agent, Call agent) — replaced the old abstract "Agents" mega-menu
+  column as the way products are shown.
+- **Superseded 2026-08-17 — kept for history, do not follow:** the site used to be pitched
+  AI-first with "AI-automatisering is the main/lead service; Power BI dashboards and
+  trainingen are supporting/secondary services." **Power BI dashboards, trainingen, and the
+  "Cases" page are dropped from the site entirely** as part of the rebrand — don't reintroduce
+  them as services or nav items; their old pages are now redirect stubs (see Folder structure).
+- **Pricing / business model — current, post-rebrand:** the site is **demo-gated with no
+  published self-serve prices**. There is no `/pricing` or `/tarieven` content page, no
+  `€40`/`€80` self-serve monthly rates displayed anywhere live, no "Start gratis" /
+  "14 dagen gratis proefperiode" signup CTA, and no `my.mowi.agency/aanmelden` link on any real
+  page. The primary CTA sitewide is **"Plan een demo"**, linking to `/demo` (a page with a
+  Calendly booking widget). Login (`https://my.mowi.agency/login`) is still linked, for
+  existing customers. **Known, already-flagged contradiction (not yet fixed, fast-follow per
+  the founder):** `algemene-voorwaarden.html` (arts. 4.2, 4.5, 4.8, 5.1) still describes a
+  self-serve €40/€80-per-agent monthly pricing model with a 14-day free trial and references a
+  live price list at `mowi.agency/pricing` that no longer exists as a real page. Don't silently
+  rewrite the AV's legal text without founder/legal sign-off, but don't reintroduce the old
+  pricing model to the rest of the site either — the AV is the one page still lagging behind on
+  purpose. The 3 existing blog posts also still contain old self-serve pricing/CTA copy
+  (`€1.000` setup + `€50`/maand in one post, "Start gratis — 14 dagen" CTAs linking to
+  `my.mowi.agency/aanmelden` in all three) — also a known, deliberately-not-rewritten editorial
+  gap (blog prose is out of scope for chrome-only regeneration via `build-blog.js`); flag rather
+  than silently edit post bodies.
 
-## Visual style
-- Visual style follows `reference/style-vuewer.md` — **inspired by**, never copied.
-- Never copy Vuewer's actual text, images, project screenshots, client logos, or brand assets.
-  Only reuse their design *patterns* (colors, type scale, spacing, radius, shadows,
-  animations) reinterpreted with our own content.
-- Base page background stays a near-neutral light grey (`#fcfbfa`, `--color-bg`). Prefer **white** as the
-  secondary/contrast surface (alternating sections, cards), not a darker sand/tint shade.
-  Alternating sections (`.section-tint`) render as a white panel with a hairline border and
-  soft shadow, not a darker-cream background — contrast comes from that border/elevation, not
-  from a second, muddier sand tone.
+## Design system
+- **Current, post total-rebrand (2026-08-17):** `css/style.css` implements a **warm-light
+  palette with a Mowi-orange accent** (`--bg: #faf6ef`, a warm "bone" off-white, explicitly
+  *not* neutral grey — aliased as `--color-bg`; `--accent: #e8590c` orange, used sparingly for
+  primary CTAs/highlights, not as a wash), **pill-shaped buttons** (fully
+  rounded, not the old square-cornered style), an **orb component** (the small gradient sphere
+  used as the configurator-demo's "AI" avatar and as a recurring motif), and **Instrument Serif**
+  italic for emphasis spans (`.h-emph`) inside otherwise-sans (Plus Jakarta Sans) headings —
+  see `test.html` for a live rendered reference of every primitive. This supersedes the
+  square-corners/vuewer-inspired system below for all current and future work.
+- **Superseded 2026-08-17 — prior-era reference only:**
+  - Visual style used to follow `reference/style-vuewer.md` (inspired-by, never copied — that
+    provenance rule still applies to *any* future reference-site study, just not to the current
+    design language, which is now Mowi's own). Never copy a reference site's actual text,
+    images, project screenshots, client logos, or brand assets regardless of era — only design
+    *patterns*, reinterpreted with our own content.
+  - Base page background used to be paired with **white** as the secondary/contrast surface,
+    square/sharp corners, and a different (non-orange, non-orb, non-Instrument-Serif) type and
+    color system. If you find visual-style guidance elsewhere in this file or in code comments
+    that references square corners, a non-orange accent, or vuewer patterns as if current,
+    treat it as pre-rebrand and prefer this section.
 
 ## Placeholders — use literally, never invent real values
 Wherever personal/business details belong, insert these placeholders verbatim in the code:
@@ -387,7 +468,27 @@ Wherever personal/business details belong, insert these placeholders verbatim in
 
 ## Folder structure
 - `index.html` in the project root.
-- All other marketing pages as `.html` files in the root (no subfolders per page).
+- All other marketing pages as `.html` files in the root (no subfolders per page), **except**
+  `receptenboek/` (added 2026-08-17 rebrand — see below).
+- **Current real content pages, post total-rebrand (2026-08-17):** `index.html` (homepage),
+  `workflows.html` (flagship "Maak workflows met AI" page), `koppelingen.html`, `vertrouwen.html`,
+  `over.html` ("About"), `zo-werkt-het.html` ("How it works"), `demo.html` (the "Plan een demo"
+  destination, Calendly-embedded), `receptenboek.html` (gallery overview) plus a dedicated
+  `receptenboek/` folder holding 5 recipe detail pages (`agenda-samenvatting.html`,
+  `call-agent.html`, `email-agent.html`, `offerte-opvolging.html`, `order-status.html` — each
+  references shared assets one level up via `../`, same convention as `docs/`), and the existing
+  `blog/` (generated by `build-blog.js`, unchanged mechanism) and 6 legal pages
+  (`privacyverklaring.html`, `algemene-voorwaarden.html`, `cookies.html`, `ai-transparantie.html`,
+  `bedrijfsgegevens.html`, `subverwerkers.html`).
+- **Redirect stubs, not real content (added Stage 7 of the rebrand, 2026-08-17):** `pricing.html`,
+  `tarieven.html`, `power-bi-dashboards.html`, `trainingen.html`, `cases.html`,
+  `agentic-ai.html`, `agents/email-triage.html`, `agents/phone-agent.html`, `contact.html` — each
+  is a minimal client-side redirect (`<meta http-equiv="refresh">` + `window.location.replace()`
+  + `rel="canonical"` + `noindex, follow`) pointing at the page that replaced it (see the HTML
+  comment in each stub for its specific target and reasoning). These do **not** load
+  `css/style.css` or `js/main.js` — no header/footer chrome, so they're excluded from the
+  sitewide cache-bust `?v=` bump. Don't add new content to them; if a stub's old URL needs to
+  become a real page again, that's new work, not a revival of the stub file.
 - `docs/` — the entire documentation section lives here: `docs/index.html` is the overview page,
   every article is `docs/<slug>.html` with **no `docs-` filename prefix** (the folder itself is
   the namespace — e.g. `docs/agent-crm-sync.html`, not `docs/docs-agent-crm-sync.html`). Pages in
