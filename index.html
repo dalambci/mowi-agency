@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mowi — AI-agents die uw werk overnemen, eerste 14 dagen gratis</title>
-  <meta name="description" content="Sluit binnen enkele minuten uw eigen AI-agent aan en zie hem meteen aan het werk — de eerste 14 dagen gratis, daarna vanaf €40/maand excl. btw. Voor MKB-bedrijven in Nederland en Vlaanderen." />
+  <title>Mowi — AI-automatisering voor het Nederlandse MKB</title>
+  <meta name="description" content="Vertel in gewone taal wat u geregeld wilt hebben — Mowi configureert het uit geteste bouwstenen, nooit uit losse code. Niets gaat live zonder uw akkoord. Plan een demo." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
@@ -15,6 +15,50 @@
   <link rel="apple-touch-icon-precomposed" href="assets/apple-icon-180.png?v=20260804-3" />
   <script defer data-domain="mowi.agency" src="https://plausible.io/js/script.js"></script>
   <script src="js/broken-image-guard.js?v=20260805-1"></script>
+  <!-- FAQPage structured data — mirrors the FAQ accordion in <main> 1:1 (same
+       question/answer pairs, same order). Format follows build-blog.js's own
+       articleJsonLd() FAQPage block (see that file) for site-wide consistency,
+       hand-written here since this page isn't part of the blog build. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Wat kost het?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Dat hangt af van wat u wilt automatiseren. We bespreken een eerlijk tarief tijdens de demo — er staan bewust geen vaste prijzen op deze site, zodat u nooit betaalt voor bouwstenen die u niet gebruikt."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Moet ik zelf iets bouwen?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Nee. U beschrijft in gewone taal wat u geregeld wilt hebben, en Mowi configureert het uit een set geteste bouwstenen — u schrijft nooit code en heeft nooit rechtstreeks toegang tot een API."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Wat als de AI het fout heeft?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Elke stap die iets verandert draait eerst als proef, zodat u het resultaat ziet vóórdat het echt is. Pas na uw bevestiging gaat een workflow live."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Werkt dit met mijn boekhoudpakket?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Vandaag koppelt Mowi met WooCommerce, Shopify, Pipedrive en Google Agenda, plus uw mailbox. Nieuwe koppelingen — zoals een boekhoudpakket — bouwen we op klantvraag; vraag er gerust naar in de demo."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -105,256 +149,275 @@
   </header>
 
   <main>
-    <!-- ===== Hero frame =====
-         AI-automatisering leads the headline; Power BI dashboards is the
-         supporting clause. #afspraak points at the on-page booking section
-         that will be added lower on this page in a later pass.
+    <!-- ===== Hero =====
+         Story the whole page tells: "U zegt het. Het werkt. Er is iemand
+         verantwoordelijk." H1/em pattern per css/style.css's .h-emph
+         comment. The right-hand visual is the configurator conversation
+         demo — see its own comment block below for exactly which real
+         capability it illustrates. -->
+    <section class="container hero">
+      <div class="hero-with-visual">
+        <div>
+          <h1>Vertel wat u geregeld wilt hebben. <em class="h-emph">Mowi zet het aan het werk.</em></h1>
 
-         Structure mirrors the reference screenshot from vuewer.com: a
-         bordered block with empty margin columns flanking a centered
-         content column (continuing the header's grid lines downward), and
-         the client-logo strip inside the same frame below a divider. -->
-    <div class="hero-frame-wrap">
-    <div class="hero-frame">
-      <div class="hero-frame-grid">
-        <div class="hero-frame-col"></div>
-
-        <!-- data-reveal removed: this block's own entrance animation
-             (badge pop + per-character headline + staggered paragraph/
-             buttons) replaces the generic fade-in — see the "Hero entrance
-             animation" section in css/style.css and js/main.js. -->
-        <div class="hero-frame-col hero-frame-content">
-          <span class="eyebrow hero-badge-reveal">AI-agents · Eerste 14 dagen gratis</span>
-
-          <h1 class="hero-heading-reveal">Uw eerste AI-collega staat vandaag aan het werk.</h1>
-
-          <p class="lede hero-reveal hero-reveal-delay-1" style="margin-top: 1.5rem; max-width: 34rem;">
-            Koppel uw mailbox, kies uw categorieën, en de E-mail agent sorteert uw post, schrijft
-            concept-antwoorden en vraagt zelf de ontbrekende gegevens op voor een offerte —
-            terwijl u iets anders doet. Zelf uitproberen, zonder setupkosten en zonder contract.
+          <p class="lede" style="margin-top: 1.5rem; max-width: 34rem;">
+            Zapier voor het Nederlandse MKB, maar u zegt gewoon wat u wilt — en er is iemand verantwoordelijk.
           </p>
 
           <div class="hero-actions">
-            <span class="btn-slot hero-reveal hero-reveal-delay-2">
-              <a href="https://my.mowi.agency/aanmelden" class="btn btn-primary" data-event="Signup Started">Start gratis — 14 dagen</a>
+            <span class="btn-slot">
+              <a href="/demo" class="btn btn-primary" data-event="Demo Click">Plan een demo</a>
             </span>
-            <span class="btn-slot hero-reveal hero-reveal-delay-3">
-              <a href="agents/email-triage" class="btn btn-secondary">Bekijk de E-mail agent</a>
+            <span class="btn-slot">
+              <a href="/receptenboek" class="btn btn-secondary">Bekijk het Receptenboek</a>
             </span>
           </div>
-
-          <p class="lede hero-reveal hero-reveal-delay-3" style="margin-top: 1rem; font-size: 0.875rem;">
-            Eerste 14 dagen gratis · geen betaalgegevens nodig om te starten · daarna €40 per maand
-            excl. btw · maandelijks opzegbaar. Liever eerst overleggen?
-            <a href="contact#calendly-widget" data-event="CTA Click" style="text-decoration: underline;">Plan een kennismaking</a>.
-          </p>
         </div>
 
-        <div class="hero-frame-col"></div>
+        <!-- Configurator conversation demo — the site's centerpiece proof
+             device. Script verified against config/capabilities.php's
+             Manifest Standard v1 (Mowi Dashboard repo) before writing:
+             illustrates 'booking.check_availability' (a real, read-only
+             operation — "Geeft een lijst vrije tijdsloten terug in de
+             agenda, vanaf nu tot het opgegeven aantal dagen vooruit"), run
+             on a schedule, which the standard's own docblock confirms v1
+             flows support ("schedule- or manual-triggered only"). Every
+             element below renders its real, finished Dutch copy in plain
+             HTML — see css/style.css's .configurator-demo comment for the
+             reveal-safety guarantee, and js/main.js's own comment for how
+             the staged typing/reveal is layered on top without ever
+             depending on it. -->
+        <div class="configurator-demo-wrap">
+          <div class="configurator-demo">
+            <div class="configurator-demo-avatar">
+              <span class="mowi-orb mowi-orb--sm" aria-hidden="true"></span>
+            </div>
+
+            <div class="configurator-thread">
+              <div class="configurator-bubble configurator-bubble-user">
+                <p>Stuur mij elke ochtend om 8 uur een overzicht van de vrije plekken in mijn agenda.</p>
+              </div>
+
+              <div class="configurator-bubble configurator-bubble-mowi">
+                <p>Begrepen. Elke ochtend om 08:00 uur haal ik de vrije tijdsloten in uw agenda op voor de komende 7 dagen, en stuur ik u een overzicht — zonder dat u zelf hoeft te kijken.</p>
+              </div>
+
+              <div class="configurator-dryrun configurator-reveal">
+                <span class="configurator-dryrun-label">Proefdraai — voorbeeldresultaat</span>
+                <div class="configurator-dryrun-row"><span>Vandaag</span><span>4 vrije plekken</span></div>
+                <div class="configurator-dryrun-row"><span>Morgen</span><span>6 vrije plekken</span></div>
+                <div class="configurator-dryrun-row"><span>Komende 7 dagen</span><span>27 vrije plekken totaal</span></div>
+              </div>
+
+              <div class="configurator-confirm-row">
+                <span class="configurator-confirm-btn is-confirmed">
+                  <span class="configurator-confirm-check" aria-hidden="true"></span>
+                  Bevestigen
+                </span>
+                <span class="configurator-live-badge configurator-reveal">
+                  <span class="configurator-live-dot" aria-hidden="true"></span>
+                  Live — draait dagelijks om 08:00
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hard honesty requirement, not decoration: this must never read
+               as a real product screenshot. -->
+          <p class="configurator-demo-caption">Voorbeeld van een gesprek met de configurator — geen echte productscreenshot, geen live klantdata.</p>
+        </div>
       </div>
+    </section>
 
-      <!-- Real logos of the apps/systems Mowi automates around (not client
-           logos — see CLAUDE.md, that rule only covers actual customers).
-           Each PNG in assets/logos/ had its background stripped to alpha
-           and was capped to a shared max dimension; .logo-tile then fits
-           every one to the exact same box via object-fit: contain so they
-           read as a uniform row despite very different source aspect
-           ratios. The track holds THREE identical sets of 9 tiles back to
-           back, animating exactly -33.333% (one set-width) per loop.
+    <!-- ===== Koppelt vandaag met =====
+         Honest, non-looping strip — reuses .koppelt-widget/.pill/.pill-row
+         exactly as agentic-ai.html already does. Deliberately NOT
+         assets/logos/ (those are AFAS/Exact/SAP/etc. — roadmap items, not
+         live today) and deliberately only the 4 real, live koppelingen
+         (see docs/koppeling-woocommerce.html etc.) plus mailbox/telefoon. -->
+    <section class="container section" style="padding-block: 2.5rem;">
+      <div class="koppelt-widget" data-reveal>
+        <p class="koppelt-label">Koppelt vandaag met</p>
+        <div class="pill-row" style="justify-content: center;">
+          <span class="pill">WooCommerce</span>
+          <span class="pill">Shopify</span>
+          <span class="pill">Pipedrive</span>
+          <span class="pill">Google Agenda</span>
+        </div>
+        <p class="koppelt-note">en uw mailbox (Gmail, Outlook) en uw telefoonnummer.</p>
+      </div>
+    </section>
 
-           Two sets isn't enough: one set is ~1195px wide, but the site's
-           container can be up to 1600px (--container-width: 100rem). At
-           the point in the loop where set 1 has scrolled fully off and
-           set 2 is the only thing left to cover the container, set 2
-           alone (1195px) can't span a 1600px container — leaving real
-           blank space at the right edge for the last stretch of the loop.
-           A third set guarantees two full sets (~2390px) are always on
-           screen after any shift, comfortably covering the container at
-           any width the site actually uses.
+    <!-- ===== Voorbeelden, met naam =====
+         Names the OUTPUT, not the capability (shapes.co's device) — each
+         card is grounded in either a real Manifest Standard v1 operation
+         or an already-shipped agent feature (see each card's own note),
+         never invented. -->
+    <section class="section section-tint">
+      <div class="container">
+        <div class="section-head center" data-reveal>
+          <span class="eyebrow">Voorbeelden, met naam</span>
+          <h2>Geen belofte. Een naam en een status.</h2>
+        </div>
 
-           No loading="lazy" on the imgs, on purpose: every tile scrolls
-           into view repeatedly via this transform animation (not real
-           page scroll), and the browser's lazy-load intersection check
-           doesn't reliably keep up with that — tiles would render blank
-           for a few seconds mid-loop before their deferred fetch/decode
-           finished. -->
-      <div class="hero-frame-logos">
-        <p class="lede marquee-heading">Hierin automatiseren wij onder andere</p>
-        <div class="logo-marquee" aria-hidden="true">
-          <div class="logo-track">
-            <span class="logo-tile"><img src="assets/logos/afas.png" alt="AFAS"></span>
-            <span class="logo-tile"><img src="assets/logos/dynamics-365.png" alt="Microsoft Dynamics 365"></span>
-            <span class="logo-tile"><img src="assets/logos/exact.png" alt="Exact"></span>
-            <span class="logo-tile"><img src="assets/logos/hubspot.png" alt="HubSpot"></span>
-            <span class="logo-tile"><img src="assets/logos/excel.png" alt="Microsoft Excel"></span>
-            <span class="logo-tile"><img src="assets/logos/odoo.png" alt="Odoo"></span>
-            <span class="logo-tile"><img src="assets/logos/salesforce.png" alt="Salesforce"></span>
-            <span class="logo-tile"><img src="assets/logos/sap.png" alt="SAP"></span>
-            <span class="logo-tile"><img src="assets/logos/twinfield.png" alt="Twinfield"></span>
-            <!-- 2nd of 3 identical sets, for the seamless loop -->
-            <span class="logo-tile"><img src="assets/logos/afas.png" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/dynamics-365.png" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/exact.png" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/hubspot.png" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/excel.png" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/odoo.png" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/salesforce.png" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/sap.png" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/twinfield.png" alt=""></span>
-            <!-- 3rd of 3 identical sets -->
-            <span class="logo-tile"><img src="assets/logos/afas.png" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/dynamics-365.png" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/exact.png" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/hubspot.png" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/excel.png" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/odoo.png" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/salesforce.png" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/sap.png" alt=""></span>
-            <span class="logo-tile"><img src="assets/logos/twinfield.png" alt=""></span>
+        <div class="grid grid-4">
+          <!-- Grounded in order.find_by_number / order.find_by_email
+               (config/capabilities.php) + the E-mail agent's existing
+               concept-antwoord feature (agents/email-triage.html). -->
+          <div class="card" data-reveal>
+            <span class="pill pill-accent" style="margin-bottom: 0.75rem; display: inline-block;">Live</span>
+            <h3>Order-status automatisch beantwoord</h3>
+            <p>Klant mailt over een bestelling — Mowi zoekt de order op in WooCommerce of Shopify en zet een concept-antwoord met de status klaar.</p>
+          </div>
+          <!-- Grounded in booking.check_availability — the same operation
+               the hero's configurator demo illustrates above. -->
+          <div class="card" data-reveal>
+            <span class="pill pill-accent" style="margin-bottom: 0.75rem; display: inline-block;">Live</span>
+            <h3>Dagelijkse agenda-samenvatting</h3>
+            <p>Elke ochtend een overzicht van de vrije plekken in uw agenda — automatisch opgehaald, zonder dat u zelf hoeft te kijken.</p>
+          </div>
+          <!-- Grounded in the E-mail agent's real, shipped
+               offerteaanvraag-flow (agents/email-triage.html: missing-field
+               detection + automatic follow-up question). -->
+          <div class="card" data-reveal>
+            <span class="pill pill-accent" style="margin-bottom: 0.75rem; display: inline-block;">Live</span>
+            <h3>Offerteaanvraag zelf compleet gemaakt</h3>
+            <p>Mist een offerteaanvraag gegevens? De E-mail agent herkent wat ontbreekt en vraagt het zelf na bij de klant.</p>
+          </div>
+          <!-- Grounded in agents/phone-agent.html's real, current copy: the
+               Call agent (incl. its "Gespreksnotitie" summary) is built,
+               not live yet — described there honestly as "Binnenkort". -->
+          <div class="card" data-reveal>
+            <span class="pill" style="margin-bottom: 0.75rem; display: inline-block;">Binnenkort</span>
+            <h3>Gespreksnotitie na elk telefoongesprek</h3>
+            <p>De Call agent legt na elk gesprek een samenvatting vast in uw dashboard — gebouwd, en binnenkort beschikbaar.</p>
           </div>
         </div>
       </div>
-    </div>
-    </div>
+    </section>
 
-    <!-- ===== Producten ===== -->
-    <section class="container section" id="diensten">
-      <div class="section-head" data-reveal>
-        <span class="eyebrow">Producten</span>
-        <h2>Agents die u vandaag al kunt aanzetten.</h2>
+    <!-- ===== Drieluik: kanalen / workflows / dashboard =====
+         Each .browser-frame screenshot slot points at a plausible future
+         filename — none of these files exist yet, which is expected: see
+         js/broken-image-guard.js, it hides the whole frame (chrome bar
+         included) on a 404 rather than showing a broken image. -->
+    <section class="container section">
+      <div class="section-head center" data-reveal>
+        <span class="eyebrow">In één overzicht</span>
+        <h2>Kanalen, workflows en controle — op één plek.</h2>
       </div>
 
-      <!-- grid-2, not grid-3: only two agents are sold today (the Power BI
-           dashboards card was removed) — leaving grid-3 would strand an empty
-           third column at desktop widths. -->
-      <div class="grid grid-2">
-        <div class="card card-featured" data-reveal>
-          <span class="pill" style="margin-bottom: 0.75rem; display: inline-block;">Nu te proberen</span>
-          <h3>E-mail agent</h3>
-          <p>Sorteert uw inbox, schrijft concept-antwoorden en vraagt zelf ontbrekende offerte-informatie op.
-            Eerste 14 dagen gratis, daarna €40/maand excl. btw.</p>
+      <div class="grid grid-3">
+        <div class="card" data-reveal>
+          <h3>Kanalen</h3>
+          <p>Waar uw klant ook contact opneemt, Mowi is aanwezig.</p>
+          <div class="pill-row" style="margin-top: 1rem;">
+            <span class="pill pill-accent">E-mail agent — Live</span>
+            <span class="pill">Call agent — Binnenkort</span>
+          </div>
+          <div class="browser-frame browser-frame-compact">
+            <div class="browser-frame-bar" aria-hidden="true"><span></span><span></span><span></span></div>
+            <img src="assets/screenshots/dashboard-kanalen.png" alt="Mowi dashboard — overzicht van kanalen" loading="lazy" />
+          </div>
           <a href="agents/email-triage" class="card-link">Bekijk de E-mail agent →</a>
         </div>
 
         <div class="card" data-reveal>
-          <span class="pill" style="margin-bottom: 0.75rem; display: inline-block;">Binnenkort</span>
-          <h3>Call agent</h3>
-          <p>Beantwoordt binnenkomende gesprekken op uw bestaande nummer en verbindt door wanneer dat nodig is.</p>
-          <a href="agents/phone-agent" class="card-link">Bekijk de Call agent →</a>
+          <h3>Workflows met AI</h3>
+          <p>Beschrijf wat u geregeld wilt hebben — Mowi stelt een workflow voor uit geteste bouwstenen, nooit uit losse code.</p>
+          <div class="browser-frame browser-frame-compact">
+            <div class="browser-frame-bar" aria-hidden="true"><span></span><span></span><span></span></div>
+            <img src="assets/screenshots/dashboard-workflows.png" alt="Mowi dashboard — workflow-configurator" loading="lazy" />
+          </div>
+          <a href="/workflows" class="card-link">Meer over workflows met AI →</a>
         </div>
 
+        <div class="card" data-reveal>
+          <h3>Het dashboard</h3>
+          <p>Elke run staat in de log, met "attention items" die uw blik nodig hebben — en één geheugen dat elk kanaal deelt.</p>
+          <div class="browser-frame browser-frame-compact">
+            <div class="browser-frame-bar" aria-hidden="true"><span></span><span></span><span></span></div>
+            <img src="assets/screenshots/dashboard-runs.png" alt="Mowi dashboard — run-log en attention items" loading="lazy" />
+          </div>
+          <a href="https://my.mowi.agency/login" class="card-link" target="_blank" rel="noopener">Bekijk het dashboard →</a>
+        </div>
       </div>
-
-      <p class="muted" style="margin-top: 2rem;">
-        Liever zelf leren werken met AI en Power BI? <a href="trainingen" class="card-link" style="display: inline;">Bekijk onze trainingen →</a>
-      </p>
     </section>
 
-    <!-- ===== Wat de E-mail agent doet ===== -->
+    <!-- ===== Niets gaat live zonder uw akkoord (dark trust band) ===== -->
+    <section class="trust-band-dark">
+      <div class="container trust-band-dark-inner" data-reveal>
+        <h2>Niets gaat live zonder uw akkoord.</h2>
+        <p>Elke actie die iets verandert — een boeking, een verstuurd antwoord — draait eerst als proef. U ziet precies wat Mowi zou doen, en pas na uw bevestiging gaat het écht live.</p>
+        <a href="/vertrouwen">Meer over vertrouwen →</a>
+      </div>
+    </section>
+
+    <!-- ===== Gebouwd voor eigenaren, niet voor hobbyisten ===== -->
     <section class="section section-tint">
       <div class="container">
         <div class="section-head center" data-reveal>
-          <span class="eyebrow">Vandaag al mogelijk</span>
-          <h2>Wat de E-mail agent vandaag al doet.</h2>
+          <span class="eyebrow">Gebouwd voor eigenaren, niet voor hobbyisten</span>
+          <h2>Automatisering die u durft aan te zetten.</h2>
         </div>
 
         <div class="grid grid-3">
           <div class="card" data-reveal>
-            <h3>Automatische categorisering</h3>
-            <p>Elke binnenkomende mail wordt gelezen en in de juiste categorie gezet — voordat uw team eraan begint.</p>
+            <div class="trust-photo" style="margin-bottom: 1.25rem;">
+              <img src="assets/sal-portret.jpg" alt="Sal, oprichter van Mowi" />
+            </div>
+            <h3>Iemand verantwoordelijk</h3>
+            <p>Sal, oprichter van Mowi, is persoonlijk aanspreekbaar op elke workflow die bij u draait — geen anoniem supportteam.</p>
           </div>
           <div class="card" data-reveal>
-            <h3>Concept-antwoorden</h3>
-            <p>Klantvragen krijgen een kant-en-klaar concept-antwoord op basis van uw eigen FAQ.</p>
+            <h3>Geen doe-het-zelf</h3>
+            <p>Geen Engelstalige interface vol losse blokjes die u zelf aan elkaar moet knopen, zoals Zapier of Make. U zegt wat u wilt, Mowi bouwt het.</p>
           </div>
           <div class="card" data-reveal>
-            <h3>Offerte-informatie automatisch opgevraagd</h3>
-            <p>Mist een offerteaanvraag gegevens? De agent vraagt ze zelf na — sneller antwoord, sneller order.</p>
-          </div>
-          <div class="card" data-reveal>
-            <h3>Proefdraaien zonder risico</h3>
-            <p>Bekijk eerst wat de agent zou doen, voordat u hem daadwerkelijk laat versturen.</p>
-          </div>
-          <div class="card" data-reveal>
-            <h3>Blocklist voor afzenders</h3>
-            <p>Bepaal zelf welke afzenders de agent altijd moet negeren.</p>
-          </div>
-          <div class="card" data-reveal>
-            <h3>Volledige run-historie</h3>
-            <p>Elke actie is zichtbaar in uw dashboard, inclusief 'Needs attention' bij storingen.</p>
-            <a href="agents/email-triage" class="card-link">Bekijk de E-mail agent →</a>
+            <h3>Eerst proefdraaien</h3>
+            <p>Voordat iets uw klant bereikt of uw agenda wijzigt, ziet u eerst wat er zou gebeuren. Dat beschermt u tegen een AI die het verkeerd begrijpt.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ===== De kloof groeit (FOMO) =====
-         Website & Conversion plan, 2.1. Works on logic only — deliberately no
-         statistics here (an invented number would poison the trust the rest
-         of the site is built on). -->
-    <section class="container section" data-reveal>
-      <div class="section-head center">
-        <span class="eyebrow">Waarom nu</span>
-        <h2>De kloof groeit.</h2>
-      </div>
-      <p class="lede text-center" style="max-width: 40rem; margin-inline: auto;">
-        Bedrijven die AI inzetten werken sneller, goedkoper en met minder fouten dan bedrijven
-        die het uitstellen — en dat verschil wordt elk kwartaal groter. Niet omdat AI magie is,
-        maar omdat elk geautomatiseerd proces uren vrijmaakt die uw concurrent nu al ergens
-        anders in investeert. De vraag is niet óf u automatiseert, maar of u vooroploopt of
-        achteraan aansluit.
-      </p>
-      <div class="text-center" style="margin-top: 2rem;">
-        <span class="btn-slot">
-          <a href="https://my.mowi.agency/aanmelden" class="btn btn-primary" data-event="Signup Started">Start gratis — 14 dagen</a>
-        </span>
-      </div>
-    </section>
-
-
-    <!-- ===== Werkwijze ===== -->
+    <!-- ===== Receptenboek teaser =====
+         3 strongest REAL recipes only — same manifest/feature verification
+         as "Voorbeelden, met naam" above, nothing invented. -->
     <section class="container section">
       <div class="section-head center" data-reveal>
-        <span class="eyebrow">Werkwijze</span>
-        <h2>Klein beginnen, meteen resultaat.</h2>
+        <span class="eyebrow">Receptenboek</span>
+        <h2>Drie recepten om mee te beginnen.</h2>
       </div>
 
-      <div class="steps">
-        <div class="step" data-reveal>
-          <h3>Account aanmaken</h3>
-          <p>Gratis, direct te starten — geen kennismaking vooraf nodig.</p>
+      <div class="grid grid-3">
+        <div class="card" data-reveal>
+          <span class="pill pill-accent" style="margin-bottom: 0.75rem; display: inline-block;">Live</span>
+          <h3>Inbox-triage</h3>
+          <p>Elke binnenkomende mail automatisch gecategoriseerd en, waar mogelijk, van een concept-antwoord voorzien.</p>
+          <a href="/receptenboek" class="card-link">Bekijk recept →</a>
         </div>
-        <div class="step" data-reveal>
-          <h3>Mailbox koppelen</h3>
-          <p>Verbind uw mailbox met één klik en stel uw categorieën in.</p>
+        <div class="card" data-reveal>
+          <span class="pill pill-accent" style="margin-bottom: 0.75rem; display: inline-block;">Live</span>
+          <h3>Offerteaanvraag-opvolging</h3>
+          <p>Ontbrekende gegevens in een offerteaanvraag worden automatisch bij de klant nagevraagd — sneller antwoord, sneller order.</p>
+          <a href="/receptenboek" class="card-link">Bekijk recept →</a>
         </div>
-        <div class="step" data-reveal>
-          <h3>Proefdraaien</h3>
-          <p>Bekijk eerst wat de agent zou doen, zonder dat er iets wordt verstuurd.</p>
-        </div>
-        <div class="step" data-reveal>
-          <h3>Activeren &amp; uitbreiden</h3>
-          <p>Tevreden? Zet de agent aan en breid uit naar de Call agent zodra die live is.</p>
+        <div class="card" data-reveal>
+          <span class="pill pill-accent" style="margin-bottom: 0.75rem; display: inline-block;">Live</span>
+          <h3>Order-status opzoeken</h3>
+          <p>Een klant vraagt naar zijn bestelling — Mowi zoekt hem op in uw webshop en heeft het antwoord klaar.</p>
+          <a href="/receptenboek" class="card-link">Bekijk recept →</a>
         </div>
       </div>
+
+      <p class="text-center" style="margin-top: 2.5rem;">
+        <a href="/receptenboek" class="card-link" style="display: inline;">Bekijk alle recepten in het Receptenboek →</a>
+      </p>
     </section>
 
-    <!-- ===== CTA ===== -->
-    <section class="container section">
-      <div class="cta-band" data-reveal>
-        <h2>Waarom nog wachten?</h2>
-        <p>Uw team verliest deze week weer uren aan werk dat een agent net zo goed kan doen. Start vandaag
-          gratis en zie het resultaat morgen al in uw dashboard.</p>
-        <div class="cta-actions">
-          <span class="btn-slot">
-            <a href="https://my.mowi.agency/aanmelden" class="btn btn-secondary" data-event="Signup Started">Start gratis — 14 dagen</a>
-          </span>
-        </div>
-        <p class="cta-alt">Liever eerst overleggen? <a href="contact#calendly-widget" data-event="CTA Click">Plan een kennismaking</a> · 085 333 5800 · <a href="mailto:contact@mowi.agency">contact@mowi.agency</a></p>
-      </div>
-    </section>
-
-    <!-- ===== FAQ ===== -->
+    <!-- ===== FAQ =====
+         Matches the FAQPage JSON-LD in <head> 1:1 — keep both in sync. -->
     <section class="container section" style="max-width: 48rem;">
       <div class="section-head center" data-reveal>
         <span class="eyebrow">Veelgestelde vragen</span>
@@ -368,76 +431,37 @@
             <span class="accordion-icon" aria-hidden="true"></span>
           </button>
           <div class="accordion-panel" id="faq-1">
-            <p>De eerste 14 dagen zijn gratis. Daarna €40 per maand excl. btw voor de E-mail agent — geen setupkosten,
-              geen verborgen kosten. Zie <a href="pricing">Tarieven</a> voor het volledige overzicht.</p>
+            <p>Dat hangt af van wat u wilt automatiseren. We bespreken een eerlijk tarief tijdens de demo — er staan bewust geen vaste prijzen op deze site, zodat u nooit betaalt voor bouwstenen die u niet gebruikt.</p>
           </div>
         </div>
 
         <div class="accordion-item">
           <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-2">
-            Wat gebeurt er na de gratis periode?
+            Moet ik zelf iets bouwen?
             <span class="accordion-icon" aria-hidden="true"></span>
           </button>
           <div class="accordion-panel" id="faq-2">
-            <p>U voegt in uw dashboard betaalgegevens toe om zonder onderbreking door te blijven werken —
-              dat kan al vanaf dag één, maar hoeft pas tegen het einde van de proefperiode. Daarna loopt
-              uw abonnement automatisch door tegen het reguliere maandbedrag; u ziet de datum vooraf in
-              uw dashboard, dus er komt geen verrassing.</p>
+            <p>Nee. U beschrijft in gewone taal wat u geregeld wilt hebben, en Mowi configureert het uit een set geteste bouwstenen — u schrijft nooit code en heeft nooit rechtstreeks toegang tot een API.</p>
           </div>
         </div>
 
         <div class="accordion-item">
           <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-3">
-            Kan ik zomaar opzeggen?
+            Wat als de AI het fout heeft?
             <span class="accordion-icon" aria-hidden="true"></span>
           </button>
           <div class="accordion-panel" id="faq-3">
-            <p>Ja, maandelijks. Er geldt een opzegtermijn van 1 kalendermaand — een e-mail volstaat. Geen
-              jaarcontract, geen boetebeding.</p>
+            <p>Elke stap die iets verandert draait eerst als proef, zodat u het resultaat ziet vóórdat het echt is. Pas na uw bevestiging gaat een workflow live.</p>
           </div>
         </div>
 
         <div class="accordion-item">
           <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-4">
-            Werkt dit met Gmail en Outlook?
+            Werkt dit met mijn boekhoudpakket?
             <span class="accordion-icon" aria-hidden="true"></span>
           </button>
           <div class="accordion-panel" id="faq-4">
-            <p>Ja, de E-mail agent werkt met Gmail en Outlook / Microsoft 365. U koppelt uw mailbox zelf, in
-              enkele minuten.</p>
-          </div>
-        </div>
-
-        <div class="accordion-item">
-          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-5">
-            Verstuurt de agent zelf mails?
-            <span class="accordion-icon" aria-hidden="true"></span>
-          </button>
-          <div class="accordion-panel" id="faq-5">
-            <p>Alleen na uw goedkeuring. U kunt de agent eerst laten proefdraaien en pas daarna automatisch
-              laten versturen — u bepaalt zelf wanneer u dat vertrouwt.</p>
-          </div>
-        </div>
-
-        <div class="accordion-item">
-          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-6">
-            Hoe zit het met onze data en privacy?
-            <span class="accordion-icon" aria-hidden="true"></span>
-          </button>
-          <div class="accordion-panel" id="faq-6">
-            <p>Uw data blijft van u. We werken volgens de AVG en houden waar gewenst een mens in de
-              controle-loop bij geautomatiseerde processen.</p>
-          </div>
-        </div>
-
-        <div class="accordion-item">
-          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-7">
-            Kan Mowi het voor mij inrichten?
-            <span class="accordion-icon" aria-hidden="true"></span>
-          </button>
-          <div class="accordion-panel" id="faq-7">
-            <p>Ja. Liever niet zelf koppelen? Ons implementatieteam richt de agent op aanvraag voor u in —
-              <a href="contact#calendly-widget">plan een kennismaking</a> om de mogelijkheden te bespreken.</p>
+            <p>Vandaag koppelt Mowi met WooCommerce, Shopify, Pipedrive en Google Agenda, plus uw mailbox. Nieuwe koppelingen — zoals een boekhoudpakket — bouwen we op klantvraag; vraag er gerust naar in de demo.</p>
           </div>
         </div>
       </div>

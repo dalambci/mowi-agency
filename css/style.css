@@ -3353,6 +3353,245 @@ a.pill:hover {
 .mowi-orb--lg { --orb-size: 10rem; }
 .mowi-orb--xl { --orb-size: 16rem; }
 
+/* ==========================================================================
+   Configurator conversation demo — Stage 3, homepage hero centerpiece
+   Illustrates the whole product mechanic in one glance: a client states a
+   request in plain Dutch -> Mowi restates exactly what it understood -> a
+   dry-run result proves it actually works -> a human confirms -> it goes
+   live. This is a REUSABLE pattern, not a one-off — later stages (the
+   /workflows flagship page especially) are expected to reuse or extend
+   .configurator-demo rather than invent a second version of the same idea.
+
+   Reveal-safety: every bubble/row/badge below is real, complete, correct
+   Dutch copy in plain HTML from first paint — .configurator-confirm-btn
+   ships with .is-confirmed already on it and .configurator-reveal elements
+   ship WITHOUT .is-pending, so the static/no-JS/reduced-motion state is
+   already the finished conversation (request -> understood -> proven ->
+   confirmed -> live). js/main.js only ever clears the two bubbles' text and
+   adds .is-pending immediately before retyping/restaging the exact same
+   content — identical convention to the hero showcase's
+   .showcase-compose/.showcase-offerte-card cards above (see their own
+   comments), gated the same way behind !prefersReducedMotion. */
+.configurator-demo {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-lg);
+  padding: 1.5rem;
+}
+
+.configurator-demo-avatar {
+  flex-shrink: 0;
+  padding-top: 0.25rem;
+}
+
+.configurator-thread {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.configurator-bubble {
+  border-radius: var(--radius-card);
+  padding: 0.75rem 1rem;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  /* Floor, not a fixed width — a flex item with empty text (js/main.js
+     clears it right before typing it back in) would otherwise shrink to a
+     padding-only square for a moment, since flex items size to their
+     content by default. min() keeps that floor from overflowing a
+     narrower container (mobile) once max-width below also applies. */
+  min-width: min(14rem, 100%);
+}
+
+.configurator-bubble p {
+  margin: 0;
+  /* Reserves space at the copy's real, final length so the bubble never
+     resizes/jumps while js/main.js types it back in character by
+     character. */
+  min-height: 1.45em;
+}
+
+.configurator-bubble-user {
+  background: var(--bg-band);
+  color: var(--ink);
+  align-self: flex-end;
+  max-width: 90%;
+}
+
+.configurator-bubble-mowi {
+  background: var(--accent-soft);
+  color: var(--ink);
+  align-self: flex-start;
+  max-width: 92%;
+}
+
+.configurator-dryrun {
+  background: var(--bg);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-card);
+  padding: 0.875rem 1rem;
+}
+
+.configurator-dryrun-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--ink-muted);
+  margin-bottom: 0.625rem;
+}
+
+.configurator-dryrun-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 0.3125rem;
+  font-size: 0.875rem;
+}
+
+.configurator-dryrun-row span:first-child {
+  color: var(--ink-muted);
+}
+
+.configurator-dryrun-row span:last-child {
+  font-weight: 600;
+}
+
+.configurator-confirm-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* A styled <span>, not a real <button> — this is a fixed illustration, not
+   a live control, and a non-functional <button> would be a genuine a11y/UX
+   trap (it looks clickable but does nothing). */
+.configurator-confirm-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4375rem;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--ink);
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.configurator-confirm-check {
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 50%;
+  border: 1.5px solid currentColor;
+  opacity: 0.4;
+  transition: opacity 0.3s ease, background-color 0.3s ease;
+}
+
+.configurator-confirm-btn.is-confirmed {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.configurator-confirm-btn.is-confirmed .configurator-confirm-check {
+  background: var(--accent);
+  opacity: 1;
+}
+
+/* Green is a deliberate one-off "done" exception, same as .showcase-check
+   above — not a new global token. */
+.configurator-live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #2f7d3c;
+}
+
+.configurator-live-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.configurator-demo-caption {
+  margin-top: 0.75rem;
+  font-size: 0.8125rem;
+  color: var(--ink-muted);
+  text-align: center;
+}
+
+/* Staged-reveal elements — see the header comment above for exactly when
+   .is-pending is (and isn't) applied. */
+.configurator-reveal {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition: opacity 0.35s ease, transform 0.35s var(--ease-bounce);
+}
+
+.configurator-reveal.is-pending {
+  opacity: 0;
+  transform: translateY(6px) scale(0.97);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .configurator-confirm-btn,
+  .configurator-confirm-check,
+  .configurator-reveal {
+    transition: none;
+  }
+}
+
+/* ==========================================================================
+   Dark trust band — Stage 3, in-page section
+   Same dark-inverted visual language as .cta-prefooter (var(--bg-inverted)/
+   var(--ink-inverted)) but a DISTINCT, non-full-bleed-CTA in-page section —
+   states the dry-run/confirm mechanic as a trust argument on its own beat,
+   not a closing call to action. Reusable name/pattern for later stages that
+   need the same "nothing happens without you" statement elsewhere on the
+   site (e.g. /vertrouwen itself). */
+.trust-band-dark {
+  background: var(--bg-inverted);
+  color: var(--ink-inverted);
+  padding-block: 4.5rem;
+}
+
+.trust-band-dark-inner {
+  max-width: 40rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.trust-band-dark h2 {
+  color: var(--ink-inverted);
+}
+
+.trust-band-dark p {
+  color: var(--ink-inverted-muted);
+  margin-top: 1rem;
+}
+
+.trust-band-dark a {
+  display: inline-block;
+  margin-top: 1.5rem;
+  font-weight: 600;
+  color: var(--ink-inverted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 /* --- Utilities (general) -------------------------------------------------------- */
 /* Hides content visually while leaving it available to screen readers. */
 .sr-only {

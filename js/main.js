@@ -1045,6 +1045,87 @@ if (agentFeedCard && agentFeedList && !prefersReducedMotion) {
   pauseWhenOffscreen(agentFeedCard, startFeed, stopFeed);
 }
 
+// --- Homepage hero: configurator conversation demo (Stage 3) -----------------
+// .configurator-demo is the hero's centerpiece proof device: a fixed, honest
+// script (see index.html's own comment for exactly which real capability it
+// illustrates — a Manifest Standard v1 operation, verified against
+// config/capabilities.php before this copy was written) staged as
+// user message -> Mowi's playback -> dry-run result -> confirm -> live.
+// The full, finished conversation is real Dutch copy in plain HTML from
+// first paint (reveal-safety invariant, same as [data-reveal]/.reveal-armed
+// above — see css/style.css's .configurator-demo comment for the exact
+// default state) — this only ever restages that SAME text as a
+// typed/staggered reveal, reusing typeInto() and pauseWhenOffscreen() from
+// the hero showcase above rather than duplicating that logic. Never runs
+// under prefers-reduced-motion, matching every other looping widget on this
+// page (the agent-feed widget, the hero showcase).
+const configuratorDemo = document.querySelector(".configurator-demo");
+
+if (configuratorDemo && !prefersReducedMotion) {
+  const userP = configuratorDemo.querySelector(".configurator-bubble-user p");
+  const mowiP = configuratorDemo.querySelector(".configurator-bubble-mowi p");
+  const dryrun = configuratorDemo.querySelector(".configurator-dryrun");
+  const confirmBtn = configuratorDemo.querySelector(".configurator-confirm-btn");
+  const liveBadge = configuratorDemo.querySelector(".configurator-live-badge");
+
+  if (userP && mowiP && dryrun && confirmBtn && liveBadge) {
+    // Stashed once, from the real HTML — never hardcoded here, so the
+    // script this plays is always exactly what's actually written on the
+    // page (edit the HTML, the demo replays the new copy automatically).
+    const userText = userP.textContent;
+    const mowiText = mowiP.textContent;
+    let configuratorVisible = false;
+    let configuratorRunning = false;
+
+    function playConfiguratorDemoOnce(onDone) {
+      userP.textContent = "";
+      mowiP.textContent = "";
+      dryrun.classList.add("is-pending");
+      liveBadge.classList.add("is-pending");
+      confirmBtn.classList.remove("is-confirmed");
+
+      typeInto(userP, userText, () => {
+        setTimeout(() => {
+          // Brief pause between "the client finished typing" and "Mowi
+          // starts replying" — reads as a real beat, not an instant echo.
+          typeInto(mowiP, mowiText, () => {
+            setTimeout(() => {
+              dryrun.classList.remove("is-pending");
+              setTimeout(() => {
+                confirmBtn.classList.add("is-confirmed");
+                setTimeout(() => {
+                  liveBadge.classList.remove("is-pending");
+                  setTimeout(onDone, 3800); // hold on the finished state before replaying
+                }, 350);
+              }, 700);
+            }, 350);
+          });
+        }, 500);
+      });
+    }
+
+    function loopConfiguratorDemo() {
+      if (!configuratorVisible) {
+        configuratorRunning = false;
+        return;
+      }
+      configuratorRunning = true;
+      playConfiguratorDemoOnce(loopConfiguratorDemo);
+    }
+
+    pauseWhenOffscreen(
+      configuratorDemo,
+      () => {
+        configuratorVisible = true;
+        if (!configuratorRunning) loopConfiguratorDemo();
+      },
+      () => {
+        configuratorVisible = false;
+      }
+    );
+  }
+}
+
 // --- Pricing calculator (/pricing "Custom" card) ---------------------------
 // Reads prices from each checkbox's data-price rather than a lookup table here,
 // so the number JS sums and the number printed beside the label can never drift
