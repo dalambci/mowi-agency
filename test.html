@@ -3,19 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Design System — Mowi</title>
-  <!-- Dev-only style guide. Not part of the shipped site — not linked from
-       any real page and has no header/footer chrome, just the raw design
-       system primitives for review. -->
+  <meta name="robots" content="noindex" />
+  <title>Design systeem — Mowi</title>
+  <!-- Dev-only style guide (rebrand era). Not part of the shipped site — not
+       linked from any real page, no header/footer chrome, just the raw
+       design-system primitives for review. Deliberately does NOT load
+       js/main.js (same as before this rebrand) — this page only needs to
+       render final/finished states for a visual review, not live
+       interactivity; a couple of components below (accordion, hero
+       showcase) simply show their static/closed/first-frame appearance. -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260815" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css?v=20260817" />
   <style>
     /* Styling for this style-guide page only — not part of the design system itself. */
     .ds-block {
       padding-block: 3rem;
-      border-top: 1px solid var(--color-border);
+      border-top: 1px solid var(--border);
     }
 
     .ds-block:first-of-type {
@@ -25,13 +30,13 @@
     .ds-caption {
       margin-top: 1rem;
       font-size: 0.8125rem;
-      color: var(--color-text-muted);
+      color: var(--ink-muted);
     }
 
     .ds-caption code {
       background: var(--color-bg-tint-strong);
       padding: 0.125rem 0.375rem;
-      border-radius: var(--radius-md);
+      border-radius: 0.25rem;
       font-size: 0.8125rem;
     }
 
@@ -49,10 +54,10 @@
     }
 
     .ds-swatch {
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-xl);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
       overflow: hidden;
-      background: var(--color-surface);
+      background: var(--surface);
     }
 
     .ds-swatch-fill {
@@ -70,22 +75,60 @@
 
     .ds-swatch-value {
       font-size: 0.8125rem;
-      color: var(--color-text-muted);
+      color: var(--ink-muted);
       font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     }
 
+    /* Dark-inverted demo band, for reviewing tokens/components on
+       --bg-inverted rather than the page's own light background. */
+    .ds-inverted {
+      background: var(--bg-inverted);
+      color: var(--ink-inverted);
+      border-radius: var(--radius-3xl);
+      padding: 2.5rem;
+    }
+
+    .ds-inverted .ds-swatch {
+      background: var(--surface-inverted);
+      border-color: var(--border-inverted);
+    }
+
+    .ds-inverted .ds-swatch-value {
+      color: var(--ink-inverted-muted);
+    }
+
     .ds-section-demo {
-      border: 1px dashed var(--color-border);
-      border-radius: var(--radius-xl);
+      border: 1px dashed var(--border);
+      border-radius: var(--radius-card);
       background: var(--color-bg-tint);
     }
 
     .ds-section-demo-inner {
-      border: 1px dashed var(--color-accent);
+      border: 1px dashed var(--accent);
       padding-block: 2.5rem;
       text-align: center;
-      color: var(--color-text-muted);
+      color: var(--ink-muted);
       font-size: 0.875rem;
+    }
+
+    .ds-orb-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      gap: 2.5rem;
+    }
+
+    .ds-orb-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .ds-orb-item span {
+      font-size: 0.8125rem;
+      color: var(--ink-muted);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     }
   </style>
 </head>
@@ -93,11 +136,11 @@
 
   <header class="container" style="padding-block: 3rem 1rem;">
     <span class="eyebrow">Intern &middot; niet onderdeel van de live site</span>
-    <h1 style="font-size: clamp(2rem, 3vw + 1rem, 3rem);">Design systeem.</h1>
+    <h1 style="font-size: clamp(2rem, 3vw + 1rem, 3.5rem);">Design systeem.</h1>
     <p class="lede" style="margin-top: 0.75rem; max-width: 40rem;">
-      Alle herbruikbare bouwstenen uit <code>css/style.css</code>, gebaseerd op
-      <code>reference/style-vuewer.md</code>. Gebruik deze pagina om het systeem te
-      controleren voordat we de echte pagina's bouwen.
+      Alle herbruikbare bouwstenen uit <code>css/style.css</code> — rebrand-stijl, warme lichte
+      basis met Mowi-oranje als enige uitgesproken kleur. Gebruik deze pagina om het systeem te
+      controleren voordat volgende stages er echte pagina's op bouwen.
     </p>
   </header>
 
@@ -106,57 +149,110 @@
     <!-- ===== Colors ===== -->
     <section class="ds-block">
       <span class="eyebrow">Kleuren</span>
-      <h2>Paletto.</h2>
+      <h2>Palet — licht.</h2>
       <p class="ds-caption">Alle waarden zijn CSS custom properties op <code>:root</code> in <code>css/style.css</code>.</p>
 
       <div class="ds-swatch-grid" style="margin-top: 1.5rem;">
         <div class="ds-swatch">
-          <div class="ds-swatch-fill" style="background: var(--color-bg);"></div>
+          <div class="ds-swatch-fill" style="background: var(--bg);"></div>
           <div class="ds-swatch-meta">
             <div class="ds-swatch-name">Background</div>
-            <div class="ds-swatch-value">--color-bg · #fcfbfa</div>
+            <div class="ds-swatch-value">--bg &middot; #faf6ef</div>
           </div>
         </div>
         <div class="ds-swatch">
-          <div class="ds-swatch-fill" style="background: var(--color-surface);"></div>
+          <div class="ds-swatch-fill" style="background: var(--bg-band);"></div>
+          <div class="ds-swatch-meta">
+            <div class="ds-swatch-name">Background band</div>
+            <div class="ds-swatch-value">--bg-band &middot; #f1e6d6</div>
+          </div>
+        </div>
+        <div class="ds-swatch">
+          <div class="ds-swatch-fill" style="background: var(--surface); border-bottom: 1px solid var(--border);"></div>
           <div class="ds-swatch-meta">
             <div class="ds-swatch-name">Surface</div>
-            <div class="ds-swatch-value">--color-surface · #ffffff</div>
+            <div class="ds-swatch-value">--surface &middot; #ffffff</div>
           </div>
         </div>
         <div class="ds-swatch">
-          <div class="ds-swatch-fill" style="background: var(--color-text);"></div>
+          <div class="ds-swatch-fill" style="background: var(--ink);"></div>
           <div class="ds-swatch-meta">
-            <div class="ds-swatch-name">Text (near-black)</div>
-            <div class="ds-swatch-value">--color-text · #16140f</div>
+            <div class="ds-swatch-name">Ink</div>
+            <div class="ds-swatch-value">--ink &middot; #1c1712</div>
           </div>
         </div>
         <div class="ds-swatch">
-          <div class="ds-swatch-fill" style="background: var(--color-text-muted);"></div>
+          <div class="ds-swatch-fill" style="background: var(--ink-muted);"></div>
           <div class="ds-swatch-meta">
-            <div class="ds-swatch-name">Text muted</div>
-            <div class="ds-swatch-value">--color-text-muted · #6b6a63</div>
+            <div class="ds-swatch-name">Ink muted</div>
+            <div class="ds-swatch-value">--ink-muted &middot; #6b5f50</div>
           </div>
         </div>
         <div class="ds-swatch">
-          <div class="ds-swatch-fill" style="background: var(--color-accent);"></div>
+          <div class="ds-swatch-fill" style="background: var(--accent);"></div>
           <div class="ds-swatch-meta">
-            <div class="ds-swatch-name">Accent</div>
-            <div class="ds-swatch-value">--color-accent · #b5622f</div>
+            <div class="ds-swatch-name">Accent — Mowi orange</div>
+            <div class="ds-swatch-value">--accent &middot; #e8590c</div>
           </div>
         </div>
         <div class="ds-swatch">
-          <div class="ds-swatch-fill" style="background: var(--color-accent-soft);"></div>
+          <div class="ds-swatch-fill" style="background: var(--accent-hover);"></div>
+          <div class="ds-swatch-meta">
+            <div class="ds-swatch-name">Accent hover</div>
+            <div class="ds-swatch-value">--accent-hover &middot; #c94b09</div>
+          </div>
+        </div>
+        <div class="ds-swatch">
+          <div class="ds-swatch-fill" style="background: var(--accent-soft);"></div>
           <div class="ds-swatch-meta">
             <div class="ds-swatch-name">Accent soft</div>
-            <div class="ds-swatch-value">--color-accent-soft</div>
+            <div class="ds-swatch-value">--accent-soft &middot; rgba(232,89,12,.12)</div>
           </div>
         </div>
         <div class="ds-swatch">
-          <div class="ds-swatch-fill" style="background: var(--color-border);"></div>
+          <div class="ds-swatch-fill" style="background: var(--border);"></div>
           <div class="ds-swatch-meta">
             <div class="ds-swatch-name">Border</div>
-            <div class="ds-swatch-value">--color-border · #e6e2d8</div>
+            <div class="ds-swatch-value">--border &middot; #e6d8c3</div>
+          </div>
+        </div>
+      </div>
+
+      <h2 style="margin-top: 3rem;">Palet — donker (inverted).</h2>
+      <p class="ds-caption">
+        Alleen voor vertrouwen/CTA-secties en het mobiele navigatiescherm — nooit de standaard
+        paginakleur. Getoond hier op een echte <code>--bg-inverted</code> band, zoals op de site.
+      </p>
+
+      <div class="ds-inverted" style="margin-top: 1.5rem;">
+        <div class="ds-swatch-grid">
+          <div class="ds-swatch">
+            <div class="ds-swatch-fill" style="background: var(--bg-inverted);"></div>
+            <div class="ds-swatch-meta">
+              <div class="ds-swatch-name">Background inverted</div>
+              <div class="ds-swatch-value">--bg-inverted &middot; #1c1712</div>
+            </div>
+          </div>
+          <div class="ds-swatch">
+            <div class="ds-swatch-fill" style="background: var(--surface-inverted);"></div>
+            <div class="ds-swatch-meta">
+              <div class="ds-swatch-name">Surface inverted</div>
+              <div class="ds-swatch-value">--surface-inverted &middot; #262019</div>
+            </div>
+          </div>
+          <div class="ds-swatch">
+            <div class="ds-swatch-fill" style="background: var(--ink-inverted);"></div>
+            <div class="ds-swatch-meta">
+              <div class="ds-swatch-name">Ink inverted</div>
+              <div class="ds-swatch-value">--ink-inverted &middot; #faf6ef</div>
+            </div>
+          </div>
+          <div class="ds-swatch">
+            <div class="ds-swatch-fill" style="background: var(--accent);"></div>
+            <div class="ds-swatch-meta">
+              <div class="ds-swatch-name">Accent (unchanged on dark)</div>
+              <div class="ds-swatch-value">--accent &middot; #e8590c</div>
+            </div>
           </div>
         </div>
       </div>
@@ -165,17 +261,17 @@
     <!-- ===== Typography ===== -->
     <section class="ds-block">
       <span class="eyebrow">Typografie</span>
-      <h2>Grote, zelfverzekerde koppen.</h2>
+      <h2>Rustige koppen, één sierlijke uitzondering.</h2>
       <p class="ds-caption">
-        Lettertype: <code>Plus Jakarta Sans</code> — het gratis Google Font dat het dichtst
-        bij Vuewer's (betaalde, niet-geïdentificeerde) lettertype komt. Sectiekoppen eindigen
-        met een punt.
+        Lettertype: <code>Plus Jakarta Sans</code> (ongewijzigd t.o.v. voor de rebrand — blog en
+        juridische pagina's leunen erop). Nieuw: <code>Instrument Serif</code> italic, uitsluitend
+        voor het <code>.h-emph</code>-patroon hieronder.
       </p>
 
       <div style="margin-top: 2rem; display: flex; flex-direction: column; gap: 1.5rem;">
         <div>
-          <h1>Slimmer werken met AI.</h1>
-          <p class="ds-caption">h1 &middot; clamp(2.5rem, 5vw + 1rem, 5.625rem) &middot; line-height 1.05</p>
+          <h1>Vertel wat u geregeld wilt hebben. <em class="h-emph">Mowi zet het aan het werk.</em></h1>
+          <p class="ds-caption">h1 &middot; clamp(2.5rem, 5vw + 1rem, 5.625rem) &middot; line-height 1.05 &middot; weight 600 &middot; <code>.h-emph</code> inline</p>
         </div>
         <div>
           <h2>Wat het oplevert.</h2>
@@ -209,7 +305,7 @@
     <!-- ===== Buttons ===== -->
     <section class="ds-block">
       <span class="eyebrow">Knoppen</span>
-      <h2>Primair en secundair.</h2>
+      <h2>Volledig pill.</h2>
 
       <div class="ds-row" style="margin-top: 1.5rem;">
         <span class="btn-slot">
@@ -219,15 +315,15 @@
           <a href="#" class="btn btn-secondary">Bekijk de cases</a>
         </span>
       </div>
-      <p class="ds-caption">.btn.btn-primary (solid, pill) &middot; .btn.btn-secondary (subtiel, rand + schaduw)</p>
+      <p class="ds-caption">.btn.btn-primary (accent fill) &middot; .btn.btn-secondary (rand, licht) &middot; radius: var(--radius-pill)</p>
     </section>
 
-    <!-- ===== Card ===== -->
+    <!-- ===== Cards ===== -->
     <section class="ds-block">
       <span class="eyebrow">Kaart</span>
-      <h2>Card component.</h2>
+      <h2>Licht en donker (inverted).</h2>
 
-      <div style="margin-top: 1.5rem; max-width: 24rem;">
+      <div class="grid grid-2" style="margin-top: 1.5rem;">
         <div class="card">
           <div class="card-icon">AI</div>
           <h3>AI-automatisering</h3>
@@ -235,8 +331,17 @@
             van A tot Z.</p>
           <a href="#" class="card-link">Meer informatie →</a>
         </div>
+        <div class="card card-featured">
+          <div class="card-icon">AI</div>
+          <h3>Uitgelicht</h3>
+          <p>De .card-featured-variant — dezelfde class als vóór de rebrand, nu met de
+            donkere inverted-tokens.</p>
+          <span class="btn-slot">
+            <a href="#" class="btn btn-secondary">Knop op donkere kaart</a>
+          </span>
+        </div>
       </div>
-      <p class="ds-caption">.card &middot; afgeronde hoeken, dunne rand, hover: lift + schaduw (beweeg uw muis eroverheen)</p>
+      <p class="ds-caption">.card &middot; radius: var(--radius-card) (8px) &middot; .card.card-featured voor de donkere variant — let op: de link-kleur-fix houdt .btn-secondary hierbinnen leesbaar.</p>
     </section>
 
     <!-- ===== Pill / badge ===== -->
@@ -253,38 +358,150 @@
       <p class="ds-caption">.pill &middot; .pill.pill-accent (accentvariant, spaarzaam gebruiken)</p>
     </section>
 
-    <!-- ===== Eyebrow ===== -->
+    <!-- ===== Accordion ===== -->
     <section class="ds-block">
-      <span class="eyebrow">Eyebrow label</span>
-      <h2>Kleine kop boven een titel.</h2>
+      <span class="eyebrow">Accordion</span>
+      <h2>Veelgestelde vragen.</h2>
+      <p class="ds-caption">Statische weergave (deze pagina laadt bewust geen js/main.js) — open/dicht-gedrag draait op echte pagina's.</p>
 
-      <div style="margin-top: 1.5rem;">
-        <span class="eyebrow">Zo ziet een eyebrow eruit</span>
+      <div class="accordion" style="margin-top: 1.5rem; max-width: 34rem;">
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false" aria-controls="ds-faq-1">
+            Hoe snel is een agent operationeel?
+            <span class="accordion-icon" aria-hidden="true"></span>
+          </button>
+          <div class="accordion-panel" id="ds-faq-1">
+            <p>Na de inventarisatie stellen we een agent samen uit geteste bouwstenen — geen maatwerkcode.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false" aria-controls="ds-faq-2">
+            Werkt dit met mijn boekhoudpakket?
+            <span class="accordion-icon" aria-hidden="true"></span>
+          </button>
+          <div class="accordion-panel" id="ds-faq-2">
+            <p>Mowi koppelt met de gangbare Nederlandse pakketten — zie de koppelingen-sectie hieronder.</p>
+          </div>
+        </div>
       </div>
-      <p class="ds-caption">.eyebrow &middot; kleine hoofdletters, brede letterspatiëring, gedempte kleur</p>
     </section>
 
-    <!-- ===== Placeholder logo tile ===== -->
+    <!-- ===== Steps ===== -->
     <section class="ds-block">
-      <span class="eyebrow">Placeholder-logo</span>
-      <h2>Neutrale logo-tegel.</h2>
+      <span class="eyebrow">Genummerde stappen</span>
+      <h2>Werkwijze.</h2>
 
-      <div class="ds-row" style="margin-top: 1.5rem;">
-        <span class="logo-tile">logo</span>
-        <span class="logo-tile">logo</span>
-        <span class="logo-tile">logo</span>
+      <div class="steps steps-3" style="margin-top: 1.5rem;">
+        <div class="step">
+          <h3>Kennismaking</h3>
+          <p>30 minuten, vrijblijvend — we kijken naar uw situatie.</p>
+        </div>
+        <div class="step">
+          <h3>Configuratie</h3>
+          <p>Een AI stelt een workflow samen uit geteste bouwstenen.</p>
+        </div>
+        <div class="step">
+          <h3>Live</h3>
+          <p>De agent draait, bewaakt, en meldt zich bij uitzonderingen.</p>
+        </div>
       </div>
-      <p class="ds-caption">.logo-tile &middot; neutraal grijs, voor klantlogo's die nog niet zijn aangeleverd</p>
+    </section>
+
+    <!-- ===== The AI orb ===== -->
+    <section class="ds-block">
+      <span class="eyebrow">De AI-orb</span>
+      <h2>Nieuw visueel primitief.</h2>
+      <p class="ds-caption">
+        <code>.mowi-orb</code> &middot; pure CSS/SVG-vrije gradient-bol, ademende puls-animatie,
+        respecteert <code>prefers-reduced-motion</code> volledig (bevriest naar een statische
+        gradient). Grootte via <code>--orb-size</code> — hier via modifier-classes, maar ook
+        instelbaar per instantie met een inline <code>style="--orb-size: …"</code>.
+      </p>
+
+      <div class="ds-orb-row" style="margin-top: 2rem;">
+        <div class="ds-orb-item">
+          <span class="mowi-orb mowi-orb--xs"></span>
+          <span>--xs (2rem)</span>
+        </div>
+        <div class="ds-orb-item">
+          <span class="mowi-orb mowi-orb--sm"></span>
+          <span>--sm (3.5rem)</span>
+        </div>
+        <div class="ds-orb-item">
+          <span class="mowi-orb mowi-orb--md"></span>
+          <span>--md (6rem)</span>
+        </div>
+        <div class="ds-orb-item">
+          <span class="mowi-orb mowi-orb--lg"></span>
+          <span>--lg (10rem)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Hero showcase (ported engine) ===== -->
+    <section class="ds-block">
+      <span class="eyebrow">Hero showcase</span>
+      <h2>Taak → Mowi → resultaat.</h2>
+      <p class="ds-caption">
+        Zelfde markup/CSS-klassen als op /agentic-ai — hier statisch gerenderd (geen
+        js/main.js op deze pagina, dus geen reis-animatie of getekende lijnen), puur om te
+        bevestigen dat de geporteerde showcase-CSS nog klopt met de nieuwe tokens.
+      </p>
+
+      <div class="hero-showcase" aria-hidden="true" style="margin-top: 1.5rem; max-width: 40rem;">
+        <svg class="showcase-lines" id="showcaseLines"></svg>
+
+        <div class="showcase-task" style="grid-row: 1;">
+          <span class="showcase-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="5" y="3" width="14" height="18" rx="2" />
+              <path d="M8.5 8h7M8.5 12h7M8.5 16h4" />
+            </svg>
+          </span>
+          <span>Inkomende factuur</span>
+        </div>
+        <div class="showcase-task" style="grid-row: 2;">
+          <span class="showcase-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 2L11 13" />
+              <path d="M22 2l-7 20-4-9-9-4 20-7z" />
+            </svg>
+          </span>
+          <span>Klantvraag</span>
+        </div>
+
+        <div class="showcase-hub">
+          <div class="showcase-hub-pulse"></div>
+          <div class="showcase-hub-plate">
+            <img src="assets/mowi-icon.png" alt="" />
+          </div>
+        </div>
+
+        <div class="showcase-endpoint showcase-result" style="grid-row: 1;">
+          <span class="showcase-check">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7" /></svg>
+          </span>
+          <span>Geboekt in uw boekhouding</span>
+        </div>
+        <div class="showcase-endpoint showcase-result" style="grid-row: 2;">
+          <span class="showcase-check">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7" /></svg>
+          </span>
+          <span>Beantwoord</span>
+        </div>
+
+        <div class="showcase-ghost" id="showcaseGhost"></div>
+      </div>
     </section>
 
     <!-- ===== Section container ===== -->
     <section class="ds-block">
       <span class="eyebrow">Section container</span>
-      <h2>Breedte en ruimte.</h2>
+      <h2>Breedte en band.</h2>
       <p class="ds-caption">
-        .container (max-breedte ~1152px, gecentreerd) + .section (ruime verticale ritmiek,
-        96px mobiel → 128px desktop). De stippellijn hieronder toont de containerbreedte;
-        de binnenste rand toont de verticale padding.
+        .container (max-breedte var(--container-width), 1380px, gecentreerd) + .section (ruime
+        verticale ritmiek). .section-tint geeft de sectie zelf een volle --bg-band-achtergrond
+        i.p.v. een gebokste witte panel-truc.
       </p>
 
       <div class="ds-section-demo" style="margin-top: 1.5rem;">
@@ -296,146 +513,17 @@
       </div>
     </section>
 
-    <!-- ===== Website & Conversion plan — Phase 0 shared components =====
-         Six components below match the vault note "Website & Conversion —
-         Implementation Plan", Phase 0 exactly (0.1–0.6). Built once here,
-         reused by every /agents/ and /koppelingen/ page from Phase 3 on. -->
-
-    <!-- ===== 0.1 Primary CTA block ===== -->
-    <section class="ds-block">
-      <span class="eyebrow">0.1 &middot; Primary CTA block</span>
-      <h2>Eén actie, overal hetzelfde.</h2>
-      <p class="ds-caption">
-        Reuses .cta-band as-is (heading + één zin + .btn-slot &gt; .btn-primary), zonder de
-        .cta-alt telefoon/mail-regel. Wijst naar <code>contact#calendly-widget</code> — de
-        werkende Calendly-embed — niet naar het plan-document se letterlijke
-        <code>index.html#afspraak</code>, dat geen bestaand anker is (zie STOP 0-verslag).
-      </p>
-
-      <div style="margin-top: 1.5rem;">
-        <div class="cta-band">
-          <h2>Benieuwd wat er in uw bedrijf te winnen valt?</h2>
-          <p>In een kennismaking van 30 minuten kijken we naar uw situatie — vrijblijvend.</p>
-          <div class="cta-actions">
-            <span class="btn-slot">
-              <a href="contact#calendly-widget" class="btn btn-primary" data-event="CTA Click">Plan een kennismaking</a>
-            </span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== 0.2 Trust block ===== -->
-    <section class="ds-block">
-      <span class="eyebrow">0.2 &middot; Trust block</span>
-      <h2>Waar u op kunt bouwen.</h2>
-      <p class="ds-caption">
-        .trust-block &middot; op elke marketingpagina, direct boven de footer. Item 4's foto
-        (<code>assets/team/sal.jpg</code>) bestaat nog niet, dus toont de browser hier een
-        kapot-beeld icoontje in het gestippelde vlak. Op echte pagina's (die js/main.js wél
-        laden — dit ontwerpsysteem-overzicht bewust niet, zie de intro hierboven) verbergt de
-        bestaande broken-image safety net die &lt;img&gt; automatisch, en blijft alleen het
-        gestippelde vlak zelf als placeholder staan.
-      </p>
-
-      <div style="margin-top: 1.5rem;">
-        <div class="section-head">
-          <span class="eyebrow">Vertrouwen</span>
-          <h2>Waar u op kunt bouwen.</h2>
-        </div>
-        <div class="trust-list">
-          <div class="trust-item">
-            <p>AVG-proof — een verwerkersovereenkomst is standaard onderdeel van elke samenwerking.</p>
-          </div>
-          <div class="trust-item">
-            <p>Uw data versleuteld — encryptie tijdens transport en opslag, met dagelijkse backups. <!-- VERIFY: encryptie/backup-claim nog niet bevestigd op platformniveau, zie docs/it-beveiliging.html --></p>
-          </div>
-          <div class="trust-item">
-            <p>Niets faalt onopgemerkt — elke agent wordt bewaakt. Gaat er iets mis, dan ziet u het direct in uw dashboard onder 'Needs attention'.</p>
-          </div>
-          <div class="trust-item">
-            <span class="trust-photo"><img src="assets/team/sal.jpg" alt="Sal Pagrach" /></span>
-            <p>Sal Pagrach — uw vaste aanspreekpunt, van kennismaking tot nazorg.</p>
-          </div>
-          <div class="trust-item">
-            <p>Nederlands bedrijf, actief in Nederland en Vlaanderen.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== 0.3 Pricing line ===== -->
-    <section class="ds-block">
-      <span class="eyebrow">0.3 &middot; Pricing line</span>
-      <h2>Eén consistent prijspatroon.</h2>
-      <p class="ds-caption">
-        .pricing-line &middot; placeholder-token rendert letterlijk tot Sal een echt bedrag
-        aanlevert — nooit een verzonnen getal.
-      </p>
-
-      <div style="margin-top: 1.5rem;">
-        <p class="pricing-line">Vanaf <strong>€[PRICE_EMAIL_TRIAGE]</strong> per maand &middot; eenmalige setup op basis van de inventarisatie &middot; exacte prijs in uw voorstel.</p>
-      </div>
-    </section>
-
-    <!-- ===== 0.4 Video slot ===== -->
-    <section class="ds-block">
-      <span class="eyebrow">0.4 &middot; Video slot</span>
-      <h2>Demo, of eerlijk "binnenkort".</h2>
-      <p class="ds-caption">
-        .demo-video &middot; toont hier de "geen video"-status (echt en functioneel — er bestaat
-        nog geen bestand in <code>assets/demos/</code>). Zodra een echt bestand landt, krijgt de
-        markup <code>.has-video</code> + <code>data-video-src</code> en vervangt js/main.js de
-        poster bij een klik door een native &lt;video&gt; (zelfde swap-patroon als
-        .blog-video-facade), en vuurt <code>data-event="Video Play"</code>.
-      </p>
-
-      <div style="margin-top: 1.5rem; max-width: 32rem;">
-        <div class="demo-video">
-          <div class="demo-video-poster">
-            <span class="demo-video-agent">E-mail agent</span>
-            <span class="demo-video-soon">Demo binnenkort</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== 0.5 "Werkt met" pills ===== -->
-    <section class="ds-block">
-      <span class="eyebrow">0.5 &middot; "Werkt met" pills</span>
-      <h2>Tekst, geen logo's.</h2>
-      <p class="ds-caption">
-        a.pill &middot; hergebruikt .pill/.pill-row 1:1, met een hover-state voor de klikbare
-        variant. Wijst naar de bijbehorende /koppelingen/-pagina zodra die bestaat.
-      </p>
-
-      <div class="pill-row" style="margin-top: 1.5rem;">
-        <a href="#" class="pill">Gmail</a>
-        <a href="#" class="pill">Outlook / Microsoft 365</a>
-        <a href="#" class="pill">Elke IMAP-mailbox</a>
-      </div>
-    </section>
-
-    <!-- ===== 0.6 IT-sheet download button ===== -->
-    <section class="ds-block">
-      <span class="eyebrow">0.6 &middot; IT-sheet download</span>
-      <h2>Eén A4 voor de IT-partner.</h2>
-      <p class="ds-caption">
-        Hergebruikt .btn.btn-secondary 1:1 — geen nieuwe CSS nodig. <code>data-event="Sheet
-        Download"</code> vuurt ook als het PDF-bestand nog 404't (Phase 1.3 test dat
-        expliciet).
-      </p>
-
-      <div class="ds-row" style="margin-top: 1.5rem;">
-        <span class="btn-slot">
-          <a href="downloads/it-partner-exact-online.pdf" class="btn btn-secondary" data-event="Sheet Download" data-event-pakket="exact-online">Download: instructies voor uw IT-partner (PDF)</a>
-        </span>
+    <section class="section section-tint" style="border-radius: var(--radius-card); margin-block: 1rem;">
+      <div class="container ds-block" style="border-top: none;">
+        <span class="eyebrow">.section-tint</span>
+        <h2>Een afwisselende band.</h2>
+        <p class="ds-caption">Volle-breedte var(--bg-band) achter deze sectie, geen boxed panel.</p>
       </div>
     </section>
 
   </main>
 
-  <footer class="container" style="padding-block: 3rem; color: var(--color-text-muted); font-size: 0.875rem;">
+  <footer class="container" style="padding-block: 3rem; color: var(--ink-muted); font-size: 0.875rem;">
     Design systeem overzicht &middot; niet gekoppeld vanuit de live site.
   </footer>
 

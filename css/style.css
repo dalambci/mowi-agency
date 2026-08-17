@@ -1,101 +1,145 @@
 /* ==========================================================================
-   Mowi — main stylesheet
-   Visual style inspired by vuewer.com (see reference/style-vuewer.md).
+   Mowi — main stylesheet (rebrand era)
+   Successor to the vuewer.com-inspired stylesheet this project shipped
+   with originally (see git history for that version — square corners,
+   bold segmented header, near-black terracotta accent). This is Stage 1 of
+   a multi-stage rebrand: Mowi repositions from "two AI agents sold
+   self-serve" to "the conversational automation platform" — describe a
+   workflow in Dutch, an AI configures it from a curated, tested set of
+   building blocks. Structurally modeled on shapes.co (an AI-native HR
+   platform) — patterns only, never their copy/assets/hex values.
+
    Plain CSS, no build step, no framework.
+
+   ---- Token architecture ---------------------------------------------------
+   Every component below reads CSS custom properties, never raw hex — see
+   the :root block. Three families:
+     1. Semantic tokens (--bg, --ink, --accent, --surface, --border, ...) —
+        the real vocabulary. New code should only ever reference these.
+     2. Back-compat aliases (--color-ink, --color-text, --color-bg, ...) —
+        map the OLD (pre-rebrand) token names onto the new semantic tokens,
+        so pages not yet rebuilt in this multi-stage rebrand (legal pages,
+        blog posts, docs-adjacent inline styles) don't visually break
+        outright even though nobody has touched their markup yet. DELETE
+        these once every page has been migrated to the new token names — a
+        later QA stage's job, not this one.
+     3. Content/prose tokens (--content-h1-size, --breadcrumb-*, ...) — the
+        blog's own typographic contract. build-blog.js and 3 shipped posts
+        read these class names directly; do not rename them.
    ========================================================================== */
 
-/* --- Design tokens ------------------------------------------------------ */
+/* --- Design tokens -------------------------------------------------------- */
 :root {
-  /* ---- Core palette (see reference/style-vuewer.md) ----------------------
-     Vuewer's own palette is a warm off-white canvas with near-black ink and
-     almost no color of its own. We keep that restraint, but add one warm
-     accent, since a fully monochrome site needs *some* way to signal
-     interactive/brand moments beyond a hover state. */
-  --color-bg: #fcfbfa;              /* page background — near-neutral light grey */
-  --color-surface: #ffffff;         /* cards, panels, anything "raised" */
-  --color-text: #000000;            /* pure black */
-  --color-text-muted: #6b6a63;      /* secondary/body copy — warm grey */
-  --color-accent: #b5622f;          /* warm terracotta — links, focus, small accents */
-  --color-accent-soft: rgba(181, 98, 47, 0.12); /* tinted background for accent pills */
-  --color-border: #e6e2d8;          /* hairline borders — warm-tinted, not neutral grey */
-  /* Pixel-sampled straight from a vuewer.com screenshot: their header's own
-     segment dividers are solid (0,0,0) black — much bolder than the faint
-     hairline their hero-frame's *continuing* vertical lines use further
-     down the page (those measured close to --color-border above, near
-     #d2d2cf). Two different weights for two different jobs: this one is
-     only for the header's own segmented bar. */
-  --color-header-line: rgba(10, 9, 7, 0.85);
+  /* ---- Core palette: warm light, shapes.co-patterned (bone canvas, warm
+     near-black ink, one loud accent) — NOT dark-mode-default. Dark is used
+     only for inverted trust/CTA bands and the mobile nav sheet, never the
+     page default. */
+  --bg: #faf6ef;                    /* page background — warm bone, not neutral grey */
+  --bg-band: #f1e6d6;                /* alternating section band — warm greige, a shade down from --bg */
+  --bg-inverted: #1c1712;            /* dark inverted section (trust/CTA bands only) — warm near-black, not pure #000 */
+  --surface: #ffffff;                /* cards/panels on light backgrounds */
+  --surface-inverted: #262019;       /* cards/panels sitting on --bg-inverted — one step lighter, for elevation */
+  --ink: #1c1712;                    /* body/heading text — warm near-black, matches --bg-inverted intentionally */
+  --ink-muted: #6b5f50;              /* secondary/muted text — warm grey-brown, not cool grey */
+  --ink-inverted: #faf6ef;           /* text on dark surfaces */
+  --ink-inverted-muted: rgba(250, 246, 239, 0.65);
 
-  /* Back-compat aliases: components further down this file were named
-     before the tokens above were formalized. Keeping both means nothing
-     that already ships references a color that no longer exists. */
-  --color-ink: var(--color-text);
-  --color-white: var(--color-surface);
-  --color-gray-900: var(--color-text);
-  --color-gray-600: var(--color-text-muted);
-  --color-gray-500: #8a887f;
-  --color-gray-400: #b0ada2;
-  --color-bg-tint: rgba(22, 20, 15, 0.04);
-  --color-bg-tint-strong: rgba(22, 20, 15, 0.06);
+  /* Mowi orange — a hotter, louder evolution of the old terracotta
+     (#b5622f). Picked to sit solidly in orange territory (~19° hue) with
+     real saturation, deliberately clear of shapes.co's egg-yellow (#ffdd00,
+     ~50° hue) on one side and the old muted terracotta on the other — this
+     reads as "AI energy / ignition", not "brand yellow" or "earthy clay".
+     The one loud color in the system; everything else stays restrained. */
+  --accent: #e8590c;
+  --accent-hover: #c94b09;           /* ~15% darker, for hover/active states */
+  --accent-ink: #fff8f2;             /* text/icon color when placed ON --accent */
+  --accent-soft: rgba(232, 89, 12, 0.12); /* translucent tint for backgrounds/highlights, same pattern as before */
 
-  /* Type — Vuewer self-hosts a paid grotesk (files just named "Font", weights
-     400–900, no identifiable name). It is not on Google Fonts. Plus Jakarta
-     Sans is the closest free match: same geometric/slightly-rounded
-     character, same wide 400–800 weight range, same all-purpose use for
-     both headings and body text. */
+  --border: #e6d8c3;                 /* hairline borders on light surfaces — warm-tinted */
+  --border-inverted: rgba(250, 246, 239, 0.14); /* hairline borders on dark surfaces */
+  --border-strong: rgba(28, 23, 18, 0.82); /* header's own segment dividers — bolder than the general hairline */
+
+  /* Back-compat aliases — old token names, still referenced by legal pages'
+     inline <style> blocks and by anything else not yet migrated. Map 1:1
+     onto the semantic tokens above; never given their own values. */
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-white: var(--surface);
+  --color-text: var(--ink);
+  --color-ink: var(--ink);
+  --color-text-muted: var(--ink-muted);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-border: var(--border);
+  --color-header-line: var(--border-strong);
+  --color-gray-900: var(--ink);
+  --color-gray-600: var(--ink-muted);
+  --color-gray-500: #8a7c69;
+  --color-gray-400: #bcae97;
+  --color-bg-tint: rgba(28, 23, 18, 0.04);
+  --color-bg-tint-strong: rgba(28, 23, 18, 0.06);
+
+  /* Type — Plus Jakarta Sans stays the workhorse (loaded via Google Fonts
+     <link> in every page's <head>; unchanged from before this rebrand, blog
+     and legal pages depend on it too). New: Instrument Serif italic, used
+     ONLY for the inline headline-emphasis pattern (.h-emph below) — mirrors
+     shapes.co's sans+serif-italic headline signature without using their
+     fonts. Every page's <head> needs an added Google Fonts <link> for
+     Instrument Serif — not yet added anywhere except test.html in this
+     stage; a later stage rolls that <link> out sitewide. */
   --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-serif-emph: "Instrument Serif", Georgia, "Times New Roman", serif;
 
-  /* Tracking scale (letter-spacing), matches vuewer's tokens */
-  --tracking-tighter: -0.05em;
+  /* Tracking scale — --tracking-tighter alone moves (-0.05em -> -0.04em,
+     still deliberately tight for large display headings); the other three
+     are unchanged. */
+  --tracking-tighter: -0.04em;
   --tracking-tight: -0.025em;
   --tracking-normal: 0em;
   --tracking-wide: 0.025em;
 
-  /* Radius scale — zeroed out site-wide per request (square corners
-     everywhere). The one exception, the hero's "AI · Business
-     intelligence · MKB" pill, uses its own hardcoded value instead of
-     these tokens (see .hero-frame-content .eyebrow) so it stays rounded
-     without this scale needing to come back. */
-  --radius-md: 0;
-  --radius-lg: 0;
-  --radius-xl: 0;
-  --radius-2xl: 0;
-  --radius-3xl: 0;
-  --radius-full: 0;
+  /* Radius scale — retires "square corners everywhere." --radius-media
+     stays 0 on purpose: screenshots/browser-frames stay hard-edged, a
+     deliberate square-vs-pill contrast against the new pill buttons/badges
+     (borrowed from shapes.co's own contrast, not their values). */
+  --radius-pill: 9999px;
+  --radius-card: 0.5rem;   /* 8px */
+  --radius-media: 0;
 
-  /* Shadows — soft, low-opacity black, used sparingly */
-  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  /* Back-compat radius aliases — old code referenced a 6-step scale that
+     used to be zeroed out entirely; now resolves to real roundedness so
+     not-yet-migrated components (data-card, cta-band, section-tint's old
+     panel treatment, etc.) pick up the new geometry automatically. */
+  --radius-md: var(--radius-card);
+  --radius-lg: var(--radius-card);
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
+  --radius-3xl: 1.5rem;
+  --radius-full: var(--radius-pill);
 
-  /* Motion — --ease-out is a fast, premium deceleration used for reveal-on-
-     scroll. --ease-bounce is the slight-overshoot curve vuewer.com uses for
-     its own larger reveal animations (see reference/style-vuewer.md); used
-     sparingly here, only on small hover lifts. */
+  /* Shadows — soft, low-opacity, warm-tinted black (not cool grey), used sparingly */
+  --shadow-sm: 0 1px 3px 0 rgba(28, 23, 18, 0.08), 0 1px 2px -1px rgba(28, 23, 18, 0.08);
+  --shadow-md: 0 4px 6px -1px rgba(28, 23, 18, 0.08), 0 2px 4px -2px rgba(28, 23, 18, 0.08);
+  --shadow-lg: 0 10px 15px -3px rgba(28, 23, 18, 0.1), 0 4px 6px -4px rgba(28, 23, 18, 0.1);
+
+  /* Motion — --ease-out: fast, premium deceleration for reveal-on-scroll.
+     --ease-bounce: slight-overshoot curve for small hover lifts/pops. */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-bounce: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  /* Pulled straight from vuewer.com's own hero entrance animation (their
-     paragraph/button reveals) — see .hero-reveal below. */
-  --ease-vuewer-rise: cubic-bezier(0.25, 0.8, 0.25, 1);
 
-  /* --section-gap only drives the footer's own top margin now — the
-     section-to-section rhythm itself is verified padding on .section
-     directly (see that rule below), pulled from vuewer's compiled CSS. */
-  --section-gap: 6rem;
+  --section-gap: 6rem; /* drives the footer's own top margin */
 
-  /* Verified from vuewer.com's compiled CSS (max-w-8xl + px-4/sm:px-6/lg:px-12
-     on <main>): container max-width is 1600px, padding steps 16px → 24px
-     (≥40rem) → 48px (≥64rem). */
-  --container-width: 100rem;
+  /* Container width: 1380px (was 1600px) — tighter measure to match the
+     new, less maximal layout language. Padding steps unchanged (16px ->
+     24px at >=40rem -> 48px at >=64rem). */
+  --container-width: 86.25rem; /* 1380px */
   --container-pad: 1rem;
 
-  /* ---- Content/prose typography (reference = /blog, the site's canonical
-     reading-content standard) ----------------------------------------------
+  /* ---- Content/prose typography (reference = /blog) ---------------------
      Scoped to genuine prose/content headings and body copy — NOT the hero
-     h1 or section h2 scale above, which are a deliberate large-display
-     component reverse-engineered from vuewer.com and intentionally much
-     bigger. Use these tokens for any content heading/paragraph that reads
-     like an article, not a marketing hero/section title. */
+     h1/h2 display scale, which stays a deliberately larger marketing
+     component. Ported forward unchanged; blog posts and build-blog.js read
+     these class names/tokens directly. */
   --content-h1-size: clamp(1.625rem, 1.35rem + 1vw, 2.125rem);
   --content-h1-line-height: 1.25;
   --content-h1-margin-bottom: 1.5rem;
@@ -105,15 +149,9 @@
   --content-p-line-height: 1.7;
   --content-p-margin-bottom: 1.25rem;
 
-  /* ---- Breadcrumb (reference = /blog's .blog-breadcrumb) ----------------
-     Mobile-first: 0.75rem here, stepped back up to the original 1.5rem at
-     40rem+ below — halved specifically on phones, where the hero's own top
-     padding (see .hero in the Layout section) already eats a lot of the
-     viewport before the h1 shows up; this shouldn't add more on top of
-     that. Same token everywhere the breadcrumb is used, so the fix is
-     automatically consistent across every page that has one. */
+  /* ---- Breadcrumb (reference = /blog's .blog-breadcrumb) — unchanged mechanism */
   --breadcrumb-font-size: 0.875rem;
-  --breadcrumb-color: var(--color-text-muted);
+  --breadcrumb-color: var(--ink-muted);
   --breadcrumb-margin-bottom: 0.75rem;
 }
 
@@ -121,6 +159,7 @@
   :root {
     --container-pad: 1.5rem;
     --breadcrumb-margin-bottom: 1.5rem;
+    --breadcrumb-space-block: 15px;
   }
 }
 
@@ -131,18 +170,7 @@
   }
 }
 
-/* Breadcrumb spacing token — see .breadcrumb, .blog-breadcrumb and
-   .hero:has(.breadcrumb) below. 15px top/bottom on every non-mobile breakpoint
-   (tablet AND desktop, ≥40rem — same mobile/non-mobile line the pre-existing
-   --breadcrumb-margin-bottom split already drew). Deliberately not defined
-   below 40rem: mobile keeps its own halved 0.75rem margin-bottom untouched. */
-@media (min-width: 40rem) {
-  :root {
-    --breadcrumb-space-block: 15px;
-  }
-}
-
-/* --- Reset ---------------------------------------------------------------- */
+/* --- Reset ------------------------------------------------------------------ */
 *,
 *::before,
 *::after {
@@ -155,8 +183,8 @@ html {
 
 body {
   margin: 0;
-  background: var(--color-bg);
-  color: var(--color-gray-900);
+  background: var(--bg);
+  color: var(--ink);
   font-family: var(--font-sans);
   font-size: 1rem;
   line-height: 1.6;
@@ -164,17 +192,20 @@ body {
   position: relative;
 }
 
-/* Subtle grain across the whole page — vuewer.com has the same paper-like
-   noise if you zoom in on their background. Pure CSS/SVG (feTurbulence),
-   no image asset. Fixed + pointer-events:none so it never affects layout,
-   scrolling or interaction; tiled at a small size so it stays cheap. */
+/* A whisper of paper grain across the whole page — kept from the previous
+   system (see git history) because a warm bone canvas still benefits from
+   a hint of texture rather than reading as flat digital color, same as it
+   did on the old palette. Trimmed to a lower opacity here (0.02, was
+   0.035) — the new lighter/warmer background shows noise more readily than
+   the old near-grey one did. Pure CSS/SVG (feTurbulence), no image asset,
+   fixed + pointer-events:none so it never affects layout/scroll/interaction. */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: 9999;
   pointer-events: none;
-  opacity: 0.035;
+  opacity: 0.02;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-repeat: repeat;
 }
@@ -205,7 +236,17 @@ button {
   cursor: pointer;
 }
 
-/* Respect reduced-motion preference for all animations on the site */
+/* Visible keyboard-focus ring, accent-colored — new in this stage (the old
+   system had no explicit focus-visible treatment). Low-risk addition:
+   only shows for keyboard focus, never for mouse/touch. */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Respect reduced-motion preference for all animations on the site —
+   unchanged mechanism, still the global kill-switch every animation on
+   the site (including the new orb component) must honor. */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
@@ -215,27 +256,22 @@ button {
   }
 }
 
-/* Keep anchor targets (e.g. #afspraak, FAQ items) clear of the sticky
-   header when the page scroll-behavior:smooth lands on them. */
+/* Keep anchor targets (e.g. #afspraak, FAQ items) clear of the sticky header */
 [id] {
   scroll-margin-top: 6rem;
 }
 
-/* --- Layout helpers --------------------------------------------------------
-   Section container = `.container` (max-width ~1152px, horizontal padding,
-   centered) + `.section` (generous vertical rhythm, 96px mobile / 128px
-   desktop). Used together on every top-level page section, e.g.
-   `<section class="section"><div class="container">...</div></section>`. */
+/* --- Layout primitives -------------------------------------------------------
+   .container (max-width var(--container-width), centered, responsive
+   padding) + .section (vertical rhythm, 64px mobile / 96px desktop). Used
+   together on every top-level page section:
+   <section class="section"><div class="container">...</div></section> */
 .container {
   max-width: var(--container-width);
   margin-inline: auto;
   padding-inline: var(--container-pad);
 }
 
-/* Verified from vuewer.com's hero section (py-16 md:py-24): 64px vertical
-   padding, stepping to 96px at ≥48rem. Padding (not margin) — matches
-   vuewer's actual mechanism exactly, even though it means adjacent
-   sections' padding stacks rather than collapsing like margin would. */
 .section {
   padding-block: 4rem;
 }
@@ -246,15 +282,15 @@ button {
   }
 }
 
-/* Alternating sections use a white panel (not a darker sand tint) so the page
-   stays mostly cream/white — contrast comes from the border + shadow instead
-   of a darker background color. */
-.section-tint > .container {
-  background: var(--color-white);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-3xl);
-  box-shadow: var(--shadow-sm);
-  padding-block: 4rem;
+/* Alternating sections get a full-bleed warm-greige band (--bg-band) behind
+   them — contrast comes from a genuinely different background color now,
+   not a boxed white panel floating on an already-near-white page (the old
+   mechanism). Still "contrast from border/elevation" for anything raised
+   ON TOP of the band (a .card sitting inside one still gets its own
+   border/shadow against the band) — just the band itself is a real color
+   step, not a mud tone, matching --bg-band's own definition above. */
+.section-tint {
+  background: var(--bg-band);
 }
 
 .section-head {
@@ -277,103 +313,56 @@ button {
   margin-bottom: 0.75rem;
 }
 
-/* --- Typography ------------------------------------------------------------
-   Large, bold, confident headings with tight line-height/tracking, matching
-   Vuewer's scale. Content convention (not enforced in CSS): section headings
-   end with a period — e.g. "Wat het oplevert." — so write the period into
-   the copy itself, not as generated content. */
+/* minmax(0, 1fr), not bare 1fr — a bare 1fr track's automatic minimum size
+   is its content's min-content width, so a long word/label can force a
+   grid wider than its container. minmax(0, 1fr) removes that floor. */
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.grid-2 { grid-template-columns: minmax(0, 1fr); }
+.grid-3 { grid-template-columns: minmax(0, 1fr); }
+.grid-4 { grid-template-columns: minmax(0, 1fr); }
+
+@media (min-width: 40rem) {
+  .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (min-width: 64rem) {
+  .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+/* --- Typography ---------------------------------------------------------------
+   Weight 500-600 (not 800 like the old system), tight tracking, line-height
+   ~1.05 on the display h1. Content convention (not enforced in CSS):
+   section headings end with a period — e.g. "Wat het oplevert." */
 h1, h2, h3, h4 {
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: var(--tracking-tight);
-  color: var(--color-ink);
-  /* Dutch compounds long-form (e.g. "wegautomatiseren", "managementdashboard")
-     have few/no break points a browser will use by default, which can push
-     a heading wider than its container at narrow widths. Only kicks in when
-     a word truly doesn't fit — normal wrapping at spaces is unaffected. */
-  overflow-wrap: break-word;
+  color: var(--ink);
+  overflow-wrap: break-word; /* long Dutch compounds ("wegautomatiseren") need this at narrow widths */
 }
 
-/* Verified from vuewer.com's hero heading (the visible "Web development"
-   div, since their literal <h1> is sr-only): step-scale, not clamp — they
-   use discrete breakpoints (base/sm/md/lg), so we match that mechanism
-   rather than smoothly interpolating. font-weight 800 overrides the
-   h1,h2,h3,h4 rule above on purpose (extrabold specifically for h1). */
+/* Fluid clamp, not a step-scale — one formula instead of 5 discrete
+   device-tier breakpoints (the old system's iPad-Pro-specific hacks are
+   gone; a fluid clamp doesn't need them). Caps at 5.625rem (~90px) desktop,
+   matching the "up to ~5.5rem" spec. */
 h1 {
-  font-size: 2.25rem; /* 36px */
-  line-height: calc(2.5 / 2.25); /* ~1.111, vuewer's text-4xl pairing */
+  font-size: clamp(2.5rem, 5vw + 1rem, 5.625rem);
+  line-height: 1.05;
   letter-spacing: var(--tracking-tighter);
-  font-weight: 800;
 }
 
-@media (min-width: 40rem) {
-  h1 {
-    font-size: 3rem; /* 48px */
-    line-height: 1;
-  }
-}
-
-/* This block's range is effectively capped at 63.9375rem in practice — the
-   64rem block below overrides font-size again above that, so this value only
-   ever renders on the 48rem-63.9375rem tablet tier. 2.8125rem = 75% of the
-   previous 3.75rem (45px vs 60px), paired with the tablet-tier breadcrumb
-   spacing work above to make tablet heroes noticeably more compact — both
-   changes made together, intentionally. line-height stays untouched: it's
-   the unitless `1` inherited from the 40rem block, so it scales with the
-   smaller font-size automatically and doesn't need its own override. */
-@media (min-width: 48rem) {
-  h1 {
-    font-size: 2.8125rem; /* 45px, 75% of the previous 60px */
-  }
-}
-
-@media (min-width: 64rem) {
-  h1 {
-    font-size: 72px; /* 90px verified value, 20% smaller per request */
-  }
-}
-
-/* iPad Pro only (1024-1366px = 64rem-85.375rem, portrait through 12.9" landscape):
-   30% off the 72px desktop value. Bounded with max-width so real desktop
-   (>1366px) falls through to the 72px rule above, untouched — this tier exists
-   because iPad Pro already crosses the 64rem desktop breakpoint but still
-   reads too large at that heading size on the device itself. */
-@media (min-width: 64rem) and (max-width: 85.375rem) {
-  h1 {
-    font-size: 50.4px; /* 30% off 72px */
-  }
-}
-
-/* Contact page's own heading, 20% smaller than the shared h1 scale above at
-   every breakpoint — scoped to this class (not .hero h1) since .hero is
-   reused by agentic-ai/cases/power-bi-dashboards/trainingen too, and
-   only the contact page's heading was asked to shrink. */
+/* Contact page's own heading — ~80% of the shared h1 scale at every width,
+   same relationship the old step-scale version had, expressed as a scaled
+   clamp instead of 5 separate overrides. */
 .contact-heading {
-  font-size: 1.8rem; /* 20% smaller than 2.25rem */
-}
-
-@media (min-width: 40rem) {
-  .contact-heading {
-    font-size: 2.4rem; /* 20% smaller than 3rem */
-  }
-}
-
-@media (min-width: 48rem) {
-  .contact-heading {
-    font-size: 3rem; /* 20% smaller than 3.75rem */
-  }
-}
-
-@media (min-width: 64rem) {
-  .contact-heading {
-    font-size: 57.6px; /* 20% smaller than 72px */
-  }
-}
-
-/* Same iPad Pro tier as the shared h1 rule above, same 20%-off relationship. */
-@media (min-width: 64rem) and (max-width: 85.375rem) {
-  .contact-heading {
-    font-size: 40.32px; /* 20% smaller than 50.4px */
-  }
+  font-size: clamp(2rem, 4vw + 0.8rem, 4.5rem);
+  line-height: 1.05;
+  letter-spacing: var(--tracking-tighter);
 }
 
 h2 {
@@ -384,12 +373,25 @@ h2 {
 h3 {
   font-size: 1.375rem;
   line-height: 1.3;
-  font-weight: 600;
 }
 
-/* Verified from vuewer.com's .rich-content paragraph styling. */
+/* Inline headline-emphasis pattern — the shapes.co-patterned sans+serif-
+   italic signature. Markup: <em class="h-emph">...</em> inside any
+   heading, e.g. "Vertel wat u geregeld wilt hebben.
+   <em class="h-emph">Mowi zet het aan het werk.</em>" — only the emphasized
+   span switches font/style; the rest of the heading stays Plus Jakarta
+   Sans at its normal weight. Normal (not tight) tracking and a lighter
+   weight than the surrounding heading — Instrument Serif italic reads
+   cramped under the same -0.04em tracking a sans display face wants. */
+.h-emph {
+  font-family: var(--font-serif-emph);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: var(--tracking-normal);
+}
+
 .lede {
-  font-size: 1.125rem; /* 18px */
+  font-size: 1.125rem;
   font-weight: 500;
   color: var(--color-gray-600);
   line-height: 1.5;
@@ -397,8 +399,8 @@ h3 {
 
 @media (min-width: 40rem) {
   .lede {
-    font-size: 1.5rem; /* 24px */
-    line-height: calc(2 / 1.5); /* ~1.333 */
+    font-size: 1.5rem;
+    line-height: calc(2 / 1.5);
   }
 }
 
@@ -410,39 +412,43 @@ h3 {
   color: var(--color-gray-500);
 }
 
-/* --- Buttons -----------------------------------------------------------------
-   Verified from vuewer.com's actual button markup (Get Started / More Info):
-   fixed 48px height + 24px horizontal padding (not block padding), 16px
-   bold uppercase text, 180px min-width, and — confirmed by the absence of
-   any "rounded-*" class on their button — a genuinely sharp 0 border-radius.
-   Pill treatment is reserved for small tags/badges (.pill, .eyebrow). */
+/* Compact content heading — a card/section title too small for the hero h1
+   scale but that still needs to read as a real headline. Uses the /blog
+   content-heading token instead of a one-off hardcoded font-size. */
+.prose-heading {
+  font-size: var(--content-h1-size);
+  line-height: var(--content-h1-line-height);
+}
+
+/* --- Buttons -------------------------------------------------------------------
+   Full-pill geometry (--radius-pill) — the one deliberate "loud" shape on
+   the site, paired with the one loud color (--accent). Sentence case, not
+   uppercase (the old system's vuewer-style bold-uppercase label is gone). */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  height: 3rem; /* 48px */
-  padding-inline: 1.5rem; /* 24px */
-  min-width: 180px;
-  border-radius: 0;
-  font-size: 1rem; /* 16px */
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-wide);
+  height: 3.25rem;
+  padding-inline: 1.75rem;
+  border-radius: var(--radius-pill);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: var(--tracking-normal);
   white-space: nowrap;
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
   border: 1px solid transparent;
 }
 
-/* Found via real mobile testing (Playwright at 390px): vuewer's short
-   English labels ("GET STARTED") never wrap, but our longer Dutch CTAs
-   ("Ontdek in 30 minuten wat u kunt automatiseren") overflowed the
-   viewport with nowrap text and no way to shrink. Let them wrap and grow
-   past the fixed 48px height on narrow screens instead. */
+/* Buttons must wrap, not overflow, in narrow cards/columns — the same fix
+   the old .pricing-card buttons needed, generalized: below 30rem (or
+   inside any container narrower than the label needs), let the button grow
+   past its fixed height and wrap its text rather than spill past its
+   container's edge. */
 @media (max-width: 30rem) {
   .btn {
     height: auto;
-    min-height: 3rem;
+    min-height: 3.25rem;
     padding-block: 0.75rem;
     white-space: normal;
     text-align: center;
@@ -450,79 +456,70 @@ h3 {
 }
 
 .btn-primary {
-  background: var(--color-ink);
-  color: var(--color-white);
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.btn-primary:hover {
+  background: var(--accent-hover);
 }
 
 .btn-secondary {
-  background: var(--color-white);
-  color: var(--color-ink);
-  /* Own black border (unlike vuewer's border-none real button) — needed so
-     the button's own edge stays visible once it's mid-hover-translate and
-     no longer sitting flush against .btn-slot's border below; without it,
-     the white fill had no visible edge against the black slot revealed
-     behind it. */
-  border-color: var(--color-ink);
+  background: var(--surface);
+  color: var(--ink);
+  border-color: var(--border);
+}
+
+.btn-secondary:hover {
+  border-color: var(--ink);
 }
 
 .btn-block {
   width: 100%;
 }
 
-/* --- Magnetic-hover "slot" wrapper --------------------------------------------
-   Reproduced 1:1 from vuewer.com's own buttons, inspected live via DevTools:
-   each button actually sits inside a second, static, unmoving box exactly
-   its own size (their grandparent element — `border border-black`, plus
-   `bg-gray`, near-white, behind their black buttons, or `bg-black`, solid,
-   behind their white/gray ones). Only the visible button inside (this
-   project's existing .btn/.btn-primary/.btn-secondary, completely
-   unchanged) gets the magnetic translate in js/main.js, so on hover it
-   visibly slides a few px out of this fixed slot, leaving the border (and,
-   behind light buttons, a solid dark fill) exposed where it used to sit.
-   Markup: wrap the existing button in <span class="btn-slot">. */
+/* --- Magnetic-hover "slot" wrapper ---------------------------------------------
+   Ported from the old system: each button sits inside a second, static,
+   unmoving pill-shaped box exactly its own size — js/main.js's magnetic
+   hover only translates the visible .btn inside, so on hover it visibly
+   slides a few px out of this fixed slot. Slot itself is now pill-shaped
+   (--radius-pill) to match the button geometry, instead of the old square
+   box. Markup unchanged: wrap the existing button in <span class="btn-slot">. */
 .btn-slot {
   display: inline-flex;
-  border: 1px solid var(--color-ink);
-  background: var(--color-bg);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border);
+  background: var(--bg);
+  overflow: hidden;
 }
 
 .btn-slot:has(.btn-secondary) {
-  background: var(--color-ink);
+  background: var(--bg-band);
 }
 
-/* .btn-block buttons (e.g. contact-form submits) need their slot to grow
-   full-width too, not just the button inside it — otherwise the slot stays
-   shrink-to-fit around the button and the width:100% on .btn-block has
-   nothing to resolve against. */
 .btn-slot:has(.btn-block) {
   display: flex;
   width: 100%;
 }
 
-/* --- Site header --------------------------------------------------------------
-   A bordered, segmented bar inspired by vuewer.com's navbar: individual
-   cells (CTA, each nav link, logo) divided by hairline rules, a bold black
-   CTA cell, and uppercase nav labels — see reference/style-vuewer.md. Below
-   48rem it collapses to a compact [logo | hamburger] bar; the full nav + CTA
-   move into a slide-down mobile panel instead. */
+/* --- Site header ----------------------------------------------------------------
+   A bordered bar that floats inset from the viewport edge, same
+   segmented-cell structure as before (CTA / nav / logo, divided by
+   hairlines) but restyled: warm bone fill, --border-strong dividers
+   instead of solid black, --radius-card outer corners instead of square.
+   Below 48rem it collapses to a compact [logo | hamburger] bar; the full
+   nav + CTA move into a slide-down/up mobile panel instead. Class names,
+   breakpoints (47.9375rem / 48rem / 80rem) and structure are unchanged —
+   js/main.js and a later chrome-rewrite stage both depend on these
+   selectors staying stable. */
 .site-header {
   position: sticky;
-  /* Verified from vuewer.com: their floating header sits inset the same
-     48px from the top as from the sides at ≥64rem — top scales with
-     --container-pad instead of a fixed value, to match that at every
-     breakpoint (16px / 24px / 48px). */
   top: var(--container-pad);
   z-index: 50;
   padding-inline: var(--container-pad);
   transition: top 0.3s var(--ease-out);
 }
 
-/* js/main.js toggles this the moment window.scrollY > 0 (matching
-   vuewer.com's own x-init scroll listener) — once the page has scrolled at
-   all, the header pulls in tighter to the top instead of keeping its
-   original landing-page inset, so it overlaps less content while
-   scrolling. Desktop settles at a small fixed 10px; mobile goes all the
-   way to 0 (flush against the screen edge) per request. */
 .site-header.is-scrolled {
   top: 10px;
 }
@@ -538,51 +535,18 @@ h3 {
   margin-inline: auto;
   display: flex;
   align-items: stretch;
-  background: var(--color-bg);
-  border: 1px solid var(--color-header-line);
-  /* Square corners on purpose (no border-radius) — also means no
-     overflow:hidden is needed here, unlike hero-frame, which is what lets
-     the Service dropdown panel (an absolutely-positioned descendant)
-     render below the bar instead of being clipped. */
+  background: var(--bg);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-card);
+  overflow: hidden; /* now safe with rounded corners — the dropdown panel is positioned outside this box's own flow, see .nav-megamenu below */
   box-shadow: var(--shadow-sm);
 }
 
-/* At desktop widths the bar becomes a real 3-column grid using the exact
-   same 1fr 2.2fr 1fr proportions as .hero-frame-grid below it, so the CTA,
-   nav and logo cells genuinely line up with the hero's three columns
-   (not just the bar's outer width matching, which was already true) —
-   DOM order (cta, nav, wordmark) maps straight onto the three columns
-   with no explicit grid-column needed. Mobile keeps the simpler flex
-   [logo | hamburger] layout, unchanged. */
 @media (min-width: 48rem) {
   .header-bar {
     display: grid;
-    /* minmax(0, ...) on a PURE 1fr/2.2fr/1fr ratio, permanently — not just
-       at tablet widths. A bare (non-minmax) fr track's automatic minimum
-       is its content's min-content size, so at 1024px the old "revert to
-       bare 1fr/2.2fr/1fr at 64rem" rule let the CTA cell's nowrap text
-       force column 1 wider than its 1fr share while the logo cell's
-       smaller min-content left column 3 untouched — an asymmetric split
-       that no longer matched .hero-frame-grid's own pure 1fr/2.2fr/1fr
-       columns below it, breaking the vertical divider-line alignment
-       between header and hero. minmax(0, fr) removes that content-based
-       floor so both grids resolve to the identical proportional split at
-       every width, guaranteed — the tradeoff is that content sizing (CTA
-       nowrap, nav/logo full-size fonts) must itself be verified to fit
-       within that pure share, see the 80rem tier below. */
     grid-template-columns: minmax(0, 1fr) minmax(0, 2.2fr) minmax(0, 1fr);
-  }
-}
-
-/* Verified from vuewer.com's actual header: 78px tall. Cells had no
-   vertical padding of their own to measure against — min-height on the
-   bar itself (with align-items:stretch above) is what gets every cell to
-   that height uniformly, regardless of each cell's own content. Scoped to
-   the desktop bar only; the collapsed mobile [logo|hamburger] bar doesn't
-   need to match a measurement taken from vuewer's full desktop nav. */
-@media (min-width: 48rem) {
-  .header-bar {
-    min-height: 78px;
+    min-height: 4.5rem;
   }
 }
 
@@ -592,10 +556,6 @@ h3 {
   gap: 0.5rem;
 }
 
-/* The v2 logo artwork (a textured/halftone illustration, see CLAUDE.md) has
-   a wider, landscape ring icon and needs a bit more height than the old
-   clean-vector marks did, so the fine texture doesn't turn to mud at small
-   sizes. */
 .wordmark-icon {
   display: block;
   height: 28px;
@@ -608,7 +568,6 @@ h3 {
   width: auto;
 }
 
-/* Larger lockup used for the footer brand block */
 .wordmark-lg .wordmark-icon {
   height: 40px;
 }
@@ -617,24 +576,13 @@ h3 {
   height: 26px;
 }
 
-/* Logo cell — bordered/padded only when nested in the header bar, so the
-   same .wordmark markup stays plain when reused in the footer. Centered
-   and enlarged at desktop widths, since it's now a full grid column wide
-   (roughly 320px at 1440px) rather than an auto-width flex item.
-   .header-logo-cell (not .wordmark itself) is the actual grid/flex cell now
-   — it holds the dashboard-login icon button alongside the wordmark, so the
-   cell-level box styling (padding/border/centering) lives here instead,
-   leaving .wordmark itself the same plain icon+text row it's always been
-   (still reused as-is in the footer, which has no logo cell wrapper). */
 .header-bar .header-logo-cell {
   display: flex;
   align-items: center;
   gap: 0.625rem;
   flex-shrink: 0;
-  /* Compact at its tablet-tier default (0.875rem); the 64rem override
-     below restores the full 1.5rem once the desktop grid has room. */
   padding-inline: 0.875rem;
-  border-left: 1px solid var(--color-header-line);
+  border-left: 1px solid var(--border-strong);
 }
 
 @media (min-width: 48rem) {
@@ -642,16 +590,6 @@ h3 {
     justify-content: center;
   }
 
-  /* Split the cell instead of centering the pair as one unit, from the
-     first width the logo cell is actually a bordered/centered header cell
-     (48rem) — not just once it's full desktop size (80rem). Without this,
-     tablet widths (e.g. iPad mini, 768px) fell back to DOM order (button,
-     then wordmark), putting the login icon left of the logo instead of
-     right of it like desktop. The dashboard button moves to the cell's
-     right edge (order:2, flipping its left-first DOM/markup order) while
-     the wordmark grows to fill the leftover space (flex:1) and centers
-     itself within it — so the logo stays visually centered in "what's
-     left" after the button claims its own room on the right. */
   .header-bar .header-dashboard-btn {
     order: 2;
   }
@@ -663,9 +601,6 @@ h3 {
   }
 }
 
-/* Icon/text stay at their compact default size (28px/18px, see above) at
-   tablet widths — only enlarged once there's genuinely enough room (see
-   the 80rem note on .header-cta below for why that's 80rem, not 64rem). */
 @media (min-width: 80rem) {
   .header-bar .header-logo-cell {
     padding-inline: 1.5rem;
@@ -680,15 +615,12 @@ h3 {
   }
 }
 
-/* Dashboard-login button — a plain black icon (no background/border), just
-   large enough to sit comfortably next to the wordmark inside the logo
-   cell without a filled square competing with it visually. */
 .header-dashboard-btn {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  color: var(--color-ink);
+  color: var(--ink);
   transition: opacity 0.2s ease;
 }
 
@@ -696,12 +628,8 @@ h3 {
   opacity: 0.6;
 }
 
-/* Simple user/account glyph — mask so it inherits currentColor (black,
-   matching the wordmark's own ink) instead of needing a separate image
-   asset. Kept modest — smaller than the wordmark icon beside it — so the
-   pair reads as [small icon, logo] rather than two competing marks. */
 .header-dashboard-icon {
-  width: 1.15rem; /* 1rem + 15% */
+  width: 1.15rem;
   height: 1.15rem;
   background-color: currentColor;
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='8' r='4'/%3E%3Cpath d='M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7'/%3E%3C/svg%3E") center / contain no-repeat;
@@ -710,44 +638,15 @@ h3 {
 
 @media (min-width: 80rem) {
   .header-dashboard-icon {
-    width: 1.4375rem; /* 1.25rem + 15% */
+    width: 1.4375rem;
     height: 1.4375rem;
   }
 }
 
-/* CTA cell — the bold black "start" cell from the reference screenshot,
-   reworded to our own copy. Font-size matches the other nav cells so it
-   reads as one consistent row, not a smaller separate label — full 18px
-   only from 80rem up (see override below); compact 14px/no-nowrap by
-   default so the long Dutch label ("Gratis adviesgesprek") can wrap to two
-   lines rather than overflow its cell at tablet widths.
-
-   80rem, not 64rem: with .header-bar's grid now a pure content-immune
-   1fr/2.2fr/1fr split (see the 48rem media query above, added to fix
-   header/hero divider-line alignment), the CTA column's actual pixel share
-   at 1024-1279px is narrower than this cell's full-size nowrap text needs
-   — 80rem (1280px) is the first width where 1fr's share comfortably fits
-   "GRATIS ADVIESGESPREK" at 18px nowrap with room to spare. */
-/* Slot wrapper for .header-cta — same magnetic-hover "static box left
-   behind" treatment as .btn-slot above (see that comment for the full
-   vuewer explanation), adapted for a full-bleed grid cell instead of a
-   free-standing pill: from 48rem up, .header-cta-slot becomes the actual
-   grid item (taking over that role from .header-cta itself) and stretches
-   it to fill the cell via flex:1 below, so the slot's border/background
-   exactly track the cell's size. Only a border-right is needed at that
-   width — the slot's other three edges already sit exactly on
-   .header-bar's own outer border, so a full 4-sided border would just
-   double up on top of it.
-
-   display:contents below 48rem (and no flex:1 on .header-cta) is
-   deliberate: at that width .header-bar collapses to a totally different
-   compact [logo | hamburger] layout where .header-cta becomes a fixed
-   3.75rem icon-only button (see the max-width:47.9375rem override further
-   down) — flex:1's implicit flex-basis:0 would silently override that
-   fixed width. contents removes the slot from the box tree entirely below
-   48rem, so .header-cta participates in that layout exactly as if this
-   wrapper didn't exist (no visible slot there either, which is fine: touch
-   devices don't hover, so the effect isn't needed at that width anyway). */
+/* CTA cell — carries the ONE loud accent color in the header. Slot wrapper
+   (.header-cta-slot) mirrors .btn-slot's static-box-left-behind mechanism
+   above; display:contents below 48rem removes it from the box tree
+   entirely there, matching the old system's reasoning exactly. */
 .header-cta-slot {
   display: contents;
 }
@@ -755,7 +654,7 @@ h3 {
 @media (min-width: 48rem) {
   .header-cta-slot {
     display: flex;
-    border-right: 1px solid var(--color-ink);
+    border-right: 1px solid var(--border-strong);
   }
 }
 
@@ -764,14 +663,16 @@ h3 {
   align-items: center;
   justify-content: center;
   padding-inline: 0.875rem;
-  background: var(--color-ink);
-  color: var(--color-white);
+  background: var(--accent);
+  color: var(--accent-ink);
   font-size: 0.875rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-wide);
+  font-weight: 600;
   text-align: center;
-  transition: box-shadow 0.2s ease;
+  transition: background-color 0.2s ease;
+}
+
+.header-cta:hover {
+  background: var(--accent-hover);
 }
 
 @media (min-width: 48rem) {
@@ -783,14 +684,11 @@ h3 {
 @media (min-width: 80rem) {
   .header-cta {
     padding-inline: 1.5rem;
-    font-size: 1.125rem;
+    font-size: 1.0625rem;
     white-space: nowrap;
   }
 }
 
-/* Tablet tier swaps in the shorter "Adviesgesprek" label instead of the
-   full "Gratis adviesgesprek" — the compact cell at this tier has less
-   room, and the shorter word fits on one line instead of wrapping. */
 .header-cta-short {
   display: none;
 }
@@ -809,28 +707,14 @@ h3 {
   display: none;
 }
 
-/* Hidden by default like .header-cta-mobile above — .main-nav is
-   display:contents at desktop widths, which would otherwise let this leak
-   out as a stray flow item in the header-bar grid instead of staying
-   inside the mobile sheet. Made visible only within the mobile media query
-   below, where it's given its actual full-width styling. */
 .header-dashboard-mobile {
   display: none;
 }
 
-/* Nav generates no box of its own (display: contents) so its two
-   <ul class="nav-group"> lists become cells directly in the header bar's
-   layout — mobile's stacked column or desktop's even flex row below. */
 .main-nav {
   display: contents;
 }
 
-/* Desktop: .main-nav is the grid's middle column (see .header-bar above),
-   a real 4-column grid instead of flattening. Both nav-groups are flattened
-   too (see .nav-group below) so all 4 items sit as direct grid children
-   here — equal 1fr tracks give every item the exact same cell width, so
-   each one's hover box (which fills its cell, see the item rule below) is
-   an identical size instead of hugging whatever width its own text needs. */
 @media (min-width: 48rem) {
   .main-nav {
     display: grid;
@@ -839,107 +723,59 @@ h3 {
   }
 }
 
-/* Flattened at every width: mobile stacks the <li>s directly in .main-nav's
-   column; desktop spreads them directly in its even space-between row
-   above. The original 2+2 grouping (Service+Pricing | Cases+Contact) now
-   shows up only as the divider line below, not as its own spacing block. */
 .nav-group {
   display: contents;
 }
 
-/* Scoped to "li a" (not just ".main-nav a") on purpose: .header-cta-mobile
-   is also an <a> that lives directly inside <nav>, and an unscoped
-   ".main-nav a" selector would out-specificity its own "display: none" and
-   force it visible on desktop. font-size verified from vuewer.com's actual
-   nav cells (18px/700), up from an earlier estimate of 13px — their short
-   English words afford it, and ours are short now too post-restructure. */
-/* Scoped with ">" child combinators (not the old descendant "li a") so
-   these rules only reach the 4 top-level items (Service/Pricing/Cases/
-   Contact) — not the nested "Service" dropdown's own links, which are
-   also technically ".main-nav ... li a" but have their own separate
-   styling further down and shouldn't inherit this border/hover trick. */
 .main-nav > .nav-group > li > a,
 .main-nav .nav-dropdown-trigger {
   display: flex;
   align-items: center;
   gap: 0.375rem;
-  /* 14px by default (tablet-safe); bumped to the full 18px at 64rem+, see
-     override below — 18px items didn't leave the row enough room between
-     48rem and 64rem. */
   font-size: 0.875rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-wide);
-  color: var(--color-text);
+  font-weight: 600;
+  color: var(--ink);
   background: none;
-  /* Transparent 1px border reserves the space a solid border takes on
-     hover (see below) so it doesn't shift layout when it appears. */
-  border: 1px solid transparent;
+  border: 1px solid transparent; /* reserves the hover border's space so nothing shifts when it appears */
   padding: 0;
   font-family: inherit;
   cursor: pointer;
   transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-/* Verified from vuewer.com's own nav items: hover is a faint black tint
-   (their bg-black/3) plus a border that fades in from transparent to
-   solid — no color change, no orange. Active-page state reuses this exact
-   same box (not a color change) so it stays permanently "hovered"-looking
-   in black rather than switching to the accent color. */
+/* Hover/active: a soft accent tint + border, not a color change on the
+   text itself — active-page state reuses this exact box so it stays
+   permanently "current"-looking. */
 .main-nav > .nav-group > li > a:hover,
 .main-nav .nav-dropdown-trigger:hover,
 .main-nav > .nav-group > li > a[aria-current="page"],
 .main-nav .nav-dropdown-trigger[aria-current="page"] {
-  background: rgba(0, 0, 0, 0.03);
-  border-color: var(--color-text);
+  background: var(--accent-soft);
+  border-color: var(--accent);
 }
 
-/* --- Nav dropdown ("Products" mega-menu) -----------------------------------
-   Opens on hover at desktop/tablet widths (see the min-width:48rem block
-   below) plus click (main.js), which stays as the only way in on touch and
-   the only accessible way in via keyboard. Also closes on Esc (main.js).
-   .nav-megamenu is the panel itself — two columns (.nav-megamenu-col), each
-   an eyebrow-style label (.nav-megamenu-label) over a list of items; real
-   links get their own hover/current-page treatment, plain <li> text (the
-   non-clickable "Automations" items) intentionally gets none. */
 .nav-dropdown {
   position: relative;
 }
 
-/* height:100% only makes sense in the desktop horizontal row (fills the
-   header-bar's height, matching sibling cells) — on mobile the nav is a
-   vertical stack instead, where height:100% on a flex item caused it to
-   balloon and eat most of the panel as blank space. */
 @media (min-width: 48rem) {
   .nav-dropdown {
     height: 100%;
   }
 
-  /* Each item fills its whole 1fr grid cell (width and height) with its
-     text centered inside — that's what makes the hover box (below) an
-     identical-size rectangle for all 4 items, rather than a box sized to
-     however wide that item's own words happen to be. */
   .main-nav > .nav-group > li > a,
   .main-nav .nav-dropdown-trigger {
     height: 100%;
     width: 100%;
     justify-content: center;
     padding-inline: 0.625rem;
-    /* Deliberately NOT white-space: nowrap, if a long label is ever added
-       back here. This row is a fixed 4-column grid, so an item too wide for
-       its cell doesn't just wrap — unwrapped, it overruns and collides with
-       its neighbour. Measured 2026-08-11 with a "Contact sales" item: nowrap
-       made it overlap "RESOURCES" from 768px to ~1280px, strictly worse than
-       the two-line wrap it was meant to fix. That label was later shortened
-       to "Demo", which fits on one line at every width and removed the
-       problem at its source — the right lever is a shorter label, not nowrap. */
   }
 }
 
 @media (min-width: 80rem) {
   .main-nav > .nav-group > li > a,
   .main-nav .nav-dropdown-trigger {
-    font-size: 1.125rem; /* 18px, restored from the 14px tablet default */
+    font-size: 1.0625rem;
     padding-inline: 1.5rem;
   }
 }
@@ -958,10 +794,11 @@ h3 {
   transform: rotate(225deg) translateY(-1px);
 }
 
-/* Base/mobile: shown via a max-height accordion, same mechanism the old
-   flat dropdown used — the panel is a normal in-flow grid item here (see
-   the max-width:47.9375rem block below), so it needs its layout footprint
-   to genuinely collapse to zero when closed, not just turn invisible. */
+/* Base/mobile: max-height accordion, same mechanism as before. NOTE: a
+   later stage replaces the two-column Products layout below with a single
+   Product-dropdown-with-descriptions — this CSS keeps that old two-column
+   layout functionally working (restyled to new tokens) but gets no further
+   investment beyond that per this stage's brief. */
 .nav-megamenu {
   max-height: 0;
   overflow: hidden;
@@ -969,15 +806,9 @@ h3 {
 }
 
 .nav-dropdown-trigger[aria-expanded="true"] + .nav-megamenu {
-  max-height: 26rem; /* generous enough for two columns of wrapped labels at mobile widths */
+  max-height: 26rem;
 }
 
-/* 0.859375rem = 0.6875rem * 1.25 — 25% larger than the original eyebrow
-   size, per request, applied to both desktop and mobile since neither
-   breakpoint overrides font-size here. font-weight:600 (not 700) matches
-   the site's actual .eyebrow component (see that class further up this
-   file) — this label is styled as one of those, so it should carry the
-   exact same weight, not a bolder one-off value. */
 .nav-megamenu-label {
   font-size: 0.859375rem;
   font-weight: 600;
@@ -995,15 +826,10 @@ h3 {
   gap: 0.5rem;
 }
 
-/* Plain, non-link <li> text (the "Automations" placeholder items) — styled
-   identically to the real links below (same color, same hover), not dimmed
-   or "greyed out": these read as just as clickable as the shipped features,
-   even though there's genuinely no href/destination behind them yet
-   (per request — a deliberate choice, not an oversight). */
 .nav-megamenu-col li {
   font-size: 0.9375rem;
   line-height: 1.3;
-  color: var(--color-text);
+  color: var(--ink);
   cursor: pointer;
   transition: color 0.2s ease, background-color 0.2s ease;
 }
@@ -1018,29 +844,18 @@ h3 {
 @media (min-width: 48rem) {
   .nav-megamenu {
     position: absolute;
-    /* Flush against the trigger (no gap) — .nav-dropdown's own box (its
-       hover target) ends exactly here since both it and the trigger are
-       height:100% of the same row, so a gap of even 1px left a dead pixel
-       strip the cursor could pass through while moving from the trigger
-       down into the panel, dropping the :hover and closing it mid-move. */
     top: 100%;
     left: 0;
     z-index: 60;
     display: flex;
-    /* Same background, border weight/color and square corners as
-       .header-bar itself (see var(--color-header-line)/--radius-lg near the
-       top of this file) — reads as a natural extension of the header bar
-       dropping down, not a separate floating "card" component. */
-    background: var(--color-bg);
-    border: 1px solid var(--color-header-line);
-    border-radius: 0;
+    background: var(--bg);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-card);
     box-shadow: var(--shadow-md);
     padding: 1.25rem 0;
     min-width: 27rem;
     max-height: none;
     overflow: visible;
-    /* Fade + small translate, not the mobile max-height accordion — see the
-       prefers-reduced-motion override further down for the no-motion case. */
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
@@ -1049,19 +864,10 @@ h3 {
       visibility 0s linear 0.18s;
   }
 
-  /* The 27rem min-width above is sized for Products' two labelled columns.
-     Resources is one column of two short links, where that same floor leaves
-     most of the panel empty — this narrows it to roughly the trigger's own
-     width instead. Only the floor changes; the panel still grows to fit if a
-     longer item is added later. */
   .nav-megamenu-narrow {
     min-width: 12rem;
   }
 
-  /* Opens on hover at desktop/tablet widths (mouse/trackpad context). The
-     click-based JS toggle (main.js) stays wired alongside it — hover has no
-     equivalent on touch, and keyboard users (Tab + Enter/Space) still need
-     click to open/close it. */
   .nav-dropdown-trigger[aria-expanded="true"] + .nav-megamenu,
   .nav-dropdown:hover .nav-megamenu {
     opacity: 1;
@@ -1082,9 +888,6 @@ h3 {
     padding-inline: 1.5rem;
   }
 
-  /* var(--color-gray-500), not --color-text-muted — matches the site's
-     actual .eyebrow component color exactly (see that class further up
-     this file), rather than a darker, browner one-off muted tone. */
   .nav-megamenu-label {
     color: var(--color-gray-500);
   }
@@ -1093,26 +896,20 @@ h3 {
     white-space: nowrap;
   }
 
-  /* Identical hover recipe to the top-level nav items themselves
-     (.main-nav > .nav-group > li > a:hover above): a transparent 1px border
-     reserves the space a solid one takes on hover, so nothing shifts when
-     it appears — no color change, no rounded corners, no orange, ever.
-     Applies to both the real links AND the plain "Automations" items (see
-     the base rule above) — same treatment for both, deliberately, so the
-     placeholder items don't read as visibly disabled. */
   .nav-megamenu-col li a,
   .nav-megamenu-col li:not(:has(a)) {
     border: 1px solid transparent;
     padding: 0.3125rem 0.5rem;
     margin: -0.3125rem -0.5rem;
+    border-radius: var(--radius-card);
     transition: background-color 0.3s ease, border-color 0.3s ease;
   }
 
   .nav-megamenu-col li a:hover,
   .nav-megamenu-col li a[aria-current="page"],
   .nav-megamenu-col li:not(:has(a)):hover {
-    background: rgba(0, 0, 0, 0.03);
-    border-color: var(--color-text);
+    background: var(--accent-soft);
+    border-color: var(--accent);
   }
 }
 
@@ -1122,9 +919,6 @@ h3 {
   }
 }
 
-/* Width verified against vuewer.com's own mobile header cells at a true
-   390px width (measured live, not guessed from their desktop layout):
-   their hamburger/CTA/language cells are ~59px each — 3.75rem here. */
 .nav-toggle {
   display: none;
   flex-direction: column;
@@ -1134,7 +928,7 @@ h3 {
   width: 3.75rem;
   flex-shrink: 0;
   border: none;
-  border-left: 1px solid var(--color-header-line);
+  border-left: 1px solid var(--border-strong);
   background: none;
 }
 
@@ -1142,7 +936,7 @@ h3 {
   display: block;
   width: 22px;
   height: 2px;
-  background: var(--color-ink);
+  background: var(--ink);
   transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
@@ -1158,57 +952,33 @@ h3 {
   transform: translateY(-7px) rotate(-45deg);
 }
 
-/* This header packs a CTA + 5 nav cells + logo — wider than the site's usual
-   56rem breakpoint needs to fit comfortably, so it collapses earlier. */
-/* Mobile header + menu, reworked to match vuewer.com's actual mobile
-   pattern (checked live at 390–440px, not guessed from the desktop view):
-   - Every header cell stays visible (hamburger, CTA, logo) instead of
-     hiding the CTA — reordered via flex `order` so it reads left-to-right
-     as [hamburger][CTA][logo]. DOM order is untouched (cta, nav, wordmark,
-     toggle everywhere else in the markup), so this is CSS-only.
-   - The CTA collapses to icon-only (a calendar glyph) at this width,
-     mirroring vuewer's own icon-only "Start" cell on narrow mobile.
-   - The nav panel is a black bottom sheet flush to the screen edges
-     (vuewer's is a `fixed inset-0 ... items-end` overlay whose panel
-     sits at the bottom, not a top-anchored floating card like this site
-     had before), with a dimmed backdrop behind it and a 2-column grid of
-     bold-uppercase links with hairline dividers that invert on hover/tap
-     — all verified against vuewer's live compiled classes. */
+/* Mobile header + menu — matches vuewer-era live testing at 390-440px,
+   ported unchanged structurally: hamburger/CTA/logo stay visible
+   (reordered via flex `order`, DOM order untouched), nav panel is a
+   bottom sheet flush to the screen edges with a dimmed backdrop. Restyled
+   to the new dark-inverted tokens (--bg-inverted/--ink-inverted) instead
+   of flat black/white — same "this is an overlay, it can go dark" logic
+   as the trust/CTA bands elsewhere on the site. */
 @media (max-width: 47.9375rem) {
-  /* Height verified against vuewer's own mobile header cells at a true
-     390px width: ~57px tall, noticeably more generous than a bare-minimum
-     icon-height row. */
   .header-bar {
     min-height: 3.5625rem;
   }
 
   .header-bar .header-logo-cell {
     order: 2;
-    /* margin-inline:auto (not margin-left:auto) centers the cell within
-       whatever space is left after the fixed-width toggle/CTA cells,
-       instead of pushing it flush to the right edge. */
     margin-inline: auto;
     padding-inline: 1.0625rem;
     border-left: none;
   }
 
-  /* 34px = 40px - 15%, per request. clamp() so it scales down on the
-     narrowest phones (≤~360px) instead of overflowing — the wordmark cell's
-     available width shrinks faster than the fixed-width toggle/CTA cells
-     beside it. */
   .header-bar .wordmark-icon {
     height: clamp(28px, 9vw, 34px);
   }
 
-  /* Same height as the icon (not the smaller desktop 26px) — grown to
-     match rather than shrinking the icon down to the text. */
   .header-bar .wordmark-text {
     height: clamp(28px, 9vw, 34px);
   }
 
-  /* The icon button is desktop/tablet-only — its mobile equivalent is the
-     full-width link at the bottom of the nav sheet (.header-dashboard-mobile
-     below), not a second copy squeezed into this already-tight compact bar. */
   .header-dashboard-btn {
     display: none;
   }
@@ -1221,7 +991,6 @@ h3 {
     position: relative;
   }
 
-  /* A plain arrow-right glyph — swapped in for the earlier calendar icon. */
   .header-cta::before {
     content: "";
     width: 24px;
@@ -1235,60 +1004,37 @@ h3 {
     display: flex;
     order: 0;
     border-left: none;
-    border-right: 1px solid var(--color-header-line);
+    border-right: 1px solid var(--border-strong);
   }
 
-  /* Dimmed backdrop behind the open sheet — a body-level pseudo-element
-     instead of a real DOM node, toggled by the same "nav-open" class the
-     toggle button's click handler already applies to <body> (js/main.js).
-     Sits below the header's z-index:50 so the header (and its now-open
-     hamburger-as-X) stays reachable to close the menu. */
   body.nav-open::after {
     content: "";
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(28, 23, 18, 0.45);
     z-index: 44;
   }
 
   .main-nav {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    /* dense backfills the gap left when the Products row (see .nav-dropdown
-       below) forces a full-width row — Tarieven, the next item in source
-       order, pulls back up to sit beside Products instead of being pushed
-       down a row, which is what keeps this a clean 2x2 instead of leaving
-       a hole. */
     grid-auto-flow: dense;
     align-content: start;
     position: fixed;
     inset: auto 0 0 0;
     z-index: 45;
-    background: var(--color-ink);
-    /* Verified on vuewer.com: the sheet's black background is edge-to-edge,
-       but its actual link grid is inset by the same amount as the header's
-       own padding-inline (--container-pad, 16px at this width) — so the
-       grid's left/right edges line up vertically with the header cells
-       above it, instead of running flush to the screen edge. */
+    background: var(--bg-inverted);
     padding-inline: var(--container-pad);
-    /* Bottom matches the left/right inset (--container-pad) instead of
-       sitting flush against the screen edge — top stays 0 since the
-       border-top divider below already marks that edge. */
     padding-block: 0 var(--container-pad);
     border: none;
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    border-top: 1px solid var(--border-inverted);
     border-radius: 0;
     max-height: calc(100dvh - 6rem);
     overflow-y: auto;
     transform: translateY(100%);
-    /* visibility is delayed on close (transition-delay matches the 0.3s
-       slide) so it stays visible throughout the closing animation, but
-       switches instantly on open — this keeps the closed sheet fully out
-       of the accessibility tree and unclickable, not just visually
-       offscreen via transform. */
     visibility: hidden;
     transition: transform 0.3s var(--ease-out), visibility 0s linear 0.3s;
-    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 -10px 30px rgba(28, 23, 18, 0.3);
   }
 
   .main-nav.is-open {
@@ -1297,15 +1043,6 @@ h3 {
     transition: transform 0.3s var(--ease-out);
   }
 
-  /* A true 2x2 (Products+Tarieven / Cases+Contact), matching vuewer's own
-     flat Services/Tarieven/Over/Contact grid exactly — not 1-then-2-then-1.
-     .nav-dropdown (the <li> wrapping the trigger + mega-menu) goes
-     display:contents here so the trigger and the panel become independent
-     grid items in their own right: the trigger stays a normal half-width
-     cell (sits next to Tarieven), while the panel spans the full width and
-     drops into its own row below when expanded — collapsed (max-height:0)
-     it takes zero visible space, so by default this reads as an ordinary
-     4-cell grid. */
   .nav-dropdown {
     display: contents;
   }
@@ -1314,144 +1051,77 @@ h3 {
     grid-column: 1 / -1;
   }
 
-  /* Matches the base rule's ".main-nav > .nav-group > li > a" selector
-     specificity exactly (see the similar note near .nav-megamenu-col li a
-     below) — a plainer ".main-nav li a" loses the color override to that
-     base rule's black text, which on this new black panel meant invisible
-     black-on-black text. */
   .main-nav > .nav-group > li > a,
   .main-nav .nav-dropdown-trigger {
     font-size: 1.0625rem;
-    color: var(--color-white);
+    color: var(--ink-inverted);
     justify-content: center;
     text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: 1px solid var(--border-inverted);
     padding: 1.75rem 1rem;
     min-height: 5rem;
   }
 
-  /* Same recipe as the sub-menu items inside the Products mega-menu below
-     (.nav-megamenu-col li a:hover) — a soft grey tint, not a full white
-     invert. Reused deliberately (was var(--color-white) bg / ink text
-     before) since the softer grey reads as easier on the eye and now the
-     whole mobile sheet, top-level cells and sub-items alike, shares one
-     consistent hover/active treatment instead of two different ones.
-     border-color explicitly reset to match the cell's own resting border
-     (rgba(255,255,255,.15), same as every other cell) — the desktop/base
-     version of this same selector (line ~798) sets border-color to
-     var(--color-text) (black) for its own light-background hover, and
-     without an override here that black leaked straight through at mobile
-     widths too, on a black background, looking like a broken/missing
-     border on whichever cell was active. */
   .main-nav > .nav-group > li > a:hover,
   .main-nav .nav-dropdown-trigger:hover,
   .main-nav > .nav-group > li > a[aria-current="page"],
   .main-nav .nav-dropdown-trigger[aria-current="page"] {
-    background: rgba(255, 255, 255, 0.08);
-    color: var(--color-white);
-    border-color: rgba(255, 255, 255, 0.15);
+    background: rgba(250, 246, 239, 0.08);
+    color: var(--ink-inverted);
+    border-color: var(--border-inverted);
   }
 
   .nav-dropdown-trigger {
     width: 100%;
   }
 
-  /* Matches the original single-column dropdown's own look exactly (full-
-     width flowing rows divided by hairlines, not individually boxed) —
-     just split into two columns side by side, with a vertical line down
-     the middle instead of one long list. "Platform" and "Automations"
-     each get their own label on top. */
   .nav-megamenu {
     display: flex;
   }
 
-  /* border-top:none — the panel's own top edge sits flush against the
-     Products/Tarieven row's own bottom border above it, so a second border
-     here would just double up on top of that existing line. */
   .nav-dropdown-trigger[aria-expanded="true"] + .nav-megamenu {
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: 1px solid var(--border-inverted);
     border-top: none;
   }
 
   .nav-megamenu-col {
-    position: relative; /* anchors .nav-megamenu-scrollbar below */
+    position: relative;
     flex: 1;
-    min-width: 0; /* lets long item text actually wrap instead of overflowing its column */
+    min-width: 0;
   }
 
-  /* Products has two columns, so flex:1 gives each a 50% half that lines up
-     with the 2-up nav grid above. Resources has one, and flex:1 stretched it
-     to the full width — its items then sat wider than every other row in the
-     sheet. Pinning a lone column to the same half keeps single- and
-     two-column panels aligned with each other and with the nav grid.
-     :only-child rather than a class, so any future one-column menu inherits
-     it without needing to know about this rule. */
   .nav-megamenu-col:only-child {
     flex: 0 0 50%;
-    /* Continues the vertical grid line down from the RESOURCES|DEMO cell
-       divider above. Two-column panels get this line from
-       ".nav-megamenu-col + .nav-megamenu-col"'s border-left, which by
-       definition never matches a lone column — without it the Resources panel
-       had an open right-hand side and stopped tracking the grid. */
-    border-right: 1px solid rgba(255, 255, 255, 0.15);
+    border-right: 1px solid var(--border-inverted);
   }
 
-  /* Overrides the base rule's gap:0.5rem — rows are separated by hairline
-     borders here (see .nav-megamenu-col li below), not empty space. */
   .nav-megamenu-col ul {
     gap: 0;
   }
 
-  /* The vertical line down the middle. */
   .nav-megamenu-col + .nav-megamenu-col {
-    border-left: 1px solid rgba(255, 255, 255, 0.15);
+    border-left: 1px solid var(--border-inverted);
   }
 
-  /* Smaller than the shared/desktop size (0.859375rem) — the 25% bump
-     requested for both breakpoints read as too big specifically at mobile
-     widths, so this reverts just the mobile label back to its original
-     pre-bump size while desktop keeps the larger one. Horizontal padding
-     matches .nav-megamenu-col li's own 0.5rem (not the old 1rem) so
-     "PLATFORM"/"AUTOMATIONS" lines up with the item text directly below
-     it instead of sitting further inset. Top/bottom trimmed down too — the
-     original 0.75rem/0.5rem left more vertical air above/below the label
-     than it needed. */
   .nav-megamenu-label {
     font-size: 0.6875rem;
     padding: 0.5rem 0.5rem 0.25rem;
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--ink-inverted-muted);
   }
 
-  /* Full-width rows, hairline dividers BETWEEN items only (not before the
-     first one, right under the label, or boxing each item individually —
-     see the reference screenshot this was built against). Horizontal
-     padding trimmed from 1rem to 0.5rem specifically to reclaim room for a
-     bigger font — 0.875rem is the largest size that still keeps every
-     item, including "Workflow Automation" and "Invoice processing", on one
-     line at 360px with that smaller padding (0.75rem padding only allowed
-     up to 0.8125rem; going below 0.5rem gained nothing further until
-     0.25rem, which felt too tight). Same brightness + hover for the plain
-     "Automations" items as the real links (see the base rule above) — not
-     dimmed, so they don't read as disabled. */
   .nav-megamenu-col li {
     font-size: 0.875rem;
     line-height: 1.2;
-    color: rgba(255, 255, 255, 0.85);
+    color: rgba(250, 246, 239, 0.85);
     padding: 0.75rem 0.5rem;
   }
 
   .nav-megamenu-col li:not(:first-child) {
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    border-top: 1px solid var(--border-inverted);
   }
 
-  /* Closes off the shorter column. Rows are separated by border-top, so the
-     last item of a column has no line under it — fine for the tallest column,
-     whose last row ends at the panel's own bottom border, but the Agents
-     column ("Email", "Call") is one row shorter than Platform and just faded
-     into empty space. This continues the Platform column's own row divider
-     straight across, since equal row heights put them on the same line. */
   .nav-megamenu-col li:last-child {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    border-bottom: 1px solid var(--border-inverted);
   }
 
   .nav-megamenu-col li a {
@@ -1464,49 +1134,18 @@ h3 {
   .nav-megamenu-col li a:hover,
   .nav-megamenu-col li a[aria-current="page"],
   .nav-megamenu-col li:not(:has(a)):hover {
-    background: rgba(255, 255, 255, 0.08);
-    color: var(--color-white);
+    background: rgba(250, 246, 239, 0.08);
+    color: var(--ink-inverted);
   }
 
-  /* Matching column heights: the shorter "Platform" list's rendered height
-     becomes a max-height cap on "Automations" (which has more items and
-     would otherwise run much longer) — set as an inline style by
-     syncMegaMenuColumnHeights() in main.js, since it depends on actual
-     rendered text-wrap/line-count at the current viewport width, not a
-     value CSS alone can express. This just supplies the scrollbar/clip
-     behavior once JS sets that height.
-
-     The bottom edge fades out (mask-image) as a "there's more below, scroll
-     to see it" cue, since the exact-height cap otherwise clips cleanly
-     right at an item boundary and reads as a complete, 3-item list rather
-     than a cut-off one. Removed once actually scrolled to the end
-     (.is-at-bottom, toggled by the same function in main.js) so the last
-     item doesn't stay permanently half-faded after the user has already
-     scrolled past it.
-
-     Percentage-based stops, not a fixed rem distance from the edge, so this
-     scales with the list's actual rendered height rather than a px/rem
-     guess that only happens to line up right at one particular height.
-     Row 3 (the last visible row, of 3 equal rows) spans 66.67%-100% of the
-     total list height, i.e. it's 33.33% tall — fading exactly 60% of THAT
-     row's own height (not 60% of the whole list) means the fade must start
-     60% of 33.33% = 20 points before the bottom, i.e. at 100% - 20% = 80%.
-     (83% only faded row 3's bottom half — too slight; 70% faded ~90% of
-     the row — too much; 80% = 60% of the row.) Rows 1-2 stay fully solid
-     regardless — only row 3 itself ever fades. */
+  /* Column-height sync (Platform vs Automations) — set as an inline style
+     by syncMegaMenuColumnHeights() in main.js at runtime; this just
+     supplies the scrollbar/clip/fade behavior once JS sets that height. */
   .nav-megamenu-col ul.nav-megamenu-scroll {
     overflow-y: auto;
     overscroll-behavior: contain;
     -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
     mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-    /* The native scrollbar is hidden — iOS Safari always auto-hides it
-       regardless of CSS and flashes it only during an active scroll
-       gesture, with no override available, so it can't be relied on as a
-       permanent indicator. .nav-megamenu-scrollbar below is a custom
-       track/thumb we draw and position ourselves instead (see
-       ensureScrollIndicator() in main.js), which works the same on every
-       platform. Hiding the native one here avoids the two showing up side
-       by side on browsers that *would* have honored scrollbar-width. */
     scrollbar-width: none;
   }
 
@@ -1514,54 +1153,15 @@ h3 {
     display: none;
   }
 
-  /* right:0 — flush against the column/panel's own inner edge (the panel
-     has zero padding of its own, just its 1px border, see the open-state
-     rule above), not inset from it; an earlier 0.125rem gap left a sliver
-     of empty space between the border and the indicator that looked
-     unintentional. Kept subtle on purpose (dim, not bright white) — it
-     only needs to register as "this scrolls", not compete for attention
-     with the actual menu items. */
-  /* TEMPORARILY HIDDEN (Sal, 2026-08-11): with only two Agents items the list
-     no longer overflows, so the indicator was drawing a rail next to content
-     that never scrolls. Hidden here rather than by ripping out
-     ensureScrollIndicator() in main.js — the menu is expected to grow past the
-     cap again, and this is a one-line revert when it does. Everything else
-     (the JS, the mask fade, .nav-megamenu-scroll) is left wired and working. */
-  .nav-megamenu-scrollbar {
-    display: none;
-
-    position: absolute;
-    right: 0;
-    width: 3px;
-    background: rgba(255, 255, 255, 0.06);
-    pointer-events: none;
-  }
-
-  .nav-megamenu-scrollbar-thumb {
-    position: absolute;
-    left: 0;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.2);
-  }
-
   .nav-megamenu-col ul.nav-megamenu-scroll.is-at-bottom {
     -webkit-mask-image: none;
     mask-image: none;
   }
 
-  /* The header's own CTA is visible at all times now (even with the sheet
-     open, since the sheet only covers the bottom portion of the screen),
-     so this in-panel duplicate — sized for the old cream card, styled as
-     a solid-black button that would vanish against the new black sheet —
-     is redundant rather than reworked. */
   .main-nav .header-cta-mobile {
     display: none;
   }
 
-  /* Full-width link at the very bottom of the sheet — same bordered/
-     invert-on-hover language as the nav cells above it, but its own row
-     (grid-column: 1/-1) since it's a single standalone action, not one of
-     the four-item Service/Tarieven/Cases/Contact grid. */
   .header-dashboard-mobile {
     grid-column: 1 / -1;
     display: flex;
@@ -1571,277 +1171,43 @@ h3 {
     margin-top: 0.75rem;
     padding: 1.25rem 1rem;
     font-size: 1.0625rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: var(--tracking-wide);
-    color: var(--color-white);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    font-weight: 600;
+    color: var(--ink-inverted);
+    border: 1px solid var(--border-inverted);
+    border-radius: var(--radius-card);
   }
 
   .header-dashboard-mobile:hover {
-    background: var(--color-white);
-    color: var(--color-ink);
-    border-color: var(--color-white);
-  }
-}
-
-/* --- Hero frame -----------------------------------------------------------
-   A bordered block that continues the header's grid language down through
-   the hero and the client-logo strip below it (see reference screenshot
-   from vuewer.com): empty margin columns flank a centered content column,
-   divided by the same hairline rule used in the header bar, with the logo
-   strip in the same frame below a horizontal divider. */
-/* Fix: .hero-frame previously had no inset of its own — below the 1600px
-   container cap it sat flush against the viewport edges (measured: exactly
-   100vw wide) while .site-header correctly inset via padding-inline on its
-   wrapper. This wrapper mirrors that same site-header/header-bar pattern. */
-.hero-frame-wrap {
-  padding-inline: var(--container-pad);
-}
-
-.hero-frame {
-  max-width: var(--container-width);
-  margin-inline: auto;
-  margin-top: 2rem;
-  border: 1px solid var(--color-header-line);
-  border-radius: var(--radius-2xl);
-  overflow: hidden;
-  background: var(--color-bg);
-}
-
-/* Measured: on desktop, .hero-frame's top and .header-bar's bottom sit
-   exactly 16px into *negative* space (-16px) — .site-header's own box is
-   taller than header-bar itself and, being position:sticky with a
-   z-index, visually sits on top of that overlap, masking it so the hero
-   reads as flush against the header. Below the header's own breakpoint,
-   margin-top:2rem pushed the hero well past that overlap into genuinely
-   visible empty space instead. margin-top:0 here lands mobile at the
-   exact same -16px relationship desktop already has (verified), so it
-   gets masked the same way and reads flush too.
-
-   The 48rem-63.9375rem tablet tier has its own shorter header-bar height
-   (compact CTA/nav sizing, see the header rules above), which throws that
-   match off — measured at +8px (a real visible gap) instead of -16px at
-   this tier, hence the separate override below landing it back on -16px. */
-@media (max-width: 47.9375rem) {
-  .hero-frame {
-    margin-top: 0;
-  }
-}
-
-@media (min-width: 48rem) and (max-width: 63.9375rem) {
-  .hero-frame {
-    margin-top: 0.5rem;
-  }
-}
-
-/* minmax(0, ...) matching .header-bar's own grid exactly (see 48rem media
-   query above it) — the header and hero frame share one continuous set of
-   vertical divider lines top to bottom, and only stay aligned at every
-   width if both grids resolve their fractions the same content-immune way. */
-.hero-frame-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 2.2fr) minmax(0, 1fr);
-}
-
-.hero-frame-col {
-  /* Grid items default to min-width:auto, meaning they refuse to shrink
-     below their content's min-content size — a nowrap button label was
-     enough to push this column (and the whole page) wider than the
-     viewport on mobile. min-width:0 is the standard fix. */
-  min-width: 0;
-  /* --color-border (faint), not --color-header-line (bold) — pixel-sampled
-     from vuewer.com: their frame's *outer* perimeter is solid black all
-     the way around (top, bottom, left, right, even deep into the hero),
-     but these *internal* column dividers use the much fainter hairline
-     weight instead. Two different jobs, two different variables. */
-  border-left: 1px solid var(--color-border);
-}
-
-.hero-frame-col:first-child {
-  border-left: none;
-}
-
-.hero-frame-content {
-  padding: 5rem 2rem;
-  text-align: center;
-}
-
-.hero-frame-content .eyebrow {
-  border: 1px solid var(--color-header-line);
-  /* The one deliberate exception to the site's square-corners rule —
-     hardcoded rather than a --radius-* token, since that whole scale is
-     zeroed out (see :root). */
-  border-radius: 999px;
-  padding: 0.375rem 1.125rem;
-  margin-bottom: 1.5rem;
-}
-
-.hero-frame-content .lede {
-  margin-inline: auto;
-}
-
-.hero-frame-content .hero-actions {
-  justify-content: center;
-}
-
-/* This headline's column is only ~52% of .hero-frame-grid's width
-   (1fr / 2.2fr / 1fr split), not the full viewport — so it needs its own,
-   slower font-size ramp than the generic h1 scale above. Without this
-   override, tablets (roughly 768-1366px) hit the generic rule's 60px tier
-   at the exact breakpoint where the framed grid also narrows the column,
-   and this long headline wraps to 6-7 lines. Verified 2026-08-03 across
-   iPad mini/air/pro (both orientations), a generic Android tablet, and
-   Surface Pro — mobile (<48rem, single-column layout) is unaffected. */
-@media (min-width: 48rem) {
-  .hero-heading-reveal {
-    /* 48px still read too large on real iPad mini/air/pro-11 hands-on
-       testing (2026-08-03) — only iPad Pro 12.9" landscape (already in
-       the 60px tier below) looked right. Cut 20% from 48px: 2.4rem/38.4px. */
-    font-size: 2.4rem;
-  }
-}
-
-@media (min-width: 85rem) { /* ~1360px — past every common tablet, including iPad Pro 12.9" landscape */
-  .hero-heading-reveal {
-    font-size: 3.75rem; /* 60px — confirmed this tier already looks right, untouched */
-  }
-}
-
-@media (min-width: 100rem) { /* 1600px, matches --container-width's own cap */
-  .hero-heading-reveal {
-    font-size: 72px;
-  }
-}
-
-/* --- Hero entrance animation --------------------------------------------
-   Copied 1:1 from vuewer.com's own compiled hero (fetched their live HTML +
-   JS bundle and read the exact Alpine/GSAP values — see reference/
-   style-vuewer.md). Everything triggers once, together, when the hero
-   crosses 35% visible (js/main.js's own IntersectionObserver, matching
-   their x-intersect.once.threshold.35). Their headline reveal uses GSAP,
-   which this project can't depend on (vanilla JS only) — js/main.js
-   reimplements the same per-character stagger with plain CSS animations
-   instead, driven by a --char-delay custom property per <span>. */
-/* Both .hero-badge-reveal and .hero-reveal only go invisible once their
-   ancestor carries .reveal-armed — added by js/main.js right before it
-   starts observing, same safety reasoning as [data-reveal].reveal-armed
-   above. Without that gate, this content (the homepage's actual headline
-   and CTA) would be permanently invisible if js/main.js ever failed to
-   load — worse than any other reveal on the site, since it's the first
-   thing every visitor sees. */
-.hero-frame-content.reveal-armed .hero-badge-reveal {
-  opacity: 0;
-  transform: scale(0.5);
-  transition: opacity 0.7s var(--ease-bounce) 1s, transform 0.7s var(--ease-bounce) 1s;
-}
-
-.hero-frame-content.is-revealed .hero-badge-reveal {
-  opacity: 1;
-  transform: scale(1);
-}
-
-/* translateY(96px) = vuewer's translate-y-24 (Tailwind: 24 * 0.25rem). */
-.hero-frame-content.reveal-armed .hero-reveal {
-  opacity: 0;
-  transform: translateY(96px);
-  transition: opacity 1s var(--ease-vuewer-rise), transform 1s var(--ease-vuewer-rise);
-}
-
-.hero-frame-content.is-revealed .hero-reveal {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Delay modifiers match vuewer's own stagger exactly: paragraph at 700ms,
-   primary button at 1000ms, secondary button at 1200ms. */
-.hero-reveal-delay-1 {
-  transition-delay: 0.7s;
-}
-
-.hero-reveal-delay-2 {
-  transition-delay: 1s;
-}
-
-.hero-reveal-delay-3 {
-  transition-delay: 1.2s;
-}
-
-/* Per-character headline reveal — see setupTextAnimation() in js/main.js,
-   which wraps each character in one of these spans with a --char-delay
-   custom property (base delay + 0.03s * character index, matching
-   vuewer's GSAP stagger:0.03 exactly). cubic-bezier(0.34,1.56,0.64,1) is
-   the standard CSS approximation of GSAP's "back" ease (a slight
-   overshoot past the resting position, then settle) — GSAP itself isn't
-   available here. */
-.hero-heading-reveal .text-reveal-char {
-  display: inline-block;
-  opacity: 0;
-  transform: translateY(50px) rotate(25deg);
-}
-
-.hero-frame-content.is-revealed .hero-heading-reveal .text-reveal-char {
-  animation: hero-char-reveal 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-  animation-delay: var(--char-delay, 0s);
-}
-
-@keyframes hero-char-reveal {
-  to {
-    opacity: 1;
-    transform: translateY(0) rotate(0deg);
-  }
-}
-
-.hero-frame-logos {
-  border-top: 1px solid var(--color-header-line);
-  padding-block: 2rem;
-}
-
-/* A full sentence, not a short 2-3 word label, so it skips the all-caps
-   .eyebrow treatment used for section labels like "Diensten" — that would
-   hurt readability at this length. Carries the .lede class (see markup) to
-   inherit the hero paragraph's font-size/weight/color/line-height exactly,
-   rather than duplicating those values here where they could drift out of
-   sync — this rule only adds what .lede doesn't already provide. */
-.marquee-heading {
-  text-align: center;
-  margin-bottom: 1.25rem;
-}
-
-/* 47.9375rem (not 48rem) to match the header's own mobile cutover exactly
-   — at 48rem (768px) both boundaries are inclusive, so using the same
-   48rem here would fire this mobile collapse at the same instant the
-   header switches to its desktop 3-column grid, breaking alignment right
-   at that pixel. */
-@media (max-width: 47.9375rem) {
-  .hero-frame-grid {
-    grid-template-columns: 1fr;
+    background: var(--ink-inverted);
+    color: var(--ink);
+    border-color: var(--ink-inverted);
   }
 
-  .hero-frame-col:not(.hero-frame-content) {
+  /* Custom-drawn scroll indicator (native scrollbar is unreliable on iOS
+     Safari) — created lazily by ensureScrollIndicator() in main.js.
+     TEMPORARILY HIDDEN: ported from the old system, still display:none
+     there (only 2 "Agents" items today, so the list they'd indicate
+     doesn't currently overflow) — one-line revert (delete this
+     `display: none`) once the menu grows past the cap again. */
+  .nav-megamenu-scrollbar {
     display: none;
+    position: absolute;
+    right: 0;
+    width: 3px;
+    background: rgba(250, 246, 239, 0.06);
+    pointer-events: none;
   }
 
-  .hero-frame-content {
-    padding: 3rem 1.5rem;
+  .nav-megamenu-scrollbar-thumb {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    background: rgba(250, 246, 239, 0.2);
   }
 }
 
-/* --- Hero -------------------------------------------------------------------- */
-/* padding-block (not just padding-top) matching .section's own exact
-   values — this section had zero bottom padding, so the gap between it
-   and the section right after it was only half of a normal
-   section-to-section gap (padding doesn't collapse like margin does, so
-   two adjacent .section elements each contribute their own 4-6rem,
-   totalling 8-12rem, while this one contributed nothing on its own
-   bottom edge). */
-/* Top/bottom split on purpose: bottom keeps the normal 4rem section rhythm
-   (space before whatever comes next), but the top — which is really just
-   "space above the breadcrumb" on every page that has one — was using that
-   same full section-sized gap on mobile, directly on top of the sticky
-   header, and ate a disproportionate chunk of a phone's viewport height
-   before any real content (h1) appeared. Reduced independently; ≥48rem
-   goes back to one even padding-block, unchanged from before. */
+/* --- Hero (basic — no bordered frame; see header comment re: deleted
+   .hero-frame* family) --------------------------------------------------------- */
 .hero {
   padding-top: 1.75rem;
   padding-bottom: 4rem;
@@ -1853,51 +1219,17 @@ h3 {
   }
 }
 
-/* .hero's padding-bottom (4rem/6rem above) exists to leave room below a big
-   h1/lede/CTA block before the next section starts — on /pricing the hero
-   holds nothing but the breadcrumb, so that same padding just reads as a
-   large dead gap. Zeroed here; the breadcrumb's own spacing (margin-bottom
-   mobile, padding-block ≥40rem) is left as the only air below it. */
 .hero.hero-crumb-only {
   padding-bottom: 0;
 }
 
-/* Mirrors the gap ABOVE the breadcrumb (hero's own padding-top, 1.75rem
-   mobile / --container-pad ≥40rem — the latter is what exactly cancels the
-   sticky header's overlap, see .hero:has(.breadcrumb) above) so the space
-   below the breadcrumb reads the same, instead of falling through to
-   .section's much larger standalone 4rem/6rem rhythm. ID-scoped so only
-   this section's top side changes — its own bottom padding, and every
-   other .section on the page, are untouched. */
 #pakketten {
   padding-top: 0;
 }
 
-/* Every non-mobile breakpoint (≥40rem, tablet AND desktop): on heroes that open
-   with a breadcrumb, the breadcrumb's own padding-block (see .breadcrumb below,
-   --breadcrumb-space-block) fully owns the EXTRA space above it instead of
-   stacking on top of this 6rem (or, in the 40-47.9375rem sliver before the
-   48rem block above kicks in, the mobile-tier 1.75rem) — otherwise the two
-   values combine into a much bigger, uneven gap than the space the breadcrumb
-   itself gets below it.
-
-   NOT a flat 0, though — .site-header is `position: sticky; top:
-   var(--container-pad)`, which makes it float with that same inset from the
-   very first paint (unscrolled), not just while scrolling. Sticky elements
-   still reserve their un-adjusted flow height for layout purposes, so the
-   next sibling (.hero) starts right where the header WOULD be without that
-   offset — meaning the header's actual painted box (pushed down by its own
-   sticky inset) overlaps back over .hero by exactly --container-pad, on top
-   with z-index:50. A flat 0 here landed the breadcrumb entirely underneath
-   that overlap — invisible, not just tightly spaced. --container-pad exactly
-   cancels it (confirmed via getBoundingClientRect at 700/800/1024/1440px —
-   the overlap tracks --container-pad exactly at every width), so the
-   breadcrumb's own 15px is the only space that ends up visible, same as
-   intended. padding-block-end (space at the bottom of the hero, after the
-   content) is untouched. Heroes without a breadcrumb (e.g. index.html's
-   .hero-frame, a different class entirely, which has its own separate
-   margin-top correction for this exact same sticky-overlap mechanism) are
-   unaffected. */
+/* Cancels the sticky header's own reserved-flow-height overlap (see
+   .site-header's `top: var(--container-pad)`) so a breadcrumb sitting
+   directly in the hero isn't rendered underneath the header. */
 @media (min-width: 40rem) {
   .hero:has(.breadcrumb) {
     padding-block-start: var(--container-pad);
@@ -1923,11 +1255,10 @@ h3 {
   margin-top: 2rem;
 }
 
-/* Live-data widget card shown in hero, mirrors the data-vista original */
 .data-card {
-  background: var(--color-white);
+  background: var(--surface);
   border-radius: var(--radius-3xl);
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--border);
   box-shadow: var(--shadow-lg);
   padding: 1.75rem;
 }
@@ -1937,7 +1268,7 @@ h3 {
   align-items: baseline;
   justify-content: space-between;
   padding-block: 0.75rem;
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--border);
 }
 
 .data-card-row:last-child {
@@ -1961,20 +1292,16 @@ h3 {
   margin-left: 0.5rem;
 }
 
-/* --- Logo marquee (real app/integration logos, see index.html comment) -------- */
+/* --- Logo marquee (real app/integration logos) --------------------------------
+   Mechanics unchanged: spacing lives on each tile (not a flex `gap`) so the
+   -33.333% keyframe reset always lands on a tile boundary regardless of
+   set count; pause-on-hover/focus is pure CSS. */
 .logo-marquee {
   overflow: hidden;
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
 }
 
-/* Spacing lives on each tile (margin-right), not as a flex `gap` on the
-   track — a `gap` splits unevenly whenever the tile count per set is odd
-   (9 tiles = 17 gaps across 2 sets, which can't divide evenly), so a
-   gap-based reset can land mid-gap instead of on a tile boundary. Margin
-   per tile makes each tile "own" the space after it, so the track width
-   is always an exact multiple of (tile + its margin), whatever the set
-   count — the -33.333% reset below always lands precisely on a seam. */
 .logo-track {
   display: flex;
   align-items: center;
@@ -1986,17 +1313,11 @@ h3 {
   animation-name: marquee-reverse;
 }
 
-/* Pause the loop on hover/focus so a curious visitor can read a tile —
-   pure CSS, no JS needed. */
 .logo-marquee:hover .logo-track,
 .logo-marquee:focus-within .logo-track {
   animation-play-state: paused;
 }
 
-/* -33.333% = exactly one set-width out of the track's 3 duplicated sets
-   (see index.html comment for why 3 sets, not 2). Same absolute distance
-   as the old -50%-of-2-sets version, so the scroll speed is unchanged —
-   only the reset fraction changes because the track is now 3 sets wide. */
 @keyframes marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-33.333%); }
@@ -2007,11 +1328,6 @@ h3 {
   to { transform: translateX(0); }
 }
 
-/* No card/background — logos sit directly on the page. Fixed box +
-   object-fit:contain on the img is what makes every logo "the same size"
-   despite very different source aspect ratios (a wide wordmark like
-   Dynamics 365 vs. a near-square mark like SAP) — each is scaled down to
-   fit the same box. */
 .logo-tile {
   flex-shrink: 0;
   display: flex;
@@ -2022,8 +1338,6 @@ h3 {
   margin-right: 4.5rem;
 }
 
-/* Grayscale strips each logo of its brand colour so the row reads as one
-   neutral set of marks rather than a clash of blues/reds/oranges. */
 .logo-tile img {
   max-width: 100%;
   max-height: 100%;
@@ -2033,56 +1347,29 @@ h3 {
   filter: grayscale(100%);
 }
 
-/* --- Cards -------------------------------------------------------------------- */
-.grid {
-  display: grid;
-  gap: 1.5rem;
-}
-
-/* minmax(0, 1fr), not bare 1fr — a bare 1fr track's automatic minimum size
-   is its content's min-content width, so a long word/label can force the
-   track (and the whole grid) wider than its container instead of wrapping.
-   minmax(0, 1fr) removes that content-based floor so tracks actually share
-   space evenly and shrink with the viewport. */
-.grid-2 { grid-template-columns: minmax(0, 1fr); }
-.grid-3 { grid-template-columns: minmax(0, 1fr); }
-.grid-4 { grid-template-columns: minmax(0, 1fr); }
-
-@media (min-width: 40rem) {
-  .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-
-@media (min-width: 64rem) {
-  .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-}
-
-/* Verified from vuewer.com's card component: rounded-md (6px) + p-6/sm:p-10/lg:p-12. */
+/* --- Cards ---------------------------------------------------------------------
+   --radius-card (8px), not the old --radius-md (6px, itself now aliased to
+   --radius-card anyway). */
 .card {
-  background: var(--color-white);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md); /* 6px */
-  padding: 1.5rem; /* 24px */
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: 1.5rem;
   transition: transform 0.3s var(--ease-bounce), box-shadow 0.3s ease;
 }
 
 @media (min-width: 40rem) {
   .card {
-    padding: 2.5rem; /* 40px */
+    padding: 2.5rem;
   }
 }
 
 @media (min-width: 64rem) {
   .card {
-    padding: 3rem; /* 48px */
+    padding: 3rem;
   }
 }
 
-/* Scoped to the /contact "Bel of mail ons" grid only (not the other
-   grid-4 usages elsewhere) — these cards hold one short line of text,
-   and the default card padding left too little room for
-   "contact@mowi.agency" to fit on one line at full font size. */
 .contact-info-grid .card {
   padding-left: 1.25rem;
   padding-right: 1.25rem;
@@ -2097,8 +1384,8 @@ h3 {
   width: 2.75rem;
   height: 2.75rem;
   border-radius: var(--radius-lg);
-  background: var(--color-ink);
-  color: var(--color-white);
+  background: var(--ink);
+  color: var(--surface);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2109,34 +1396,50 @@ h3 {
 .card p {
   color: var(--color-gray-600);
   margin-top: 0.5rem;
-  /* Unbreakable strings (e.g. an email address) otherwise overflow the
-     card's edges instead of wrapping — same fix as h1-h4 above. */
   overflow-wrap: break-word;
 }
 
+/* Inverted/dark card variant — kept the original name (.card-featured,
+   still referenced by index.html/pricing.html markup this stage doesn't
+   touch) rather than renaming it. Uses the dark-inverted surface tokens,
+   not a plain "ink" background — reads as a genuine dark card, matching
+   the same bg-inverted family the trust/CTA bands use. */
 .card.card-featured {
-  background: var(--color-ink);
-  color: var(--color-white);
-  border-color: var(--color-ink);
+  background: var(--surface-inverted);
+  color: var(--ink-inverted);
+  border-color: var(--surface-inverted);
 }
 
 .card.card-featured h3,
 .card.card-featured .card-icon {
-  color: var(--color-white);
+  color: var(--ink-inverted);
 }
 
 .card.card-featured .card-icon {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(250, 246, 239, 0.15);
 }
 
 .card.card-featured p {
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--ink-inverted-muted);
 }
 
 .card.card-featured a {
-  color: var(--color-white);
+  color: var(--ink-inverted);
   text-decoration: underline;
   text-underline-offset: 3px;
+}
+
+/* Specificity lesson carried forward from the old system: `.card-featured
+   a` above sets every link's color, including a `.btn-secondary` that
+   happens to sit inside one — without this override, a light-on-light
+   secondary button on a dark card would be nearly invisible. Scoped
+   selector (not just relying on source order) so this survives future
+   reordering of the file. */
+.card-featured .btn-secondary {
+  color: var(--ink);
+  background: var(--surface);
+  border-color: var(--surface);
+  text-decoration: none;
 }
 
 .card-link {
@@ -2146,14 +1449,16 @@ h3 {
   font-size: 0.9375rem;
 }
 
-/* Small pill tag, e.g. for system-integration names */
+/* Small pill tag, e.g. system-integration names — already pill-shaped
+   before this rebrand; now reads var(--radius-pill) explicitly instead of
+   the old --radius-full alias. */
 .pill {
   display: inline-flex;
   align-items: center;
   padding: 0.375rem 0.9rem;
-  border-radius: var(--radius-full);
-  background: var(--color-white);
-  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  border: 1px solid var(--border);
   font-size: 0.875rem;
   font-weight: 500;
   color: var(--color-gray-600);
@@ -2165,17 +1470,25 @@ h3 {
   gap: 0.625rem;
 }
 
-/* Accent variant — use sparingly, e.g. to flag something as new/featured */
 .pill-accent {
-  background: var(--color-accent-soft);
+  background: var(--accent-soft);
   border-color: transparent;
-  color: var(--color-accent);
+  color: var(--accent);
 }
 
-/* --- Case cards ---------------------------------------------------------------- */
+a.pill {
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+a.pill:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* --- Case cards ------------------------------------------------------------------ */
 .case-card {
-  background: var(--color-white);
-  border: 1px solid var(--color-border);
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: var(--radius-2xl);
   padding: 2rem;
   display: flex;
@@ -2198,7 +1511,7 @@ h3 {
 }
 
 .case-block {
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid var(--border);
   padding-top: 1rem;
 }
 
@@ -2215,7 +1528,7 @@ h3 {
   color: var(--color-gray-600);
 }
 
-/* --- Numbered steps (werkwijze) --------------------------------------------------- */
+/* --- Numbered steps (werkwijze) ------------------------------------------------- */
 .steps {
   counter-reset: step;
   display: grid;
@@ -2227,10 +1540,6 @@ h3 {
     grid-template-columns: repeat(4, 1fr);
   }
 
-  /* Modifier for a 3-step sequence (e.g. an agent page's "Hoe het werkt") —
-     stays inside this same breakpoint so mobile still gets .steps' plain
-     single-column default, unlike an inline style which can't be scoped to
-     a media query. */
   .steps-3 {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -2248,7 +1557,7 @@ h3 {
   top: 0;
   left: 0;
   font-size: 1.5rem;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--color-gray-400);
   letter-spacing: var(--tracking-tight);
 }
@@ -2261,13 +1570,13 @@ h3 {
   color: var(--color-gray-600);
 }
 
-/* --- Accordion (FAQ) --------------------------------------------------------------- */
+/* --- Accordion (FAQ) -------------------------------------------------------------- */
 .accordion {
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid var(--border);
 }
 
 .accordion-item {
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--border);
 }
 
 .accordion-trigger {
@@ -2282,17 +1591,9 @@ h3 {
   text-align: left;
   font-size: 1.0625rem;
   font-weight: 600;
-  color: var(--color-ink);
+  color: var(--ink);
 }
 
-/* No border/box (Sal: the square outline around it has to go) and no text
-   glyph — a literal "+" character rotated 45° (the old approach) depends on
-   that glyph's own stroke widths/optical center being symmetric, which they
-   aren't at this size in this typeface, so the rotation read as an off-
-   center tilt rather than a clean +/- swap. Drawing both bars in CSS instead
-   guarantees they're identical and centered, so rotating the vertical one
-   90° lands it exactly on top of the horizontal one — a plus that becomes a
-   minus, not a wobble. */
 .accordion-icon {
   flex-shrink: 0;
   position: relative;
@@ -2306,7 +1607,7 @@ h3 {
   position: absolute;
   top: 50%;
   left: 50%;
-  background: var(--color-ink);
+  background: var(--ink);
   transition: transform 0.25s var(--ease-out);
 }
 
@@ -2343,25 +1644,17 @@ h3 {
   max-width: 40rem;
 }
 
-/* --- Scroll reveal ---------------------------------------------------------------------
-   Deliberately subtle: a short rise + fade, not a slide or a bounce — should
-   read as "the page is calm and just loaded in," never as a flourish.
-   [data-reveal] itself carries NO hidden state — only .reveal-armed does,
-   and js/main.js only adds .reveal-armed once it has actually set up the
-   IntersectionObserver that will reveal it again. If js/main.js fails to
-   load/run for any reason, .reveal-armed never gets added, so content just
-   stays at its normal, fully-visible default — it can never get stuck
-   invisible the way a bare `[data-reveal] { opacity: 0 }` default would. */
+/* --- Scroll reveal (safety pattern) -----------------------------------------------
+   [data-reveal] carries NO hidden state of its own — only .reveal-armed
+   does, and js/main.js only adds .reveal-armed once it has actually set up
+   the IntersectionObserver that will reveal it again. If js/main.js fails
+   to load/run for any reason, .reveal-armed never gets added, so content
+   stays at its normal, fully-visible default. This mechanism is verbatim
+   from before the rebrand — nothing about it changes here, only the timing
+   values it animates toward (opacity/translateY) stay the same too. */
 [data-reveal].reveal-armed {
   opacity: 0;
   transform: translateY(16px);
-  /* A short delay before the transition starts (not just a longer
-     duration) is what makes this actually noticeable — without it, the
-     reveal fires the instant an element crosses the IntersectionObserver
-     threshold, which is often while it's still mid-scroll, so it reads as
-     "just appeared" rather than as a visible animation. Duration bumped
-     from 0.45s to 0.7s (delay unchanged) since the fade/rise itself was
-     still over too quickly to actually read as motion. */
   transition: opacity 0.7s var(--ease-out) 0.15s, transform 0.7s var(--ease-out) 0.15s;
 }
 
@@ -2370,27 +1663,28 @@ h3 {
   transform: translateY(0);
 }
 
-/* --- CTA band ---------------------------------------------------------------------------- */
+/* --- CTA band ---------------------------------------------------------------------- */
 .cta-band {
-  background: var(--color-ink);
-  color: var(--color-white);
+  background: var(--bg-inverted);
+  color: var(--ink-inverted);
   border-radius: var(--radius-3xl);
   padding: 3.5rem 2rem;
   text-align: center;
 }
 
 .cta-band h2 {
-  color: var(--color-white);
+  color: var(--ink-inverted);
 }
 
 .cta-band p {
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--ink-inverted-muted);
   max-width: 36rem;
   margin: 1rem auto 0;
 }
 
 .cta-band .btn-secondary {
-  background: var(--color-white);
+  background: var(--ink-inverted);
+  color: var(--ink);
 }
 
 .cta-actions {
@@ -2403,17 +1697,17 @@ h3 {
 
 .cta-alt {
   margin-top: 1.5rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--ink-inverted-muted);
   font-size: 0.875rem;
 }
 
 .cta-alt a {
   text-decoration: underline;
   text-underline-offset: 3px;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(250, 246, 239, 0.8);
 }
 
-/* --- Forms ------------------------------------------------------------------------------- */
+/* --- Forms --------------------------------------------------------------------------- */
 .form-field {
   display: flex;
   flex-direction: column;
@@ -2432,13 +1726,13 @@ h3 {
   font-size: 1rem;
   padding: 0.75rem 1rem;
   border-radius: var(--radius-lg);
-  border: 1px solid var(--color-border);
-  background: var(--color-white);
+  border: 1px solid var(--border);
+  background: var(--surface);
 }
 
 .form-field input:focus,
 .form-field textarea:focus {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--accent);
   outline-offset: 1px;
 }
 
@@ -2459,8 +1753,8 @@ h3 {
   margin-top: 1.5rem;
   padding: 1.25rem;
   border-radius: var(--radius-lg);
-  border: 1px solid var(--color-border);
-  background: var(--color-accent-soft);
+  border: 1px solid var(--border);
+  background: var(--accent-soft);
 }
 
 .form-success-icon {
@@ -2471,8 +1765,8 @@ h3 {
   width: 1.75rem;
   height: 1.75rem;
   border-radius: 50%;
-  background: var(--color-accent);
-  color: var(--color-white);
+  background: var(--accent);
+  color: var(--accent-ink);
   font-size: 0.875rem;
   font-weight: 700;
 }
@@ -2483,19 +1777,13 @@ h3 {
   line-height: 1.5;
 }
 
-/* --- Breadcrumb -------------------------------------------------------------------------- */
+/* --- Breadcrumb ---------------------------------------------------------------------- */
 .breadcrumb {
   font-size: var(--breadcrumb-font-size);
   color: var(--breadcrumb-color);
   margin-bottom: var(--breadcrumb-margin-bottom);
 }
 
-/* Every non-mobile breakpoint (≥40rem): replaces margin-bottom with equal
-   padding-block (top and bottom, 15px/15px), decoupled from the hero's own
-   padding (see .hero:has(.breadcrumb) above) — so the air above and below the
-   breadcrumb is identical everywhere it appears, tablet through desktop alike.
-   --breadcrumb-margin-bottom is retired for this whole range; mobile (<40rem)
-   still uses it unchanged, per explicit instruction not to touch that tier. */
 @media (min-width: 40rem) {
   .breadcrumb {
     padding-block: var(--breadcrumb-space-block);
@@ -2508,13 +1796,13 @@ h3 {
 }
 
 .breadcrumb a:hover {
-  color: var(--color-ink);
+  color: var(--ink);
 }
 
-/* --- Footer -------------------------------------------------------------------------------- */
+/* --- Footer -------------------------------------------------------------------------- */
 .site-footer {
   margin-top: var(--section-gap);
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid var(--border);
   padding-top: 4rem;
   padding-bottom: 2rem;
 }
@@ -2548,7 +1836,7 @@ h3 {
 }
 
 .footer-nav a:hover, .footer-support a:hover {
-  color: var(--color-ink);
+  color: var(--ink);
 }
 
 .footer-heading {
@@ -2568,7 +1856,7 @@ h3 {
   gap: 1rem;
   margin-top: 3rem;
   padding-top: 2rem;
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid var(--border);
   color: var(--color-gray-500);
   font-size: 0.875rem;
 }
@@ -2579,39 +1867,23 @@ h3 {
 }
 
 .footer-legal a:hover {
-  color: var(--color-ink);
+  color: var(--ink);
 }
 
-/* --- Utilities ------------------------------------------------------------------------------ */
+/* --- Utilities ------------------------------------------------------------------------ */
 .text-center { text-align: center; }
 .mt-0 { margin-top: 0; }
 
-/* Compact content heading — for a card/section title that needs to read as
-   a real headline but is too small a space for the hero h1 scale (e.g. a
-   card title). Uses the /blog content-heading token instead of a one-off
-   hardcoded font-size. */
-.prose-heading {
-  font-size: var(--content-h1-size);
-  line-height: var(--content-h1-line-height);
-}
-
-/* --- Blog (marketing content, marketing tokens — a calmer READING mode, not the docs stylesheet;
-   /docs/ CSS stays scoped to /docs/ only per project rule) -------------------------------------- */
+/* --- Blog (marketing content, marketing tokens — a calmer READING mode, not
+   the docs stylesheet; /docs/ CSS stays scoped to /docs/ only per project
+   rule) — every .blog-* class name below is unchanged; build-blog.js and 3
+   shipped posts reference these exact selectors. ------------------------------- */
 .blog-article {
-  max-width: 42rem; /* ~70-75ch measure at this font size, matching the docs reading width */
+  max-width: 42rem;
   margin-inline: auto;
   padding-block: 0 5rem;
 }
 
-/* .site-header is position:sticky with top: var(--container-pad) - before the
-   sticky threshold triggers it renders like position:relative (visually
-   shifted down by that amount, but its reserved flow-space stays at the
-   original position), leaving a phantom zone under the header exactly
-   var(--container-pad) tall that the next element overlaps unless its own
-   top spacing clears it. Since --container-pad itself is responsive
-   (16/24/48px), a flat margin here would produce a different VISIBLE gap at
-   every breakpoint (as it did before this fix) - adding a flat 1.5rem on top
-   of var(--container-pad) keeps the real visible gap constant everywhere. */
 .blog-breadcrumb {
   font-size: var(--breadcrumb-font-size);
   color: var(--breadcrumb-color);
@@ -2619,25 +1891,6 @@ h3 {
   margin-bottom: var(--breadcrumb-margin-bottom);
 }
 
-/* Every non-mobile breakpoint (≥40rem): same 15px/15px treatment as .breadcrumb
-   above, for consistency across every breadcrumb on the site — supersedes both
-   the phantom-zone margin-top formula and --breadcrumb-margin-bottom for this
-   range. Mobile (<40rem) keeps the original values untouched.
-   margin-top is var(--container-pad), NOT 0 — same sticky-header-overlap
-   mechanism documented on .hero:has(.breadcrumb) above: .site-header floats
-   with `top: var(--container-pad)` from first paint, and since sticky still
-   reserves its un-adjusted flow height, .blog-article (the very next
-   sibling, no hero in between) starts that same --container-pad short of
-   where the header's painted box actually ends. A flat 0 here put the
-   breadcrumb entirely underneath the header, invisible — confirmed via a
-   Playwright sweep after the first attempt shipped broken. --container-pad
-   exactly cancels the overlap, same as the hero fix.
-   Selector is `.blog-article .blog-breadcrumb`, not just `.blog-breadcrumb`,
-   specifically to out-specificity the pre-existing `.blog-article p` rule
-   below (0,1,1 vs. this element's plain 0,1,0) — that rule was silently
-   winning the margin-bottom cascade on its own 1.25rem value, which would
-   have stacked with this padding-block to a 35px gap instead of the
-   intended clean 15px. */
 @media (min-width: 40rem) {
   .blog-article .blog-breadcrumb {
     margin-top: var(--container-pad);
@@ -2651,7 +1904,7 @@ h3 {
 }
 
 .blog-breadcrumb a:hover {
-  color: var(--color-ink);
+  color: var(--ink);
 }
 
 .blog-article h1 {
@@ -2679,8 +1932,9 @@ h3 {
 }
 
 .blog-direct-answer {
-  background: var(--color-accent-soft);
-  border-left: 3px solid var(--color-accent);
+  background: var(--accent-soft);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius-card) var(--radius-card) 0;
   padding: 1.25rem 1.5rem;
   margin-bottom: 2rem;
 }
@@ -2693,7 +1947,8 @@ h3 {
 .blog-table-wrap {
   overflow-x: auto;
   margin-bottom: 1.5rem;
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
 }
 
 .blog-table {
@@ -2706,7 +1961,7 @@ h3 {
 .blog-table td {
   padding: 0.75rem 1rem;
   text-align: left;
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--border);
   white-space: nowrap;
 }
 
@@ -2723,6 +1978,7 @@ h3 {
   width: 100%;
   height: auto;
   display: block;
+  border-radius: var(--radius-media); /* screenshots stay square, deliberately */
 }
 
 .blog-figure figcaption {
@@ -2733,7 +1989,7 @@ h3 {
 
 .blog-media-placeholder {
   background: var(--color-bg-tint);
-  border: 1px dashed var(--color-border);
+  border: 1px dashed var(--border);
   padding: 3rem 1.5rem;
   text-align: center;
   color: var(--color-text-muted);
@@ -2744,7 +2000,7 @@ h3 {
 .blog-video-facade {
   position: relative;
   aspect-ratio: 16 / 9;
-  background: var(--color-ink);
+  background: var(--bg-inverted);
   margin-bottom: 1.5rem;
   cursor: pointer;
   overflow: hidden;
@@ -2774,7 +2030,7 @@ h3 {
   align-items: center;
   justify-content: center;
   font-size: 1.5rem;
-  color: var(--color-ink);
+  color: var(--ink);
 }
 
 .blog-video-facade iframe {
@@ -2787,7 +2043,7 @@ h3 {
 .blog-faq {
   margin-top: 2.5rem;
   padding-top: 1.5rem;
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid var(--border);
 }
 
 .blog-faq h2 {
@@ -2820,7 +2076,7 @@ h3 {
 .blog-cta {
   margin-top: 2.5rem;
   padding-top: 2rem;
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid var(--border);
   text-align: center;
 }
 
@@ -2829,11 +2085,6 @@ h3 {
 }
 
 /* --- Blog index (listing page) --- */
-/* Same phantom-zone reasoning as .blog-breadcrumb above: a flat padding-top
-   here produced a different VISIBLE gap per breakpoint (56px mobile vs 16px
-   desktop) since --container-pad (the zone's size) shrinks at mobile while
-   this stayed fixed. calc() keeps the real visible gap constant everywhere,
-   matching the flat 1.5rem used below the paragraph exactly. */
 .blog-index-intro {
   padding-top: calc(var(--container-pad) + 1.5rem);
 }
@@ -2841,7 +2092,7 @@ h3 {
 .blog-index-intro h1 {
   font-size: var(--content-h1-size);
   line-height: var(--content-h1-line-height);
-  margin-bottom: 0; /* intentional exception — the paragraph below owns the gap via its own margin-top */
+  margin-bottom: 0;
 }
 
 .blog-index-intro p {
@@ -2881,24 +2132,18 @@ h3 {
 .blog-card-tags span {
   font-size: 0.75rem;
   padding: 0.2rem 0.6rem;
-  background: var(--color-accent-soft);
-  color: var(--color-accent);
+  border-radius: var(--radius-pill);
+  background: var(--accent-soft);
+  color: var(--accent);
 }
 
 /* ==========================================================================
-   Website & Conversion plan — Phase 0 shared components
-   Reusable primitives for the /agents/ and /koppelingen/ pages built in
-   later phases. Spec: Obsidian vault, "Website & Conversion — Implementation
-   Plan" note, Phase 0. 0.1 (primary CTA) has no new CSS — it reuses
-   .cta-band + .btn-slot > .btn-primary already defined above.
+   Shared marketing-page primitives (Website & Conversion plan, Phase 0)
+   Reusable across /agents/ and /koppelingen/ pages. 0.1 (primary CTA) has
+   no CSS of its own — reuses .cta-band + .btn-slot > .btn-primary above.
    ========================================================================== */
 
-/* --- 0.2 Trust block ---------------------------------------------------------
-   Appears on every marketing page, directly above the footer. Five compact
-   items; the photo item (#4) reuses the same dashed-placeholder look as
-   .blog-media-placeholder until assets/team/sal.jpg exists — the existing
-   broken-image safety net in js/main.js hides a missing <img> automatically,
-   leaving the empty dashed box as the placeholder. */
+/* 0.2 Trust block — every marketing page, directly above the footer. */
 .trust-list {
   display: grid;
   gap: 1.75rem;
@@ -2924,8 +2169,10 @@ h3 {
   width: 3.5rem;
   height: 3.5rem;
   flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
   background: var(--color-bg-tint);
-  border: 1px dashed var(--color-border);
+  border: 1px dashed var(--border);
 }
 
 .trust-photo img {
@@ -2934,36 +2181,33 @@ h3 {
   object-fit: cover;
 }
 
-/* --- 0.3 Pricing line ---------------------------------------------------------
-   One consistent "vanaf €X per maand" pattern, reused on every agent page.
-   Placeholder tokens (e.g. [PRICE_EMAIL_TRIAGE]) render literally until real
-   numbers exist — never invent a number here. */
+/* 0.3 Pricing line — one consistent "vanaf €X per maand" pattern, reused on
+   every agent page. Placeholder tokens (e.g. [PRICE_EMAIL_TRIAGE]) render
+   literally until real numbers exist — never invent a number here. */
 .pricing-line {
   display: inline-block;
   padding: 1.25rem 1.5rem;
-  background: var(--color-white);
-  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: var(--surface);
+  border: 1px solid var(--border);
   font-size: 1.0625rem;
   color: var(--color-gray-600);
 }
 
 .pricing-line strong {
-  color: var(--color-ink);
+  color: var(--ink);
   font-weight: 700;
 }
 
-/* --- 0.4 Video slot ---------------------------------------------------------
-   16:9 demo container. No file yet -> calm "Demo binnenkort" poster (never a
-   broken player, never a fake thumbnail implying a video exists). Once a
-   real file lands at assets/demos/<agent-slug>.mp4, markup adds
-   .has-video + data-video-src and js/main.js upgrades it to a click-to-play
-   native <video> — same click-to-swap pattern as .blog-video-facade, just a
-   local file instead of a YouTube embed. */
+/* 0.4 Video slot — 16:9. No file yet -> a calm "Demo binnenkort" poster,
+   never a broken player. Once a real file lands, markup adds .has-video +
+   data-video-src and js/main.js upgrades it to click-to-play. */
 .demo-video {
   position: relative;
   aspect-ratio: 16 / 9;
-  background: var(--color-ink);
+  background: var(--bg-inverted);
   overflow: hidden;
+  border-radius: var(--radius-media);
 }
 
 .demo-video-poster {
@@ -2974,7 +2218,7 @@ h3 {
   align-items: center;
   justify-content: center;
   gap: 0.375rem;
-  color: var(--color-white);
+  color: var(--ink-inverted);
   text-align: center;
   padding: 1.5rem;
 }
@@ -2986,7 +2230,7 @@ h3 {
 
 .demo-video-soon {
   font-size: 0.875rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--ink-inverted-muted);
 }
 
 .demo-video-play {
@@ -3003,13 +2247,13 @@ h3 {
 .demo-video-play span {
   width: 4rem;
   height: 4rem;
-  border-radius: 50%; /* deliberate exception to the site's square-corners rule, matching .blog-video-play */
+  border-radius: 50%;
   background: rgba(255, 255, 255, 0.9);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.5rem;
-  color: var(--color-ink);
+  color: var(--ink);
 }
 
 .demo-video video {
@@ -3018,52 +2262,30 @@ h3 {
   display: block;
 }
 
-/* --- 0.5 "Werkt met" pills ---------------------------------------------------
-   Reuses the existing .pill/.pill-row as-is (text-only, no third-party logo
-   images in v1). This just adds a hover state for the linkable variant
-   Phase 3+ pages use to point at /koppelingen/ pages. */
-a.pill {
-  transition: border-color 0.2s ease, color 0.2s ease;
-}
-
-a.pill:hover {
-  border-color: var(--color-accent);
-  color: var(--color-accent);
-}
-
-/* --- 0.6 IT-sheet download button ---------------------------------------------
-   Reuses .btn.btn-secondary as-is; no new CSS needed beyond a spot for the
-   download glyph already handled by .btn's existing gap. */
+/* 0.5 "Werkt met" pills — reuses .pill/.pill-row + a.pill:hover above. */
+/* 0.6 IT-sheet download — reuses .btn.btn-secondary as-is. */
 
 /* ==========================================================================
-   Illustration + widget system (piloted 2026-08-04 on /ai-automatisering, since
-   renamed to /agentic-ai on 2026-08-05, rolled out 2026-08-06 to every
-   /agents/*.html page)
-   Every rule below is scoped to page-specific classes; no shared component
-   used elsewhere is touched. The .hero-showcase component in particular is
-   fully generic — each page just supplies its own 4 task/result pairs in
-   the HTML, css/js needs no per-page changes. See reference/widgets-vuewer.md
-   for the mechanics this was studied from (never copied — see that file's
-   own header) and CLAUDE.md for the hard constraints this all follows:
-   inline SVG/CSS/vanilla JS only, no libraries, reduced-motion always
-   leaves content fully visible, every animation is enhancement-only (the
-   page looks finished even if js/main.js never runs).
+   Illustration + widget system
+   Every rule below is scoped to page-specific classes; the .hero-showcase
+   component is fully generic — each page supplies its own 4 task/result
+   pairs in HTML, css/js need no per-page changes. js/main.js's
+   drawShowcaseLines()/runDesktopStep()/typeInto()/typeComposeCard()/
+   playOfferteBeat() all depend on the class names in this section staying
+   exactly as they are.
 
    --- Illustration system spec ---------------------------------------------
-   One consistent visual language for every inline SVG built for this system
-   (every hero showcase's task/result icons, the six "Zes soorten taken"
-   icons on /agentic-ai):
+   One consistent visual language for every inline SVG built for this
+   system:
    - Stroke width 1.5 (SVG user units) everywhere — one weight, never mixed.
    - Corner radius rx="3" on every rounded rect — one radius, everywhere.
    - Max 3 colors, all existing tokens, no new hex values introduced:
-       currentColor / var(--color-text) — primary line art (ink)
-       var(--color-accent)              — exactly ONE highlight per
-                                           illustration (the "what matters"
-                                           element: an arrow, a checkmark,
-                                           a destination node)
-       var(--color-border)              — secondary/background shapes (the
-                                           "before" state, a receding/muted
-                                           element)
+       currentColor / var(--ink)     — primary line art
+       var(--accent)                 — exactly ONE highlight per
+                                        illustration (the "what matters"
+                                        element)
+       var(--border)                 — secondary/background shapes (the
+                                        "before" state, a receding element)
    - No faces, no mascots, no tech clichés (gears, lightbulbs, circuit
      boards, robots). Abstract geometric shapes only: rects, circles, paths.
    - fill="none" + stroke on every path/rect, except small solid accent
@@ -3073,45 +2295,17 @@ a.pill:hover {
    ========================================================================== */
 
 /* --- Hero showcase: taak -> Mowi -> resultaat ------------------------------
-   Complete replacement (2026-08-06) of the earlier abstract "order out of
-   chaos" flow visual — that version and all its CSS/JS/markup is gone, not
-   layered on top of. One concrete, literal story instead: a named task card
-   travels into the Mowi hub, gets processed, and comes out as a named
-   result. Two independent layouts share the same data (the desktop grid's
-   task/result markup is also what the mobile version reads its text from
-   in js/main.js) — see that file's own comment for the sequencing.
-
-   Default-visible-by-default throughout: every card (task, result, mobile
-   slot) renders its real final content in plain HTML with no hidden state
-   of its own. JS only ever ADDS a transient ".is-pending" class to hide
-   result cards it's about to animate in — if js/main.js never runs, or
-   prefers-reduced-motion is set, nothing is ever hidden in the first place. */
+   One 3-column/4-row grid at every viewport width (sized down for phones
+   via CSS, not swapped for a different component). Every card renders its
+   real final content in plain HTML with no hidden state of its own — JS
+   only ever ADDS a transient .is-pending class to a result card it's about
+   to animate in; if js/main.js never runs, or prefers-reduced-motion is
+   set, nothing is ever hidden in the first place. */
 .hero-with-visual {
   display: grid;
   gap: 2rem;
 }
 
-/* 2-column from 64rem up, same as it always was — SUPERSEDES two earlier
-   attempts at this same problem, both abandoned the same day:
-   (1) delaying the split to 85.375rem so the whole 1024-1365px "iPad Pro"
-   tier rendered single-column, avoiding a showcase-card squeeze — but that
-   also pushed the showcase below the heading on MacBook-width windows (a
-   13" MacBook's default macOS scaling is ~1280px, landing in that same
-   range), which Sal didn't want;
-   (2) restoring 2-column there only for `(hover: hover) and (pointer:
-   fine)` devices (mouse/trackpad, not touch) — real MacBooks do report
-   that, but Chrome/Firefox DevTools' device-toolbar/responsive mode
-   reports `hover:none`/`pointer:coarse` by default regardless of the
-   viewport width you set, so ANY width-based test done that way (the
-   normal way to test responsive breakpoints) looked broken even though
-   real hardware wasn't — a fragile, hard-to-verify distinction to build a
-   fix on.
-   Final approach: keep 2-column unconditional at 64rem+, exactly like
-   before either fix — and solve the actual card-squeeze problem directly,
-   in the showcase's own sizing, at the tier below (see the next comment).
-   Pure width-based again, so it looks identical everywhere: real iPad, real
-   MacBook, and any dev-tools resize regardless of its touch-simulation
-   setting. */
 @media (min-width: 64rem) {
   .hero-with-visual {
     grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
@@ -3120,38 +2314,20 @@ a.pill:hover {
   }
 }
 
-/* /contact only: below 64rem the heading/lede block and the Calendly card
-   stack (same as every other .hero-with-visual page), but this page's
-   stacked gap needs to specifically match the 1.5rem already used between
-   the h1 and the lede paragraph just above it — not the showcase pages'
-   generic 2rem stack gap, which was never tuned against this page's own
-   heading rhythm. max-width scopes it to below the 64rem 2-column split
-   above, which sets its own 3rem gap and must stay untouched. */
 @media (max-width: 63.9375rem) {
   .contact-hero-visual {
     gap: 1.5rem;
   }
 }
 
-/* /contact only, desktop: the shared .hero-with-visual align-items:center
-   (tuned for the showcase pages, where both columns are roughly the same
-   height) reads badly here — the Calendly card is much taller than the
-   heading/lede block (it's a full calendar, not a fixed-height widget), so
-   centering left the heading floating in empty space partway down the row
-   instead of level with the breadcrumb above it. Top-align both columns
-   instead, so the heading starts exactly where the single-column layout
-   already puts it. */
 @media (min-width: 64rem) {
   .contact-hero-visual {
     align-items: start;
   }
 }
 
-/* /contact only: the "who you'll actually meet" line inside the booking
-   card, sitting between the intro paragraph and the calendar itself. A
-   real face directly above a time-slot picker is the one place on the site
-   where a portrait does concrete work — the visitor is deciding whether to
-   give up half an hour to a stranger. */
+/* /contact only: a real face directly above a time-slot picker — the one
+   place on the site a portrait does concrete work. */
 .booking-host {
   display: flex;
   align-items: center;
@@ -3162,11 +2338,9 @@ a.pill:hover {
 .booking-host-photo {
   width: 3.5rem;
   height: 3.5rem;
-  border-radius: 50%; /* deliberate exception to the square-corner rule: a portrait reads as a person, not a card */
+  border-radius: 50%;
   object-fit: cover;
-  /* Photo's own backdrop is grey, so it would otherwise blur into the
-     card's white surface at this size — the hairline gives it an edge. */
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--border);
   flex-shrink: 0;
 }
 
@@ -3182,24 +2356,23 @@ a.pill:hover {
   font-weight: 600;
 }
 
-/* Shared task/result "card" look (reuses the site's own card language:
-   white surface, hairline border, shadow-sm, square corners via
-   --radius-md) and the small icon/check tokens inside them. Sized down for
-   phones by default — same component everywhere (per request), not a
-   separate mobile version — and back up to full size from 700px. */
+/* Shared task/result "card" look — reuses the card language (surface,
+   hairline border, shadow-sm, --radius-card). Sized down for phones by
+   default (same component everywhere, not a separate mobile version) and
+   back up to full size from ~700px. */
 .showcase-task,
 .showcase-result {
   display: flex;
   align-items: center;
   gap: 0.375rem;
-  background: var(--color-white);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
   padding: 0.375rem 0.5rem;
   font-size: 0.625rem;
   font-weight: 600;
   line-height: 1.25;
-  color: var(--color-text);
+  color: var(--ink);
   box-shadow: var(--shadow-sm);
 }
 
@@ -3214,21 +2387,12 @@ a.pill:hover {
 }
 
 .showcase-task.is-active {
-  border-color: var(--color-accent);
+  border-color: var(--accent);
 }
 
-/* .is-fluid only: on the base grid pages, .hero-showcase's own
-   align-items:center + fixed row tracks keep every task the same height
-   regardless of whether its own text happens to wrap to 1 or 2 lines — but
-   .is-fluid's task column deliberately has no such mechanism (natural
-   height is the whole point). That exposed a real, measured bug: Plus
-   Jakarta Sans loads async, and
-   the fallback font is narrow enough that "Factuur binnengekomen" first
-   renders on ONE line, then rewraps to two once the real font swaps in —
-   a visible height (and thus hub-position) shift the "left column never
-   moves" requirement can't tolerate. min-height reserves 2-line space
-   from the very first paint regardless of which font is active, so the
-   font swap changes nothing about the box, only the text inside it. */
+/* min-height reserves 2-line space from first paint regardless of which
+   font is active (Plus Jakarta Sans loads async) — a font swap changes
+   nothing about the box, only the text inside it. .is-fluid only. */
 .hero-showcase.is-fluid .showcase-task {
   min-height: 2.5rem;
 }
@@ -3262,16 +2426,15 @@ a.pill:hover {
 }
 
 /* Green is a deliberate one-off exception to the ink/accent/border palette
-   (same reasoning as the trust section's live agent-feed widget elsewhere
-   on this page) — "done" needs a color the rest of the site's tokens don't
-   have. Scoped locally, not a new global token. */
+   — "done" needs a color the rest of the site's tokens don't have. Scoped
+   locally, not a new global token (same convention as before the rebrand). */
 .showcase-check {
   width: 0.8125rem;
   height: 0.8125rem;
   flex-shrink: 0;
-  border-radius: 50%; /* deliberate exception to the square-corner rule, matching .agent-feed-dot */
+  border-radius: 50%;
   background: #4a7a52;
-  color: var(--color-white);
+  color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3296,17 +2459,15 @@ a.pill:hover {
   }
 }
 
-/* The hub: a genuinely rounded "soft container" — a deliberate, explicit
-   exception to the site's zeroed-out radius tokens (same precedent as
-   .demo-video-play/.browser-frame-bar's dots elsewhere), since this one
-   element is meant to read as a distinct platform/product surface, not
-   another square card. */
+/* The hub: a genuinely rounded "soft container" — an explicit exception to
+   the site's card/media radius tokens, since this one element reads as a
+   distinct platform/product surface, not another card. */
 .showcase-hub-plate {
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 0.85rem;
-  background: var(--color-white);
-  border: 1px solid var(--color-border);
+  background: var(--surface);
+  border: 1px solid var(--border);
   box-shadow: var(--shadow-md);
   display: flex;
   align-items: center;
@@ -3332,7 +2493,7 @@ a.pill:hover {
   position: absolute;
   inset: 0;
   border-radius: 0.85rem;
-  border: 1.5px solid var(--color-accent);
+  border: 1.5px solid var(--accent);
   opacity: 0.5;
   animation: showcase-idle-pulse 2.8s var(--ease-out) infinite;
 }
@@ -3348,8 +2509,6 @@ a.pill:hover {
   100% { transform: scale(1.3); opacity: 0; }
 }
 
-/* A short, snappier "processing" beat — js/main.js toggles this for ~0.6s
-   while a task is conceptually "inside" the hub. */
 .showcase-hub.is-processing .showcase-hub-plate {
   animation: showcase-process-pulse 0.6s var(--ease-bounce);
 }
@@ -3369,27 +2528,6 @@ a.pill:hover {
   }
 }
 
-/* --- Layout: one 3-column grid, 4 fixed rows, at every width --------------
-   Same layout from the smallest phone up to desktop — just smaller, not a
-   different component. Connector lines are real <line> elements in an
-   absolutely-positioned SVG overlay (.showcase-lines), each one drawn from a
-   task card's actual right edge straight to its paired result card's actual
-   left edge — computed from real getBoundingClientRect() values in
-   js/main.js, not guessed coordinates, so they always genuinely touch both
-   cards regardless of font-loading/content reflow or the size tier below.
-   Every line runs UNDER the hub plate (z-index below it, above nothing else)
-   so it visually disappears behind the plate and "continues" on the other
-   side — the line quite literally goes through the Mowi logo, not just near
-   it.
-
-   .is-fluid (email-triage only) is a wholly separate, independent variant —
-   no fixed height, no cap on how many result cards exist or how tall any one
-   of them gets (the "Offerte-concept" card is taller than a plain result by
-   design). The task column and hub are grouped into their own sub-grid
-   (.showcase-left-group) specifically so the result column's height can
-   never feed back into where the task column or hub sit — see that rule's
-   own comment. It fully overrides grid-template-columns/rows below and never
-   relies on this 3-column/4-row setup. */
 .hero-showcase {
   display: grid;
   position: relative;
@@ -3408,16 +2546,10 @@ a.pill:hover {
   }
 }
 
-/* No fixed height, no cap on content height — the whole point is that this
-   one is allowed to be as tall as its content needs. grid-template-rows:none
-   cancels the base's explicit 4-row definition (this variant's own 2
-   children, .showcase-left-group and .showcase-col-result, form a single
-   implicit row, so the base's row-gap would never have applied in practice —
-   reset here anyway so that stays true regardless of the base's own rules).
-   align-items:start (grid default would stretch both columns to the taller
-   one's height, which is harmless visually here since neither column's CSS
-   relies on 100% height, but start is the honest, intention-revealing
-   value: two independent columns, not two stretched panes.) */
+/* .is-fluid (email-triage only): no fixed height, no cap on result-card
+   count/height — the task column and hub are grouped into their own
+   sub-grid (.showcase-left-group) so the result column's height can never
+   feed back into where the task column/hub sit. */
 .hero-showcase.is-fluid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -3432,16 +2564,6 @@ a.pill:hover {
   }
 }
 
-/* Groups the task column with the hub so the hub centers against the task
-   column's own (fixed, 4-card) height specifically — NOT the result
-   column's, which is free to grow arbitrarily taller. Without this
-   grouping, hub and task-col would be siblings in the same outer grid row
-   as the result column, and that row's height (hence the hub's centered
-   position within it) would be whatever the TALLEST of the three is —
-   meaning the hub would visibly drift downward every time a new result
-   card made the right side taller. This is the one piece of the "left side
-   never moves" requirement that isn't just "don't stretch it" — it needs
-   its own layout scope entirely. */
 .showcase-left-group {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
@@ -3455,16 +2577,10 @@ a.pill:hover {
   }
 }
 
-/* .is-fluid only: has just 2 explicit grid columns (left-group, result), so
-   .showcase-col-result needs its own grid-column:2 — it's a flex child of
-   .showcase-col elsewhere (no grid-column of its own to override). */
 .hero-showcase.is-fluid .showcase-col-result {
   grid-column: 2;
 }
 
-/* .is-fluid only: one column = one of the two 4-card lists (task or
-   result), stacked with a fixed gap — natural height, never stretched,
-   which is exactly what this variant needs. */
 .showcase-col {
   display: flex;
   flex-direction: column;
@@ -3477,29 +2593,11 @@ a.pill:hover {
   }
 }
 
-/* The showcase stays in 2-column mode continuously from 64rem (see
-   .hero-with-visual above) — at 1024-1365px specifically ("iPad Pro" width,
-   whether the device is actually a tablet, a MacBook, or a dev-tools resize)
-   that leaves its task/result column only ~148px wide, while the cards
-   themselves only have ONE size-up breakpoint (43.75rem) with no upper
-   bound, so they'd otherwise render at full desktop size regardless of how
-   little room they actually have — wrapping the longer labels ("Klant
-   gewijzigd in CRM", "Alleen e-mailadres bekend") onto 2-3 lines. This tier
-   shrinks card font/padding, hub plate, and column gap together for exactly
-   that width range, unconditionally — no touch/pointer detection, pure
-   width, so it looks the same on every device and every way of testing it
-   (see .hero-with-visual's own comment for why an earlier, pointer-based
-   version of this was abandoned). MUST come after every other
-   `(min-width: 43.75rem)` block above touching these same selectors — same
-   specificity, so source order decides, and an earlier position here was
-   silently overridden by those (a real bug caught by re-measuring computed
-   styles, not just eyeballing the CSS). Target was "never 3 lines" (2-line
-   wraps on the longest labels are pre-existing and already accepted at real
-   desktop widths — see the flagged `/agents/email-triage.html` case — not
-   something this needs to eliminate), verified empirically rather than
-   purely computed: iterated against a Playwright sweep across all 6
-   `.hero-with-visual` pages until zero 3-line results remained anywhere in
-   this range. */
+/* 1024-1365px ("iPad Pro" width, whatever the actual device): the
+   task/result column only has ~148px, so cards shrink for exactly this
+   width range — pure width-based, no touch/pointer detection. Must come
+   after every other `(min-width: 43.75rem)` block touching these same
+   selectors (same specificity, source order decides). */
 @media (min-width: 64rem) and (max-width: 85.3125rem) {
   .showcase-task,
   .showcase-result {
@@ -3541,20 +2639,15 @@ a.pill:hover {
 }
 
 .showcase-lines line {
-  stroke: var(--color-border);
+  stroke: var(--border);
   stroke-width: 1.5;
   transition: stroke 0.3s ease;
 }
 
 .showcase-lines line.is-active {
-  stroke: var(--color-accent);
+  stroke: var(--accent);
 }
 
-/* The hub->result half of a row's line — actually DRAWS from the hub out to
-   the result card (stroke-dashoffset, pathLength="1" set in js/main.js) in
-   sync with that card popping in, instead of a flat opacity fade — a plain
-   fade read as static; this reads as the hub visibly sending the result
-   out. Never drawn in ahead of the card it connects to. */
 .showcase-lines line[data-side="result"] {
   stroke-dasharray: 1;
   stroke-dashoffset: 0;
@@ -3565,13 +2658,6 @@ a.pill:hover {
   stroke-dashoffset: 1;
 }
 
-/* Direct grid items of .hero-showcase's 3-column/4-row grid (their exact
-   row is set inline per card via style="grid-row: N" in the HTML, so task[i]
-   and result[i] always land on the same row regardless of source order).
-   .is-fluid's own task/result cards are flex children of .showcase-col
-   instead (see that rule) — grid-column/grid-row are simply inert on them
-   there, harmless to leave shared. position:relative is for z-index, to
-   stack above .showcase-lines (the connector-line SVG). */
 .showcase-task {
   grid-column: 1;
   position: relative;
@@ -3586,13 +2672,9 @@ a.pill:hover {
 
 /* Shared by every result-side card type (.showcase-result, .showcase-
    compose, .showcase-offerte-card) — one is-pending/reveal treatment and
-   one JS marker class (querySelectorAll(".showcase-endpoint") is how
-   js/main.js finds "the 4 outcome cards" regardless of which type each one
-   is), instead of each card type redefining the same opacity/transform
-   rules. is-pending is only ever added by JS (gated behind
-   !prefersReducedMotion, same convention as everywhere else on the site),
-   so the base/no-modifier state — real content, fully visible — is also
-   the reduced-motion/no-JS end state. */
+   one JS marker class (querySelectorAll(".showcase-endpoint")). is-pending
+   is only ever added by JS (gated behind !prefersReducedMotion), so the
+   base/no-modifier state is also the reduced-motion/no-JS end state. */
 .showcase-endpoint {
   opacity: 1;
   transform: scale(1);
@@ -3604,29 +2686,18 @@ a.pill:hover {
   transform: scale(0.85);
 }
 
-/* Compact concept-reply card — the agent visibly drafting a response after
-   a reply-type mail lands in its category (see agents/email-triage.html and
-   js/main.js's typeComposeCard). Default/no-modifier state is the FINISHED
-   look (full line, visible skeleton, visible badge) — that's also the
-   reduced-motion/no-JS end state, same convention as every other showcase
-   card on the site.
-   min-height is the same font-load-reflow defense as .showcase-task (see
-   its own comment): even though .showcase-compose-line is nowrap (can't
-   itself wrap), the CARD's overall height still measurably shifted by 16px
-   between the fallback font and Plus Jakarta Sans in testing — small
-   cross-element font-metric differences (header, tag, line, skeleton,
-   badge each a few sub-pixels off) add up across several stacked rows.
-   Pinning min-height to the settled, real-font measurement removes the gap
-   layout could ever shift into, regardless of load timing or which row
-   this card happens to occupy in the result column. */
+/* Compact concept-reply card — the agent visibly drafting a response.
+   Default/no-modifier state is the FINISHED look — also the
+   reduced-motion/no-JS end state. min-height defends against a measured
+   font-load reflow (fallback font vs. Plus Jakarta Sans). */
 .showcase-compose {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 0.1875rem;
-  background: var(--color-white);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
   box-shadow: var(--shadow-sm);
   padding: 0.375rem 0.5rem;
   min-height: 4.25rem;
@@ -3660,15 +2731,12 @@ a.pill:hover {
   }
 }
 
-/* Small category tag next to the header — same information the old,
-   separate result badge used to carry ("Support", "Sales"), folded into
-   this card instead of a second card, per the compressed-beat spec. */
 .showcase-compose-tag {
   font-size: 0.5rem;
   font-weight: 700;
-  color: var(--color-accent);
-  background: var(--color-accent-soft);
-  border-radius: 999px; /* deliberate exception, same precedent as the skeleton bar below */
+  color: var(--accent);
+  background: var(--accent-soft);
+  border-radius: var(--radius-pill);
   padding: 0.0625rem 0.375rem;
 }
 
@@ -3683,10 +2751,7 @@ a.pill:hover {
   font-size: 0.5625rem;
   font-weight: 600;
   line-height: 1.3;
-  color: var(--color-text);
-  /* Guarantees exactly one line — required for the fixed slot height to
-     hold, and matches the given copy's own trailing "…", which now reads
-     as a deliberate truncation rather than an accident either way. */
+  color: var(--ink);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -3698,19 +2763,14 @@ a.pill:hover {
   }
 }
 
-/* Deliberately NOT real text — one placeholder bar standing in for the
-   rest of a reply the demo doesn't need to fully write out (see CLAUDE.md's
-   "no lorem beyond the deliberate skeleton lines" allowance for this exact
-   component — compressed from two bars to one for the compact card).
-   border-radius:999px is an explicit exception to the site's zeroed-out
-   radius tokens, same precedent as the hub plate/pills — reads as a soft
-   text-line shape, not another square card edge. */
+/* Deliberately not real text — one placeholder bar standing in for the
+   rest of a reply the demo doesn't need to fully write out. */
 .showcase-compose-skeleton {
   display: block;
   height: 0.375rem;
   width: 70%;
-  border-radius: 999px;
-  background: var(--color-border);
+  border-radius: var(--radius-pill);
+  background: var(--border);
   opacity: 1;
   transition: opacity 0.3s ease;
 }
@@ -3725,9 +2785,6 @@ a.pill:hover {
   opacity: 0;
 }
 
-/* Same one-off green as .showcase-check (see its own comment) — "done"
-   needs a color the ink/accent/border palette doesn't have, reused here
-   rather than introducing a second green. */
 .showcase-compose-badge {
   display: inline-flex;
   align-items: center;
@@ -3768,27 +2825,19 @@ a.pill:hover {
   height: 0.4rem;
 }
 
-/* Offerte-concept card (email-triage only, Offerteaanvraag's result) — the
-   agent's biggest time-saver: two found field rows and one missing one
-   (with its own amber "?" marker), an auto-typed follow-up question asking
-   for exactly what's missing (see js/main.js's playOfferteBeat), and the
-   "Vraag automatisch verstuurd" badge (reuses .showcase-compose-badge/
-   -header as-is — same visual language, no reason to duplicate them).
-   Deliberately kept lean (3 fields, no closing line) — this card sets the
-   .is-fluid result column's height (see .hero-showcase.is-fluid above), so
-   letting it grow unchecked pushes the whole hero out of proportion. */
+/* Offerte-concept card (email-triage only) — two found field rows, one
+   missing (amber "?" marker), an auto-typed follow-up question, then the
+   "Vraag automatisch verstuurd" badge. */
 .showcase-offerte-card {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
-  background: var(--color-white);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
   box-shadow: var(--shadow-sm);
   padding: 0.5rem 0.625rem;
-  /* Same font-load-reflow defense as .showcase-compose above — settled
-     measurement, not computed, for the same reason. */
   min-height: 8.75rem;
 }
 
@@ -3800,11 +2849,6 @@ a.pill:hover {
   }
 }
 
-/* Each field row is hidden/shown as one unit (label stays put, value +
-   checkmark are what actually "fill in" — the label is the part of a form
-   that's already there before you fill it, the value+check are the part
-   the agent just supplied) — js/main.js reveals these one at a time with a
-   stagger, not all together. */
 .showcase-offerte-field {
   display: flex;
   align-items: center;
@@ -3835,7 +2879,7 @@ a.pill:hover {
 .showcase-offerte-field-value {
   flex: 1 1 auto;
   min-width: 0;
-  color: var(--color-text);
+  color: var(--ink);
   font-weight: 600;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -3847,11 +2891,6 @@ a.pill:hover {
   flex-shrink: 0;
 }
 
-/* Missing-field state: value reads as a placeholder rather than a found
-   fact, and the trailing mark is amber (reusing --color-accent, same as the
-   live agent-feed widget's "Needs attention" state — see its own comment)
-   instead of the found-fields' green check. This is the whole point of the
-   beat: the agent notices what's missing, not just what's already there. */
 .showcase-offerte-field.is-missing .showcase-offerte-field-value {
   color: var(--color-text-muted);
   font-style: italic;
@@ -3863,9 +2902,9 @@ a.pill:hover {
   height: 0.8125rem;
   flex-shrink: 0;
   margin-left: auto;
-  border-radius: 50%; /* matches .showcase-check's own exception */
-  background: var(--color-accent);
-  color: var(--color-white);
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--accent-ink);
   font-size: 0.5625rem;
   font-weight: 700;
   line-height: 1;
@@ -3882,26 +2921,15 @@ a.pill:hover {
   }
 }
 
-/* The agent's auto-generated follow-up question, typed in the same style as
-   .showcase-compose-line (see typeInto/playOfferteBeat in js/main.js).
-   min-height reserves its full two-line height from first paint — same
-   font-load-reflow defense as the rest of this card (see its own comment
-   above), and load-bearing here specifically because the hub->result SVG
-   connector line is computed from this card's real bounding box: if the
-   line grew taller only once typing finished, the connector would visibly
-   drift mid-beat instead of staying put. */
 .showcase-offerte-ask {
   margin: 0;
   padding-top: 0.375rem;
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid var(--border);
   font-size: 0.5625rem;
   font-weight: 600;
   line-height: 1.35;
-  color: var(--color-text);
+  color: var(--ink);
   min-height: 1.9rem;
-  /* Override .showcase-compose-line's single-line nowrap/ellipsis truncation
-     — that class is built for a short "…" line, this one is a full question
-     meant to wrap across the two lines min-height already reserves. */
   white-space: normal;
   overflow: visible;
   text-overflow: clip;
@@ -3915,11 +2943,6 @@ a.pill:hover {
   }
 }
 
-/* Explicitly NOT "Offerte verstuurd" anywhere in this card, including here
-   — the agent chases the missing information, a human still turns the
-   answer into the actual offerte. See CLAUDE.md-adjacent product framing:
-   this is the one place on the site that draws that line visually, not
-   just in copy. */
 .showcase-offerte-closing {
   font-size: 0.5rem;
   color: var(--color-text-muted);
@@ -3948,10 +2971,6 @@ a.pill:hover {
   justify-content: center;
 }
 
-/* The traveling element — base position/size is set once per step in
-   js/main.js (matching whichever task card is "in flight"), then only
-   transform/opacity ever animate, so the same translateX distance always
-   reads as the correct number of real pixels regardless of scale. */
 .showcase-ghost {
   position: absolute;
   z-index: 5;
@@ -3959,13 +2978,13 @@ a.pill:hover {
   pointer-events: none;
 }
 
-/* --- Task icons ("Zes soorten taken" cards) -------------------------------- */
+/* --- Task icons ("Zes soorten taken" cards) ---------------------------------- */
 .task-icon {
   display: block;
   width: 2.75rem;
   height: 2.75rem;
   margin-bottom: 1.25rem;
-  color: var(--color-text);
+  color: var(--ink);
 }
 
 .task-icon svg {
@@ -3974,14 +2993,10 @@ a.pill:hover {
   overflow: visible;
 }
 
-.task-icon .ti-accent { stroke: var(--color-accent); }
-.task-icon .ti-accent-fill { fill: var(--color-accent); stroke: none; }
-.task-icon .ti-muted { stroke: var(--color-border); }
+.task-icon .ti-accent { stroke: var(--accent); }
+.task-icon .ti-accent-fill { fill: var(--accent); stroke: none; }
+.task-icon .ti-muted { stroke: var(--border); }
 
-/* One shared hover motion for every icon — the same up-right nudge as the
-   site's existing magnetic-hover buttons (js/main.js), so the icons pick up
-   the same "demeanor" as the rest of the site's motion language rather than
-   inventing a second one. */
 .task-icon .ti-move {
   transition: transform 0.35s var(--ease-bounce);
   transform-box: fill-box;
@@ -3992,9 +3007,8 @@ a.pill:hover {
   transform: translate(2px, -3px);
 }
 
-/* --- "Mowi koppelt met" -----------------------------------------------------
-   A static row of small pill labels (reuses .pill/.pill-row as-is, same
-   component the "werkt met" pills elsewhere on the site already use) — every
+/* --- "Mowi koppelt met" ------------------------------------------------------
+   Static row of small pill labels (reuses .pill/.pill-row as-is) — every
    system shown at once, not a cycling reel. */
 .koppelt-widget {
   max-width: 44rem;
@@ -4015,13 +3029,6 @@ a.pill:hover {
   font-size: 0.9375rem;
 }
 
-/* --- Live agent-feed widget ------------------------------------------------
-   A designed activity-feed card, not a fake screenshot — lives next to the
-   "Wat is Agentic AI-automatisering" claim it's actually demonstrating (see
-   .concreet-visuals below), not the trust section. The 4 rows in the
-   initial HTML ARE the reduced-motion/no-JS end state; js/main.js (when
-   motion is allowed) takes over from there and keeps cycling — so this
-   looks complete before a single line of JS runs. */
 .trust-item-media {
   flex-direction: column;
 }
@@ -4031,85 +3038,12 @@ a.pill:hover {
   width: 100%;
 }
 
-.agent-feed-card {
-  background: var(--color-white);
-  border: 1px solid var(--color-border);
-  padding: 1.75rem;
-  box-shadow: var(--shadow-sm);
-}
-
-.agent-feed-title {
-  font-size: 0.8125rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-wide);
-  color: var(--color-gray-500);
-  margin-bottom: 1.125rem;
-}
-
-.agent-feed-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.125rem;
-}
-
-.agent-feed-row {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding-block: 0.625rem;
-  border-top: 1px solid var(--color-border);
-  font-size: 0.9375rem;
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.4s var(--ease-out), transform 0.4s var(--ease-out);
-}
-
-.agent-feed-list li:first-child {
-  border-top: none;
-}
-
-.agent-feed-row-enter {
-  opacity: 0;
-  transform: translateY(-8px);
-}
-
-.agent-feed-dot {
-  flex-shrink: 0;
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: 50%; /* deliberate exception to the square-corner rule, matching .browser-frame-bar's own status dots */
-  background: var(--color-gray-400);
-}
-
-/* Amber reuses the existing accent token — no new "warning" color needed,
-   the terracotta accent already reads as an amber/attention hue. Resolved
-   green is the one genuinely new color this pilot introduces, scoped local
-   to this component only (not a global token) since nothing else on the
-   site currently needs a success/green state. */
-.agent-feed-row.is-warning .agent-feed-dot {
-  background: var(--color-accent);
-}
-
-.agent-feed-row.is-done .agent-feed-dot {
-  background: #4a7a52;
-}
-
-.agent-feed-row.is-warning .agent-feed-text {
-  color: var(--color-accent);
-  font-weight: 600;
-}
-
-/* --- Bewijs: before/after number emphasis ----------------------------------
-   Reuses the existing [data-reveal]/.reveal-armed/.is-visible mechanism
-   already on this card (see the base "Scroll reveal" rules earlier in this
-   file) instead of adding a second observer — the hidden "before-reveal"
-   state below is only ever applied once .reveal-armed is present, matching
-   this site's own established safety rule so the numbers can never get
-   stuck invisible if js/main.js fails to run. */
+/* --- Bewijs: before/after number emphasis ------------------------------------
+   Reuses the [data-reveal]/.reveal-armed/.is-visible mechanism above
+   instead of a second observer. */
 .case-after {
   display: inline-block;
-  color: var(--color-accent);
+  color: var(--accent);
   font-weight: 800;
 }
 
@@ -4137,11 +3071,7 @@ a.pill:hover {
   margin-inline: 0.25rem;
 }
 
-/* --- Aanpak: step numbers pop in on scroll ---------------------------------
-   The connecting line that used to sit above these (stroke-dashoffset
-   "progress bar") was removed 2026-08-06 per request — just the numbers
-   popping in now, staggered, gated by the same reveal-armed/is-visible pair
-   as everywhere else on the site so they can never get stuck invisible. */
+/* --- Aanpak: step numbers pop in on scroll ------------------------------------ */
 .steps-wrap {
   position: relative;
 }
@@ -4163,10 +3093,7 @@ a.pill:hover {
   .steps .step:nth-child(4)::before { transition-delay: 0.6s; }
 }
 
-/* --- Concreet section: text + visuals layout -------------------------------
-   .concreet-visuals stacks the live agent-feed widget above the (currently
-   empty-until-supplied) dashboard screenshot — both sit in the same right-
-   hand column, next to the heading/copy, and stack under it on mobile. */
+/* --- Concreet section: text + visuals layout ---------------------------------- */
 .concreet-layout {
   display: grid;
   gap: 2rem;
@@ -4186,14 +3113,15 @@ a.pill:hover {
   gap: 1.5rem;
 }
 
-/* --- Browser-window-framed screenshot slot ---------------------------------
-   Renders only once a real file exists at the referenced path — the
-   existing broken-image safety net (js/broken-image-guard.js) hides the
-   WHOLE frame, chrome bar included, if the <img> 404s, so a missing asset
-   never leaves an empty browser-chrome shell on the live page. */
+/* --- Browser-window-framed screenshot slot -------------------------------------
+   Renders only once a real file exists — js/broken-image-guard.js hides
+   the WHOLE frame (chrome bar included) if the <img> 404s. --radius-media
+   (0) on purpose: screenshots are the one place the site stays hard-edged,
+   a deliberate contrast against the pill geometry everywhere else. */
 .browser-frame {
-  border: 1px solid var(--color-border);
-  background: var(--color-white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-media);
+  background: var(--surface);
   box-shadow: var(--shadow-sm);
   overflow: hidden;
 }
@@ -4203,14 +3131,14 @@ a.pill:hover {
   gap: 0.375rem;
   padding: 0.625rem 0.75rem;
   background: var(--color-bg-tint);
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--border);
 }
 
 .browser-frame-bar span {
   width: 0.5rem;
   height: 0.5rem;
-  border-radius: 50%; /* deliberate exception to the square-corner rule, same as .demo-video-play */
-  background: var(--color-border);
+  border-radius: 50%;
+  background: var(--border);
 }
 
 .browser-frame img {
@@ -4223,450 +3151,90 @@ a.pill:hover {
   margin-top: 1.25rem;
 }
 
-/* --- Pricing (/pricing) -----------------------------------------------------
-   Card anatomy inspired by vuewer.com/pricing (price anchor + checkmark
-   bullet list + single request button) — reinterpreted with this site's own
-   tokens/copy, never their text or assets. Built on top of the existing
-   .card/.card-featured/.btn-slot components rather than a parallel set, so
-   elevation/hover/magnetic-button behavior stay identical to the rest of
-   the site. .pricing-card is a flex column with the CTA pinned to the
-   bottom via margin-top:auto, so all three cards line up at equal height
-   even though "Groei"'s bullet list is one line longer than "Start"'s
-   (the grid item itself already stretches full-height via CSS grid's
-   default align-items:stretch — see .grid above). */
-
-/* No hero on this page (removed per Sal — the page opens straight on this
-   heading), so .section-head's default 3rem margin-bottom/h2 scale would
-   read oversized as the very first thing on the page: 50% less margin,
-   20% smaller heading, no eyebrow. Scoped to this one instance rather than
-   changing .section-head/h2 globally. */
-/* The page's own container is --container-width: 100rem (1600px). That's fine
-   for a full-bleed hero, but it made the trial card read as a vast black slab
-   and stretched the three cards beside it into letterboxes.
-
-   Applied to EVERY full-width section on this page, not just the card block:
-   capping only the cards left the breadcrumb, "Zelf live" and the closing CTA
-   sitting 24rem wider, so their left edges no longer lined up with the cards
-   between them (this is what Sal spotted on the breadcrumb). The two
-   deliberately narrow reading sections ("Altijd inbegrepen" 56rem, FAQ 48rem)
-   stay as they are — they're centered, so they read as intentional insets
-   rather than misalignment. */
-.pricing-width {
-  max-width: 76rem;
-}
-
-.pakketten-head {
-  margin-bottom: 1.5rem;
-}
-
-.pakketten-head h2 {
-  font-size: clamp(1.6rem, 2vw + 0.8rem, 2.4rem);
-}
-
-.pricing-card {
+/* ==========================================================================
+   The AI orb — new hero visual primitive
+   A pure CSS/SVG-free gradient sphere in Mowi-orange tones, standing in for
+   "the AI" the way ElevenLabs' site uses an orb — the avatar for a future
+   "configurator conversation" demo UI, and a candidate hub for the
+   task->hub->result showcase above. Reusable/parameterizable: size is
+   entirely driven by --orb-size, settable per-instance via a size modifier
+   class OR an inline style="--orb-size: 6rem". No external assets, no
+   libraries — a radial-gradient sphere + two pseudo-elements (a specular
+   highlight, a soft pulsing halo) + one breathing keyframe animation.
+   ========================================================================== */
+.mowi-orb {
+  --orb-size: 8rem;
   position: relative;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-/* .pricing-badge and the .pricing-card h3 margin-top ladder that went with it
-   were removed 2026-08-11 (Sal: drop the orange label on every card). Those
-   h3 offsets existed ONLY to clear the absolutely-positioned badge at each
-   padding breakpoint — with no badge they were pushing every title off .card's
-   own padding for no reason, so they went too rather than being zeroed out. */
-
-.pricing-card-desc {
-  margin-top: 0.5rem;
-  color: var(--color-gray-600);
-}
-
-/* Scoped to the 3-card row only (not Proefmaand/Pakket, which have no row
-   siblings to align against). Email/Call/Custom agent's descriptions run
-   different lengths (Call's used to wrap a full line longer than Email's),
-   which pushed the price below it down by that same line — reserving a
-   floor of 3 lines here means the price always starts at the same y
-   regardless of how the description above it wraps. min-height, not a
-   fixed height: a future copy edit that runs longer than 3 lines still
-   grows the box instead of clipping/overlapping. */
-.pricing-grid .pricing-card-desc {
-  min-height: 3lh;
-}
-
-.pricing-card.card-featured .pricing-card-desc {
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.pricing-price {
-  margin-top: 1.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--color-border);
-}
-
-.pricing-card.card-featured .pricing-price {
-  border-top-color: rgba(255, 255, 255, 0.2);
-}
-
-.pricing-price-trial {
-  display: block;
-  font-size: 0.875rem;
-  color: var(--color-gray-600);
-}
-
-.pricing-card.card-featured .pricing-price-trial {
-  color: rgba(255, 255, 255, 0.6);
-}
-
-.pricing-price-monthly {
-  display: block;
-  margin-top: 0.375rem;
-  font-size: 1.75rem;
-  font-weight: 800;
-  letter-spacing: var(--tracking-tight);
-}
-
-.pricing-price-monthly small {
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--color-gray-600);
-}
-
-.pricing-card.card-featured .pricing-price-monthly small {
-  color: rgba(255, 255, 255, 0.6);
-}
-
-.pricing-features {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  margin-top: 1.5rem;
-}
-
-.pricing-features li {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.625rem;
-  font-size: 0.9375rem;
-}
-
-.pricing-features svg {
-  flex-shrink: 0;
-  width: 1.125rem;
-  height: 1.125rem;
-  margin-top: 0.15rem;
-  color: var(--color-accent);
-}
-
-.pricing-card.card-featured .pricing-features svg {
-  color: var(--color-white);
-}
-
-/* The three cards below Proefmaand each get their own real button (Sal,
-   2026-08-11 — they were arrow text-links, which read as weak next to the
-   trial card's filled button and were easy to miss as the actual CTA).
-   margin-top:auto pins them to the bottom of each flex column so all three
-   land on the same line regardless of how long the feature list above is;
-   width:100% overrides .btn's inline-flex/min-width:180px so they fill the
-   card instead of sitting as a narrow pill in a 357px column. */
-.pricing-card-cta {
-  margin-top: auto;
-  width: 100%;
-}
-
-/* The Call agent card's "Binnenkort". Reuses .btn purely for the shared box
-   (same height, same bottom alignment as the two real buttons beside it) but
-   deliberately drops the black fill and black border: this states availability
-   rather than offering an action, and dressing it like the live CTAs would
-   invite a click it can't service. Text stays at --color-gray-600 rather than
-   anything fainter — a disabled control is exempt from contrast minimums, but
-   it still has to be readable. */
-.pricing-cta-soon {
-  background: transparent;
-  color: var(--color-gray-600);
-  border-color: var(--color-border);
-}
-
-/* It IS a link (to the Call agent page), so it has to answer the pointer —
-   without this the muted styling reads as a disabled control and nobody tries
-   it. Darkens to the same ink the live buttons use, rather than filling, so it
-   still never competes with them as a call to action. */
-.pricing-cta-soon:hover,
-.pricing-cta-soon:focus-visible {
-  color: var(--color-ink);
-  border-color: var(--color-ink);
-}
-
-/* The gap goes on the element BEFORE the CTA, not on the CTA's own margin-top —
-   that one is spent on the auto bottom-pin above, and setting it here would
-   silently override the pin and let the buttons float up to different heights.
-   Matters because the tallest card in the row has no spare space for the auto
-   margin to absorb, so without this its button would butt straight against the
-   content above it. :has() is already used elsewhere in this file. */
-.pricing-card > :has(+ .pricing-card-cta) {
-  margin-bottom: 2rem;
-}
-
-/* No current caller — the maatwerk row this served was removed 2026-08-11
-   (Custom agent's card in the grid above now covers that "on request" case).
-   Left in rather than deleted: harmless, and a future card variant using
-   .card-link instead of .pricing-card-cta would need it again. */
-.pricing-card .card-link {
-  margin-top: auto;
-  padding-top: 2rem;
-}
-
-/* --- Pricing: free-trial card ------------------------------------------------
-   Full-width dark card sitting ABOVE the per-agent grid, so the first price a
-   visitor reads on this page is €0. It reuses .card/.card-featured (same
-   elevation/hover as everywhere else) but deliberately NOT .pricing-card — that
-   class's equal-height flex column and h3 offsets are tuned for grid siblings,
-   which this card has none of. */
-/* .pricing-pakket (the renamed/relocated "Custom" build-your-own card,
-   pushed out of the 3-card grid and down to full width, Sal 2026-08-11)
-   shares this exact grid mechanic — same selector list — specifically so
-   it stays "just like Proefmaand" by construction: if this rule ever
-   changes, both cards move together instead of silently drifting apart. */
-.pricing-trial,
-.pricing-pakket {
-  display: grid;
-  gap: 2rem;
-}
-
-/* Two columns only once there's room for the second column (Proefmaand's
-   bullet list / Pakket's price+CTA) to sit beside the main content without
-   either column going narrow enough to wrap awkwardly. */
-@media (min-width: 64rem) {
-  .pricing-trial,
-  .pricing-pakket {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: 3.5rem;
-    align-items: center;
-  }
-}
-
-/* The .card.card-featured overrides further up this file cover h3 and <p>
-   automatically; these are the pricing-specific bits it doesn't know about. */
-.pricing-trial .pricing-price {
-  border-top-color: rgba(255, 255, 255, 0.2);
-}
-
-.pricing-trial .pricing-price-trial,
-.pricing-trial .pricing-price-monthly small {
-  color: rgba(255, 255, 255, 0.6);
-}
-
-.pricing-trial .pricing-features svg {
-  color: var(--color-white);
-}
-
-/* .card.card-featured a underlines every link on a dark card — right for inline
-   arrow links, wrong for a filled button, which already reads as clickable. */
-/* Selector needs .card.card-featured on it to outweigh that rule's (0,2,1)
-   specificity — .pricing-trial-cta alone silently loses, leaving the CTA
-   underlined AND white-on-white (that rule sets color:white, which beats
-   .btn-secondary's own color:ink, so the label vanished into the button). */
-.card.card-featured .pricing-trial-cta {
-  margin-top: 1.75rem;
-  color: var(--color-ink);
-  text-decoration: none;
-}
-
-/* Bullets already sit in their own grid column on desktop, so the 1.5rem
-   .pricing-features top margin (meant to space it off the price above) only
-   applies while stacked. */
-@media (min-width: 64rem) {
-  .pricing-trial-features {
-    margin-top: 0;
-  }
-}
-
-.pricing-grid {
-  margin-top: 1.5rem;
-}
-
-/* --- Pricing: Pakket (build-your-own) -----------------------------------------
-   The only interactive card on the page — renamed from "Custom" and moved out
-   of the 3-card grid to its own full-width row below it, Sal 2026-08-11 (a
-   new static "Custom agent" card took its old grid slot instead — see the
-   HTML). Real <input type="checkbox">es are kept in the DOM and focusable
-   (opacity/size are handled below, not display:none) so keyboard and
-   screen-reader users get native checkbox semantics for free;
-   .pricing-option-mark is the drawn box. */
-.pricing-pakket {
-  margin-top: 1.5rem;
-}
-
-/* Mirrors .pricing-trial-main/.pricing-trial-features: two named children,
-   main content first (source order = mobile stacking order), price+CTA
-   second. Grid column sizing itself comes from the shared .pricing-trial,
-   .pricing-pakket rule above. */
-.pricing-pakket-main h3 {
-  margin: 0;
-}
-
-.pricing-pakket-side {
-  display: flex;
-  flex-direction: column;
-}
-
-/* The price block's own margin-top/padding-top/border-top exist to space it
-   off content stacked ABOVE it in the same column — right on mobile, where
-   .pricing-pakket-side stacks below .pricing-pakket-main, but wrong at
-   64rem+ where it's the first (only) thing in its own grid column: with
-   align-items:center on the parent, that leftover top space would pull the
-   whole side column visibly off-center. Same fix .pricing-trial-features
-   needed for the same reason. */
-@media (min-width: 64rem) {
-  .pricing-pakket-side .pricing-price {
-    margin-top: 0;
-    padding-top: 0;
-    border-top: none;
-  }
-}
-
-.pricing-pakket-cta {
-  margin-top: 1.75rem;
-  width: 100%;
-}
-
-/* Two checkboxes stretched to the full ~38rem column width (half of a
-   76rem-capped full-width card) would each read as an oversized touch
-   target with a lot of empty space — the "make sure items adjust to the
-   new width" ask. Side by side once there's room, same 40rem tablet
-   threshold every other 2-up layout on this page/site uses. */
-@media (min-width: 40rem) {
-  .pricing-pakket .pricing-options {
-    flex-direction: row;
-  }
-
-  .pricing-pakket .pricing-option {
-    flex: 1 1 0;
-  }
-}
-
-.pricing-options {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin-top: 1.5rem;
-  border: 0;
-  padding: 0;
-}
-
-.pricing-option {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem;
-  /* 44px minimum touch target, per the site's mobile quality bar — the padding
-     above alone lands just under it at this font size. */
-  min-height: 2.75rem;
-  border: 1px solid var(--color-border);
-  cursor: pointer;
-  transition: border-color 0.2s ease, background-color 0.2s ease;
-}
-
-.pricing-option:hover {
-  border-color: var(--color-ink);
-}
-
-/* Visually hidden but still focusable and hit-testable — sized 1px rather than
-   display:none so the browser keeps it in the tab order and screen readers
-   still announce checked state. */
-.pricing-option input {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.pricing-option-mark {
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 1.25rem;
-  height: 1.25rem;
-  border: 1px solid var(--color-gray-400);
-  background: var(--color-white);
-  transition: background-color 0.2s ease, border-color 0.2s ease;
-}
-
-/* Checkmark drawn in CSS rather than an inline SVG per row — it has to appear
-   and disappear with :checked, which a static SVG can't do without JS. */
-.pricing-option-mark::after {
-  content: "";
-  width: 0.375rem;
-  height: 0.6875rem;
-  border: solid var(--color-white);
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg) translate(-1px, -1px);
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.pricing-option input:checked ~ .pricing-option-mark {
-  background: var(--color-accent);
-  border-color: var(--color-accent);
-}
-
-.pricing-option input:checked ~ .pricing-option-mark::after {
-  opacity: 1;
-}
-
-/* Focus ring lands on the drawn box, since the real input is 1px and invisible —
-   without this, keyboard users get no visible focus at all on these rows. */
-.pricing-option input:focus-visible ~ .pricing-option-mark {
-  outline: 2px solid var(--color-accent);
-  outline-offset: 2px;
-}
-
-.pricing-option-name {
-  flex: 1;
-  font-size: 0.9375rem;
-  font-weight: 600;
-}
-
-.pricing-option-tag {
   display: inline-block;
-  margin-left: 0.375rem;
-  padding: 0.1rem 0.4rem;
-  background: var(--color-bg);
-  border: 1px solid var(--color-border);
-  font-size: 0.6875rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-wide);
-  color: var(--color-gray-600);
-  /* Sits inside a 600-weight name; without this it inherits the bold and stops
-     reading as secondary metadata. */
-  vertical-align: middle;
-}
-
-.pricing-option-price {
+  width: var(--orb-size);
+  height: var(--orb-size);
   flex-shrink: 0;
-  font-size: 0.9375rem;
-  font-weight: 700;
-  color: var(--color-gray-600);
+  border-radius: 50%;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 34% 28%, #ffcda1 0%, #ffab63 16%, var(--accent) 46%, #b23e08 76%, #6e2405 100%);
+  box-shadow:
+    inset 0 0 calc(var(--orb-size) * 0.22) rgba(28, 12, 2, 0.35),
+    inset 0 calc(var(--orb-size) * -0.08) calc(var(--orb-size) * 0.18) rgba(28, 12, 2, 0.25);
+  animation: mowi-orb-breathe 4.5s var(--ease-out) infinite;
 }
 
-.pricing-custom-note {
-  margin-top: 0.75rem;
-  font-size: 0.8125rem;
-  color: var(--color-gray-600);
+/* Specular highlight — a small, soft off-center bloom, the detail that
+   reads "sphere" rather than "flat circle". */
+.mowi-orb::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 24%, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0) 32%);
+  mix-blend-mode: screen;
 }
 
-/* [hidden] alone loses to .pricing-custom-note's display from the rule above in
-   some resets — this keeps the JS-toggled notes genuinely hidden. */
-.pricing-custom-note[hidden] {
-  display: none;
+/* Soft outer halo — pulses on its own slightly offset cycle so the whole
+   thing reads as "breathing" rather than a single uniform pulse. Sits
+   behind the sphere (z-index via isolation on the parent). */
+.mowi-orb::after {
+  content: "";
+  position: absolute;
+  inset: -22%;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--accent-soft) 0%, rgba(232, 89, 12, 0) 70%);
+  animation: mowi-orb-halo 4.5s var(--ease-out) infinite;
 }
 
-/* General utility, defined here because this is its first use on the site:
-   hides content visually while leaving it available to screen readers (used for
-   the Custom card's <legend>, which groups the checkboxes semantically but has
-   no room to be drawn). */
+@keyframes mowi-orb-breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.035); }
+}
+
+@keyframes mowi-orb-halo {
+  0%, 100% { opacity: 0.55; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.12); }
+}
+
+/* Freezes to a static gradient state — no motion, no exceptions. The
+   sphere itself (background/box-shadow) is already a complete, correctly-
+   lit "resting" image with the animation stopped mid-keyframe; nothing
+   about the orb's basic legibility depends on the animation running. */
+@media (prefers-reduced-motion: reduce) {
+  .mowi-orb,
+  .mowi-orb::after {
+    animation: none;
+  }
+}
+
+/* Size presets — all just set --orb-size; use directly on .mowi-orb or
+   layer a size class alongside it (<div class="mowi-orb mowi-orb--lg">).
+   An inline style="--orb-size: …" works too for one-off sizes. */
+.mowi-orb--xs { --orb-size: 2rem; }
+.mowi-orb--sm { --orb-size: 3.5rem; }
+.mowi-orb--md { --orb-size: 6rem; }
+.mowi-orb--lg { --orb-size: 10rem; }
+.mowi-orb--xl { --orb-size: 16rem; }
+
+/* --- Utilities (general) -------------------------------------------------------- */
+/* Hides content visually while leaving it available to screen readers. */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -4679,9 +3247,8 @@ a.pill:hover {
   border: 0;
 }
 
-/* Two-column checkmark list, "Altijd inbegrepen" section — single column
-   below 40rem, matching every other 2-up grid's mobile behavior on this
-   site (e.g. .grid-2). */
+/* Two-column checkmark list ("Altijd inbegrepen" pattern) — single column
+   below 40rem, matching every other 2-up grid's mobile behavior. */
 .check-list {
   display: grid;
   gap: 1.25rem;
@@ -4706,5 +3273,5 @@ a.pill:hover {
   width: 1.25rem;
   height: 1.25rem;
   margin-top: 0.15rem;
-  color: var(--color-accent);
+  color: var(--accent);
 }
