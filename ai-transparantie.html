@@ -8,7 +8,7 @@
   <meta name="robots" content="noindex" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css?v=20260815" />
   <link rel="icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="shortcut icon" href="assets/icon-192.png?v=20260804-3" />
@@ -21,38 +21,51 @@
   <header class="site-header">
     <div class="header-bar">
       <span class="header-cta-slot">
-        <a href="/pricing" class="header-cta" data-event="CTA Click">
-          <span class="header-cta-full">Start gratis</span><span class="header-cta-short">Start gratis</span>
+        <a href="/demo" class="header-cta" data-event="Demo Click">
+          <span class="header-cta-full">Plan een demo</span><span class="header-cta-short">Demo</span>
         </a>
       </span>
+
       <nav class="main-nav" id="main-nav" aria-label="Hoofdmenu">
         <ul class="nav-group">
           <li class="nav-dropdown">
-            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="products-menu" aria-haspopup="true">
-              Products
+            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="product-menu" aria-haspopup="true">
+              Product
               <span class="nav-dropdown-icon" aria-hidden="true"></span>
             </button>
-            <div class="nav-megamenu" id="products-menu">
+            <!-- English label is deliberate here — see CLAUDE.md's Language & tone
+                 exception. Single column, shapes.co-style: title + one-line Dutch
+                 descriptor per row. -->
+            <div class="nav-megamenu nav-megamenu-single" id="product-menu">
               <div class="nav-megamenu-col">
-                <p class="nav-megamenu-label">Platform</p>
                 <ul>
-                  <li><a href="agentic-ai">Agentic AI</a></li>
-                  <li><a href="power-bi-dashboards">Power BI</a></li>
-                  <li><a href="trainingen">Trainingen</a></li>
-                </ul>
-              </div>
-              <div class="nav-megamenu-col">
-                <p class="nav-megamenu-label">Agents</p>
-                <ul>
-                  <li><a href="agents/email-triage">Email agent</a></li>
-                  <li><a href="agents/phone-agent">Call agent</a></li>
+                  <li>
+                    <a href="/workflows">
+                      <span class="nav-megamenu-item-title">Workflows</span>
+                      <span class="nav-megamenu-item-desc">Maak workflows met AI</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/koppelingen">
+                      <span class="nav-megamenu-item-title">Koppelingen</span>
+                      <span class="nav-megamenu-item-desc">Uw systemen, één geheel</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/vertrouwen">
+                      <span class="nav-megamenu-item-title">Vertrouwen</span>
+                      <span class="nav-megamenu-item-desc">Eerst proefdraaien, dan pas live</span>
+                    </a>
+                  </li>
                 </ul>
               </div>
             </div>
           </li>
-          <li><a href="pricing">Pricing</a></li>
+          <li><a href="/receptenboek">Receptenboek</a></li>
+          <li><a href="/zo-werkt-het">How it works</a></li>
         </ul>
         <ul class="nav-group">
+          <li><a href="/over">About</a></li>
           <li class="nav-dropdown">
             <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="resources-menu" aria-haspopup="true">
               Resources
@@ -60,7 +73,7 @@
             </button>
             <!-- One unlabelled column: the trigger already says "Resources", so a
                  .nav-megamenu-label here would only repeat it. -narrow drops the
-                 27rem min-width the two-column Products panel needs. -->
+                 wider min-width the Product panel needs. -->
             <div class="nav-megamenu nav-megamenu-narrow" id="resources-menu">
               <div class="nav-megamenu-col">
                 <ul>
@@ -70,20 +83,17 @@
               </div>
             </div>
           </li>
-          <li><a href="contact">Demo</a></li>
+          <li><a href="https://my.mowi.agency/login" target="_blank" rel="noopener">Login</a></li>
         </ul>
-        <a href="/pricing" class="btn btn-primary header-cta-mobile" data-event="CTA Click">Start gratis</a>
-        <a href="https://my.mowi.agency/login" class="header-dashboard-mobile" target="_blank" rel="noopener">Dashboard log in</a>
       </nav>
+
       <div class="header-logo-cell">
-        <a href="https://my.mowi.agency/login" class="header-dashboard-btn" aria-label="Dashboard inloggen" target="_blank" rel="noopener">
-          <span class="header-dashboard-icon" aria-hidden="true"></span>
-        </a>
         <a href="/" class="wordmark" aria-label="Mowi - home">
           <img src="assets/mowi-icon.png" alt="" class="wordmark-icon" />
           <img src="assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
         </a>
       </div>
+
       <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="main-nav" aria-label="Menu openen">
         <span></span><span></span><span></span>
       </button>
@@ -149,6 +159,20 @@
     <p>Wilt u weten welke partijen namens Mowi persoonsgegevens verwerken (zoals Anthropic en ElevenLabs), of hoe lang gegevens bewaard blijven? Zie onze <a href="subverwerkers">subverwerkerspagina</a> en ons <a href="privacyverklaring">privacybeleid</a>.</p>
   </main>
 
+  <!-- ===== Pre-footer CTA band =====
+       Full-bleed dark inverted band, appears on every page directly above
+       the footer — see .cta-prefooter in css/style.css. Must always
+       immediately precede <footer class="site-footer">. -->
+  <section class="cta-prefooter">
+    <div class="container cta-prefooter-inner">
+      <h2>Uw bedrijf op de <em class="h-emph">automatische piloot.</em></h2>
+      <span class="btn-slot">
+        <a href="/demo" class="btn btn-primary" data-event="Demo Click">Plan een demo</a>
+      </span>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-brand">
@@ -156,34 +180,43 @@
           <img src="assets/mowi-icon.png" alt="" class="wordmark-icon" />
           <img src="assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
         </span>
-        <p>AI-automatisering, Power BI dashboards en trainingen voor MKB-bedrijven in Nederland en Vlaanderen.</p>
+        <p>Het conversationele automatiseringsplatform voor het Nederlandse MKB.</p>
       </div>
+
       <nav class="footer-nav" aria-label="Footermenu">
-        <span class="footer-heading">Navigatie</span>
-        <a href="/">Home</a>
-        <a href="agentic-ai">Agentic AI</a>
-        <a href="power-bi-dashboards">Power BI</a>
-        <a href="trainingen">Trainingen</a>
-        <a href="pricing">Tarieven</a>
-        <a href="blog/">Blog</a>
-        <a href="cases">Cases</a>
-        <a href="contact">Contact</a>
+        <span class="footer-heading">Platform</span>
+        <a href="/workflows">Workflows met AI</a>
+        <a href="/receptenboek">Receptenboek</a>
+        <a href="/koppelingen">Koppelingen</a>
+        <a href="/vertrouwen">Vertrouwen</a>
+        <a href="/zo-werkt-het">Zo werkt het</a>
       </nav>
-      <nav class="footer-support" aria-label="Supportmenu">
-        <span class="footer-heading">Support</span>
-        <a href="docs/">Documentatie</a>
+
+      <nav class="footer-support" aria-label="Bronnenmenu">
+        <span class="footer-heading">Bronnen</span>
+        <a href="/blog/">Blog</a>
+        <a href="/docs/">Documentatie</a>
       </nav>
+
       <div class="footer-contact">
-        <span class="footer-heading">Contact</span>
+        <span class="footer-heading">Bedrijf &amp; contact</span>
+        <a href="/over">Over Mowi</a>
+        <a href="/demo">Plan een demo</a>
         <p>085 333 5800</p>
         <p>contact@mowi.agency</p>
+        <a href="https://my.mowi.agency/login" target="_blank" rel="noopener">Inloggen</a>
       </div>
     </div>
+
     <div class="container footer-bottom">
       <p>© 2026 Mowi · Nederland &amp; België</p>
       <div class="footer-legal">
         <a href="/privacyverklaring">Privacyverklaring</a>
         <a href="/algemene-voorwaarden">Algemene voorwaarden</a>
+        <a href="/cookies">Cookies</a>
+        <a href="/ai-transparantie">AI-transparantie</a>
+        <a href="/bedrijfsgegevens">Bedrijfsgegevens</a>
+        <a href="/subverwerkers">Subverwerkers</a>
       </div>
     </div>
   </footer>

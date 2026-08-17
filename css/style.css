@@ -538,14 +538,27 @@ h3 {
   background: var(--bg);
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-card);
-  overflow: hidden; /* now safe with rounded corners — the dropdown panel is positioned outside this box's own flow, see .nav-megamenu below */
   box-shadow: var(--shadow-sm);
+  /* No overflow:hidden here (Stage 2 fix, 2026-08-17) — it used to clip the
+     CTA cell's solid-orange fill to the bar's own rounded corners, but that
+     also clipped the desktop .nav-megamenu dropdown panel, which is
+     positioned via `top: 100%` and so sits almost entirely BELOW this box's
+     own border box. Verified this silently broke the dropdown site-wide
+     (confirmed on unmodified contact.html before touching anything here —
+     hovering "Products" flips the trigger's aria-expanded/icon but the
+     panel itself was clipped to a ~1px sliver). Fixed the corner-clipping
+     need directly on .header-cta below (matching border-radius on its own
+     left edge) instead of clipping the whole bar. */
 }
 
+/* Column ratio widened for Stage 2's nav (2026-08-17): CTA / nav / logo,
+   was 1 : 2.2 : 1 — the nav now carries 6 top-level items (was 4) and the
+   logo cell lost its icon-only login button (Login is now a plain nav item,
+   see .main-nav below), so it needs less width than before. */
 @media (min-width: 48rem) {
   .header-bar {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 2.2fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 3.4fr) minmax(0, 0.9fr);
     min-height: 4.5rem;
   }
 }
@@ -678,6 +691,12 @@ h3 {
 @media (min-width: 48rem) {
   .header-cta {
     flex: 1;
+    /* .header-cta is the leftmost, solid-fill cell at this breakpoint (see
+       .header-bar's own comment on why overflow:hidden was removed) — round
+       its own left edge to match the bar's corner instead of relying on
+       parent clipping. */
+    border-top-left-radius: var(--radius-card);
+    border-bottom-left-radius: var(--radius-card);
   }
 }
 
@@ -715,11 +734,23 @@ h3 {
   display: contents;
 }
 
+/* flex, not a hardcoded `repeat(N, ...)` grid (pre-Stage-2) — Stage 2 grew
+   the nav from 4 top-level items to 6 (Product▾ / Receptenboek / How it
+   works / About / Resources▾ / Login), and pages not yet migrated to the
+   new chrome still render only 4. A fixed column count would either
+   starve the new 6-item nav or leave two empty trailing columns on
+   not-yet-migrated pages; flex with an explicit equal-share basis on each
+   <li> (below) self-adjusts to whatever item count is actually in the
+   markup, so both coexist correctly during the multi-stage rebrand. */
 @media (min-width: 48rem) {
   .main-nav {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    display: flex;
     align-items: stretch;
+  }
+
+  .main-nav > .nav-group > li {
+    flex: 1 1 0;
+    min-width: 0;
   }
 }
 
@@ -772,11 +803,14 @@ h3 {
   }
 }
 
+/* Stage 2: font-size/padding trimmed slightly from the pre-rebrand values
+   (1.0625rem/1.5rem) — 6 items need to fit where 4 used to, and this still
+   reads comfortably at >=80rem. */
 @media (min-width: 80rem) {
   .main-nav > .nav-group > li > a,
   .main-nav .nav-dropdown-trigger {
-    font-size: 1.0625rem;
-    padding-inline: 1.5rem;
+    font-size: 1rem;
+    padding-inline: 1rem;
   }
 }
 
@@ -841,6 +875,26 @@ h3 {
   transition: color 0.2s ease, background-color 0.2s ease;
 }
 
+/* Product dropdown's shapes.co-style rows (Stage 2): a short title plus a
+   one-line Dutch descriptor, stacked — the descriptor reads like the
+   linked page's own H1, not a generic tagline. Base rules cover both the
+   mobile accordion and the desktop panel; .nav-megamenu-single below
+   overrides wrapping/spacing for the desktop panel specifically. */
+.nav-megamenu-item-title {
+  display: block;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.nav-megamenu-item-desc {
+  display: block;
+  margin-top: 0.125rem;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: var(--ink-muted);
+}
+
 @media (min-width: 48rem) {
   .nav-megamenu {
     position: absolute;
@@ -866,6 +920,22 @@ h3 {
 
   .nav-megamenu-narrow {
     min-width: 12rem;
+  }
+
+  /* Product dropdown (Stage 2) — single wide column, title+descriptor rows.
+     Wider than -narrow (a bare label list) but narrower than the old
+     two-column Products panel's 27rem default. */
+  .nav-megamenu-single {
+    min-width: 22rem;
+  }
+
+  .nav-megamenu-single .nav-megamenu-col li,
+  .nav-megamenu-single .nav-megamenu-col li a {
+    white-space: normal; /* descriptors need to wrap; the default panel assumes short nowrap labels */
+  }
+
+  .nav-megamenu-single .nav-megamenu-col li a {
+    padding-block: 0.625rem; /* a bit more breathing room for two-line rows */
   }
 
   .nav-dropdown-trigger[aria-expanded="true"] + .nav-megamenu,
@@ -1114,6 +1184,14 @@ h3 {
     line-height: 1.2;
     color: rgba(250, 246, 239, 0.85);
     padding: 0.75rem 0.5rem;
+  }
+
+  .nav-megamenu-item-title {
+    color: inherit;
+  }
+
+  .nav-megamenu-item-desc {
+    color: rgba(250, 246, 239, 0.55);
   }
 
   .nav-megamenu-col li:not(:first-child) {
@@ -1799,12 +1877,50 @@ a.pill:hover {
   color: var(--ink);
 }
 
+/* --- Pre-footer CTA band ---------------------------------------------------
+   Full-bleed dark inverted band appearing on every page directly above the
+   footer — Mowi's own closing-statement CTA, patterned after shapes.co's
+   own pre-footer band ("The new era of people management") but with
+   entirely original copy/markup. New in Stage 2 (2026-08-17). Deliberately
+   edge-to-edge (no border-radius, unlike the rounded mid-page .cta-band)
+   so it reads as the site's final beat before the footer, not another card
+   in the flow — same full-bleed-background + inner .container pattern as
+   .section-tint elsewhere on the site. */
+.cta-prefooter {
+  background: var(--bg-inverted);
+  color: var(--ink-inverted);
+  margin-top: var(--section-gap);
+  padding-block: 4.5rem;
+  text-align: center;
+}
+
+.cta-prefooter h2 {
+  color: var(--ink-inverted);
+  margin-inline: auto;
+  max-width: 34rem;
+}
+
+.cta-prefooter .btn-slot {
+  display: inline-flex;
+  margin-top: 2rem;
+  background: var(--bg-inverted);
+  border-color: var(--border-inverted);
+}
+
 /* --- Footer -------------------------------------------------------------------------- */
 .site-footer {
   margin-top: var(--section-gap);
   border-top: 1px solid var(--border);
   padding-top: 4rem;
   padding-bottom: 2rem;
+}
+
+/* Every page's footer is now directly preceded by .cta-prefooter (Stage 2)
+   — its own dark band already provides the visual break, so don't stack a
+   second top-margin + hairline border right underneath it. */
+.cta-prefooter + .site-footer {
+  margin-top: 0;
+  border-top: none;
 }
 
 .footer-inner {
@@ -1835,7 +1951,7 @@ a.pill:hover {
   font-size: 0.9375rem;
 }
 
-.footer-nav a:hover, .footer-support a:hover {
+.footer-nav a:hover, .footer-support a:hover, .footer-contact a:hover {
   color: var(--ink);
 }
 
@@ -1861,9 +1977,13 @@ a.pill:hover {
   font-size: 0.875rem;
 }
 
+/* flex-wrap added in Stage 2 — the legal row grew from 2 links to 6, so it
+   needs to wrap onto multiple lines on narrow viewports instead of
+   overflowing. */
 .footer-legal {
   display: flex;
-  gap: 1.5rem;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
 }
 
 .footer-legal a:hover {
