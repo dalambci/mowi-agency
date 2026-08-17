@@ -113,6 +113,26 @@ retype credentials from scratch or falling back to a password:
   value on all `<link>`/`<script>` tags referencing them, across every HTML page**, so browsers
   are forced to fetch the new file immediately rather than waiting out the cache. Use the
   current date (`YYYYMMDD`); if multiple deploys land same-day, append `-2`, `-3`, etc.
+- **The same 30-day header is on the HTML too, and HTML has no `?v=` escape hatch.** Measured
+  2026-08-17: every explicit-slug page (`/agentic-ai`, `/agents/email-triage`, `/pricing`, …)
+  returns `Cache-Control: public, max-age=2592000` on the *document itself*. A returning visitor
+  therefore does not re-request the page at all — no revalidation, no 304 — for up to 30 days.
+  **So an HTML-only deploy is invisible to anyone who has visited before.** Nothing in this repo
+  fixes it: the header comes from `/etc/nginx/expires_static`
+  (`add_header Cache-Control "public, max-age=2592000";`) which is root-owned; the app's
+  `conf/custom-resp.vcl` Varnish hook is root-owned too (**not** writable by `master_jhjtpcszem`
+  despite sitting in the app folder — verified by `touch`, permission denied); `sudo` needs a
+  password; and the site's vhost is unreadable. Fixing it means asking Cloudways support to stop
+  applying `expires_static` to `text/html` for app `ktzphwhvnh` — assets keep the long cache,
+  documents become `no-cache` so they revalidate and 304. Until then, **never call an HTML-only
+  change "live" without saying the user must hard-refresh**, and verify with `curl` (which
+  ignores the browser cache) rather than trusting what a browser shows.
+- **The two caches are an exact inversion — know which one you are fighting.** `/` goes through
+  Varnish (`X-Cache`/`Age` present) and carries **no** `Cache-Control`, so browsers revalidate it
+  fine but the *server* keeps serving a stale copy until Varnish expires or is purged. Every
+  explicit-slug page skips Varnish entirely (no `X-Cache` header) but carries the **30-day**
+  browser cache. So: homepage stale → purge Varnish; inner page stale → the user must
+  hard-refresh, and purging will not help.
 - **Separate from the above:** production also has a page-level HTTP cache in front of nginx
   (confirmed 2026-08-03 — `curl -sI https://mowi.agency/` showed `X-Cache: HIT` and `Age: 252`;
   likely Varnish, which Cloudways commonly bundles). This caches whole HTML responses, not just
