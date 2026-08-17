@@ -1747,6 +1747,78 @@ body.nav-open .main-nav .wordmark-text {
   text-underline-offset: 3px;
 }
 
+/* Lists inside prose (legal pages: rights lists, numbered wijzigingsbeleid
+   steps, "gerelateerde documenten"). Not needed by the 3 shipped blog posts
+   (no lists in their prose), so this was a genuine gap, not covered by the
+   .blog-article rules above — added for Stage 5 (legal shells). */
+.blog-article ul,
+.blog-article ol {
+  margin-bottom: var(--content-p-margin-bottom);
+  padding-left: 1.25rem;
+}
+
+.blog-article ul {
+  list-style: disc;
+}
+
+.blog-article ol {
+  list-style: decimal;
+}
+
+.blog-article li {
+  line-height: var(--content-p-line-height);
+  margin-bottom: 0.5rem;
+}
+
+/* "Laatst bijgewerkt: ..." byline under a legal page's h1. */
+.blog-meta {
+  font-size: var(--text-small);
+  color: var(--ink-muted);
+  margin-bottom: var(--content-p-margin-bottom);
+}
+
+/* Structured-data tables (privacyverklaring, algemene-voorwaarden,
+   bedrijfsgegevens, subverwerkers) — another genuine gap, no table styling
+   existed anywhere in the v2 stylesheet yet. Minimal, reuses existing
+   tokens only. */
+.blog-table-wrap {
+  overflow-x: auto;
+  margin-bottom: var(--content-p-margin-bottom);
+}
+
+.blog-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-small);
+}
+
+.blog-table th,
+.blog-table td {
+  text-align: left;
+  padding: 0.625rem 0.75rem;
+  border: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.blog-table th {
+  background: var(--bg-band);
+  font-weight: 700;
+}
+
+/* Small inline "concept / pending review" notice box on the legal pages —
+   same visual role as the pre-rebuild inline-styled divs, rebuilt with real
+   v2 tokens instead of the old --color-* variable names (which no longer
+   exist in this stylesheet and would have rendered broken). */
+.legal-notice {
+  border-left: 3px solid var(--border-ink);
+  background: var(--bg-band);
+  padding: 1rem 1.25rem;
+  border-radius: 0.5rem;
+  margin-bottom: 2rem;
+  font-size: 0.9375rem;
+  color: var(--ink-muted);
+}
+
 /* --- Browser-window-framed screenshot slot -------------------------------------
    Hard-edged (border-radius: 0) on purpose — the one place the site stays
    square, a deliberate contrast against the pill/rounded geometry

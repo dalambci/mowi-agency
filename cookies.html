@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260817" />
+  <link rel="stylesheet" href="css/style.css?v=20260818" />
   <link rel="icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="shortcut icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260804-3" />
@@ -18,13 +18,15 @@
   <script src="js/broken-image-guard.js?v=20260805-1"></script>
 </head>
 <body>
+
+  <!-- ===== Header / navigation =====
+       Copied verbatim from index.html / test.html (the canonical v2 source). -->
   <header class="site-header">
     <div class="header-bar">
-      <span class="header-cta-slot">
-        <a href="/demo" class="header-cta" data-event="Demo Click">
-          <span class="header-cta-full">Plan een demo</span><span class="header-cta-short">Demo</span>
-        </a>
-      </span>
+      <a href="/" class="wordmark" aria-label="Mowi - home">
+        <img src="assets/mowi-icon.png" alt="" class="wordmark-icon" />
+        <img src="assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
+      </a>
 
       <nav class="main-nav" id="main-nav" aria-label="Hoofdmenu">
         <ul class="nav-group">
@@ -33,9 +35,6 @@
               Product
               <span class="nav-dropdown-icon" aria-hidden="true"></span>
             </button>
-            <!-- English label is deliberate here — see CLAUDE.md's Language & tone
-                 exception. Single column, shapes.co-style: title + one-line Dutch
-                 descriptor per row. -->
             <div class="nav-megamenu nav-megamenu-single" id="product-menu">
               <div class="nav-megamenu-col">
                 <ul>
@@ -61,36 +60,17 @@
               </div>
             </div>
           </li>
-          <li><a href="/receptenboek">Receptenboek</a></li>
           <li><a href="/zo-werkt-het">How it works</a></li>
-        </ul>
-        <ul class="nav-group">
+          <li><a href="/docs/">Docs</a></li>
           <li><a href="/over">About</a></li>
-          <li class="nav-dropdown">
-            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="resources-menu" aria-haspopup="true">
-              Resources
-              <span class="nav-dropdown-icon" aria-hidden="true"></span>
-            </button>
-            <!-- One unlabelled column: the trigger already says "Resources", so a
-                 .nav-megamenu-label here would only repeat it. -narrow drops the
-                 wider min-width the Product panel needs. -->
-            <div class="nav-megamenu nav-megamenu-narrow" id="resources-menu">
-              <div class="nav-megamenu-col">
-                <ul>
-                  <li><a href="/docs/">Documentation</a></li>
-                  <li><a href="/blog/">Blog</a></li>
-                </ul>
-              </div>
-            </div>
-          </li>
-          <li><a href="https://my.mowi.agency/login" target="_blank" rel="noopener">Login</a></li>
+          <li><a href="/blog/">Blog</a></li>
         </ul>
       </nav>
 
-      <div class="header-logo-cell">
-        <a href="/" class="wordmark" aria-label="Mowi - home">
-          <img src="assets/mowi-icon.png" alt="" class="wordmark-icon" />
-          <img src="assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
+      <div class="header-actions">
+        <a href="https://my.mowi.agency/login" target="_blank" rel="noopener" class="header-login">Login</a>
+        <a href="/demo" class="header-cta" data-event="Demo Click">
+          <span class="header-cta-full">Plan een demo</span><span class="header-cta-short">Demo</span>
         </a>
       </div>
 
@@ -104,7 +84,7 @@
     <p class="blog-breadcrumb"><a href="/">Home</a> &rsaquo; <a href="privacyverklaring">Privacyverklaring</a> &rsaquo; Cookies</p>
 
     <!-- CONCEPT-gate: wacht op de P0-4 Calendly click-to-load-fix live vóór publicatie. Zie Legal/STATUS.md. -->
-    <div style="border-left: 3px solid var(--color-border); background: var(--color-gray-50, #f7f7f5); padding: 1rem 1.25rem; border-radius: 0.5rem; margin-bottom: 2rem; font-size: 0.9375rem; color: var(--color-gray-600);">
+    <div class="legal-notice">
       <strong>Concept.</strong> Deze pagina beschrijft het beoogde gedrag van de boekingswidget (pas laden na een actieve klik). Publicatie wacht tot die aanpassing live staat.
     </div>
 
@@ -140,19 +120,18 @@
   </main>
 
   <!-- ===== Pre-footer CTA band =====
-       Full-bleed dark inverted band, appears on every page directly above
-       the footer — see .cta-prefooter in css/style.css. Must always
-       immediately precede <footer class="site-footer">. -->
+       Full-bleed dark inverted band — must always immediately precede
+       <footer class="site-footer">. -->
   <section class="cta-prefooter">
-    <div class="container cta-prefooter-inner">
+    <div class="container">
       <h2>Uw bedrijf op de <em class="h-emph">automatische piloot.</em></h2>
-      <span class="btn-slot">
-        <a href="/demo" class="btn btn-primary" data-event="Demo Click">Plan een demo</a>
-      </span>
+      <a href="/demo" class="btn btn-primary" style="background: var(--ink-inverted); color: var(--ink); border-color: var(--ink-inverted);" data-event="Demo Click">Plan een demo</a>
+      <p class="cta-alt">of <a href="/zo-werkt-het">bekijk eerst hoe het werkt</a></p>
     </div>
   </section>
 
-  <!-- ===== Footer ===== -->
+  <!-- ===== Footer =====
+       Copied verbatim from index.html / test.html (the canonical v2 source). -->
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-brand">
@@ -166,7 +145,6 @@
       <nav class="footer-nav" aria-label="Footermenu">
         <span class="footer-heading">Platform</span>
         <a href="/workflows">Workflows met AI</a>
-        <a href="/receptenboek">Receptenboek</a>
         <a href="/koppelingen">Koppelingen</a>
         <a href="/vertrouwen">Vertrouwen</a>
         <a href="/zo-werkt-het">Zo werkt het</a>
@@ -201,6 +179,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=20260817"></script>
+  <script src="js/main.js?v=20260818"></script>
 </body>
 </html>
