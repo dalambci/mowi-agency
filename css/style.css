@@ -164,7 +164,11 @@ main { flex: 1 0 auto; }
   transform: rotate(225deg) translateY(-1px);
 }
 
-/* Dropdown panel — opacity-only open/close, keyed off aria-expanded. */
+/* Dropdown panel — opacity-only open/close, keyed off aria-expanded.
+   Shadow recipe measured on shapes.co's own open Product dropdown
+   (Playwright, 2026-08-18): a SUBTLE tight shadow (0 2px 5px @ 7% black)
+   paired with a hairline rgba border — the border does the definition
+   work, not a big blur. Don't "improve" this back to a heavy shadow. */
 .nav-menu {
   position: absolute;
   top: calc(100% + 10px);
@@ -172,8 +176,9 @@ main { flex: 1 0 auto; }
   z-index: 110;
   min-width: 21rem;
   background: var(--surface);
-  border-radius: 14px;
-  box-shadow: 0 8px 30px rgba(18, 17, 16, 0.12);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.07);
   padding: 0.5rem;
   opacity: 0;
   visibility: hidden;
@@ -240,8 +245,10 @@ main { flex: 1 0 auto; }
     left: 0;
     right: 0;
     background: var(--surface);
+    border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: var(--radius-header);
-    box-shadow: 0 8px 30px rgba(18, 17, 16, 0.14);
+    /* same measured shapes.co dropdown shadow as .nav-menu above */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.07);
     padding: 0.75rem;
   }
   .main-nav.is-open { display: block; }
@@ -299,18 +306,22 @@ main { flex: 1 0 auto; }
   border-radius: var(--radius-footer) var(--radius-footer) 0 0;
   padding: var(--footer-pad);
 }
+/* shapes' measured footer-top proportions @1440: logo column ~460px on the
+   left with a notably LARGER logo, the three menu lists as a right-pinned
+   block of ~219px columns. 1fr + auto reproduces that: logo hugs left,
+   menus hug right, dead space in between — that gap is the design. */
 .footer-top {
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 3rem;
 }
-.footer-logo-col .wordmark-icon { height: 34px; }
-.footer-logo-col .wordmark-text { height: 22px; }
+.footer-logo-col .wordmark-icon { height: 44px; }
+.footer-logo-col .wordmark-text { height: 28px; }
 
 .footer-menus {
   display: grid;
-  grid-template-columns: repeat(3, minmax(150px, 200px));
-  gap: 2.5rem;
+  grid-template-columns: repeat(3, minmax(170px, 220px));
+  gap: 2rem;
 }
 .footer-menu-heading {
   font-size: 0.9375rem;
