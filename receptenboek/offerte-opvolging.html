@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Offerteaanvragen automatisch compleet maken | Mowi</title>
+  <meta name="description" content="Mist een offerteaanvraag gegevens? De E-mail agent herkent wat ontbreekt en vraagt het automatisch na bij de klant — sneller antwoord, sneller order." />
+  <link rel="canonical" href="https://mowi.agency/receptenboek/offerte-opvolging" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css?v=20260815" />
+  <link rel="icon" href="../assets/icon-192.png?v=20260804-3" />
+  <link rel="shortcut icon" href="../assets/icon-192.png?v=20260804-3" />
+  <link rel="apple-touch-icon" href="../assets/apple-icon-180.png?v=20260804-3" />
+  <link rel="apple-touch-icon-precomposed" href="../assets/apple-icon-180.png?v=20260804-3" />
+  <script defer data-domain="mowi.agency" src="https://plausible.io/js/script.js"></script>
+  <script src="../js/broken-image-guard.js?v=20260805-1"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mowi.agency/" },
+      { "@type": "ListItem", "position": 2, "name": "Receptenboek", "item": "https://mowi.agency/receptenboek" },
+      { "@type": "ListItem", "position": 3, "name": "Offerteaanvraag-opvolging", "item": "https://mowi.agency/receptenboek/offerte-opvolging" }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ===== Header / navigation ===== Copied verbatim from index.html, asset/script paths adjusted one level up for /receptenboek/. -->
+  <header class="site-header">
+    <div class="header-bar">
+      <span class="header-cta-slot">
+        <a href="/demo" class="header-cta" data-event="Demo Click">
+          <span class="header-cta-full">Plan een demo</span><span class="header-cta-short">Demo</span>
+        </a>
+      </span>
+
+      <nav class="main-nav" id="main-nav" aria-label="Hoofdmenu">
+        <ul class="nav-group">
+          <li class="nav-dropdown">
+            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="product-menu" aria-haspopup="true">
+              Product
+              <span class="nav-dropdown-icon" aria-hidden="true"></span>
+            </button>
+            <div class="nav-megamenu nav-megamenu-single" id="product-menu">
+              <div class="nav-megamenu-col">
+                <ul>
+                  <li>
+                    <a href="/workflows">
+                      <span class="nav-megamenu-item-title">Workflows</span>
+                      <span class="nav-megamenu-item-desc">Maak workflows met AI</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/koppelingen">
+                      <span class="nav-megamenu-item-title">Koppelingen</span>
+                      <span class="nav-megamenu-item-desc">Uw systemen, één geheel</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/vertrouwen">
+                      <span class="nav-megamenu-item-title">Vertrouwen</span>
+                      <span class="nav-megamenu-item-desc">Eerst proefdraaien, dan pas live</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li><a href="/receptenboek" aria-current="page">Receptenboek</a></li>
+          <li><a href="/zo-werkt-het">How it works</a></li>
+        </ul>
+        <ul class="nav-group">
+          <li><a href="/over">About</a></li>
+          <li class="nav-dropdown">
+            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="resources-menu" aria-haspopup="true">
+              Resources
+              <span class="nav-dropdown-icon" aria-hidden="true"></span>
+            </button>
+            <div class="nav-megamenu nav-megamenu-narrow" id="resources-menu">
+              <div class="nav-megamenu-col">
+                <ul>
+                  <li><a href="/docs/">Documentation</a></li>
+                  <li><a href="/blog/">Blog</a></li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li><a href="https://my.mowi.agency/login" target="_blank" rel="noopener">Login</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-logo-cell">
+        <a href="/" class="wordmark" aria-label="Mowi - home">
+          <img src="../assets/mowi-icon.png" alt="" class="wordmark-icon" />
+          <img src="../assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
+        </a>
+      </div>
+
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="main-nav" aria-label="Menu openen">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== Hero ===== -->
+    <section class="container hero">
+      <div class="breadcrumb"><a href="/">Home</a> / <a href="/receptenboek">Receptenboek</a> / Offerteaanvraag-opvolging</div>
+      <div class="hero-with-visual">
+        <div>
+          <div class="recipe-card-meta">
+            <span class="pill pill-accent">Live</span>
+            <span class="recipe-tag">E-mail</span>
+          </div>
+          <h1>Offerteaanvragen automatisch compleet maken</h1>
+          <p class="lede" style="margin-top: 1.25rem;">Mist een offerteaanvraag een gegeven? De E-mail agent herkent wat ontbreekt en vraagt het automatisch na bij de klant — sneller antwoord, sneller order.</p>
+          <div class="hero-actions" style="margin-top: 1.75rem;">
+            <span class="btn-slot">
+              <a href="/demo" class="btn btn-primary" data-event="Demo Click">Bespreek dit recept in een demo</a>
+            </span>
+          </div>
+        </div>
+
+        <div class="recipe-cover" data-tint="mail">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="6" width="18" height="13" rx="3" />
+            <path d="M3.5 7.5l8.5 6 8.5-6" stroke="var(--border)" />
+            <circle cx="18.5" cy="7.5" r="1.4" fill="var(--accent)" stroke="none" />
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Wat doet dit recept? ===== -->
+    <section class="section section-tint">
+      <div class="container" style="max-width: 48rem;">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Wat doet dit recept?</span>
+          <h2>Geen offerte blijft onvolledig liggen.</h2>
+        </div>
+        <div data-reveal>
+          <p>Wanneer de E-mail agent een offerteaanvraag herkent, controleert hij die op de gegevens die nodig zijn om een offerte te kunnen maken — bijvoorbeeld de klantnaam, de omvang van de opdracht en de gewenste datum. Ontbreekt er iets, dan stelt de agent automatisch een korte vraag op om precies dat gegeven na te vragen bij de klant, in plaats van dat de aanvraag blijft liggen tot iemand het handmatig opmerkt.</p>
+          <p style="margin-top: 1rem;">Dit is geen los recept naast de E-mail agent — het is een van de dingen die de agent al doet zodra hij een offerteaanvraag herkent.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Wanneer gebruikt u het? ===== -->
+    <section class="container section" style="max-width: 48rem;">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">Wanneer gebruikt u het?</span>
+        <h2>Voor aanvragen die anders blijven liggen.</h2>
+      </div>
+      <ul class="recipe-scenarios" data-reveal>
+        <li>Offerteaanvragen die regelmatig een gegeven missen — afmeting, datum, locatie — waardoor u zelf moet navragen.</li>
+        <li>Een team dat niet wil dat een aanvraag "blijft liggen" omdat niemand tijd had om terug te mailen.</li>
+        <li>Bedrijven waar snelheid van reageren direct meetelt in de kans op de order.</li>
+      </ul>
+    </section>
+
+    <!-- ===== Wat zit erin? =====
+         Grounded in agents/email-triage.html's showcase-offerte-card: real,
+         shipped missing-field detection inside the E-mail agent — same
+         reasoning as email-agent.html's own breakdown (predates the
+         Manifest Standard v1 configurator operations, so no manifest key
+         cited here). -->
+    <section class="section section-tint">
+      <div class="container" style="max-width: 48rem;">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Wat zit erin?</span>
+          <h2>De bouwstenen, precies zoals ze zijn.</h2>
+        </div>
+        <dl class="recipe-breakdown" data-reveal>
+          <div class="recipe-breakdown-row">
+            <dt>Trigger</dt>
+            <dd>Offerteaanvraag herkend in een binnenkomende mail.</dd>
+          </div>
+          <div class="recipe-breakdown-row">
+            <dt>Condities</dt>
+            <dd>De aanvraag wordt vergeleken met de gegevens die nodig zijn voor een offerte (bijvoorbeeld klant, omvang, gewenste datum) — ontbreekt er iets, dan volgt de actie hieronder.</dd>
+          </div>
+          <div class="recipe-breakdown-row">
+            <dt>Acties</dt>
+            <dd>
+              <ul>
+                <li>Ontbrekend gegeven gesignaleerd</li>
+                <li>Korte vraag automatisch opgesteld en verstuurd om het gegeven na te vragen</li>
+              </ul>
+            </dd>
+          </div>
+          <div class="recipe-breakdown-row">
+            <dt>Koppelingen</dt>
+            <dd>Gmail, Outlook / Microsoft 365 (via de E-mail agent).</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ===== Verwante recepten ===== -->
+    <section class="container section">
+      <div class="section-head center" data-reveal>
+        <span class="eyebrow">Verwante recepten</span>
+        <h2>Meer uit het Receptenboek.</h2>
+      </div>
+
+      <div class="grid grid-3">
+        <div class="card recipe-card" data-reveal>
+          <div class="recipe-cover" data-tint="mail">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="6" width="18" height="13" rx="3" />
+              <path d="M3.5 7.5l8.5 6 8.5-6" stroke="var(--border)" />
+              <circle cx="18.5" cy="7.5" r="1.4" fill="var(--accent)" stroke="none" />
+            </svg>
+          </div>
+          <div class="recipe-card-body">
+            <div class="recipe-card-meta">
+              <span class="pill pill-accent">Live</span>
+              <span class="recipe-tag">E-mail</span>
+            </div>
+            <h3>E-mail agent: inbox-triage &amp; concept-antwoorden</h3>
+            <p>Elke binnenkomende mail gecategoriseerd en waar mogelijk van een concept-antwoord voorzien.</p>
+            <a href="email-agent" class="card-link">Bekijk recept →</a>
+          </div>
+        </div>
+
+        <div class="card recipe-card" data-reveal>
+          <div class="recipe-cover" data-tint="webshop">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="4" y="8" width="16" height="12" rx="3" />
+              <path d="M8 8V6a4 4 0 018 0v2" stroke="var(--border)" />
+              <circle cx="12" cy="13" r="1.4" fill="var(--accent)" stroke="none" />
+            </svg>
+          </div>
+          <div class="recipe-card-body">
+            <div class="recipe-card-meta">
+              <span class="pill pill-accent">Live</span>
+              <span class="recipe-tag">Webshop</span>
+            </div>
+            <h3>Order-status automatisch opgezocht en beantwoord</h3>
+            <p>Een klant vraagt naar zijn bestelling — Mowi zoekt hem op en heeft het antwoord klaar.</p>
+            <a href="order-status" class="card-link">Bekijk recept →</a>
+          </div>
+        </div>
+
+        <div class="card recipe-card" data-reveal>
+          <div class="recipe-cover" data-tint="agenda">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="4" y="5" width="16" height="15" rx="3" />
+              <path d="M4 10h16M8 3v4M16 3v4" stroke="var(--border)" />
+              <path d="M9 14.5l2 2 4-4.5" stroke="var(--accent)" />
+            </svg>
+          </div>
+          <div class="recipe-card-body">
+            <div class="recipe-card-meta">
+              <span class="pill pill-accent">Live</span>
+              <span class="recipe-tag">Agenda</span>
+            </div>
+            <h3>Dagelijkse agenda-samenvatting</h3>
+            <p>Elke ochtend een overzicht van de vrije plekken in uw agenda — automatisch opgehaald.</p>
+            <a href="agenda-samenvatting" class="card-link">Bekijk recept →</a>
+          </div>
+        </div>
+      </div>
+
+      <p class="text-center" style="margin-top: 2.5rem;">
+        <a href="/receptenboek" class="card-link" style="display: inline;">Bekijk alle recepten in het Receptenboek →</a>
+      </p>
+    </section>
+
+  </main>
+
+  <!-- ===== Pre-footer CTA band ===== -->
+  <section class="cta-prefooter">
+    <div class="container cta-prefooter-inner">
+      <h2>Uw bedrijf op de <em class="h-emph">automatische piloot.</em></h2>
+      <span class="btn-slot">
+        <a href="/demo" class="btn btn-primary" data-event="Demo Click">Plan een demo</a>
+      </span>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="wordmark wordmark-lg">
+          <img src="../assets/mowi-icon.png" alt="" class="wordmark-icon" />
+          <img src="../assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
+        </span>
+        <p>Het conversationele automatiseringsplatform voor het Nederlandse MKB.</p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Footermenu">
+        <span class="footer-heading">Platform</span>
+        <a href="/workflows">Workflows met AI</a>
+        <a href="/receptenboek">Receptenboek</a>
+        <a href="/koppelingen">Koppelingen</a>
+        <a href="/vertrouwen">Vertrouwen</a>
+        <a href="/zo-werkt-het">Zo werkt het</a>
+      </nav>
+
+      <nav class="footer-support" aria-label="Bronnenmenu">
+        <span class="footer-heading">Bronnen</span>
+        <a href="/blog/">Blog</a>
+        <a href="/docs/">Documentatie</a>
+      </nav>
+
+      <div class="footer-contact">
+        <span class="footer-heading">Bedrijf &amp; contact</span>
+        <a href="/over">Over Mowi</a>
+        <a href="/demo">Plan een demo</a>
+        <p>085 333 5800</p>
+        <p>contact@mowi.agency</p>
+        <a href="https://my.mowi.agency/login" target="_blank" rel="noopener">Inloggen</a>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>© 2026 Mowi · Nederland &amp; België</p>
+      <div class="footer-legal">
+        <a href="/privacyverklaring">Privacyverklaring</a>
+        <a href="/algemene-voorwaarden">Algemene voorwaarden</a>
+        <a href="/cookies">Cookies</a>
+        <a href="/ai-transparantie">AI-transparantie</a>
+        <a href="/bedrijfsgegevens">Bedrijfsgegevens</a>
+        <a href="/subverwerkers">Subverwerkers</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js?v=20260815"></script>
+</body>
+</html>

@@ -3729,3 +3729,210 @@ a.pill:hover {
   margin-top: 0.15rem;
   color: var(--accent);
 }
+
+/* ==========================================================================
+   Receptenboek — cover-tile + recipe-card system (Stage 5, 2026-08-17)
+   Honesty constraint driving this whole block: no product screenshot exists
+   for any recipe yet, and none should be faked. Every recipe "cover" is a
+   designed illustration tile (tinted panel + one inline-SVG icon), built to
+   the same illustration-system spec already documented above (stroke-width
+   1.5, rx="3", max 3 token colors, no mascots/tech clichés) — never allowed
+   to read as a real screenshot. Square (aspect-ratio: 1), matching the
+   design system's "square media" convention (--radius-media: 0 already
+   establishes screenshots stay hard-edged; recipe covers follow the same
+   hard-edged, non-pill geometry for the same reason).
+
+   Tints are picked via [data-tint] rather than a modifier-class-per-category
+   so a category only ever needs one attribute, and every value is derived
+   from existing tokens via color-mix() — no new hex introduced anywhere in
+   this block. -------------------------------------------------------------- */
+.recipe-cover {
+  aspect-ratio: 1;
+  width: 100%;
+  border-radius: var(--radius-media);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.recipe-cover svg {
+  width: 38%;
+  height: 38%;
+  color: var(--ink);
+}
+
+.recipe-cover[data-tint="mail"] { background: var(--accent-soft); }
+.recipe-cover[data-tint="phone"] { background: color-mix(in srgb, var(--ink) 7%, var(--bg) 93%); }
+.recipe-cover[data-tint="webshop"] { background: color-mix(in srgb, var(--accent) 20%, var(--bg-band) 80%); }
+.recipe-cover[data-tint="agenda"] { background: var(--bg-band); }
+.recipe-cover[data-tint="crm"] { background: color-mix(in srgb, var(--ink) 11%, var(--bg-band) 89%); }
+/* "Op de planning" idea cards get a visibly duller, more washed-out tile —
+   a deliberate visual demotion vs. Live/Binnenkort covers, matching the
+   bigger honesty gap ("idee — nog niets gebouwd") those cards carry. */
+.recipe-cover[data-tint="idea"] {
+  background: color-mix(in srgb, var(--border) 45%, var(--bg) 55%);
+  border-style: dashed;
+}
+
+.recipe-cover[data-tint="idea"] svg {
+  color: var(--ink-muted);
+}
+
+/* Card wrapper — overrides .card's own padding (compound selector for
+   specificity, so this wins regardless of source order) since the cover
+   tile needs to bleed to the card's own edges; body copy gets its own
+   padding via .recipe-card-body. */
+.card.recipe-card {
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.recipe-card-body {
+  padding: 1.5rem;
+}
+
+@media (min-width: 40rem) {
+  .recipe-card-body {
+    padding: 1.75rem;
+  }
+}
+
+.recipe-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.875rem;
+}
+
+/* Category tag — plain, quiet, distinct from the status pill next to it. */
+.recipe-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.375rem 0.75rem;
+  border-radius: var(--radius-pill);
+  background: var(--bg-band);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+}
+
+.recipe-card h3 {
+  font-size: 1.25rem;
+}
+
+.recipe-card p {
+  margin-top: 0.625rem;
+}
+
+.recipe-attribution {
+  margin-top: 1rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+}
+
+/* "Op de planning" status pill — deliberately NOT the same solid-bordered
+   look as "Binnenkort" (.pill) or the filled "Live" look (.pill-accent):
+   dashed + no fill reads as "idea, not yet under construction", the bigger
+   honesty gap this status represents. */
+.pill-muted {
+  background: transparent;
+  border: 1px dashed var(--border);
+  color: var(--ink-muted);
+}
+
+/* --- Recipe detail page: "Wat zit erin?" breakdown -----------------------
+   The proof device — trigger/condities/acties/koppelingen, pulled straight
+   from what's real (config/capabilities.php's Manifest Standard v1, or an
+   already-shipped agent's documented feature set). Definition-list styling
+   kept deliberately plain — this section's job is to read as a factual
+   spec sheet, not a marketing block. */
+.recipe-breakdown {
+  border-top: 1px solid var(--border);
+}
+
+.recipe-breakdown-row {
+  display: grid;
+  gap: 0.25rem;
+  padding-block: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+@media (min-width: 40rem) {
+  .recipe-breakdown-row {
+    grid-template-columns: 12rem minmax(0, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+.recipe-breakdown-row dt {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-gray-500);
+}
+
+.recipe-breakdown-row dd {
+  margin: 0;
+  color: var(--ink);
+}
+
+.recipe-breakdown-row dd ul {
+  display: grid;
+  gap: 0.375rem;
+}
+
+.recipe-breakdown-row dd li {
+  padding-left: 1.125rem;
+  position: relative;
+}
+
+.recipe-breakdown-row dd li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* Scenario bullets ("Wanneer gebruikt u het?") — reuses .check-list's grid
+   rhythm but with a plain accent dot instead of a checkmark icon (these are
+   situations, not completed/verified items). */
+.recipe-scenarios {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.recipe-scenarios li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.recipe-scenarios li::before {
+  content: "";
+  flex-shrink: 0;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--accent);
+  margin-top: 0.5em;
+}
+
+/* Small honest note under a CTA that can't be self-served yet (Binnenkort
+   recipes) — quiet, not alarming. */
+.recipe-cta-note {
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  color: var(--ink-muted);
+}
