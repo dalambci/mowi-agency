@@ -3,213 +3,38 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact — Mowi</title>
-  <meta name="description" content="Plan een vrijblijvende kennismaking van 30 minuten met Mowi, of neem direct contact op." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260815" />
-  <link rel="icon" href="assets/icon-192.png?v=20260804-3" />
-  <link rel="shortcut icon" href="assets/icon-192.png?v=20260804-3" />
-  <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260804-3" />
-  <link rel="apple-touch-icon-precomposed" href="assets/apple-icon-180.png?v=20260804-3" />
-  <script defer data-domain="mowi.agency" src="https://plausible.io/js/script.js"></script>
-  <script src="js/broken-image-guard.js?v=20260805-1"></script>
+
+  <!-- Redirect stub. /contact was the live, publicly-deployed booking page
+       until the Stage 7 rebrand cleanup on 2026-08-17, when it was replaced
+       by /demo — the rebranded page carrying the same Calendly widget
+       (same data-url, same booking-host block, same #calendly-widget
+       anchor id, so old "/contact#calendly-widget" deep links still land on
+       the right section after the redirect). Without this file the old URL
+       404s for anyone who bookmarked it, and for every external link and
+       search result still pointing at it.
+
+       This is a client-side redirect, NOT a real 301 — a static host can't
+       issue one from a file. It works for humans immediately; search engines
+       treat it as a weaker signal than a server 301, which is what
+       rel="canonical" below is for. If the old URL turns out to matter for
+       SEO, add a proper 301 as a Cloudways Web Rule (app mowi.agency /
+       6590002 -> Web Rules -> Redirect, ^/contact$ -> /demo) and delete this
+       file.
+
+       noindex keeps this stub itself out of search results — without it the
+       stub can rank in place of the real page. -->
+  <meta name="robots" content="noindex, follow" />
+  <meta http-equiv="refresh" content="0; url=/demo" />
+  <link rel="canonical" href="https://mowi.agency/demo" />
+
+  <title>Verplaatst naar /demo — Mowi</title>
 </head>
 <body>
+  <p>Deze pagina is verhuisd naar <a href="/demo">mowi.agency/demo</a>.</p>
 
-  <!-- ===== Header ===== -->
-  <header class="site-header">
-    <div class="header-bar">
-      <span class="header-cta-slot">
-        <a href="/pricing" class="header-cta" data-event="CTA Click">
-          <span class="header-cta-full">Start gratis</span><span class="header-cta-short">Start gratis</span>
-        </a>
-      </span>
-
-      <nav class="main-nav" id="main-nav" aria-label="Hoofdmenu">
-        <ul class="nav-group">
-          <li class="nav-dropdown">
-            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="products-menu" aria-haspopup="true">
-              Products
-              <span class="nav-dropdown-icon" aria-hidden="true"></span>
-            </button>
-            <!-- English labels are deliberate here — see CLAUDE.md's Language & tone exception. -->
-            <div class="nav-megamenu" id="products-menu">
-              <div class="nav-megamenu-col">
-                <p class="nav-megamenu-label">Platform</p>
-                <ul>
-                  <li><a href="agentic-ai">Agentic AI</a></li>
-                  <li><a href="power-bi-dashboards">Power BI</a></li>
-                  <li><a href="trainingen">Trainingen</a></li>
-                </ul>
-              </div>
-              <div class="nav-megamenu-col">
-                <p class="nav-megamenu-label">Agents</p>
-                <ul>
-                  <li><a href="agents/email-triage">Email agent</a></li>
-                  <li><a href="agents/phone-agent">Call agent</a></li>
-                </ul>
-              </div>
-            </div>
-          </li>
-          <li><a href="pricing">Pricing</a></li>
-        </ul>
-        <ul class="nav-group">
-          <li class="nav-dropdown">
-            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="resources-menu" aria-haspopup="true">
-              Resources
-              <span class="nav-dropdown-icon" aria-hidden="true"></span>
-            </button>
-            <!-- One unlabelled column: the trigger already says "Resources", so a
-                 .nav-megamenu-label here would only repeat it. -narrow drops the
-                 27rem min-width the two-column Products panel needs. -->
-            <div class="nav-megamenu nav-megamenu-narrow" id="resources-menu">
-              <div class="nav-megamenu-col">
-                <ul>
-                  <li><a href="/docs/">Documentation</a></li>
-                  <li><a href="/blog/">Blog</a></li>
-                </ul>
-              </div>
-            </div>
-          </li>
-          <li><a href="contact" aria-current="page">Demo</a></li>
-        </ul>
-        <!-- Same CTA, shown only inside the open mobile menu -->
-        <a href="/pricing" class="btn btn-primary header-cta-mobile" data-event="CTA Click">Start gratis</a>
-        <a href="https://my.mowi.agency/login" class="header-dashboard-mobile" target="_blank" rel="noopener">Dashboard log in</a>
-      </nav>
-
-      <div class="header-logo-cell">
-        <a href="https://my.mowi.agency/login" class="header-dashboard-btn" aria-label="Dashboard inloggen" target="_blank" rel="noopener">
-          <span class="header-dashboard-icon" aria-hidden="true"></span>
-        </a>
-        <a href="/" class="wordmark" aria-label="Mowi - home">
-          <img src="assets/mowi-icon.png" alt="" class="wordmark-icon" />
-          <img src="assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
-        </a>
-      </div>
-
-      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="main-nav" aria-label="Menu openen">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </header>
-
-  <main>
-    <!-- ===== Hero =====
-         Calendly widget lives inside the hero now, as the visual half of
-         .hero-with-visual (same side-by-side-on-desktop/stacked-on-mobile
-         pattern as /agentic-ai + every /agents/* page) — sits to the right
-         of the heading from 64rem up instead of underneath it. Website &
-         Conversion plan, 2.3 (CTA hygiene): booking is the only path on this
-         page now — the Formspree contact form that used to sit beside this
-         card was removed on purpose, not lost. See the vault's decisions
-         log (2026-08-04) if it ever needs restoring. -->
-    <section class="container hero">
-      <div class="breadcrumb"><a href="/">Home</a> / Contact</div>
-      <div class="hero-with-visual contact-hero-visual">
-        <div style="max-width: 44rem;">
-          <h1 class="contact-heading">Plan een vrijblijvende kennismaking.</h1>
-          <p class="lede" style="margin-top: 1.5rem;">
-            In 30 minuten bespreken we uw situatie: welke problemen spelen er, wie is Mowi, wie bent u — en
-            kunnen we een oplossing bieden? Bij een goede match plannen we vervolgens een afspraak op locatie.
-          </p>
-          <p class="lede" style="margin-top: 1rem; font-size: 0.875rem;">
-            Wilt u liever meteen zelf beginnen? <a href="https://my.mowi.agency/aanmelden" data-event="Signup Started" style="text-decoration: underline;">Start de E-mail agent gratis</a> — geen gesprek nodig.
-          </p>
-        </div>
-
-        <!-- Calendly inline embed. Widget script is loaded once at the bottom of this page. -->
-        <!-- id targeted by the header CTA button (site-wide) so it can jump straight here. -->
-        <div class="card" data-reveal id="calendly-widget">
-          <span class="eyebrow">Plan direct</span>
-          <h2 class="prose-heading">Kies een moment dat u past.</h2>
-          <p style="color: var(--color-gray-600); margin-top: 0.75rem;">
-            30 minuten, online en vrijblijvend. U weet daarna precies wat de volgende stap zou zijn.
-          </p>
-          <!-- Portrait sits between the intro copy and the calendar on
-               purpose: it answers "who am I giving 30 minutes to?" at the
-               exact moment the visitor is about to pick a slot. Width/height
-               attributes match the CSS size so the row doesn't reflow while
-               the image loads and shove the calendar down. -->
-          <div class="booking-host">
-            <img class="booking-host-photo" src="assets/sal-portret.jpg" alt="Portret van Sal, oprichter van Mowi" width="56" height="56" loading="lazy" decoding="async">
-            <p class="booking-host-text">U spreekt met <span class="booking-host-name">Sal</span>, oprichter van Mowi.</p>
-          </div>
-
-          <div class="calendly-inline-widget" data-url="https://calendly.com/contact-mowi/30min?hide_gdpr_banner=1&embed_type=Inline&embed_domain=mowi.agency" style="min-width: 280px; height: 630px; margin-top: 1.5rem;"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== Direct contact ===== -->
-    <section class="section section-tint">
-      <div class="container">
-        <div class="section-head center" data-reveal>
-          <span class="eyebrow">Liever direct contact?</span>
-          <h2>Bel of mail ons.</h2>
-        </div>
-
-        <div class="grid grid-2 contact-info-grid">
-          <div class="card text-center" data-reveal>
-            <h3>Telefoon</h3>
-            <p><a href="tel:+31853335800">085 333 5800</a></p>
-          </div>
-          <div class="card text-center" data-reveal>
-            <h3>E-mail</h3>
-            <p><a href="mailto:contact@mowi.agency">contact@mowi.agency</a></p>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- ===== Footer ===== -->
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div class="footer-brand">
-        <span class="wordmark wordmark-lg">
-          <img src="assets/mowi-icon.png" alt="" class="wordmark-icon" />
-          <img src="assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
-        </span>
-        <p>AI-automatisering, Power BI dashboards en trainingen voor MKB-bedrijven in Nederland en Vlaanderen.</p>
-      </div>
-
-      <nav class="footer-nav" aria-label="Footermenu">
-        <span class="footer-heading">Navigatie</span>
-        <a href="/">Home</a>
-        <a href="agentic-ai">Agentic AI</a>
-        <a href="power-bi-dashboards">Power BI</a>
-        <a href="trainingen">Trainingen</a>
-        <a href="pricing">Tarieven</a>
-        <a href="blog/">Blog</a>
-        <a href="cases">Cases</a>
-        <a href="contact">Contact</a>
-      </nav>
-
-      <nav class="footer-support" aria-label="Supportmenu">
-        <span class="footer-heading">Support</span>
-        <a href="docs/">Documentatie</a>
-      </nav>
-
-      <div class="footer-contact">
-        <span class="footer-heading">Contact</span>
-        <p>085 333 5800</p>
-        <p>contact@mowi.agency</p>
-      </div>
-    </div>
-
-    <div class="container footer-bottom">
-      <p>© 2026 Mowi · Nederland &amp; België</p>
-      <div class="footer-legal">
-        <a href="/privacyverklaring">Privacyverklaring</a>
-        <a href="/algemene-voorwaarden">Algemene voorwaarden</a>
-      </div>
-    </div>
-  </footer>
-
-  <script src="js/main.js?v=20260815"></script>
-  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  <!-- replace(), not href: keeps the dead URL out of the back-button history,
+       so "terug" from /demo doesn't bounce the visitor straight back here
+       and into a redirect loop. -->
+  <script>window.location.replace("/demo");</script>
 </body>
 </html>

@@ -5,31 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Redirect stub. /tarieven was the live, publicly-deployed URL of the
-       pricing page until 2026-08-11, when it was renamed to /pricing. Without
-       this file that URL 404s for anyone who bookmarked it, and for every
-       external link and search result still pointing at it.
+       pricing page until 2026-08-11, when it was renamed to /pricing. As of
+       the Stage 7 rebrand cleanup on 2026-08-17, /pricing itself became a
+       redirect stub (fixed pricing tables were dropped from the public site
+       — see /zo-werkt-het's own FAQ) — so this file is retargeted straight
+       at /zo-werkt-het rather than bouncing through /pricing, to avoid a
+       needless redirect chain (/tarieven -> /pricing -> /zo-werkt-het).
 
        This is a client-side redirect, NOT a real 301 — a static host can't
        issue one from a file. It works for humans immediately; search engines
        treat it as a weaker signal than a server 301, which is what
        rel="canonical" below is for. If the old URL turns out to matter for
-       SEO, add a proper 301 as a Cloudways Web Rule (app mowi.agency / 6590002
-       -> Web Rules -> Redirect, ^/tarieven$ -> /pricing) and delete this file.
+       SEO, add a proper 301 as a Cloudways Web Rule (app mowi.agency /
+       6590002 -> Web Rules -> Redirect, ^/tarieven$ -> /zo-werkt-het) and
+       delete this file.
 
        noindex keeps this stub itself out of search results — without it the
        stub can rank in place of the real page. -->
   <meta name="robots" content="noindex, follow" />
-  <meta http-equiv="refresh" content="0; url=/pricing" />
-  <link rel="canonical" href="https://mowi.agency/pricing" />
+  <meta http-equiv="refresh" content="0; url=/zo-werkt-het" />
+  <link rel="canonical" href="https://mowi.agency/zo-werkt-het" />
 
-  <title>Verplaatst naar /pricing — Mowi</title>
+  <title>Verplaatst naar /zo-werkt-het — Mowi</title>
 </head>
 <body>
-  <p>Deze pagina staat nu op <a href="/pricing">mowi.agency/pricing</a>.</p>
+  <p>Deze pagina is verhuisd naar <a href="/zo-werkt-het">mowi.agency/zo-werkt-het</a>.</p>
 
   <!-- replace(), not href: keeps the dead URL out of the back-button history,
-       so "terug" from /pricing doesn't bounce the visitor straight back here
+       so "terug" from /zo-werkt-het doesn't bounce the visitor straight back here
        and into a redirect loop. -->
-  <script>window.location.replace("/pricing");</script>
+  <script>window.location.replace("/zo-werkt-het");</script>
 </body>
 </html>

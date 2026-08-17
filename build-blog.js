@@ -454,7 +454,9 @@ function renderPost(post) {
   <meta property="og:title" content="${post.title}" />
   <meta property="og:description" content="${post.description}" />
   <meta property="og:url" content="${url}" />
-  <meta property="og:image" content="${SITE_URL}/assets/og-default.png" />
+  <meta property="og:image" content="${SITE_URL}/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="${post.title}" />
   <meta name="twitter:description" content="${post.description}" />
@@ -485,7 +487,7 @@ ${headerHtml()}
     <div class="blog-cta">
       <p>Benieuwd wat dit voor uw situatie betekent?</p>
       <a href="https://my.mowi.agency/aanmelden" class="btn btn-primary" data-event="Signup Started">Start gratis — 14 dagen</a>
-      <p class="cta-alt">Liever eerst overleggen? <a href="/contact#calendly-widget" data-event="CTA Click">Plan een kennismaking</a></p>
+      <p class="cta-alt">Liever eerst overleggen? <a href="/demo#calendly-widget" data-event="CTA Click">Plan een kennismaking</a></p>
     </div>
   </main>
 ${footerHtml()}
@@ -543,22 +545,37 @@ ${footerHtml()}
 }
 
 function buildSitemap(posts) {
+  // Rebrand Stage 7 (2026-08-17): replaced the old root-page list with the
+  // rebranded site's pages. Deliberately excludes the redirect stubs built
+  // the same stage (/pricing, /tarieven, /power-bi-dashboards, /trainingen,
+  // /cases, /agentic-ai, /agents/email-triage, /agents/phone-agent,
+  // /contact) — a noindex stub should never be in the sitemap.
   const staticPages = [
-    "", "cases", "contact", "agentic-ai", "power-bi-dashboards", "trainingen", "pricing", "docs/",
+    "", "workflows", "receptenboek", "koppelingen", "vertrouwen", "over", "zo-werkt-het", "demo", "docs/",
   ];
-  // docs/, agents/ are read from disk rather than hand-listed, so a new page
-  // in either folder is in the sitemap the next time this script runs — no
-  // separate "don't forget the sitemap" step to remember. koppelingen/ no
-  // longer exists (those pages sold agents that were removed from the
-  // product lineup — see the vault's decisions log) — dropped from here too.
+  // docs/, receptenboek/ are read from disk rather than hand-listed, so a new
+  // page in either folder is in the sitemap the next time this script runs —
+  // no separate "don't forget the sitemap" step to remember. agents/ no
+  // longer holds real pages as of Stage 7 (those two pages became redirect
+  // stubs to receptenboek/email-agent and receptenboek/call-agent) —
+  // switched to reading receptenboek/ instead. koppelingen/ (the old folder,
+  // not to be confused with the new koppelingen.html page) no longer exists
+  // (those pages sold agents that were removed from the product lineup —
+  // see the vault's decisions log) — stays dropped from here too.
   const readFolderSlugs = (folder) =>
-    fs.readdirSync(path.join(ROOT, folder)).filter((f) => f.endsWith(".html")).map((f) => folder + "/" + f.replace(/\.html$/, ""));
+    fs.readdirSync(path.join(ROOT, folder)).filter((f) => f.endsWith(".html"))
+      // Skip index.html: its slug would otherwise emit "<folder>/index", a
+      // duplicate of the "<folder>/" entry already in staticPages (both
+      // resolve to the exact same page via the site's extensionless-URL
+      // rewrite) — a sitemap shouldn't list the same URL twice.
+      .filter((f) => f !== "index.html")
+      .map((f) => folder + "/" + f.replace(/\.html$/, ""));
   const docsSlugs = readFolderSlugs("docs");
-  const agentSlugs = readFolderSlugs("agents");
+  const receptenboekSlugs = readFolderSlugs("receptenboek");
   const urls = [
     ...staticPages.map((p) => `${SITE_URL}/${p}`),
     ...docsSlugs.map((p) => `${SITE_URL}/${p}`),
-    ...agentSlugs.map((p) => `${SITE_URL}/${p}`),
+    ...receptenboekSlugs.map((p) => `${SITE_URL}/${p}`),
     `${SITE_URL}/blog`,
     ...posts.map((p) => `${SITE_URL}/blog/${p.slug}`),
   ];

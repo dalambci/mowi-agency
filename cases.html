@@ -3,258 +3,36 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cases — Mowi</title>
-  <meta name="description" content="Ruim 100 dashboards en automatiseringen opgeleverd, een gemiddelde klantbeoordeling van 5/5. Bekijk hoe Dibalex, Hirschel Verhage en MMI ons inzetten." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260815" />
-  <link rel="icon" href="assets/icon-192.png?v=20260804-3" />
-  <link rel="shortcut icon" href="assets/icon-192.png?v=20260804-3" />
-  <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260804-3" />
-  <link rel="apple-touch-icon-precomposed" href="assets/apple-icon-180.png?v=20260804-3" />
-  <script defer data-domain="mowi.agency" src="https://plausible.io/js/script.js"></script>
-  <script src="js/broken-image-guard.js?v=20260805-1"></script>
+
+  <!-- Redirect stub. /cases was a live, publicly-deployed case-studies page
+       until the Stage 7 rebrand cleanup on 2026-08-17, when it was replaced
+       by /receptenboek — concrete, ready-made automations, the closest
+       equivalent in the rebranded site to what /cases used to show. Without
+       this file the old URL 404s for anyone who bookmarked it, and for every
+       external link and search result still pointing at it.
+
+       This is a client-side redirect, NOT a real 301 — a static host can't
+       issue one from a file. It works for humans immediately; search engines
+       treat it as a weaker signal than a server 301, which is what
+       rel="canonical" below is for. If the old URL turns out to matter for
+       SEO, add a proper 301 as a Cloudways Web Rule (app mowi.agency /
+       6590002 -> Web Rules -> Redirect, ^/cases$ -> /receptenboek) and
+       delete this file.
+
+       noindex keeps this stub itself out of search results — without it the
+       stub can rank in place of the real page. -->
+  <meta name="robots" content="noindex, follow" />
+  <meta http-equiv="refresh" content="0; url=/receptenboek" />
+  <link rel="canonical" href="https://mowi.agency/receptenboek" />
+
+  <title>Verplaatst naar /receptenboek — Mowi</title>
 </head>
 <body>
+  <p>Deze pagina is verhuisd naar <a href="/receptenboek">mowi.agency/receptenboek</a>.</p>
 
-  <!-- ===== Header ===== -->
-  <header class="site-header">
-    <div class="header-bar">
-      <span class="header-cta-slot">
-        <a href="/pricing" class="header-cta" data-event="CTA Click">
-          <span class="header-cta-full">Start gratis</span><span class="header-cta-short">Start gratis</span>
-        </a>
-      </span>
-
-      <nav class="main-nav" id="main-nav" aria-label="Hoofdmenu">
-        <ul class="nav-group">
-          <li class="nav-dropdown">
-            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="products-menu" aria-haspopup="true">
-              Products
-              <span class="nav-dropdown-icon" aria-hidden="true"></span>
-            </button>
-            <!-- English labels are deliberate here — see CLAUDE.md's Language & tone exception. -->
-            <div class="nav-megamenu" id="products-menu">
-              <div class="nav-megamenu-col">
-                <p class="nav-megamenu-label">Platform</p>
-                <ul>
-                  <li><a href="agentic-ai">Agentic AI</a></li>
-                  <li><a href="power-bi-dashboards">Power BI</a></li>
-                  <li><a href="trainingen">Trainingen</a></li>
-                </ul>
-              </div>
-              <div class="nav-megamenu-col">
-                <p class="nav-megamenu-label">Agents</p>
-                <ul>
-                  <li><a href="agents/email-triage">Email agent</a></li>
-                  <li><a href="agents/phone-agent">Call agent</a></li>
-                </ul>
-              </div>
-            </div>
-          </li>
-          <li><a href="pricing">Pricing</a></li>
-        </ul>
-        <ul class="nav-group">
-          <li class="nav-dropdown">
-            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="resources-menu" aria-haspopup="true">
-              Resources
-              <span class="nav-dropdown-icon" aria-hidden="true"></span>
-            </button>
-            <!-- One unlabelled column: the trigger already says "Resources", so a
-                 .nav-megamenu-label here would only repeat it. -narrow drops the
-                 27rem min-width the two-column Products panel needs. -->
-            <div class="nav-megamenu nav-megamenu-narrow" id="resources-menu">
-              <div class="nav-megamenu-col">
-                <ul>
-                  <li><a href="/docs/">Documentation</a></li>
-                  <li><a href="/blog/">Blog</a></li>
-                </ul>
-              </div>
-            </div>
-          </li>
-          <li><a href="contact">Demo</a></li>
-        </ul>
-        <!-- Same CTA, shown only inside the open mobile menu -->
-        <a href="/pricing" class="btn btn-primary header-cta-mobile" data-event="CTA Click">Start gratis</a>
-        <a href="https://my.mowi.agency/login" class="header-dashboard-mobile" target="_blank" rel="noopener">Dashboard log in</a>
-      </nav>
-
-      <div class="header-logo-cell">
-        <a href="https://my.mowi.agency/login" class="header-dashboard-btn" aria-label="Dashboard inloggen" target="_blank" rel="noopener">
-          <span class="header-dashboard-icon" aria-hidden="true"></span>
-        </a>
-        <a href="/" class="wordmark" aria-label="Mowi - home">
-          <img src="assets/mowi-icon.png" alt="" class="wordmark-icon" />
-          <img src="assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
-        </a>
-      </div>
-
-      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="main-nav" aria-label="Menu openen">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </header>
-
-  <main>
-    <!-- ===== Hero ===== -->
-    <section class="container hero">
-      <div class="breadcrumb"><a href="/">Home</a> / Cases</div>
-      <div style="max-width: 44rem;">
-        <h1>Klanten die u voorgingen.</h1>
-        <p class="lede" style="margin-top: 1.5rem;">
-          Ruim 100 dashboards en automatiseringen opgeleverd, een gemiddelde klantbeoordeling van 5/5, en klanten in
-          productie, bouw en handel die dagelijks op onze oplossingen sturen.
-        </p>
-      </div>
-    </section>
-
-    <!-- ===== Cases ===== -->
-    <section class="container section">
-      <div class="grid grid-3">
-        <div class="case-card" data-reveal>
-          <span class="case-tag">Productie · Dibalex</span>
-          <h3>Van een dag naar een paar minuten.</h3>
-          <div class="case-block">
-            <h4>Startsituatie</h4>
-            <p>Groeiend productiebedrijf met versnipperde gegevens per afdeling. De wekelijkse MT-rapportage kostte een volledige dag.</p>
-          </div>
-          <div class="case-block">
-            <h4>Aanpak</h4>
-            <p>Dashboards gekoppeld aan bestaande systemen, plus een project web app (PWA) voor engineering, inkoop en projectmanagement.</p>
-          </div>
-          <div class="case-block">
-            <h4>Resultaat</h4>
-            <p>Van een volledige dag naar een paar minuten voor de MT-rapportage, en betere samenwerking tussen afdelingen.</p>
-          </div>
-        </div>
-
-        <div class="case-card" data-reveal>
-          <span class="case-tag">Bouw · Hirschel Verhage</span>
-          <h3>Van uren zoeken naar 1 minuut verversen.</h3>
-          <div class="case-block">
-            <h4>Startsituatie</h4>
-            <p>Meerdere gelijktijdige projecten met verspreid voortgangs- en kostenoverzicht, waardoor bijsturen laat kwam.</p>
-          </div>
-          <div class="case-block">
-            <h4>Aanpak</h4>
-            <p>Eén geïntegreerd bouwdashboard met voortgang, kosten, planning en openstaande uren per project.</p>
-          </div>
-          <div class="case-block">
-            <h4>Resultaat</h4>
-            <p>Direct inzicht in de voortgang van alle projecten, met afwijkingen die meteen zichtbaar zijn.</p>
-          </div>
-        </div>
-
-        <div class="case-card" data-reveal>
-          <span class="case-tag">Productie · MMI</span>
-          <h3>Van een week naar 1 dag reactietijd.</h3>
-          <div class="case-block">
-            <h4>Startsituatie</h4>
-            <p>Drie afdelingen met eigen spreadsheets, wat leidde tot gegevens-inconsistentie.</p>
-          </div>
-          <div class="case-block">
-            <h4>Aanpak</h4>
-            <p>Eén gecombineerd dashboard voor planning, verkoop en finance, in dezelfde omgeving.</p>
-          </div>
-          <div class="case-block">
-            <h4>Resultaat</h4>
-            <p>Zo snel kan MMI nu reageren op wijzigingen van klanten, met een merkbaar hogere leverbetrouwbaarheid.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== Testimonials ===== -->
-    <section class="container section">
-      <div class="section-head center" data-reveal>
-        <span class="eyebrow">Klantgetuigenissen</span>
-        <h2>In hun eigen woorden.</h2>
-      </div>
-
-      <div class="grid grid-3">
-        <div class="card" data-reveal>
-          <p style="font-style: italic; color: var(--color-gray-600);">
-            "Het dashboard stimuleert een nieuwe manier van denken en biedt een solide basis om proactief te
-            handelen in plaats van reactief te zijn."
-          </p>
-          <p class="text-sm muted" style="margin-top: 1rem;">— Lucas, productieleider, maakindustrie</p>
-        </div>
-        <div class="card" data-reveal>
-          <p style="font-style: italic; color: var(--color-gray-600);">
-            "We ontdekten hoeveel onbenutte data we hadden — het helpt ons echt bij strategisch denken en
-            optimalisatie."
-          </p>
-          <p class="text-sm muted" style="margin-top: 1rem;">— Eva, HR, vastgoed</p>
-        </div>
-        <div class="card" data-reveal>
-          <p style="font-style: italic; color: var(--color-gray-600);">
-            "Het dashboard biedt ons handvatten voor verkoopoptimalisatie en een betere voorbereiding."
-          </p>
-          <p class="text-sm muted" style="margin-top: 1rem;">— Gerard, marketing &amp; sales, projecten</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== CTA ===== -->
-    <section class="container section">
-      <div class="cta-band" data-reveal>
-        <h2>Wordt uw bedrijf de volgende case?</h2>
-        <p>30 minuten gratis adviesgesprek — vrijblijvend, en u weet daarna precies wat de volgende stap zou zijn.</p>
-        <div class="cta-actions">
-          <span class="btn-slot">
-            <a href="contact#calendly-widget" class="btn btn-secondary" data-event="CTA Click">Plan uw kennismaking</a>
-          </span>
-        </div>
-        <p class="cta-alt">Liever direct contact? 085 333 5800 · <a href="mailto:contact@mowi.agency">contact@mowi.agency</a></p>
-      </div>
-    </section>
-  </main>
-
-  <!-- ===== Footer ===== -->
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div class="footer-brand">
-        <span class="wordmark wordmark-lg">
-          <img src="assets/mowi-icon.png" alt="" class="wordmark-icon" />
-          <img src="assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
-        </span>
-        <p>AI-automatisering, Power BI dashboards en trainingen voor MKB-bedrijven in Nederland en Vlaanderen.</p>
-      </div>
-
-      <nav class="footer-nav" aria-label="Footermenu">
-        <span class="footer-heading">Navigatie</span>
-        <a href="/">Home</a>
-        <a href="agentic-ai">Agentic AI</a>
-        <a href="power-bi-dashboards">Power BI</a>
-        <a href="trainingen">Trainingen</a>
-        <a href="pricing">Tarieven</a>
-        <a href="blog/">Blog</a>
-        <a href="cases">Cases</a>
-        <a href="contact">Contact</a>
-      </nav>
-
-      <nav class="footer-support" aria-label="Supportmenu">
-        <span class="footer-heading">Support</span>
-        <a href="docs/">Documentatie</a>
-      </nav>
-
-      <div class="footer-contact">
-        <span class="footer-heading">Contact</span>
-        <p>085 333 5800</p>
-        <p>contact@mowi.agency</p>
-      </div>
-    </div>
-
-    <div class="container footer-bottom">
-      <p>© 2026 Mowi · Nederland &amp; België</p>
-      <div class="footer-legal">
-        <a href="/privacyverklaring">Privacyverklaring</a>
-        <a href="/algemene-voorwaarden">Algemene voorwaarden</a>
-      </div>
-    </div>
-  </footer>
-
-  <script src="js/main.js?v=20260815"></script>
+  <!-- replace(), not href: keeps the dead URL out of the back-button history,
+       so "terug" from /receptenboek doesn't bounce the visitor straight back here
+       and into a redirect loop. -->
+  <script>window.location.replace("/receptenboek");</script>
 </body>
 </html>

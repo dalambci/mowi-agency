@@ -5,6 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mowi — AI-automatisering voor het Nederlandse MKB</title>
   <meta name="description" content="Vertel in gewone taal wat u geregeld wilt hebben — Mowi configureert het uit geteste bouwstenen, nooit uit losse code. Niets gaat live zonder uw akkoord. Plan een demo." />
+  <link rel="canonical" href="https://mowi.agency/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Mowi — AI-automatisering voor het Nederlandse MKB" />
+  <meta property="og:description" content="Vertel in gewone taal wat u geregeld wilt hebben — Mowi configureert het uit geteste bouwstenen, nooit uit losse code. Niets gaat live zonder uw akkoord. Plan een demo." />
+  <meta property="og:url" content="https://mowi.agency/" />
+  <meta property="og:image" content="https://mowi.agency/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Mowi — AI-automatisering voor het Nederlandse MKB" />
+  <meta name="twitter:description" content="Vertel in gewone taal wat u geregeld wilt hebben — Mowi configureert het uit geteste bouwstenen, nooit uit losse code. Niets gaat live zonder uw akkoord. Plan een demo." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
@@ -15,6 +26,23 @@
   <link rel="apple-touch-icon-precomposed" href="assets/apple-icon-180.png?v=20260804-3" />
   <script defer data-domain="mowi.agency" src="https://plausible.io/js/script.js"></script>
   <script src="js/broken-image-guard.js?v=20260805-1"></script>
+  <!-- Organization structured data — one canonical description of the
+       company, same nesting/formatting convention as build-blog.js's own
+       articleJsonLd() Organization block (see that file's publisher field)
+       for site-wide consistency. Phone and email are the same ones already
+       live in the footer (see footerHtml() in build-blog.js, and this
+       page's own footer below) — not invented for this block. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Mowi",
+    "url": "https://mowi.agency",
+    "logo": "https://mowi.agency/assets/mowi-icon.png",
+    "telephone": "+31853335800",
+    "email": "contact@mowi.agency"
+  }
+  </script>
   <!-- FAQPage structured data — mirrors the FAQ accordion in <main> 1:1 (same
        question/answer pairs, same order). Format follows build-blog.js's own
        articleJsonLd() FAQPage block (see that file) for site-wide consistency,
@@ -319,7 +347,7 @@
             <div class="browser-frame-bar" aria-hidden="true"><span></span><span></span><span></span></div>
             <img src="assets/screenshots/dashboard-kanalen.png" alt="Mowi dashboard — overzicht van kanalen" loading="lazy" />
           </div>
-          <a href="agents/email-triage" class="card-link">Bekijk de E-mail agent →</a>
+          <a href="/receptenboek/email-agent" class="card-link">Bekijk de E-mail agent →</a>
         </div>
 
         <div class="card" data-reveal>
