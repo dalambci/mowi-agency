@@ -47,6 +47,28 @@
     });
   });
 
+  /* Desktop only: the dropdown also opens on hover. Click stays as-is above
+     (keyboard + touch). The close runs on a short delay so the pointer can
+     cross the 10px gap between the trigger and the panel without it
+     collapsing mid-way. */
+  var hoverNav = window.matchMedia("(min-width: 64rem) and (hover: hover)");
+  document.querySelectorAll(".nav-dropdown").forEach(function (dropdown) {
+    var trigger = dropdown.querySelector(".nav-dropdown-trigger");
+    if (!trigger) return;
+    var closeTimer = null;
+    dropdown.addEventListener("mouseenter", function () {
+      if (!hoverNav.matches) return;
+      clearTimeout(closeTimer);
+      trigger.setAttribute("aria-expanded", "true");
+    });
+    dropdown.addEventListener("mouseleave", function () {
+      if (!hoverNav.matches) return;
+      closeTimer = setTimeout(function () {
+        trigger.setAttribute("aria-expanded", "false");
+      }, 120);
+    });
+  });
+
   // Clicking anywhere outside an open dropdown closes it.
   document.addEventListener("click", function (event) {
     document.querySelectorAll('.nav-dropdown-trigger[aria-expanded="true"]').forEach(function (trigger) {

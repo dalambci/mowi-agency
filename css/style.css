@@ -128,7 +128,7 @@ main { flex: 1 0 auto; }
 }
 .wordmark { display: inline-flex; align-items: center; gap: 0.5rem; flex-shrink: 0; }
 .wordmark-icon { height: 26px; width: auto; }
-.wordmark-text { height: 17px; width: auto; }
+.wordmark-text { height: 26px; width: auto; }
 
 .main-nav { display: flex; flex: 1; }
 .main-nav > ul {
@@ -257,6 +257,7 @@ main { flex: 1 0 auto; }
   .nav-menu {
     position: static;
     min-width: 0;
+    border: 0; /* the sheet already has the border — a second one reads as a stray box */
     box-shadow: none;
     padding: 0 0 0 0.875rem;
     display: none;
@@ -264,6 +265,15 @@ main { flex: 1 0 auto; }
     transition: none;
   }
   .nav-dropdown-trigger[aria-expanded="true"] + .nav-menu { display: block; }
+  /* The demo CTA keeps its desktop button look inside the mobile sheet
+     (the sheet's own link rule outranks .btn-primary, so restate it here). */
+  .main-nav > ul > li.nav-mobile-actions > a.btn-primary {
+    background: var(--ink);
+    color: var(--bg);
+    justify-content: center;
+    border-radius: var(--radius-btn);
+    margin-top: 0.25rem;
+  }
 }
 
 /* --- Footer -----------------------------------------------------------------
@@ -335,17 +345,30 @@ main { flex: 1 0 auto; }
 
 .footer-badges {
   display: flex;
-  justify-content: flex-end;
-  gap: 1rem;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.625rem;
   margin-top: 2rem;
 }
-/* Empty placeholder circles — structure only. Never render a SOC2/GDPR/ISO
-   claim here that Mowi doesn't hold; swap in real marks when they exist. */
+.footer-badges-label { font-size: 0.75rem; color: var(--ink-3); }
+.footer-badges-row { display: flex; gap: 1rem; }
+/* Text seals for marks Mowi is WORKING TOWARD — the "Currently working on"
+   label in the markup is what keeps this honest; never restyle these to look
+   like held certifications. */
 .footer-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 50px;
   height: 50px;
   border: 1px solid var(--ink-3);
   border-radius: 50%;
+  font-size: 0.5625rem;
+  font-weight: 600;
+  color: var(--ink-3);
+  text-align: center;
+  line-height: 1.2;
+  padding: 4px;
 }
 
 .footer-bottom {
@@ -361,18 +384,17 @@ main { flex: 1 0 auto; }
 }
 .footer-legal { display: flex; align-items: center; gap: 1.25rem; }
 .footer-legal a:hover { color: var(--ink); }
+/* Real LinkedIn glyph (inline SVG, fill: currentColor) — the rounded square
+   is part of the logo itself, so the anchor carries no background of its own. */
 .footer-social {
   display: inline-flex;
-  width: 26px;
-  height: 26px;
-  border-radius: 6px;
-  background: var(--ink-3);
-  color: var(--bg);
-  align-items: center;
-  justify-content: center;
-  font-size: 0.6875rem;
-  font-weight: 700;
+  width: 22px;
+  height: 22px;
+  color: var(--ink-3);
+  transition: color 0.15s ease;
 }
+.footer-social:hover { color: var(--ink); }
+.footer-social svg { width: 100%; height: 100%; }
 
 @media (max-width: 63.9rem) {
   .footer-wrap { padding-top: 72px; margin-top: 4rem; }
@@ -381,7 +403,7 @@ main { flex: 1 0 auto; }
   .footer-panel { padding: 24px; }
   .footer-top { grid-template-columns: 1fr; gap: 2rem; }
   .footer-menus { grid-template-columns: 1fr; gap: 2rem; }
-  .footer-badges { justify-content: flex-start; }
+  .footer-badges { align-items: flex-start; }
   .footer-bottom { flex-direction: column-reverse; align-items: flex-start; gap: 1rem; }
 }
 
