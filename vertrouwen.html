@@ -4,22 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vertrouwen — Mowi</title>
-  <meta name="description" content="Niets gaat live zonder uw akkoord. Zo bouwt Mowi vertrouwen: dry-run vóór live, menselijke bevestiging op elke schrijf-actie, gesloten bouwstenen, alles gelogd — en Sal, oprichter, persoonlijk verantwoordelijk." />
+  <meta name="description" content="Niets gaat live zonder uw akkoord. Zo bouwt Mowi vertrouwen: eerst proefdraaien, nooit een schrijf-actie zonder akkoord, een vaste contactpersoon, en heldere afspraken over uw gegevens." />
   <link rel="canonical" href="https://mowi.agency/vertrouwen" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Vertrouwen" />
-  <meta property="og:description" content="Niets gaat live zonder uw akkoord. Zo bouwt Mowi vertrouwen: dry-run vóór live, menselijke bevestiging op elke schrijf-actie, gesloten bouwstenen, alles gelogd — en Sal, oprichter, persoonlijk verantwoordelijk." />
+  <meta property="og:title" content="Vertrouwen — Mowi" />
+  <meta property="og:description" content="Niets gaat live zonder uw akkoord. Zo bouwt Mowi vertrouwen: eerst proefdraaien, nooit een schrijf-actie zonder akkoord, een vaste contactpersoon, en heldere afspraken over uw gegevens." />
   <meta property="og:url" content="https://mowi.agency/vertrouwen" />
   <meta property="og:image" content="https://mowi.agency/assets/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Vertrouwen" />
-  <meta name="twitter:description" content="Niets gaat live zonder uw akkoord. Zo bouwt Mowi vertrouwen: dry-run vóór live, menselijke bevestiging op elke schrijf-actie, gesloten bouwstenen, alles gelogd — en Sal, oprichter, persoonlijk verantwoordelijk." />
+  <meta name="twitter:title" content="Vertrouwen — Mowi" />
+  <meta name="twitter:description" content="Niets gaat live zonder uw akkoord. Zo bouwt Mowi vertrouwen: eerst proefdraaien, nooit een schrijf-actie zonder akkoord, een vaste contactpersoon, en heldere afspraken over uw gegevens." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260817" />
+  <link rel="stylesheet" href="css/style.css?v=20260818" />
   <link rel="icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="shortcut icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260804-3" />
@@ -30,14 +30,13 @@
 <body>
 
   <!-- ===== Header / navigation =====
-       Copied verbatim from reference/chrome-snippet.html (Stage 2), unmodified. -->
+       Copied verbatim from index.html / test.html (the canonical v2 source). -->
   <header class="site-header">
     <div class="header-bar">
-      <span class="header-cta-slot">
-        <a href="/demo" class="header-cta" data-event="Demo Click">
-          <span class="header-cta-full">Plan een demo</span><span class="header-cta-short">Demo</span>
-        </a>
-      </span>
+      <a href="/" class="wordmark" aria-label="Mowi - home">
+        <img src="assets/mowi-icon.png" alt="" class="wordmark-icon" />
+        <img src="assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
+      </a>
 
       <nav class="main-nav" id="main-nav" aria-label="Hoofdmenu">
         <ul class="nav-group">
@@ -71,33 +70,17 @@
               </div>
             </div>
           </li>
-          <li><a href="/receptenboek">Receptenboek</a></li>
           <li><a href="/zo-werkt-het">How it works</a></li>
-        </ul>
-        <ul class="nav-group">
+          <li><a href="/docs/">Docs</a></li>
           <li><a href="/over">About</a></li>
-          <li class="nav-dropdown">
-            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="resources-menu" aria-haspopup="true">
-              Resources
-              <span class="nav-dropdown-icon" aria-hidden="true"></span>
-            </button>
-            <div class="nav-megamenu nav-megamenu-narrow" id="resources-menu">
-              <div class="nav-megamenu-col">
-                <ul>
-                  <li><a href="/docs/">Documentation</a></li>
-                  <li><a href="/blog/">Blog</a></li>
-                </ul>
-              </div>
-            </div>
-          </li>
-          <li><a href="https://my.mowi.agency/login" target="_blank" rel="noopener">Login</a></li>
+          <li><a href="/blog/">Blog</a></li>
         </ul>
       </nav>
 
-      <div class="header-logo-cell">
-        <a href="/" class="wordmark" aria-label="Mowi - home">
-          <img src="assets/mowi-icon.png" alt="" class="wordmark-icon" />
-          <img src="assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
+      <div class="header-actions">
+        <a href="https://my.mowi.agency/login" target="_blank" rel="noopener" class="header-login">Login</a>
+        <a href="/demo" class="header-cta" data-event="Demo Click">
+          <span class="header-cta-full">Plan een demo</span><span class="header-cta-short">Demo</span>
         </a>
       </div>
 
@@ -108,126 +91,168 @@
   </header>
 
   <main>
-    <!-- ===== Hero ===== -->
-    <section class="container hero">
-      <div class="breadcrumb"><a href="/">Home</a> / Vertrouwen</div>
-      <div style="max-width: 40rem;">
-        <span class="mowi-orb mowi-orb--sm" aria-hidden="true" style="margin-bottom: 1.75rem;"></span>
-        <h1>Vertrouwen.</h1>
-        <p class="lede" style="margin-top: 1.25rem;">
-          <em class="h-emph">Niet omdat we het beloven — omdat u het zelf kunt zien, elke keer weer.</em>
-        </p>
-        <div class="hero-actions" style="margin-top: 2rem;">
-          <span class="btn-slot">
-            <a href="/demo" class="btn btn-primary" data-event="Demo Click">Plan een demo</a>
+
+    <!-- ===== 1. Hero ===== -->
+    <section class="section">
+      <div class="container">
+        <div class="hero-inner">
+          <span class="text-kicker">Vertrouwen</span>
+          <h1>Niet beloofd. <em class="h-emph">Bewezen.</em></h1>
+          <p class="text-lead">Elke proefdraai, elk akkoord en elke actie staat voor u vastgelegd — niet omdat we het beloven, maar omdat u het zelf kunt zien, elke keer weer.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 2. Mechanismen — proefdraaien & het akkoord-gate =====
+         Both process mechanisms grounded in the same real claims already
+         established on / and /workflows — nothing new invented here, just
+         given their own deep-dive room. "Alles gelogd" (old page's own
+         separate card) folded into these two rather than kept as a 5th
+         card, per this page's brief: proefdraaien, akkoord-gate, vaste
+         contactpersoon, data — four named mechanisms. -->
+    <section class="section section-tint">
+      <div class="container">
+        <div class="section-head">
+          <span class="text-kicker">Hoe dat werkt</span>
+          <h2>Geen belofte op de tast.</h2>
+        </div>
+        <div class="grid grid-2">
+          <div class="card">
+            <h3>Eerst proefdraaien</h3>
+            <p>Niets draait live voordat u heeft gezien wat het zou hebben gedaan — op uw eigen, recente gegevens, nooit op nepdata. Elke proefdraai staat vastgelegd in uw dashboard, zodat u altijd kunt teruglezen wat er gebeurde.</p>
+          </div>
+          <div class="card">
+            <h3>Het akkoord-gate</h3>
+            <p>Schrijf-acties — alles wat iets aanpast of verstuurt — gaan nooit zonder uw akkoord. Mowi kiest bovendien alleen uit bouwstenen die wij vooraf gebouwd en getest hebben; de AI schrijft geen eigen code en raakt nooit rechtstreeks een API aan. Zo kan een workflow nooit iets doen dat wij niet hebben goedgekeurd.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 3. Vaste contactpersoon =====
+         [FULL_NAME] per CLAUDE.md placeholder rules, matching the convention
+         already established on index.html's pull-quote (the founder's real
+         name isn't confirmed for public copy yet). -->
+    <section class="section">
+      <div class="container">
+        <div class="split-section" style="align-items: center;">
+          <div>
+            <span class="text-kicker">Geen anoniem supportteam</span>
+            <h2>Iemand verantwoordelijk.</h2>
+            <p class="text-lead" style="margin-top: 1rem;">[FULL_NAME], oprichter van Mowi, is persoonlijk aanspreekbaar op elke workflow die bij u draait. Heeft u een vraag over een specifieke actie? U spreekt rechtstreeks met de persoon die ervoor verantwoordelijk is — niet met een ticketnummer.</p>
+          </div>
+          <div class="card">
+            <img src="assets/sal-portret.jpg" alt="" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-card); filter: grayscale(1);" />
+            <h3 style="margin-top: 1.25rem;">[FULL_NAME]</h3>
+            <p>Oprichter, Mowi</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 4. Wat Mowi wel/niet met uw data doet =====
+         Both cards reuse the old page's exact, already-approved claims —
+         see CLAUDE.md's "Never guess security/network specifics" rule:
+         no encryption/retention/certification values invented here. -->
+    <section class="section section-tint">
+      <div class="container">
+        <div class="section-head">
+          <span class="text-kicker">Uw gegevens</span>
+          <h2>Wat Mowi wel — en nog niet — over data zegt.</h2>
+        </div>
+        <div class="grid grid-2">
+          <div class="card">
+            <h3>Gegevensverwerking bij Mowi</h3>
+            <p>Mowi is een Nederlands bedrijf en valt onder toezicht van de Autoriteit Persoonsgegevens. Het dashboard draait op dezelfde server als deze website, maar als aparte applicatie onder een eigen subdomein. Specifieke, verifieerbare uitspraken over encryptie, bewaartermijnen of certificeringen staan hier bewust nog niet — pas zodra ze met Mowi zijn vastgesteld, niet eerder. Heeft u dit nu al nodig, bijvoorbeeld voor een security-vragenlijst? <a href="mailto:contact@mowi.agency" style="text-decoration: underline; text-underline-offset: 3px;">Neem rechtstreeks contact op</a>.</p>
+          </div>
+          <div class="card">
+            <h3>Verwerkersovereenkomst op aanvraag</h3>
+            <p>Mowi heeft op dit moment geen standaard verwerkersovereenkomst klaarliggen; dit wordt per klant op aanvraag geregeld. Heeft uw organisatie er een nodig? Vraag ernaar bij Mowi tijdens de demo.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 5. Trust strip, volledig =====
+         Same 4 items as the shorter version linking here from /, in their
+         own full-width dark band as this page's own destination display. -->
+    <section class="section-inverted">
+      <div class="container">
+        <div class="section-head center">
+          <span class="text-kicker">Samengevat</span>
+          <h2>Vier zinnen die alles dekken.</h2>
+        </div>
+        <div class="trust-strip" style="justify-content: center;">
+          <span class="trust-item">
+            <svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" /></svg>
+            Eerst proefdraaien
+          </span>
+          <span class="trust-item">
+            <svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="10" rx="1.5" /><path d="M8 10V7a4 4 0 0 1 8 0v3" /></svg>
+            Niets live zonder uw akkoord
+          </span>
+          <span class="trust-item">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" /><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7" /></svg>
+            Een vaste contactpersoon
+          </span>
+          <span class="trust-item">
+            <svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z" /></svg>
+            Subverwerkers inzichtelijk
           </span>
         </div>
       </div>
     </section>
 
-    <!-- ===== Zes mechanismen =====
-         Each honest, real mechanism already established elsewhere on the
-         site (index.html/workflows.html) — nothing new claimed here, just
-         gathered on one page. #3's copy deliberately echoes workflows.html's
-         own sentence 1:1 for site-wide consistency (see task brief). -->
-    <section class="container section">
-      <div class="section-head" data-reveal>
-        <span class="eyebrow">Hoe dat werkt</span>
-        <h2>Zes mechanismen, geen belofte op de tast.</h2>
-      </div>
-
-      <div class="grid grid-2">
-        <div class="card" data-reveal>
-          <h3>Dry-run vóór live</h3>
-          <p>Niets draait live voordat een mens heeft gezien wat het zou hebben gedaan — op uw eigen, recente gegevens, niet op nepdata.</p>
-        </div>
-        <div class="card" data-reveal>
-          <h3>Menselijke bevestiging</h3>
-          <p>Schrijf-acties — alles wat iets aanpast of verstuurt — gaan nooit zonder uw akkoord. Een proefdraai kost u hooguit tijd, nooit een foute actie in uw systeem.</p>
-        </div>
-        <div class="card" data-reveal>
-          <h3>Gesloten bouwstenen</h3>
-          <p>De AI schrijft geen code en raakt nooit rechtstreeks een API aan. Hij kiest uit bouwstenen die wij vooraf gebouwd en getest hebben — daarom kan een workflow nooit iets doen dat wij niet hebben goedgekeurd.</p>
-        </div>
-        <div class="card" data-reveal>
-          <h3>Alles gelogd</h3>
-          <p>Elke actie staat in het dashboard: een run-historie van wat er gebeurde, en "aandachtspunten" die een mens moet bekijken.</p>
-        </div>
-        <div class="card" data-reveal>
-          <h3>AVG &amp; gegevensverwerking</h3>
-          <p>Mowi is een Nederlands bedrijf en valt onder toezicht van de Autoriteit Persoonsgegevens. Het dashboard draait op dezelfde server als deze website, als aparte applicatie onder een eigen subdomein. Encryptie, bewaartermijnen en eventuele certificeringen zijn specifieke, verifieerbare uitspraken die hier bewust nog niet staan — pas zodra ze met Mowi zijn vastgesteld, niet eerder. Heeft u dit nu al nodig, bijvoorbeeld voor een security-vragenlijst? <a href="mailto:contact@mowi.agency" style="text-decoration: underline;">Neem rechtstreeks contact op</a>.</p>
-        </div>
-        <div class="card" data-reveal>
-          <h3>Verwerkersovereenkomst op aanvraag</h3>
-          <p>Mowi heeft op dit moment geen standaard verwerkersovereenkomst klaarliggen; dit wordt per klant op aanvraag geregeld. Heeft uw organisatie er een nodig? Vraag ernaar bij Mowi.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== Iemand verantwoordelijk =====
-         Same real photo/copy pattern as index.html's "Gebouwd voor
-         eigenaren" card, given its own full-width section here since this
-         page's whole point is trust, not a shared grid item. -->
-    <section class="section section-tint">
+    <!-- ===== 6. Meer lezen =====
+         AI-transparantie + Subverwerkers (both real, stable URLs — see task
+         brief) plus the 2 docs IT articles, genuinely relevant to a trust
+         page and both confirmed to exist on disk. -->
+    <section class="section">
       <div class="container">
-        <div class="hero-with-visual" style="align-items: center;">
-          <div data-reveal>
-            <span class="eyebrow">Geen anoniem supportteam</span>
-            <h2>Iemand verantwoordelijk.</h2>
-            <p class="lede" style="margin-top: 1rem;">Sal, oprichter van Mowi, is persoonlijk aanspreekbaar op elke workflow die bij u draait. Heeft u een vraag over een specifieke actie? U spreekt rechtstreeks met de persoon die ervoor verantwoordelijk is — niet met een ticketnummer.</p>
+        <div class="section-head">
+          <span class="text-kicker">Meer lezen</span>
+          <h2>Voor wie het precies wil weten.</h2>
+        </div>
+        <div class="grid grid-4">
+          <div class="card">
+            <h3>AI-transparantie</h3>
+            <p>Waar Mowi AI inzet, wat die AI wel en niet beslist, en hoe wij gebruikers en bellers daarover informeren.</p>
+            <p style="margin-top: 1rem;"><a href="/ai-transparantie" style="text-decoration: underline; text-underline-offset: 3px; font-weight: 600; color: var(--ink);">Lees de transparantieverklaring →</a></p>
           </div>
-          <div class="card" data-reveal>
-            <div class="trust-photo">
-              <img src="assets/sal-portret.jpg" alt="Sal, oprichter van Mowi" />
-            </div>
-            <h3 style="margin-top: 1.25rem;">Sal</h3>
-            <p>Oprichter van Mowi.</p>
+          <div class="card">
+            <h3>Subverwerkers</h3>
+            <p>De volledige, actuele lijst van externe partijen die namens Mowi gegevens verwerken.</p>
+            <p style="margin-top: 1rem;"><a href="/subverwerkers" style="text-decoration: underline; text-underline-offset: 3px; font-weight: 600; color: var(--ink);">Bekijk de lijst →</a></p>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== Meer lezen =====
-         Links out to the 3 existing legal/transparency pages (already on
-         the new chrome since Stage 2). -->
-    <section class="container section">
-      <div class="section-head" data-reveal>
-        <span class="eyebrow">Meer lezen</span>
-        <h2>Voor wie het precies wil weten.</h2>
-      </div>
-
-      <div class="grid grid-3">
-        <div class="card" data-reveal>
-          <h3>AI-transparantie</h3>
-          <p>Waar Mowi AI inzet, wat die AI wel en niet beslist, en hoe wij gebruikers en bellers daarover informeren.</p>
-          <a href="/ai-transparantie" class="card-link">Lees de transparantieverklaring →</a>
-        </div>
-        <div class="card" data-reveal>
-          <h3>Subverwerkers</h3>
-          <p>De volledige, actuele lijst van externe partijen die namens Mowi gegevens verwerken.</p>
-          <a href="/subverwerkers" class="card-link">Bekijk de lijst →</a>
-        </div>
-        <div class="card" data-reveal>
-          <h3>Privacyverklaring</h3>
-          <p>Wat Mowi met uw gegevens doet, en welke rechten u heeft.</p>
-          <a href="/privacyverklaring" class="card-link">Lees de privacyverklaring →</a>
+          <div class="card">
+            <h3>Beveiliging &amp; gegevensverwerking</h3>
+            <p>Hoe het dashboard is opgezet, en welke afspraken daarover al vaststaan — voor wie het technisch wil natrekken.</p>
+            <p style="margin-top: 1rem;"><a href="/docs/it-beveiliging" style="text-decoration: underline; text-underline-offset: 3px; font-weight: 600; color: var(--ink);">Lees de documentatie →</a></p>
+          </div>
+          <div class="card">
+            <h3>Netwerkvereisten</h3>
+            <p>Wat uw IT-afdeling moet weten om Mowi's koppelingen goed te laten werken.</p>
+            <p style="margin-top: 1rem;"><a href="/docs/it-netwerkvereisten" style="text-decoration: underline; text-underline-offset: 3px; font-weight: 600; color: var(--ink);">Lees de documentatie →</a></p>
+          </div>
         </div>
       </div>
     </section>
 
   </main>
 
-  <!-- ===== Pre-footer CTA band ===== -->
+  <!-- ===== 7. Pre-footer CTA band =====
+       Full-bleed dark inverted band — must always immediately precede
+       <footer class="site-footer">. -->
   <section class="cta-prefooter">
-    <div class="container cta-prefooter-inner">
+    <div class="container">
       <h2>Uw bedrijf op de <em class="h-emph">automatische piloot.</em></h2>
-      <span class="btn-slot">
-        <a href="/demo" class="btn btn-primary" data-event="Demo Click">Plan een demo</a>
-      </span>
+      <a href="/demo" class="btn btn-primary" style="background: var(--ink-inverted); color: var(--ink); border-color: var(--ink-inverted);" data-event="Demo Click">Plan een demo</a>
+      <p class="cta-alt">of <a href="/zo-werkt-het">bekijk eerst hoe het werkt</a></p>
     </div>
   </section>
 
-  <!-- ===== Footer ===== -->
+  <!-- ===== Footer =====
+       Copied verbatim from index.html / test.html (the canonical v2 source). -->
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-brand">
@@ -241,7 +266,6 @@
       <nav class="footer-nav" aria-label="Footermenu">
         <span class="footer-heading">Platform</span>
         <a href="/workflows">Workflows met AI</a>
-        <a href="/receptenboek">Receptenboek</a>
         <a href="/koppelingen">Koppelingen</a>
         <a href="/vertrouwen">Vertrouwen</a>
         <a href="/zo-werkt-het">Zo werkt het</a>
@@ -276,6 +300,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=20260817"></script>
+  <script src="js/main.js?v=20260818"></script>
 </body>
 </html>

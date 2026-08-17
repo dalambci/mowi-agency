@@ -1417,6 +1417,20 @@ body.nav-open .main-nav .wordmark-text {
   .steps-3 {
     grid-template-columns: repeat(3, 1fr);
   }
+
+  /* Stage 3 (/zo-werkt-het) — the base .steps 4-column grid leaves an
+     awkward 4+1 orphan row for a 5-item timeline (Demo/Intake/Configuratie/
+     Proefperiode/Live). 3-across at tablet width, full 5-across once there's
+     room, rather than inventing a whole new stepped-list component. */
+  .steps-5 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 64rem) {
+  .steps-5 {
+    grid-template-columns: repeat(5, 1fr);
+  }
 }
 
 .step {

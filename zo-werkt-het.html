@@ -4,74 +4,39 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Zo werkt het — Mowi</title>
-  <meta name="description" content="Van demo tot live: Mowi richt uw koppelingen en workflows in, laat ze proefdraaien op uw eigen gegevens, en pas na uw akkoord gaat het live. Een concreet maandbedrag krijgt u ná de demo." />
+  <meta name="description" content="Van vraag tot live workflow in vijf stappen — en waarom er bewust geen prijslijst op deze site staat. Eerst proefdraaien, pas live na uw akkoord." />
   <link rel="canonical" href="https://mowi.agency/zo-werkt-het" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Zo werkt het" />
-  <meta property="og:description" content="Van demo tot live: Mowi richt uw koppelingen en workflows in, laat ze proefdraaien op uw eigen gegevens, en pas na uw akkoord gaat het live. Een concreet maandbedrag krijgt u ná de demo." />
+  <meta property="og:title" content="Zo werkt het — Mowi" />
+  <meta property="og:description" content="Van vraag tot live workflow in vijf stappen — en waarom er bewust geen prijslijst op deze site staat. Eerst proefdraaien, pas live na uw akkoord." />
   <meta property="og:url" content="https://mowi.agency/zo-werkt-het" />
   <meta property="og:image" content="https://mowi.agency/assets/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Zo werkt het" />
-  <meta name="twitter:description" content="Van demo tot live: Mowi richt uw koppelingen en workflows in, laat ze proefdraaien op uw eigen gegevens, en pas na uw akkoord gaat het live. Een concreet maandbedrag krijgt u ná de demo." />
+  <meta name="twitter:title" content="Zo werkt het — Mowi" />
+  <meta name="twitter:description" content="Van vraag tot live workflow in vijf stappen — en waarom er bewust geen prijslijst op deze site staat. Eerst proefdraaien, pas live na uw akkoord." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260817" />
+  <link rel="stylesheet" href="css/style.css?v=20260818" />
   <link rel="icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="shortcut icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260804-3" />
   <link rel="apple-touch-icon-precomposed" href="assets/apple-icon-180.png?v=20260804-3" />
   <script defer data-domain="mowi.agency" src="https://plausible.io/js/script.js"></script>
   <script src="js/broken-image-guard.js?v=20260805-1"></script>
-  <!-- FAQPage structured data — mirrors the FAQ accordion in <main> 1:1, same
-       format as index.html/workflows.html's own hand-written FAQPage blocks. -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Kan ik tussentijds opzeggen?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "De precieze voorwaarden staan in de overeenkomst die u bij aanvang ontvangt. Vraag hiernaar in de demo, zodat u vooraf weet waar u aan toe bent."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Wie richt het voor mij in?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Mowi. Tijdens de concierge-inrichting koppelt en configureert Mowi uw systemen, en kijkt u mee — u hoeft zelf niets te bouwen."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Hoe lang duurt het voordat ik live ben?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Dat bespreken we in de demo — het hangt af van hoeveel koppelingen en workflows u nodig heeft."
-        }
-      }
-    ]
-  }
-  </script>
 </head>
 <body>
 
   <!-- ===== Header / navigation =====
-       Copied verbatim from reference/chrome-snippet.html (Stage 2), unmodified. -->
+       Copied verbatim from index.html / test.html (the canonical v2 source). -->
   <header class="site-header">
     <div class="header-bar">
-      <span class="header-cta-slot">
-        <a href="/demo" class="header-cta" data-event="Demo Click">
-          <span class="header-cta-full">Plan een demo</span><span class="header-cta-short">Demo</span>
-        </a>
-      </span>
+      <a href="/" class="wordmark" aria-label="Mowi - home">
+        <img src="assets/mowi-icon.png" alt="" class="wordmark-icon" />
+        <img src="assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
+      </a>
 
       <nav class="main-nav" id="main-nav" aria-label="Hoofdmenu">
         <ul class="nav-group">
@@ -105,33 +70,17 @@
               </div>
             </div>
           </li>
-          <li><a href="/receptenboek">Receptenboek</a></li>
           <li><a href="/zo-werkt-het" aria-current="page">How it works</a></li>
-        </ul>
-        <ul class="nav-group">
+          <li><a href="/docs/">Docs</a></li>
           <li><a href="/over">About</a></li>
-          <li class="nav-dropdown">
-            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="resources-menu" aria-haspopup="true">
-              Resources
-              <span class="nav-dropdown-icon" aria-hidden="true"></span>
-            </button>
-            <div class="nav-megamenu nav-megamenu-narrow" id="resources-menu">
-              <div class="nav-megamenu-col">
-                <ul>
-                  <li><a href="/docs/">Documentation</a></li>
-                  <li><a href="/blog/">Blog</a></li>
-                </ul>
-              </div>
-            </div>
-          </li>
-          <li><a href="https://my.mowi.agency/login" target="_blank" rel="noopener">Login</a></li>
+          <li><a href="/blog/">Blog</a></li>
         </ul>
       </nav>
 
-      <div class="header-logo-cell">
-        <a href="/" class="wordmark" aria-label="Mowi - home">
-          <img src="assets/mowi-icon.png" alt="" class="wordmark-icon" />
-          <img src="assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
+      <div class="header-actions">
+        <a href="https://my.mowi.agency/login" target="_blank" rel="noopener" class="header-login">Login</a>
+        <a href="/demo" class="header-cta" data-event="Demo Click">
+          <span class="header-cta-full">Plan een demo</span><span class="header-cta-short">Demo</span>
         </a>
       </div>
 
@@ -142,119 +91,128 @@
   </header>
 
   <main>
-    <!-- ===== Hero ===== -->
-    <section class="container hero">
-      <div class="breadcrumb"><a href="/">Home</a> / Zo werkt het</div>
-      <div style="max-width: 40rem;">
-        <h1>Zo werkt het.</h1>
-        <p class="lede" style="margin-top: 1.25rem;">
-          <em class="h-emph">Van demo tot live — vier stappen, geen verrassingen.</em>
-        </p>
-      </div>
-    </section>
 
-    <!-- ===== Vier stappen =====
-         ElevenLabs pricing-page-style card layout, per the task brief: plain
-         .card grid (already understated border/radius/hover, no heavy color
-         blocking) with a small .eyebrow acting as the "tier label" slot —
-         both components already exist site-wide, so this needed zero new
-         CSS. Deliberately no numbers anywhere in this section. -->
-    <section class="container section">
-      <div class="grid grid-4">
-        <div class="card" data-reveal>
-          <span class="eyebrow">Stap 1</span>
-          <h3>Demo</h3>
-          <p>30 minuten, met echte voorbeelden uit uw branche. U vertelt wat er speelt, Mowi laat zien wat er vandaag al kan.</p>
-        </div>
-        <div class="card" data-reveal>
-          <span class="eyebrow">Stap 2</span>
-          <h3>Concierge-inrichting</h3>
-          <p>Mowi koppelt en configureert uw systemen. U kijkt mee — u hoeft zelf niets te bouwen.</p>
-        </div>
-        <div class="card" data-reveal>
-          <span class="eyebrow">Stap 3</span>
-          <h3>Proefdraaien op uw echte data</h3>
-          <p>Een dry-run op uw eigen, recente gegevens. Niets gaat live zonder uw akkoord.</p>
-        </div>
-        <div class="card" data-reveal>
-          <span class="eyebrow">Stap 4</span>
-          <h3>Live + maandabonnement</h3>
-          <p>Na uw bevestiging gaat de workflow live, en draait hij vanaf dan zelfstandig door.</p>
+    <!-- ===== 1. Hero ===== -->
+    <section class="section">
+      <div class="container">
+        <div class="hero-inner">
+          <span class="text-kicker">Zo werkt het</span>
+          <h1>Geen project met een briefing. <em class="h-emph">Een gesprek.</em></h1>
+          <p class="text-lead">U vertelt in gewone taal wat u geregeld wilt hebben. Mowi zet het uit geteste bouwstenen in elkaar, laat het eerst proefdraaien op uw eigen gegevens, en pas na uw akkoord gaat het live. Hieronder ziet u dat in actie, stap voor stap.</p>
         </div>
       </div>
     </section>
 
-    <!-- ===== Tarieven op aanvraag =====
-         .card-featured — already the site's one "distinct, deliberately
-         set-apart" card variant (dark-inverted), used here instead of
-         inventing a second visual language. No numbers, no grandfathering/
-         rate-lock language (explicitly not approved for the public site
-         yet — internal strategy only, per task brief). -->
-    <section class="container section" style="padding-top: 0;">
-      <div class="card card-featured" data-reveal style="max-width: 44rem; margin-inline: auto; text-align: center;">
-        <span class="eyebrow" style="color: var(--ink-inverted-muted);">Tarieven</span>
-        <h2>Tarieven op aanvraag.</h2>
-        <p style="margin-top: 1rem;">Elk bedrijf is anders: het aantal koppelingen, het aantal workflows, de omvang van uw systemen. Daarom staat hier geen vast bedrag — u krijgt een concreet maandbedrag ná de demo, niet ervoor, zodat u nooit betaalt voor iets dat niet bij u past.</p>
+    <!-- ===== 2. Full-width chat demo — de vraag-tot-live-boog =====
+         One .chat-input in auto-play mode, 4 beats narrating vraag → proef
+         → akkoord → live for a single workflow (agenda-samenvatting — the
+         same read-only, low-risk recipe used elsewhere on the site, so the
+         story stays grounded in a real recipe, not an invented one). Uses
+         initChatInput()'s real contract: data-prompts / data-results,
+         pipe-separated, same count, read off the element automatically. -->
+    <section class="section section-tint">
+      <div class="container">
+        <div class="section-head center">
+          <span class="text-kicker">Van vraag tot live</span>
+          <h2>Eén workflow, van begin tot eind.</h2>
+          <p class="text-lead" style="margin-top: 0.5rem;">Hetzelfde gesprek dat u zelf met Mowi zou voeren — hier automatisch afgespeeld, zodat u de vier momenten ziet: de vraag, het proefdraaien, uw akkoord, en de workflow die live gaat.</p>
+        </div>
+
+        <div class="hero-frame">
+          <div class="chat-input-frame">
+            <div class="chat-input" data-mode="auto-play"
+              data-prompts="Automatiseer de agenda-samenvatting elke ochtend om 8 uur.|Bekijk het proefresultaat.|Ziet er goed uit — zet 'm live.|Vat mijn agenda van morgen samen."
+              data-results="Proefdraaien gestart — 3 dagen historische agenda doorgerekend.|Resultaat klaar ter controle — 6 afspraken, 1 conflict gevonden.|Akkoord ontvangen — workflow gaat live.|Agenda-samenvatting — live, dagelijks om 08:00 ✓">
+              <div class="chat-input-field">
+                <span class="chat-input-text" data-chat-text></span><span class="chat-input-caret" data-chat-caret aria-hidden="true"></span>
+                <span class="chat-input-placeholder" data-chat-placeholder>Beschrijf wat u geregeld wilt hebben…</span>
+              </div>
+              <button type="button" class="chat-input-submit" aria-label="Versturen">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
+              </button>
+            </div>
+            <div class="chat-input-thinking" data-chat-thinking hidden>
+              Mowi denkt na…
+              <span class="chat-input-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+            </div>
+            <div class="chat-input-result" data-chat-result hidden>
+              <svg class="chat-input-result-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7" /></svg>
+            </div>
+          </div>
+
+          <div class="hero-frame-status-row">
+            <span class="status-card"><span class="status-card-dot" aria-hidden="true"></span>Proefdraaien — 3 dagen data</span>
+            <span class="status-card"><span class="status-card-dot" aria-hidden="true"></span>Akkoord ontvangen</span>
+            <span class="status-card"><span class="status-card-dot" aria-hidden="true"></span>Live — dagelijks 08:00</span>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- ===== FAQ =====
-         Matches the FAQPage JSON-LD in <head> 1:1 — keep both in sync.
-         Opzegtermijn answer is deliberately vague — see task brief: exact
-         terms aren't decided yet, flagged as an open item for legal/AV
-         input rather than guessed at here. -->
-    <section class="container section" style="max-width: 48rem;">
-      <div class="section-head center" data-reveal>
-        <span class="eyebrow">Veelgestelde vragen</span>
-        <h2>Vragen? Antwoorden.</h2>
+    <!-- ===== 3. Timeline — vijf stappen ===== -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head center">
+          <span class="text-kicker">Van demo tot live</span>
+          <h2>Vijf stappen, geen verrassingen.</h2>
+        </div>
+        <div class="steps steps-5">
+          <div class="step">
+            <h3>Demo</h3>
+            <p>30 minuten, met voorbeelden uit uw eigen branche. U vertelt wat er speelt, Mowi laat zien wat er vandaag al kan.</p>
+          </div>
+          <div class="step">
+            <h3>Intake</h3>
+            <p>Mowi brengt uw systemen en wensen in kaart — welke koppelingen en workflows u nodig heeft, en wat daarvoor moet gebeuren.</p>
+          </div>
+          <div class="step">
+            <h3>Configuratie</h3>
+            <p>Mowi koppelt en configureert uw workflows uit geteste bouwstenen. U kijkt mee — u hoeft zelf niets te bouwen.</p>
+          </div>
+          <div class="step">
+            <h3>Proefperiode</h3>
+            <p>Elke workflow draait eerst als proef op uw eigen, recente gegevens. U ziet het resultaat vóórdat er iets verandert.</p>
+          </div>
+          <div class="step">
+            <h3>Live</h3>
+            <p>Pas na uw akkoord gaat de workflow echt live, en draait hij vanaf dan zelfstandig door.</p>
+          </div>
+        </div>
       </div>
+    </section>
 
-      <div class="accordion" data-reveal>
-        <div class="accordion-item">
-          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-1">
-            Kan ik tussentijds opzeggen?
-            <span class="accordion-icon" aria-hidden="true"></span>
-          </button>
-          <div class="accordion-panel" id="faq-1">
-            <p>De precieze voorwaarden staan in de overeenkomst die u bij aanvang ontvangt. Vraag hiernaar in de demo, zodat u vooraf weet waar u aan toe bent.</p>
-          </div>
+    <!-- ===== 4. Pricing-stance — waarom hier geen prijslijst staat =====
+         Grounded in the same FAQ answer already used on / (index.html) —
+         nothing new claimed, no numbers or ranges invented. -->
+    <section class="section section-tint">
+      <div class="container" style="max-width: 44rem; margin-inline: auto; text-align: center;">
+        <div class="section-head center">
+          <span class="text-kicker">Wat kost het</span>
+          <h2>Waarom hier <em class="h-emph">geen</em> prijslijst staat.</h2>
         </div>
-
-        <div class="accordion-item">
-          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-2">
-            Wie richt het voor mij in?
-            <span class="accordion-icon" aria-hidden="true"></span>
-          </button>
-          <div class="accordion-panel" id="faq-2">
-            <p>Mowi. Tijdens de concierge-inrichting koppelt en configureert Mowi uw systemen, en kijkt u mee — u hoeft zelf niets te bouwen.</p>
-          </div>
-        </div>
-
-        <div class="accordion-item">
-          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-3">
-            Hoe lang duurt het voordat ik live ben?
-            <span class="accordion-icon" aria-hidden="true"></span>
-          </button>
-          <div class="accordion-panel" id="faq-3">
-            <p>Dat bespreken we in de demo — het hangt af van hoeveel koppelingen en workflows u nodig heeft.</p>
-          </div>
+        <p class="text-lead">Elk bedrijf is anders: het aantal koppelingen, het aantal workflows, de omvang van uw systemen. Een vast bedrag op deze site zou voor de meeste bezoekers gewoon niet kloppen — dus staat het er niet.</p>
+        <div class="card card-featured" style="margin-top: var(--space-6); text-align: left;">
+          <h3>Een eerlijk tarief, ná kennismaking</h3>
+          <p>We bespreken een eerlijk tarief tijdens de demo, zodra we weten wat u daadwerkelijk wilt automatiseren — niet ervoor. Zo betaalt u nooit voor bouwstenen die u niet gebruikt.</p>
         </div>
       </div>
     </section>
 
   </main>
 
-  <!-- ===== Pre-footer CTA band ===== -->
+  <!-- ===== 5. Pre-footer CTA band =====
+       Full-bleed dark inverted band — must always immediately precede
+       <footer class="site-footer">. -->
   <section class="cta-prefooter">
-    <div class="container cta-prefooter-inner">
+    <div class="container">
       <h2>Uw bedrijf op de <em class="h-emph">automatische piloot.</em></h2>
-      <span class="btn-slot">
-        <a href="/demo" class="btn btn-primary" data-event="Demo Click">Plan een demo</a>
-      </span>
+      <a href="/demo" class="btn btn-primary" style="background: var(--ink-inverted); color: var(--ink); border-color: var(--ink-inverted);" data-event="Demo Click">Plan een demo</a>
+      <p class="cta-alt">of <a href="/vertrouwen">lees eerst over vertrouwen</a></p>
     </div>
   </section>
 
-  <!-- ===== Footer ===== -->
+  <!-- ===== Footer =====
+       Copied verbatim from index.html / test.html (the canonical v2 source). -->
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-brand">
@@ -268,7 +226,6 @@
       <nav class="footer-nav" aria-label="Footermenu">
         <span class="footer-heading">Platform</span>
         <a href="/workflows">Workflows met AI</a>
-        <a href="/receptenboek">Receptenboek</a>
         <a href="/koppelingen">Koppelingen</a>
         <a href="/vertrouwen">Vertrouwen</a>
         <a href="/zo-werkt-het">Zo werkt het</a>
@@ -303,6 +260,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=20260817"></script>
+  <script src="js/main.js?v=20260818"></script>
 </body>
 </html>
