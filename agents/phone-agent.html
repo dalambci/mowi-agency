@@ -16,7 +16,11 @@
   <script defer data-domain="mowi.agency" src="https://plausible.io/js/script.js"></script>
   <script src="../js/broken-image-guard.js?v=20260805-1"></script>
 </head>
-<body>
+<!-- page-dense: tightens .section's vertical rhythm 25% — see the rule in
+     style.css. Shared with index.html, agentic-ai.html and the E-mail agent
+     page: this page now carries the marquee and gauge animations, and the
+     default 192px between blocks read as dead scroll between them. -->
+<body class="page-dense">
 
   <!-- ===== Header =====
        Identical to every root page, paths adjusted one level up for /agents/. -->
@@ -264,26 +268,200 @@
       </p>
     </section>
 
-    <!-- ===== Hoe het werkt ===== -->
+    <!-- ===== Koppel agents =====
+         3-row counter-scrolling logo marquee, the same block as
+         agentic-ai.html's (top and bottom rows drift right, middle row
+         left). Duplicated markup rather than generated: this site has no
+         build step, and keeping the logos in the HTML source is what makes
+         them crawlable and keeps the band rendering with JS disabled — see
+         CLAUDE.md. If you add an integration, add it to agentic-ai.html,
+         agents/email-triage.html and agents/phone-agent.html alike.
+         section-tint is required, not cosmetic: .koppelt-marquee sets
+         --marquee-fade to white so its edge gradients end in the panel's
+         own colour (see css/style.css). -->
     <section class="section section-tint">
+      <div class="container" style="padding-block: 2.5rem;">
+      <p class="koppelt-label" data-reveal>Koppel uw agent met 1 druk op de knop</p>
+
+      <div class="koppelt-marquee" data-reveal>
+        <div class="logo-marquee row-a" aria-hidden="true">
+          <div class="logo-track reverse">
+            <!-- set 1 of 3 -->
+            <span class="logo-tile"><img src="../assets/logos/gmail.svg" alt="Gmail"></span>
+            <span class="logo-tile"><img src="../assets/logos/outlook.svg" alt="Outlook / Microsoft 365"></span>
+            <span class="logo-tile"><img src="../assets/logos/google-agenda.svg" alt="Google Agenda"></span>
+            <span class="logo-tile"><img src="../assets/logos/woocommerce.svg" alt="WooCommerce"></span>
+            <span class="logo-tile"><img src="../assets/logos/shopify.svg" alt="Shopify"></span>
+            <span class="logo-tile"><img src="../assets/logos/lightspeed.svg" alt="Lightspeed eCom"></span>
+            <span class="logo-tile"><img src="../assets/logos/ccv-shop.svg" alt="CCV Shop"></span>
+            <span class="logo-tile"><img src="../assets/logos/shopware.svg" alt="Shopware"></span>
+            <span class="logo-tile"><img src="../assets/logos/magento.svg" alt="Magento"></span>
+            <span class="logo-tile"><img src="../assets/logos/mijnwebwinkel.svg" alt="Mijnwebwinkel"></span>
+            <span class="logo-tile"><img src="../assets/logos/bol-com.svg" alt="bol.com"></span>
+            <!-- set 2 of 3 -->
+            <span class="logo-tile"><img src="../assets/logos/gmail.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/outlook.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/google-agenda.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/woocommerce.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/shopify.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/lightspeed.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/ccv-shop.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/shopware.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/magento.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/mijnwebwinkel.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/bol-com.svg" alt=""></span>
+            <!-- set 3 of 3 -->
+            <span class="logo-tile"><img src="../assets/logos/gmail.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/outlook.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/google-agenda.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/woocommerce.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/shopify.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/lightspeed.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/ccv-shop.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/shopware.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/magento.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/mijnwebwinkel.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/bol-com.svg" alt=""></span>
+          </div>
+        </div>
+        <div class="logo-marquee row-b" aria-hidden="true">
+          <div class="logo-track">
+            <!-- set 1 of 3 -->
+            <span class="logo-tile"><img src="../assets/logos/wix.svg" alt="Wix"></span>
+            <span class="logo-tile"><img src="../assets/logos/prestashop.svg" alt="PrestaShop"></span>
+            <span class="logo-tile"><img src="../assets/logos/exact.png" alt="Exact Online"></span>
+            <span class="logo-tile"><img src="../assets/logos/pipedrive.svg" alt="Pipedrive"></span>
+            <span class="logo-tile"><img src="../assets/logos/teamleader.svg" alt="Teamleader"></span>
+            <span class="logo-tile"><img src="../assets/logos/hubspot.png" alt="HubSpot"></span>
+            <span class="logo-tile"><img src="../assets/logos/afas.png" alt="AFAS"></span>
+            <span class="logo-tile"><img src="../assets/logos/moneybird.svg" alt="Moneybird"></span>
+            <span class="logo-tile"><img src="../assets/logos/zoho-crm.svg" alt="Zoho CRM"></span>
+            <span class="logo-tile"><img src="../assets/logos/odoo.png" alt="Odoo"></span>
+            <span class="logo-tile"><img src="../assets/logos/formitable.svg" alt="Formitable / Zenchef"></span>
+            <!-- set 2 of 3 -->
+            <span class="logo-tile"><img src="../assets/logos/wix.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/prestashop.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/exact.png" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/pipedrive.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/teamleader.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/hubspot.png" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/afas.png" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/moneybird.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/zoho-crm.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/odoo.png" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/formitable.svg" alt=""></span>
+            <!-- set 3 of 3 -->
+            <span class="logo-tile"><img src="../assets/logos/wix.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/prestashop.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/exact.png" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/pipedrive.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/teamleader.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/hubspot.png" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/afas.png" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/moneybird.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/zoho-crm.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/odoo.png" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/formitable.svg" alt=""></span>
+          </div>
+        </div>
+        <div class="logo-marquee row-c" aria-hidden="true">
+          <div class="logo-track reverse">
+            <!-- set 1 of 3 -->
+            <span class="logo-tile"><img src="../assets/logos/guestplan.svg" alt="Guestplan"></span>
+            <span class="logo-tile"><img src="../assets/logos/thefork.svg" alt="TheFork"></span>
+            <span class="logo-tile"><img src="../assets/logos/lightspeed.svg" alt="Lightspeed Restaurant"></span>
+            <span class="logo-tile"><img src="../assets/logos/mews.svg" alt="Mews"></span>
+            <span class="logo-tile"><img src="../assets/logos/cubilis.svg" alt="Cubilis"></span>
+            <span class="logo-tile"><img src="../assets/logos/siteminder.svg" alt="SiteMinder"></span>
+            <span class="logo-tile"><img src="../assets/logos/salonized.svg" alt="Salonized"></span>
+            <span class="logo-tile"><img src="../assets/logos/microsoft.svg" alt="Microsoft Bookings"></span>
+            <span class="logo-tile"><img src="../assets/logos/calendly.svg" alt="Calendly"></span>
+            <span class="logo-tile"><img src="../assets/logos/wix.svg" alt="Wix Bookings"></span>
+            <!-- set 2 of 3 -->
+            <span class="logo-tile"><img src="../assets/logos/guestplan.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/thefork.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/lightspeed.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/mews.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/cubilis.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/siteminder.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/salonized.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/microsoft.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/calendly.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/wix.svg" alt=""></span>
+            <!-- set 3 of 3 -->
+            <span class="logo-tile"><img src="../assets/logos/guestplan.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/thefork.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/lightspeed.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/mews.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/cubilis.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/siteminder.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/salonized.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/microsoft.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/calendly.svg" alt=""></span>
+            <span class="logo-tile"><img src="../assets/logos/wix.svg" alt=""></span>
+          </div>
+        </div>
+      </div>
+
+      <p class="sr-only">Mowi koppelt met: Gmail, Outlook / Microsoft 365, Google Agenda, WooCommerce, Shopify, Lightspeed eCom, CCV Shop, Shopware, Magento, Mijnwebwinkel, bol.com, Wix, PrestaShop, Exact Online, Pipedrive, Teamleader, HubSpot, AFAS, Moneybird, Zoho CRM, Odoo, Formitable / Zenchef, Guestplan, TheFork, Lightspeed Restaurant, Mews, Cubilis, SiteMinder, Salonized, Microsoft Bookings, Calendly, Wix Bookings.</p>
+
+      <p class="koppelt-note" data-reveal>Ontbreekt uw systeem? Dan bouwen wij de koppeling voor u.</p>
+      </div>
+    </section>
+    <!-- ===== Hoe het werkt =====
+         Plain background on purpose: .health-layout is itself a white
+         bordered card, so wrapping it in section-tint would nest a white
+         card inside a white panel — the same note sits on agentic-ai.html's
+         gauge section. Gauge-driven: js/main.js's initHealthGauge fills the
+         arc through the real dashboard's colour bands as the visitor
+         scrolls, and each step checks off as the score passes its
+         data-health-at threshold. Three steps here, not agentic-ai's four,
+         so the thresholds are 33/66/100 — the component reads them off the
+         markup and works with any count. The plain HTML below is the
+         finished state; JS only rewinds and animates it when motion is
+         allowed. -->
+    <section class="section">
       <div class="container">
         <div class="section-head center" data-reveal>
           <span class="eyebrow">Hoe het werkt</span>
           <h2>Van website-URL tot live nummer.</h2>
         </div>
 
-        <div class="steps steps-3">
-          <div class="step" data-reveal>
-            <h3>Website-URL invullen</h3>
-            <p>De agent leest uw website en zet dat automatisch om in een concept-agent die uw bedrijf al kent.</p>
+        <div class="health-layout" data-reveal>
+          <div class="health-gauge" data-gauge data-gauge-start="0" data-gauge-max="100">
+            <!-- Geometry copied from the dashboard's health-gauge component:
+                 270° arc (gap at the bottom), notches at the 40/70/90 band
+                 thresholds, score as "N/100", status chip in the gap. Static
+                 markup is the finished state; js/main.js scroll-drives it. -->
+            <p class="gauge-title">Agent-gezondheid</p>
+            <div class="gauge-figure">
+              <svg viewBox="0 0 120 120" role="img" aria-label="Agent health: 100 van 100 — optimaal getraind">
+                <circle class="gauge-track" cx="60" cy="60" r="52.5"
+                        stroke-dasharray="247.40 329.87" transform="rotate(135 60 60)" />
+                <circle class="gauge-arc" cx="60" cy="60" r="52.5"
+                        stroke-dasharray="247.40 329.87" transform="rotate(135 60 60)" />
+                <line class="gauge-notch" x1="39.34" y1="19.46" x2="32.99" y2="6.99" />
+                <line class="gauge-notch" x1="96.81" y1="33.26" x2="108.14" y2="25.03" />
+                <line class="gauge-notch" x1="103.27" y1="74.06" x2="116.59" y2="78.39" />
+                <text x="60" y="58" text-anchor="middle" dominant-baseline="central"><tspan class="gauge-score">100</tspan><tspan class="gauge-max">/100</tspan></text>
+              </svg>
+              <span class="gauge-band success-dark">Optimaal getraind</span>
+            </div>
           </div>
-          <div class="step" data-reveal>
-            <h3>Controleren</h3>
-            <p>Een kort overzicht met de belangrijkste keuzes — openingszin, toon, wanneer doorverbinden — dat u zelf bevestigt of aanpast.</p>
-          </div>
-          <div class="step" data-reveal>
-            <h3>Nummer koppelen &amp; live</h3>
-            <p>Uw nummer doorschakelen en de agent staat aan.</p>
+
+          <div class="steps">
+            <div class="step" data-health-at="33">
+              <h3>Website-URL invullen</h3>
+              <p>De agent leest uw website en zet dat automatisch om in een concept-agent die uw bedrijf al kent.</p>
+            </div>
+            <div class="step" data-health-at="66">
+              <h3>Controleren</h3>
+              <p>Een kort overzicht met de belangrijkste keuzes — openingszin, toon, wanneer doorverbinden — dat u zelf bevestigt of aanpast.</p>
+            </div>
+            <div class="step" data-health-at="100">
+              <h3>Nummer koppelen &amp; live</h3>
+              <p>Uw nummer doorschakelen en de agent staat aan.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -294,7 +472,8 @@
          (flipped hierarchy: short bold claim + one small supporting line).
          Grounded in the build plan's hard prompt guarantees — see
          phone-assistent-agent-build-plan.md. -->
-    <section class="container section">
+    <section class="section section-tint">
+      <div class="container">
       <div class="section-head" data-reveal>
         <span class="eyebrow">Controle</span>
         <h2>Kort van stof. Nooit uit de bocht.</h2>
@@ -330,6 +509,7 @@
       <p class="text-center muted" style="margin-top: 2.5rem;" data-reveal>
         Wat de agent bewust niet doet: geen uitgaande belcampagnes, geen betalingen, geen toezeggingen namens u.
       </p>
+      </div>
     </section>
 
     <!-- ===== Prijs ===== -->
@@ -344,8 +524,11 @@
       </div>
     </section>
 
-    <!-- ===== FAQ ===== -->
-    <section class="container section" style="max-width: 48rem;">
+    <!-- ===== FAQ =====
+         section-tint keeps the plain/tinted alternation running to the end
+         of the page, same as agentic-ai.html's FAQ. -->
+    <section class="section section-tint">
+      <div class="container" style="max-width: 48rem;">
       <div class="section-head" data-reveal>
         <span class="eyebrow">Veelgestelde vragen</span>
         <h2>Vragen over de Call agent.</h2>
@@ -401,6 +584,7 @@
             </p>
           </div>
         </div>
+      </div>
       </div>
     </section>
 

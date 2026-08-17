@@ -16,7 +16,11 @@
   <script defer data-domain="mowi.agency" src="https://plausible.io/js/script.js"></script>
   <script src="js/broken-image-guard.js?v=20260805-1"></script>
 </head>
-<body>
+<!-- page-dense: tightens .section's vertical rhythm 25% — see the rule in
+     style.css. Shared with agentic-ai.html and the two agent pages: this
+     page carries the gauge animation and the hero marquee, and the default
+     192px between blocks read as dead scroll between them. -->
+<body class="page-dense">
 
   <!-- ===== Header / navigation =====
        Sticky top bar. Below the 56rem breakpoint the nav links collapse
@@ -429,23 +433,14 @@
       </div>
     </section>
 
-    <!-- ===== CTA ===== -->
-    <section class="container section">
-      <div class="cta-band" data-reveal>
-        <h2>Waarom nog wachten?</h2>
-        <p>Uw team verliest deze week weer uren aan werk dat een agent net zo goed kan doen. Start vandaag
-          gratis en zie het resultaat morgen al in uw dashboard.</p>
-        <div class="cta-actions">
-          <span class="btn-slot">
-            <a href="https://my.mowi.agency/aanmelden" class="btn btn-secondary" data-event="Signup Started">Start gratis — 14 dagen</a>
-          </span>
-        </div>
-        <p class="cta-alt">Liever eerst overleggen? <a href="contact#calendly-widget" data-event="CTA Click">Plan een kennismaking</a> · 085 333 5800 · <a href="mailto:contact@mowi.agency">contact@mowi.agency</a></p>
-      </div>
-    </section>
-
-    <!-- ===== FAQ ===== -->
-    <section class="container section" style="max-width: 48rem;">
+    <!-- ===== FAQ =====
+         Moved above the CTA (it used to sit after it) so the page closes on
+         the call to action rather than on a list of questions — same order
+         as agentic-ai.html. section-tint for the same reason it is tinted
+         there: it keeps the plain/tinted alternation going, which had four
+         plain sections running back to back at this end of the page. -->
+    <section class="section section-tint">
+      <div class="container" style="max-width: 48rem;">
       <div class="section-head center" data-reveal>
         <span class="eyebrow">Veelgestelde vragen</span>
         <h2>Vragen? Antwoorden.</h2>
@@ -530,6 +525,22 @@
               <a href="contact#calendly-widget">plan een kennismaking</a> om de mogelijkheden te bespreken.</p>
           </div>
         </div>
+      </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="container section">
+      <div class="cta-band" data-reveal>
+        <h2>Waarom nog wachten?</h2>
+        <p>Uw team verliest deze week weer uren aan werk dat een agent net zo goed kan doen. Start vandaag
+          gratis en zie het resultaat morgen al in uw dashboard.</p>
+        <div class="cta-actions">
+          <span class="btn-slot">
+            <a href="https://my.mowi.agency/aanmelden" class="btn btn-secondary" data-event="Signup Started">Start gratis — 14 dagen</a>
+          </span>
+        </div>
+        <p class="cta-alt">Liever eerst overleggen? <a href="contact#calendly-widget" data-event="CTA Click">Plan een kennismaking</a> · 085 333 5800 · <a href="mailto:contact@mowi.agency">contact@mowi.agency</a></p>
       </div>
     </section>
 
