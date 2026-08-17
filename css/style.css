@@ -1769,3 +1769,40 @@ body.nav-open .main-nav .wordmark-text {
 .browser-frame-compact {
   margin-top: var(--space-4);
 }
+
+/* ==========================================================================
+   Homepage
+   Two genuinely page-specific layout needs not covered by an existing
+   primitive: centering the hero's headline stack (shapes.co-style, centered
+   hero rather than the two-column .hero-with-visual the old system used),
+   and a two-column split layout for the mid-page chat-demo-beside-copy
+   section. Everything else on / reuses existing components as-is. ---------- */
+.hero-inner {
+  max-width: 46rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.hero-inner .text-lead {
+  max-width: 34rem;
+  margin: var(--space-5) auto 0;
+}
+
+.hero-cta {
+  margin-top: var(--space-6);
+  display: flex;
+  justify-content: center;
+}
+
+.split-section {
+  display: grid;
+  gap: var(--space-6);
+  align-items: center;
+}
+
+@media (min-width: 56rem) {
+  .split-section {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+  }
+}
