@@ -482,14 +482,11 @@
          so the thresholds are 33/66/100 — the component reads them off the
          markup and works with any count. The plain HTML below is the
          finished state; JS only rewinds and animates it when motion is
-         allowed. -->
+         allowed. No section-head above the card — matches agentic-ai.html's
+         Aanpak section exactly, which goes straight from .container into
+         .health-layout with no heading of its own. -->
     <section class="section">
       <div class="container">
-        <div class="section-head center" data-reveal>
-          <span class="eyebrow">Hoe het werkt</span>
-          <h2>Van koppeling tot dagelijks gebruik.</h2>
-        </div>
-
         <div class="health-layout" data-reveal>
           <div class="health-gauge" data-gauge data-gauge-start="0" data-gauge-max="100">
             <!-- Geometry copied from the dashboard's health-gauge component:

@@ -172,7 +172,7 @@
            for a few seconds mid-loop before their deferred fetch/decode
            finished. -->
       <div class="hero-frame-logos">
-        <p class="lede marquee-heading">Hierin automatiseren wij onder andere</p>
+        <p class="lede marquee-heading">Koppel agents met 1 druk op de knop</p>
         <div class="logo-marquee" aria-hidden="true">
           <div class="logo-track">
             <!-- 1st of 3 identical sets -->
@@ -389,17 +389,11 @@
          dashboard component, so its bands and wording must keep matching
          it — see the note on .health-gauge in css/style.css. The plain
          HTML below is the finished state (gauge 100, all steps full
-         opacity); JS only rewinds and animates it when motion is allowed. -->
+         opacity); JS only rewinds and animates it when motion is allowed.
+         No section-head above the card — matches agentic-ai.html's Aanpak
+         section exactly, which goes straight from .container into
+         .health-layout with no heading of its own. -->
     <section class="container section">
-      <div class="section-head center" data-reveal>
-        <span class="eyebrow">Werkwijze</span>
-        <h2>Klein beginnen, meteen resultaat.</h2>
-        <p class="lede" style="margin-top: 1rem;">
-          Alles hieronder doet u zelf, zonder implementatietraject. Het dashboard laat zien hoe goed
-          uw agent getraind is.
-        </p>
-      </div>
-
       <div class="health-layout" data-reveal>
         <div class="health-gauge" data-gauge data-gauge-start="0" data-gauge-max="100">
           <!-- Geometry copied from the dashboard's health-gauge component:
