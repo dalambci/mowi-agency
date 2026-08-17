@@ -3936,3 +3936,46 @@ a.pill:hover {
   font-size: 0.875rem;
   color: var(--ink-muted);
 }
+
+/* --- Stage 6: /koppelingen logo cards --------------------------------------
+   New component — nothing existing fit both "live, full-colour brand mark"
+   and "planned, muted roadmap tile" in one family. Sits on top of .card
+   (border/radius/hover already come from there); this just adds the fixed-
+   height logo slot + two visual states. Live tiles show the brand's real
+   colour (WooCommerce/Shopify/Google Agenda — see assets/logos/); planned
+   tiles (the existing AFAS/Exact/SAP/... set, already roadmap-only per
+   index.html's own comment) get grayscale+reduced opacity, same "not real
+   yet" signal .pill-muted gives its badge, so the two rows never look like
+   they carry equal status even at a glance. */
+.logo-card {
+  text-align: center;
+}
+
+.logo-card-mark {
+  height: 2.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.logo-card-mark img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.logo-card-mark.is-planned img {
+  filter: grayscale(100%);
+  opacity: 0.55;
+}
+
+/* Text-pill fallback for an integration whose logo wasn't cleanly
+   sourceable (Pipedrive, Stage 6) — same visual weight as the logo slot
+   above it so the "Vandaag live" row still reads as one grid. */
+.logo-card-mark.is-pill-fallback {
+  height: auto;
+  margin-bottom: 1.25rem;
+}

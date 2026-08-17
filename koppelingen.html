@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Koppelingen — Mowi</title>
+  <meta name="description" content="Mowi koppelt vandaag al met WooCommerce, Shopify, Pipedrive en Google Agenda, plus uw mailbox en telefoonnummer. Nieuwe koppelingen bouwen we op klantvraag." />
+  <link rel="canonical" href="https://mowi.agency/koppelingen" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css?v=20260815" />
+  <link rel="icon" href="assets/icon-192.png?v=20260804-3" />
+  <link rel="shortcut icon" href="assets/icon-192.png?v=20260804-3" />
+  <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260804-3" />
+  <link rel="apple-touch-icon-precomposed" href="assets/apple-icon-180.png?v=20260804-3" />
+  <script defer data-domain="mowi.agency" src="https://plausible.io/js/script.js"></script>
+  <script src="js/broken-image-guard.js?v=20260805-1"></script>
+</head>
+<body>
+
+  <!-- ===== Header / navigation =====
+       Copied verbatim from reference/chrome-snippet.html (Stage 2), unmodified. -->
+  <header class="site-header">
+    <div class="header-bar">
+      <span class="header-cta-slot">
+        <a href="/demo" class="header-cta" data-event="Demo Click">
+          <span class="header-cta-full">Plan een demo</span><span class="header-cta-short">Demo</span>
+        </a>
+      </span>
+
+      <nav class="main-nav" id="main-nav" aria-label="Hoofdmenu">
+        <ul class="nav-group">
+          <li class="nav-dropdown">
+            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="product-menu" aria-haspopup="true">
+              Product
+              <span class="nav-dropdown-icon" aria-hidden="true"></span>
+            </button>
+            <div class="nav-megamenu nav-megamenu-single" id="product-menu">
+              <div class="nav-megamenu-col">
+                <ul>
+                  <li>
+                    <a href="/workflows">
+                      <span class="nav-megamenu-item-title">Workflows</span>
+                      <span class="nav-megamenu-item-desc">Maak workflows met AI</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/koppelingen" aria-current="page">
+                      <span class="nav-megamenu-item-title">Koppelingen</span>
+                      <span class="nav-megamenu-item-desc">Uw systemen, één geheel</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/vertrouwen">
+                      <span class="nav-megamenu-item-title">Vertrouwen</span>
+                      <span class="nav-megamenu-item-desc">Eerst proefdraaien, dan pas live</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li><a href="/receptenboek">Receptenboek</a></li>
+          <li><a href="/zo-werkt-het">How it works</a></li>
+        </ul>
+        <ul class="nav-group">
+          <li><a href="/over">About</a></li>
+          <li class="nav-dropdown">
+            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="resources-menu" aria-haspopup="true">
+              Resources
+              <span class="nav-dropdown-icon" aria-hidden="true"></span>
+            </button>
+            <div class="nav-megamenu nav-megamenu-narrow" id="resources-menu">
+              <div class="nav-megamenu-col">
+                <ul>
+                  <li><a href="/docs/">Documentation</a></li>
+                  <li><a href="/blog/">Blog</a></li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li><a href="https://my.mowi.agency/login" target="_blank" rel="noopener">Login</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-logo-cell">
+        <a href="/" class="wordmark" aria-label="Mowi - home">
+          <img src="assets/mowi-icon.png" alt="" class="wordmark-icon" />
+          <img src="assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
+        </a>
+      </div>
+
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="main-nav" aria-label="Menu openen">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== Hero ===== -->
+    <section class="container hero">
+      <div class="breadcrumb"><a href="/">Home</a> / Koppelingen</div>
+      <div style="max-width: 40rem;">
+        <span class="mowi-orb mowi-orb--sm" aria-hidden="true" style="margin-bottom: 1.75rem;"></span>
+        <h1>Uw systemen, één geheel.</h1>
+        <p class="lede" style="margin-top: 1.25rem;">
+          <em class="h-emph">Geen los koppelblokje per systeem — Mowi verbindt wat u al gebruikt.</em>
+        </p>
+        <div class="hero-actions" style="margin-top: 2rem;">
+          <span class="btn-slot">
+            <a href="/demo" class="btn btn-primary" data-event="Demo Click">Plan een demo</a>
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Vandaag live =====
+         4 real, live koppelingen — same set index.html/workflows.html already
+         name sitewide. Benefit sentences grounded in real, shipped
+         capabilities: WooCommerce/Shopify in order.find_by_number /
+         order.find_by_email (config/capabilities.php), Pipedrive in
+         crm.find_person_by_phone (also illustrated in workflows.html's
+         showcase), Google Agenda in booking.check_availability (the hero
+         configurator demo on index.html/workflows.html).
+
+         Logo sourcing (Stage 6): WooCommerce and Shopify logos downloaded
+         directly from their own official brand-asset pages
+         (woocommerce.com/brand-and-logo-guidelines/,
+         shopify.com/brand-assets — both public, no login), Google Agenda
+         from Google's own branding CDN (gstatic.com/images/branding/
+         productlogos/calendar_2026/…). Pipedrive's only cleanly-licensed
+         official mark reachable was a small circular favicon (gated
+         Google-Drive folder for anything better) — visually inconsistent
+         with the wordmark-style set above, so it falls back to a styled
+         .pill label instead of a forced/mismatched image. -->
+    <section class="container section">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">Vandaag live</span>
+        <h2>Vier koppelingen, vandaag al werkend.</h2>
+      </div>
+
+      <div class="grid grid-4">
+        <div class="card logo-card" data-reveal>
+          <div class="logo-card-mark">
+            <img src="assets/logos/woocommerce.svg" alt="WooCommerce" loading="lazy" />
+          </div>
+          <h3>WooCommerce</h3>
+          <p>Een klant vraagt naar zijn bestelling — Mowi zoekt hem op in uw webshop en heeft het antwoord klaar.</p>
+        </div>
+        <div class="card logo-card" data-reveal>
+          <div class="logo-card-mark">
+            <img src="assets/logos/shopify.svg" alt="Shopify" loading="lazy" />
+          </div>
+          <h3>Shopify</h3>
+          <p>Dezelfde order-status-koppeling als WooCommerce — voor uw Shopify-webshop.</p>
+        </div>
+        <div class="card logo-card" data-reveal>
+          <div class="logo-card-mark is-pill-fallback">
+            <span class="pill pill-accent" style="font-size: 1.0625rem; padding: 0.5rem 1.25rem;">Pipedrive</span>
+          </div>
+          <h3>Pipedrive</h3>
+          <p>Een klant belt of mailt — Mowi herkent hem meteen in uw CRM, zonder dat u zelf hoeft te zoeken.</p>
+        </div>
+        <div class="card logo-card" data-reveal>
+          <div class="logo-card-mark">
+            <img src="assets/logos/google-agenda.svg" alt="Google Agenda" loading="lazy" />
+          </div>
+          <h3>Google Agenda</h3>
+          <p>Vrije plekken in uw agenda automatisch opgehaald en gedeeld — u hoeft er niet zelf voor te kijken.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Uw kanalen =====
+         Channels, not connected systems — deliberately text-only (no logo
+         marks), same distinction index.html's own "Koppelt vandaag met"
+         strip already draws between koppelingen and kanalen. -->
+    <section class="section section-tint">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Uw kanalen</span>
+          <h2>Waar uw klant contact opneemt, is Mowi aanwezig.</h2>
+        </div>
+
+        <div class="grid grid-2">
+          <div class="card" data-reveal>
+            <h3>Mailbox</h3>
+            <p>Gmail of Outlook — de E-mail agent leest binnenkomende mail, categoriseert hem en zet waar mogelijk een concept-antwoord klaar.</p>
+          </div>
+          <div class="card" data-reveal>
+            <h3>Telefoonnummer</h3>
+            <p>Uw bestaande nummer, gekoppeld aan de Call agent — neemt gesprekken aan en legt na afloop een gespreksnotitie vast.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Op de planning =====
+         Reuses the exact 9 assets/logos/ files already on disk (roadmap
+         items per index.html's own comment, never presented as live) — same
+         .pill-muted "idea, not yet built" honesty pattern Stage 5 introduced
+         on /receptenboek. -->
+    <section class="container section">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">Op de planning</span>
+        <h2>Nog niet gekoppeld — wel al op de kaart.</h2>
+        <p class="lede" style="margin-top: 1rem;">Wij bouwen koppelingen in volgorde van klantvraag — vraag naar uw systeem in de demo.</p>
+      </div>
+
+      <div class="grid grid-3">
+        <div class="card logo-card" data-reveal>
+          <div class="logo-card-mark is-planned">
+            <img src="assets/logos/afas.png" alt="AFAS" loading="lazy" />
+          </div>
+          <h3>AFAS</h3>
+          <span class="pill pill-muted">Op de planning</span>
+        </div>
+        <div class="card logo-card" data-reveal>
+          <div class="logo-card-mark is-planned">
+            <img src="assets/logos/dynamics-365.png" alt="Microsoft Dynamics 365" loading="lazy" />
+          </div>
+          <h3>Dynamics 365</h3>
+          <span class="pill pill-muted">Op de planning</span>
+        </div>
+        <div class="card logo-card" data-reveal>
+          <div class="logo-card-mark is-planned">
+            <img src="assets/logos/exact.png" alt="Exact" loading="lazy" />
+          </div>
+          <h3>Exact</h3>
+          <span class="pill pill-muted">Op de planning</span>
+        </div>
+        <div class="card logo-card" data-reveal>
+          <div class="logo-card-mark is-planned">
+            <img src="assets/logos/excel.png" alt="Excel" loading="lazy" />
+          </div>
+          <h3>Excel</h3>
+          <span class="pill pill-muted">Op de planning</span>
+        </div>
+        <div class="card logo-card" data-reveal>
+          <div class="logo-card-mark is-planned">
+            <img src="assets/logos/hubspot.png" alt="HubSpot" loading="lazy" />
+          </div>
+          <h3>HubSpot</h3>
+          <span class="pill pill-muted">Op de planning</span>
+        </div>
+        <div class="card logo-card" data-reveal>
+          <div class="logo-card-mark is-planned">
+            <img src="assets/logos/odoo.png" alt="Odoo" loading="lazy" />
+          </div>
+          <h3>Odoo</h3>
+          <span class="pill pill-muted">Op de planning</span>
+        </div>
+        <div class="card logo-card" data-reveal>
+          <div class="logo-card-mark is-planned">
+            <img src="assets/logos/salesforce.png" alt="Salesforce" loading="lazy" />
+          </div>
+          <h3>Salesforce</h3>
+          <span class="pill pill-muted">Op de planning</span>
+        </div>
+        <div class="card logo-card" data-reveal>
+          <div class="logo-card-mark is-planned">
+            <img src="assets/logos/sap.png" alt="SAP" loading="lazy" />
+          </div>
+          <h3>SAP</h3>
+          <span class="pill pill-muted">Op de planning</span>
+        </div>
+        <div class="card logo-card" data-reveal>
+          <div class="logo-card-mark is-planned">
+            <img src="assets/logos/twinfield.png" alt="Twinfield" loading="lazy" />
+          </div>
+          <h3>Twinfield</h3>
+          <span class="pill pill-muted">Op de planning</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Closing CTA ===== -->
+    <section class="container section" style="padding-block: 0 3rem;">
+      <div class="cta-band" data-reveal>
+        <h2>Mist u een koppeling?</h2>
+        <p>Dat bespreken we in de demo.</p>
+        <div class="cta-actions">
+          <span class="btn-slot">
+            <a href="/demo" class="btn btn-secondary" data-event="Demo Click">Plan een demo</a>
+          </span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== Pre-footer CTA band ===== -->
+  <section class="cta-prefooter">
+    <div class="container cta-prefooter-inner">
+      <h2>Uw bedrijf op de <em class="h-emph">automatische piloot.</em></h2>
+      <span class="btn-slot">
+        <a href="/demo" class="btn btn-primary" data-event="Demo Click">Plan een demo</a>
+      </span>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="wordmark wordmark-lg">
+          <img src="assets/mowi-icon.png" alt="" class="wordmark-icon" />
+          <img src="assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
+        </span>
+        <p>Het conversationele automatiseringsplatform voor het Nederlandse MKB.</p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Footermenu">
+        <span class="footer-heading">Platform</span>
+        <a href="/workflows">Workflows met AI</a>
+        <a href="/receptenboek">Receptenboek</a>
+        <a href="/koppelingen">Koppelingen</a>
+        <a href="/vertrouwen">Vertrouwen</a>
+        <a href="/zo-werkt-het">Zo werkt het</a>
+      </nav>
+
+      <nav class="footer-support" aria-label="Bronnenmenu">
+        <span class="footer-heading">Bronnen</span>
+        <a href="/blog/">Blog</a>
+        <a href="/docs/">Documentatie</a>
+      </nav>
+
+      <div class="footer-contact">
+        <span class="footer-heading">Bedrijf &amp; contact</span>
+        <a href="/over">Over Mowi</a>
+        <a href="/demo">Plan een demo</a>
+        <p>085 333 5800</p>
+        <p>contact@mowi.agency</p>
+        <a href="https://my.mowi.agency/login" target="_blank" rel="noopener">Inloggen</a>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>© 2026 Mowi · Nederland &amp; België</p>
+      <div class="footer-legal">
+        <a href="/privacyverklaring">Privacyverklaring</a>
+        <a href="/algemene-voorwaarden">Algemene voorwaarden</a>
+        <a href="/cookies">Cookies</a>
+        <a href="/ai-transparantie">AI-transparantie</a>
+        <a href="/bedrijfsgegevens">Bedrijfsgegevens</a>
+        <a href="/subverwerkers">Subverwerkers</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js?v=20260815"></script>
+</body>
+</html>
