@@ -236,18 +236,22 @@ function formatDateNL(iso) {
 }
 
 // ---------------------------------------------------------------------------
-// Page shell — same header/footer markup as every other root page, so nav
-// stays in sync manually the same way it already does across index.html,
-// cases.html, etc. (the site has no shared header/footer template anywhere).
+// Page shell — v2 rebuild (Stage 7). Copied verbatim from index.html/test.html
+// (the canonical v2 source — logo left, nav center, Login + "Plan een demo"
+// pill right; see test.html's own header comment). test.html is the
+// copy-paste source of truth site-wide; keep this in sync with it by hand,
+// same as every other rebuilt page — the site has no shared header/footer
+// template anywhere. "Blog" carries aria-current="page" on every blog page
+// (index and posts alike), matching how e.g. over.html marks "About" current
+// on /over.
 // ---------------------------------------------------------------------------
 function headerHtml() {
   return `  <header class="site-header">
     <div class="header-bar">
-      <span class="header-cta-slot">
-        <a href="/demo" class="header-cta" data-event="Demo Click">
-          <span class="header-cta-full">Plan een demo</span><span class="header-cta-short">Demo</span>
-        </a>
-      </span>
+      <a href="/" class="wordmark" aria-label="Mowi - home">
+        <img src="/assets/mowi-icon.png" alt="" class="wordmark-icon" />
+        <img src="/assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
+      </a>
 
       <nav class="main-nav" id="main-nav" aria-label="Hoofdmenu">
         <ul class="nav-group">
@@ -256,9 +260,9 @@ function headerHtml() {
               Product
               <span class="nav-dropdown-icon" aria-hidden="true"></span>
             </button>
-            <!-- English label is deliberate here — see CLAUDE.md's Language & tone
-                 exception. Single column, shapes.co-style: title + one-line Dutch
-                 descriptor per row. -->
+            <!-- English label is deliberate — see CLAUDE.md's Language & tone
+                 exception (header nav stays English sitewide). Single column,
+                 title + one-line Dutch descriptor per row. -->
             <div class="nav-megamenu nav-megamenu-single" id="product-menu">
               <div class="nav-megamenu-col">
                 <ul>
@@ -284,36 +288,17 @@ function headerHtml() {
               </div>
             </div>
           </li>
-          <li><a href="/receptenboek">Receptenboek</a></li>
           <li><a href="/zo-werkt-het">How it works</a></li>
-        </ul>
-        <ul class="nav-group">
+          <li><a href="/docs/">Docs</a></li>
           <li><a href="/over">About</a></li>
-          <li class="nav-dropdown">
-            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="resources-menu" aria-haspopup="true">
-              Resources
-              <span class="nav-dropdown-icon" aria-hidden="true"></span>
-            </button>
-            <!-- One unlabelled column: the trigger already says "Resources", so a
-                 .nav-megamenu-label here would only repeat it. -narrow drops the
-                 wider min-width the Product panel needs. -->
-            <div class="nav-megamenu nav-megamenu-narrow" id="resources-menu">
-              <div class="nav-megamenu-col">
-                <ul>
-                  <li><a href="/docs/">Documentation</a></li>
-                  <li><a href="/blog/" aria-current="page">Blog</a></li>
-                </ul>
-              </div>
-            </div>
-          </li>
-          <li><a href="https://my.mowi.agency/login" target="_blank" rel="noopener">Login</a></li>
+          <li><a href="/blog/" aria-current="page">Blog</a></li>
         </ul>
       </nav>
 
-      <div class="header-logo-cell">
-        <a href="/" class="wordmark" aria-label="Mowi - home">
-          <img src="/assets/mowi-icon.png" alt="" class="wordmark-icon" />
-          <img src="/assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
+      <div class="header-actions">
+        <a href="https://my.mowi.agency/login" target="_blank" rel="noopener" class="header-login">Login</a>
+        <a href="/demo" class="header-cta" data-event="Demo Click">
+          <span class="header-cta-full">Plan een demo</span><span class="header-cta-short">Demo</span>
         </a>
       </div>
 
@@ -327,11 +312,10 @@ function headerHtml() {
 
 function footerHtml() {
   return `  <section class="cta-prefooter">
-    <div class="container cta-prefooter-inner">
+    <div class="container">
       <h2>Uw bedrijf op de <em class="h-emph">automatische piloot.</em></h2>
-      <span class="btn-slot">
-        <a href="/demo" class="btn btn-primary" data-event="Demo Click">Plan een demo</a>
-      </span>
+      <a href="/demo" class="btn btn-primary" style="background: var(--ink-inverted); color: var(--ink); border-color: var(--ink-inverted);" data-event="Demo Click">Plan een demo</a>
+      <p class="cta-alt">of <a href="/zo-werkt-het">bekijk eerst hoe het werkt</a></p>
     </div>
   </section>
 
@@ -348,7 +332,6 @@ function footerHtml() {
       <nav class="footer-nav" aria-label="Footermenu">
         <span class="footer-heading">Platform</span>
         <a href="/workflows">Workflows met AI</a>
-        <a href="/receptenboek">Receptenboek</a>
         <a href="/koppelingen">Koppelingen</a>
         <a href="/vertrouwen">Vertrouwen</a>
         <a href="/zo-werkt-het">Zo werkt het</a>
@@ -356,7 +339,7 @@ function footerHtml() {
 
       <nav class="footer-support" aria-label="Bronnenmenu">
         <span class="footer-heading">Bronnen</span>
-        <a href="/blog/" aria-current="page">Blog</a>
+        <a href="/blog/">Blog</a>
         <a href="/docs/">Documentatie</a>
       </nav>
 
@@ -483,12 +466,6 @@ ${headerHtml()}
     ${renderVideo(post.video_id)}
     ${renderFaq(post.faq)}
     ${renderSources(post.sources)}
-
-    <div class="blog-cta">
-      <p>Benieuwd wat dit voor uw situatie betekent?</p>
-      <a href="https://my.mowi.agency/aanmelden" class="btn btn-primary" data-event="Signup Started">Start gratis — 14 dagen</a>
-      <p class="cta-alt">Liever eerst overleggen? <a href="/demo#calendly-widget" data-event="CTA Click">Plan een kennismaking</a></p>
-    </div>
   </main>
 ${footerHtml()}
 </body>
@@ -497,13 +474,19 @@ ${footerHtml()}
 }
 
 function renderIndex(posts) {
+  // Card-based listing, built from the same .card/.grid-3 primitives every
+  // other v2 page uses (see workflows.html's card usage) rather than
+  // bespoke .blog-card/.blog-index-grid classes — those never got CSS in
+  // the v2 stylesheet rewrite (S0 deleted the old back-compat alias layer),
+  // so reusing the shared primitives is what actually renders styled.
+  // Kicker + .pill tags reuse the same components as the rest of the site.
   const cards = posts
     .map(
       (p) => `      <a href="/blog/${p.slug}" class="card blog-card">
-        <p class="blog-card-date">${formatDateNL(p.date)}</p>
+        <span class="text-kicker">${formatDateNL(p.date)}</span>
         <h3>${p.title}</h3>
         <p>${p.description}</p>
-        ${p.tags && p.tags.length ? `<div class="blog-card-tags">${p.tags.map((t) => `<span>${t}</span>`).join("")}</div>` : ""}
+        ${p.tags && p.tags.length ? `<div class="pill-row" style="margin-top: 1rem;">${p.tags.map((t) => `<span class="pill">${t}</span>`).join("")}</div>` : ""}
       </a>`
     )
     .join("\n");
@@ -529,14 +512,19 @@ function renderIndex(posts) {
 </head>
 <body>
 ${headerHtml()}
-  <main class="container" style="padding-bottom: 5rem;">
-    <div class="blog-index-intro">
-      <h1>Blog</h1>
-      <p>Praktische antwoorden over AI-automatisering voor het MKB — kosten, koppelingen, en wat werkt in de praktijk.</p>
-    </div>
-    <div class="blog-index-grid">
-${cards || '      <p>Binnenkort de eerste posts.</p>'}
-    </div>
+  <main>
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <span class="text-kicker">Blog</span>
+          <h1>Blog</h1>
+          <p class="text-lead" style="margin-top: 1rem;">Praktische antwoorden over AI-automatisering voor het MKB — kosten, koppelingen, en wat werkt in de praktijk.</p>
+        </div>
+        <div class="grid grid-3">
+${cards || '          <p class="muted">Binnenkort de eerste posts.</p>'}
+        </div>
+      </div>
+    </section>
   </main>
 ${footerHtml()}
 </body>
