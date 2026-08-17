@@ -356,7 +356,6 @@ main { flex: 1 0 auto; }
   gap: 0.625rem;
   margin-top: 2rem;
 }
-.footer-badges-label { font-size: 0.75rem; color: var(--ink-3); }
 .footer-badges-row { display: flex; gap: 1rem; }
 /* Seal images (assets/badges/) for marks Mowi is WORKING TOWARD — the
    "Hier werken we aan" label in the markup is what keeps this honest;

@@ -350,13 +350,12 @@ function footerHtml() {
           </nav>
         </div>
 
-        <!-- Het "Hier werken we aan"-label is bewuste eerlijkheid: Mowi heeft
-             deze certificeringen NOG NIET. Nooit als behaald presenteren — het
-             label blijft staan tot er een echt certificaat is. -->
+        <!-- Alleen GDPR/AVG — een zelfverklaring, geen certificaat (dat bestaat
+             niet voor de AVG); klopt zolang de registers en verklaringen in de
+             vault (Legal/) worden bijgehouden. SOC 2 / ISO komen hier pas terug
+             wanneer een echt certificaat behaald is. -->
         <div class="footer-badges">
-          <p class="footer-badges-label">Hier werken we aan</p>
           <div class="footer-badges-row">
-            <img src="/assets/badges/soc2.png" alt="SOC 2 Type II" class="footer-badge" width="50" height="50" />
             <img src="/assets/badges/gdpr.png" alt="GDPR" class="footer-badge" width="50" height="50" />
           </div>
         </div>
