@@ -394,7 +394,7 @@ main { flex: 1 0 auto; }
    be able to actually read/click a card) and is fully stopped by the
    sitewide reduced-motion rule below, same as the logo marquee. */
 .section-head-row { display: flex; justify-content: space-between; align-items: flex-end; gap: 2rem; margin-bottom: 2.5rem; }
-.section-head-cta { margin-top: 0; flex-shrink: 0; }
+.section-head-row-center { flex-direction: column; align-items: center; text-align: center; }
 .card-strip-wrap {
   overflow: hidden;
   mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
@@ -446,6 +446,7 @@ main { flex: 1 0 auto; }
   .hero-visual { min-height: 220px; }
   .section { padding: 3.5rem 0; }
   .section-head-row { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .section-head-row-center { align-items: center; }
 }
 
 /* Reduced-motion for the marquee is already covered by the sitewide
