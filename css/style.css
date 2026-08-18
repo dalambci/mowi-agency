@@ -177,7 +177,9 @@ main { flex: 1 0 auto; }
   top: calc(100% + 10px);
   left: 0;
   z-index: 110;
-  min-width: 21rem;
+  display: flex;
+  align-items: flex-start;
+  min-width: 34rem;
   background: var(--surface);
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 16px;
@@ -187,6 +189,15 @@ main { flex: 1 0 auto; }
   visibility: hidden;
   pointer-events: none;
   transition: opacity 0.12s ease, visibility 0s linear 0.12s;
+}
+/* Two side-by-side categories (Agents / Workflows) on desktop, where there's
+   room; the mobile media query below stacks them back to one column since
+   the nav sheet there is already narrow and internally scrollable. */
+.nav-menu-col { flex: 1 1 0; min-width: 0; }
+.nav-menu-col + .nav-menu-col {
+  border-left: 1px solid var(--border);
+  margin-left: 0.25rem;
+  padding-left: 0.75rem;
 }
 .nav-dropdown-trigger[aria-expanded="true"] + .nav-menu {
   opacity: 1;
@@ -290,10 +301,21 @@ main { flex: 1 0 auto; }
     box-shadow: none;
     padding: 0 0 0 0.875rem;
     display: none;
+    flex-direction: column;
     opacity: 1; visibility: visible; pointer-events: auto;
     transition: none;
   }
-  .nav-dropdown-trigger[aria-expanded="true"] + .nav-menu { display: block; }
+  .nav-dropdown-trigger[aria-expanded="true"] + .nav-menu { display: flex; }
+  /* Back to one stacked column — the desktop side-by-side divider becomes
+     the old top-border-between-categories look. */
+  .nav-menu-col + .nav-menu-col {
+    border-left: 0;
+    margin-left: 0;
+    padding-left: 0;
+    border-top: 1px solid var(--border);
+    margin-top: 0.25rem;
+    padding-top: 0.75rem;
+  }
   /* The demo CTA keeps its desktop button look inside the mobile sheet
      (the sheet's own link rule outranks .btn-primary, so restate it here). */
   .main-nav > ul > li.nav-mobile-actions > a.btn-primary {
