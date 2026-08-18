@@ -85,6 +85,13 @@
       <div class="container">
         <p class="section-sub section-sub-center">Mowi sluit gewoon aan op wat u al gebruikt.</p>
       </div>
+      <!-- Both rows carry the FULL set of 13 partners, in different orders, so
+           each row runs 13 logos before it repeats. Splitting the set across the
+           rows (7 here, 6 there) made the shorter row visibly loop after six.
+           The orders are deliberately unrelated to each other so the two rows
+           rarely show the same brand side by side as they pass in opposite
+           directions. js/main.js clones each row to fill the viewport — that
+           only repeats what's here, it never adds variety. -->
       <div class="marquee" aria-hidden="true">
         <div class="marquee-track" data-marquee-clone>
           <span class="marquee-logo"><img src="assets/logos/woocommerce.svg" alt="" /></span>
@@ -94,16 +101,29 @@
           <span class="marquee-logo"><img src="assets/logos/exact.png" alt="" /></span>
           <span class="marquee-logo"><img src="assets/logos/afas.png" alt="" /></span>
           <span class="marquee-logo"><img src="assets/logos/sap.png" alt="" /></span>
-        </div>
-      </div>
-      <div class="marquee" aria-hidden="true">
-        <div class="marquee-track marquee-track-reverse" data-marquee-clone>
           <span class="marquee-logo"><img src="assets/logos/odoo.svg" alt="" /></span>
           <span class="marquee-logo"><img src="assets/logos/dynamics-365.png" alt="" /></span>
           <span class="marquee-logo"><img src="assets/logos/twinfield.png" alt="" /></span>
           <span class="marquee-logo"><img src="assets/logos/excel.png" alt="" /></span>
           <span class="marquee-logo"><img src="assets/logos/google-agenda.svg" alt="" /></span>
           <span class="marquee-logo marquee-logo-text">Pipedrive</span>
+        </div>
+      </div>
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee-track marquee-track-reverse" data-marquee-clone>
+          <span class="marquee-logo"><img src="assets/logos/odoo.svg" alt="" /></span>
+          <span class="marquee-logo"><img src="assets/logos/hubspot.png" alt="" /></span>
+          <span class="marquee-logo"><img src="assets/logos/twinfield.png" alt="" /></span>
+          <span class="marquee-logo"><img src="assets/logos/woocommerce.svg" alt="" /></span>
+          <span class="marquee-logo"><img src="assets/logos/google-agenda.svg" alt="" /></span>
+          <span class="marquee-logo"><img src="assets/logos/sap.png" alt="" /></span>
+          <span class="marquee-logo"><img src="assets/logos/excel.png" alt="" /></span>
+          <span class="marquee-logo"><img src="assets/logos/shopify.svg" alt="" /></span>
+          <span class="marquee-logo marquee-logo-text">Pipedrive</span>
+          <span class="marquee-logo"><img src="assets/logos/afas.png" alt="" /></span>
+          <span class="marquee-logo"><img src="assets/logos/dynamics-365.png" alt="" /></span>
+          <span class="marquee-logo"><img src="assets/logos/exact.png" alt="" /></span>
+          <span class="marquee-logo"><img src="assets/logos/salesforce.png" alt="" /></span>
         </div>
       </div>
       <p class="visually-hidden">Mowi werkt onder meer samen met WooCommerce, Shopify, HubSpot, Salesforce, Exact, AFAS, SAP, Odoo, Dynamics 365, Twinfield, Excel, Google Agenda en Pipedrive.</p>
