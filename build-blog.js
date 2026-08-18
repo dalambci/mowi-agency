@@ -336,8 +336,7 @@ function footerHtml() {
               <ul>
                 <li><a href="mailto:contact@mowi.agency">contact@mowi.agency</a></li>
                 <li><a href="tel:+31853335800">+31 85 333 58 00</a></li>
-                <li><a href="/bedrijfsgegevens">Bedrijfsgegevens</a></li>
-                <li><a href="/subverwerkers">Subverwerkers</a></li>
+                <li><a href="/demo">Contact sales</a></li>
               </ul>
             </div>
           </nav>
@@ -349,6 +348,11 @@ function footerHtml() {
             <a href="/algemene-voorwaarden">Algemene voorwaarden</a>
             <a href="/privacyverklaring">Privacyverklaring</a>
             <a href="/cookies">Cookies</a>
+            <!-- Bedrijfsgegevens moet wettelijk "gemakkelijk, rechtstreeks en
+                 permanent toegankelijk" blijven (art. 3:15d BW) — daarom hier,
+                 niet verwijderd, toen de Contact-kolom werd opgeschoond. -->
+            <a href="/bedrijfsgegevens">Bedrijfsgegevens</a>
+            <a href="/subverwerkers">Subverwerkers</a>
             <!-- Alleen GDPR/AVG — een zelfverklaring, geen certificaat (dat
                  bestaat niet voor de AVG); klopt zolang de registers en
                  verklaringen in de vault (Legal/) worden bijgehouden. SOC 2 /
