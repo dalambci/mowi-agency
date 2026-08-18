@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260819-4" />
+  <link rel="stylesheet" href="css/style.css?v=20260819-6" />
   <link rel="icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="shortcut icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260804-3" />
@@ -85,48 +85,55 @@
       <div class="container">
         <p class="section-sub section-sub-center">Mowi sluit gewoon aan op wat u al gebruikt.</p>
       </div>
-      <!-- Both rows carry the FULL set of 13 partners, in different orders, so
-           each row runs 13 logos before it repeats. Splitting the set across the
-           rows (7 here, 6 there) made the shorter row visibly loop after six.
-           The orders are deliberately unrelated to each other so the two rows
-           rarely show the same brand side by side as they pass in opposite
-           directions. js/main.js clones each row to fill the viewport — that
-           only repeats what's here, it never adds variety. -->
+      <!-- Two rows holding DISJOINT sets — every brand appears in exactly one
+           row, so a logo can never show up above or below itself. The set is
+           the dashboard's own integrations registry (mowi-dashboard's
+           config/shop_platforms.php), which is why there's now enough of it:
+           14 here, 14 below. .marquee-logo-mark tags the square glyph marks so
+           they get a taller box than the wide wordmarks (see style.css).
+           Five marks from that registry (Teamleader, Mews, Zoho, Wix, CCV Shop)
+           are deliberately left out: they're thin, pale glyphs that measured
+           under half the on-screen presence of the faintest logo already here,
+           so the grayscale wash erased them. They can come back if a heavier
+           mark turns up. js/main.js clones each row to fill the width — that
+           only repeats what's here, it never adds variety, so keep rows long. -->
       <div class="marquee" aria-hidden="true">
         <div class="marquee-track" data-marquee-clone>
           <span class="marquee-logo"><img src="assets/logos/woocommerce.svg" alt="" /></span>
-          <span class="marquee-logo"><img src="assets/logos/shopify.svg" alt="" /></span>
-          <span class="marquee-logo"><img src="assets/logos/hubspot.png" alt="" /></span>
-          <span class="marquee-logo"><img src="assets/logos/salesforce.png" alt="" /></span>
+          <span class="marquee-logo marquee-logo-mark"><img src="assets/logos/calendly.svg" alt="" /></span>
           <span class="marquee-logo"><img src="assets/logos/exact.png" alt="" /></span>
-          <span class="marquee-logo"><img src="assets/logos/afas.png" alt="" /></span>
-          <span class="marquee-logo"><img src="assets/logos/sap.png" alt="" /></span>
-          <span class="marquee-logo"><img src="assets/logos/odoo.svg" alt="" /></span>
-          <span class="marquee-logo"><img src="assets/logos/dynamics-365.png" alt="" /></span>
+          <span class="marquee-logo marquee-logo-mark"><img src="assets/logos/magento.svg" alt="" /></span>
           <span class="marquee-logo"><img src="assets/logos/twinfield.png" alt="" /></span>
-          <span class="marquee-logo"><img src="assets/logos/excel.png" alt="" /></span>
-          <span class="marquee-logo"><img src="assets/logos/google-agenda.svg" alt="" /></span>
-          <span class="marquee-logo marquee-logo-text">Pipedrive</span>
+          <span class="marquee-logo marquee-logo-mark"><img src="assets/logos/siteminder.svg" alt="" /></span>
+          <span class="marquee-logo"><img src="assets/logos/odoo.svg" alt="" /></span>
+          <span class="marquee-logo marquee-logo-mark"><img src="assets/logos/salonized.svg" alt="" /></span>
+          <span class="marquee-logo"><img src="assets/logos/bol.svg" alt="" /></span>
+          <span class="marquee-logo marquee-logo-mark"><img src="assets/logos/prestashop.svg" alt="" /></span>
+          <span class="marquee-logo"><img src="assets/logos/hubspot.png" alt="" /></span>
+          <span class="marquee-logo marquee-logo-mark"><img src="assets/logos/google-agenda.svg" alt="" /></span>
+          <span class="marquee-logo"><img src="assets/logos/pipedrive.svg" alt="" /></span>
+          <span class="marquee-logo"><img src="assets/logos/cubilis.svg" alt="" /></span>
         </div>
       </div>
       <div class="marquee" aria-hidden="true">
         <div class="marquee-track marquee-track-reverse" data-marquee-clone>
-          <span class="marquee-logo"><img src="assets/logos/odoo.svg" alt="" /></span>
-          <span class="marquee-logo"><img src="assets/logos/hubspot.png" alt="" /></span>
-          <span class="marquee-logo"><img src="assets/logos/twinfield.png" alt="" /></span>
-          <span class="marquee-logo"><img src="assets/logos/woocommerce.svg" alt="" /></span>
-          <span class="marquee-logo"><img src="assets/logos/google-agenda.svg" alt="" /></span>
-          <span class="marquee-logo"><img src="assets/logos/sap.png" alt="" /></span>
-          <span class="marquee-logo"><img src="assets/logos/excel.png" alt="" /></span>
           <span class="marquee-logo"><img src="assets/logos/shopify.svg" alt="" /></span>
-          <span class="marquee-logo marquee-logo-text">Pipedrive</span>
+          <span class="marquee-logo marquee-logo-mark"><img src="assets/logos/lightspeed.svg" alt="" /></span>
           <span class="marquee-logo"><img src="assets/logos/afas.png" alt="" /></span>
-          <span class="marquee-logo"><img src="assets/logos/dynamics-365.png" alt="" /></span>
-          <span class="marquee-logo"><img src="assets/logos/exact.png" alt="" /></span>
+          <span class="marquee-logo marquee-logo-mark"><img src="assets/logos/shopware.svg" alt="" /></span>
+          <span class="marquee-logo"><img src="assets/logos/mijnwebwinkel.svg" alt="" /></span>
+          <span class="marquee-logo marquee-logo-mark"><img src="assets/logos/microsoft-bookings.svg" alt="" /></span>
+          <span class="marquee-logo"><img src="assets/logos/sap.png" alt="" /></span>
+          <span class="marquee-logo marquee-logo-mark"><img src="assets/logos/formitable.svg" alt="" /></span>
+          <span class="marquee-logo"><img src="assets/logos/moneybird.svg" alt="" /></span>
+          <span class="marquee-logo marquee-logo-mark"><img src="assets/logos/excel.png" alt="" /></span>
           <span class="marquee-logo"><img src="assets/logos/salesforce.png" alt="" /></span>
+          <span class="marquee-logo"><img src="assets/logos/thefork.svg" alt="" /></span>
+          <span class="marquee-logo"><img src="assets/logos/guestplan.svg" alt="" /></span>
+          <span class="marquee-logo"><img src="assets/logos/dynamics-365.png" alt="" /></span>
         </div>
       </div>
-      <p class="visually-hidden">Mowi werkt onder meer samen met WooCommerce, Shopify, HubSpot, Salesforce, Exact, AFAS, SAP, Odoo, Dynamics 365, Twinfield, Excel, Google Agenda en Pipedrive.</p>
+      <p class="visually-hidden">Mowi werkt onder meer samen met WooCommerce, Shopify, Lightspeed, Shopware, Magento, Mijnwebwinkel, bol.com, PrestaShop, Exact, Twinfield, Moneybird, AFAS, SAP, Odoo, HubSpot, Salesforce, Pipedrive, Dynamics 365, Excel, Google Agenda, Microsoft Bookings, Calendly, Salonized, Formitable, Guestplan, TheFork, Cubilis en SiteMinder.</p>
     </section>
 
     <!-- ================= Template-cards slider ================= -->
@@ -285,6 +292,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=20260819-4"></script>
+  <script src="js/main.js?v=20260819-6"></script>
 </body>
 </html>

@@ -377,13 +377,14 @@ main { flex: 1 0 auto; }
 .hero-visual { min-height: 360px; margin-top: 3.5rem; width: 100%; }
 
 /* --- Integrations marquee ----------------------------------------------------
-   Two counter-scrolling rows, matching shapes.co's own logo-wall pattern
-   (observed on both their client-logo strip and their integrations
-   section). Each row's real logos are split across the two rows and
-   data-marquee-clone (js/main.js) duplicates each row's set once at
-   runtime, so the translateX(-50%) loop is seamless — only one copy of
-   each row is ever hand-maintained here. Pure CSS motion, pauses under
-   the sitewide reduced-motion rule. */
+   Two counter-scrolling rows, matching shapes.co's own logo-wall pattern.
+   The two rows hold DISJOINT sets of partners (see index.html) — no brand is
+   in both, so a logo can never appear above or below itself. That only works
+   because the set is big enough: the logos come from the dashboard's own
+   integrations registry (config/shop_platforms.php over in mowi-dashboard).
+   data-marquee-clone (js/main.js) duplicates each row at runtime so the loop
+   is seamless and only one copy is ever hand-maintained here. Pure CSS
+   motion, pauses under the sitewide reduced-motion rule. */
 .marquee-section { overflow: hidden; padding-top: 2rem; }
 .marquee-section .container { text-align: center; margin-bottom: 1.5rem; }
 .marquee { overflow: hidden; mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent); }
@@ -411,8 +412,16 @@ main { flex: 1 0 auto; }
   from { transform: translateX(0); }
   to { transform: translateX(var(--marquee-shift, -50%)); }
 }
-.marquee-logo { display: flex; align-items: center; justify-content: center; height: 32px; flex-shrink: 0; filter: grayscale(1); opacity: 0.6; }
+/* opacity 0.7, not the original 0.6: the wall now carries thin single-colour
+   glyph marks alongside heavy wordmarks, and at 0.6 the lightest of them were
+   washed out to nothing against the sand background. */
+.marquee-logo { display: flex; align-items: center; justify-content: center; height: 32px; flex-shrink: 0; filter: grayscale(1); opacity: 0.7; }
 .marquee-logo img { height: 100%; width: auto; max-width: 120px; object-fit: contain; }
+/* Square glyph marks (most of the dashboard's integration tiles are 1:1 brand
+   symbols rather than wordmarks) read far lighter than a 120px-wide wordmark
+   at the same height, so they get a bigger box to even out optical weight.
+   align-items:center on the track keeps the taller ones on the same midline. */
+.marquee-logo-mark { height: 40px; }
 .marquee-logo-text { font-weight: 700; font-size: 1.0625rem; color: var(--ink-3); }
 
 /* --- Template-card marquee ---------------------------------------------------
@@ -427,7 +436,12 @@ main { flex: 1 0 auto; }
    be able to actually read/click a card) and is fully stopped by the
    sitewide reduced-motion rule below, same as the logo marquee. */
 .section-head-row { display: flex; justify-content: space-between; align-items: flex-end; gap: 2rem; margin-bottom: 2.5rem; }
-.section-head-row-center { flex-direction: column; align-items: center; text-align: center; }
+/* Centered variant: the row's own 2rem flex gap stacked on top of
+   .link-arrow's 1.25rem margin-top, putting 3.25rem above the CTA against the
+   2.5rem margin-bottom below it. Zero the margin and match the gap to that
+   margin so the CTA sits in even space. */
+.section-head-row-center { flex-direction: column; align-items: center; text-align: center; gap: 2.5rem; }
+.section-head-row-center .link-arrow { margin-top: 0; }
 .card-strip-wrap {
   overflow: hidden;
   mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
@@ -479,7 +493,9 @@ main { flex: 1 0 auto; }
   .hero-visual { min-height: 220px; }
   .section { padding: 3.5rem 0; }
   .section-head-row { flex-direction: column; align-items: flex-start; gap: 1rem; }
-  .section-head-row-center { align-items: center; }
+  /* re-assert the centered variant's even spacing — the .section-head-row gap
+     above it is equal-specificity and later in the file, so it would win */
+  .section-head-row-center { align-items: center; gap: 2.5rem; }
 }
 
 /* Reduced-motion for the marquee is already covered by the sitewide
