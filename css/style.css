@@ -203,6 +203,19 @@ main { flex: 1 0 auto; }
 .nav-menu li a:hover { background: var(--muted); }
 .nav-menu-item-title { display: block; font-size: 0.9375rem; font-weight: 600; }
 .nav-menu-item-desc { display: block; font-size: 0.8125rem; color: var(--ink-3); margin-top: 1px; }
+.nav-menu-heading {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--ink-3);
+  padding: 0.5rem 0.75rem 0.25rem;
+}
+.nav-menu-heading:not(:first-child) {
+  margin-top: 0.25rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+}
 
 .header-actions {
   display: flex;
@@ -364,10 +377,11 @@ main { flex: 1 0 auto; }
   pointer-events: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 10 -5.6'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
   background-size: 300px 300px;
-  opacity: 0.16; /* founder-tuned round 3: 0.07 read as too subtle to notice
-    on a real screen, not just "quiet" — doubled opacity and eased the alpha
-    ramp (-6.2 -> -5.6, lets more turbulence pixels clear the threshold) so
-    the specks read as real grain, not just a faint haze */
+  opacity: 0.12; /* founder-tuned round 4: round 3's 0.16 read as too
+    intrusive — backed off toward the round-2 0.07 that was "too subtle to
+    notice," landing above its midpoint so the grain stays visible without
+    dominating. Alpha ramp (-5.6) left as-is; opacity alone controls
+    intrusiveness here, the ramp controls speck density/distribution. */
   mask-image: radial-gradient(ellipse 85% 90% at 50% 25%, #000 25%, transparent 80%);
   -webkit-mask-image: radial-gradient(ellipse 85% 90% at 50% 25%, #000 25%, transparent 80%);
 }
