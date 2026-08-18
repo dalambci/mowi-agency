@@ -296,36 +296,29 @@ function footerHtml() {
     <div class="container">
 
       <div class="footer-cta">
-        <div>
-          <h2 class="footer-cta-title">U zegt het.<br />En het werkt.</h2>
-          <a href="/demo" class="btn-primary" data-event="Demo Click">Plan een demo</a>
-        </div>
-        <!-- Visual slot — intentionally empty until real artwork exists. -->
-        <div class="footer-cta-visual" aria-hidden="true"></div>
+        <h2 class="footer-cta-title">U zegt het.<br />En het werkt.</h2>
+        <a href="/demo" class="btn-primary" data-event="Demo Click">Plan een demo</a>
       </div>
 
       <div class="footer-panel">
         <div class="footer-top">
-          <div class="footer-logo-col">
+          <div class="footer-brand">
             <a href="/" class="wordmark" aria-label="Mowi - home">
               <img src="/assets/mowi-icon.png" alt="" class="wordmark-icon" />
               <img src="/assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
             </a>
+            <p class="footer-tagline">Automatisering voor het MKB.<br />Altijd eerst op proef.</p>
+            <a href="#" class="footer-social" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg></a>
           </div>
 
           <nav class="footer-menus" aria-label="Footer">
             <div>
-              <h3 class="footer-menu-heading">Platform</h3>
+              <h3 class="footer-menu-heading">Product</h3>
               <ul>
                 <li><a href="/workflows">Alle workflows</a></li>
-                <li><a href="/workflows#email-agent">E-mail agent</a></li>
-                <li><a href="/workflows#call-agent">Call agent</a></li>
-                <li><a href="/workflows#order-status">Orderstatus</a></li>
-                <li><a href="/workflows#offerte-opvolging">Offerte-opvolging</a></li>
-                <li><a href="/workflows#agenda-samenvatting">Agenda-samenvatting</a></li>
-                <li><a href="/workflows#crm-sync">CRM-synchronisatie</a></li>
-                <li><a href="/koppelingen">Koppelingen</a></li>
                 <li><a href="/templates">Templates</a></li>
+                <li><a href="/koppelingen">Koppelingen</a></li>
+                <li><a href="/pricing">Prijzen</a></li>
               </ul>
             </div>
             <div>
@@ -339,7 +332,7 @@ function footerHtml() {
               </ul>
             </div>
             <div>
-              <h3 class="footer-menu-heading">Bedrijf &amp; Contact</h3>
+              <h3 class="footer-menu-heading">Contact</h3>
               <ul>
                 <li><a href="mailto:contact@mowi.agency">contact@mowi.agency</a></li>
                 <li><a href="tel:+31853335800">+31 85 333 58 00</a></li>
@@ -350,23 +343,18 @@ function footerHtml() {
           </nav>
         </div>
 
-        <!-- Alleen GDPR/AVG — een zelfverklaring, geen certificaat (dat bestaat
-             niet voor de AVG); klopt zolang de registers en verklaringen in de
-             vault (Legal/) worden bijgehouden. SOC 2 / ISO komen hier pas terug
-             wanneer een echt certificaat behaald is. -->
-        <div class="footer-badges">
-          <div class="footer-badges-row">
-            <img src="/assets/badges/gdpr.png" alt="GDPR" class="footer-badge" width="50" height="50" />
-          </div>
-        </div>
-
         <div class="footer-bottom">
           <span>&copy; 2026 Mowi. Alle rechten voorbehouden.</span>
           <div class="footer-legal">
             <a href="/algemene-voorwaarden">Algemene voorwaarden</a>
             <a href="/privacyverklaring">Privacyverklaring</a>
             <a href="/cookies">Cookies</a>
-            <a href="#" class="footer-social" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg></a>
+            <!-- Alleen GDPR/AVG — een zelfverklaring, geen certificaat (dat
+                 bestaat niet voor de AVG); klopt zolang de registers en
+                 verklaringen in de vault (Legal/) worden bijgehouden. SOC 2 /
+                 ISO komen hier pas terug wanneer een echt certificaat behaald
+                 is. -->
+            <img src="/assets/badges/gdpr.png" alt="GDPR" class="footer-badge" width="36" height="36" />
           </div>
         </div>
       </div>

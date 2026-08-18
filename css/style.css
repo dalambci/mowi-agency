@@ -439,28 +439,29 @@ main { flex: 1 0 auto; }
    `*,*::before,*::after{animation:none!important}` rule further down. */
 
 /* --- Footer -----------------------------------------------------------------
-   The full shapes.co recipe — see the header comment for the measured
-   values. Structure:
+   shapes.co-derived band + rounded panel, structure modernized 2026-08-19.
+   Layout:
      footer.footer-wrap            full-width greige band
        .container
-         .footer-cta               pre-footer CTA on the band
+         .footer-cta               one row: headline left, button right
          .footer-panel             rounded-top light panel, flush to bottom
-           .footer-top             logo col + 3 link columns
-           .footer-badges          placeholder badge circles (no invented
-                                   certification claims — real badges only
-                                   once Mowi actually holds them)
-           .footer-bottom          © + legal links + social               */
+           .footer-top             brand block (logo + tagline + LinkedIn)
+                                   + 3 trimmed link columns
+           .footer-bottom          © left · legal links + GDPR seal right */
 .footer-wrap {
   background: var(--band);
   padding-top: 120px;
   margin-top: 6rem;
 }
 
+/* CTA: headline and button share one row. The old grid reserved an empty
+   right-hand "visual slot" half — dead structure; if real artwork ever
+   exists it gets reintroduced deliberately, not kept as a blank cell. */
 .footer-cta {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
+  display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
   padding-bottom: 4rem;
 }
 .footer-cta-title {
@@ -468,27 +469,31 @@ main { flex: 1 0 auto; }
   font-weight: 700;
   line-height: 1.08;
   letter-spacing: -0.02em;
-  margin-bottom: 1.5rem;
 }
-/* Right-hand visual slot — intentionally empty in the skeleton. */
-.footer-cta-visual { min-height: 200px; }
+.footer-cta .btn-primary { flex-shrink: 0; }
 
 .footer-panel {
   background: var(--bg);
   border-radius: var(--radius-footer) var(--radius-footer) 0 0;
   padding: var(--footer-pad);
 }
-/* shapes' measured footer-top proportions @1440: logo column ~460px on the
-   left with a notably LARGER logo, the three menu lists as a right-pinned
-   block of ~219px columns. 1fr + auto reproduces that: logo hugs left,
-   menus hug right, dead space in between — that gap is the design. */
+/* Brand hugs left, menus hug right — the gap between them is the design
+   (measured on shapes originally, kept through the restructure). */
 .footer-top {
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 3rem;
 }
-.footer-logo-col .wordmark-icon { height: 44px; }
-.footer-logo-col .wordmark-text { height: 44px; }
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+}
+.footer-brand .wordmark-icon { height: 44px; }
+.footer-brand .wordmark-text { height: 44px; }
+.footer-tagline { font-size: 0.9375rem; color: var(--ink-2); line-height: 1.55; }
 
 .footer-menus {
   display: grid;
@@ -505,35 +510,22 @@ main { flex: 1 0 auto; }
 .footer-menus li a { font-size: 0.9375rem; }
 .footer-menus li a:hover { color: var(--ink-2); }
 
-.footer-badges {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.625rem;
-  margin-top: 2rem;
-}
-.footer-badges-row { display: flex; gap: 1rem; }
-/* Seal images (assets/badges/) for marks Mowi is WORKING TOWARD — the
-   "Hier werken we aan" label in the markup is what keeps this honest;
-   never present these as held certifications. */
-.footer-badge {
-  width: 50px;
-  height: 50px;
-}
-
 .footer-bottom {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
   border-top: 1px solid var(--border);
-  margin-top: 1.5rem;
+  margin-top: 2.5rem;
   padding-top: 1.75rem;
   font-size: 0.875rem;
   color: var(--ink-2);
 }
-.footer-legal { display: flex; align-items: center; gap: 1.25rem; }
+.footer-legal { display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; }
 .footer-legal a:hover { color: var(--ink); }
+/* GDPR seal, small, inline with the legal links — see the honesty comment
+   in the markup; never present unheld certifications here. */
+.footer-badge { width: 36px; height: 36px; }
 /* Real LinkedIn glyph (inline SVG, fill: currentColor) — the rounded square
    is part of the logo itself, so the anchor carries no background of its own. */
 .footer-social {
@@ -548,13 +540,15 @@ main { flex: 1 0 auto; }
 
 @media (max-width: 63.9rem) {
   .footer-wrap { padding-top: 72px; margin-top: 4rem; }
-  .footer-cta { grid-template-columns: 1fr; padding-bottom: 3rem; }
-  .footer-cta-visual { min-height: 120px; }
-  .footer-panel { padding: 24px; }
-  .footer-top { grid-template-columns: 1fr; gap: 2rem; }
-  .footer-menus { grid-template-columns: 1fr; gap: 2rem; }
-  .footer-badges { align-items: flex-start; }
-  .footer-bottom { flex-direction: column-reverse; align-items: flex-start; gap: 1rem; }
+  .footer-cta { flex-direction: column; align-items: flex-start; gap: 1.5rem; padding-bottom: 3rem; }
+  .footer-panel { padding: 32px 20px; }
+  .footer-top { grid-template-columns: 1fr; gap: 2.5rem; }
+  /* The modernized mobile structure: link lists sit two-across instead of
+     one long stack (the third list wraps under the first) — roughly halves
+     the footer's scroll length on a phone. */
+  .footer-menus { grid-template-columns: repeat(2, 1fr); gap: 2rem 1.5rem; }
+  .footer-menus li { margin-bottom: 0.75rem; }
+  .footer-bottom { flex-direction: column-reverse; align-items: flex-start; gap: 1.25rem; }
 }
 
 /* --- Legal / blog prose -----------------------------------------------------
