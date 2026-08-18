@@ -16,6 +16,7 @@
   function closeMobileNav() {
     if (!navToggle || !mainNav) return;
     navToggle.setAttribute("aria-expanded", "false");
+    navToggle.setAttribute("aria-label", "Menu openen");
     mainNav.classList.remove("is-open");
     // Unlock background scroll (locked while the mobile sheet is open — the
     // sheet itself scrolls via its own max-height/overflow, mobile only; the
@@ -30,6 +31,7 @@
         closeMobileNav();
       } else {
         navToggle.setAttribute("aria-expanded", "true");
+        navToggle.setAttribute("aria-label", "Menu sluiten");
         mainNav.classList.add("is-open");
         document.body.classList.add("nav-open");
       }

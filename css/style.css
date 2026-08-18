@@ -229,7 +229,12 @@ main { flex: 1 0 auto; }
   padding: 8px;
   margin-left: auto;
 }
-.nav-toggle span { display: block; height: 2px; background: var(--ink); border-radius: 2px; }
+.nav-toggle span { display: block; height: 2px; background: var(--ink); border-radius: 2px; transition: transform 0.2s ease, opacity 0.15s ease; }
+/* Open state: the three bars morph into a cross (bars sit 7px apart
+   center-to-center: 5px gap + 2px bar, so ±7px meets in the middle). */
+.nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 @media (max-width: 63.9rem) {
   .site-header { margin: 12px 12px 0; }
