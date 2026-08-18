@@ -358,8 +358,8 @@ main { flex: 1 0 auto; }
    runtime, so the translateX(-50%) loop is seamless — only one copy of
    each row is ever hand-maintained here. Pure CSS motion, pauses under
    the sitewide reduced-motion rule. */
-.marquee-section { overflow: hidden; }
-.marquee-section .container { text-align: center; margin-bottom: 2.5rem; }
+.marquee-section { overflow: hidden; padding-top: 2rem; }
+.marquee-section .container { text-align: center; margin-bottom: 1.5rem; }
 .marquee { overflow: hidden; mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent); }
 .marquee + .marquee { margin-top: 2rem; }
 .marquee-track {
