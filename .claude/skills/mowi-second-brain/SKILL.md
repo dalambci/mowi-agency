@@ -5,7 +5,12 @@ description: "Load and maintain the Mowi project's persistent second-brain — a
 
 # Mowi second-brain (Obsidian vault)
 
-The vault lives at `c:/Users/SalP1/Desktop/Mowi brain/Mowi/`. It is separate from Claude Code's
+The vault lives at `c:/Users/SalP1/Desktop/Mowi brain/Mowi/` on the Windows PC and — synced via
+Obsidian Sync (Sal has the subscription) — at `/Users/sal/Desktop/Mowi brain/` on the Mac. Note
+the structural difference: on the Mac the notes sit directly in the vault root (`Home.md`,
+`Decisions log.md`, topic folders like `Website/`), with no `Mowi/` subfolder and no `Mowi - `
+filename prefix on the core files. If the folder looks missing, ask Sal to open the Obsidian app
+so Sync can catch up before concluding the vault is unavailable. It is separate from Claude Code's
 own built-in auto-memory system — this one is a manually-curated, cross-project knowledge base
 (website + dashboard both read and write the same files), visible to the user as an Obsidian
 graph. Treat it as the authoritative source of project decisions and status, not a nice-to-have.

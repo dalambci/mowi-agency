@@ -149,8 +149,16 @@
       appendCopy(); // always at least 2 copies total
       // Period = one copy + one gap: transform-invariant (both children share
       // the track's transform), so measuring mid-animation is still exact.
-      var period = track.children[originals.length].getBoundingClientRect().left -
-                   track.children[0].getBoundingClientRect().left;
+      // Rounded to a whole pixel: getBoundingClientRect() returns subpixel
+      // floats, and the keyframes always START at the exact integer
+      // translateX(0). A fractional --marquee-shift means the wrap lands on
+      // a subpixel offset, which resets to 0 (integer) a frame later — a
+      // one-frame antialiasing snap that reads as a very faint flicker even
+      // though the loop position itself is mathematically exact.
+      var period = Math.round(
+        track.children[originals.length].getBoundingClientRect().left -
+        track.children[0].getBoundingClientRect().left
+      );
       // Keep the wrapper full through one full period of travel: the visible
       // window slides [0, period], so the track must overhang by period+width.
       var guard = 0;

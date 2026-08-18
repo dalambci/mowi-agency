@@ -362,12 +362,12 @@ main { flex: 1 0 auto; }
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 10 -6.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 10 -5.6'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
   background-size: 300px 300px;
-  opacity: 0.07; /* founder-tuned: 0.05 read as invisible, 0.07 is "just noticeable" */
-  /* founder-tuned round 2: sparser specks (alpha ramp 10/-6.2, was 9/-5 —
-     higher threshold keeps fewer particles) spread over a wider, rounder
-     halo that reaches further down the hero before dissolving */
+  opacity: 0.16; /* founder-tuned round 3: 0.07 read as too subtle to notice
+    on a real screen, not just "quiet" — doubled opacity and eased the alpha
+    ramp (-6.2 -> -5.6, lets more turbulence pixels clear the threshold) so
+    the specks read as real grain, not just a faint haze */
   mask-image: radial-gradient(ellipse 85% 90% at 50% 25%, #000 25%, transparent 80%);
   -webkit-mask-image: radial-gradient(ellipse 85% 90% at 50% 25%, #000 25%, transparent 80%);
 }
@@ -399,6 +399,12 @@ main { flex: 1 0 auto; }
      card strip below — moves at the exact same px/s speed regardless of
      how much content it holds. */
   animation: marquee-scroll linear infinite;
+  /* Own compositor layer: without this, the loop-reset (100% -> 0% is an
+     instant jump, not a transition) can trigger the browser to repaint the
+     track from scratch on that frame instead of just re-positioning an
+     already-rasterized layer — the source of the residual barely-visible
+     "flicker" at each wrap even after the pixel-exact shift fix below. */
+  will-change: transform;
 }
 .marquee-track-reverse { animation-direction: reverse; }
 /* The loop travels --marquee-shift: an EXACT one-copy pixel distance measured
