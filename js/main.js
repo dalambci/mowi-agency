@@ -91,21 +91,41 @@
   });
 
   /* ---- Marquee cloning ----------------------------------------------------
-     Any [data-marquee-clone] track (the workflow card row) gets its real
-     content duplicated once at runtime, so a CSS translateX(-50%) loop is
-     seamless — the author only ever maintains one copy in HTML. Clones are
-     hidden from assistive tech and pulled out of tab order so keyboard/
-     screen-reader users only ever reach the real cards. */
+     Any [data-marquee-clone] track gets its real content duplicated at
+     runtime, so a CSS translateX(-50%) loop is seamless — the author only
+     ever maintains one copy in HTML. Clones are hidden from assistive tech
+     and pulled out of tab order so keyboard/screen-reader users only ever
+     reach the real items.
+
+     Copies are added in PAIRS, keeping the total count even, until the
+     track is at least twice as wide as its wrapper. That guarantees
+     translateX(-50%) — the loop point every marquee keyframe here uses —
+     always has real content to show. A single doubling isn't enough for a
+     short row (e.g. 6 logos) inside a wide viewport: a reverse-direction
+     track starts its animation AT the -50% position, and if one copy is
+     narrower than the visible window, that position exposes empty space
+     before the loop wraps around — this is what fixes it. */
   document.querySelectorAll("[data-marquee-clone]").forEach(function (track) {
-    Array.prototype.slice.call(track.children).forEach(function (node) {
-      var clone = node.cloneNode(true);
-      clone.setAttribute("aria-hidden", "true");
-      if (clone.matches("a, button")) clone.setAttribute("tabindex", "-1");
-      clone.querySelectorAll("a, button").forEach(function (el) {
-        el.setAttribute("tabindex", "-1");
+    var wrapper = track.parentElement;
+    var originals = Array.prototype.slice.call(track.children);
+    function appendCopy() {
+      originals.forEach(function (node) {
+        var clone = node.cloneNode(true);
+        clone.setAttribute("aria-hidden", "true");
+        if (clone.matches("a, button")) clone.setAttribute("tabindex", "-1");
+        clone.querySelectorAll("a, button").forEach(function (el) {
+          el.setAttribute("tabindex", "-1");
+        });
+        track.appendChild(clone);
       });
-      track.appendChild(clone);
-    });
+    }
+    appendCopy(); // always at least 2 copies total
+    var guard = 0;
+    while (track.scrollWidth < wrapper.clientWidth * 2 && guard < 8) {
+      appendCopy();
+      appendCopy();
+      guard++;
+    }
   });
 
   // Escape closes an open dropdown (and the mobile sheet) and restores focus.

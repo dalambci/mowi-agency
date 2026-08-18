@@ -301,7 +301,6 @@ main { flex: 1 0 auto; }
 .section-sub { color: var(--ink-2); font-size: 1.0625rem; margin-top: 0.875rem; max-width: 40rem; }
 .section-sub-center { text-align: center; margin-left: auto; margin-right: auto; }
 .section { padding: 5rem 0; }
-.band-section { background: var(--surface); border-radius: var(--radius-footer); }
 .link-arrow { font-weight: 600; font-size: 0.9375rem; display: inline-block; margin-top: 1.25rem; }
 .link-arrow:hover { color: var(--ink-2); }
 
@@ -415,48 +414,12 @@ main { flex: 1 0 auto; }
 .workflow-card h3 { font-size: 1.0625rem; font-weight: 700; }
 .workflow-card p { font-size: 0.9375rem; color: var(--ink-2); }
 
-/* --- Split sections (Doet het werk / Vertrouwen) --------------------------- */
-.split-section { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
-
-/* --- Three-step explainer --------------------------------------------------- */
-.step-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin: 2.5rem 0 2rem; }
-/* Sand, not white — sits inside the now-white .band-section, so it needs
-   the other approved tone to read as a distinct card. */
-.step-card { background: var(--bg); border-radius: var(--radius-card); padding: 1.5rem; }
-.step-number {
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 28px; height: 28px; border-radius: 50%;
-  background: var(--ink); color: var(--bg);
-  font-size: 0.8125rem; font-weight: 700; margin-bottom: 1rem;
-}
-.step-card h3 { font-size: 1.0625rem; font-weight: 700; margin-bottom: 0.5rem; }
-.step-card p { font-size: 0.9375rem; color: var(--ink-2); }
-.band-section .container { padding-top: var(--footer-pad); padding-bottom: var(--footer-pad); }
-
-/* --- Trust bullets + pull quote --------------------------------------------- */
-.check-list { margin: 1.5rem 0; display: flex; flex-direction: column; gap: 0.75rem; }
-.check-list li { font-size: 1rem; font-weight: 500; padding-left: 1.75rem; position: relative; }
-.check-list li::before {
-  content: ""; position: absolute; left: 0; top: 0.3em;
-  width: 16px; height: 9px;
-  border-left: 2px solid var(--ink); border-bottom: 2px solid var(--ink);
-  transform: rotate(-45deg);
-}
-.pull-quote { background: var(--surface); border-radius: var(--radius-card); padding: 2rem; }
-.pull-quote p { font-family: var(--font-serif-emph); font-style: italic; font-size: 1.375rem; line-height: 1.45; }
-.pull-quote footer { margin-top: 1.25rem; display: flex; flex-direction: column; font-size: 0.9375rem; }
-.pull-quote-name { font-weight: 700; }
-.pull-quote-role { color: var(--ink-2); }
-
 @media (max-width: 63.9rem) {
   .hero { grid-template-columns: 1fr; padding: 2rem 0 3rem; }
   .hero h1 { font-size: 2.25rem; }
   .hero-visual { min-height: 220px; order: -1; }
   .section { padding: 3.5rem 0; }
   .section-head-row { flex-direction: column; align-items: flex-start; gap: 1rem; }
-  .split-section { grid-template-columns: 1fr; gap: 2rem; }
-  .step-grid { grid-template-columns: 1fr; gap: 1rem; }
-  .band-section .container { padding-top: 2.5rem; padding-bottom: 2.5rem; }
 }
 
 /* Reduced-motion for the marquee is already covered by the sitewide

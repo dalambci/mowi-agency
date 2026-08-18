@@ -254,7 +254,7 @@ retype credentials from scratch or falling back to a password:
 
 ### Copywriting voice (2026-08-19)
 Applies to all body copy the founder writes or asks for going forward (not just this page) —
-headings, sublines, quotes, FAQ answers, anything a visitor reads as prose. Four rules:
+headings, sublines, quotes, FAQ answers, anything a visitor reads as prose. Five rules:
 1. **No em dashes.** Split into two sentences instead, or use a comma if a short connective
    genuinely fits.
 2. **Short sentences.** One idea per sentence; if a sentence has more than one comma-joined
@@ -263,6 +263,11 @@ headings, sublines, quotes, FAQ answers, anything a visitor reads as prose. Four
    a period works.
 4. **Conversational, plain language** — not stiff or corporate, still formal **u**-form per the
    rule above. Read it out loud; if it sounds like a brochure, rewrite it.
+5. **Headings are punchlines, not sentences.** Cut filler words (articles, "die"/"dat" relative
+   clauses) until only the essential words remain, and drop internal punctuation (commas,
+   trailing periods included) unless it's a deliberate two-beat line like the hero's. Both live
+   on the homepage: "Elke workflow, in minuten opgezet." → "Workflows in minuten". "Werkt met de
+   systemen die u al gebruikt" → "Werkt met wat u al gebruikt".
 
 Before/after, from the homepage build:
 - Before: "Beschrijf in gewone taal wat u geregeld wilt hebben — Mowi configureert het uit
