@@ -296,28 +296,22 @@ main { flex: 1 0 auto; }
   overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
 }
 
-.kicker {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--ink-2);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  margin-bottom: 0.75rem;
-}
 .section-heading { font-size: 2rem; line-height: 1.2; font-weight: 700; }
 .section-heading-center { text-align: center; }
 .section-sub { color: var(--ink-2); font-size: 1.0625rem; margin-top: 0.875rem; max-width: 40rem; }
 .section-sub-center { text-align: center; margin-left: auto; margin-right: auto; }
 .section { padding: 5rem 0; }
-.band-section { background: var(--muted); border-radius: var(--radius-footer); }
+.band-section { background: var(--surface); border-radius: var(--radius-footer); }
 .link-arrow { font-weight: 600; font-size: 0.9375rem; display: inline-block; margin-top: 1.25rem; }
 .link-arrow:hover { color: var(--ink-2); }
 
-/* Grey rounded placeholder — every visual slot that doesn't have real
-   artwork yet uses this same block, so it's obviously a placeholder and
-   trivial to swap out page by page. */
+/* Rounded placeholder — every visual slot that doesn't have real artwork
+   yet uses this same block, so it's obviously a placeholder and trivial
+   to swap out page by page. White fill (the page's only other approved
+   background besides the sand --bg) with a dashed border for definition,
+   since a solid grey fill isn't part of the two-tone palette. */
 .placeholder-tile {
-  background: var(--muted);
+  background: var(--surface);
   border: 1px dashed var(--border);
   border-radius: var(--radius-card);
   display: flex;
@@ -341,13 +335,17 @@ main { flex: 1 0 auto; }
 .hero-visual { min-height: 360px; }
 
 /* --- Integrations marquee ----------------------------------------------------
-   Two-row-equivalent shapes.co pattern, simplified to one seamless row (the
-   duplicated track loops via translateX(-50%) — track markup repeats its
-   logo set exactly twice so the halfway point is a perfect seam). Pure CSS,
-   pauses under reduced motion. */
+   Two counter-scrolling rows, matching shapes.co's own logo-wall pattern
+   (observed on both their client-logo strip and their integrations
+   section). Each row's real logos are split across the two rows and
+   data-marquee-clone (js/main.js) duplicates each row's set once at
+   runtime, so the translateX(-50%) loop is seamless — only one copy of
+   each row is ever hand-maintained here. Pure CSS motion, pauses under
+   the sitewide reduced-motion rule. */
 .marquee-section { overflow: hidden; }
 .marquee-section .container { text-align: center; margin-bottom: 2.5rem; }
 .marquee { overflow: hidden; mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent); }
+.marquee + .marquee { margin-top: 2rem; }
 .marquee-track {
   display: flex;
   align-items: center;
@@ -355,6 +353,7 @@ main { flex: 1 0 auto; }
   width: max-content;
   animation: marquee-scroll 32s linear infinite;
 }
+.marquee-track-reverse { animation-direction: reverse; }
 @keyframes marquee-scroll {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
@@ -363,25 +362,34 @@ main { flex: 1 0 auto; }
 .marquee-logo img { height: 100%; width: auto; max-width: 120px; object-fit: contain; }
 .marquee-logo-text { font-weight: 700; font-size: 1.0625rem; color: var(--ink-3); }
 
-/* --- Template-card slider ------------------------------------------------- */
+/* --- Template-card marquee ---------------------------------------------------
+   Auto-sliding, like shapes.co's own "built in minutes" card row (observed
+   live, 2026-08-19: a continuous, unassisted leftward drift, no scroll
+   controls) — same mechanism as the integrations marquee above it (reuses
+   its `marquee-scroll` keyframes, just a slower duration for the wider
+   cards). data-marquee-clone (js/main.js) duplicates the 9 real cards once
+   at runtime for a seamless loop, so only one copy is ever hand-maintained
+   here; the clone is aria-hidden + untabbable, so keyboard/AT users only
+   ever reach the real set. Pauses on hover/focus (WCAG 2.2.2 — a user must
+   be able to actually read/click a card) and is fully stopped by the
+   sitewide reduced-motion rule below, same as the logo marquee. */
 .section-head-row { display: flex; justify-content: space-between; align-items: flex-end; gap: 2rem; margin-bottom: 2.5rem; }
 .section-head-cta { margin-top: 0; flex-shrink: 0; }
-.card-strip-wrap { padding: 0 var(--edge) 0 var(--edge); }
+.card-strip-wrap {
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
+}
 .card-strip {
   display: flex;
   gap: 1.25rem;
-  overflow-x: auto;
-  scroll-snap-type: x proximity;
-  padding: 0.25rem var(--gutter) 1.5rem;
-  margin: 0 calc(-1 * var(--gutter));
-  cursor: grab;
-  scrollbar-width: none;
+  width: max-content;
+  padding: 0.25rem 0 1.5rem;
+  animation: marquee-scroll 70s linear infinite;
 }
-.card-strip::-webkit-scrollbar { display: none; }
-.card-strip.is-dragging { cursor: grabbing; scroll-snap-type: none; }
+.card-strip:hover, .card-strip:focus-within { animation-play-state: paused; }
 .workflow-card {
   flex: 0 0 clamp(240px, 26vw, 300px);
-  scroll-snap-align: start;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-card);
@@ -397,11 +405,13 @@ main { flex: 1 0 auto; }
   font-size: 0.75rem;
   font-weight: 600;
   color: var(--ink-2);
-  background: var(--muted);
+  background: var(--bg);
   border-radius: var(--radius-pill);
   padding: 0.25rem 0.625rem;
 }
-.workflow-card-visual { min-height: 140px; }
+/* Overrides .placeholder-tile's white fill to sand — it sits inside a
+   white .workflow-card, so it needs the other approved tone to read. */
+.workflow-card-visual { min-height: 140px; background: var(--bg); }
 .workflow-card h3 { font-size: 1.0625rem; font-weight: 700; }
 .workflow-card p { font-size: 0.9375rem; color: var(--ink-2); }
 
@@ -410,7 +420,9 @@ main { flex: 1 0 auto; }
 
 /* --- Three-step explainer --------------------------------------------------- */
 .step-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin: 2.5rem 0 2rem; }
-.step-card { background: var(--surface); border-radius: var(--radius-card); padding: 1.5rem; }
+/* Sand, not white — sits inside the now-white .band-section, so it needs
+   the other approved tone to read as a distinct card. */
+.step-card { background: var(--bg); border-radius: var(--radius-card); padding: 1.5rem; }
 .step-number {
   display: inline-flex; align-items: center; justify-content: center;
   width: 28px; height: 28px; border-radius: 50%;
@@ -430,37 +442,11 @@ main { flex: 1 0 auto; }
   border-left: 2px solid var(--ink); border-bottom: 2px solid var(--ink);
   transform: rotate(-45deg);
 }
-.pull-quote { background: var(--muted); border-radius: var(--radius-card); padding: 2rem; }
+.pull-quote { background: var(--surface); border-radius: var(--radius-card); padding: 2rem; }
 .pull-quote p { font-family: var(--font-serif-emph); font-style: italic; font-size: 1.375rem; line-height: 1.45; }
 .pull-quote footer { margin-top: 1.25rem; display: flex; flex-direction: column; font-size: 0.9375rem; }
 .pull-quote-name { font-weight: 700; }
 .pull-quote-role { color: var(--ink-2); }
-
-/* --- FAQ ---------------------------------------------------------------------
-   Native <details>/<summary> — no JS needed for open/close or keyboard/
-   screen-reader support. */
-.faq-list { margin-top: 2rem; display: flex; flex-direction: column; gap: 0.75rem; max-width: 44rem; }
-.faq-item { background: var(--surface); border-radius: var(--radius-card); padding: 1.125rem 1.5rem; }
-.faq-item summary {
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 1.0625rem;
-  list-style: none;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.faq-item summary::-webkit-details-marker { display: none; }
-.faq-item summary::after {
-  content: "";
-  width: 9px; height: 9px;
-  border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
-  transform: rotate(45deg);
-  transition: transform 0.15s ease;
-  flex-shrink: 0; margin-left: 1rem;
-}
-.faq-item[open] summary::after { transform: rotate(225deg); }
-.faq-item p { color: var(--ink-2); margin-top: 0.875rem; font-size: 0.9375rem; }
 
 @media (max-width: 63.9rem) {
   .hero { grid-template-columns: 1fr; padding: 2rem 0 3rem; }
@@ -470,8 +456,6 @@ main { flex: 1 0 auto; }
   .section-head-row { flex-direction: column; align-items: flex-start; gap: 1rem; }
   .split-section { grid-template-columns: 1fr; gap: 2rem; }
   .step-grid { grid-template-columns: 1fr; gap: 1rem; }
-  .card-strip-wrap { padding: 0; }
-  .card-strip { margin: 0; padding: 0.25rem 20px 1.5rem; }
   .band-section .container { padding-top: 2.5rem; padding-bottom: 2.5rem; }
 }
 

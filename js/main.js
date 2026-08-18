@@ -90,36 +90,22 @@
     }
   });
 
-  /* ---- Card strip (workflow slider) drag-to-scroll -----------------------
-     Native touch/wheel scroll already works for free — this only adds
-     click-and-drag for mouse/trackpad, same pattern as any horizontal
-     media rail. */
-  document.querySelectorAll("[data-card-strip]").forEach(function (track) {
-    var isDown = false;
-    var startX = 0;
-    var startScroll = 0;
-
-    track.addEventListener("pointerdown", function (event) {
-      if (event.pointerType === "touch") return;
-      isDown = true;
-      startX = event.clientX;
-      startScroll = track.scrollLeft;
-      track.classList.add("is-dragging");
+  /* ---- Marquee cloning ----------------------------------------------------
+     Any [data-marquee-clone] track (the workflow card row) gets its real
+     content duplicated once at runtime, so a CSS translateX(-50%) loop is
+     seamless — the author only ever maintains one copy in HTML. Clones are
+     hidden from assistive tech and pulled out of tab order so keyboard/
+     screen-reader users only ever reach the real cards. */
+  document.querySelectorAll("[data-marquee-clone]").forEach(function (track) {
+    Array.prototype.slice.call(track.children).forEach(function (node) {
+      var clone = node.cloneNode(true);
+      clone.setAttribute("aria-hidden", "true");
+      if (clone.matches("a, button")) clone.setAttribute("tabindex", "-1");
+      clone.querySelectorAll("a, button").forEach(function (el) {
+        el.setAttribute("tabindex", "-1");
+      });
+      track.appendChild(clone);
     });
-
-    track.addEventListener("pointermove", function (event) {
-      if (!isDown) return;
-      track.scrollLeft = startScroll - (event.clientX - startX);
-    });
-
-    function endDrag() {
-      isDown = false;
-      track.classList.remove("is-dragging");
-    }
-
-    track.addEventListener("pointerup", endDrag);
-    track.addEventListener("pointerleave", endDrag);
-    track.addEventListener("pointercancel", endDrag);
   });
 
   // Escape closes an open dropdown (and the mobile sheet) and restores focus.

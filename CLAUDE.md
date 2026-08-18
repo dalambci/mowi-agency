@@ -243,9 +243,44 @@ retype credentials from scratch or falling back to a password:
 
 ## Language & tone
 - All visible site text is in **Dutch**, formal **"u"** form (never "je/jij").
-- **Exception — the whole header nav, not just the dropdown.** The header nav has always used
+- **Superseded 2026-08-19 — the header-nav-stays-English exception below no longer applies.**
+  During the shapes-skeleton rebuild the founder asked for the whole chrome (header + footer,
+  including the Product dropdown) remapped to Dutch — done, live, and confirmed working. Don't
+  translate the nav back to English on the strength of the paragraph below; it's kept only as a
+  record of the old v1/v2-era rule.
+- ~~**Exception — the whole header nav, not just the dropdown.** The header nav has always used
   English labels deliberately (unchanged through both rebrands). Keep these in English; don't
-  translate them to Dutch. Everything else on the site stays Dutch per the rule above.
+  translate them to Dutch. Everything else on the site stays Dutch per the rule above.~~
+
+### Copywriting voice (2026-08-19)
+Applies to all body copy the founder writes or asks for going forward (not just this page) —
+headings, sublines, quotes, FAQ answers, anything a visitor reads as prose. Four rules:
+1. **No em dashes.** Split into two sentences instead, or use a comma if a short connective
+   genuinely fits.
+2. **Short sentences.** One idea per sentence; if a sentence has more than one comma-joined
+   clause, it's usually two sentences.
+3. **Don't overuse punctuation.** No comma chains, no stacked qualifiers, no semicolons where
+   a period works.
+4. **Conversational, plain language** — not stiff or corporate, still formal **u**-form per the
+   rule above. Read it out loud; if it sounds like a brochure, rewrite it.
+
+Before/after, from the homepage build:
+- Before: "Beschrijf in gewone taal wat u geregeld wilt hebben — Mowi configureert het uit
+  geteste bouwstenen, nooit uit losse code."
+  After: "Vertel in gewone taal wat u geregeld wilt hebben. Mowi bouwt het uit geteste
+  bouwstenen, nooit uit losse code."
+- Before: "Pas na uw bevestiging gaat de workflow echt live — u bepaalt het moment."
+  After: "Pas na uw akkoord gaat de workflow live. U bepaalt het moment."
+- Before: "Dat is niet voorzichtigheid — dat is hoe automatisering hoort te gaan, en het is
+  waarom ik zelf aanspreekbaar blijf..."
+  After: "Dat is geen voorzichtigheid. Zo hoort automatisering te gaan. Daarom blijf ik zelf
+  aanspreekbaar..."
+
+Also per the founder's explicit call, 2026-08-19: no small-caps "kicker" eyebrow labels above
+headings (e.g. a standalone "Vertrouwen" sitting above "Automatisering die u durft aan te
+zetten.") — they read as generic AI-generated-template filler. Let headings and body copy carry
+the section's meaning on their own instead. Same reasoning killed the hero's plain "Bekijk hoe
+het werkt →" secondary link — one clear CTA beats a hedged pair.
 
 ### Navigation — current, v2 (2026-08-18)
 The header is now **logo-left / nav-center / actions-right** (a deliberate structural change
