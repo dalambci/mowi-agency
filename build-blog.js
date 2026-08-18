@@ -334,8 +334,8 @@ function footerHtml() {
             <div>
               <h3 class="footer-menu-heading">Contact</h3>
               <ul>
-                <li><a href="mailto:contact@mowi.agency">contact@mowi.agency</a></li>
                 <li><a href="tel:+31853335800">+31 85 333 58 00</a></li>
+                <li><a href="mailto:contact@mowi.agency">contact@mowi.agency</a></li>
                 <li><a href="/demo">Contact sales</a></li>
               </ul>
             </div>

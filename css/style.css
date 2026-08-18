@@ -148,8 +148,11 @@ main { flex: 1 0 auto; }
   border-radius: 10px;
   transition: background-color 0.15s ease;
 }
+/* The Product trigger deliberately gets NO fill — hovering opens the panel,
+   so a grey "active" pill on the trigger doubled the feedback and stuck
+   around after a tap on mobile (tap = sticky :hover there). The open panel
+   itself is the state indicator. */
 .main-nav > ul > li > a:hover,
-.nav-dropdown-trigger:hover,
 .main-nav > ul > li > a[aria-current="page"] { background: var(--muted); }
 
 .nav-dropdown { position: relative; }
@@ -258,8 +261,10 @@ main { flex: 1 0 auto; }
   }
   .main-nav.is-open { display: block; }
   body.nav-open { overflow: hidden; }
-  .main-nav > ul { flex-direction: column; align-items: stretch; gap: 0; }
-  .main-nav > ul > li > a, .nav-dropdown-trigger { width: 100%; padding: 0.75rem 0.875rem; }
+  /* Slightly shorter item boxes + a hairline gap so the active item's grey
+     pill never touches an adjacent item's highlight. */
+  .main-nav > ul { flex-direction: column; align-items: stretch; gap: 0.25rem; }
+  .main-nav > ul > li > a, .nav-dropdown-trigger { width: 100%; padding: 0.625rem 0.875rem; }
   .nav-menu {
     position: static;
     min-width: 0;
@@ -571,7 +576,11 @@ main { flex: 1 0 auto; }
 .blog-meta { font-size: 0.875rem; color: var(--ink-3); margin-bottom: 2rem; }
 .blog-table-wrap { overflow-x: auto; margin-bottom: 1rem; }
 .blog-table { border-collapse: collapse; width: 100%; font-size: 0.9375rem; }
-.blog-table th, .blog-table td { border: 1px solid var(--border); padding: 0.5rem 0.75rem; text-align: left; vertical-align: top; }
+/* overflow-wrap:anywhere — long unbreakable values (BTW number, e-mail,
+   IBAN) otherwise set the table's min-content width above a phone
+   viewport, and that minimum propagates up and widens the whole page
+   (the wrap's own overflow-x can't contain min-content propagation). */
+.blog-table th, .blog-table td { border: 1px solid var(--border); padding: 0.5rem 0.75rem; text-align: left; vertical-align: top; overflow-wrap: anywhere; }
 .blog-table th { background: var(--muted); font-weight: 600; }
 .blog-breadcrumb { font-size: 0.875rem; color: var(--ink-3); margin-bottom: 1.5rem; }
 .blog-breadcrumb a { text-decoration: underline; text-underline-offset: 2px; }
