@@ -364,7 +364,7 @@ main { flex: 1 0 auto; }
   pointer-events: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 9 -5'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
   background-size: 300px 300px;
-  opacity: 0.05;
+  opacity: 0.07; /* founder-tuned: 0.05 read as invisible, 0.07 is "just noticeable" */
   mask-image: radial-gradient(ellipse 75% 65% at 50% 15%, #000 20%, transparent 72%);
   -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 15%, #000 20%, transparent 72%);
 }
