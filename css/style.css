@@ -350,7 +350,11 @@ main { flex: 1 0 auto; }
   align-items: center;
   gap: 3.5rem;
   width: max-content;
-  animation: marquee-scroll 32s linear infinite;
+  /* duration set by initMarqueeClone() (js/main.js) from the track's actual
+     measured width, so every marquee-style track — this and the workflow
+     card strip below — moves at the exact same px/s speed regardless of
+     how much content it holds. */
+  animation: marquee-scroll linear infinite;
 }
 .marquee-track-reverse { animation-direction: reverse; }
 @keyframes marquee-scroll {
@@ -384,7 +388,9 @@ main { flex: 1 0 auto; }
   gap: 1.25rem;
   width: max-content;
   padding: 0.25rem 0 1.5rem;
-  animation: marquee-scroll 70s linear infinite;
+  /* duration set by initMarqueeClone() (js/main.js) — same shared speed
+     constant as the integrations marquee above. */
+  animation: marquee-scroll linear infinite;
 }
 .card-strip:hover, .card-strip:focus-within { animation-play-state: paused; }
 .workflow-card {

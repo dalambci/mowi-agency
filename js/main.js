@@ -104,7 +104,14 @@
      short row (e.g. 6 logos) inside a wide viewport: a reverse-direction
      track starts its animation AT the -50% position, and if one copy is
      narrower than the visible window, that position exposes empty space
-     before the loop wraps around — this is what fixes it. */
+     before the loop wraps around — this is what fixes it.
+
+     Every track's animation-duration is then set from MARQUEE_PX_PER_SECOND
+     rather than a hardcoded number in CSS, so the integrations rows and the
+     workflow-card row always move at the same visual speed — one shared
+     constant instead of separately-tuned durations that would silently
+     drift out of sync the moment either track's content changes. */
+  var MARQUEE_PX_PER_SECOND = 41;
   document.querySelectorAll("[data-marquee-clone]").forEach(function (track) {
     var wrapper = track.parentElement;
     var originals = Array.prototype.slice.call(track.children);
@@ -126,6 +133,9 @@
       appendCopy();
       guard++;
     }
+    // translateX(-50%) covers exactly half the (now doubled-or-more) track,
+    // so that's the real per-loop travel distance regardless of copy count.
+    track.style.animationDuration = (track.scrollWidth / 2 / MARQUEE_PX_PER_SECOND) + "s";
   });
 
   // Escape closes an open dropdown (and the mobile sheet) and restores focus.
