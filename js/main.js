@@ -90,6 +90,38 @@
     }
   });
 
+  /* ---- Card strip (workflow slider) drag-to-scroll -----------------------
+     Native touch/wheel scroll already works for free — this only adds
+     click-and-drag for mouse/trackpad, same pattern as any horizontal
+     media rail. */
+  document.querySelectorAll("[data-card-strip]").forEach(function (track) {
+    var isDown = false;
+    var startX = 0;
+    var startScroll = 0;
+
+    track.addEventListener("pointerdown", function (event) {
+      if (event.pointerType === "touch") return;
+      isDown = true;
+      startX = event.clientX;
+      startScroll = track.scrollLeft;
+      track.classList.add("is-dragging");
+    });
+
+    track.addEventListener("pointermove", function (event) {
+      if (!isDown) return;
+      track.scrollLeft = startScroll - (event.clientX - startX);
+    });
+
+    function endDrag() {
+      isDown = false;
+      track.classList.remove("is-dragging");
+    }
+
+    track.addEventListener("pointerup", endDrag);
+    track.addEventListener("pointerleave", endDrag);
+    track.addEventListener("pointercancel", endDrag);
+  });
+
   // Escape closes an open dropdown (and the mobile sheet) and restores focus.
   document.addEventListener("keydown", function (event) {
     if (event.key !== "Escape") return;
