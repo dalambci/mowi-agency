@@ -362,11 +362,14 @@ main { flex: 1 0 auto; }
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 9 -5'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 10 -6.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
   background-size: 300px 300px;
   opacity: 0.07; /* founder-tuned: 0.05 read as invisible, 0.07 is "just noticeable" */
-  mask-image: radial-gradient(ellipse 75% 65% at 50% 15%, #000 20%, transparent 72%);
-  -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 15%, #000 20%, transparent 72%);
+  /* founder-tuned round 2: sparser specks (alpha ramp 10/-6.2, was 9/-5 —
+     higher threshold keeps fewer particles) spread over a wider, rounder
+     halo that reaches further down the hero before dissolving */
+  mask-image: radial-gradient(ellipse 85% 90% at 50% 25%, #000 25%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 85% 90% at 50% 25%, #000 25%, transparent 80%);
 }
 .hero h1 { font-size: 5rem; line-height: 1.02; font-weight: 700; letter-spacing: -0.02em; overflow-wrap: break-word; }
 .hero-sub { font-size: 1.125rem; color: var(--ink-2); margin-top: 1.5rem; max-width: 34rem; }
