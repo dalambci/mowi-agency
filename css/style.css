@@ -226,6 +226,10 @@ main { flex: 1 0 auto; }
   color: var(--ink-3);
   padding: 0.5rem 0.75rem 0.25rem;
 }
+/* Invisible twin of .nav-menu-heading — reserves the exact same box so the
+   un-headed continuation column's rows land level with the headed column's
+   rows, without hardcoding a pixel height. */
+.nav-menu-spacer { visibility: hidden; }
 .nav-menu-heading:not(:first-child) {
   margin-top: 0.25rem;
   padding-top: 0.75rem;
@@ -322,6 +326,9 @@ main { flex: 1 0 auto; }
     margin-top: 0.25rem;
     padding-top: 0.75rem;
   }
+  /* The desktop row-alignment spacer would otherwise leave a blank gap in
+     the stacked mobile list — it's only needed for the column layout. */
+  .nav-menu-spacer { display: none; }
   /* The demo CTA keeps its desktop button look inside the mobile sheet
      (the sheet's own link rule outranks .btn-primary, so restate it here). */
   .main-nav > ul > li.nav-mobile-actions > a.btn-primary {
