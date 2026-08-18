@@ -112,33 +112,61 @@
      rather than a hardcoded number in CSS, so the integrations rows and the
      workflow-card row always move at the same visual speed — one shared
      constant instead of separately-tuned durations that would silently
-     drift out of sync the moment either track's content changes. */
+     drift out of sync the moment either track's content changes.
+
+     Two hard-won lessons baked in here (both were live bugs, 2026-08-19):
+
+     1. Init runs at window "load", NOT at script parse. The logo <img>s have
+        no width/height attributes, so before they load each one measures
+        ~0px wide — a parse-time measurement saw a near-empty track, set a
+        far-too-short duration, and the logo rows visibly RACED on a cold
+        cache (correct again on reload, when images were cached). The card
+        strip never raced because its cards are fixed-width CSS boxes.
+
+     2. The loop travel is an exact measured period — the px distance from
+        the first original to its first clone — written to --marquee-shift
+        and consumed by the marquee-scroll keyframes. The old translateX(-50%)
+        loop point was off by half a flex gap every cycle (see the keyframes
+        comment in style.css for the math), which is the wrap "flicker" that
+        was previously chased on the v2 site and fixed the same way: make the
+        wrap land on the same logo so the strip reads as unending. */
   var MARQUEE_PX_PER_SECOND = 41;
-  document.querySelectorAll("[data-marquee-clone]").forEach(function (track) {
-    var wrapper = track.parentElement;
-    var originals = Array.prototype.slice.call(track.children);
-    function appendCopy() {
-      originals.forEach(function (node) {
-        var clone = node.cloneNode(true);
-        clone.setAttribute("aria-hidden", "true");
-        if (clone.matches("a, button")) clone.setAttribute("tabindex", "-1");
-        clone.querySelectorAll("a, button").forEach(function (el) {
-          el.setAttribute("tabindex", "-1");
+  function initMarquees() {
+    document.querySelectorAll("[data-marquee-clone]").forEach(function (track) {
+      var wrapper = track.parentElement;
+      var originals = Array.prototype.slice.call(track.children);
+      function appendCopy() {
+        originals.forEach(function (node) {
+          var clone = node.cloneNode(true);
+          clone.setAttribute("aria-hidden", "true");
+          if (clone.matches("a, button")) clone.setAttribute("tabindex", "-1");
+          clone.querySelectorAll("a, button").forEach(function (el) {
+            el.setAttribute("tabindex", "-1");
+          });
+          track.appendChild(clone);
         });
-        track.appendChild(clone);
-      });
-    }
-    appendCopy(); // always at least 2 copies total
-    var guard = 0;
-    while (track.scrollWidth < wrapper.clientWidth * 2 && guard < 8) {
-      appendCopy();
-      appendCopy();
-      guard++;
-    }
-    // translateX(-50%) covers exactly half the (now doubled-or-more) track,
-    // so that's the real per-loop travel distance regardless of copy count.
-    track.style.animationDuration = (track.scrollWidth / 2 / MARQUEE_PX_PER_SECOND) + "s";
-  });
+      }
+      appendCopy(); // always at least 2 copies total
+      // Period = one copy + one gap: transform-invariant (both children share
+      // the track's transform), so measuring mid-animation is still exact.
+      var period = track.children[originals.length].getBoundingClientRect().left -
+                   track.children[0].getBoundingClientRect().left;
+      // Keep the wrapper full through one full period of travel: the visible
+      // window slides [0, period], so the track must overhang by period+width.
+      var guard = 0;
+      while (track.scrollWidth - period < wrapper.clientWidth + 1 && guard < 8) {
+        appendCopy();
+        guard++;
+      }
+      track.style.setProperty("--marquee-shift", -period + "px");
+      track.style.animationDuration = (period / MARQUEE_PX_PER_SECOND) + "s";
+    });
+  }
+  if (document.readyState === "complete") {
+    initMarquees();
+  } else {
+    window.addEventListener("load", initMarquees);
+  }
 
   // Escape closes an open dropdown (and the mobile sheet) and restores focus.
   document.addEventListener("keydown", function (event) {

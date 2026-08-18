@@ -400,9 +400,16 @@ main { flex: 1 0 auto; }
   animation: marquee-scroll linear infinite;
 }
 .marquee-track-reverse { animation-direction: reverse; }
+/* The loop travels --marquee-shift: an EXACT one-copy pixel distance measured
+   by js/main.js (first original → its first clone), not -50% of the track.
+   -50% was the old loop point and it flickered every cycle: with flex gap g
+   and k copies, track width = k·copyWidth + (k·n−1)·g, so half of it lands
+   g/2 short of a copy boundary — a visible half-gap jump (~28px on the logo
+   rows) at every wrap. The px var lands the wrap on the same logo, so the
+   loop reads as unending. -50% stays only as a no-JS fallback. */
 @keyframes marquee-scroll {
   from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  to { transform: translateX(var(--marquee-shift, -50%)); }
 }
 .marquee-logo { display: flex; align-items: center; justify-content: center; height: 32px; flex-shrink: 0; filter: grayscale(1); opacity: 0.6; }
 .marquee-logo img { height: 100%; width: auto; max-width: 120px; object-fit: contain; }
