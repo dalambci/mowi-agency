@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/style.css?v=20260819-14" />
+  <link rel="stylesheet" href="/css/style.css?v=20260819-15" />
   <link rel="icon" href="/assets/icon-192.png?v=20260804-3" />
   <link rel="shortcut icon" href="/assets/icon-192.png?v=20260804-3" />
   <link rel="apple-touch-icon" href="/assets/apple-icon-180.png?v=20260804-3" />
@@ -51,15 +51,15 @@
               <!-- Continuation of the Workflows column, split out as its own
                    list so the dropdown doesn't run one column too tall — no
                    repeated "Workflows" heading, it's still that same
-                   category, just spilled into a second list. The hidden
-                   spacer li reserves exactly the heading's own height so
-                   "Agenda-samenvatting"/"CRM-synchronisatie" land in the
-                   same rows as "Alle workflows"/"Orderstatus" next door —
-                   collapsed on mobile, where this column stacks flush
-                   under the real heading instead. -->
-              <div class="nav-menu-col">
+                   category, just spilled into a second list. Bottom-aligned
+                   (nav-menu-col-bottom) so "Agenda-samenvatting"/
+                   "CRM-synchronisatie" sit level with "Orderstatus"/
+                   "Offerte-opvolging" — "Alle workflows" deliberately has no
+                   neighbor. On mobile the column's height is just its
+                   content, so the bottom-align rule is a no-op there and it
+                   stacks flush like any other item list. -->
+              <div class="nav-menu-col nav-menu-col-bottom">
                 <ul>
-                  <li class="nav-menu-heading nav-menu-spacer" aria-hidden="true">Workflows</li>
                   <li><a href="/workflows#agenda-samenvatting"><span class="nav-menu-item-title">Agenda-samenvatting</span><span class="nav-menu-item-desc">Uw agenda samengevat, op uw tijdstip</span></a></li>
                   <li><a href="/workflows#crm-sync"><span class="nav-menu-item-title">CRM-synchronisatie</span><span class="nav-menu-item-desc">Herkent klanten en houdt uw CRM bij</span></a></li>
                 </ul>
