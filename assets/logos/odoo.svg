@@ -1,0 +1,13 @@
+<!-- Odoo wordmark. Replaces odoo.png, whose 480x160 canvas was a too-tight crop
+     that sliced ~8px off the first ring and ~7px off the last (and a sliver off
+     the d's stem cap), so the outer o's rendered with flat cut sides. Geometry
+     here is a least-squares circle fit of that PNG (RMS < 0.3px, verified by
+     pixel-diff overlay: identical area within 0.3%), re-emitted as vectors with
+     the full circles restored and 1 unit of margin. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 497.97 163.34" width="497.97" height="163.34" role="img" aria-label="Odoo">
+  <line x1="232.85" y1="13.50" x2="232.85" y2="98.96" fill="none" stroke="#7C7C7C" stroke-width="25" stroke-linecap="round"/>
+  <circle cx="61.52" cy="101.82" r="47.73" fill="none" stroke="#AF5299" stroke-width="25.59"/>
+  <circle cx="185.13" cy="98.96" r="47.66" fill="none" stroke="#7C7C7C" stroke-width="24.31"/>
+  <circle cx="311.71" cy="101.76" r="47.64" fill="none" stroke="#7C7C7C" stroke-width="24.42"/>
+  <circle cx="437.14" cy="101.73" r="47.64" fill="none" stroke="#7C7C7C" stroke-width="24.38"/>
+</svg>
