@@ -392,7 +392,10 @@ main { flex: 1 0 auto; }
      constant as the integrations marquee above. */
   animation: marquee-scroll linear infinite;
 }
-.card-strip:hover, .card-strip:focus-within { animation-play-state: paused; }
+/* Hover no longer pauses (founder's call) — kept on focus-within only,
+   since a keyboard user tabbing onto a card needs it to hold still to
+   actually see and activate what's focused (WCAG 2.2.2). */
+.card-strip:focus-within { animation-play-state: paused; }
 .workflow-card {
   flex: 0 0 clamp(240px, 26vw, 300px);
   background: var(--surface);
