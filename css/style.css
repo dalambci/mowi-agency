@@ -179,7 +179,7 @@ main { flex: 1 0 auto; }
   z-index: 110;
   display: flex;
   align-items: flex-start;
-  min-width: 34rem;
+  min-width: 42rem;
   background: var(--surface);
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 16px;
@@ -190,11 +190,15 @@ main { flex: 1 0 auto; }
   pointer-events: none;
   transition: opacity 0.12s ease, visibility 0s linear 0.12s;
 }
-/* Two side-by-side categories (Agents / Workflows) on desktop, where there's
-   room; the mobile media query below stacks them back to one column since
-   the nav sheet there is already narrow and internally scrollable. */
+/* Three side-by-side lists on desktop — Agents, then Workflows spilled
+   across two columns (no repeated heading on the second, it's still the
+   same category) — where there's room; the mobile media query below
+   stacks them back to one column since the nav sheet there is already
+   narrow and internally scrollable. .nav-menu-col-divider (not a plain
+   adjacent-sibling rule) marks only the Agents|Workflows boundary, so the
+   two Workflows columns sit flush against each other with no divider. */
 .nav-menu-col { flex: 1 1 0; min-width: 0; }
-.nav-menu-col + .nav-menu-col {
+.nav-menu-col-divider {
   border-left: 1px solid var(--border);
   margin-left: 0.25rem;
   padding-left: 0.75rem;
@@ -306,9 +310,11 @@ main { flex: 1 0 auto; }
     transition: none;
   }
   .nav-dropdown-trigger[aria-expanded="true"] + .nav-menu { display: flex; }
-  /* Back to one stacked column — the desktop side-by-side divider becomes
-     the old top-border-between-categories look. */
-  .nav-menu-col + .nav-menu-col {
+  /* Back to one stacked list — the desktop side-by-side divider becomes a
+     top border, only before the Workflows heading (.nav-menu-col-divider);
+     the un-headed continuation column that follows it stays flush, so it
+     reads as more of the same Workflows list rather than a new group. */
+  .nav-menu-col-divider {
     border-left: 0;
     margin-left: 0;
     padding-left: 0;
