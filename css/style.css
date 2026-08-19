@@ -304,6 +304,16 @@ main { flex: 1 0 auto; }
      pill never touches an adjacent item's highlight. */
   .main-nav > ul { flex-direction: column; align-items: stretch; gap: 0.25rem; }
   .main-nav > ul > li > a, .nav-dropdown-trigger { width: 100%; padding: 0.625rem 0.875rem; }
+  /* Touch has no real :hover — a tap fires it anyway and it then sticks
+     until the next tap elsewhere, leaving a grey pill stuck on whatever
+     was just tapped (the same sticky-:hover issue the Product trigger
+     comment above already works around). Kill the hover fill for every
+     nav-sheet item on mobile; [aria-current="page"]'s pill is a real state,
+     not hover, so it's untouched. */
+  .main-nav > ul > li > a:hover,
+  .nav-menu li a:hover {
+    background: none;
+  }
   .nav-menu {
     position: static;
     min-width: 0;
