@@ -200,7 +200,7 @@ main { flex: 1 0 auto; }
 .nav-menu-col { flex: 1 1 0; min-width: 0; }
 .nav-menu-col-divider {
   border-left: 1px solid var(--border);
-  margin-left: 0.25rem;
+  margin-left: 0.4375rem; /* 0.25rem + 3px, nudged right per founder request */
   padding-left: 0.75rem;
 }
 /* Bottom-aligns the continuation column against its taller sibling, so its
