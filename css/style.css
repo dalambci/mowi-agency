@@ -592,6 +592,28 @@ main { flex: 1 0 auto; }
   flex-shrink: 0;
 }
 
+/* --- Alternating split rows -------------------------------------------------
+   Generic two-column row (copy + visual) for pages like /zo-werkt-het that
+   step through a process one beat at a time. Copy always comes first in the
+   DOM; .split-flip moves the visual to the left column on desktop only, so
+   reading order on mobile never depends on which way a row is flipped. */
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 4rem;
+  align-items: center;
+}
+.split + .split { margin-top: 6rem; }
+.split-flip .split-visual { order: -1; }
+.split-visual { min-height: 380px; }
+@media (max-width: 63.9rem) {
+  .split { grid-template-columns: minmax(0, 1fr); gap: 1.75rem; }
+  .split + .split { margin-top: 3.5rem; }
+  /* Always heading -> text -> visual on mobile, regardless of .split-flip. */
+  .split-flip .split-visual { order: 0; }
+  .split-visual { min-height: 240px; }
+}
+
 /* --- Business-area tab switcher -----------------------------------------------
    Reintroduces pill tabs (removed with the rest of v2) purely for this
    section, retokenised to the skeleton's own palette/spacing rather than
