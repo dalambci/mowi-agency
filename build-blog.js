@@ -259,16 +259,31 @@ function headerHtml() {
               <span class="nav-dropdown-icon" aria-hidden="true"></span>
             </button>
             <div class="nav-menu" id="product-menu">
-              <ul>
-                <li><a href="/workflows"><span class="nav-menu-item-title">Alle workflows</span><span class="nav-menu-item-desc">Het volledige overzicht van wat Mowi automatiseert</span></a></li>
-                <li><a href="/workflows#email-agent"><span class="nav-menu-item-title">E-mail agent</span><span class="nav-menu-item-desc">Sorteert en beantwoordt uw e-mail</span></a></li>
-                <li><a href="/workflows#call-agent"><span class="nav-menu-item-title">Call agent</span><span class="nav-menu-item-desc">Neemt binnenkomende gesprekken aan</span></a></li>
-                <li><a href="/workflows#order-status"><span class="nav-menu-item-title">Orderstatus</span><span class="nav-menu-item-desc">Zoekt bestellingen op in uw webshop</span></a></li>
-                <li><a href="/workflows#offerte-opvolging"><span class="nav-menu-item-title">Offerte-opvolging</span><span class="nav-menu-item-desc">Controleert en volgt offerteaanvragen op</span></a></li>
-                <li><a href="/workflows#agenda-samenvatting"><span class="nav-menu-item-title">Agenda-samenvatting</span><span class="nav-menu-item-desc">Uw agenda samengevat, op uw tijdstip</span></a></li>
-                <li><a href="/workflows#crm-sync"><span class="nav-menu-item-title">CRM-synchronisatie</span><span class="nav-menu-item-desc">Herkent klanten en houdt uw CRM bij</span></a></li>
-                <li><a href="/koppelingen"><span class="nav-menu-item-title">Koppelingen</span><span class="nav-menu-item-desc">Werkt met uw webshop, CRM en agenda</span></a></li>
-              </ul>
+              <div class="nav-menu-col">
+                <ul>
+                  <li class="nav-menu-heading">Agents</li>
+                  <li><a href="/workflows"><span class="nav-menu-item-title">Alle agents</span><span class="nav-menu-item-desc">Het volledige overzicht van alle Mowi-agents</span></a></li>
+                  <li><a href="/workflows#email-agent"><span class="nav-menu-item-title">E-mail agent</span><span class="nav-menu-item-desc">Sorteert en beantwoordt uw e-mail</span></a></li>
+                  <li><a href="/workflows#call-agent"><span class="nav-menu-item-title">Call agent</span><span class="nav-menu-item-desc">Neemt binnenkomende gesprekken aan</span></a></li>
+                </ul>
+              </div>
+              <div class="nav-menu-col nav-menu-col-divider">
+                <ul>
+                  <li class="nav-menu-heading">Workflows</li>
+                  <li><a href="/workflows"><span class="nav-menu-item-title">Alle workflows</span><span class="nav-menu-item-desc">Het volledige overzicht van wat Mowi automatiseert</span></a></li>
+                  <li><a href="/workflows#order-status"><span class="nav-menu-item-title">Orderstatus</span><span class="nav-menu-item-desc">Zoekt bestellingen op in uw webshop</span></a></li>
+                  <li><a href="/workflows#offerte-opvolging"><span class="nav-menu-item-title">Offerte-opvolging</span><span class="nav-menu-item-desc">Controleert en volgt offerteaanvragen op</span></a></li>
+                </ul>
+              </div>
+              <!-- Continuation of the Workflows column — see index.html's own
+                   header for the full rationale comment; kept in sync here so
+                   the dropdown renders identically on blog pages. -->
+              <div class="nav-menu-col nav-menu-col-bottom">
+                <ul>
+                  <li><a href="/workflows#agenda-samenvatting"><span class="nav-menu-item-title">Agenda-samenvatting</span><span class="nav-menu-item-desc">Uw agenda samengevat, op uw tijdstip</span></a></li>
+                  <li><a href="/workflows#crm-sync"><span class="nav-menu-item-title">CRM-synchronisatie</span><span class="nav-menu-item-desc">Herkent klanten en houdt uw CRM bij</span></a></li>
+                </ul>
+              </div>
             </div>
           </li>
           <li><a href="/templates">Templates</a></li>
@@ -296,7 +311,7 @@ function footerHtml() {
     <div class="container">
 
       <div class="footer-cta">
-        <h2 class="footer-cta-title">U zegt het.<br />En het werkt.</h2>
+        <h2 class="footer-cta-title">Vertel het<br />Mowi regelt het</h2>
         <a href="/demo" class="btn-primary" data-event="Demo Click">Plan een demo</a>
       </div>
 
@@ -327,7 +342,7 @@ function footerHtml() {
                 <li><a href="/docs/">Documentatie</a></li>
                 <li><a href="/blog/">Blog</a></li>
                 <li><a href="/zo-werkt-het">Zo werkt het</a></li>
-                <li><a href="/vertrouwen">Vertrouwen</a></li>
+                <li><a href="/vertrouwen">Security</a></li>
                 <li><a href="/ai-transparantie">AI-transparantie</a></li>
               </ul>
             </div>

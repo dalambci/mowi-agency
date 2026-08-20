@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/style.css?v=20260819-18" />
+  <link rel="stylesheet" href="/css/style.css?v=20260820" />
   <link rel="icon" href="/assets/icon-192.png?v=20260804-3" />
   <link rel="shortcut icon" href="/assets/icon-192.png?v=20260804-3" />
   <link rel="apple-touch-icon" href="/assets/apple-icon-180.png?v=20260804-3" />
@@ -62,16 +62,9 @@
                   <li><a href="/workflows#offerte-opvolging"><span class="nav-menu-item-title">Offerte-opvolging</span><span class="nav-menu-item-desc">Controleert en volgt offerteaanvragen op</span></a></li>
                 </ul>
               </div>
-              <!-- Continuation of the Workflows column, split out as its own
-                   list so the dropdown doesn't run one column too tall — no
-                   repeated "Workflows" heading, it's still that same
-                   category, just spilled into a second list. Bottom-aligned
-                   (nav-menu-col-bottom) so "Agenda-samenvatting"/
-                   "CRM-synchronisatie" sit level with "Orderstatus"/
-                   "Offerte-opvolging" — "Alle workflows" deliberately has no
-                   neighbor. On mobile the column's height is just its
-                   content, so the bottom-align rule is a no-op there and it
-                   stacks flush like any other item list. -->
+              <!-- Continuation of the Workflows column — see index.html's own
+                   header for the full rationale comment; kept in sync here so
+                   the dropdown renders identically on blog pages. -->
               <div class="nav-menu-col nav-menu-col-bottom">
                 <ul>
                   <li><a href="/workflows#agenda-samenvatting"><span class="nav-menu-item-title">Agenda-samenvatting</span><span class="nav-menu-item-desc">Uw agenda samengevat, op uw tijdstip</span></a></li>
@@ -146,7 +139,7 @@
     <div class="container">
 
       <div class="footer-cta">
-        <h2 class="footer-cta-title">U zegt het.<br />En het werkt.</h2>
+        <h2 class="footer-cta-title">Vertel het<br />Mowi regelt het</h2>
         <a href="/demo" class="btn-primary" data-event="Demo Click">Plan een demo</a>
       </div>
 
@@ -177,7 +170,7 @@
                 <li><a href="/docs/">Documentatie</a></li>
                 <li><a href="/blog/">Blog</a></li>
                 <li><a href="/zo-werkt-het">Zo werkt het</a></li>
-                <li><a href="/vertrouwen">Vertrouwen</a></li>
+                <li><a href="/vertrouwen">Security</a></li>
                 <li><a href="/ai-transparantie">AI-transparantie</a></li>
               </ul>
             </div>
@@ -215,7 +208,7 @@
 
     </div>
   </footer>
-  <script src="/js/main.js?v=20260819-8"></script>
+  <script src="/js/main.js?v=20260820"></script>
   <script>
     document.querySelectorAll(".blog-video-facade").forEach(function (el) {
       el.addEventListener("click", function () {
