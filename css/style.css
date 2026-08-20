@@ -87,6 +87,10 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
   .container { margin: 0; padding: 0 20px; }
 }
 
+/* Keeps a hash-activated tab panel (e.g. /#bestellingen) from landing under
+   the fixed-position header on jump. */
+[id] { scroll-margin-top: 6rem; }
+
 /* main grows so the footer sits at the bottom even on blank pages */
 main { flex: 1 0 auto; }
 
@@ -564,6 +568,145 @@ main { flex: 1 0 auto; }
 
 /* Reduced-motion for the marquee is already covered by the sitewide
    `*,*::before,*::after{animation:none!important}` rule further down. */
+
+/* --- Serif-italic emphasis ----------------------------------------------------
+   Reconnects the --font-serif-emph token: Instrument Serif italic is loaded on
+   every page already (see the <link> in <head>) but no rule used it since the
+   skeleton rebuild dropped the v2 system. One emphasised word/phrase per
+   heading, never a whole heading. */
+.h-emph {
+  font-family: var(--font-serif-emph);
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* --- Small dashed placeholder icon ---------------------------------------
+   A smaller sibling of .placeholder-tile for slots too small for a label
+   (tab icons, reason-column icons, badge glyphs not yet designed). */
+.placeholder-icon {
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-card);
+  background: var(--surface);
+  flex-shrink: 0;
+}
+
+/* --- Business-area tab switcher -----------------------------------------------
+   Reintroduces pill tabs (removed with the rest of v2) purely for this
+   section, retokenised to the skeleton's own palette/spacing rather than
+   ported verbatim. data-pill-tabs / role="tab" / role="tabpanel" contract,
+   see initPillTabs in js/main.js. */
+.pill-tablist {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+.pill-tab {
+  display: inline-flex;
+  align-items: center;
+  height: 2.75rem;
+  padding: 0 1.25rem;
+  border-radius: var(--radius-btn);
+  border: 1px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+/* Hover uses the exact same faint ink wash as the selected state below —
+   one background treatment for every tab, active or not, so hover never
+   reads as a different interaction depending on state. */
+@media (hover: hover) {
+  .pill-tab:hover { background: rgba(18, 17, 16, 0.03); }
+}
+/* Selected state stays the same black border/text as every other tab — only
+   a faint 3% ink wash marks it, no separate grey fill. */
+.pill-tab[aria-selected="true"] {
+  background: rgba(18, 17, 16, 0.03);
+}
+.pill-panels { margin-top: 3rem; }
+.pill-panel[hidden] { display: none; }
+.pill-panel-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 3rem;
+  align-items: center;
+}
+.pill-panel-copy-head {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  margin-bottom: 1.25rem;
+}
+.pill-panel-copy-head .placeholder-icon { width: 2.25rem; height: 2.25rem; }
+.pill-panel-copy-head span { font-weight: 600; font-size: 0.9375rem; color: var(--ink-2); }
+.pill-panel-copy h3 { font-size: 1.375rem; font-weight: 700; line-height: 1.25; }
+.pill-panel-copy p { font-size: 1rem; color: var(--ink-2); margin-top: 0.875rem; max-width: 30rem; }
+.pill-panel-copy .btn-primary { margin-top: 1.5rem; }
+.pill-panel-visual { min-height: 320px; }
+@media (max-width: 63.9rem) {
+  .pill-panel-split { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
+  .pill-panel-visual { min-height: 220px; order: -1; }
+}
+
+/* --- Closing reasons block -----------------------------------------------
+   Heading + demo CTA + three short reasons, each column topped with a
+   hairline rather than a card border (keeps it quieter than .workflow-card,
+   since it sits directly above the footer's own CTA band). */
+.reasons-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2.5rem;
+  margin-top: 3.5rem;
+}
+.reasons-grid > div { padding-top: 1.5rem; border-top: 1px solid var(--border); }
+.reasons-grid .placeholder-icon { margin-bottom: 1.25rem; }
+.reasons-grid h3 { font-size: 1.0625rem; font-weight: 700; }
+.reasons-grid p { font-size: 0.9375rem; color: var(--ink-2); margin-top: 0.625rem; }
+@media (max-width: 63.9rem) {
+  .reasons-grid { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+}
+
+/* --- Security strip --------------------------------------------------------
+   Badges left, copy right. GDPR is the one real, held certification/self-
+   declaration (see assets/badges/gdpr.png, used sitewide in every footer).
+   ISO 27001 / ISO 42001 are NOT held — shown as a deliberate, visibly
+   labelled in-progress commitment, never implied as already achieved. Every
+   footer's own HTML comment says SOC 2 / ISO badges return "pas wanneer een
+   echt certificaat behaald is" — this section is the one place that gets
+   ahead of that by explicitly marking the two as in-progress in copy, not
+   silently implying they're done. */
+.security-strip {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 3rem;
+  align-items: center;
+}
+.badge-row { display: flex; flex-wrap: wrap; gap: 1.5rem; }
+.badge-item { display: flex; flex-direction: column; align-items: center; gap: 0.625rem; width: 6.5rem; }
+.badge-item img,
+.badge-item .placeholder-icon { width: 4.25rem; height: 4.25rem; }
+.badge-item .placeholder-icon { border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.badge-item .placeholder-icon span { font-size: 0.6875rem; font-weight: 700; color: var(--ink-3); }
+.badge-label { font-size: 0.8125rem; font-weight: 600; text-align: center; }
+.badge-wip {
+  display: inline-block;
+  margin-top: 0.125rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--ink-3);
+}
+.security-strip-copy p { font-size: 1rem; color: var(--ink-2); margin-top: 0.875rem; max-width: 28rem; }
+@media (max-width: 63.9rem) {
+  .security-strip { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+  .badge-row { justify-content: center; }
+}
 
 /* --- Footer -----------------------------------------------------------------
    shapes.co-derived band + rounded panel, structure modernized 2026-08-19.

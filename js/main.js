@@ -176,6 +176,60 @@
     window.addEventListener("load", initMarquees);
   }
 
+  /* ---- Pill tabs (business-area switcher) --------------------------------
+     Ported from the v2 rebuild's initPillTabs, rewritten to this file's ES5
+     house style. Contract: a wrapper carries [data-pill-tabs]; descendant
+     buttons carry role="tab" + id + aria-controls + aria-selected; matching
+     panels carry role="tabpanel" with id === the controlling tab's
+     aria-controls, hidden on every panel but the active one. */
+  function initPillTabs(container) {
+    var tabs = Array.prototype.slice.call(container.querySelectorAll('[role="tab"]'));
+    var panels = Array.prototype.slice.call(container.querySelectorAll('[role="tabpanel"]'));
+    if (!tabs.length) return;
+
+    function activate(tab, focus) {
+      if (!tab) return;
+      tabs.forEach(function (t) {
+        var selected = t === tab;
+        t.setAttribute("aria-selected", String(selected));
+        t.tabIndex = selected ? 0 : -1;
+      });
+      panels.forEach(function (p) {
+        p.hidden = p.id !== tab.getAttribute("aria-controls");
+      });
+      if (focus) tab.focus();
+    }
+
+    tabs.forEach(function (tab, i) {
+      tab.addEventListener("click", function () {
+        activate(tab, false);
+      });
+      tab.addEventListener("keydown", function (event) {
+        var keys = ["ArrowRight", "ArrowLeft", "Home", "End"];
+        if (keys.indexOf(event.key) === -1) return;
+        event.preventDefault();
+        var next = i;
+        if (event.key === "ArrowRight") next = (i + 1) % tabs.length;
+        if (event.key === "ArrowLeft") next = (i - 1 + tabs.length) % tabs.length;
+        if (event.key === "Home") next = 0;
+        if (event.key === "End") next = tabs.length - 1;
+        activate(tabs[next], true);
+      });
+    });
+
+    var hashId = window.location.hash.slice(1);
+    var hashTab = null;
+    var defaultTab = null;
+    tabs.forEach(function (t) {
+      if (t.getAttribute("aria-controls") === hashId) hashTab = t;
+      if (t.getAttribute("aria-selected") === "true") defaultTab = t;
+    });
+    activate(hashTab || defaultTab || tabs[0], false);
+  }
+  document.querySelectorAll("[data-pill-tabs]").forEach(function (el) {
+    initPillTabs(el);
+  });
+
   // Escape closes an open dropdown (and the mobile sheet) and restores focus.
   document.addEventListener("keydown", function (event) {
     if (event.key !== "Escape") return;
