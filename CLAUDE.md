@@ -526,6 +526,18 @@ resurrect any of the old label names above for the current nav.
   hardcoded per-article "Start gratis — 14 dagen" CTA block that every post used to get
   regardless of its own body text — but left the post bodies themselves untouched). Flag
   rather than silently edit post bodies.
+- **Masterplan amendment 2026-08-19 (vault — adopted by the founder): two-motion model.** The
+  business model is no longer demo-gated-only: the hardened agents (E-mail/Call) will sell
+  **self-serve** again as an acquisition wedge, cheap and **usage-priced via a credit system**
+  (no per-agent fee — the €40/€80 per-agent prices stay dead either way, don't reintroduce
+  them), while the platform/configurator stays demo-gated premium with no published price.
+  **The site itself does not change yet**: no self-serve CTA, signup link, or pricing goes
+  live until the credit billing exists (masterplan roadmap Phase 2b, dashboard-side work).
+  When that lands, the plan is a *secondary* "Zelf starten" path on the relevant workflow
+  panels — "Plan een demo" stays the primary CTA sitewide — and this section gets updated to
+  match. Until then everything in the bullet above remains the live reality; equally, don't
+  "fix" a future self-serve CTA away by citing the older demo-gated-only wording. Full
+  rationale: the vault's `Mowi - Masterplan — MKB-OS.md` §5 + Decisions log 2026-08-19.
 
 ## Design system
 - **Current, v2 (2026-08-18) — monochrome.** `css/style.css` implements a **black-and-white
