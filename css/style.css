@@ -626,10 +626,16 @@ main { flex: 1 0 auto; }
    both breakpoints (padding-bottom stays the .section default). */
 #live { padding-top: 2rem; }
 .integration-category { margin-top: 3rem; }
-/* Matches #live's own reduced top padding below, so the gap header->heading
+/* Matches #live's own reduced top padding above, so the gap header->heading
    and heading->tiles read as one even rhythm instead of the much bigger
-   default .section top padding this page no longer has a hero to justify. */
-.integration-category:first-child { margin-top: calc(2rem - 30px); }
+   default .section top padding this page no longer has a hero to justify.
+   NOTE: this used to be `.integration-category:first-child`, which never
+   matched anything -- :first-child means literally the parent's first
+   child, and the heading itself is that first child, so every
+   .integration-category is a LATER sibling and the selector was dead code.
+   The adjacent-sibling combinator below is what actually targets "the
+   category right after the heading." */
+.koppelingen-heading + .integration-category { margin-top: calc(2rem - 30px); }
 .integration-category-heading { font-size: 1.0625rem; font-weight: 700; margin-bottom: 1.25rem; }
 .integration-grid {
   display: grid;
