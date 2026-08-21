@@ -614,6 +614,61 @@ main { flex: 1 0 auto; }
   .split-visual { min-height: 240px; }
 }
 
+/* --- Integration grid (koppelingen.html) -------------------------------------
+   Category-grouped card grid: logo + name + one-line description per card.
+   .integration-card-planned dims the logo and shows a "Binnenkort" tag, for
+   platforms that are real and named but not yet buildable/selectable by a
+   client — never used for genuinely invented/unverified platforms. */
+.integration-category { margin-top: 3rem; }
+.integration-category:first-child { margin-top: 2.5rem; }
+.integration-category-heading { font-size: 1.0625rem; font-weight: 700; margin-bottom: 1.25rem; }
+.integration-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+.integration-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: 1rem 1.25rem;
+}
+.integration-card-logo { width: 2.75rem; height: 2.75rem; flex-shrink: 0; object-fit: contain; }
+.integration-card-logo-fallback {
+  width: 2.75rem;
+  height: 2.75rem;
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  color: var(--ink-2);
+}
+.integration-card-name { font-weight: 700; font-size: 0.9375rem; }
+.integration-card-desc { font-size: 0.8125rem; color: var(--ink-2); margin-top: 0.125rem; }
+.integration-card-planned .integration-card-logo { filter: grayscale(1); opacity: 0.6; }
+.integration-card-planned .integration-card-logo-fallback { color: var(--ink-3); }
+.integration-card-tag { display: inline-block; margin-top: 0.25rem; font-size: 0.6875rem; font-weight: 600; color: var(--ink-3); }
+@media (max-width: 63.9rem) {
+  .integration-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 47.9rem) {
+  .integration-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Section headings on this page read at the same scale as the blog's own
+   article prose (.blog-article h2/p), left-aligned, not the homepage's
+   bigger centered .section-heading treatment. */
+.koppelingen-heading { font-size: 1.375rem; font-weight: 700; line-height: 1.2; }
+.koppelingen-body { font-size: 1rem; color: var(--ink-2); margin-top: 0.75rem; max-width: 40rem; }
+.koppelingen-cta { margin-top: 1.5rem; }
+
 /* --- Business-area tab switcher -----------------------------------------------
    Reintroduces pill tabs (removed with the rest of v2) purely for this
    section, retokenised to the skeleton's own palette/spacing rather than

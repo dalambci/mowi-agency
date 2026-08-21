@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260820-2" />
+  <link rel="stylesheet" href="css/style.css?v=20260821" />
   <link rel="icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="shortcut icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260804-3" />
@@ -110,15 +110,29 @@
       <!-- Two rows holding DISJOINT sets — every brand appears in exactly one
            row, so a logo can never show up above or below itself. The set is
            the dashboard's own integrations registry (mowi-dashboard's
-           config/shop_platforms.php), which is why there's now enough of it:
-           14 here, 14 below. .marquee-logo-mark tags the square glyph marks so
-           they get a taller box than the wide wordmarks (see style.css).
+           config/shop_platforms.php): 14 here, 10 below. .marquee-logo-mark
+           tags the square glyph marks so they get a taller box than the wide
+           wordmarks (see style.css).
            Five marks from that registry (Teamleader, Mews, Zoho, Wix, CCV Shop)
            are deliberately left out: they're thin, pale glyphs that measured
            under half the on-screen presence of the faintest logo already here,
            so the grayscale wash erased them. They can come back if a heavier
-           mark turns up. js/main.js clones each row to fill the width — that
-           only repeats what's here, it never adds variety, so keep rows long. -->
+           mark turns up.
+           Salesforce, SAP, Dynamics 365 and Excel were REMOVED 2026-08-21
+           (previously in the second row) — none of the four are in the real
+           config/shop_platforms.php registry at all; they were leftover from
+           a pre-rebrand plan (2026-08-04) never reconciled against it. Real
+           research found genuine reasons each fails Sal's own bar ("if we
+           can't connect it for a client without a heavy integration, it's
+           not worth it for now"): Salesforce API access needs a paid
+           tier/add-on many small orgs don't have; SAP is enterprise-cost
+           integration work ($10k-50k+/yr per real research, 2026-08-21);
+           Dynamics 365 is buildable but needs the client's own Azure AD
+           admin and doesn't fit Mowi's actual SMB target; Excel isn't a
+           discrete platform with its own API at all. Don't re-add any of
+           the four without a real registry entry backing them.
+           js/main.js clones each row to fill the width — that only repeats
+           what's here, it never adds variety, so keep rows long. -->
       <div class="marquee" aria-hidden="true">
         <div class="marquee-track" data-marquee-clone>
           <span class="marquee-logo"><img src="assets/logos/woocommerce.svg" alt="" /></span>
@@ -145,17 +159,13 @@
           <span class="marquee-logo marquee-logo-mark"><img src="assets/logos/shopware.svg" alt="" /></span>
           <span class="marquee-logo"><img src="assets/logos/mijnwebwinkel.svg" alt="" /></span>
           <span class="marquee-logo marquee-logo-mark"><img src="assets/logos/microsoft-bookings.svg" alt="" /></span>
-          <span class="marquee-logo"><img src="assets/logos/sap.png" alt="" /></span>
           <span class="marquee-logo marquee-logo-mark"><img src="assets/logos/formitable.svg" alt="" /></span>
           <span class="marquee-logo"><img src="assets/logos/moneybird.svg?v=20260819-9" alt="" /></span>
-          <span class="marquee-logo marquee-logo-mark"><img src="assets/logos/excel.png" alt="" /></span>
-          <span class="marquee-logo"><img src="assets/logos/salesforce.png" alt="" /></span>
           <span class="marquee-logo"><img src="assets/logos/thefork.svg?v=20260819-9" alt="" /></span>
           <span class="marquee-logo"><img src="assets/logos/guestplan.svg?v=20260819-9" alt="" /></span>
-          <span class="marquee-logo"><img src="assets/logos/dynamics-365.png" alt="" /></span>
         </div>
       </div>
-      <p class="visually-hidden">Mowi werkt onder meer samen met WooCommerce, Shopify, Lightspeed, Shopware, Magento, Mijnwebwinkel, bol.com, PrestaShop, Exact, Twinfield, Moneybird, AFAS, SAP, Odoo, HubSpot, Salesforce, Pipedrive, Dynamics 365, Excel, Google Agenda, Microsoft Bookings, Calendly, Salonized, Formitable, Guestplan, TheFork, Cubilis en SiteMinder.</p>
+      <p class="visually-hidden">Mowi werkt onder meer samen met WooCommerce, Shopify, Lightspeed, Shopware, Magento, Mijnwebwinkel, bol.com, PrestaShop, Exact, Twinfield, Moneybird, AFAS, Odoo, HubSpot, Pipedrive, Google Agenda, Microsoft Bookings, Calendly, Salonized, Formitable, Guestplan, TheFork, Cubilis en SiteMinder.</p>
     </section>
 
     <!-- ================= Template-cards slider ================= -->
@@ -460,6 +470,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=20260820-2"></script>
+  <script src="js/main.js?v=20260821"></script>
 </body>
 </html>
