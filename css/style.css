@@ -639,7 +639,7 @@ main { flex: 1 0 auto; }
    .integration-category is a LATER sibling and the selector was dead code.
    The adjacent-sibling combinator below is what actually targets "the
    category right after the heading." */
-.koppelingen-heading + .integration-category { margin-top: 32px; }
+.page-heading + .integration-category { margin-top: 32px; }
 .integration-category-heading { font-size: 1.0625rem; font-weight: 700; margin-bottom: 1.25rem; }
 .integration-grid {
   display: grid;
@@ -687,9 +687,172 @@ main { flex: 1 0 auto; }
 /* Section headings on this page read at the same scale as the blog's own
    article prose (.blog-article h2/p), left-aligned, not the homepage's
    bigger centered .section-heading treatment. */
-.koppelingen-heading { font-size: 1.375rem; font-weight: 700; line-height: 1.2; }
-.koppelingen-body { font-size: 1rem; color: var(--ink-2); margin-top: 0.75rem; max-width: 40rem; }
-.koppelingen-cta { margin-top: 1.5rem; }
+.page-heading { font-size: 1.375rem; font-weight: 700; line-height: 1.2; }
+.page-body { font-size: 1rem; color: var(--ink-2); margin-top: 0.75rem; max-width: 40rem; }
+.page-cta { margin-top: 1.5rem; }
+/* Pins a .split row's short column to the top instead of the default
+   vertical centering -- used where the right column is much taller
+   (a stack of cards) than the left column (a heading + one line). */
+.split-top { align-items: flex-start; }
+
+/* --- AI diagram (security.html) ----------------------------------------------
+   Recreation of the reference's "app -> prompt -> lock -> tools" flow, pure
+   CSS/HTML, no motion. Sits inside a .split-visual slot. The 3-way bracket
+   under the lock is the classic org-chart trick: a shared top border on the
+   tools row plus one vertical drop per tile -- the middle tile's drop lands
+   exactly on the wrap's horizontal center, which is where the lock's own
+   connector arrives, so no JS measurement is needed. */
+.ai-diagram {
+  background: var(--band);
+  border-radius: var(--radius-card);
+  min-height: 380px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1.5rem;
+  gap: 0;
+}
+.ai-diagram-mowi { width: 40px; height: 40px; }
+.ai-diagram-mowi img { width: 100%; height: auto; }
+.ai-diagram-connector { width: 1px; height: 22px; background: var(--ink-3); opacity: 0.35; }
+.ai-diagram-prompt {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  background: var(--surface);
+  border-radius: var(--radius-pill);
+  padding: 0.75rem 0.5rem 0.75rem 1.125rem;
+  box-shadow: 0 1px 2px rgba(18, 17, 16, 0.06);
+  width: 100%;
+  max-width: 21rem;
+}
+.ai-diagram-prompt-icon { color: var(--ink-3); flex-shrink: 0; font-size: 0.9375rem; }
+.ai-diagram-prompt-text { flex: 1; font-size: 0.875rem; color: var(--ink-2); }
+.ai-diagram-prompt-arrow {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.ai-diagram-prompt-arrow svg { width: 12px; height: 12px; }
+.ai-diagram-lock {
+  width: 36px;
+  height: 36px;
+  background: var(--surface);
+  border-radius: var(--radius-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 2px rgba(18, 17, 16, 0.06);
+  color: var(--ink);
+}
+.ai-diagram-lock svg { width: 16px; height: 16px; }
+.ai-diagram-tools-wrap { width: 100%; max-width: 22rem; margin-top: 22px; padding-top: 22px; }
+.ai-diagram-tools {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+.ai-diagram-tools::before {
+  content: "";
+  position: absolute;
+  top: -22px;
+  left: calc(100% / 6);
+  right: calc(100% / 6);
+  height: 1px;
+  background: var(--ink-3);
+  opacity: 0.35;
+}
+.ai-diagram-tool {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+.ai-diagram-tool::before {
+  content: "";
+  position: absolute;
+  top: -22px;
+  left: 50%;
+  width: 1px;
+  height: 22px;
+  background: var(--ink-3);
+  opacity: 0.35;
+}
+.ai-diagram-tool-icon {
+  width: 42px;
+  height: 42px;
+  background: var(--surface);
+  border-radius: var(--radius-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 2px rgba(18, 17, 16, 0.06);
+}
+.ai-diagram-tool-icon img { width: 20px; height: 20px; object-fit: contain; }
+.ai-diagram-tool-name { font-size: 0.75rem; font-weight: 600; color: var(--ink-2); }
+@media (max-width: 47.9rem) {
+  .ai-diagram { min-height: 300px; padding: 2rem 1rem; }
+  .ai-diagram-tools-wrap { max-width: 18rem; }
+}
+
+/* --- Trust cards (security.html) ---------------------------------------------
+   Full-width stacked cards, icon+title in a fixed-width left column, body
+   copy filling the rest -- matches the reference's two-column card shape,
+   collapsed to one column on mobile. */
+.trust-cards { display: flex; flex-direction: column; gap: 1.25rem; }
+.trust-card {
+  display: flex;
+  gap: 2rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: 1.75rem 2rem;
+}
+.trust-card-head { flex: 0 0 12rem; display: flex; flex-direction: column; gap: 0.75rem; }
+.trust-card-icon { width: 22px; height: 22px; color: var(--ink-2); }
+.trust-card-head h3 { font-size: 1.0625rem; font-weight: 700; }
+.trust-card p { flex: 1; font-size: 0.9375rem; color: var(--ink-2); margin: 0; }
+@media (max-width: 63.9rem) {
+  .trust-card { flex-direction: column; gap: 0.75rem; }
+  .trust-card-head { flex: none; }
+}
+
+/* --- Standards band (security.html) -------------------------------------------
+   Tinted full-width band, centered heading, 3 cards reusing the homepage
+   security strip's own .badge-item/.badge-wip language so the "In
+   voorbereiding" ISO treatment reads identically in both places. */
+.standards-band { background: var(--band); border-radius: var(--radius-card); padding: 3rem 2rem; }
+.standards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+}
+.standards-card {
+  background: var(--surface);
+  border-radius: var(--radius-card);
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.875rem;
+}
+.standards-card .badge-item { width: auto; }
+.standards-card p { font-size: 0.875rem; color: var(--ink-2); }
+@media (max-width: 63.9rem) {
+  .standards-grid { grid-template-columns: minmax(0, 1fr); }
+}
 
 /* --- Business-area tab switcher -----------------------------------------------
    Reintroduces pill tabs (removed with the rest of v2) purely for this

@@ -342,7 +342,7 @@ function footerHtml() {
                 <li><a href="/docs/">Documentatie</a></li>
                 <li><a href="/blog/">Blog</a></li>
                 <li><a href="/zo-werkt-het">Zo werkt het</a></li>
-                <li><a href="/vertrouwen">Security</a></li>
+                <li><a href="/security">Security</a></li>
                 <li><a href="/ai-transparantie">AI-transparantie</a></li>
               </ul>
             </div>
@@ -544,7 +544,7 @@ function buildSitemap(posts) {
   // /cases, /agentic-ai, /agents/email-triage, /agents/phone-agent,
   // /contact) — a noindex stub should never be in the sitemap.
   const staticPages = [
-    "", "workflows", "receptenboek", "koppelingen", "vertrouwen", "over", "zo-werkt-het", "demo", "docs/",
+    "", "workflows", "receptenboek", "koppelingen", "security", "over", "zo-werkt-het", "demo", "docs/",
   ];
   // docs/, receptenboek/ are read from disk rather than hand-listed, so a new
   // page in either folder is in the sitemap the next time this script runs —
