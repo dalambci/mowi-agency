@@ -635,7 +635,7 @@ main { flex: 1 0 auto; }
    .integration-category is a LATER sibling and the selector was dead code.
    The adjacent-sibling combinator below is what actually targets "the
    category right after the heading." */
-.koppelingen-heading + .integration-category { margin-top: calc(2rem - 30px); }
+.koppelingen-heading + .integration-category { margin-top: 22px; }
 .integration-category-heading { font-size: 1.0625rem; font-weight: 700; margin-bottom: 1.25rem; }
 .integration-grid {
   display: grid;
