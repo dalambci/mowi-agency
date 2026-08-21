@@ -619,8 +619,17 @@ main { flex: 1 0 auto; }
    .integration-card-planned dims the logo and shows a "Binnenkort" tag, for
    platforms that are real and named but not yet buildable/selectable by a
    client — never used for genuinely invented/unverified platforms. */
+/* The page has no hero, so #live is the first thing under the header --
+   its own top padding IS "space below the header." Reduced from .section's
+   default 5rem/3.5rem and matched to .integration-category:first-child's
+   margin-top below so header->heading and heading->tiles read even, at
+   both breakpoints (padding-bottom stays the .section default). */
+#live { padding-top: 2rem; }
 .integration-category { margin-top: 3rem; }
-.integration-category:first-child { margin-top: 2.5rem; }
+/* Matches #live's own reduced top padding below, so the gap header->heading
+   and heading->tiles read as one even rhythm instead of the much bigger
+   default .section top padding this page no longer has a hero to justify. */
+.integration-category:first-child { margin-top: calc(2rem - 15px); }
 .integration-category-heading { font-size: 1.0625rem; font-weight: 700; margin-bottom: 1.25rem; }
 .integration-grid {
   display: grid;
@@ -658,8 +667,11 @@ main { flex: 1 0 auto; }
 @media (max-width: 63.9rem) {
   .integration-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+/* Two tiles per row all the way down to phone width, not one -- see the
+   card's own gap/padding shrink alongside it below. */
 @media (max-width: 47.9rem) {
-  .integration-grid { grid-template-columns: minmax(0, 1fr); }
+  .integration-grid { gap: 0.75rem; }
+  .integration-card { padding: 0.75rem; gap: 0.625rem; }
 }
 
 /* Section headings on this page read at the same scale as the blog's own
