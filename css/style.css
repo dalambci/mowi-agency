@@ -624,7 +624,7 @@ main { flex: 1 0 auto; }
    default 5rem/3.5rem and matched to .integration-category:first-child's
    margin-top below so header->heading and heading->tiles read even, at
    both breakpoints (padding-bottom stays the .section default). */
-#live { padding-top: 2rem; }
+#live { padding-top: 42px; }
 .integration-category { margin-top: 3rem; }
 /* Matches #live's own reduced top padding above, so the gap header->heading
    and heading->tiles read as one even rhythm instead of the much bigger
@@ -635,7 +635,7 @@ main { flex: 1 0 auto; }
    .integration-category is a LATER sibling and the selector was dead code.
    The adjacent-sibling combinator below is what actually targets "the
    category right after the heading." */
-.koppelingen-heading + .integration-category { margin-top: 22px; }
+.koppelingen-heading + .integration-category { margin-top: 32px; }
 .integration-category-heading { font-size: 1.0625rem; font-weight: 700; margin-bottom: 1.25rem; }
 .integration-grid {
   display: grid;
