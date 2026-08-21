@@ -116,7 +116,7 @@ body.docs {
 .docs-menu-toggle:hover { background: var(--docs-muted-bg); }
 .docs-wordmark { display: flex; align-items: center; gap: var(--docs-space-2); flex-shrink: 0; }
 .docs-wordmark-icon { height: 22px; width: auto; object-fit: contain; }
-.docs-wordmark-text { height: 13px; width: auto; object-fit: contain; }
+.docs-wordmark-text { height: 22px; width: auto; object-fit: contain; }
 .docs-header-divider { width: 1px; height: 20px; background: var(--docs-border); flex-shrink: 0; }
 .docs-header-label { font-size: 13px; font-weight: 600; color: var(--docs-text-2); white-space: nowrap; }
 .docs-header-actions { margin-left: auto; display: flex; align-items: center; gap: 6px; }
