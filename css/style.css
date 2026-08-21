@@ -624,7 +624,11 @@ main { flex: 1 0 auto; }
    default 5rem/3.5rem and matched to .integration-category:first-child's
    margin-top below so header->heading and heading->tiles read even, at
    both breakpoints (padding-bottom stays the .section default). */
-#live { padding-top: 42px; }
+#live { padding-top: 42px; padding-bottom: 40px; }
+/* Halves the .section default (80px) so the total gap to #binnenkort's own
+   halved padding-top below comes to 80px combined -- 50% of the 160px it
+   was before either override. */
+#binnenkort { padding-top: 40px; }
 .integration-category { margin-top: 3rem; }
 /* Matches #live's own reduced top padding above, so the gap header->heading
    and heading->tiles read as one even rhythm instead of the much bigger
