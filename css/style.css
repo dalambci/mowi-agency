@@ -629,7 +629,7 @@ main { flex: 1 0 auto; }
 /* Matches #live's own reduced top padding below, so the gap header->heading
    and heading->tiles read as one even rhythm instead of the much bigger
    default .section top padding this page no longer has a hero to justify. */
-.integration-category:first-child { margin-top: calc(2rem - 15px); }
+.integration-category:first-child { margin-top: calc(2rem - 30px); }
 .integration-category-heading { font-size: 1.0625rem; font-weight: 700; margin-bottom: 1.25rem; }
 .integration-grid {
   display: grid;
