@@ -544,9 +544,13 @@ main { flex: 1 0 auto; }
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  transition: border-color 0.15s ease;
 }
-.workflow-card:hover { border-color: var(--ink-3); }
+/* No hover state at all (founder's call, 2026-08-22) — the slider cards are
+   deliberately inert on pointer-over. The `transition: border-color` that used
+   to animate the old `:hover { border-color: var(--ink-3) }` went with it:
+   nothing else on .workflow-card changes border-color (global focus is an
+   outline, not a border — see the a/button :focus-visible rule), so leaving
+   the transition behind would have been dead weight. */
 .workflow-card-tag {
   align-self: flex-start;
   font-size: 0.75rem;
@@ -1062,12 +1066,12 @@ main { flex: 1 0 auto; }
    one background treatment for every tab, active or not, so hover never
    reads as a different interaction depending on state. */
 @media (hover: hover) {
-  .pill-tab:hover { background: rgba(18, 17, 16, 0.03); }
+  .pill-tab:hover { background: rgba(18, 17, 16, 0.05); }
 }
 /* Selected state stays the same black border/text as every other tab — only
-   a faint 3% ink wash marks it, no separate grey fill. */
+   a faint 5% ink wash marks it, no separate grey fill. */
 .pill-tab[aria-selected="true"] {
-  background: rgba(18, 17, 16, 0.03);
+  background: rgba(18, 17, 16, 0.05);
 }
 .pill-panels { margin-top: 3rem; }
 .pill-panel[hidden] { display: none; }
