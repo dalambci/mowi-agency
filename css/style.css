@@ -437,6 +437,13 @@ main { flex: 1 0 auto; }
 .hero-sub { font-size: 1.125rem; color: var(--ink-2); margin-top: 1.5rem; max-width: 34rem; }
 .hero-actions { display: flex; align-items: center; justify-content: center; gap: 1.5rem; margin-top: 2rem; flex-wrap: wrap; }
 .hero-visual { min-height: 360px; margin-top: 3.5rem; width: 100%; }
+/* Page-specific hero modifiers (Sal, 2026-08-22) -- index.html/zo-werkt-
+   het.html/templates.html only. security.html also uses the shared .hero
+   component but was NOT part of this request, so it stays on the base
+   5rem/2.75rem sizing untouched. Equal specificity to .hero h1/.hero, so
+   these must stay after those base rules in source order to win. */
+.hero-h1-reduced h1 { font-size: 4rem; } /* 5rem * 0.8 */
+.hero-tight-bottom { padding-bottom: 40px; } /* 5rem (80px) - 40px */
 
 /* --- Integrations marquee ----------------------------------------------------
    Two counter-scrolling rows, matching shapes.co's own logo-wall pattern.
@@ -558,6 +565,8 @@ main { flex: 1 0 auto; }
 @media (max-width: 63.9rem) {
   .hero { padding-top: 2rem; padding-bottom: 3rem; }
   .hero h1 { font-size: 2.75rem; }
+  .hero-h1-reduced h1 { font-size: 2.2rem; } /* 2.75rem * 0.8 */
+  .hero-tight-bottom { padding-bottom: 24px; } /* 3rem (48px) * 0.5 -- same 50% cut as desktop's 80px->40px, not a flat -40px (that left only 8px and read as cramped against the next section, 2026-08-22) */
   .hero-visual { min-height: 220px; }
   .section { padding: 3.5rem 0; }
   .section-head-row { flex-direction: column; align-items: flex-start; gap: 1rem; }
@@ -725,8 +734,26 @@ main { flex: 1 0 auto; }
   padding: 2.5rem 1.5rem;
   gap: 0;
 }
-.ai-diagram-mowi { width: 40px; height: 40px; }
-.ai-diagram-mowi img { width: 100%; height: auto; }
+/* Matches .ai-diagram-lock/.ai-diagram-tool-icon's white-box treatment
+   (Sal, 2026-08-22 -- was bare width:100% before, no background). The fix
+   is also what closes the visual gap to the connector below: mowi-icon.png
+   is a wide 1317x790 source (see Branding in CLAUDE.md), so width:100% in
+   a 40px box rendered it only ~24px tall, leaving empty transparent space
+   below the visible ring before the connector line started -- the DOM gap
+   measured 0px, but it didn't look connected. Flex-centering + a fixed
+   height (not width) keeps the ring's visual weight comparable to the
+   other icons and fills the box the same way they do. */
+.ai-diagram-mowi {
+  width: 40px;
+  height: 40px;
+  background: var(--surface);
+  border-radius: var(--radius-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 2px rgba(18, 17, 16, 0.06);
+}
+.ai-diagram-mowi img { width: auto; height: 20px; }
 .ai-diagram-connector { width: 1px; height: 22px; background: var(--ink-3); opacity: 0.35; }
 .ai-diagram-prompt {
   display: flex;
@@ -815,8 +842,21 @@ main { flex: 1 0 auto; }
   border-top-right-radius: 10px;
 }
 .ai-diagram-tools-wrap { width: 100%; max-width: 22rem; }
-.ai-diagram-tools { display: flex; justify-content: space-between; gap: 0.75rem; }
-.ai-diagram-tool { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+/* Grid with 3 equal 1fr columns and NO gap -- not flex space-between.
+   Root-caused 2026-08-22 (Sal flagged the connector arms landing in empty
+   space instead of on the icons, via screenshot): the arms below are
+   positioned at fixed fractions (100%/6, 5*100%/6) on the assumption the 3
+   icons sit at exact sixths of the row's width. space-between does NOT
+   give equal-thirds positions for non-zero-width items -- it places item 1
+   flush left and item 3 flush right, pushing their CENTERS to roughly 6%/
+   94% instead of 16.7%/83.3%, worse still when sibling label text (removed
+   here) made the items unequal width too. Equal 1fr grid columns give each
+   icon's center an EXACT 1/6, 1/2, 5/6 position regardless of icon or
+   content width, matching the arms' math with zero approximation error --
+   gap must stay 0 for that exact match (any gap shifts the column centers
+   off those fractions). */
+.ai-diagram-tools { display: grid; grid-template-columns: repeat(3, 1fr); }
+.ai-diagram-tool { display: flex; justify-content: center; }
 .ai-diagram-tool-icon {
   width: 42px;
   height: 42px;
@@ -828,7 +868,6 @@ main { flex: 1 0 auto; }
   box-shadow: 0 1px 2px rgba(18, 17, 16, 0.06);
 }
 .ai-diagram-tool-icon img { width: 20px; height: 20px; object-fit: contain; }
-.ai-diagram-tool-name { font-size: 0.75rem; font-weight: 600; color: var(--ink-2); }
 @media (max-width: 47.9rem) {
   .ai-diagram { min-height: 300px; padding: 2rem 1rem; }
   .ai-diagram-bracket, .ai-diagram-tools-wrap { max-width: 18rem; }
