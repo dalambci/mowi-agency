@@ -715,6 +715,18 @@ main { flex: 1 0 auto; }
    vertical centering -- used where the right column is much taller
    (a stack of cards) than the left column (a heading + one line). */
 .split-top { align-items: flex-start; }
+/* Copy column follows the scroll alongside a taller sibling column
+   (security.html's trust-cards section). top must clear the sticky
+   .site-header, or the copy slides underneath it: header sticks at 12px
+   and its bar bottom measures 88px from the viewport top, +16px breathing
+   room = 104px. Requires the .split-top alignment on the same row --
+   a stretched grid item has no room left to travel. Mobile: the split
+   collapses to one column there, where a stuck heading would overlap the
+   cards scrolling past it, so it reverts to static. */
+.split-sticky .split-copy { position: sticky; top: 104px; }
+@media (max-width: 63.9rem) {
+  .split-sticky .split-copy { position: static; }
+}
 
 /* --- AI diagram (security.html) ----------------------------------------------
    Recreation of the reference's "app -> prompt -> lock -> tools" flow, pure
@@ -814,6 +826,12 @@ main { flex: 1 0 auto; }
   top: 0;
   bottom: 0;
   left: 50%;
+  /* translateX(-50%) centers this 1px line ON the 50% mark -- left:50%
+     alone puts its left EDGE there, half a pixel right of the flex-
+     centered connector above it, which rasterized as a visible jog at
+     the seam (Sal's zoomed screenshot, 2026-08-22: connector at
+     x 378.5-379.5, stem at 379-380). */
+  transform: translateX(-50%);
   width: 1px;
   background: var(--ink-3);
   opacity: 0.35;
