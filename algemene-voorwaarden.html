@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260822-7" />
+  <link rel="stylesheet" href="css/style.css?v=20260822-15" />
   <link rel="icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="shortcut icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260804-3" />
@@ -71,13 +71,13 @@
           <li><a href="/templates">Templates</a></li>
           <li><a href="/pricing">Prijzen</a></li>
           <li class="nav-mobile-actions"><a href="https://my.mowi.agency/login" target="_blank" rel="noopener">Inloggen</a></li>
-          <li class="nav-mobile-actions"><a href="/demo" class="btn-primary" data-event="Demo Click">Plan een demo</a></li>
+          <li class="nav-mobile-actions"><a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a></li>
         </ul>
       </nav>
 
       <div class="header-actions">
         <a href="https://my.mowi.agency/login" target="_blank" rel="noopener" class="header-login">Inloggen</a>
-        <a href="/demo" class="btn-primary" data-event="Demo Click">Plan een demo</a>
+        <a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a>
       </div>
 
       <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="main-nav" aria-label="Menu openen">
@@ -130,7 +130,11 @@
     <p><strong>1.3 Agent</strong>: een geautomatiseerd AI-gestuurd proces dat Mowi voor Opdrachtgever inricht en onderhoudt, zoals de E-mailagent of de Call-agent (zie artikel 6).</p>
     <p><strong>1.4 Portal</strong>: het klantportaal van Mowi waarin Opdrachtgever inzage heeft in de werking en resultaten van de Agents.</p>
     <p><strong>1.5 Offerte</strong>: het schriftelijke aanbod van Mowi, met inbegrip van het gekozen prijspakket (zie artikel 4).</p>
-    <p><strong>1.6 Fair Use-grens</strong>: het in artikel 4.4 bedoelde maximale gebruiksvolume per Agent per maand dat is inbegrepen in de vaste maandvergoeding.</p>
+    <!-- DRAFT 2026-08-22, pending founder/legal sign-off — see Decisions log,
+         2026-08-22. Replaces the flat-fee "Fair Use-grens" concept with the
+         credit system now live at mowi.agency/pricing. Not yet reviewed or
+         approved; do not treat as final. -->
+    <p><strong>1.6 Credit</strong>: de eenheid waarin Mowi het gebruik van een Agent uitdrukt en verrekent. Eén credit komt overeen met één door de E-mailagent verwerkte e-mail (zie artikel 4.2 en 4.4).</p>
     <p><strong>1.7 Verwerkersovereenkomst (VWO)</strong>: de separate overeenkomst tussen Partijen die de verwerking van persoonsgegevens door Mowi namens Opdrachtgever regelt (zie artikel 10).</p>
     <p><strong>1.8 Vertrouwelijke Informatie</strong>: alle informatie die Partijen elkaar in het kader van de Overeenkomst verstrekken en die als vertrouwelijk is aangemerkt of waarvan de vertrouwelijkheid uit de aard van de informatie voortvloeit.</p>
     <p><strong>1.9 Werkdag</strong>: een kalenderdag met uitzondering van zaterdag, zondag en in Nederland algemeen erkende feestdagen.</p>
@@ -150,18 +154,18 @@
 
     <h2>Artikel 4 — Prijzen en betaling</h2>
     <p><strong>4.1</strong> Alle door Mowi genoemde prijzen zijn exclusief BTW, tenzij Mowi op grond van de kleineondernemersregeling (KOR) geen BTW mag berekenen.</p>
-    <p><strong>4.2</strong> Voor de in artikel 3.4 genoemde zelfstandig af te sluiten Diensten zijn de actuele maandprijzen gepubliceerd op mowi.agency/pricing en bestaan, op de datum van deze AV, uit:</p>
-    <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Dienst</th><th>Maandvergoeding</th><th>Eenmalige setupvergoeding</th></tr></thead><tbody>
-      <tr><td>E-mail agent</td><td>€40</td><td>Geen — zelf aan te sluiten</td></tr>
-      <tr><td>Call agent</td><td>€80</td><td>Geen — zelf aan te sluiten</td></tr>
+    <p><strong>4.2</strong> Voor de in artikel 3.4 genoemde zelfstandig af te sluiten Dienst geldt een creditsysteem: Opdrachtgever betaalt een vaste maandvergoeding die een aantal credits omvat (zie artikel 1.6). De actuele maandvergoeding en het daarin begrepen aantal credits zijn gepubliceerd op mowi.agency/pricing en bestaan, op de datum van deze AV, uit:</p>
+    <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Dienst</th><th>Maandvergoeding</th><th>Inbegrepen credits</th><th>Eenmalige setupvergoeding</th></tr></thead><tbody>
+      <tr><td>Basis</td><td>€19</td><td>300</td><td>Geen — zelf aan te sluiten</td></tr>
+      <tr><td>Pro</td><td>€79</td><td>1.500</td><td>Geen — zelf aan te sluiten</td></tr>
     </tbody></table></div>
-    <p>De op mowi.agency/pricing gepubliceerde prijslijst geldt totdat Mowi hierover schriftelijk anders beslist. Voor maatwerktrajecten die op aanvraag en na een separate Offerte worden geleverd (zie artikel 3.4), zijn het in die Offerte genoemde pakket en de daarbij horende prijs leidend; die prijzen kunnen wel een setupvergoeding omvatten, zoals in de Offerte gespecificeerd.</p>
-    <p><strong>4.3</strong> De in artikel 4.2 genoemde zelfstandig af te sluiten Diensten kennen geen eenmalige setupvergoeding. Wenst Opdrachtgever de koppeling of inrichting door Mowi te laten uitvoeren in plaats van zelf, dan wordt dit als maatwerk op aanvraag geleverd tegen een in een separate Offerte genoemde vergoeding; die vergoeding is in geen geval restitueerbaar zodra Mowi met de uitvoering is begonnen. Voor overige maatwerktrajecten (artikel 3.4) wordt de wijze van facturering van een eventuele eenmalige setupvergoeding bevestigd via het betalingsschema in de Offerte; ook die vergoeding is in geen geval restitueerbaar zodra Mowi met de bouw van de Agent is begonnen.</p>
-    <p><strong>4.4 Fair use.</strong> De maandvergoeding is inclusief gebruik tot een fair-use-grens per Agent per maand van [nog te bevestigen]. Gebruik boven deze grens wordt tegen een in de Offerte of prijsbijlage genoemd tarief per eenheid in rekening gebracht.</p>
-    <p><strong>4.5</strong> Voor de in artikel 3.4 genoemde zelfstandig af te sluiten Diensten machtigt Opdrachtgever Mowi, op het moment dat Opdrachtgever betaalgegevens toevoegt (dit kan al bij aanmelden, maar uiterlijk vóór het einde van de in artikel 4.8 bedoelde proefperiode), tot automatische maandelijkse incasso (via iDEAL-machtiging of SEPA-doorlopende machtiging, verwerkt door de betaaldienstverlener van Mowi) van de op dat moment geldende maandvergoeding. Mislukt een incasso, dan onderneemt Mowi een of meerdere nieuwe incassopogingen en informeert Mowi Opdrachtgever hierover; blijft de incasso binnen de in het dashboard getoonde respijttermijn uit, dan is Mowi gerechtigd de toegang tot de Diensten op te schorten totdat de betaalmethode is bijgewerkt en het openstaande bedrag is voldaan. Voor maatwerktrajecten (artikel 3.4) vindt betaling plaats binnen 14 dagen na factuurdatum, tenzij in de Offerte anders is bepaald; bij te late betaling is Opdrachtgever, zonder dat ingebrekestelling is vereist, de wettelijke handelsrente ex art. 6:119a BW verschuldigd, met een minimum van €40 aan incassokosten, en is Mowi bij een betalingsachterstand van meer dan 30 dagen gerechtigd de Diensten op te schorten, met inachtneming van een aanzegtermijn van 7 dagen.</p>
+    <p>Credits boven het inbegrepen aantal koopt Opdrachtgever desgewenst zelf bij via het dashboard, tegen de daar vóór de aankoop getoonde prijs per credit-pakket (zie artikel 4.4). De op mowi.agency/pricing gepubliceerde prijzen gelden totdat Mowi hierover schriftelijk anders beslist. Voor maatwerktrajecten die op aanvraag en na een separate Offerte worden geleverd (zie artikel 3.4) — waaronder het platform/de configurator — zijn het in die Offerte genoemde pakket en de daarbij horende prijs leidend; die prijzen kunnen wel een setupvergoeding omvatten, zoals in de Offerte gespecificeerd.</p>
+    <p><strong>4.3</strong> De in artikel 4.2 genoemde zelfstandig af te sluiten Dienst kent geen eenmalige setupvergoeding. Wenst Opdrachtgever de koppeling of inrichting door Mowi te laten uitvoeren in plaats van zelf, dan wordt dit als maatwerk op aanvraag geleverd tegen een in een separate Offerte genoemde vergoeding; die vergoeding is in geen geval restitueerbaar zodra Mowi met de uitvoering is begonnen. Voor overige maatwerktrajecten (artikel 3.4) wordt de wijze van facturering van een eventuele eenmalige setupvergoeding bevestigd via het betalingsschema in de Offerte; ook die vergoeding is in geen geval restitueerbaar zodra Mowi met de bouw van de Agent is begonnen.</p>
+    <p><strong>4.4 Credits en bijkopen.</strong> Credits boven het in artikel 4.2 genoemde inbegrepen aantal koopt Opdrachtgever zelf bij via het dashboard, tegen de daar vóór de aankoop getoonde prijs per credit-pakket. Zijn de credits van een lopende maand op en zijn er geen credits bijgekocht, dan pauzeert Mowi de Dienst totdat Opdrachtgever credits heeft bijgekocht of de eerstvolgende maandelijkse credit-toekenning ingaat; de Overeenkomst en de reeds ingerichte configuratie blijven daarbij behouden.</p>
+    <p><strong>4.5</strong> Voor de in artikel 3.4 genoemde zelfstandig af te sluiten Dienst machtigt Opdrachtgever Mowi, op het moment dat Opdrachtgever betaalgegevens toevoegt (dit kan al bij aanmelden, maar uiterlijk vóór het einde van de in artikel 4.8 bedoelde proefperiode), tot (a) automatische maandelijkse incasso (via iDEAL-machtiging of SEPA-doorlopende machtiging, verwerkt door de betaaldienstverlener van Mowi) van de op dat moment geldende maandvergoeding, en (b) eenmalige incasso van credit-aankopen die Opdrachtgever zelf in het dashboard initieert (artikel 4.4), telkens ter hoogte van het door Opdrachtgever bij die aankoop gekozen bedrag. Mislukt een incasso, dan onderneemt Mowi een of meerdere nieuwe incassopogingen en informeert Mowi Opdrachtgever hierover; blijft de incasso binnen de in het dashboard getoonde respijttermijn uit, dan is Mowi gerechtigd de toegang tot de Diensten op te schorten totdat de betaalmethode is bijgewerkt en het openstaande bedrag is voldaan. Voor maatwerktrajecten (artikel 3.4) vindt betaling plaats binnen 14 dagen na factuurdatum, tenzij in de Offerte anders is bepaald; bij te late betaling is Opdrachtgever, zonder dat ingebrekestelling is vereist, de wettelijke handelsrente ex art. 6:119a BW verschuldigd, met een minimum van €40 aan incassokosten, en is Mowi bij een betalingsachterstand van meer dan 30 dagen gerechtigd de Diensten op te schorten, met inachtneming van een aanzegtermijn van 7 dagen.</p>
     <p><strong>4.6</strong> Mowi mag de prijzen jaarlijks per 1 januari indexeren conform de CBS Consumentenprijsindex (alle huishoudens), voor het eerst in het tweede contractjaar. De indexatie is nooit negatief en wordt ten minste 2 maanden vooraf aangekondigd.</p>
     <p><strong>4.7</strong> Prijswijzigingen anders dan de in artikel 4.6 bedoelde indexatie worden ten minste 2 maanden vooraf schriftelijk aangekondigd. Opdrachtgever heeft in dat geval het recht de Overeenkomst op te zeggen tegen de datum waarop de wijziging in werking zou treden.</p>
-    <p><strong>4.8 Eerste 14 dagen gratis, geen betaalgegevens vereist om te starten.</strong> Bij het zelfstandig aansluiten van een in artikel 3.4 genoemde Dienst kan Opdrachtgever direct beginnen zonder betaalgegevens op te geven; de eerste 14 dagen na aanmelden gelden als gratis proefperiode. Voegt Opdrachtgever binnen deze proefperiode betaalgegevens toe, dan wordt de daarbij verstrekte machtiging uitsluitend gebruikt voor een verificatiebetaling van €0,01, niet voor de maandvergoeding, en gaat de Overeenkomst na de proefperiode automatisch over in een doorlopend maandabonnement tegen de op dat moment geldende, in artikel 4.2 bedoelde maandvergoeding, met automatische incasso conform artikel 4.5 — tenzij Opdrachtgever voor het einde van de proefperiode opzegt. Heeft Opdrachtgever bij het einde van de proefperiode nog geen betaalgegevens toegevoegd, dan is Mowi gerechtigd de toegang tot de Diensten op te schorten totdat dit alsnog is gebeurd; de Overeenkomst en de reeds ingerichte configuratie blijven daarbij behouden en de toegang wordt hersteld zodra betaalgegevens zijn toegevoegd.</p>
+    <p><strong>4.8 Gratis credits, geen betaalgegevens vereist om te starten.</strong> Bij het zelfstandig aansluiten van de in artikel 3.4 genoemde Dienst ontvangt Opdrachtgever eenmalig een aantal gratis credits (het actuele aantal is gepubliceerd op mowi.agency/pricing) zonder dat betaalgegevens hoeven te worden opgegeven. Deze gratis credits zijn geldig tot en met [nog te bepalen: geldigheidsduur/vervaldatum]. Zijn de gratis credits verbruikt of verlopen, dan is Mowi gerechtigd de toegang tot de Dienst op te schorten totdat Opdrachtgever betaalgegevens toevoegt en overstapt op het in artikel 4.2 bedoelde betaalde abonnement, met automatische incasso conform artikel 4.5; de Overeenkomst en de reeds ingerichte configuratie blijven daarbij behouden en de toegang wordt hersteld zodra betaalgegevens zijn toegevoegd en, waar van toepassing, credits zijn bijgekocht.</p>
 
     <h2>Artikel 5 — Duur, opzegging en beëindiging</h2>
     <p><strong>5.1</strong> De Overeenkomst wordt aangegaan voor onbepaalde tijd en is maandelijks opzegbaar, zoals gepubliceerd op mowi.agency/pricing.</p>
@@ -241,7 +245,7 @@
 
       <div class="footer-cta">
         <h2 class="footer-cta-title">Vertel het<br />Mowi regelt het</h2>
-        <a href="/demo" class="btn-primary" data-event="Demo Click">Plan een demo</a>
+        <a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a>
       </div>
 
       <div class="footer-panel">
@@ -310,6 +314,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=20260822-7"></script>
+  <script src="js/main.js?v=20260822-15"></script>
 </body>
 </html>

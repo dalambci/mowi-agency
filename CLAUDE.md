@@ -297,7 +297,9 @@ of the old "Resources" dropdown to a flat top-level link — both reference site
 first-class nav, not buried; `/docs/`) → **"About"** (`/over`) → **"Blog"** (flat link,
 `/blog/` — with Docs promoted out, a one-item "Resources" dropdown was pointless, so it was
 removed entirely) → right-aligned `.header-actions`: **"Login"** (external,
-`https://my.mowi.agency/login`, `target="_blank"`) + **"Plan een demo"** pill CTA. There is no
+`https://my.mowi.agency/login`, `target="_blank"`) + **"Start gratis"** pill CTA (superseded
+2026-08-22, later same day — was ~~"Plan een demo"~~; see the pricing bullet below for the
+sitewide CTA flip and why). There is no
 separate dashboard-login icon button (folded into "Login"). **"Receptenboek" is gone from the
 nav entirely** — see "Content & positioning" below for where that content went. The footer
 still uses Dutch labels, 4 columns (brand / Platform / Bronnen / Bedrijf & Contact) — header
@@ -501,43 +503,103 @@ resurrect any of the old label names above for the current nav.
   trainingen are supporting/secondary services." Power BI dashboards, trainingen, and the
   original "Cases" page were dropped entirely as part of that rebrand — don't reintroduce
   them as services or nav items; their old pages remain redirect stubs (see Folder structure).
-- **Pricing / business model — unchanged by v2:** the site is **demo-gated with no published
-  self-serve prices**. There is no `/pricing` or `/tarieven` content page, no `€40`/`€80`
-  self-serve monthly rates displayed anywhere live, no "Start gratis" / "14 dagen gratis
-  proefperiode" signup CTA, and no `my.mowi.agency/aanmelden` link on any real page. The
-  primary CTA sitewide is **"Plan een demo"**, linking to `/demo` (a page with a Calendly
-  booking widget, currently the literal `[CALENDLY_URL]` placeholder — no real Calendly link
-  has been supplied yet, see Placeholders below). Login (`https://my.mowi.agency/login`) is
-  still linked, for existing customers. `zo-werkt-het.html` now carries an explicit,
-  plain-Dutch explanation of *why* there's no price list (grounded in the same real FAQ
-  answer used sitewide — pricing depends on what's automated, discussed honestly at the demo,
-  nobody pays for building blocks they don't use — no invented numbers or ranges anywhere).
-  **Known, already-flagged contradiction (not yet fixed, fast-follow per the founder, v2
-  deliberately left this exactly as v1 left it):** `algemene-voorwaarden.html` (arts. 4.2,
-  4.5, 4.8, 5.1) still describes a self-serve €40/€80-per-agent monthly pricing model with a
-  14-day free trial and references a live price list at `mowi.agency/pricing` that no longer
-  exists as a real page. Don't silently rewrite the AV's legal text without founder/legal
-  sign-off, but don't reintroduce the old pricing model to the rest of the site either — the
-  AV is the one page still lagging behind on purpose. The 3 existing blog posts also still
-  contain old self-serve pricing/CTA copy (`€1.000` setup + `€50`/maand in one post — visible
-  in that post's own text/frontmatter) — also a known, deliberately-not-rewritten editorial
-  gap (blog *prose* is out of scope for chrome-only regeneration via `build-blog.js`; v2's
-  Stage 7 did remove one piece of *template* chrome that had duplicated this problem — a
-  hardcoded per-article "Start gratis — 14 dagen" CTA block that every post used to get
-  regardless of its own body text — but left the post bodies themselves untouched). Flag
-  rather than silently edit post bodies.
-- **Masterplan amendment 2026-08-19 (vault — adopted by the founder): two-motion model.** The
-  business model is no longer demo-gated-only: the hardened agents (E-mail/Call) will sell
-  **self-serve** again as an acquisition wedge, cheap and **usage-priced via a credit system**
-  (no per-agent fee — the €40/€80 per-agent prices stay dead either way, don't reintroduce
-  them), while the platform/configurator stays demo-gated premium with no published price.
-  **The site itself does not change yet**: no self-serve CTA, signup link, or pricing goes
-  live until the credit billing exists (masterplan roadmap Phase 2b, dashboard-side work).
-  When that lands, the plan is a *secondary* "Zelf starten" path on the relevant workflow
-  panels — "Plan een demo" stays the primary CTA sitewide — and this section gets updated to
-  match. Until then everything in the bullet above remains the live reality; equally, don't
-  "fix" a future self-serve CTA away by citing the older demo-gated-only wording. Full
-  rationale: the vault's `Mowi - Masterplan — MKB-OS.md` §5 + Decisions log 2026-08-19.
+- **Pricing / business model — tiers current as of 2026-08-22 (later same day, see next
+  bullet).** `/pricing` H1 is **"Betaal per gebruik"**. Four tiers: **Start gratis** (€0, 30
+  credits), **Basis** (€19/mnd, 300 credits), **Pro** (€79/mnd, 1.500 credits), **Custom** (op
+  maat, na een demo). Start gratis/Basis/Pro sit in one `.tier-grid`, differentiated by credit
+  balance only — no agent- or workflow-name gating on any of them, per the unified-access
+  amendment below. **Custom lives in its own band (`#pricing-custom`), not the grid** — moved
+  out 2026-08-22 so the demo-gated tier structurally never sits beside the credit-priced cards,
+  making the masterplan's packaging rule physically true rather than visually implied. Every
+  self-serve CTA (Start gratis, Basis, Aan de slag ×2) links to
+  `https://my.mowi.agency/aanmelden`; Custom links to `/demo`.
+  **Superseded 2026-08-22 (later still the same day) — kept for history:** ~~"Plan een demo" is
+  still the primary CTA in the header/footer chrome sitewide; the pricing page is where the
+  self-serve path now lives.~~ See the CTA-flip bullet below.
+  **Deliberately one new tier, not the two originally asked for** — a volume-discounted
+  mid-tier makes a customer's usage cost Mowi *less* revenue than the same usage on Basis plus
+  top-ups would, which cuts against the "profit scales with usage" goal; a second published
+  breakpoint would also be a second contractually-binding number (AV art. 4.2) set with zero
+  real usage data, since credits are still dormant in production. **Support-tier
+  differentiation (dedicated contact, faster response) was considered and explicitly
+  rejected** — Mowi is a confirmed eenmanszaak, the masterplan is BINDING that Motion A support
+  stays docs-first with an async backstop and capacity valves are "price and waitlist, never
+  concierge-for-free," and the SLA annex (vault `Legal/contracts/08-Dienstbeschrijving-SLA.md`)
+  is untiered and overrides marketing copy on conflict — "Vaste contactpersoon" stays exclusive
+  to Custom. Full reasoning and the margin math behind it: masterplan §5 and the Decisions log,
+  2026-08-22.
+- **Sitewide primary CTA — current, 2026-08-22 (later still the same day).** "Start gratis" (→
+  `https://my.mowi.agency/aanmelden`) replaced "Plan een demo" as the primary CTA everywhere:
+  header `.header-actions`, mobile nav, and the footer CTA block, across all 16 root pages plus
+  the blog chrome template in `build-blog.js`. This reverses the "demo stays primary sitewide"
+  call from earlier the same day (see the superseded note above) — a deliberate second decision,
+  not a bug. **"Plan een demo" now survives in exactly one place: the Custom band on
+  `/pricing`.** The footer's "Contact sales" text link (→ `/demo`) was kept everywhere as a
+  second, lower-emphasis demo entry point — don't remove it if editing any footer.
+  **Widens an existing exposure, doesn't create a new one:** every "Start gratis" click
+  sitewide, not just `/pricing`'s, now lands on the old retired per-agent trial signup until
+  `CREDITS_ENABLED` flips (see the exposure note above). **`/demo` is still a blank page**
+  (chrome only, empty `<main>` — same status as `over.html`, `templates.html`, `workflows.html`)
+  — after this change it's reachable from only two links on the entire site, which makes
+  building it a more urgent open item than it was that morning. Building `/demo` was
+  deliberately treated as separate follow-up work, not a blocker for this change.
+  Custom's copy was also rewritten the same session: qualifier line "Voor wie het volledig uit
+  handen wil geven" (Sal's own wording), feature list gained "Advies over wat u het beste kunt
+  automatiseren" and "Wij richten het in, u hoeft zelf niets te doen", dropped "Alles uit Pro."
+  Sal's original framing was "custom advies + implementatie, volledige ontzorging" — shipped
+  "wij richten het in" instead of "volledige ontzorging" specifically, because that exact phrase
+  has zero prior occurrences anywhere in the vault and reads as a service-level promise that
+  the untiered `Legal/contracts/08-Dienstbeschrijving-SLA.md` (states it overrides marketing
+  copy on conflict) doesn't back. Sal also floated "€200 minimum" for Custom in conversation;
+  **not published** — it contradicts the vault's own RECOMMENDED €99–149/mnd Motion B launch
+  figure and was never logged as a confirmation, so Motion B pricing stays unconfirmed and off
+  the page either way, per the packaging rule. Full reasoning: masterplan §5's "Amendment
+  2026-08-22 (later still)" and the Decisions log, 2026-08-22 (second pricing entry that day).
+  **Superseded 2026-08-22 (earlier the same day) — kept for history:** ~~three tiers (Proef,
+  Agents, Platform), H1 "Eenvoudige prijzen". Proef and Agents both link to
+  `https://my.mowi.agency/aanmelden`; Platform links to `/demo` and deliberately carries no
+  price next to it (the masterplan's own packaging rule — platform pricing never sits beside
+  agent pricing).~~ Renamed Proef→"Start gratis" and Platform→"Custom" later the same day,
+  before the Basis/Pro restructuring above superseded the tier count itself.
+  **Deliberate, founder-approved exposure, not an oversight:** this was published *ahead* of
+  the backend — `config('credits.enabled')` is still `false` in production as of this build,
+  so a signup today still runs the old retired per-agent trial (`RegistrationController` /
+  `TrialStart`), not the credit system the page describes. The two self-serve CTAs are a
+  one-line change to point elsewhere once `CREDITS_ENABLED` flips. The trial figure ("30
+  gratis credits", no day count) is a proposal, not a vault-confirmed number — the credit
+  model itself never defined a trial allocation. The other figures (€19/mnd, 300 credits,
+  1 e-mail = 1 credit, 1 belminuut ≈ 10 credits) were confirmed by Sal the same day; see the
+  masterplan-amendment bullet below and the Decisions log, 2026-08-22.
+  **Real, still-open contradiction this creates:** `algemene-voorwaarden.html` (arts. 3.4, 4.2,
+  4.4, 4.5, 4.8, 5.1) still describes the *old* self-serve €40/€80-per-agent model with a
+  14-day free trial, and art. 4.2 makes `mowi.agency/pricing` the contractually *leading* price
+  list — so the live page and the live terms currently disagree about what the prices even
+  are. A draft AV amendment was prepared the same session for founder/legal sign-off; until
+  that lands and is approved, **do not silently rewrite the AV's legal text**, and don't treat
+  the AV's numbers as current elsewhere on the site. `/demo` still points at the literal
+  `[CALENDLY_URL]` placeholder (see Placeholders below). The 3 existing blog posts also still
+  contain old self-serve pricing/CTA copy (`€1.000` setup + `€50`/maand in one post) — a known,
+  deliberately-not-rewritten editorial gap (blog *prose* is out of scope for chrome-only
+  regeneration via `build-blog.js`). Flag rather than silently edit post bodies.
+  **Superseded 2026-08-22 — kept for history, do not follow:** ~~the site is demo-gated with no
+  published self-serve prices; there is no `/pricing` content page, no `€40`/`€80` self-serve
+  monthly rates displayed anywhere live, no signup CTA, and no `my.mowi.agency/aanmelden` link
+  on any real page.~~ `zo-werkt-het.html`'s own "why there's no price list" explainer was
+  planned under that era and was never actually written before this page superseded the need
+  for it — its placeholder TODO comment was removed the same session, not filled in.
+- **Masterplan amendment 2026-08-19 (vault — adopted by the founder): two-motion model.
+  Figures confirmed 2026-08-22.** The business model is no longer demo-gated-only: the
+  hardened agents (E-mail/Call) sell **self-serve** as an acquisition wedge, cheap and
+  **usage-priced via a credit system** (no per-agent fee — the €40/€80 per-agent prices stay
+  dead either way), while the platform/configurator stays demo-gated premium with no published
+  price. **Confirmed figures (2026-08-22, no longer "RECOMMENDED"):** €19/mnd including 300
+  credits; 1 verwerkte e-mail = 1 credit; 1 belminuut ≈ 10 credits. Trial allocation ("30
+  gratis credits") is still a proposal, not vault-confirmed — see the pricing bullet above.
+  **Superseded 2026-08-22 — kept for history:** ~~the site itself does not change yet: no
+  self-serve CTA, signup link, or pricing goes live until the credit billing exists.~~ Sal's
+  explicit call was to publish `/pricing` now, ahead of `CREDITS_ENABLED` — see the pricing
+  bullet above for the exposure this creates and why it was accepted anyway. Full rationale:
+  the vault's `Mowi - Masterplan — MKB-OS.md` §5 + Decisions log, 2026-08-19 and 2026-08-22.
 
 ## Design system
 - **Current, v2 (2026-08-18) — monochrome.** `css/style.css` implements a **black-and-white

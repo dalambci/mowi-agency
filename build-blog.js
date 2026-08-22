@@ -289,13 +289,13 @@ function headerHtml() {
           <li><a href="/templates">Templates</a></li>
           <li><a href="/pricing">Prijzen</a></li>
           <li class="nav-mobile-actions"><a href="https://my.mowi.agency/login" target="_blank" rel="noopener">Inloggen</a></li>
-          <li class="nav-mobile-actions"><a href="/demo" class="btn-primary" data-event="Demo Click">Plan een demo</a></li>
+          <li class="nav-mobile-actions"><a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a></li>
         </ul>
       </nav>
 
       <div class="header-actions">
         <a href="https://my.mowi.agency/login" target="_blank" rel="noopener" class="header-login">Inloggen</a>
-        <a href="/demo" class="btn-primary" data-event="Demo Click">Plan een demo</a>
+        <a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a>
       </div>
 
       <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="main-nav" aria-label="Menu openen">
@@ -312,7 +312,7 @@ function footerHtml() {
 
       <div class="footer-cta">
         <h2 class="footer-cta-title">Vertel het<br />Mowi regelt het</h2>
-        <a href="/demo" class="btn-primary" data-event="Demo Click">Plan een demo</a>
+        <a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a>
       </div>
 
       <div class="footer-panel">
@@ -544,7 +544,7 @@ function buildSitemap(posts) {
   // /cases, /agentic-ai, /agents/email-triage, /agents/phone-agent,
   // /contact) — a noindex stub should never be in the sitemap.
   const staticPages = [
-    "", "workflows", "receptenboek", "koppelingen", "security", "over", "zo-werkt-het", "demo", "docs/",
+    "", "workflows", "receptenboek", "koppelingen", "security", "pricing", "over", "zo-werkt-het", "demo", "docs/",
   ];
   // docs/, receptenboek/ are read from disk rather than hand-listed, so a new
   // page in either folder is in the sitemap the next time this script runs —

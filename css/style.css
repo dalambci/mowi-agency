@@ -690,6 +690,18 @@ main { flex: 1 0 auto; }
 .page-heading { font-size: 1.375rem; font-weight: 700; line-height: 1.2; }
 .page-body { font-size: 1rem; color: var(--ink-2); margin-top: 0.75rem; max-width: 40rem; }
 .page-cta { margin-top: 1.5rem; }
+/* Left-aligned hero matching .blog-article h1/p exactly (2rem/700/1.15,
+   plain ink-2 body) -- for pages that want a blog-post-style opener
+   instead of the sitewide centered .hero. */
+.page-hero-heading { font-size: 2rem; font-weight: 700; line-height: 1.15; }
+.page-hero-body { font-size: 1rem; color: var(--ink-2); margin-top: 0.75rem; max-width: 40rem; }
+/* Halved again 2026-08-22 (Sal: "reduce the hero spacing above and below
+   with 50%") -- measured via getBoundingClientRect() before editing:
+   padding-top was still the untouched .section default (80px), padding-
+   bottom was already 40px from the prior halving. Both cut in half again:
+   80px->40px top, 40px->20px bottom. */
+#pricing-hero { padding-top: 40px; padding-bottom: 20px; }
+#pricing-tiers { padding-top: 20px; }
 /* Pins a .split row's short column to the top instead of the default
    vertical centering -- used where the right column is much taller
    (a stack of cards) than the left column (a heading + one line). */
@@ -753,41 +765,58 @@ main { flex: 1 0 auto; }
   color: var(--ink);
 }
 .ai-diagram-lock svg { width: 16px; height: 16px; }
-.ai-diagram-tools-wrap { width: 100%; max-width: 22rem; margin-top: 22px; padding-top: 22px; }
-.ai-diagram-tools {
+
+/* Bracket: one continuous line from the lock down to all 3 tools, with a
+   real rounded corner at each turn -- the classic CSS trick, not three
+   separate line pieces glued together. .ai-diagram-bracket-stem is ONE
+   line spanning the full height of the box: its top half is the lock's own
+   connector, its bottom half continues straight down to the middle tool
+   (which sits on the same center line, so it needs no turn at all). Each
+   arm is an L-shaped box with only two borders drawn (top+left or
+   top+right) and border-radius on exactly that shared corner -- the corner
+   IS the rounded turn, precisely, with no separate curve asset needed. */
+.ai-diagram-connector-to-bracket { width: 1px; height: 22px; background: var(--ink-3); opacity: 0.35; }
+.ai-diagram-bracket {
   position: relative;
-  display: flex;
-  justify-content: space-between;
-  gap: 0.75rem;
+  width: 100%;
+  max-width: 22rem;
+  height: 32px;
 }
-.ai-diagram-tools::before {
-  content: "";
+.ai-diagram-bracket-stem {
   position: absolute;
-  top: -22px;
-  left: calc(100% / 6);
-  right: calc(100% / 6);
-  height: 1px;
-  background: var(--ink-3);
-  opacity: 0.35;
-}
-.ai-diagram-tool {
-  position: relative;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-}
-.ai-diagram-tool::before {
-  content: "";
-  position: absolute;
-  top: -22px;
+  top: 0;
+  bottom: 0;
   left: 50%;
   width: 1px;
-  height: 22px;
   background: var(--ink-3);
   opacity: 0.35;
 }
+.ai-diagram-bracket-arm {
+  position: absolute;
+  top: 50%;
+  bottom: 0;
+  border-color: var(--ink-3);
+  opacity: 0.35;
+  border-style: solid;
+  border-width: 0;
+}
+.ai-diagram-bracket-arm-left {
+  left: calc(100% / 6);
+  right: 50%;
+  border-top-width: 1px;
+  border-left-width: 1px;
+  border-top-left-radius: 10px;
+}
+.ai-diagram-bracket-arm-right {
+  left: 50%;
+  right: calc(100% / 6);
+  border-top-width: 1px;
+  border-right-width: 1px;
+  border-top-right-radius: 10px;
+}
+.ai-diagram-tools-wrap { width: 100%; max-width: 22rem; }
+.ai-diagram-tools { display: flex; justify-content: space-between; gap: 0.75rem; }
+.ai-diagram-tool { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
 .ai-diagram-tool-icon {
   width: 42px;
   height: 42px;
@@ -802,7 +831,7 @@ main { flex: 1 0 auto; }
 .ai-diagram-tool-name { font-size: 0.75rem; font-weight: 600; color: var(--ink-2); }
 @media (max-width: 47.9rem) {
   .ai-diagram { min-height: 300px; padding: 2rem 1rem; }
-  .ai-diagram-tools-wrap { max-width: 18rem; }
+  .ai-diagram-bracket, .ai-diagram-tools-wrap { max-width: 18rem; }
 }
 
 /* --- Trust cards (security.html) ---------------------------------------------
@@ -852,6 +881,92 @@ main { flex: 1 0 auto; }
 .standards-card p { font-size: 0.875rem; color: var(--ink-2); }
 @media (max-width: 63.9rem) {
   .standards-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* --- Tier grid (pricing.html) -------------------------------------------------
+   Left-aligned card content (not .standards-card's centered treatment) with
+   the feature list set to flex:1 and the CTA pinned to the card's bottom
+   edge, so all three buttons share one baseline regardless of feature-list
+   length -- the exact bug the 2026-08-11 decisions-log entry records fixing
+   on the old pricing cards, deliberately not reintroduced here. */
+.tier-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+  align-items: stretch;
+}
+.tier-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: 2rem 1.75rem;
+}
+.tier-card-highlight { border: 1px solid var(--ink); }
+.tier-card-name { font-size: 1.0625rem; font-weight: 700; }
+.tier-price { margin-top: 1.25rem; display: flex; align-items: baseline; gap: 0.25rem; }
+.tier-price-amount { font-size: 2rem; font-weight: 700; line-height: 1; }
+.tier-price-period { font-size: 0.9375rem; color: var(--ink-2); }
+.tier-price-sub { font-size: 0.8125rem; color: var(--ink-3); margin-top: 0.375rem; }
+/* "Who this fits" line -- turns an abstract credit count into something a
+   business owner can recognize about themselves, added alongside the Pro
+   tier so a first-time visitor has more than the number to size against. */
+.tier-profile { font-size: 0.8125rem; color: var(--ink-3); margin-top: 0.25rem; }
+.tier-features { flex: 1; margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.625rem; }
+.tier-features li { font-size: 0.9375rem; color: var(--ink-2); padding-left: 1.125rem; position: relative; }
+.tier-features li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ink-3);
+}
+.tier-cta { margin-top: 1.75rem; width: 100%; }
+@media (max-width: 63.9rem) {
+  .tier-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* --- Custom band (pricing.html) -------------------------------------------
+   Wide tinted band, not a card in .tier-grid -- see the HTML comment above
+   #pricing-custom for why. Reuses .tier-card-name/.tier-price/.tier-
+   features for visual consistency with the grid above; only the outer
+   wrapper and the horizontal layout are new. */
+#pricing-custom { padding-top: 20px; }
+/* Width matches exactly 2 of .tier-grid's 3 columns (card+gap+card), so the
+   band's left/right edges line up with the tier-grid's card 1/card 2 seam
+   above it -- a deliberate vertical-alignment composition, not just "looks
+   about card-sized". Derived from the same math as the grid: 3 equal
+   columns with 2 internal 1.5rem gaps, so 2 columns' span is
+   (100% - 2*1.5rem) * 2/3 + 1*1.5rem (the two columns' share of the
+   remaining space, plus the one gap between them). No margin:auto, so it
+   stays left-aligned against the container edge like card 1.
+
+   Grid, not flex: text sits in an auto-sized first column, the CTA gets
+   its own 1fr column and is centered WITHIN that leftover space
+   (justify-self:center on .tier-cta below) -- rather than flush against
+   the text (a fixed gap) or flush against the band's far edge
+   (space-between, measured 2026-08-22 to leave 54% of the band as dead
+   air at the old, wider layout). column-gap is a minimum floor only; the
+   1fr track supplies the real spacing. */
+.tier-custom {
+  background: var(--band);
+  border-radius: var(--radius-card);
+  padding: 3rem;
+  width: calc((100% - 3rem) * 2 / 3 + 1.5rem);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  column-gap: 1.5rem;
+}
+.tier-custom-features { margin-top: 1.25rem; flex: none; }
+.tier-custom .tier-cta { width: auto; justify-self: center; margin-top: 0; }
+@media (max-width: 63.9rem) {
+  .tier-custom { grid-template-columns: 1fr; padding: 2rem; }
+  .tier-custom .tier-cta { justify-self: stretch; width: 100%; margin-top: 1.5rem; }
 }
 
 /* --- Business-area tab switcher -----------------------------------------------

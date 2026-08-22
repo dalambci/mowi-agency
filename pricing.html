@@ -4,11 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mowi — Prijzen</title>
-  <meta name="robots" content="noindex" />
+  <meta name="description" content="Betaal voor wat u gebruikt. Agents en workflows werken op hetzelfde tegoed, credits per gebruik. Voor maatwerk plant u een demo." />
+  <link rel="canonical" href="https://mowi.agency/pricing" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260822-7" />
+  <link rel="stylesheet" href="css/style.css?v=20260822-15" />
   <link rel="icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="shortcut icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260804-3" />
@@ -71,13 +72,13 @@
           <li><a href="/templates">Templates</a></li>
           <li><a aria-current="page" href="/pricing">Prijzen</a></li>
           <li class="nav-mobile-actions"><a href="https://my.mowi.agency/login" target="_blank" rel="noopener">Inloggen</a></li>
-          <li class="nav-mobile-actions"><a href="/demo" class="btn-primary" data-event="Demo Click">Plan een demo</a></li>
+          <li class="nav-mobile-actions"><a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a></li>
         </ul>
       </nav>
 
       <div class="header-actions">
         <a href="https://my.mowi.agency/login" target="_blank" rel="noopener" class="header-login">Inloggen</a>
-        <a href="/demo" class="btn-primary" data-event="Demo Click">Plan een demo</a>
+        <a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a>
       </div>
 
       <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="main-nav" aria-label="Menu openen">
@@ -87,7 +88,161 @@
   </header>
 
   <main>
-    <!-- Blank by design. Real content comes later, page by page. -->
+
+    <!-- ================= Hero =================
+         Left-aligned, blog-post H1 scale (.page-hero-heading/-body match
+         .blog-article h1/p exactly) rather than the sitewide centered
+         .hero -- Sal's call for this page specifically. -->
+    <section class="section" id="pricing-hero">
+      <div class="container">
+        <h1 class="page-hero-heading">Betaal per gebruik</h1>
+        <p class="page-hero-body">Eén credit staat gelijk aan één verwerkte e-mail. Bellen en workflows verbruiken meer credits per gebruik. Belminuten volgen zodra de call agent op de site verkrijgbaar is.</p>
+        <p class="page-hero-body">U kunt altijd bijkopen of overstappen. Uw configuratie blijft staan.</p>
+      </div>
+    </section>
+
+    <!-- ================= Tier grid =================
+         Trial allocation ("30 gratis credits", no day count) is a proposal,
+         not a vault-confirmed figure -- the credit model never defined a
+         trial and the 14-day framing is formally retired (masterplan §5).
+         The other figures (€19/mnd, 300 credits, 1 e-mail = 1 credit, 1
+         belminuut ≈ 10 credits) are the vault's own recommended figures,
+         confirmed by Sal 2026-08-22 when this page was built -- see the
+         Decisions log and the masterplan §5 update the same day.
+         Both self-serve CTAs point at signup ahead of CREDITS_ENABLED going
+         true in production (Sal's explicit call, publish-now) -- a real
+         signup today still runs the old retired per-agent trial model until
+         that flag flips. Custom CTA stays /demo, never signup -- the
+         masterplan's packaging rule (platform pricing never sits next to
+         agent pricing) is why there's no price on that card at all.
+         Unified access model added 2026-08-22 (same day, later in the
+         session): Sal's explicit call was that Start gratis/Agents should
+         not gate by agent name ("should not mention the agents apart from
+         each other") -- access to every agent AND every workflow is the
+         same for both tiers, only the credit balance differs. Workflows now
+         draw from the same credit pool as agents ("same counts for the
+         workflows... doesnt matter"). Custom's differentiator shifts from
+         "has workflows" to "has bespoke-built workflows + own-system
+         integrations + a dedicated contact" -- see Decisions log.
+
+         Second tier added 2026-08-22 (still later the same day): "Agents"
+         renamed to "Basis" (the name stopped describing anything once every
+         tier grants every agent) and a new "Pro" card (€79/1.500 credits)
+         inserted above it. Deliberately ONE new tier, not the two Sal
+         initially asked for -- margin math showed volume-discount tiers
+         reduce usage profit (a customer on Pro pays LESS than the same
+         usage on Basis+top-ups would cost them), which cuts against Sal's
+         own stated goal of profit scaling with usage. Two tiers would also
+         have meant a third published, contractually-binding (AV art. 4.2)
+         breakpoint set with zero real usage data -- credits are still
+         dormant (`config('credits.enabled')` false). Support-tier
+         differentiation (a mid-tier with faster/dedicated support) was
+         considered and rejected: Mowi is a confirmed eenmanszaak, the
+         masterplan is BINDING that Motion A support stays docs-first with
+         an async backstop and capacity valves are "price and waitlist,
+         never concierge-for-free", and the SLA annex
+         (Legal/contracts/08-Dienstbeschrijving-SLA.md) is untiered and
+         states it overrides marketing copy on conflict. Tiers stay
+         differentiated by credit balance only. Custom moved out of
+         .tier-grid into its own band (#pricing-custom below) so the
+         demo-gated tier structurally never sits beside the credit-priced
+         cards -- the masterplan's packaging rule made physically true, not
+         just visually implied. See masterplan §5 and the Decisions log,
+         2026-08-22, for the full reasoning. -->
+    <section class="section" id="pricing-tiers">
+      <div class="container">
+        <div class="tier-grid">
+          <div class="tier-card tier-card-highlight">
+            <h2 class="tier-card-name">Start gratis</h2>
+            <div class="tier-price"><span class="tier-price-amount">€0</span></div>
+            <p class="tier-price-sub">30 gratis credits</p>
+            <p class="tier-profile">Genoeg om het uit te proberen</p>
+            <ul class="tier-features">
+              <li>30 gratis credits</li>
+              <li>Geen betaalgegevens nodig</li>
+              <li>Toegang tot alle agents en workflows</li>
+              <li>Geen automatische overgang naar betaald</li>
+            </ul>
+            <a href="https://my.mowi.agency/aanmelden" class="btn-primary tier-cta" data-event="Signup Click">Start gratis</a>
+          </div>
+
+          <div class="tier-card">
+            <h2 class="tier-card-name">Basis</h2>
+            <div class="tier-price"><span class="tier-price-amount">€19</span><span class="tier-price-period">/mnd</span></div>
+            <p class="tier-price-sub">300 credits per maand</p>
+            <p class="tier-profile">Ongeveer 15 e-mails per werkdag</p>
+            <ul class="tier-features">
+              <li>Alles uit Start gratis</li>
+              <li>300 credits per maand</li>
+              <li>Eén tegoed voor alle agents en workflows</li>
+              <li>Bijkopen wanneer u wilt</li>
+              <li>Pauzeert netjes bij op tegoed</li>
+            </ul>
+            <a href="https://my.mowi.agency/aanmelden" class="btn-primary tier-cta" data-event="Signup Click">Aan de slag</a>
+          </div>
+
+          <div class="tier-card">
+            <h2 class="tier-card-name">Pro</h2>
+            <div class="tier-price"><span class="tier-price-amount">€79</span><span class="tier-price-period">/mnd</span></div>
+            <p class="tier-price-sub">1.500 credits per maand</p>
+            <p class="tier-profile">Ongeveer 75 e-mails per werkdag</p>
+            <ul class="tier-features">
+              <li>Alles uit Basis</li>
+              <li>1.500 credits per maand</li>
+              <li>Voordeliger per credit</li>
+              <li>Bijkopen wanneer u wilt</li>
+            </ul>
+            <a href="https://my.mowi.agency/aanmelden" class="btn-primary tier-cta" data-event="Signup Click">Aan de slag</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Custom band =================
+         Moved out of .tier-grid 2026-08-22 so the demo-gated tier never
+         sits in the same row as the credit-priced self-serve cards -- makes
+         the masterplan's packaging rule (platform pricing never displayed
+         next to agent pricing) structurally true, not just visually
+         implied. Reuses .tier-card-name/.tier-price/.tier-features so the
+         visual language matches the grid above; .tier-custom is the only
+         new wrapper.
+
+         Repositioned 2026-08-22 (later still, same day as the sitewide CTA
+         swap): the qualifier line ("Voor wie het volledig uit handen
+         wil geven") is Sal's own wording, adopted as-is. The feature list
+         deliberately does NOT say "volledige ontzorging" as a bare promise
+         -- that word appears nowhere else on the site or in the vault, and
+         Legal/contracts/08-Dienstbeschrijving-SLA.md is untiered and states
+         it overrides marketing copy on conflict, so a blanket service-level
+         promise here would conflict with a contract annex that outranks it.
+         "Wij richten het in, u hoeft zelf niets te doen" says the same
+         thing concretely -- it's true of Motion B's committed concierge
+         onboarding (masterplan §5) and contrasts with the self-serve tiers,
+         which the customer connects themselves (AV art. 4.3, "zelf aan te
+         sluiten"). "Alles uit Pro" dropped -- with "Start gratis" replacing
+         "Plan een demo" sitewide (header/footer/mobile-nav, this same
+         session), the self-serve ladder no longer ends at this card, so
+         Custom now reads as its own proposition rather than the top rung. -->
+    <section class="section" id="pricing-custom">
+      <div class="container">
+        <div class="tier-custom">
+          <div>
+            <h2 class="tier-card-name">Custom</h2>
+            <div class="tier-price"><span class="tier-price-amount">Op maat</span></div>
+            <p class="tier-profile">Voor wie het volledig uit handen wil geven</p>
+            <ul class="tier-features tier-custom-features">
+              <li>Advies over wat u het beste kunt automatiseren</li>
+              <li>Workflows speciaal voor u gebouwd</li>
+              <li>Koppelingen met uw eigen systemen</li>
+              <li>Wij richten het in, u hoeft zelf niets te doen</li>
+              <li>Vaste contactpersoon</li>
+            </ul>
+          </div>
+          <a href="/demo" class="btn-primary tier-cta" data-event="Demo Click">Plan een demo</a>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <!-- ============================================================
@@ -104,7 +259,7 @@
 
       <div class="footer-cta">
         <h2 class="footer-cta-title">Vertel het<br />Mowi regelt het</h2>
-        <a href="/demo" class="btn-primary" data-event="Demo Click">Plan een demo</a>
+        <a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a>
       </div>
 
       <div class="footer-panel">
@@ -173,6 +328,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=20260822-7"></script>
+  <script src="js/main.js?v=20260822-15"></script>
 </body>
 </html>
