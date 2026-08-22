@@ -1004,7 +1004,12 @@ main { flex: 1 0 auto; }
 .tier-custom-features { margin-top: 1.25rem; flex: none; }
 .tier-custom .tier-cta { width: auto; justify-self: center; margin-top: 0; }
 @media (max-width: 63.9rem) {
-  .tier-custom { grid-template-columns: 1fr; padding: 2rem; }
+  /* width: 100% overrides the desktop "span exactly 2 of 3 grid columns"
+     calc -- the tier-grid is single-column (full-width cards) at this
+     breakpoint, so the band must match or it renders visibly narrower
+     than the cards above it (caught 2026-08-22: the 2/3-width band also
+     forced the h2 to wrap one word per line on a phone). */
+  .tier-custom { grid-template-columns: 1fr; width: 100%; padding: 2rem; }
   .tier-custom .tier-cta { justify-self: stretch; width: 100%; margin-top: 1.5rem; }
 }
 
