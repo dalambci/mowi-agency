@@ -1,3 +1,9 @@
 node_modules/
 screenshots/
 blog-preview/
+
+# ralph-loop plugin state (iteration counter + promise), rewritten every iteration
+.claude/ralph-loop.local.md
+
+# ralph loop run transcripts - useful for debugging a run, not worth committing
+ralph/logs/
