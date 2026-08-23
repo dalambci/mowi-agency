@@ -95,7 +95,7 @@ specifics remain superseded by v2 as already noted; only this paragraph's git-me
 history stays accurate as a record of what happened on 2026-08-17.
 
 ## Project memory (Obsidian)
-Long-term project knowledge lives in `c:\Users\SalP1\Desktop\Mowi brain\Mowi\`.
+Long-term project knowledge lives in `c:\Users\SalP1\Desktop\Mowi brain\`.
 At the start of every session: read "Mowi - Home.md" plus the notes relevant to today's task.
 When we decide or change something important: update the relevant note AND add a dated line
 to "Mowi - Decisions log.md" before the session ends. Never delete history — mark superseded

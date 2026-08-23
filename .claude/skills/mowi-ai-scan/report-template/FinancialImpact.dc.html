@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,500;0,600;1,400;1,500&family=Public+Sans:wght@400;500;600;700&display=swap">
+  <style>
+    :root{
+      --bg:#faf8f4; --card:#ffffff; --ink:#1f2420; --muted:#6b7269;
+      --border:#e2e6e0; --accent:#2f6f5c; --accent-light:#e6f0ec; --accent-dark:#1c3f34;
+    }
+    *{box-sizing:border-box;}
+    body{margin:0;font-family:'Public Sans',system-ui,sans-serif;color:var(--ink);background:var(--bg);}
+    h1,h2,h3{font-family:'Newsreader',Georgia,serif;margin:0;}
+    em.accent{font-style:italic;color:var(--accent);}
+    .op{font-family:'Newsreader',Georgia,serif;font-size:28px;color:var(--muted);}
+  </style>
+</helmet>
+<div style="width:1200px;height:750px;background:var(--bg);display:flex;flex-direction:column;padding:56px 64px;">
+
+  <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:20px;border-bottom:1px solid var(--border);">
+    <div style="font-family:'Newsreader',Georgia,serif;font-weight:600;font-size:18px;color:var(--accent-dark);">Mowi</div>
+    <div style="font-size:13px;color:var(--muted);">08 · Financiële impact</div>
+  </div>
+
+  <h1 style="font-size:30px;font-weight:600;margin-top:28px;">Wat dit <em class="accent">oplevert</em>, in getallen</h1>
+  <div style="font-size:15px;color:var(--muted);margin-top:6px;max-width:680px;">Elk cijfer hieronder komt uit wat u zelf tijdens het gesprek aangaf, of uit de echte lijstprijs van de tool. Geen schattingen die we hebben verzonnen.</div>
+
+  <div style="flex-grow:1;display:flex;align-items:center;justify-content:center;gap:18px;margin-top:16px;">
+
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px 28px;text-align:center;min-width:170px;">
+      <div style="font-size:12px;color:var(--muted);margin-bottom:8px;">Tijdwinst per week</div>
+      <div style="font-family:'Newsreader',Georgia,serif;font-size:34px;font-weight:600;">7 uur</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:6px;">som van fase 3, aanbevolen oplossingen</div>
+    </div>
+
+    <div class="op">×</div>
+
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px 28px;text-align:center;min-width:170px;">
+      <div style="font-size:12px;color:var(--muted);margin-bottom:8px;">Uurtarief</div>
+      <div style="font-family:'Newsreader',Georgia,serif;font-size:34px;font-weight:600;">€ 45</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:6px;">door u genoemd tijdens het gesprek</div>
+    </div>
+
+    <div class="op">−</div>
+
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px 28px;text-align:center;min-width:170px;">
+      <div style="font-size:12px;color:var(--muted);margin-bottom:8px;">Toolkosten per maand</div>
+      <div style="font-family:'Newsreader',Georgia,serif;font-size:34px;font-weight:600;">€ 80</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:6px;">som van alle aanbevolen tools</div>
+    </div>
+
+    <div class="op">=</div>
+
+    <div style="background:var(--accent-dark);border-radius:16px;padding:24px 28px;text-align:center;min-width:190px;color:#f4f2ea;">
+      <div style="font-size:12px;color:#a9c9be;margin-bottom:8px;">Netto per maand</div>
+      <div style="font-family:'Newsreader',Georgia,serif;font-size:34px;font-weight:600;">€ 1.275</div>
+      <div style="font-size:12px;color:#a9c9be;margin-top:6px;">(7 × €45 × 4,3 weken) − €80</div>
+    </div>
+
+  </div>
+
+  <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border);font-size:12px;color:var(--muted);">Vertrouwelijk · opgesteld voor [Bedrijfsnaam]</div>
+</div>
+</x-dc>
+<script data-dc-script data-props='{}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>
