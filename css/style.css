@@ -425,11 +425,11 @@ main { flex: 1 0 auto; }
   pointer-events: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 10 -5.6'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
   background-size: 300px 300px;
-  opacity: 0.08; /* founder-tuned round 5: same -0.04 step repeated from
-    round 4 (0.16 -> 0.12), landing near the round-2 0.07 that was once
-    "too subtle to notice" — founder asked for this specific step again,
-    so noting it's now close to that earlier floor. Alpha ramp (-5.6)
-    left as-is; opacity alone controls intrusiveness here. */
+  opacity: 0.068; /* founder-tuned round 6 (2026-08-23): -15% from round 5's
+    0.08 (0.08 * 0.85 = 0.068), asked for after the coverage-area revert
+    above still read as too present. Now just under the round-2 0.07 floor
+    that was once called "too subtle to notice" — deliberately, this time.
+    Alpha ramp (-5.6) left as-is; opacity alone controls intrusiveness. */
   /* Coverage reverted 2026-08-23 to round 2's original small halo (75%/65%
      at 50% 15%, dissolving quickly past the headline) — round 2's widened
      85%/90%-at-25% halo (reaching much further down the hero) had stuck
