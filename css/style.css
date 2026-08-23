@@ -430,8 +430,14 @@ main { flex: 1 0 auto; }
     "too subtle to notice" — founder asked for this specific step again,
     so noting it's now close to that earlier floor. Alpha ramp (-5.6)
     left as-is; opacity alone controls intrusiveness here. */
-  mask-image: radial-gradient(ellipse 85% 90% at 50% 25%, #000 25%, transparent 80%);
-  -webkit-mask-image: radial-gradient(ellipse 85% 90% at 50% 25%, #000 25%, transparent 80%);
+  /* Coverage reverted 2026-08-23 to round 2's original small halo (75%/65%
+     at 50% 15%, dissolving quickly past the headline) — round 2's widened
+     85%/90%-at-25% halo (reaching much further down the hero) had stuck
+     around through every later opacity-only tuning round since, which is
+     what actually read as "more intense" even after opacity itself came
+     back down. Opacity and the particle alpha ramp are untouched here. */
+  mask-image: radial-gradient(ellipse 75% 65% at 50% 15%, #000 20%, transparent 72%);
+  -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 15%, #000 20%, transparent 72%);
 }
 .hero h1 { font-size: 5rem; line-height: 1.02; font-weight: 700; letter-spacing: -0.02em; overflow-wrap: break-word; }
 .hero-sub { font-size: 1.125rem; color: var(--ink-2); margin-top: 1.5rem; max-width: 34rem; }
