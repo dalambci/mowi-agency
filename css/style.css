@@ -259,7 +259,7 @@ main { flex: 1 0 auto; }
    --bg (the page's own lighter beige, not the darker --band footer tone)
    marks it as a distinct "see everything" row rather than just the first
    item, without the stronger contrast the --band shade needs elsewhere. */
-.nav-menu-item-full a { background: var(--bg); }
+.nav-menu-item-full a { background: var(--bg); margin-bottom: 5px; }
 .nav-menu-item-full a:hover { background: color-mix(in srgb, var(--bg), black 8%); }
 .nav-menu-item-title { display: block; font-size: 0.9375rem; font-weight: 600; }
 .nav-menu-item-desc { display: block; font-size: 0.8125rem; color: var(--ink-3); margin-top: 1px; }
@@ -366,9 +366,8 @@ main { flex: 1 0 auto; }
   }
   .nav-dropdown-trigger[aria-expanded="true"] + .nav-menu { display: flex; }
   /* Back to one stacked list — the desktop side-by-side divider becomes a
-     top border, only before the Workflows heading (.nav-menu-col-divider);
-     the un-headed continuation column that follows it stays flush, so it
-     reads as more of the same Workflows list rather than a new group. */
+     top border before each category after the first (Workflows,
+     Dashboards), via the same .nav-menu-col-divider class used on desktop. */
   .nav-menu-col-divider {
     border-left: 0;
     margin-left: 0;
@@ -377,6 +376,13 @@ main { flex: 1 0 auto; }
     margin-top: 0.25rem;
     padding-top: 0.75rem;
   }
+  /* Each category's item list is a 2-column CSS Grid on desktop (see
+     .nav-menu-item-grid above) — never reset for the mobile sheet, so it
+     was squeezing every item into a cramped half-width column instead of
+     the single stacked list this sheet is supposed to show (2026-08-26,
+     Sal: "not responsive on mobile... look at how it looked before").
+     Back to one column, same as before that grid existed. */
+  .nav-menu-item-grid { grid-template-columns: 1fr; gap: 0; }
   /* The demo CTA keeps its desktop button look inside the mobile sheet
      (the sheet's own link rule outranks .btn-primary, so restate it here). */
   .main-nav > ul > li.nav-mobile-actions > a.btn-primary {
