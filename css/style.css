@@ -355,6 +355,13 @@ main { flex: 1 0 auto; }
   }
   .nav-menu {
     position: static;
+    /* The desktop centering fix (left:50%; transform:translateX(-50%),
+       added earlier this session) isn't scoped to the desktop rule and
+       carries over here — position:static makes `left` inert, but
+       `transform` still applies regardless of position, shifting the
+       whole panel ~137px off-screen to the left. Reset both explicitly. */
+    left: auto;
+    transform: none;
     min-width: 0;
     border: 0; /* the sheet already has the border — a second one reads as a stray box */
     box-shadow: none;
