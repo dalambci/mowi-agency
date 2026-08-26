@@ -183,7 +183,12 @@ main { flex: 1 0 auto; }
   z-index: 110;
   display: flex;
   align-items: flex-start;
-  min-width: 42rem;
+  /* 68rem, not the original 42rem (2026-08-26): each .nav-menu-col shares
+     an equal flex basis, so adding the 3-column Dashboards category
+     alongside Agents (1 column) and Workflows (2) squeezed every column
+     to half its old width at 42rem, wrapping titles like "Klanten en
+     retouren" onto 2 lines. */
+  min-width: 76rem;
   background: var(--surface);
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 16px;
@@ -226,6 +231,20 @@ main { flex: 1 0 auto; }
   transition: background-color 0.15s ease;
 }
 .nav-menu li a:hover { background: var(--muted); }
+/* Each category is now ONE grid (2026-08-26, Sal: "put alle workflows and
+   alle dashboard on an entire row and stack the menu items below 2 per
+   row") -- .nav-menu-item-full spans both columns for the heading and the
+   "Alle X" link; everything else falls into the 2-column grid below it.
+   Replaces the old approach of splitting a tall category into multiple
+   side-by-side .nav-menu-col divs, which needed align-self:stretch +
+   flex-end tricks to look level with its neighbours and broke down the
+   moment sibling categories had different total heights or their
+   descriptions wrapped a different number of lines -- a real grid aligns
+   each category's own rows independently, so that whole class of
+   misalignment can't happen here. */
+.nav-menu-item-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 0.25rem; }
+.nav-menu-item-grid .nav-menu-heading,
+.nav-menu-item-full { grid-column: 1 / -1; }
 .nav-menu-item-title { display: block; font-size: 0.9375rem; font-weight: 600; }
 .nav-menu-item-desc { display: block; font-size: 0.8125rem; color: var(--ink-3); margin-top: 1px; }
 .nav-menu-heading {
