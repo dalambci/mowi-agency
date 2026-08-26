@@ -260,28 +260,31 @@ function headerHtml() {
             </button>
             <div class="nav-menu" id="product-menu">
               <div class="nav-menu-col">
-                <ul>
+                <ul class="nav-menu-item-grid">
                   <li class="nav-menu-heading">Agents</li>
-                  <li><a href="/workflows"><span class="nav-menu-item-title">Alle agents</span><span class="nav-menu-item-desc">Het volledige overzicht van alle Mowi-agents</span></a></li>
+                  <li class="nav-menu-item-full"><a href="/workflows"><span class="nav-menu-item-title">Alle agents</span><span class="nav-menu-item-desc">Het volledige overzicht van alle Mowi-agents</span></a></li>
                   <li><a href="/workflows#email-agent"><span class="nav-menu-item-title">E-mail agent</span><span class="nav-menu-item-desc">Sorteert en beantwoordt uw e-mail</span></a></li>
                   <li><a href="/workflows#call-agent"><span class="nav-menu-item-title">Call agent</span><span class="nav-menu-item-desc">Neemt binnenkomende gesprekken aan</span></a></li>
                 </ul>
               </div>
               <div class="nav-menu-col nav-menu-col-divider">
-                <ul>
+                <ul class="nav-menu-item-grid">
                   <li class="nav-menu-heading">Workflows</li>
-                  <li><a href="/workflows"><span class="nav-menu-item-title">Alle workflows</span><span class="nav-menu-item-desc">Het volledige overzicht van wat Mowi automatiseert</span></a></li>
+                  <li class="nav-menu-item-full"><a href="/workflows"><span class="nav-menu-item-title">Alle workflows</span><span class="nav-menu-item-desc">Het volledige overzicht van wat Mowi automatiseert</span></a></li>
                   <li><a href="/workflows#order-status"><span class="nav-menu-item-title">Orderstatus</span><span class="nav-menu-item-desc">Zoekt bestellingen op in uw webshop</span></a></li>
                   <li><a href="/workflows#offerte-opvolging"><span class="nav-menu-item-title">Offerte-opvolging</span><span class="nav-menu-item-desc">Controleert en volgt offerteaanvragen op</span></a></li>
-                </ul>
-              </div>
-              <!-- Continuation of the Workflows column — see index.html's own
-                   header for the full rationale comment; kept in sync here so
-                   the dropdown renders identically on blog pages. -->
-              <div class="nav-menu-col nav-menu-col-bottom">
-                <ul>
                   <li><a href="/workflows#agenda-samenvatting"><span class="nav-menu-item-title">Agenda-samenvatting</span><span class="nav-menu-item-desc">Uw agenda samengevat, op uw tijdstip</span></a></li>
                   <li><a href="/workflows#crm-sync"><span class="nav-menu-item-title">CRM-synchronisatie</span><span class="nav-menu-item-desc">Herkent klanten en houdt uw CRM bij</span></a></li>
+                </ul>
+              </div>
+              <div class="nav-menu-col nav-menu-col-divider">
+                <ul class="nav-menu-item-grid">
+                  <li class="nav-menu-heading">Dashboards</li>
+                  <li class="nav-menu-item-full"><a href="/workflows#dashboards"><span class="nav-menu-item-title">Alle dashboards</span><span class="nav-menu-item-desc">Het volledige overzicht van al uw dashboards</span></a></li>
+                  <li><a href="/workflows#dashboard-directie-overzicht"><span class="nav-menu-item-title">Directie overzicht</span><span class="nav-menu-item-desc">De cijfers waar een eigenaar op stuurt</span></a></li>
+                  <li><a href="/workflows#dashboard-webshops-vergelijken"><span class="nav-menu-item-title">Webshops vergelijken</span><span class="nav-menu-item-desc">Kerncijfers per webshop naast elkaar</span></a></li>
+                  <li><a href="/workflows#dashboard-openstaande-facturen"><span class="nav-menu-item-title">Openstaande facturen</span><span class="nav-menu-item-desc">Welke facturen aandacht nodig hebben</span></a></li>
+                  <li><a href="/workflows#dashboard-winstgevendheid"><span class="nav-menu-item-title">Winstgevendheid</span><span class="nav-menu-item-desc">Marge op basis van uw eigen kostprijzen</span></a></li>
                 </ul>
               </div>
             </div>

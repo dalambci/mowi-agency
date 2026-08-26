@@ -159,7 +159,13 @@ main { flex: 1 0 auto; }
 .main-nav > ul > li > a:hover,
 .main-nav > ul > li > a[aria-current="page"] { background: var(--muted); }
 
-.nav-dropdown { position: relative; }
+/* No position:relative here (2026-08-26, was the .nav-menu containing
+   block before) — the trigger sits close to the header's left edge, so a
+   menu this wide anchored to ITS left edge ran off the right side of the
+   viewport on laptop-width screens. .site-header (position:sticky, so it
+   already qualifies as a containing block) is used instead, so the panel
+   centers under the whole header bar rather than hanging off the button. */
+.nav-dropdown { position: static; }
 .nav-dropdown-icon {
   width: 8px; height: 8px;
   border-right: 1.5px solid currentColor;
@@ -179,7 +185,8 @@ main { flex: 1 0 auto; }
 .nav-menu {
   position: absolute;
   top: calc(100% + 10px);
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 110;
   display: flex;
   align-items: flex-start;
@@ -187,7 +194,10 @@ main { flex: 1 0 auto; }
      an equal flex basis, so adding the 3-column Dashboards category
      alongside Agents (1 column) and Workflows (2) squeezed every column
      to half its old width at 42rem, wrapping titles like "Klanten en
-     retouren" onto 2 lines. */
+     retouren" onto 2 lines. Dashboards later dropped that item along with
+     3 others (2026-08-26, same day) — kept at 76rem rather than
+     re-narrowing since "Webshops vergelijken"/"Openstaande facturen" are
+     still long enough to need the room; re-measure before narrowing. */
   min-width: 76rem;
   background: var(--surface);
   border: 1px solid rgba(0, 0, 0, 0.08);
@@ -245,6 +255,12 @@ main { flex: 1 0 auto; }
 .nav-menu-item-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 0.25rem; }
 .nav-menu-item-grid .nav-menu-heading,
 .nav-menu-item-full { grid-column: 1 / -1; }
+/* The "Alle X" row is a listing link, not a peer of the items below it —
+   --bg (the page's own lighter beige, not the darker --band footer tone)
+   marks it as a distinct "see everything" row rather than just the first
+   item, without the stronger contrast the --band shade needs elsewhere. */
+.nav-menu-item-full a { background: var(--bg); }
+.nav-menu-item-full a:hover { background: color-mix(in srgb, var(--bg), black 8%); }
 .nav-menu-item-title { display: block; font-size: 0.9375rem; font-weight: 600; }
 .nav-menu-item-desc { display: block; font-size: 0.8125rem; color: var(--ink-3); margin-top: 1px; }
 .nav-menu-heading {
