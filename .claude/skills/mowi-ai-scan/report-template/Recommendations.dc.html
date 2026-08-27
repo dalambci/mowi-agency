@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,500;0,600;1,400;1,500&family=Public+Sans:wght@400;500;600;700&display=swap">
+  <style>
+    :root{
+      --bg:#faf8f4; --card:#ffffff; --ink:#1f2420; --muted:#6b7269;
+      --border:#e2e6e0; --accent:#2f6f5c; --accent-light:#e6f0ec; --accent-dark:#1c3f34;
+    }
+    *{box-sizing:border-box;}
+    body{margin:0;font-family:'Public Sans',system-ui,sans-serif;color:var(--ink);background:var(--bg);}
+    h1,h2,h3{font-family:'Newsreader',Georgia,serif;margin:0;}
+    em.accent{font-style:italic;color:var(--accent);}
+    .stat{display:flex;flex-direction:column;gap:2px;}
+    .stat .lbl{font-size:11px;color:var(--muted);}
+    .stat .val{font-size:15px;font-weight:600;}
+  </style>
+</helmet>
+<div style="width:1200px;height:900px;background:var(--bg);display:flex;flex-direction:column;padding:56px 64px;">
+
+  <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:20px;border-bottom:1px solid var(--border);">
+    <div style="font-family:'Newsreader',Georgia,serif;font-weight:600;font-size:18px;color:var(--accent-dark);">Mowi</div>
+    <div style="font-size:13px;color:var(--muted);">05 · Aanbevolen oplossingen</div>
+  </div>
+
+  <h1 style="font-size:30px;font-weight:600;margin-top:28px;">De <em class="accent">tools</em>, in detail</h1>
+  <div style="font-size:15px;color:var(--muted);margin-top:6px;">Alle prijzen zijn actuele lijstprijzen. Tijdwinst is gebaseerd op wat u zelf aangaf tijdens het gesprek.</div>
+
+  <div style="flex-grow:1;display:flex;flex-direction:column;gap:14px;margin-top:24px;">
+
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px 24px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:16px;align-items:center;">
+      <div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:4px;">Pijnpunt</div>
+        <div style="font-size:15px;font-weight:600;">Klanten mailen steeds "waar blijft mijn bestelling"</div>
+      </div>
+      <div class="stat"><span class="lbl">Tool</span><span class="val" style="color:var(--accent-dark);">Mowi bestelstatus-agent</span></div>
+      <div class="stat"><span class="lbl">Kosten/maand</span><span class="val">€ 40</span></div>
+      <div class="stat"><span class="lbl">Opzettijd</span><span class="val">±20 min</span></div>
+      <div class="stat"><span class="lbl">Tijdwinst/week</span><span class="val">3 uur</span></div>
+    </div>
+
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px 24px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:16px;align-items:center;">
+      <div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:4px;">Pijnpunt</div>
+        <div style="font-size:15px;font-weight:600;">Belangrijke mail verdwijnt tussen de rest</div>
+      </div>
+      <div class="stat"><span class="lbl">Tool</span><span class="val">SaneBox</span></div>
+      <div class="stat"><span class="lbl">Kosten/maand</span><span class="val">€ 15</span></div>
+      <div class="stat"><span class="lbl">Opzettijd</span><span class="val">±10 min</span></div>
+      <div class="stat"><span class="lbl">Tijdwinst/week</span><span class="val">1,5 uur</span></div>
+    </div>
+
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px 24px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:16px;align-items:center;">
+      <div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:4px;">Pijnpunt</div>
+        <div style="font-size:15px;font-weight:600;">Facturen met de hand overtypen</div>
+      </div>
+      <div class="stat"><span class="lbl">Tool</span><span class="val">Klippa</span></div>
+      <div class="stat"><span class="lbl">Kosten/maand</span><span class="val">€ 25</span></div>
+      <div class="stat"><span class="lbl">Opzettijd</span><span class="val">±30 min</span></div>
+      <div class="stat"><span class="lbl">Tijdwinst/week</span><span class="val">2 uur</span></div>
+    </div>
+
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px 24px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:16px;align-items:center;">
+      <div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:4px;">Pijnpunt</div>
+        <div style="font-size:15px;font-weight:600;">Afspraken plannen kost heen-en-weer-mailen</div>
+      </div>
+      <div class="stat"><span class="lbl">Tool</span><span class="val">Cal.com</span></div>
+      <div class="stat"><span class="lbl">Kosten/maand</span><span class="val">€ 0</span></div>
+      <div class="stat"><span class="lbl">Opzettijd</span><span class="val">±15 min</span></div>
+      <div class="stat"><span class="lbl">Tijdwinst/week</span><span class="val">0,5 uur</span></div>
+    </div>
+
+  </div>
+
+  <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border);font-size:12px;color:var(--muted);">Vertrouwelijk · opgesteld voor [Bedrijfsnaam]</div>
+</div>
+</x-dc>
+<script data-dc-script data-props='{}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

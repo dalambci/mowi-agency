@@ -5,7 +5,7 @@ description: "Load and maintain the Mowi project's persistent second-brain — a
 
 # Mowi second-brain (Obsidian vault)
 
-The vault lives at `c:/Users/SalP1/Desktop/Mowi brain/Mowi/` on the Windows PC and — synced via
+The vault lives at `c:/Users/SalP1/Desktop/Mowi brain/` on the Windows PC and — synced via
 Obsidian Sync (Sal has the subscription) — at `/Users/sal/Desktop/Mowi brain/` on the Mac. Note
 the structural difference: on the Mac the notes sit directly in the vault root (`Home.md`,
 `Decisions log.md`, topic folders like `Website/`), with no `Mowi/` subfolder and no `Mowi - `
@@ -23,7 +23,7 @@ decisions):
   every note) and `Mowi - Decisions log.md` (short, gives fast orientation on anything recent).
 - For everything else, **do not read every note in the folder** — that stops scaling once the
   vault has more than a handful of files. Instead:
-  - `Grep` the vault folder (`c:/Users/SalP1/Desktop/Mowi brain/Mowi/`, recursively — plan for
+  - `Grep` the vault folder (`c:/Users/SalP1/Desktop/Mowi brain/`, recursively — plan for
     subfolders as the vault grows) for keywords from today's task, or for the relevant
     frontmatter `tags:` value, to find candidate notes.
   - `Glob` for filename patterns (e.g. `Mowi - Agent*.md`) once you know the topic.

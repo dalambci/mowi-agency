@@ -159,7 +159,13 @@ main { flex: 1 0 auto; }
 .main-nav > ul > li > a:hover,
 .main-nav > ul > li > a[aria-current="page"] { background: var(--muted); }
 
-.nav-dropdown { position: relative; }
+/* No position:relative here (2026-08-26, was the .nav-menu containing
+   block before) — the trigger sits close to the header's left edge, so a
+   menu this wide anchored to ITS left edge ran off the right side of the
+   viewport on laptop-width screens. .site-header (position:sticky, so it
+   already qualifies as a containing block) is used instead, so the panel
+   centers under the whole header bar rather than hanging off the button. */
+.nav-dropdown { position: static; }
 .nav-dropdown-icon {
   width: 8px; height: 8px;
   border-right: 1.5px solid currentColor;
@@ -179,11 +185,20 @@ main { flex: 1 0 auto; }
 .nav-menu {
   position: absolute;
   top: calc(100% + 10px);
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 110;
   display: flex;
   align-items: flex-start;
-  min-width: 42rem;
+  /* 68rem, not the original 42rem (2026-08-26): each .nav-menu-col shares
+     an equal flex basis, so adding the 3-column Dashboards category
+     alongside Agents (1 column) and Workflows (2) squeezed every column
+     to half its old width at 42rem, wrapping titles like "Klanten en
+     retouren" onto 2 lines. Dashboards later dropped that item along with
+     3 others (2026-08-26, same day) — kept at 76rem rather than
+     re-narrowing since "Webshops vergelijken"/"Openstaande facturen" are
+     still long enough to need the room; re-measure before narrowing. */
+  min-width: 76rem;
   background: var(--surface);
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 16px;
@@ -226,6 +241,26 @@ main { flex: 1 0 auto; }
   transition: background-color 0.15s ease;
 }
 .nav-menu li a:hover { background: var(--muted); }
+/* Each category is now ONE grid (2026-08-26, Sal: "put alle workflows and
+   alle dashboard on an entire row and stack the menu items below 2 per
+   row") -- .nav-menu-item-full spans both columns for the heading and the
+   "Alle X" link; everything else falls into the 2-column grid below it.
+   Replaces the old approach of splitting a tall category into multiple
+   side-by-side .nav-menu-col divs, which needed align-self:stretch +
+   flex-end tricks to look level with its neighbours and broke down the
+   moment sibling categories had different total heights or their
+   descriptions wrapped a different number of lines -- a real grid aligns
+   each category's own rows independently, so that whole class of
+   misalignment can't happen here. */
+.nav-menu-item-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 0.25rem; }
+.nav-menu-item-grid .nav-menu-heading,
+.nav-menu-item-full { grid-column: 1 / -1; }
+/* The "Alle X" row is a listing link, not a peer of the items below it —
+   --bg (the page's own lighter beige, not the darker --band footer tone)
+   marks it as a distinct "see everything" row rather than just the first
+   item, without the stronger contrast the --band shade needs elsewhere. */
+.nav-menu-item-full a { background: var(--bg); margin-bottom: 5px; }
+.nav-menu-item-full a:hover { background: color-mix(in srgb, var(--bg), black 8%); }
 .nav-menu-item-title { display: block; font-size: 0.9375rem; font-weight: 600; }
 .nav-menu-item-desc { display: block; font-size: 0.8125rem; color: var(--ink-3); margin-top: 1px; }
 .nav-menu-heading {
@@ -320,6 +355,13 @@ main { flex: 1 0 auto; }
   }
   .nav-menu {
     position: static;
+    /* The desktop centering fix (left:50%; transform:translateX(-50%),
+       added earlier this session) isn't scoped to the desktop rule and
+       carries over here — position:static makes `left` inert, but
+       `transform` still applies regardless of position, shifting the
+       whole panel ~137px off-screen to the left. Reset both explicitly. */
+    left: auto;
+    transform: none;
     min-width: 0;
     border: 0; /* the sheet already has the border — a second one reads as a stray box */
     box-shadow: none;
@@ -331,9 +373,8 @@ main { flex: 1 0 auto; }
   }
   .nav-dropdown-trigger[aria-expanded="true"] + .nav-menu { display: flex; }
   /* Back to one stacked list — the desktop side-by-side divider becomes a
-     top border, only before the Workflows heading (.nav-menu-col-divider);
-     the un-headed continuation column that follows it stays flush, so it
-     reads as more of the same Workflows list rather than a new group. */
+     top border before each category after the first (Workflows,
+     Dashboards), via the same .nav-menu-col-divider class used on desktop. */
   .nav-menu-col-divider {
     border-left: 0;
     margin-left: 0;
@@ -342,6 +383,13 @@ main { flex: 1 0 auto; }
     margin-top: 0.25rem;
     padding-top: 0.75rem;
   }
+  /* Each category's item list is a 2-column CSS Grid on desktop (see
+     .nav-menu-item-grid above) — never reset for the mobile sheet, so it
+     was squeezing every item into a cramped half-width column instead of
+     the single stacked list this sheet is supposed to show (2026-08-26,
+     Sal: "not responsive on mobile... look at how it looked before").
+     Back to one column, same as before that grid existed. */
+  .nav-menu-item-grid { grid-template-columns: 1fr; gap: 0; }
   /* The demo CTA keeps its desktop button look inside the mobile sheet
      (the sheet's own link rule outranks .btn-primary, so restate it here). */
   .main-nav > ul > li.nav-mobile-actions > a.btn-primary {
@@ -425,13 +473,19 @@ main { flex: 1 0 auto; }
   pointer-events: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 10 -5.6'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
   background-size: 300px 300px;
-  opacity: 0.08; /* founder-tuned round 5: same -0.04 step repeated from
-    round 4 (0.16 -> 0.12), landing near the round-2 0.07 that was once
-    "too subtle to notice" — founder asked for this specific step again,
-    so noting it's now close to that earlier floor. Alpha ramp (-5.6)
-    left as-is; opacity alone controls intrusiveness here. */
-  mask-image: radial-gradient(ellipse 85% 90% at 50% 25%, #000 25%, transparent 80%);
-  -webkit-mask-image: radial-gradient(ellipse 85% 90% at 50% 25%, #000 25%, transparent 80%);
+  opacity: 0.068; /* founder-tuned round 6 (2026-08-23): -15% from round 5's
+    0.08 (0.08 * 0.85 = 0.068), asked for after the coverage-area revert
+    above still read as too present. Now just under the round-2 0.07 floor
+    that was once called "too subtle to notice" — deliberately, this time.
+    Alpha ramp (-5.6) left as-is; opacity alone controls intrusiveness. */
+  /* Coverage reverted 2026-08-23 to round 2's original small halo (75%/65%
+     at 50% 15%, dissolving quickly past the headline) — round 2's widened
+     85%/90%-at-25% halo (reaching much further down the hero) had stuck
+     around through every later opacity-only tuning round since, which is
+     what actually read as "more intense" even after opacity itself came
+     back down. Opacity and the particle alpha ramp are untouched here. */
+  mask-image: radial-gradient(ellipse 75% 65% at 50% 15%, #000 20%, transparent 72%);
+  -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 15%, #000 20%, transparent 72%);
 }
 .hero h1 { font-size: 5rem; line-height: 1.02; font-weight: 700; letter-spacing: -0.02em; overflow-wrap: break-word; }
 .hero-sub { font-size: 1.125rem; color: var(--ink-2); margin-top: 1.5rem; max-width: 34rem; }

@@ -95,7 +95,7 @@ specifics remain superseded by v2 as already noted; only this paragraph's git-me
 history stays accurate as a record of what happened on 2026-08-17.
 
 ## Project memory (Obsidian)
-Long-term project knowledge lives in `c:\Users\SalP1\Desktop\Mowi brain\Mowi\`.
+Long-term project knowledge lives in `c:\Users\SalP1\Desktop\Mowi brain\`.
 At the start of every session: read "Mowi - Home.md" plus the notes relevant to today's task.
 When we decide or change something important: update the relevant note AND add a dated line
 to "Mowi - Decisions log.md" before the session ends. Never delete history — mark superseded
@@ -315,6 +315,35 @@ or `/tarieven`/`/pricing`. All of those pages (`agentic-ai.html`, `power-bi-dash
 `agents/phone-agent.html`, `contact.html`) are, and remain, **client-side redirect stubs**
 (see Folder structure below), not real content — don't add new links to them, and don't
 resurrect any of the old label names above for the current nav.
+
+### Navigation — current, re-verified 2026-08-26 (the section above predates several rounds
+### of nav changes this doc never caught up on — this replaces it; do not follow the 2026-08-18
+### description above for the Product menu's contents)
+Verified by reading `test.html`'s live markup directly rather than assumed. `<nav class="
+main-nav">` top-level, in order: **"Zo werkt het"** (`/zo-werkt-het`) → **"Product"**
+(`.nav-dropdown-trigger` → `#product-menu`) → **"Templates"** (`/templates`) → **"Prijzen"**
+(`/pricing`); then `.header-actions`: **"Inloggen"** (external, `my.mowi.agency/login`) +
+**"Start gratis"** pill CTA (`my.mowi.agency/aanmelden`). "Docs"/"About"/"Blog" are **no
+longer top-level nav items** (footer-only now) — exactly when/why that changed wasn't
+re-derived, only that it's the current live state.
+
+**"Product" is now a 3-category mega-menu grid**, not the single-column Workflows/Koppelingen/
+Vertrouwen dropdown described above — Koppelingen and Vertrouwen are no longer in it either.
+Each category is one `.nav-menu-item-grid` (CSS Grid, `repeat(2, minmax(0,1fr))`) with a
+`.nav-menu-heading`, an `.nav-menu-item-full` "Alle X" row spanning both columns, and its
+items stacked 2-per-row beneath:
+- **Agents** — Alle agents (`/workflows`) · E-mail agent · Call agent.
+- **Workflows** — Alle workflows (`/workflows`) · Orderstatus · Offerte-opvolging ·
+  Agenda-samenvatting · CRM-synchronisatie.
+- **Dashboards** (added 2026-08-26, see [[Website/dashboards-nav-category]] in the Obsidian
+  vault) — Alle dashboards (`/workflows#dashboards`) · Webshop overzicht · Directie overzicht ·
+  Klanten en retouren · Webshops vergelijken · Agenda · Verkooppijplijn · Openstaande
+  facturen · Winstgevendheid.
+
+`.nav-menu` is 76rem wide (widened from an original 42rem across two follow-up rounds so every
+title stays on one line at 2-per-row). This exact `#product-menu` markup is duplicated
+identically across all 16 root HTML pages (no templating) — a change to one category must be
+applied to all 16, and `test.html` is the reliable copy-paste source.
 
 ## Documentation section (setup guides for clients)
 - Structure, page anatomy, navigation anatomy, and writing rules are defined in
