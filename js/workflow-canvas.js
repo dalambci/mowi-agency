@@ -77,7 +77,10 @@
             var size = stageSize();
             scale = 1;
             offsetX = (viewport.clientWidth - size.w * scale) / 2;
-            offsetY = 24;
+            // Vertically centered when the flow fits the frame; a flow taller
+            // than the frame (all of the current ones) starts 24px from the
+            // top so its Start node is the first thing in view.
+            offsetY = Math.max(24, (viewport.clientHeight - size.h * scale) / 2);
             clamp();
             apply();
         }
@@ -412,6 +415,9 @@
                 btn.addEventListener("click", function () {
                     var key = btn.getAttribute("data-tpl-select");
                     buttons.forEach(function (b) { b.classList.toggle("active", b === btn); });
+                    // Bring the chosen tile fully into the rail (a half-peeking
+                    // tile is the usual thing to tap); nearest = no page jump.
+                    if (btn.scrollIntoView) btn.scrollIntoView({ block: "nearest", inline: "nearest" });
                     examples.forEach(function (ex) {
                         ex.hidden = ex.getAttribute("data-tpl-example") !== key;
                     });

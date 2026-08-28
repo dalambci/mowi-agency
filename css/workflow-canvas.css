@@ -66,9 +66,19 @@
    .is-scrolled (a matching left fade once there is content hidden on
    that side). The 3rem fade is the same width as the gap the last tile
    would otherwise vanish into. */
+/* Rail polish (Sal, 2026-08-28, "make it visually more appealing"): what
+   makes a card rail read well is a peeking next card + an edge fade
+   (both above), tiles that stop on their own edges (scroll-snap), equal
+   tile heights with the text centered so short taglines don't leave a
+   ragged bottom, one hover/selected treatment shared with the site's
+   pill tabs (ink border + 5% ink wash), and — on phones — a rail that
+   runs to the screen edge while its first tile stays aligned with the
+   text column. No motion beyond the site's existing color/border
+   transitions. */
 .tpl-branche-list{
-  display:flex;gap:.625rem;overflow-x:auto;padding-bottom:.25rem;
+  display:flex;gap:.75rem;overflow-x:auto;padding-bottom:.25rem;
   scrollbar-width:none;
+  scroll-snap-type:x proximity;
   --tpl-fade-l:0rem;--tpl-fade-r:3rem;
   -webkit-mask-image:linear-gradient(to right,transparent 0,#000 var(--tpl-fade-l),#000 calc(100% - var(--tpl-fade-r)),transparent 100%);
   mask-image:linear-gradient(to right,transparent 0,#000 var(--tpl-fade-l),#000 calc(100% - var(--tpl-fade-r)),transparent 100%);
@@ -77,17 +87,19 @@
 .tpl-branche-list.is-at-end{--tpl-fade-r:0rem}
 .tpl-branche-list::-webkit-scrollbar{display:none}
 .tpl-branche-btn{
-  flex:0 0 auto;width:13rem;text-align:left;background:var(--surface);
+  flex:0 0 auto;width:13rem;min-height:6rem;text-align:left;background:var(--surface);
   border:1px solid var(--border);border-radius:var(--radius-card);
-  padding:.875rem 1rem;cursor:pointer;font-family:inherit;
-  transition:border-color .15s ease;
+  padding:1rem 1.125rem;cursor:pointer;font-family:inherit;
+  display:flex;flex-direction:column;justify-content:center;
+  scroll-snap-align:start;
+  transition:border-color .15s ease,background-color .15s ease;
 }
-.tpl-branche-btn.active{border-color:var(--ink)}
-@media (hover:hover){ .tpl-branche-btn:hover{border-color:var(--ink)} }
+.tpl-branche-btn.active{border-color:var(--ink);background:rgba(18,17,16,.05)}
+@media (hover:hover){ .tpl-branche-btn:hover{border-color:var(--ink);background:rgba(18,17,16,.05)} }
 .tpl-branche-name{display:block;font-weight:700;font-size:.9375rem;color:var(--ink)}
 .tpl-branche-tag{
-  display:block;margin-top:.25rem;font-size:.8125rem;color:var(--ink-2);
-  line-height:1.4;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+  margin-top:.25rem;font-size:.8125rem;color:var(--ink-2);line-height:1.4;
 }
 
 /* ---------- One example (summary + canvas + CTA) ---------- */
@@ -100,7 +112,10 @@
   position:relative;border-radius:var(--radius-card);border:1px solid var(--border);
   background:var(--muted);overflow:hidden;isolation:isolate;height:24rem;
 }
-@media (min-width:48rem){ .wf-canvas{height:28rem} }
+/* 32rem, was 28rem (2026-08-28): every flow is 1170-1370px tall, so the
+   frame only ever shows its top; four more rem brings a third node fully
+   into the first view instead of cutting it mid-card. */
+@media (min-width:48rem){ .wf-canvas{height:32rem} }
 /* touch-action:pan-y, not none (Sal, 2026-08-28: "on mobile the page
    scroll stops for the widget"): a finger on the canvas scrolls the PAGE
    by default, exactly like an embedded Google Map. A two-finger pinch is
@@ -194,5 +209,13 @@
    leave a sliver. The width is a flex-basis on the scroll container's
    visible width: two gaps plus 2.5 tiles fill it. */
 @media (max-width:47.9rem){
-  .tpl-branche-btn{width:auto;flex:0 0 calc((100% - 2 * .625rem) / 2.5)}
+  /* Rail bleeds to the screen edges (the .container's 20px padding is
+     pulled back with negative margins and re-added as the rail's own
+     padding), so a peeking tile touches the edge while the first tile
+     still lines up with the text column; scroll-padding keeps the snap
+     stops on that same column. The 2.5-tile width resolves against the
+     rail's content box — still the text column's width — so exactly two
+     and a half tiles sit in it and the half one runs into the fade. */
+  .tpl-branche-list{margin:0 -20px;padding:0 20px .25rem;scroll-padding-inline:20px}
+  .tpl-branche-btn{width:auto;flex:0 0 calc((100% - 2 * .75rem) / 2.5);min-height:5.5rem;padding:.875rem 1rem}
 }
