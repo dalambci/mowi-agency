@@ -130,7 +130,7 @@
          2026-08-22. Replaces the flat-fee "Fair Use-grens" concept with the
          credit system now live at mowi.agency/pricing. Not yet reviewed or
          approved; do not treat as final. -->
-    <p><strong>1.6 Credit</strong>: de eenheid waarin Mowi het gebruik van een Agent uitdrukt en verrekent. Eén credit komt overeen met één door de E-mailagent verwerkte e-mail (zie artikel 4.2 en 4.4).</p>
+    <p><strong>1.6 Credit</strong>: de eenheid waarin Mowi het gebruik van een Agent uitdrukt en verrekent. Het aantal credits dat een verrichting kost, verschilt per Agent en per soort verrichting; de actuele credittarieven zijn gepubliceerd op mowi.agency/pricing en zijn, op de datum van deze AV, opgenomen in artikel 4.2 (zie ook artikel 4.4).</p>
     <p><strong>1.7 Verwerkersovereenkomst (VWO)</strong>: de separate overeenkomst tussen Partijen die de verwerking van persoonsgegevens door Mowi namens Opdrachtgever regelt (zie artikel 10).</p>
     <p><strong>1.8 Vertrouwelijke Informatie</strong>: alle informatie die Partijen elkaar in het kader van de Overeenkomst verstrekken en die als vertrouwelijk is aangemerkt of waarvan de vertrouwelijkheid uit de aard van de informatie voortvloeit.</p>
     <p><strong>1.9 Werkdag</strong>: een kalenderdag met uitzondering van zaterdag, zondag en in Nederland algemeen erkende feestdagen.</p>
@@ -152,9 +152,25 @@
     <p><strong>4.1</strong> Alle door Mowi genoemde prijzen zijn exclusief BTW, tenzij Mowi op grond van de kleineondernemersregeling (KOR) geen BTW mag berekenen.</p>
     <p><strong>4.2</strong> Voor de in artikel 3.4 genoemde zelfstandig af te sluiten Dienst geldt een creditsysteem: Opdrachtgever betaalt een vaste maandvergoeding die een aantal credits omvat (zie artikel 1.6). De actuele maandvergoeding en het daarin begrepen aantal credits zijn gepubliceerd op mowi.agency/pricing en bestaan, op de datum van deze AV, uit:</p>
     <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Dienst</th><th>Maandvergoeding</th><th>Inbegrepen credits</th><th>Eenmalige setupvergoeding</th></tr></thead><tbody>
-      <tr><td>Basis</td><td>€19</td><td>300</td><td>Geen — zelf aan te sluiten</td></tr>
-      <tr><td>Pro</td><td>€79</td><td>1.500</td><td>Geen — zelf aan te sluiten</td></tr>
+      <tr><td>Basis</td><td>€19</td><td>600</td><td>Geen — zelf aan te sluiten</td></tr>
+      <tr><td>Pro</td><td>€79</td><td>3.000</td><td>Geen — zelf aan te sluiten</td></tr>
+      <!-- Call-agent telefoonnummer (2026-08-28, Sal): een vaste euro-regel
+           op hetzelfde abonnement, geen credits — dashboard config/plans.php
+           'call_addon', 1033 cent excl. = €12,50 incl. btw. Verving de
+           creditvergoeding (300 credits/mnd) van dezelfde dag. -->
+      <tr><td>Call-agent — telefoonnummer (aanvulling op Basis of Pro)</td><td>€10,33 (€12,50 incl. btw)</td><td>—</td><td>Geen — zelf aan te sluiten</td></tr>
     </tbody></table></div>
+    <p>Voor de Call-agent geldt daarnaast de in de tabel genoemde vaste maandvergoeding per gekoppeld telefoonnummer. Deze gaat in op het moment dat Opdrachtgever het telefoonnummer in het dashboard activeert, wordt samen met de maandvergoeding van het gekozen pakket geïncasseerd (artikel 4.5) en vervalt zodra de Call-agent wordt verwijderd.</p>
+    <!-- Verbruikstarieven toegevoegd 2026-08-28 met de credit-rebase. Zonder
+         deze regel noemt de tabel hierboven een aantal credits zonder te zeggen
+         wat een credit koopt -- en artikel 1.6 noemt sinds dezelfde datum
+         bewust geen tarief meer, omdat een definitie in bindende voorwaarden
+         geen getal hoort vast te leggen dat config/credits.php kan wijzigen.
+         De bundels (300 -> 600, 1.500 -> 3.000) en de tarieven (1 -> 2 per
+         e-mail) zijn samen verdubbeld: 600 credits à 2 per e-mail is dezelfde
+         300 e-mails die 300 credits à 1 per e-mail was. Wie de tabel alleen
+         zou bijwerken en 1.6 zou laten staan, belooft 600 e-mails voor €19. -->
+    <p>De actuele verbruikstarieven zijn eveneens gepubliceerd op mowi.agency/pricing en bedragen, op de datum van deze AV: 2 credits per door de E-mailagent verwerkte e-mail, 6 credits per belminuut van de Call-agent, en 2 credits per bericht in de Builder. Mowi kan deze tarieven wijzigen met inachtneming van artikel 11.1.</p>
     <p>Credits boven het inbegrepen aantal koopt Opdrachtgever desgewenst zelf bij via het dashboard, tegen de daar vóór de aankoop getoonde prijs per credit-pakket (zie artikel 4.4). De op mowi.agency/pricing gepubliceerde prijzen gelden totdat Mowi hierover schriftelijk anders beslist. Voor maatwerktrajecten die op aanvraag en na een separate Offerte worden geleverd (zie artikel 3.4) — waaronder het platform/de configurator — zijn het in die Offerte genoemde pakket en de daarbij horende prijs leidend; die prijzen kunnen wel een setupvergoeding omvatten, zoals in de Offerte gespecificeerd.</p>
     <p><strong>4.3</strong> De in artikel 4.2 genoemde zelfstandig af te sluiten Dienst kent geen eenmalige setupvergoeding. Wenst Opdrachtgever de koppeling of inrichting door Mowi te laten uitvoeren in plaats van zelf, dan wordt dit als maatwerk op aanvraag geleverd tegen een in een separate Offerte genoemde vergoeding; die vergoeding is in geen geval restitueerbaar zodra Mowi met de uitvoering is begonnen. Voor overige maatwerktrajecten (artikel 3.4) wordt de wijze van facturering van een eventuele eenmalige setupvergoeding bevestigd via het betalingsschema in de Offerte; ook die vergoeding is in geen geval restitueerbaar zodra Mowi met de bouw van de Agent is begonnen.</p>
     <p><strong>4.4 Credits en bijkopen.</strong> Credits boven het in artikel 4.2 genoemde inbegrepen aantal koopt Opdrachtgever zelf bij via het dashboard, tegen de daar vóór de aankoop getoonde prijs per credit-pakket. Zijn de credits van een lopende maand op en zijn er geen credits bijgekocht, dan pauzeert Mowi de Dienst totdat Opdrachtgever credits heeft bijgekocht of de eerstvolgende maandelijkse credit-toekenning ingaat; de Overeenkomst en de reeds ingerichte configuratie blijven daarbij behouden.</p>
