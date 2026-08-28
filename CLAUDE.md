@@ -318,6 +318,7 @@ resurrect any of the old label names above for the current nav.
 
 ### Navigation — current, re-verified 2026-08-26 (the section above predates several rounds
 ### of nav changes this doc never caught up on — this replaces it; do not follow the 2026-08-18
+- **Header "Inloggen" link opens in the SAME tab (2026-08-28) — never `target="_blank"`.** It was the only link on the site opening a new tab, and on an iPhone in Chrome a new tab animates in while the page is already painting, so the dashboard login page visibly "jumped" every time it was opened from the site — and never any other way. Two days were spent looking for that inside the dashboard. Same-tab like the "Start gratis" CTA; the header is duplicated per page and in `build-blog.js`, so change all 21 places together.
 ### description above for the Product menu's contents)
 Verified by reading `test.html`'s live markup directly rather than assumed. `<nav class="
 main-nav">` top-level, in order: **"Zo werkt het"** (`/zo-werkt-het`) → **"Product"**
