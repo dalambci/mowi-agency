@@ -1418,10 +1418,13 @@ main { flex: 1 0 auto; }
    real h1/h2/h3; .lp-step-circle keeps its own further down since a
    number-in-a-circle isn't a heading tag. Body copy stays --font-sans.
    ========================================================================== */
+/* Sizes match flyhermes.ai's own hero h1 exactly (measured off its
+   resolved Tailwind classes: text-5xl base, lg:text-[3.75rem] desktop) —
+   48px mobile, 60px desktop. Previously 36/48px, off at both ends. */
 .lp-hero h1 {
-  font-size: 3rem; line-height: 1.15; font-weight: 600; letter-spacing: -0.02em;
+  font-size: 3.75rem; line-height: 1.15; font-weight: 600; letter-spacing: -0.02em;
 }
-@media (max-width: 63.9rem) { .lp-hero h1 { font-size: 2.25rem; } }
+@media (max-width: 63.9rem) { .lp-hero h1 { font-size: 3rem; } }
 /* hero-sub deliberately NOT overridden here (2026-08-28, Sal: match the
    homepage's own body-text style) — inherits the sitewide .hero-sub
    unchanged (18px/400/1.6), same as every other page's hero. */
