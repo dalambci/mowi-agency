@@ -172,6 +172,18 @@
   transition:opacity .3s ease;
 }
 .wf-hint-hidden{opacity:0}
+/* Touch, not yet armed (Sal, 2026-08-28: "tap to interact, in the middle
+   of the frame so it's more noticeable"): the hint becomes the activator
+   itself — centered, ink-filled, tappable; js/workflow-canvas.js arms
+   the canvas on tap and then drops this class, so it turns back into the
+   small bottom indicator ("Sleep om te verkennen") and stops covering
+   the workflow. */
+.wf-hint.wf-hint-cta{
+  pointer-events:auto;cursor:pointer;top:50%;bottom:auto;transform:translate(-50%,-50%);
+  background:var(--ink);color:var(--bg);border-color:var(--ink);
+  font-size:.875rem;font-weight:600;padding:.625rem 1.125rem;
+  box-shadow:0 2px 8px rgba(18,17,16,.18);
+}
 
 .wf-viewport.wf-armed{touch-action:none}
 

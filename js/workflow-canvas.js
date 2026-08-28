@@ -35,7 +35,7 @@
     var isMac = /Mac|iPhone|iPad/.test(navigator.platform || "") || /Mac/.test((navigator.userAgentData && navigator.userAgentData.platform) || "");
     var ZOOM_KEY = isMac ? "⌘" : "Ctrl";
     var HINT_DESKTOP = "Sleep om te verkennen — " + ZOOM_KEY + " + scroll om te zoomen";
-    var HINT_TOUCH_DISARMED = "Zoom met twee vingers om te verkennen";
+    var HINT_TOUCH_DISARMED = "Tik om te verkennen";
     var HINT_TOUCH_ARMED = "Sleep om te verkennen";
 
     function mountWorkflowCanvas(root) {
@@ -129,6 +129,31 @@
             armed = next;
             viewport.classList.toggle("wf-armed", armed);
             setHint(armed ? HINT_TOUCH_ARMED : HINT_TOUCH_DISARMED, true);
+            // Disarmed on touch: the hint is the tap-to-arm button, centered
+            // in the frame (css .wf-hint-cta). Armed: back to a passive
+            // indicator at the bottom.
+            if (hint) {
+                hint.classList.toggle("wf-hint-cta", !armed);
+                if (!armed) {
+                    hint.setAttribute("role", "button");
+                    hint.setAttribute("tabindex", "0");
+                } else {
+                    hint.removeAttribute("role");
+                    hint.removeAttribute("tabindex");
+                }
+            }
+        }
+
+        if (hint) {
+            hint.addEventListener("click", function () {
+                if (!armed && (coarsePointer || touchSeen)) setArmed(true);
+            });
+            hint.addEventListener("keydown", function (e) {
+                if (!armed && hint.classList.contains("wf-hint-cta") && (e.key === "Enter" || e.key === " ")) {
+                    e.preventDefault();
+                    setArmed(true);
+                }
+            });
         }
 
         if (coarsePointer) {
