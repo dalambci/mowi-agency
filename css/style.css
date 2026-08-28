@@ -635,7 +635,6 @@ main { flex: 1 0 auto; }
 @media (max-width: 63.9rem) {
   .hero { padding-top: 2rem; padding-bottom: 3rem; }
   .hero h1 { font-size: 3rem; } /* 48px */
-  .page-hero-heading { font-size: 3rem; } /* 48px — 2026-08-28: page-hero-heading is now sized like every other hero heading (Sal), same mobile step-down */
   .hero-tight-bottom { padding-bottom: 24px; } /* 3rem (48px) * 0.5 -- same 50% cut as desktop's 80px->40px, not a flat -40px (that left only 8px and read as cramped against the next section, 2026-08-22) */
   .hero-visual { min-height: 220px; }
   .section { padding: 3.5rem 0; }
@@ -772,7 +771,12 @@ main { flex: 1 0 auto; }
 /* Left-aligned hero matching .blog-article h1/p exactly (2rem/700/1.15,
    plain ink-2 body) -- for pages that want a blog-post-style opener
    instead of the sitewide centered .hero. */
-.page-hero-heading { font-size: 3.75rem; line-height: 1.15; }
+/* Back to 2rem (2026-08-28) — briefly unified to the 60px hero size,
+   but Sal asked for it back: this page's heading was deliberately kept
+   at blog-post H1 scale (see the hero-section comment in pricing.html),
+   not the sitewide marketing hero size, and that was a specific earlier
+   call of his the blanket "all hero headings" pass overrode by mistake. */
+.page-hero-heading { font-size: 2rem; line-height: 1.15; }
 .page-hero-body { font-size: 1rem; color: var(--ink-2); margin-top: 0.75rem; max-width: 40rem; }
 /* Halved again 2026-08-22 (Sal: "reduce the hero spacing above and below
    with 50%") -- measured via getBoundingClientRect() before editing:
