@@ -222,9 +222,9 @@ retype credentials from scratch or falling back to a password:
   value on all `<link>`/`<script>` tags referencing them, across every HTML page**, so browsers
   are forced to fetch the new file immediately rather than waiting out the cache. Use the
   current date (`YYYYMMDD`); if multiple deploys land same-day, append `-2`, `-3`, etc.
-  **Latest coordinated bump: `20260829-1`** (2026-08-29, homepage icons — see "Homepage
-  imagery" under Design system; the previous sweep, `20260828-12`, was the homepage imagery
-  the day before). Before that sweep, `pricing.html` had drifted to `-11` while
+  **Latest coordinated bump: `20260829-2`** (2026-08-29, the WebKit card-strip fix below;
+  `-1` earlier the same day was the homepage icons, `20260828-12` the homepage imagery the day
+  before). Before that sweep, `pricing.html` had drifted to `-11` while
   the other 21 pages sat on `-10` — a page-local bump from an earlier session. When bumping,
   `grep -ho 'style.css?v=[0-9-]*' *.html blog/*.html | sort | uniq -c` should show exactly
   one distinct value; if it shows two, take the higher one +1 so nothing goes backwards.
@@ -703,6 +703,20 @@ applied to all 16, and `test.html` is the reliable copy-paste source.
   - `.workflow-card-visual` is now an `<img>` rule (`width:100%; height:auto; aspect-ratio:
     3/2; object-fit:cover`). The `height:auto` is load-bearing: without it the `<img>`'s
     `height="600"` attribute wins and every card renders 600px tall (caught in QA).
+  - **WebKit regression from that swap, fixed the next day (2026-08-29) after Sal saw it on his
+    iPhone ("not infinite and way too fast" on the card slider, logo marquee fine):** the
+    `.card-strip` is `width: max-content`, and **WebKit sizes a flex container's max-content
+    from each item's content, ignoring a definite `flex-basis`** (Chromium honours it). A
+    900px-intrinsic `<img>` per card ballooned the track to **17,296px in WebKit vs 4,660px in
+    Chromium** — 12.6k of dead space and past Safari's ~16k animated-layer limit. Fix:
+    `.workflow-card` gets a definite `width: clamp(240px, 26vw, 300px)` (+ `flex: 0 0 auto`)
+    instead of only a flex-basis; measured 4,660px in both engines afterwards. **Lesson: any
+    `width: max-content` flex track on this site needs definite item widths, and mobile QA
+    must include Playwright's `webkit` with an iPhone device profile — Chromium-only
+    screenshots at 390px never showed this** (the logo marquee's `<img>`s have no intrinsic
+    size until loaded and are sized by CSS, which is why it was unaffected). Reproduce/verify
+    with `pw.webkit` + `pw.devices["iPhone 13"]`, reading `#workflow-card-strip`'s
+    `offsetWidth`.
   - **"Eén platform voor alles wat terugkomt" tabs (2026-08-29):** the five "Voorbeeld volgt"
     tiles are now **static workflow pictures** using the same `.wf-canvas` component as
     `/templates` (nodes, curved edges, dot grid) via a `.wf-canvas-static` variant at the end of

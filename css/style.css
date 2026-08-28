@@ -613,7 +613,19 @@ main { flex: 1 0 auto; }
    actually see and activate what's focused (WCAG 2.2.2). */
 .card-strip:focus-within { animation-play-state: paused; }
 .workflow-card {
-  flex: 0 0 clamp(240px, 26vw, 300px);
+  /* A definite `width`, NOT just a flex-basis (2026-08-29, real iPhone
+     regression report from Sal: "not infinite and way too fast"). The
+     track is `width: max-content`, and WebKit sizes a flex container's
+     max-content from each item's CONTENT, ignoring a definite flex-basis
+     (Chromium honours it). With a placeholder div that only over-counted
+     the cards' text (~5.8k vs 4.7k, harmless). Once the visual became a
+     900px-intrinsic <img> the track ballooned to ~17.3k px in WebKit —
+     past Safari's ~16k compositing-layer limit for an animated layer —
+     while Chromium stayed at 4.7k, which is why desktop QA never saw it.
+     A definite width makes every engine use the width as the item's
+     contribution: measured 4660px in both. Keep this a `width`. */
+  flex: 0 0 auto;
+  width: clamp(240px, 26vw, 300px);
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-card);
