@@ -1424,8 +1424,21 @@ main { flex: 1 0 auto; }
 .lp-card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 3rem; }
 @media (max-width: 47.9rem) { .lp-card-grid { grid-template-columns: 1fr; } }
 .lp-card { background: var(--surface); border: 1px solid var(--border); border-radius: 1.2rem; padding: 2rem; }
-.lp-card-icon { width: 2rem; height: 2rem; margin-bottom: 1rem; color: var(--ink-2); }
-.lp-card-icon svg { width: 100%; height: 100%; }
+/* Bug fix (2026-08-28, real device finding): .lp-card-icon is a <span>,
+   inline by default — width/height on an inline element are a no-op per
+   spec, so the bare SVG rendered at its browser-default intrinsic size
+   (huge, dominating the whole card) instead of the intended small icon.
+   display:inline-flex makes the sizing take effect. Also adds the small
+   tinted circle behind the glyph that the reference actually uses (matches
+   .lp-step-circle's own background/border treatment) — a detail the first
+   pass missed even before the sizing bug. */
+.lp-card-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 2.75rem; height: 2.75rem; margin-bottom: 1.25rem;
+  border-radius: 50%; background: var(--muted); border: 1px solid var(--border);
+  color: var(--ink-2); flex-shrink: 0;
+}
+.lp-card-icon svg { width: 1.25rem; height: 1.25rem; display: block; }
 .lp-card h3 { font-family: "Inter Tight", var(--font-sans); font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem; }
 .lp-card p { font-size: 0.875rem; color: var(--ink-2); line-height: 1.625; }
 
