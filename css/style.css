@@ -499,16 +499,16 @@ main { flex: 1 0 auto; }
   mask-image: radial-gradient(ellipse 75% 65% at 50% 15%, #000 20%, transparent 72%);
   -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 15%, #000 20%, transparent 72%);
 }
-.hero h1 { font-size: 5rem; line-height: 1.02; font-weight: 700; letter-spacing: -0.02em; overflow-wrap: break-word; }
+/* 60px (2026-08-28, Sal: "update the font size for all hero headings to
+   the size of the hero heading of the call agent page") -- was 80px.
+   .hero-h1-reduced below no longer reduces anything relative to this (it
+   used to compute 80% of the old 80px = 64px); kept as a harmless no-op
+   class on the 3 pages that carry it rather than editing their markup,
+   since every hero heading is now meant to be this one size regardless. */
+.hero h1 { font-size: 3.75rem; line-height: 1.02; font-weight: 700; letter-spacing: -0.02em; overflow-wrap: break-word; }
 .hero-sub { font-size: 1.125rem; color: var(--ink-2); margin-top: 1.5rem; max-width: 34rem; }
 .hero-actions { display: flex; align-items: center; justify-content: center; gap: 1.5rem; margin-top: 2rem; flex-wrap: wrap; }
 .hero-visual { min-height: 360px; margin-top: 3.5rem; width: 100%; }
-/* Page-specific hero modifiers (Sal, 2026-08-22) -- index.html/zo-werkt-
-   het.html/templates.html only. security.html also uses the shared .hero
-   component but was NOT part of this request, so it stays on the base
-   5rem/2.75rem sizing untouched. Equal specificity to .hero h1/.hero, so
-   these must stay after those base rules in source order to win. */
-.hero-h1-reduced h1 { font-size: 4rem; } /* 5rem * 0.8 */
 .hero-tight-bottom { padding-bottom: 40px; } /* 5rem (80px) - 40px */
 
 /* --- Integrations marquee ----------------------------------------------------
@@ -634,8 +634,7 @@ main { flex: 1 0 auto; }
 
 @media (max-width: 63.9rem) {
   .hero { padding-top: 2rem; padding-bottom: 3rem; }
-  .hero h1 { font-size: 2.75rem; }
-  .hero-h1-reduced h1 { font-size: 2.2rem; } /* 2.75rem * 0.8 */
+  .hero h1 { font-size: 3rem; } /* 48px */
   .hero-tight-bottom { padding-bottom: 24px; } /* 3rem (48px) * 0.5 -- same 50% cut as desktop's 80px->40px, not a flat -40px (that left only 8px and read as cramped against the next section, 2026-08-22) */
   .hero-visual { min-height: 220px; }
   .section { padding: 3.5rem 0; }
@@ -1418,13 +1417,14 @@ main { flex: 1 0 auto; }
    real h1/h2/h3; .lp-step-circle keeps its own further down since a
    number-in-a-circle isn't a heading tag. Body copy stays --font-sans.
    ========================================================================== */
-/* Sizes match flyhermes.ai's own hero h1 exactly (measured off its
-   resolved Tailwind classes: text-5xl base, lg:text-[3.75rem] desktop) —
-   48px mobile, 60px desktop. Previously 36/48px, off at both ends. */
-.lp-hero h1 {
-  font-size: 3.75rem; line-height: 1.15; font-weight: 600; letter-spacing: -0.02em;
-}
-@media (max-width: 63.9rem) { .lp-hero h1 { font-size: 3rem; } }
+/* Only line-height/font-weight here now (2026-08-28) — size and
+   letter-spacing used to matter here too (matching flyhermes.ai's own
+   hero h1 independently of the rest of the site), but both are now the
+   sitewide .hero h1 values as well (Sal: "all hero headings" the same
+   size), so only the genuine remaining differences are worth stating:
+   lighter weight and looser line-height than the site's other heroes,
+   matching the reference's own proportions. */
+.lp-hero h1 { line-height: 1.15; font-weight: 600; }
 /* hero-sub deliberately NOT overridden here (2026-08-28, Sal: match the
    homepage's own body-text style) — inherits the sitewide .hero-sub
    unchanged (18px/400/1.6), same as every other page's hero. */
