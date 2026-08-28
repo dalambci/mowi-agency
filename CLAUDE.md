@@ -526,6 +526,14 @@ applied to all 16, and `test.html` is the reliable copy-paste source.
   proberen." No numbers, no "geen creditcard"-style claims (signup/trial terms are not verified
   from this repo). The previous copy ("Automatisering die naar u luistert" / "Mowi is het
   platform waar u in gewone taal zegt…") is superseded, kept only in git history.
+- **Inbox agent hero (2026-08-29, Sal: "more of a direct response approach"):** `<h1>` is now
+  **"Nooit meer een mail die blijft liggen."** (was "Uw inbox is 's ochtends al gesorteerd.") —
+  a pain-elimination headline taken from the page's own story section ("De offerte die blijft
+  liggen … Hij belt de concurrent."), deliberately parallel to the Voice agent's "Nooit meer een
+  gemiste oproep." so the two agent pages rhyme. The sub's third beat changed with it (was
+  "Geen offerteaanvraag die drie dagen blijft liggen" — same phrase as the new heading; now
+  "Geen avond meer op de bank met uw inbox", the page's other pain). Keep the two agent heroes
+  parallel if either is rewritten again.
 - **Current positioning, unchanged by v2:** Mowi is a **conversational workflow-automation
   platform** for the Dutch MKB/SMB — "u zegt het, en het werkt." The product story is:
   describe what you want done in plain language, Mowi configures it from tested building
