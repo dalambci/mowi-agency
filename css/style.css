@@ -83,7 +83,7 @@ body {
    .workflow-card h3, .tier-card-name, .blog-article h1/h2/h3, ...) so
    every real h1/h2/h3 picks it up regardless of which class styles its
    size, with nothing to miss. No h4-6 exist on this site (checked). */
-h1, h2, h3 { font-family: var(--font-heading); }
+h1, h2, h3 { font-family: var(--font-heading); font-weight: 600; }
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
 button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
@@ -427,7 +427,7 @@ main { flex: 1 0 auto; }
   overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
 }
 
-.section-heading { font-size: 2rem; line-height: 1.2; font-weight: 700; }
+.section-heading { font-size: 2rem; line-height: 1.2; }
 .section-heading-center { text-align: center; }
 .section-sub { color: var(--ink-2); font-size: 1.0625rem; margin-top: 0.875rem; max-width: 40rem; }
 .section-sub-center { text-align: center; margin-left: auto; margin-right: auto; }
@@ -505,7 +505,7 @@ main { flex: 1 0 auto; }
    used to compute 80% of the old 80px = 64px); kept as a harmless no-op
    class on the 3 pages that carry it rather than editing their markup,
    since every hero heading is now meant to be this one size regardless. */
-.hero h1 { font-size: 3.75rem; line-height: 1.02; font-weight: 700; letter-spacing: -0.02em; overflow-wrap: break-word; }
+.hero h1 { font-size: 3.75rem; line-height: 1.02; letter-spacing: -0.02em; overflow-wrap: break-word; }
 .hero-sub { font-size: 1.125rem; color: var(--ink-2); margin-top: 1.5rem; max-width: 34rem; }
 .hero-actions { display: flex; align-items: center; justify-content: center; gap: 1.5rem; margin-top: 2rem; flex-wrap: wrap; }
 .hero-visual { min-height: 360px; margin-top: 3.5rem; width: 100%; }
@@ -629,12 +629,13 @@ main { flex: 1 0 auto; }
 /* Overrides .placeholder-tile's white fill to sand — it sits inside a
    white .workflow-card, so it needs the other approved tone to read. */
 .workflow-card-visual { min-height: 140px; background: var(--bg); }
-.workflow-card h3 { font-size: 1.0625rem; font-weight: 600; }
+.workflow-card h3 { font-size: 1.0625rem; }
 .workflow-card p { font-size: 0.9375rem; color: var(--ink-2); }
 
 @media (max-width: 63.9rem) {
   .hero { padding-top: 2rem; padding-bottom: 3rem; }
   .hero h1 { font-size: 3rem; } /* 48px */
+  .page-hero-heading { font-size: 3rem; } /* 48px — 2026-08-28: page-hero-heading is now sized like every other hero heading (Sal), same mobile step-down */
   .hero-tight-bottom { padding-bottom: 24px; } /* 3rem (48px) * 0.5 -- same 50% cut as desktop's 80px->40px, not a flat -40px (that left only 8px and read as cramped against the next section, 2026-08-22) */
   .hero-visual { min-height: 220px; }
   .section { padding: 3.5rem 0; }
@@ -718,7 +719,7 @@ main { flex: 1 0 auto; }
    The adjacent-sibling combinator below is what actually targets "the
    category right after the heading." */
 .page-heading + .integration-category { margin-top: 32px; }
-.integration-category-heading { font-size: 1.0625rem; font-weight: 600; margin-bottom: 1.25rem; }
+.integration-category-heading { font-size: 1.0625rem; margin-bottom: 1.25rem; }
 .integration-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -765,13 +766,13 @@ main { flex: 1 0 auto; }
 /* Section headings on this page read at the same scale as the blog's own
    article prose (.blog-article h2/p), left-aligned, not the homepage's
    bigger centered .section-heading treatment. */
-.page-heading { font-size: 1.375rem; font-weight: 600; line-height: 1.2; }
+.page-heading { font-size: 1.375rem; line-height: 1.2; }
 .page-body { font-size: 1rem; color: var(--ink-2); margin-top: 0.75rem; max-width: 40rem; }
 .page-cta { margin-top: 1.5rem; }
 /* Left-aligned hero matching .blog-article h1/p exactly (2rem/700/1.15,
    plain ink-2 body) -- for pages that want a blog-post-style opener
    instead of the sitewide centered .hero. */
-.page-hero-heading { font-size: 2rem; font-weight: 700; line-height: 1.15; }
+.page-hero-heading { font-size: 3.75rem; line-height: 1.15; }
 .page-hero-body { font-size: 1rem; color: var(--ink-2); margin-top: 0.75rem; max-width: 40rem; }
 /* Halved again 2026-08-22 (Sal: "reduce the hero spacing above and below
    with 50%") -- measured via getBoundingClientRect() before editing:
@@ -975,7 +976,7 @@ main { flex: 1 0 auto; }
 }
 .trust-card-head { flex: 0 0 12rem; display: flex; flex-direction: column; gap: 0.75rem; }
 .trust-card-icon { width: 22px; height: 22px; color: var(--ink-2); }
-.trust-card-head h3 { font-size: 1.0625rem; font-weight: 600; }
+.trust-card-head h3 { font-size: 1.0625rem; }
 .trust-card p { flex: 1; font-size: 0.9375rem; color: var(--ink-2); margin: 0; }
 @media (max-width: 63.9rem) {
   .trust-card { flex-direction: column; gap: 0.75rem; }
@@ -1030,7 +1031,7 @@ main { flex: 1 0 auto; }
   padding: 2rem 1.75rem;
 }
 .tier-card-highlight { border: 1px solid var(--ink); }
-.tier-card-name { font-size: 1.0625rem; font-weight: 600; }
+.tier-card-name { font-size: 1.0625rem; }
 .tier-price { margin-top: 1.25rem; display: flex; align-items: baseline; gap: 0.25rem; }
 .tier-price-amount { font-size: 2rem; font-weight: 700; line-height: 1; }
 .tier-price-period { font-size: 0.9375rem; color: var(--ink-2); }
@@ -1154,7 +1155,7 @@ main { flex: 1 0 auto; }
 }
 .pill-panel-copy-head .placeholder-icon { width: 2.25rem; height: 2.25rem; }
 .pill-panel-copy-head span { font-weight: 600; font-size: 0.9375rem; color: var(--ink-2); }
-.pill-panel-copy h3 { font-size: 1.375rem; font-weight: 600; line-height: 1.25; }
+.pill-panel-copy h3 { font-size: 1.375rem; line-height: 1.25; }
 .pill-panel-copy p { font-size: 1rem; color: var(--ink-2); margin-top: 0.875rem; max-width: 30rem; }
 .pill-panel-copy .btn-primary { margin-top: 1.5rem; }
 .pill-panel-visual { min-height: 320px; }
@@ -1175,7 +1176,7 @@ main { flex: 1 0 auto; }
 }
 .reasons-grid > div { padding-top: 1.5rem; border-top: 1px solid var(--border); }
 .reasons-grid .placeholder-icon { margin-bottom: 1.25rem; }
-.reasons-grid h3 { font-size: 1.0625rem; font-weight: 600; }
+.reasons-grid h3 { font-size: 1.0625rem; }
 .reasons-grid p { font-size: 0.9375rem; color: var(--ink-2); margin-top: 0.625rem; }
 @media (max-width: 63.9rem) {
   .reasons-grid { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
@@ -1244,7 +1245,6 @@ main { flex: 1 0 auto; }
 }
 .footer-cta-title {
   font-size: clamp(2rem, 4.5vw, 3.5rem);
-  font-weight: 700;
   line-height: 1.08;
   letter-spacing: -0.02em;
 }
@@ -1350,9 +1350,9 @@ main { flex: 1 0 auto; }
   margin: 0 auto;
   padding: 4rem 20px;
 }
-.blog-article h1 { font-size: 2rem; font-weight: 700; line-height: 1.15; margin-bottom: 0.75rem; }
-.blog-article h2 { font-size: 1.375rem; font-weight: 600; margin: 2.25rem 0 0.75rem; }
-.blog-article h3 { font-size: 1.0625rem; font-weight: 600; margin: 1.75rem 0 0.5rem; }
+.blog-article h1 { font-size: 2rem; line-height: 1.15; margin-bottom: 0.75rem; }
+.blog-article h2 { font-size: 1.375rem; margin: 2.25rem 0 0.75rem; }
+.blog-article h3 { font-size: 1.0625rem; margin: 1.75rem 0 0.5rem; }
 .blog-article p { margin-bottom: 1rem; color: var(--ink-2); }
 .blog-article strong { color: var(--ink); }
 .blog-article a { text-decoration: underline; text-underline-offset: 2px; }
@@ -1392,7 +1392,7 @@ main { flex: 1 0 auto; }
   transition: border-color 0.15s ease;
 }
 .blog-card:hover { border-color: var(--ink-3); }
-.blog-card h2 { font-size: 1.0625rem; font-weight: 600; margin: 0.5rem 0; }
+.blog-card h2 { font-size: 1.0625rem; margin: 0.5rem 0; }
 .blog-card p { font-size: 0.9375rem; color: var(--ink-2); }
 .blog-card-date { font-size: 0.8125rem; color: var(--ink-3); }
 
@@ -1424,13 +1424,13 @@ main { flex: 1 0 auto; }
    size), so only the genuine remaining differences are worth stating:
    lighter weight and looser line-height than the site's other heroes,
    matching the reference's own proportions. */
-.lp-hero h1 { line-height: 1.15; font-weight: 600; }
+.lp-hero h1 { line-height: 1.15; }
 /* hero-sub deliberately NOT overridden here (2026-08-28, Sal: match the
    homepage's own body-text style) — inherits the sitewide .hero-sub
    unchanged (18px/400/1.6), same as every other page's hero. */
 
 .lp-section-heading {
-  font-size: 1.875rem; line-height: 1.2; font-weight: 600; letter-spacing: -0.01em;
+  font-size: 1.875rem; line-height: 1.2; letter-spacing: -0.01em;
 }
 @media (min-width: 48rem) { .lp-section-heading { font-size: 2.5rem; } }
 /* Tight heading-to-subtext gap for a heading immediately followed by a
@@ -1438,11 +1438,13 @@ main { flex: 1 0 auto; }
    "Voor elke branche anders ingesteld") — .section-head-row-center's own
    sitewide gap is 2.5rem, right for a heading beside a longer blurb +
    link, but reads as too loose for a tight title+subtitle pairing.
-   0.75rem instead, matching the site's OWN existing convention for this
-   exact pairing (.page-hero-heading + .page-hero-body's margin-top).
-   Scoped to this class, not .section-head-row-center itself, so it
-   doesn't change that spacing anywhere else on the site. */
-.section-head-row-center:has(.lp-section-heading) { gap: 0.75rem; }
+   0.875rem instead (corrected from an initial 0.75rem, Sal: match the
+   homepage's own "Workflows in minuten" heading exactly, measured live
+   at 14px) — .section-sub's own margin-top, the standard gap for a
+   .section-heading immediately followed by its subtext everywhere else
+   on the site. Scoped to this class, not .section-head-row-center
+   itself, so it doesn't change that spacing anywhere else on the site. */
+.section-head-row-center:has(.lp-section-heading) { gap: 0.875rem; }
 
 /* ---------- Filled, large-radius card (their .tool-card: 19.2px radius) */
 /* No margin-top here (2026-08-28 fix, Sal: match the homepage's own
@@ -1469,7 +1471,7 @@ main { flex: 1 0 auto; }
   color: var(--ink-2); flex-shrink: 0;
 }
 .lp-card-icon svg { width: 1.25rem; height: 1.25rem; display: block; }
-.lp-card h3 { font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem; }
+.lp-card h3 { font-size: 1.125rem; margin-bottom: 0.5rem; }
 /* 15px/1.6 (2026-08-28: matches .workflow-card p exactly — the homepage's
    own card body-text style — rather than the tighter 14px/1.625 this
    started at). */
@@ -1485,7 +1487,7 @@ main { flex: 1 0 auto; }
   font-family: "Inter Tight", var(--font-sans); font-size: 1.25rem; font-weight: 600;
   margin: 0 auto 1.5rem;
 }
-.lp-step h3 { font-size: 1.25rem; font-weight: 600; text-align: center; margin-bottom: 0.5rem; }
+.lp-step h3 { font-size: 1.25rem; text-align: center; margin-bottom: 0.5rem; }
 .lp-step p { font-size: 0.9375rem; color: var(--ink-2); text-align: center; }
 
 /* ---------- Full-width mobile CTA + microcopy under it (their pattern) */
