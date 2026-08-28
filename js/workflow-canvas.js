@@ -27,7 +27,14 @@
     var MAX_SCALE = 2;
 
     var coarsePointer = window.matchMedia && window.matchMedia("(hover: none) and (pointer: coarse)").matches;
-    var HINT_DESKTOP = "Sleep om te verkennen — scroll om te zoomen";
+    // Cooperative wheel (Sal, 2026-08-28: scrolling the page with the
+    // cursor over the widget zoomed the widget instead — the same trap
+    // Google Maps solves with "use Ctrl + scroll to zoom the map"): a
+    // plain wheel scrolls the page and briefly shows this hint; Ctrl/⌘ +
+    // wheel (which is also what a trackpad pinch sends) zooms the canvas.
+    var isMac = /Mac|iPhone|iPad/.test(navigator.platform || "") || /Mac/.test((navigator.userAgentData && navigator.userAgentData.platform) || "");
+    var ZOOM_KEY = isMac ? "⌘" : "Ctrl";
+    var HINT_DESKTOP = "Sleep om te verkennen — " + ZOOM_KEY + " + scroll om te zoomen";
     var HINT_TOUCH_DISARMED = "Zoom met twee vingers om te verkennen";
     var HINT_TOUCH_ARMED = "Sleep om te verkennen";
 
@@ -89,6 +96,17 @@
             if (!hint) return;
             hint.textContent = text;
             hint.classList.toggle("wf-hint-hidden", !visible);
+        }
+
+        // Shows the desktop hint for a moment (a plain wheel over the
+        // canvas — the user probably wanted to scroll the page, and did;
+        // this just says how to zoom instead), even after it was hidden.
+        var flashTimer = null;
+        function flashHint() {
+            if (!hint || touchSeen) return;
+            setHint(HINT_DESKTOP, true);
+            clearTimeout(flashTimer);
+            flashTimer = setTimeout(function () { setHint(HINT_DESKTOP, false); }, 1600);
         }
 
         // touchSeen: a touch-screen laptop is a fine-pointer device by the
@@ -202,6 +220,7 @@
             // the latter is restored explicitly right after, so the
             // keyboard pan/zoom shortcuts below still work post-drag.
             e.preventDefault();
+            viewport.classList.add("wf-pointer-focus");
             viewport.focus();
             dragging = true;
             moved = false;
@@ -274,6 +293,13 @@
         viewport.addEventListener(
             "wheel",
             function (e) {
+                // Plain wheel: let the page scroll (no preventDefault), just
+                // say how to zoom. Ctrl/⌘ + wheel — and a trackpad pinch,
+                // which browsers deliver as a ctrlKey wheel — zooms.
+                if (!e.ctrlKey && !e.metaKey) {
+                    flashHint();
+                    return;
+                }
                 e.preventDefault();
                 var rect = viewport.getBoundingClientRect();
                 var factor = Math.pow(1.0015, -e.deltaY);
@@ -292,6 +318,9 @@
         if (resetBtn) resetBtn.addEventListener("click", function () { center(); markExplored(); });
 
         viewport.addEventListener("keydown", function (e) {
+            // Keyboard use: the focus ring is welcome again (see
+            // .wf-pointer-focus in css/workflow-canvas.css).
+            viewport.classList.remove("wf-pointer-focus");
             var step = 48;
             if (e.key === "ArrowLeft") { offsetX += step; clamp(); apply(); }
             else if (e.key === "ArrowRight") { offsetX -= step; clamp(); apply(); }

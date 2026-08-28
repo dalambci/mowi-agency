@@ -114,6 +114,16 @@
   background-image:radial-gradient(var(--wf-dot) 1.25px,transparent 0);background-size:20px 20px;
 }
 .wf-viewport.wf-dragging{cursor:grabbing}
+/* No focus ring after pointer use (Sal, 2026-08-28: "remove the border
+   over the widget once active"): js/workflow-canvas.js focuses the
+   viewport on pointerdown so the keyboard shortcuts work, and the
+   browser then drew its default focus outline around the whole widget.
+   .wf-pointer-focus is set on pointerdown and cleared on the first
+   keydown, so someone who Tabs into the canvas still gets a visible
+   ring (the site's a/button :focus-visible treatment, inset so it
+   stays inside the rounded frame). */
+.wf-viewport:focus{outline:none}
+.wf-viewport:focus-visible:not(.wf-pointer-focus){outline:2px solid var(--ink);outline-offset:-2px}
 .wf-stage{position:relative;transform-origin:0 0;will-change:transform}
 .wf-edges{position:absolute;top:0;left:0;pointer-events:none}
 .wf-edge-path{fill:none;stroke:var(--wf-edge);stroke-width:1.5}
