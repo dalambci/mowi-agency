@@ -92,30 +92,50 @@
     <section class="section" id="pricing-hero">
       <div class="container">
         <h1 class="page-hero-heading">Betaal per gebruik</h1>
-        <p class="page-hero-body">Eén credit staat gelijk aan één verwerkte e-mail. Bellen en workflows verbruiken meer credits per gebruik. Belminuten volgen zodra de call agent op de site verkrijgbaar is.</p>
+        <p class="page-hero-body">Credits rekenen per gebruik af: 2 credits per verwerkte e-mail, 6 per belminuut. Bouwopdrachten in de Builder kosten 2 credits per bericht.</p>
         <p class="page-hero-body">U kunt altijd bijkopen of overstappen. Uw configuratie blijft staan.</p>
       </div>
     </section>
 
     <!-- ================= Tier grid =================
-         Trial allocation ("30 gratis credits", no day count) is a proposal,
+         Trial allocation ("60 gratis credits", no day count) is a proposal,
          not a vault-confirmed figure -- the credit model never defined a
          trial and the 14-day framing is formally retired (masterplan §5).
-         The other figures (€19/mnd, 300 credits, 1 e-mail = 1 credit) are
-         the vault's own recommended figures, confirmed by Sal 2026-08-22
-         when this page was built -- see the Decisions log and the
-         masterplan §5 update the same day. The belminuut rate is
-         deliberately NOT rendered anywhere on this page yet (the hero
-         above says "volgen zodra de call agent op de site verkrijgbaar
-         is") -- REPRICED 2026-08-28 in config/credits.php from
-         1 belminuut ≈ 10 credits to 1 belminuut ≈ 4 credits, after
-         researched Dutch competitor rates (Fonio €0.10/min, CallingBird
-         €0.35/min) showed the original figure priced voice at roughly
-         2-6x the market it competes in; see
-         "Mowi - Competitive positioning 2026-08.md" §6/§7 in the vault
-         for the full comparison. Still RECOMMENDED, not confirmed on this
-         page -- update this comment (and add the real copy) the day the
-         Call agent's `sold_on_site` flips true.
+
+         REBASED 2026-08-28 (Sal): the credit is now worth HALF what it was.
+         Bundles doubled (EUR19 -> 600, EUR79 -> 3.000, trial 30 -> 60) and
+         every usage rate doubled with them, so the real prices below are
+         unchanged -- an e-mail still costs EUR0,063. Deliberate: a bigger
+         headline number, and integer granularity fine enough to price a
+         belminuut at something other than a multiple of EUR0,063.
+
+         Note what did NOT change, because it is the figure customers
+         actually read: "15 e-mails per werkdag" (Basis) and "75" (Pro) are
+         identical before and after -- 600 credits at 2/e-mail is the same
+         300 e-mails that 300 credits at 1/e-mail was.
+
+         The one real price change is voice: 1 belminuut went 10 -> 4 -> 6
+         credits across two passes the same day. In money that is EUR0,63 ->
+         EUR0,19/min, a 70% cut from the original. Basis: the researched
+         Dutch market (Fonio EUR0,099/min, CallingBird EUR0,35, VoxFlow
+         EUR99/mo unlimited) against a corrected variable COGS of
+         EUR0,085-0,123/min -- the $7,70/mo number rental is NOT in that
+         figure, it is recovered separately by credits.fixed_addons. See
+         "Mowi - Competitive positioning 2026-08.md" in the vault.
+
+         The belminuut rate IS now on the hero. It used to be withheld
+         behind "volgen zodra de call agent op de site verkrijgbaar is",
+         which as of 2026-08-28 is stale in both halves: the Call agent is
+         available (agent_types.telefoon_agent.available = true, Twilio KYC
+         cleared and a real NL number is live), and the rate is settled at
+         6 credits. Keeping that sentence would have promised a price the
+         same paragraph had already stated.
+
+         NEW on the hero 2026-08-28: Builder messages now cost credits (2
+         each). They were previously free and unmetered. Stated here because
+         AV art. 4.2 makes this page the contractually leading price list --
+         a charge clients will actually see on their meter must not be
+         absent from it.
          Both self-serve CTAs point at signup ahead of CREDITS_ENABLED going
          true in production (Sal's explicit call, publish-now) -- a real
          signup today still runs the old retired per-agent trial model until
@@ -134,15 +154,20 @@
 
          Second tier added 2026-08-22 (still later the same day): "Agents"
          renamed to "Basis" (the name stopped describing anything once every
-         tier grants every agent) and a new "Pro" card (€79/1.500 credits)
+         tier grants every agent) and a new "Pro" card (€79/1.500 credits --
+         3.000 since the 2026-08-28 rebase below; the figure here is left as
+         it stood that day because this paragraph is a record of a decision,
+         not a live price)
          inserted above it. Deliberately ONE new tier, not the two Sal
          initially asked for -- margin math showed volume-discount tiers
          reduce usage profit (a customer on Pro pays LESS than the same
          usage on Basis+top-ups would cost them), which cuts against Sal's
          own stated goal of profit scaling with usage. Two tiers would also
          have meant a third published, contractually-binding (AV art. 4.2)
-         breakpoint set with zero real usage data -- credits are still
-         dormant (`config('credits.enabled')` false). Support-tier
+         breakpoint set with zero real usage data -- credits were still
+         dormant that day (`config('credits.enabled')` false; it is true in
+         production since 2026-08-27, so this reasoning is history, not a
+         current constraint). Support-tier
          differentiation (a mid-tier with faster/dedicated support) was
          considered and rejected: Mowi is a confirmed eenmanszaak, the
          masterplan is BINDING that Motion A support stays docs-first with
@@ -162,10 +187,10 @@
           <div class="tier-card tier-card-highlight">
             <h2 class="tier-card-name">Start gratis</h2>
             <div class="tier-price"><span class="tier-price-amount">€0</span></div>
-            <p class="tier-price-sub">30 gratis credits</p>
+            <p class="tier-price-sub">60 gratis credits</p>
             <p class="tier-profile">Genoeg om het uit te proberen</p>
             <ul class="tier-features">
-              <li>30 gratis credits</li>
+              <li>60 gratis credits</li>
               <li>Geen betaalgegevens nodig</li>
               <li>Toegang tot alle agents en workflows</li>
               <li>Geen automatische overgang naar betaald</li>
@@ -176,11 +201,11 @@
           <div class="tier-card">
             <h2 class="tier-card-name">Basis</h2>
             <div class="tier-price"><span class="tier-price-amount">€19</span><span class="tier-price-period">/mnd</span></div>
-            <p class="tier-price-sub">300 credits per maand</p>
+            <p class="tier-price-sub">600 credits per maand</p>
             <p class="tier-profile">Ongeveer 15 e-mails per werkdag</p>
             <ul class="tier-features">
               <li>Alles uit Start gratis</li>
-              <li>300 credits per maand</li>
+              <li>600 credits per maand</li>
               <li>Eén tegoed voor alle agents en workflows</li>
               <li>Bijkopen wanneer u wilt</li>
               <li>Pauzeert netjes bij op tegoed</li>
@@ -191,11 +216,11 @@
           <div class="tier-card">
             <h2 class="tier-card-name">Pro</h2>
             <div class="tier-price"><span class="tier-price-amount">€79</span><span class="tier-price-period">/mnd</span></div>
-            <p class="tier-price-sub">1.500 credits per maand</p>
+            <p class="tier-price-sub">3.000 credits per maand</p>
             <p class="tier-profile">Ongeveer 75 e-mails per werkdag</p>
             <ul class="tier-features">
               <li>Alles uit Basis</li>
-              <li>1.500 credits per maand</li>
+              <li>3.000 credits per maand</li>
               <li>Voordeliger per credit</li>
               <li>Bijkopen wanneer u wilt</li>
             </ul>
