@@ -697,6 +697,29 @@ main { flex: 1 0 auto; }
   flex-shrink: 0;
 }
 
+/* --- Icon tile (2026-08-29) ------------------------------------------------
+   The real replacement for .placeholder-icon once a glyph exists: the same
+   tinted circle + hairline .lp-card-icon uses on the agent pages, so the
+   site keeps ONE icon treatment (that rule predates this one and is left
+   as-is; new slots should use .icon-tile). Sized to the slot it replaces by
+   the context rules that sit next to the old placeholder ones. Glyphs are
+   inline SVG on the 24-grid, stroke 1.75, round caps/joins — the same
+   drawing rules as the workflow-canvas node icons and the agent-page cards.
+   Monochrome by design: currentColor = --ink-2, no fills beyond a dot. */
+.icon-tile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: var(--muted);
+  border: 1px solid var(--border);
+  color: var(--ink-2);
+  flex-shrink: 0;
+}
+.icon-tile svg { width: 1.25rem; height: 1.25rem; display: block; }
+
 /* --- Alternating split rows -------------------------------------------------
    Generic two-column row (copy + visual) for pages like /zo-werkt-het that
    step through a process one beat at a time. Copy always comes first in the
@@ -1185,6 +1208,8 @@ main { flex: 1 0 auto; }
   margin-bottom: 1.25rem;
 }
 .pill-panel-copy-head .placeholder-icon { width: 2.25rem; height: 2.25rem; }
+.pill-panel-copy-head .icon-tile { width: 2.25rem; height: 2.25rem; }
+.pill-panel-copy-head .icon-tile svg { width: 1.125rem; height: 1.125rem; }
 .pill-panel-copy-head span { font-weight: 600; font-size: 0.9375rem; color: var(--ink-2); }
 .pill-panel-copy h3 { font-size: 1.375rem; line-height: 1.25; }
 .pill-panel-copy p { font-size: 1rem; color: var(--ink-2); margin-top: 0.875rem; max-width: 30rem; }
@@ -1207,6 +1232,7 @@ main { flex: 1 0 auto; }
 }
 .reasons-grid > div { padding-top: 1.5rem; border-top: 1px solid var(--border); }
 .reasons-grid .placeholder-icon { margin-bottom: 1.25rem; }
+.reasons-grid .icon-tile { margin-bottom: 1.25rem; }
 .reasons-grid h3 { font-size: 1.0625rem; }
 .reasons-grid p { font-size: 0.9375rem; color: var(--ink-2); margin-top: 0.625rem; }
 @media (max-width: 63.9rem) {

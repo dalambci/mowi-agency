@@ -222,8 +222,9 @@ retype credentials from scratch or falling back to a password:
   value on all `<link>`/`<script>` tags referencing them, across every HTML page**, so browsers
   are forced to fetch the new file immediately rather than waiting out the cache. Use the
   current date (`YYYYMMDD`); if multiple deploys land same-day, append `-2`, `-3`, etc.
-  **Latest coordinated bump: `20260828-12`** (2026-08-28, homepage imagery — see "Homepage
-  imagery" under Design system). Before that sweep, `pricing.html` had drifted to `-11` while
+  **Latest coordinated bump: `20260829-1`** (2026-08-29, homepage icons — see "Homepage
+  imagery" under Design system; the previous sweep, `20260828-12`, was the homepage imagery
+  the day before). Before that sweep, `pricing.html` had drifted to `-11` while
   the other 21 pages sat on `-10` — a page-local bump from an earlier session. When bumping,
   `grep -ho 'style.css?v=[0-9-]*' *.html blog/*.html | sort | uniq -c` should show exactly
   one distinct value; if it shows two, take the higher one +1 so nothing goes backwards.
@@ -513,6 +514,18 @@ applied to all 16, and `test.html` is the reliable copy-paste source.
 - Content is adapted from `reference/content-data-vista.md` (our own prior business
   website — safe to reuse/adapt in full: text, numbers, stats, client names, case studies) —
   historical source; both rebrands have since rewritten most of what actually ships.
+- **Homepage hero copy (2026-08-29, Sal's direct call):** `<h1>` is **"Deploy Agents.<br />
+  Workflows. Dashboards."** — Sal's own wording (typed "Workfows", corrected as an obvious typo;
+  the closing period added for the three-beat rhythm). **"Deploy" is English on purpose** — a
+  founder exception to the Dutch-only rule for this one heading, same category as the English
+  product nouns (Agents/Workflows/Dashboards) already used in the nav; don't "fix" it to Dutch
+  without asking. The `.hero-sub` was rewritten in the direct-response voice the agent pages
+  already use ("Geen X. Geen Y. Geen Z." → mechanism → risk-reversal close): "Geen inbox die
+  overloopt. Geen gemiste oproep. Geen order die u zelf opzoekt. Zeg in gewone taal wat er moet
+  gebeuren. Mowi bouwt het, test het en zet het live na uw akkoord. Vandaag gratis te
+  proberen." No numbers, no "geen creditcard"-style claims (signup/trial terms are not verified
+  from this repo). The previous copy ("Automatisering die naar u luistert" / "Mowi is het
+  platform waar u in gewone taal zegt…") is superseded, kept only in git history.
 - **Current positioning, unchanged by v2:** Mowi is a **conversational workflow-automation
   platform** for the Dutch MKB/SMB — "u zegt het, en het werkt." The product story is:
   describe what you want done in plain language, Mowi configures it from tested building
@@ -709,6 +722,17 @@ applied to all 16, and `test.html` is the reliable copy-paste source.
     its templates-only hero override is now scoped to `.tpl-hero` (a hook added to
     `templates.html`'s hero section). `workflow-canvas.css` has its own `?v=` (`20260829-1`,
     on `index.html` and `templates.html` — bump both together).
+  - **Homepage icons (2026-08-29):** the eight `.placeholder-icon` slots in the "Eén platform"
+    tab heads (5) and the "Gemaakt voor het Nederlandse MKB" reasons (3) are real glyphs now,
+    per Sal "use the same icon style as the Inbox and Voice agent pages" — i.e. `.lp-card-icon`'s
+    tinted circle + hairline + ink-2 stroke. Implemented as a new generic **`.icon-tile`**
+    component in `css/style.css` (same look; `.lp-card-icon` itself is untouched and predates
+    it — use `.icon-tile` for any new slot), sized to the slot by context rules next to the old
+    placeholder ones (2.25rem in tab heads, 2.75rem elsewhere). Glyphs are inline SVG on the
+    24-grid, stroke 1.75, round caps/joins, `fill="none"` except a single dot — the same drawing
+    rules as the agent-page cards and the workflow-canvas node icons. Chat bubble / parcel /
+    document / calendar / receipt for the tabs; price tag / two steps / person for the reasons.
+    The two ISO badge placeholders further down are deliberately still placeholders.
 - **Superseded 2026-08-17→18 (v1 rebrand) — prior-era reference only, do not follow:** v1 had
   a **warm-light palette with a Mowi-orange accent** (`--accent:#e8590c`, used sparingly for
   primary CTAs/highlights) and a gradient-color orb. If you find visual-style guidance
