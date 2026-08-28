@@ -526,6 +526,10 @@ applied to all 16, and `test.html` is the reliable copy-paste source.
   proberen." No numbers, no "geen creditcard"-style claims (signup/trial terms are not verified
   from this repo). The previous copy ("Automatisering die naar u luistert" / "Mowi is het
   platform waar u in gewone taal zegt…") is superseded, kept only in git history.
+- **Agent pages lost their "Er is maar één probleem." section (2026-08-29, Sal's call):** the
+  four-card pain grid that sat between "Wat de agent doet" and "Zo werkt het" on both
+  `e-mail-agent.html` and `call-agent.html` was removed outright. Don't reintroduce it; the
+  copy is in git history if ever wanted.
 - **Inbox agent hero (2026-08-29, Sal: "more of a direct response approach"):** `<h1>` is now
   **"Nooit meer een mail die blijft liggen."** (was "Uw inbox is 's ochtends al gesorteerd.") —
   a pain-elimination headline taken from the page's own story section ("De offerte die blijft
