@@ -1444,7 +1444,14 @@ main { flex: 1 0 auto; }
    .section-heading immediately followed by its subtext everywhere else
    on the site. Scoped to this class, not .section-head-row-center
    itself, so it doesn't change that spacing anywhere else on the site. */
+/* .section-sub's own margin-top must be zeroed here (2026-08-28 fix,
+   found live: measured 28px instead of the intended 14px) — it's a flex
+   child of this row, and flex gap adds space BETWEEN items on top of
+   whatever margin an item already has; the base .section-sub's
+   margin-top:0.875rem was stacking with this rule's own 0.875rem gap
+   instead of being made redundant by it. */
 .section-head-row-center:has(.lp-section-heading) { gap: 0.875rem; }
+.section-head-row-center:has(.lp-section-heading) .section-sub { margin-top: 0; }
 
 /* ---------- Filled, large-radius card (their .tool-card: 19.2px radius) */
 /* No margin-top here (2026-08-28 fix, Sal: match the homepage's own
