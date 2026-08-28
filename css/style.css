@@ -43,6 +43,12 @@
      real content returns — unused in the blank skeleton but the pages all
      load it, so keep the token. */
   --font-serif-emph: "Instrument Serif", Georgia, serif;
+  /* Sitewide heading font (2026-08-28) — introduced on call-agent.html/
+     e-mail-agent.html first, then rolled out everywhere once Sal saw it
+     live ("update all headings across the website to have the same
+     heading styling"). Every <h1>/<h2>/<h3> gets this via the bare
+     selector rule further down; body text keeps --font-sans. */
+  --font-heading: "Inter Tight", var(--font-sans);
 
   --radius-header: 18px;     /* the floating header bar */
   --radius-footer: 30px;     /* footer panel top corners — measured on shapes */
@@ -72,6 +78,12 @@ body {
   display: flex;
   flex-direction: column;
 }
+/* Sitewide heading font (2026-08-28) — by TAG rather than by the dozen+
+   heading classes (.section-heading, .page-heading, .footer-cta-title,
+   .workflow-card h3, .tier-card-name, .blog-article h1/h2/h3, ...) so
+   every real h1/h2/h3 picks it up regardless of which class styles its
+   size, with nothing to miss. No h4-6 exist on this site (checked). */
+h1, h2, h3 { font-family: var(--font-heading); }
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
 button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
@@ -1400,13 +1412,13 @@ main { flex: 1 0 auto; }
    hover-glow — v2's "motion is minimal, emphasis via weight/size/.h-emph"
    rule still applies here, it's the same site.
 
-   Heading font is Inter Tight (SIL OFL, google fonts) — added to these two
-   pages' own <link> only. Body copy stays --font-sans. Sitewide rollout is
-   a deliberate follow-up once the founder has seen it live, not bundled in
-   silently here.
+   Heading font is Inter Tight — now sitewide (h1,h2,h3 rule near the top
+   of this file), introduced here first. font-family isn't repeated on the
+   heading rules below anymore since that global rule already covers every
+   real h1/h2/h3; .lp-step-circle keeps its own further down since a
+   number-in-a-circle isn't a heading tag. Body copy stays --font-sans.
    ========================================================================== */
 .lp-hero h1 {
-  font-family: "Inter Tight", var(--font-sans);
   font-size: 3rem; line-height: 1.15; font-weight: 600; letter-spacing: -0.02em;
 }
 @media (max-width: 63.9rem) { .lp-hero h1 { font-size: 2.25rem; } }
@@ -1415,10 +1427,19 @@ main { flex: 1 0 auto; }
    unchanged (18px/400/1.6), same as every other page's hero. */
 
 .lp-section-heading {
-  font-family: "Inter Tight", var(--font-sans);
   font-size: 1.875rem; line-height: 1.2; font-weight: 600; letter-spacing: -0.01em;
 }
 @media (min-width: 48rem) { .lp-section-heading { font-size: 2.5rem; } }
+/* Tight heading-to-subtext gap for a heading immediately followed by a
+   one-line description (2026-08-28 fix, "Er is maar één probleem." /
+   "Voor elke branche anders ingesteld") — .section-head-row-center's own
+   sitewide gap is 2.5rem, right for a heading beside a longer blurb +
+   link, but reads as too loose for a tight title+subtitle pairing.
+   0.75rem instead, matching the site's OWN existing convention for this
+   exact pairing (.page-hero-heading + .page-hero-body's margin-top).
+   Scoped to this class, not .section-head-row-center itself, so it
+   doesn't change that spacing anywhere else on the site. */
+.section-head-row-center:has(.lp-section-heading) { gap: 0.75rem; }
 
 /* ---------- Filled, large-radius card (their .tool-card: 19.2px radius) */
 /* No margin-top here (2026-08-28 fix, Sal: match the homepage's own
@@ -1445,7 +1466,7 @@ main { flex: 1 0 auto; }
   color: var(--ink-2); flex-shrink: 0;
 }
 .lp-card-icon svg { width: 1.25rem; height: 1.25rem; display: block; }
-.lp-card h3 { font-family: "Inter Tight", var(--font-sans); font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem; }
+.lp-card h3 { font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem; }
 /* 15px/1.6 (2026-08-28: matches .workflow-card p exactly — the homepage's
    own card body-text style — rather than the tighter 14px/1.625 this
    started at). */
@@ -1461,7 +1482,7 @@ main { flex: 1 0 auto; }
   font-family: "Inter Tight", var(--font-sans); font-size: 1.25rem; font-weight: 600;
   margin: 0 auto 1.5rem;
 }
-.lp-step h3 { font-family: "Inter Tight", var(--font-sans); font-size: 1.25rem; font-weight: 600; text-align: center; margin-bottom: 0.5rem; }
+.lp-step h3 { font-size: 1.25rem; font-weight: 600; text-align: center; margin-bottom: 0.5rem; }
 .lp-step p { font-size: 0.9375rem; color: var(--ink-2); text-align: center; }
 
 /* ---------- Full-width mobile CTA + microcopy under it (their pattern) */
@@ -1483,8 +1504,12 @@ main { flex: 1 0 auto; }
 /* ---------- Trust note (AI-disclosure / retention — Call agent only) */
 /* 15px (2026-08-28: matches .legal-notice, the site's existing boxed-note
    convention, rather than the smaller 14px caption size this started at). */
+/* Centered as a block (2026-08-28 fix) — max-width alone doesn't center a
+   block element, it just caps it, so this sat flush-left under the
+   centered step list above it. text-align:center too, matching that same
+   section's own centered rhythm. */
 .lp-trust-note {
   border: 1px solid var(--border); border-radius: var(--radius-card); background: var(--muted);
-  padding: 1.25rem 1.5rem; margin-top: 2rem; font-size: 0.9375rem; color: var(--ink-2);
-  line-height: 1.6; max-width: 40rem;
+  padding: 1.25rem 1.5rem; margin: 2rem auto 0; font-size: 0.9375rem; color: var(--ink-2);
+  line-height: 1.6; max-width: 40rem; text-align: center;
 }
