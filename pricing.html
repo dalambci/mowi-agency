@@ -67,13 +67,13 @@
           </li>
           <li><a href="/templates">Templates</a></li>
           <li><a aria-current="page" href="/pricing">Prijzen</a></li>
-          <li class="nav-mobile-actions"><a href="https://my.mowi.agency/login" target="_blank" rel="noopener">Inloggen</a></li>
+          <li class="nav-mobile-actions"><a href="https://my.mowi.agency/login">Inloggen</a></li>
           <li class="nav-mobile-actions"><a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a></li>
         </ul>
       </nav>
 
       <div class="header-actions">
-        <a href="https://my.mowi.agency/login" target="_blank" rel="noopener" class="header-login">Inloggen</a>
+        <a href="https://my.mowi.agency/login" class="header-login">Inloggen</a>
         <a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a>
       </div>
 
@@ -101,10 +101,21 @@
          Trial allocation ("30 gratis credits", no day count) is a proposal,
          not a vault-confirmed figure -- the credit model never defined a
          trial and the 14-day framing is formally retired (masterplan §5).
-         The other figures (€19/mnd, 300 credits, 1 e-mail = 1 credit, 1
-         belminuut ≈ 10 credits) are the vault's own recommended figures,
-         confirmed by Sal 2026-08-22 when this page was built -- see the
-         Decisions log and the masterplan §5 update the same day.
+         The other figures (€19/mnd, 300 credits, 1 e-mail = 1 credit) are
+         the vault's own recommended figures, confirmed by Sal 2026-08-22
+         when this page was built -- see the Decisions log and the
+         masterplan §5 update the same day. The belminuut rate is
+         deliberately NOT rendered anywhere on this page yet (the hero
+         above says "volgen zodra de call agent op de site verkrijgbaar
+         is") -- REPRICED 2026-08-28 in config/credits.php from
+         1 belminuut ≈ 10 credits to 1 belminuut ≈ 4 credits, after
+         researched Dutch competitor rates (Fonio €0.10/min, CallingBird
+         €0.35/min) showed the original figure priced voice at roughly
+         2-6x the market it competes in; see
+         "Mowi - Competitive positioning 2026-08.md" §6/§7 in the vault
+         for the full comparison. Still RECOMMENDED, not confirmed on this
+         page -- update this comment (and add the real copy) the day the
+         Call agent's `sold_on_site` flips true.
          Both self-serve CTAs point at signup ahead of CREDITS_ENABLED going
          true in production (Sal's explicit call, publish-now) -- a real
          signup today still runs the old retired per-agent trial model until
