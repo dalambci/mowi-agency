@@ -1,5 +1,7 @@
 /* ==========================================================================
-   Illustrative workflow-template canvas (templates.html only, 2026-08-27) —
+   Illustrative workflow-template canvas (templates.html, 2026-08-27; also
+   loaded by index.html since 2026-08-29 for the STATIC variant at the end
+   of this file — the homepage never loads js/workflow-canvas.js) —
    ported 1:1 from the Mowi Dashboard's own Templates gallery (same feature,
    same reference: elevenlabs.io/voice-agents' "Scale ElevenAgents across
    every function"), retokenised to THIS site's own palette (see the
@@ -42,8 +44,11 @@
 /* Sal, 2026-08-28: "reduce the space between the hero body and the first
    two tiles". Overrides style.css's shared .hero-tight-bottom (40px /
    24px on phones) and the section's own top padding here, so no other
-   page moves. */
-.hero-tight-bottom{padding-bottom:16px}
+   page moves. Scoped to .tpl-hero (a hook on templates.html's hero only)
+   since 2026-08-29, when index.html started loading this file too — the
+   homepage hero doesn't carry .hero-tight-bottom today, but the scope
+   makes that a non-issue rather than a coincidence. */
+.tpl-hero.hero-tight-bottom{padding-bottom:16px}
 .tpl-showcase{padding-top:2.5rem}   /* .section default is 5rem */
 /* The site's own pill-tabs component adds 32px above the tab row and
    48px between it and its panels — on this page the section padding
@@ -53,7 +58,7 @@
 .tpl-showcase .pill-tablist{margin-top:0}
 .tpl-showcase .pill-panels{margin-top:1.5rem}
 @media (max-width:47.9rem){
-  .hero-tight-bottom{padding-bottom:12px}
+  .tpl-hero.hero-tight-bottom{padding-bottom:12px}
   .tpl-showcase{padding-top:1.5rem}
 }
 
@@ -218,4 +223,43 @@
      and a half tiles sit in it and the half one runs into the fade. */
   .tpl-branche-list{margin:0 -20px;padding:0 20px .25rem;scroll-padding-inline:20px}
   .tpl-branche-btn{width:auto;flex:0 0 calc((100% - 2 * .75rem) / 2.5);min-height:5.5rem;padding:.875rem 1rem}
+}
+
+/* ---------- Static variant (index.html, 2026-08-29) ----------
+   The homepage's "Eén platform voor alles wat terugkomt" tabs show one
+   flow each as a plain picture: same nodes, edges and dot grid as above,
+   but no pan/zoom/drag, no zoom buttons, no hint, and js/workflow-
+   canvas.js is not loaded on that page at all (the markup carries no
+   data-wf-* hooks, so even if it were, nothing would mount). Sal's call
+   (2026-08-29): the flow stays vertical but is deliberately CUT OFF —
+   "only show the most important parts" — so each frame is a fixed
+   window onto the middle of its flow (tool step → decision → the two
+   outcomes), with the Start node's tail fading in at the top and the
+   branch nodes fading out at the bottom. The fade is the same mask idiom
+   .card-strip-wrap and .tpl-branche-list already use; it sits on the
+   viewport, so the frame border stays crisp while the content fades.
+
+   Layout: the viewport is a normal block here (not absolute); the stage
+   is centered in it, shifted up by --wf-off (how far into the flow the
+   window starts) and — on phones, where a 480px-wide flow doesn't fit
+   the text column — scaled down with a transform. A transform doesn't
+   change layout, so the window height and the offset are both multiplied
+   by --wf-s; each canvas sets --wf-win/--wf-off inline, and the media
+   query only has to change --wf-s. */
+.wf-canvas-static{height:auto}
+.wf-canvas-static .wf-viewport{
+  position:relative;inset:auto;overflow:hidden;cursor:default;touch-action:auto;
+  -webkit-user-select:auto;user-select:auto;
+  --wf-s:1;
+  height:calc(var(--wf-win) * var(--wf-s));
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 12%,#000 84%,transparent 100%);
+  mask-image:linear-gradient(to bottom,transparent 0,#000 12%,#000 84%,transparent 100%);
+}
+.wf-canvas-static .wf-stage{
+  position:absolute;left:50%;top:calc(-1 * var(--wf-off) * var(--wf-s));
+  transform:translateX(-50%) scale(var(--wf-s));transform-origin:top center;
+  will-change:auto;
+}
+@media (max-width:47.9rem){
+  .wf-canvas-static .wf-viewport{--wf-s:.62}
 }
