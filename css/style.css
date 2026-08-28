@@ -629,7 +629,7 @@ main { flex: 1 0 auto; }
 /* Overrides .placeholder-tile's white fill to sand — it sits inside a
    white .workflow-card, so it needs the other approved tone to read. */
 .workflow-card-visual { min-height: 140px; background: var(--bg); }
-.workflow-card h3 { font-size: 1.0625rem; font-weight: 700; }
+.workflow-card h3 { font-size: 1.0625rem; font-weight: 600; }
 .workflow-card p { font-size: 0.9375rem; color: var(--ink-2); }
 
 @media (max-width: 63.9rem) {
@@ -718,7 +718,7 @@ main { flex: 1 0 auto; }
    The adjacent-sibling combinator below is what actually targets "the
    category right after the heading." */
 .page-heading + .integration-category { margin-top: 32px; }
-.integration-category-heading { font-size: 1.0625rem; font-weight: 700; margin-bottom: 1.25rem; }
+.integration-category-heading { font-size: 1.0625rem; font-weight: 600; margin-bottom: 1.25rem; }
 .integration-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -765,7 +765,7 @@ main { flex: 1 0 auto; }
 /* Section headings on this page read at the same scale as the blog's own
    article prose (.blog-article h2/p), left-aligned, not the homepage's
    bigger centered .section-heading treatment. */
-.page-heading { font-size: 1.375rem; font-weight: 700; line-height: 1.2; }
+.page-heading { font-size: 1.375rem; font-weight: 600; line-height: 1.2; }
 .page-body { font-size: 1rem; color: var(--ink-2); margin-top: 0.75rem; max-width: 40rem; }
 .page-cta { margin-top: 1.5rem; }
 /* Left-aligned hero matching .blog-article h1/p exactly (2rem/700/1.15,
@@ -975,7 +975,7 @@ main { flex: 1 0 auto; }
 }
 .trust-card-head { flex: 0 0 12rem; display: flex; flex-direction: column; gap: 0.75rem; }
 .trust-card-icon { width: 22px; height: 22px; color: var(--ink-2); }
-.trust-card-head h3 { font-size: 1.0625rem; font-weight: 700; }
+.trust-card-head h3 { font-size: 1.0625rem; font-weight: 600; }
 .trust-card p { flex: 1; font-size: 0.9375rem; color: var(--ink-2); margin: 0; }
 @media (max-width: 63.9rem) {
   .trust-card { flex-direction: column; gap: 0.75rem; }
@@ -1030,7 +1030,7 @@ main { flex: 1 0 auto; }
   padding: 2rem 1.75rem;
 }
 .tier-card-highlight { border: 1px solid var(--ink); }
-.tier-card-name { font-size: 1.0625rem; font-weight: 700; }
+.tier-card-name { font-size: 1.0625rem; font-weight: 600; }
 .tier-price { margin-top: 1.25rem; display: flex; align-items: baseline; gap: 0.25rem; }
 .tier-price-amount { font-size: 2rem; font-weight: 700; line-height: 1; }
 .tier-price-period { font-size: 0.9375rem; color: var(--ink-2); }
@@ -1154,7 +1154,7 @@ main { flex: 1 0 auto; }
 }
 .pill-panel-copy-head .placeholder-icon { width: 2.25rem; height: 2.25rem; }
 .pill-panel-copy-head span { font-weight: 600; font-size: 0.9375rem; color: var(--ink-2); }
-.pill-panel-copy h3 { font-size: 1.375rem; font-weight: 700; line-height: 1.25; }
+.pill-panel-copy h3 { font-size: 1.375rem; font-weight: 600; line-height: 1.25; }
 .pill-panel-copy p { font-size: 1rem; color: var(--ink-2); margin-top: 0.875rem; max-width: 30rem; }
 .pill-panel-copy .btn-primary { margin-top: 1.5rem; }
 .pill-panel-visual { min-height: 320px; }
@@ -1175,7 +1175,7 @@ main { flex: 1 0 auto; }
 }
 .reasons-grid > div { padding-top: 1.5rem; border-top: 1px solid var(--border); }
 .reasons-grid .placeholder-icon { margin-bottom: 1.25rem; }
-.reasons-grid h3 { font-size: 1.0625rem; font-weight: 700; }
+.reasons-grid h3 { font-size: 1.0625rem; font-weight: 600; }
 .reasons-grid p { font-size: 0.9375rem; color: var(--ink-2); margin-top: 0.625rem; }
 @media (max-width: 63.9rem) {
   .reasons-grid { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
@@ -1351,8 +1351,8 @@ main { flex: 1 0 auto; }
   padding: 4rem 20px;
 }
 .blog-article h1 { font-size: 2rem; font-weight: 700; line-height: 1.15; margin-bottom: 0.75rem; }
-.blog-article h2 { font-size: 1.375rem; font-weight: 700; margin: 2.25rem 0 0.75rem; }
-.blog-article h3 { font-size: 1.0625rem; font-weight: 700; margin: 1.75rem 0 0.5rem; }
+.blog-article h2 { font-size: 1.375rem; font-weight: 600; margin: 2.25rem 0 0.75rem; }
+.blog-article h3 { font-size: 1.0625rem; font-weight: 600; margin: 1.75rem 0 0.5rem; }
 .blog-article p { margin-bottom: 1rem; color: var(--ink-2); }
 .blog-article strong { color: var(--ink); }
 .blog-article a { text-decoration: underline; text-underline-offset: 2px; }
@@ -1392,7 +1392,7 @@ main { flex: 1 0 auto; }
   transition: border-color 0.15s ease;
 }
 .blog-card:hover { border-color: var(--ink-3); }
-.blog-card h2 { font-size: 1.0625rem; font-weight: 700; margin: 0.5rem 0; }
+.blog-card h2 { font-size: 1.0625rem; font-weight: 600; margin: 0.5rem 0; }
 .blog-card p { font-size: 0.9375rem; color: var(--ink-2); }
 .blog-card-date { font-size: 0.8125rem; color: var(--ink-3); }
 
