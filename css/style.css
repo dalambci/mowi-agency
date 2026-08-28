@@ -1410,9 +1410,9 @@ main { flex: 1 0 auto; }
   font-size: 3rem; line-height: 1.15; font-weight: 600; letter-spacing: -0.02em;
 }
 @media (max-width: 63.9rem) { .lp-hero h1 { font-size: 2.25rem; } }
-/* Scoped under .lp-hero so this never touches .hero-sub on any other page. */
-.lp-hero .hero-sub { font-weight: 600; font-size: 1.125rem; line-height: 1.625; }
-@media (min-width: 48rem) { .lp-hero .hero-sub { font-size: 1.25rem; } }
+/* hero-sub deliberately NOT overridden here (2026-08-28, Sal: match the
+   homepage's own body-text style) — inherits the sitewide .hero-sub
+   unchanged (18px/400/1.6), same as every other page's hero. */
 
 .lp-section-heading {
   font-family: "Inter Tight", var(--font-sans);
@@ -1421,7 +1421,13 @@ main { flex: 1 0 auto; }
 @media (min-width: 48rem) { .lp-section-heading { font-size: 2.5rem; } }
 
 /* ---------- Filled, large-radius card (their .tool-card: 19.2px radius) */
-.lp-card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 3rem; }
+/* No margin-top here (2026-08-28 fix, Sal: match the homepage's own
+   spacing rules) — .section-head-row already carries margin-bottom:40px
+   sitewide, and the homepage's own .card-strip-wrap adds nothing on top
+   of that (confirmed: margin-top:0 there). The original 3rem here was
+   stacking on top of that 40px instead of matching it, ~doubling the gap
+   the rest of the site uses between a section head and its content. */
+.lp-card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
 @media (max-width: 47.9rem) { .lp-card-grid { grid-template-columns: 1fr; } }
 .lp-card { background: var(--surface); border: 1px solid var(--border); border-radius: 1.2rem; padding: 2rem; }
 /* Bug fix (2026-08-28, real device finding): .lp-card-icon is a <span>,
@@ -1440,10 +1446,15 @@ main { flex: 1 0 auto; }
 }
 .lp-card-icon svg { width: 1.25rem; height: 1.25rem; display: block; }
 .lp-card h3 { font-family: "Inter Tight", var(--font-sans); font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem; }
-.lp-card p { font-size: 0.875rem; color: var(--ink-2); line-height: 1.625; }
+/* 15px/1.6 (2026-08-28: matches .workflow-card p exactly — the homepage's
+   own card body-text style — rather than the tighter 14px/1.625 this
+   started at). */
+.lp-card p { font-size: 0.9375rem; color: var(--ink-2); line-height: 1.6; }
 
 /* ---------- Numbered step circle (their 64px rounded-full) */
-.lp-steps { display: grid; gap: 3rem; margin-top: 3rem; max-width: 34rem; margin-left: auto; margin-right: auto; }
+/* margin-top removed (2026-08-28, same reasoning as .lp-card-grid above —
+   .section-head-row's own 40px margin-bottom is the spacing here too). */
+.lp-steps { display: grid; gap: 3rem; max-width: 34rem; margin-left: auto; margin-right: auto; }
 .lp-step-circle {
   width: 4rem; height: 4rem; border-radius: 50%; background: var(--muted); border: 1px solid var(--border);
   display: flex; align-items: center; justify-content: center;
@@ -1460,7 +1471,8 @@ main { flex: 1 0 auto; }
 .lp-cta-micro { font-size: 0.875rem; color: var(--ink-3); }
 
 /* ---------- Comparison table (new primitive — none existed on the site) */
-.lp-compare { overflow-x: auto; margin-top: 3rem; border: 1px solid var(--border); border-radius: var(--radius-card); }
+/* margin-top removed (2026-08-28, same reasoning as .lp-card-grid above). */
+.lp-compare { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius-card); }
 .lp-compare table { width: 100%; border-collapse: collapse; min-width: 40rem; }
 .lp-compare th, .lp-compare td { padding: 0.875rem 1.25rem; text-align: left; font-size: 0.9375rem; border-bottom: 1px solid var(--border); }
 .lp-compare thead th { font-weight: 700; background: var(--muted); }
@@ -1469,8 +1481,10 @@ main { flex: 1 0 auto; }
 .lp-compare tr th:nth-child(2), .lp-compare tr td:nth-child(2) { background: var(--muted); font-weight: 600; }
 
 /* ---------- Trust note (AI-disclosure / retention — Call agent only) */
+/* 15px (2026-08-28: matches .legal-notice, the site's existing boxed-note
+   convention, rather than the smaller 14px caption size this started at). */
 .lp-trust-note {
   border: 1px solid var(--border); border-radius: var(--radius-card); background: var(--muted);
-  padding: 1.25rem 1.5rem; margin-top: 2rem; font-size: 0.875rem; color: var(--ink-2);
+  padding: 1.25rem 1.5rem; margin-top: 2rem; font-size: 0.9375rem; color: var(--ink-2);
   line-height: 1.6; max-width: 40rem;
 }
