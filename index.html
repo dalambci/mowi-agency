@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&family=Inter+Tight:wght@600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260828-10" />
+  <link rel="stylesheet" href="css/style.css?v=20260828-12" />
   <link rel="icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="shortcut icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260804-3" />
@@ -92,10 +92,11 @@
       <div class="hero-actions">
         <a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a>
       </div>
-      <!-- Visual placeholder — a real product screenshot/demo replaces this later. -->
-      <div class="hero-visual placeholder-tile" aria-hidden="true">
-        <span class="placeholder-label">Voorbeeld volgt</span>
-      </div>
+      <!-- Real dashboard screenshot (2026-08-28): the chat home of my.mowi.agency.
+           Re-export assets/hero-dashboard.webp from a fresh screenshot when the
+           dashboard's home changes; width/height match the file so the box is
+           reserved before the image arrives (no layout shift under the hero). -->
+      <img class="hero-visual" src="assets/hero-dashboard.webp" alt="Het Mowi-dashboard: een chatvenster waarin u in gewone taal zegt wat u geregeld wilt hebben." width="2178" height="1388" fetchpriority="high" decoding="async" />
     </section>
 
     <!-- ================= Integraties marquee ================= -->
@@ -179,55 +180,55 @@
         <div class="card-strip" id="workflow-card-strip" data-marquee-clone>
           <a href="/e-mail-agent" class="workflow-card">
             <span class="workflow-card-tag">E-mail</span>
-            <div class="placeholder-tile workflow-card-visual" aria-hidden="true"><span class="placeholder-label">Voorbeeld volgt</span></div>
+            <img class="workflow-card-visual" src="assets/workflows/inbox-agent.webp" alt="" width="900" height="600" decoding="async" />
             <h3>Inbox agent</h3>
             <p>Sorteert en beantwoordt uw e-mail.</p>
           </a>
           <a href="/call-agent" class="workflow-card">
             <span class="workflow-card-tag">Telefonie</span>
-            <div class="placeholder-tile workflow-card-visual" aria-hidden="true"><span class="placeholder-label">Voorbeeld volgt</span></div>
+            <img class="workflow-card-visual" src="assets/workflows/voice-agent.webp" alt="" width="900" height="600" decoding="async" />
             <h3>Voice agent</h3>
             <p>Neemt uw telefoon op.</p>
           </a>
           <a href="/workflows#order-status" class="workflow-card">
             <span class="workflow-card-tag">Orders</span>
-            <div class="placeholder-tile workflow-card-visual" aria-hidden="true"><span class="placeholder-label">Voorbeeld volgt</span></div>
+            <img class="workflow-card-visual" src="assets/workflows/orderstatus.webp" alt="" width="900" height="600" decoding="async" />
             <h3>Orderstatus</h3>
             <p>Zoekt bestellingen op in uw webshop.</p>
           </a>
           <a href="/workflows#offerte-opvolging" class="workflow-card">
             <span class="workflow-card-tag">Offertes</span>
-            <div class="placeholder-tile workflow-card-visual" aria-hidden="true"><span class="placeholder-label">Voorbeeld volgt</span></div>
+            <img class="workflow-card-visual" src="assets/workflows/offerte-opvolging.webp" alt="" width="900" height="600" decoding="async" />
             <h3>Offerte-opvolging</h3>
             <p>Herinnert klanten die niet reageren.</p>
           </a>
           <a href="/workflows#agenda-samenvatting" class="workflow-card">
             <span class="workflow-card-tag">Agenda</span>
-            <div class="placeholder-tile workflow-card-visual" aria-hidden="true"><span class="placeholder-label">Voorbeeld volgt</span></div>
+            <img class="workflow-card-visual" src="assets/workflows/agenda-samenvatting.webp" alt="" width="900" height="600" decoding="async" />
             <h3>Agenda-samenvatting</h3>
             <p>Vat uw agenda dagelijks samen.</p>
           </a>
           <a href="/workflows#crm-sync" class="workflow-card">
             <span class="workflow-card-tag">CRM &amp; data</span>
-            <div class="placeholder-tile workflow-card-visual" aria-hidden="true"><span class="placeholder-label">Voorbeeld volgt</span></div>
+            <img class="workflow-card-visual" src="assets/workflows/crm-synchronisatie.webp" alt="" width="900" height="600" decoding="async" />
             <h3>CRM-synchronisatie</h3>
             <p>Houdt uw CRM up-to-date.</p>
           </a>
           <a href="/workflows#factuurverwerking" class="workflow-card">
             <span class="workflow-card-tag">Facturen</span>
-            <div class="placeholder-tile workflow-card-visual" aria-hidden="true"><span class="placeholder-label">Voorbeeld volgt</span></div>
+            <img class="workflow-card-visual" src="assets/workflows/factuurverwerking.webp" alt="" width="900" height="600" decoding="async" />
             <h3>Factuurverwerking</h3>
             <p>Leest facturen en legt de belangrijkste gegevens vast.</p>
           </a>
           <a href="/workflows#lead-verrijking" class="workflow-card">
             <span class="workflow-card-tag">Leads</span>
-            <div class="placeholder-tile workflow-card-visual" aria-hidden="true"><span class="placeholder-label">Voorbeeld volgt</span></div>
+            <img class="workflow-card-visual" src="assets/workflows/lead-verrijking.webp" alt="" width="900" height="600" decoding="async" />
             <h3>Lead-verrijking</h3>
             <p>Vult nieuwe leads automatisch aan.</p>
           </a>
           <a href="/workflows#rapportgenerator" class="workflow-card">
             <span class="workflow-card-tag">Rapportages</span>
-            <div class="placeholder-tile workflow-card-visual" aria-hidden="true"><span class="placeholder-label">Voorbeeld volgt</span></div>
+            <img class="workflow-card-visual" src="assets/workflows/rapportgenerator.webp" alt="" width="900" height="600" decoding="async" />
             <h3>Rapportgenerator</h3>
             <p>Maakt op een vast moment een rapport uit uw data.</p>
           </a>

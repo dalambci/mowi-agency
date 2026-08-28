@@ -508,7 +508,18 @@ main { flex: 1 0 auto; }
 .hero h1 { font-size: 3.75rem; line-height: 1.02; letter-spacing: -0.02em; overflow-wrap: break-word; }
 .hero-sub { font-size: 1.125rem; color: var(--ink-2); margin-top: 1.5rem; max-width: 34rem; }
 .hero-actions { display: flex; align-items: center; justify-content: center; gap: 1.5rem; margin-top: 2rem; flex-wrap: wrap; }
-.hero-visual { min-height: 360px; margin-top: 3.5rem; width: 100%; }
+/* Hero product screenshot (2026-08-28, was a placeholder tile). Sized by its
+   own width/height attrs — no min-height, that would stretch a real image.
+   Framed like the header bar (same radius) with a hairline border and no
+   drop shadow, same as .workflow-card and the other content cards. */
+.hero-visual {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: 3.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-header);
+}
 .hero-tight-bottom { padding-bottom: 40px; } /* 5rem (80px) - 40px */
 
 /* --- Integrations marquee ----------------------------------------------------
@@ -626,9 +637,25 @@ main { flex: 1 0 auto; }
   border-radius: var(--radius-pill);
   padding: 0.25rem 0.625rem;
 }
-/* Overrides .placeholder-tile's white fill to sand — it sits inside a
-   white .workflow-card, so it needs the other approved tone to read. */
-.workflow-card-visual { min-height: 140px; background: var(--bg); }
+/* The card's visual slot (2026-08-28): a real image now, not a placeholder
+   tile. Each is a pre-rendered 900x600 WebP (assets/workflows/*.webp) — a
+   small white UI card composited over ONE shared field/cloud photo with a
+   film-grain overlay, the same photo cropped/mirrored differently per card.
+   This is the founder's deliberate exception to the v2 "no colour anywhere"
+   rule: the photo carries the colour, the UI cards on it stay monochrome.
+   Source composition lives outside the repo (rendered from HTML/SVG in the
+   site's own fonts); re-render rather than hand-edit the WebPs.
+   width/height attrs on the <img> + aspect-ratio here reserve the box before
+   the image arrives, so the marquee doesn't reflow mid-scroll. The sand
+   background shows through only while loading. */
+.workflow-card-visual {
+  width: 100%;
+  height: auto; /* without this the height="600" attr wins and aspect-ratio never applies */
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: var(--radius-card);
+  background: var(--bg);
+}
 .workflow-card h3 { font-size: 1.0625rem; }
 .workflow-card p { font-size: 0.9375rem; color: var(--ink-2); }
 
@@ -636,7 +663,7 @@ main { flex: 1 0 auto; }
   .hero { padding-top: 2rem; padding-bottom: 3rem; }
   .hero h1 { font-size: 3rem; } /* 48px */
   .hero-tight-bottom { padding-bottom: 24px; } /* 3rem (48px) * 0.5 -- same 50% cut as desktop's 80px->40px, not a flat -40px (that left only 8px and read as cramped against the next section, 2026-08-22) */
-  .hero-visual { min-height: 220px; }
+  .hero-visual { margin-top: 2rem; border-radius: var(--radius-card); }
   .section { padding: 3.5rem 0; }
   .section-head-row { flex-direction: column; align-items: flex-start; gap: 1rem; }
   /* re-assert the centered variant's even spacing — the .section-head-row gap

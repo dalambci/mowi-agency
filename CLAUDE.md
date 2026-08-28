@@ -222,9 +222,14 @@ retype credentials from scratch or falling back to a password:
   value on all `<link>`/`<script>` tags referencing them, across every HTML page**, so browsers
   are forced to fetch the new file immediately rather than waiting out the cache. Use the
   current date (`YYYYMMDD`); if multiple deploys land same-day, append `-2`, `-3`, etc.
-  **Latest coordinated bump: `20260818`** (v2 rebuild Stage 9 — every real page loading either
+  **Latest coordinated bump: `20260828-12`** (2026-08-28, homepage imagery — see "Homepage
+  imagery" under Design system). Before that sweep, `pricing.html` had drifted to `-11` while
+  the other 21 pages sat on `-10` — a page-local bump from an earlier session. When bumping,
+  `grep -ho 'style.css?v=[0-9-]*' *.html blog/*.html | sort | uniq -c` should show exactly
+  one distinct value; if it shows two, take the higher one +1 so nothing goes backwards.
+  (Older record: `20260818`, v2 rebuild Stage 9 — every real page loading either
   file was swept and verified on this exact string, including `test.html` which had drifted one
-  version behind after Stage 0). Applies to every root marketing page, the 6 legal pages,
+  version behind after Stage 0.) Applies to every root marketing page, the 6 legal pages,
   `test.html`, and `blog/*` (whose version is auto-derived by `build-blog.js` from
   `index.html`'s own `?v=` — see its `CSS_VERSION` regex — don't hardcode it separately there).
   Does **not** apply to the 15 redirect stubs (root stubs, `agents/*`, and — new in v2 —
@@ -666,6 +671,25 @@ applied to all 16, and `test.html` is the reliable copy-paste source.
   See `test.html` for a live rendered reference of every primitive — it was rebuilt in v2 as
   the canonical styleguide and is also the copy-paste source for the exact header/footer
   markup every other page must match.
+- **Homepage imagery (2026-08-28) — the one deliberate exception to "no colour anywhere".**
+  Two placeholder tiles on `index.html` became real images at the founder's request:
+  - **Hero:** `assets/hero-dashboard.webp` (2178×1388, ~66 KB), a real screenshot of the
+    dashboard's chat home, in a hairline-bordered `--radius-header` frame (`.hero-visual`, now
+    an `<img>` — the old `min-height` rules were removed because they'd stretch a real image).
+    Re-export from a fresh screenshot when the dashboard home changes.
+  - **"Workflows in minuten" slider:** nine `assets/workflows/*.webp` (900×600, 3:2, ~50–70 KB
+    each), one per card. Each is a small **monochrome** UI card (stat, sparkline, stepper,
+    legend, chat, rows, bars) composited over ONE shared field/cloud photo with a film-grain
+    overlay and ~12% darkening; the same photo is cropped/mirrored differently per card so it
+    doesn't read as nine copies. The photo carries the colour; the UI on it stays black-on-white
+    per the rule above. They are **rendered, not hand-drawn** — from an HTML/SVG composition in
+    the site's own fonts (Plus Jakarta Sans / Inter Tight), screenshotted at 4× with Playwright.
+    That source isn't in the repo (it lived in a session scratchpad); to change a label or
+    number, rebuild the composition rather than editing the WebP. Numbers on the cards are
+    illustrative activity counts ("31 facturen"), deliberately not performance claims.
+  - `.workflow-card-visual` is now an `<img>` rule (`width:100%; height:auto; aspect-ratio:
+    3/2; object-fit:cover`). The `height:auto` is load-bearing: without it the `<img>`'s
+    `height="600"` attribute wins and every card renders 600px tall (caught in QA).
 - **Superseded 2026-08-17→18 (v1 rebrand) — prior-era reference only, do not follow:** v1 had
   a **warm-light palette with a Mowi-orange accent** (`--accent:#e8590c`, used sparingly for
   primary CTAs/highlights) and a gradient-color orb. If you find visual-style guidance
