@@ -260,6 +260,19 @@
   transform:translateX(-50%) scale(var(--wf-s));transform-origin:top center;
   will-change:auto;
 }
+/* Static nodes are 100px tall (the interactive ones are 88px and rely on
+   hover for the clipped 3rd line — a picture can't). Line-clamp clips at
+   the padding edge, so clamping the padded body let a 4th line's ascenders
+   peek into the bottom padding under the ellipsis. The static markup
+   therefore wraps the body text in .wf-clamp (no padding) and clamps THAT;
+   the body itself becomes a plain padded block that still fills the node. */
+.wf-canvas-static .wf-node-body{display:block}
+.wf-canvas-static .wf-clamp{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+/* Wide flows (the E-mail-agent branche flows are 760px: a three-way fan-out
+   after "Sorteren") don't fit the split-panel column at 1:1, so they scale
+   on desktop too; on phones 45% is what fits 760px in a 350px column. */
+.wf-canvas-static-wide .wf-viewport{--wf-s:.78}
 @media (max-width:47.9rem){
   .wf-canvas-static .wf-viewport{--wf-s:.62}
+  .wf-canvas-static-wide .wf-viewport{--wf-s:.45}
 }

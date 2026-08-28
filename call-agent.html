@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&family=Inter+Tight:wght@600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css?v=20260829-2" />
+  <link rel="stylesheet" href="css/workflow-canvas.css?v=20260829-2" />
   <link rel="icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="shortcut icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260804-3" />
@@ -208,7 +209,71 @@
                 <p>Neemt elke oproep aan, herkent een lekkage, storing of gaslucht en handelt dat als spoed af — voor een routineverzoek plant de agent zelf onderhoud of een keuring in.</p>
                 <a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a>
               </div>
-              <div class="placeholder-tile pill-panel-visual" aria-hidden="true"><span class="placeholder-label">Voorbeeld volgt</span></div>
+
+              <!-- Static workflow picture (generated, 2026-08-29): the call-agent.loodgieter flow from /templates,
+                   verbatim content, cut off to its middle, no JS. Decorative — the copy on the left
+                   says the same thing. Regenerate from templates.html rather than hand-editing. -->
+              <div class="wf-canvas wf-canvas-static pill-panel-visual" style="--wf-win:470px;--wf-off:510px" aria-hidden="true">
+                <div class="wf-viewport"><div class="wf-stage" style="width:520px;height:1368px">
+            <svg class="wf-edges" width="520" height="1368" aria-hidden="true">
+              <defs>
+                <marker id="wfcall-agent-loodgieter-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M0,0 L10,5 L0,10 z" fill="var(--wf-edge)" />
+                </marker>
+              </defs>
+              <path d="M260,128 C260,184 260,184 260,240" class="wf-edge-path" marker-end="url(#wfcall-agent-loodgieter-arrow)" /><path d="M260,328 C260,384 260,384 260,440" class="wf-edge-path" marker-end="url(#wfcall-agent-loodgieter-arrow)" /><path d="M260,528 C260,584 260,584 260,640" class="wf-edge-path" marker-end="url(#wfcall-agent-loodgieter-arrow)" /><path d="M260,728 C260,784 140,784 140,840" class="wf-edge-path" marker-end="url(#wfcall-agent-loodgieter-arrow)" /><path d="M260,728 C260,784 380,784 380,840" class="wf-edge-path" marker-end="url(#wfcall-agent-loodgieter-arrow)" /><path d="M140,928 C140,984 260,984 260,1040" class="wf-edge-path" marker-end="url(#wfcall-agent-loodgieter-arrow)" /><path d="M380,928 C380,984 260,984 260,1040" class="wf-edge-path" marker-end="url(#wfcall-agent-loodgieter-arrow)" /><path d="M260,1128 C260,1184 260,1184 260,1240" class="wf-edge-path" marker-end="url(#wfcall-agent-loodgieter-arrow)" />
+            </svg>
+            <span class="wf-edge-label" style="left:200px;top:784px" title="Lekkage, storing of gaslucht">Lekkage, storing of gaslucht</span><span class="wf-edge-label" style="left:320px;top:784px" title="Onderhoud, keuring of offerte">Onderhoud, keuring of offerte</span>
+            <div class="wf-node wf-node-start" style="left:160px;top:40px;width:200px;height:100px">
+                <div class="wf-node-head">
+                  <span class="wf-node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="7" fill="none"/><circle cx="12" cy="12" r="2.3" fill="currentColor" stroke="none"/></svg></span>
+                  <span class="wf-node-title">Start</span>
+                </div>
+                <div class="wf-node-body" title="Telefoon gaat over."><span class="wf-clamp">Telefoon gaat over.</span></div>
+              </div><div class="wf-node wf-node-talk" style="left:160px;top:240px;width:200px;height:100px">
+                <div class="wf-node-head">
+                  <span class="wf-node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="12" rx="3"/><path d="M8 16.5v3.5l4.5-3.5"/></svg></span>
+                  <span class="wf-node-title">Begroeting</span>
+                </div>
+                <div class="wf-node-body" title="Meldt zich als virtuele assistent van het bedrijf en dat het gesprek wordt opgenomen."><span class="wf-clamp">Meldt zich als virtuele assistent van het bedrijf en dat het gesprek wordt opgenomen.</span></div>
+              </div><div class="wf-node wf-node-talk" style="left:160px;top:440px;width:200px;height:100px">
+                <div class="wf-node-head">
+                  <span class="wf-node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="12" rx="3"/><path d="M8 16.5v3.5l4.5-3.5"/></svg></span>
+                  <span class="wf-node-title">Intake</span>
+                </div>
+                <div class="wf-node-body" title="Vraag ALTIJD het adres, wat er precies aan de hand is, en sinds wanneer. Bij een lekkage: vraag of de hoofdkraan al is dichtgedraaid."><span class="wf-clamp">Vraag ALTIJD het adres, wat er precies aan de hand is, en sinds wanneer. Bij een lekkage: vraag of de hoofdkraan al is dichtgedraaid.</span></div>
+              </div><div class="wf-node wf-node-decision" style="left:160px;top:640px;width:200px;height:100px">
+                <div class="wf-node-head">
+                  <span class="wf-node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M9.3 9.3a2.7 2.7 0 1 1 3.6 2.5c-.8.3-1 .9-1 1.7"/><circle cx="12" cy="16.7" r=".3" fill="currentColor"/></svg></span>
+                  <span class="wf-node-title">Spoed?</span>
+                </div>
+                <div class="wf-node-body" title="Beoordeelt eerst of dit met spoed moet."><span class="wf-clamp">Beoordeelt eerst of dit met spoed moet.</span></div>
+              </div><div class="wf-node wf-node-tool" style="left:40px;top:840px;width:200px;height:100px">
+                <div class="wf-node-head">
+                  <span class="wf-node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5h8M18.5 7.5H20M4 16.5h2M12.5 16.5H20"/><circle cx="15" cy="7.5" r="2.3"/><circle cx="9" cy="16.5" r="2.3"/></svg></span>
+                  <span class="wf-node-title">Terugbelverzoek</span>
+                </div>
+                <div class="wf-node-body" title="Gebruik dit bij elke storing, lekkage of ander spoedgeval dat niet direct telefonisch is op te lossen — vraag altijd het adres erbij, niet alleen naam en telefoonnummer."><span class="wf-clamp">Gebruik dit bij elke storing, lekkage of ander spoedgeval dat niet direct telefonisch is op te lossen — vraag altijd het adres erbij, niet alleen naam en telefoonnummer.</span></div>
+              </div><div class="wf-node wf-node-tool" style="left:280px;top:840px;width:200px;height:100px">
+                <div class="wf-node-head">
+                  <span class="wf-node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5h8M18.5 7.5H20M4 16.5h2M12.5 16.5H20"/><circle cx="15" cy="7.5" r="2.3"/><circle cx="9" cy="16.5" r="2.3"/></svg></span>
+                  <span class="wf-node-title">Beschikbaarheid &amp; afspraak</span>
+                </div>
+                <div class="wf-node-body" title="Gebruik dit zodra de beller wil weten wanneer er een monteur langs kan komen. Gebruik dit alleen voor een geplande, niet-spoedeisende afspraak (bijv. een keuring of onderhoud). Bij een storing of lekkage: noteer het verzoek en verbind door of meld dat er teruggebeld wordt."><span class="wf-clamp">Gebruik dit zodra de beller wil weten wanneer er een monteur langs kan komen. Gebruik dit alleen voor een geplande, niet-spoedeisende afspraak (bijv. een keuring of onderhoud). Bij een storing of lekkage: noteer het verzoek en verbind door of meld dat er teruggebeld wordt.</span></div>
+              </div><div class="wf-node wf-node-human" style="left:160px;top:1040px;width:200px;height:100px">
+                <div class="wf-node-head">
+                  <span class="wf-node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8.5" r="3"/><path d="M5.5 20c0-3.6 3-6 6.5-6s6.5 2.4 6.5 6"/></svg></span>
+                  <span class="wf-node-title">Samenvatting</span>
+                </div>
+                <div class="wf-node-body" title="Vat kort samen wat er is afgesproken en bevestigt uw telefoonnummer — de samenvatting staat direct in uw dashboard."><span class="wf-clamp">Vat kort samen wat er is afgesproken en bevestigt uw telefoonnummer — de samenvatting staat direct in uw dashboard.</span></div>
+              </div><div class="wf-node wf-node-end" style="left:160px;top:1240px;width:200px;height:100px">
+                <div class="wf-node-head">
+                  <span class="wf-node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M9 12.2l2 2 4-4.4"/></svg></span>
+                  <span class="wf-node-title">Einde</span>
+                </div>
+                <div class="wf-node-body" title="Gesprek beëindigd."><span class="wf-clamp">Gesprek beëindigd.</span></div>
+              </div></div></div>
+              </div>
             </div>
             <div class="pill-panel pill-panel-split" id="ca-kapper" role="tabpanel" aria-labelledby="tab-ca-kapper" hidden>
               <div class="pill-panel-copy">
@@ -217,7 +282,71 @@
                 <p>Vraagt welke behandeling het is en voor wie, checkt de beschikbaarheid en stelt zelf een tijd voor — of beantwoordt een vraag uit de kennisbank.</p>
                 <a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a>
               </div>
-              <div class="placeholder-tile pill-panel-visual" aria-hidden="true"><span class="placeholder-label">Voorbeeld volgt</span></div>
+
+              <!-- Static workflow picture (generated, 2026-08-29): the call-agent.kapper flow from /templates,
+                   verbatim content, cut off to its middle, no JS. Decorative — the copy on the left
+                   says the same thing. Regenerate from templates.html rather than hand-editing. -->
+              <div class="wf-canvas wf-canvas-static pill-panel-visual" style="--wf-win:470px;--wf-off:510px" aria-hidden="true">
+                <div class="wf-viewport"><div class="wf-stage" style="width:520px;height:1368px">
+            <svg class="wf-edges" width="520" height="1368" aria-hidden="true">
+              <defs>
+                <marker id="wfcall-agent-kapper-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M0,0 L10,5 L0,10 z" fill="var(--wf-edge)" />
+                </marker>
+              </defs>
+              <path d="M260,128 C260,184 260,184 260,240" class="wf-edge-path" marker-end="url(#wfcall-agent-kapper-arrow)" /><path d="M260,328 C260,384 260,384 260,440" class="wf-edge-path" marker-end="url(#wfcall-agent-kapper-arrow)" /><path d="M260,528 C260,584 260,584 260,640" class="wf-edge-path" marker-end="url(#wfcall-agent-kapper-arrow)" /><path d="M260,728 C260,784 140,784 140,840" class="wf-edge-path" marker-end="url(#wfcall-agent-kapper-arrow)" /><path d="M260,728 C260,784 380,784 380,840" class="wf-edge-path" marker-end="url(#wfcall-agent-kapper-arrow)" /><path d="M140,928 C140,984 260,984 260,1040" class="wf-edge-path" marker-end="url(#wfcall-agent-kapper-arrow)" /><path d="M380,928 C380,984 260,984 260,1040" class="wf-edge-path" marker-end="url(#wfcall-agent-kapper-arrow)" /><path d="M260,1128 C260,1184 260,1184 260,1240" class="wf-edge-path" marker-end="url(#wfcall-agent-kapper-arrow)" />
+            </svg>
+            <span class="wf-edge-label" style="left:200px;top:784px" title="Heeft een vraag">Heeft een vraag</span><span class="wf-edge-label" style="left:320px;top:784px" title="Wil een afspraak">Wil een afspraak</span>
+            <div class="wf-node wf-node-start" style="left:160px;top:40px;width:200px;height:100px">
+                <div class="wf-node-head">
+                  <span class="wf-node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="7" fill="none"/><circle cx="12" cy="12" r="2.3" fill="currentColor" stroke="none"/></svg></span>
+                  <span class="wf-node-title">Start</span>
+                </div>
+                <div class="wf-node-body" title="Telefoon gaat over."><span class="wf-clamp">Telefoon gaat over.</span></div>
+              </div><div class="wf-node wf-node-talk" style="left:160px;top:240px;width:200px;height:100px">
+                <div class="wf-node-head">
+                  <span class="wf-node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="12" rx="3"/><path d="M8 16.5v3.5l4.5-3.5"/></svg></span>
+                  <span class="wf-node-title">Begroeting</span>
+                </div>
+                <div class="wf-node-body" title="Meldt zich als virtuele assistent van het bedrijf en dat het gesprek wordt opgenomen."><span class="wf-clamp">Meldt zich als virtuele assistent van het bedrijf en dat het gesprek wordt opgenomen.</span></div>
+              </div><div class="wf-node wf-node-talk" style="left:160px;top:440px;width:200px;height:100px">
+                <div class="wf-node-head">
+                  <span class="wf-node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="12" rx="3"/><path d="M8 16.5v3.5l4.5-3.5"/></svg></span>
+                  <span class="wf-node-title">Intake</span>
+                </div>
+                <div class="wf-node-body" title="Vraag welke behandeling het is (knippen, kleuren, e.d.), voor wie de afspraak is, en of er een voorkeur is voor een specifieke kapper of dag/tijdstip."><span class="wf-clamp">Vraag welke behandeling het is (knippen, kleuren, e.d.), voor wie de afspraak is, en of er een voorkeur is voor een specifieke kapper of dag/tijdstip.</span></div>
+              </div><div class="wf-node wf-node-decision" style="left:160px;top:640px;width:200px;height:100px">
+                <div class="wf-node-head">
+                  <span class="wf-node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M9.3 9.3a2.7 2.7 0 1 1 3.6 2.5c-.8.3-1 .9-1 1.7"/><circle cx="12" cy="16.7" r=".3" fill="currentColor"/></svg></span>
+                  <span class="wf-node-title">Afspraak of vraag?</span>
+                </div>
+                <div class="wf-node-body" title="Bepaalt of de beller wil boeken of een vraag heeft."><span class="wf-clamp">Bepaalt of de beller wil boeken of een vraag heeft.</span></div>
+              </div><div class="wf-node wf-node-talk" style="left:40px;top:840px;width:200px;height:100px">
+                <div class="wf-node-head">
+                  <span class="wf-node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="12" rx="3"/><path d="M8 16.5v3.5l4.5-3.5"/></svg></span>
+                  <span class="wf-node-title">Antwoord uit kennisbank</span>
+                </div>
+                <div class="wf-node-body" title="Beantwoordt de vraag op basis van uw kennisbank."><span class="wf-clamp">Beantwoordt de vraag op basis van uw kennisbank.</span></div>
+              </div><div class="wf-node wf-node-tool" style="left:280px;top:840px;width:200px;height:100px">
+                <div class="wf-node-head">
+                  <span class="wf-node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5h8M18.5 7.5H20M4 16.5h2M12.5 16.5H20"/><circle cx="15" cy="7.5" r="2.3"/><circle cx="9" cy="16.5" r="2.3"/></svg></span>
+                  <span class="wf-node-title">Beschikbaarheid &amp; afspraak</span>
+                </div>
+                <div class="wf-node-body" title="Gebruik dit zodra de beller wil weten wanneer er een plekje vrij is. Gebruik dit zodra de beller een knipbeurt of behandeling wil inplannen en akkoord is met een voorgesteld tijdstip."><span class="wf-clamp">Gebruik dit zodra de beller wil weten wanneer er een plekje vrij is. Gebruik dit zodra de beller een knipbeurt of behandeling wil inplannen en akkoord is met een voorgesteld tijdstip.</span></div>
+              </div><div class="wf-node wf-node-human" style="left:160px;top:1040px;width:200px;height:100px">
+                <div class="wf-node-head">
+                  <span class="wf-node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8.5" r="3"/><path d="M5.5 20c0-3.6 3-6 6.5-6s6.5 2.4 6.5 6"/></svg></span>
+                  <span class="wf-node-title">Samenvatting</span>
+                </div>
+                <div class="wf-node-body" title="Vat kort samen wat er is afgesproken en bevestigt uw telefoonnummer — de samenvatting staat direct in uw dashboard."><span class="wf-clamp">Vat kort samen wat er is afgesproken en bevestigt uw telefoonnummer — de samenvatting staat direct in uw dashboard.</span></div>
+              </div><div class="wf-node wf-node-end" style="left:160px;top:1240px;width:200px;height:100px">
+                <div class="wf-node-head">
+                  <span class="wf-node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M9 12.2l2 2 4-4.4"/></svg></span>
+                  <span class="wf-node-title">Einde</span>
+                </div>
+                <div class="wf-node-body" title="Gesprek beëindigd."><span class="wf-clamp">Gesprek beëindigd.</span></div>
+              </div></div></div>
+              </div>
             </div>
             <div class="pill-panel pill-panel-split" id="ca-webshop" role="tabpanel" aria-labelledby="tab-ca-webshop" hidden>
               <div class="pill-panel-copy">
@@ -226,7 +355,71 @@
                 <p>Vraagt naar het ordernummer of e-mailadres, zoekt de bestelling op en geeft de status direct door — wordt niets gevonden, dan legt de agent een terugbelverzoek vast.</p>
                 <a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a>
               </div>
-              <div class="placeholder-tile pill-panel-visual" aria-hidden="true"><span class="placeholder-label">Voorbeeld volgt</span></div>
+
+              <!-- Static workflow picture (generated, 2026-08-29): the call-agent.webshop flow from /templates,
+                   verbatim content, cut off to its middle, no JS. Decorative — the copy on the left
+                   says the same thing. Regenerate from templates.html rather than hand-editing. -->
+              <div class="wf-canvas wf-canvas-static pill-panel-visual" style="--wf-win:470px;--wf-off:710px" aria-hidden="true">
+                <div class="wf-viewport"><div class="wf-stage" style="width:520px;height:1368px">
+            <svg class="wf-edges" width="520" height="1368" aria-hidden="true">
+              <defs>
+                <marker id="wfcall-agent-webshop-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M0,0 L10,5 L0,10 z" fill="var(--wf-edge)" />
+                </marker>
+              </defs>
+              <path d="M260,128 C260,184 260,184 260,240" class="wf-edge-path" marker-end="url(#wfcall-agent-webshop-arrow)" /><path d="M260,328 C260,384 260,384 260,440" class="wf-edge-path" marker-end="url(#wfcall-agent-webshop-arrow)" /><path d="M260,528 C260,584 260,584 260,640" class="wf-edge-path" marker-end="url(#wfcall-agent-webshop-arrow)" /><path d="M260,728 C260,784 260,784 260,840" class="wf-edge-path" marker-end="url(#wfcall-agent-webshop-arrow)" /><path d="M260,928 C260,984 140,984 140,1040" class="wf-edge-path" marker-end="url(#wfcall-agent-webshop-arrow)" /><path d="M260,928 C260,984 380,984 380,1040" class="wf-edge-path" marker-end="url(#wfcall-agent-webshop-arrow)" /><path d="M140,1128 C140,1184 260,1184 260,1240" class="wf-edge-path" marker-end="url(#wfcall-agent-webshop-arrow)" /><path d="M380,1128 C380,1184 260,1184 260,1240" class="wf-edge-path" marker-end="url(#wfcall-agent-webshop-arrow)" />
+            </svg>
+            <span class="wf-edge-label" style="left:200px;top:984px" title="Gevonden">Gevonden</span><span class="wf-edge-label" style="left:320px;top:984px" title="Niet gevonden">Niet gevonden</span>
+            <div class="wf-node wf-node-start" style="left:160px;top:40px;width:200px;height:100px">
+                <div class="wf-node-head">
+                  <span class="wf-node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="7" fill="none"/><circle cx="12" cy="12" r="2.3" fill="currentColor" stroke="none"/></svg></span>
+                  <span class="wf-node-title">Start</span>
+                </div>
+                <div class="wf-node-body" title="Telefoon gaat over."><span class="wf-clamp">Telefoon gaat over.</span></div>
+              </div><div class="wf-node wf-node-talk" style="left:160px;top:240px;width:200px;height:100px">
+                <div class="wf-node-head">
+                  <span class="wf-node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="12" rx="3"/><path d="M8 16.5v3.5l4.5-3.5"/></svg></span>
+                  <span class="wf-node-title">Begroeting</span>
+                </div>
+                <div class="wf-node-body" title="Meldt zich als virtuele assistent van het bedrijf en dat het gesprek wordt opgenomen."><span class="wf-clamp">Meldt zich als virtuele assistent van het bedrijf en dat het gesprek wordt opgenomen.</span></div>
+              </div><div class="wf-node wf-node-talk" style="left:160px;top:440px;width:200px;height:100px">
+                <div class="wf-node-head">
+                  <span class="wf-node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="12" rx="3"/><path d="M8 16.5v3.5l4.5-3.5"/></svg></span>
+                  <span class="wf-node-title">Intake</span>
+                </div>
+                <div class="wf-node-body" title="Vraag naar het ordernummer of e-mailadres waarmee besteld is, en waar de vraag precies over gaat (levering, retour, product)."><span class="wf-clamp">Vraag naar het ordernummer of e-mailadres waarmee besteld is, en waar de vraag precies over gaat (levering, retour, product).</span></div>
+              </div><div class="wf-node wf-node-tool" style="left:160px;top:640px;width:200px;height:100px">
+                <div class="wf-node-head">
+                  <span class="wf-node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5h8M18.5 7.5H20M4 16.5h2M12.5 16.5H20"/><circle cx="15" cy="7.5" r="2.3"/><circle cx="9" cy="16.5" r="2.3"/></svg></span>
+                  <span class="wf-node-title">Bestelling opzoeken</span>
+                </div>
+                <div class="wf-node-body" title="Gebruik dit zodra de beller vraagt naar de status van een bestelling."><span class="wf-clamp">Gebruik dit zodra de beller vraagt naar de status van een bestelling.</span></div>
+              </div><div class="wf-node wf-node-decision" style="left:160px;top:840px;width:200px;height:100px">
+                <div class="wf-node-head">
+                  <span class="wf-node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M9.3 9.3a2.7 2.7 0 1 1 3.6 2.5c-.8.3-1 .9-1 1.7"/><circle cx="12" cy="16.7" r=".3" fill="currentColor"/></svg></span>
+                  <span class="wf-node-title">Gevonden?</span>
+                </div>
+                <div class="wf-node-body" title="Controleert of de bestelling of order bekend is."><span class="wf-clamp">Controleert of de bestelling of order bekend is.</span></div>
+              </div><div class="wf-node wf-node-talk" style="left:40px;top:1040px;width:200px;height:100px">
+                <div class="wf-node-head">
+                  <span class="wf-node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="12" rx="3"/><path d="M8 16.5v3.5l4.5-3.5"/></svg></span>
+                  <span class="wf-node-title">Status doorgeven</span>
+                </div>
+                <div class="wf-node-body" title="Geeft de status direct door aan de beller."><span class="wf-clamp">Geeft de status direct door aan de beller.</span></div>
+              </div><div class="wf-node wf-node-tool" style="left:280px;top:1040px;width:200px;height:100px">
+                <div class="wf-node-head">
+                  <span class="wf-node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5h8M18.5 7.5H20M4 16.5h2M12.5 16.5H20"/><circle cx="15" cy="7.5" r="2.3"/><circle cx="9" cy="16.5" r="2.3"/></svg></span>
+                  <span class="wf-node-title">Terugbelverzoek</span>
+                </div>
+                <div class="wf-node-body" title="Gebruik dit als de bestelling niet gevonden kan worden of het probleem meer uitzoekwerk vraagt."><span class="wf-clamp">Gebruik dit als de bestelling niet gevonden kan worden of het probleem meer uitzoekwerk vraagt.</span></div>
+              </div><div class="wf-node wf-node-end" style="left:160px;top:1240px;width:200px;height:100px">
+                <div class="wf-node-head">
+                  <span class="wf-node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M9 12.2l2 2 4-4.4"/></svg></span>
+                  <span class="wf-node-title">Einde</span>
+                </div>
+                <div class="wf-node-body" title="Gesprek beëindigd."><span class="wf-clamp">Gesprek beëindigd.</span></div>
+              </div></div></div>
+              </div>
             </div>
             <div class="pill-panel pill-panel-split" id="ca-horeca" role="tabpanel" aria-labelledby="tab-ca-horeca" hidden>
               <div class="pill-panel-copy">
@@ -235,7 +428,71 @@
                 <p>Vraagt het aantal personen, datum en tijd en eventuele dieetwensen, en stelt zelf een tijd voor — of beantwoordt een vraag over het menu.</p>
                 <a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a>
               </div>
-              <div class="placeholder-tile pill-panel-visual" aria-hidden="true"><span class="placeholder-label">Voorbeeld volgt</span></div>
+
+              <!-- Static workflow picture (generated, 2026-08-29): the call-agent.horeca flow from /templates,
+                   verbatim content, cut off to its middle, no JS. Decorative — the copy on the left
+                   says the same thing. Regenerate from templates.html rather than hand-editing. -->
+              <div class="wf-canvas wf-canvas-static pill-panel-visual" style="--wf-win:470px;--wf-off:510px" aria-hidden="true">
+                <div class="wf-viewport"><div class="wf-stage" style="width:520px;height:1368px">
+            <svg class="wf-edges" width="520" height="1368" aria-hidden="true">
+              <defs>
+                <marker id="wfcall-agent-horeca-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M0,0 L10,5 L0,10 z" fill="var(--wf-edge)" />
+                </marker>
+              </defs>
+              <path d="M260,128 C260,184 260,184 260,240" class="wf-edge-path" marker-end="url(#wfcall-agent-horeca-arrow)" /><path d="M260,328 C260,384 260,384 260,440" class="wf-edge-path" marker-end="url(#wfcall-agent-horeca-arrow)" /><path d="M260,528 C260,584 260,584 260,640" class="wf-edge-path" marker-end="url(#wfcall-agent-horeca-arrow)" /><path d="M260,728 C260,784 140,784 140,840" class="wf-edge-path" marker-end="url(#wfcall-agent-horeca-arrow)" /><path d="M260,728 C260,784 380,784 380,840" class="wf-edge-path" marker-end="url(#wfcall-agent-horeca-arrow)" /><path d="M140,928 C140,984 260,984 260,1040" class="wf-edge-path" marker-end="url(#wfcall-agent-horeca-arrow)" /><path d="M380,928 C380,984 260,984 260,1040" class="wf-edge-path" marker-end="url(#wfcall-agent-horeca-arrow)" /><path d="M260,1128 C260,1184 260,1184 260,1240" class="wf-edge-path" marker-end="url(#wfcall-agent-horeca-arrow)" />
+            </svg>
+            <span class="wf-edge-label" style="left:200px;top:784px" title="Heeft een vraag">Heeft een vraag</span><span class="wf-edge-label" style="left:320px;top:784px" title="Wil een afspraak">Wil een afspraak</span>
+            <div class="wf-node wf-node-start" style="left:160px;top:40px;width:200px;height:100px">
+                <div class="wf-node-head">
+                  <span class="wf-node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="7" fill="none"/><circle cx="12" cy="12" r="2.3" fill="currentColor" stroke="none"/></svg></span>
+                  <span class="wf-node-title">Start</span>
+                </div>
+                <div class="wf-node-body" title="Telefoon gaat over."><span class="wf-clamp">Telefoon gaat over.</span></div>
+              </div><div class="wf-node wf-node-talk" style="left:160px;top:240px;width:200px;height:100px">
+                <div class="wf-node-head">
+                  <span class="wf-node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="12" rx="3"/><path d="M8 16.5v3.5l4.5-3.5"/></svg></span>
+                  <span class="wf-node-title">Begroeting</span>
+                </div>
+                <div class="wf-node-body" title="Meldt zich als virtuele assistent van het bedrijf en dat het gesprek wordt opgenomen."><span class="wf-clamp">Meldt zich als virtuele assistent van het bedrijf en dat het gesprek wordt opgenomen.</span></div>
+              </div><div class="wf-node wf-node-talk" style="left:160px;top:440px;width:200px;height:100px">
+                <div class="wf-node-head">
+                  <span class="wf-node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="12" rx="3"/><path d="M8 16.5v3.5l4.5-3.5"/></svg></span>
+                  <span class="wf-node-title">Intake</span>
+                </div>
+                <div class="wf-node-body" title="Vraag het aantal personen, de gewenste datum en tijd, en of er dieetwensen of allergieën zijn."><span class="wf-clamp">Vraag het aantal personen, de gewenste datum en tijd, en of er dieetwensen of allergieën zijn.</span></div>
+              </div><div class="wf-node wf-node-decision" style="left:160px;top:640px;width:200px;height:100px">
+                <div class="wf-node-head">
+                  <span class="wf-node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M9.3 9.3a2.7 2.7 0 1 1 3.6 2.5c-.8.3-1 .9-1 1.7"/><circle cx="12" cy="16.7" r=".3" fill="currentColor"/></svg></span>
+                  <span class="wf-node-title">Afspraak of vraag?</span>
+                </div>
+                <div class="wf-node-body" title="Bepaalt of de beller wil boeken of een vraag heeft."><span class="wf-clamp">Bepaalt of de beller wil boeken of een vraag heeft.</span></div>
+              </div><div class="wf-node wf-node-talk" style="left:40px;top:840px;width:200px;height:100px">
+                <div class="wf-node-head">
+                  <span class="wf-node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="12" rx="3"/><path d="M8 16.5v3.5l4.5-3.5"/></svg></span>
+                  <span class="wf-node-title">Antwoord uit kennisbank</span>
+                </div>
+                <div class="wf-node-body" title="Beantwoordt de vraag op basis van uw kennisbank."><span class="wf-clamp">Beantwoordt de vraag op basis van uw kennisbank.</span></div>
+              </div><div class="wf-node wf-node-tool" style="left:280px;top:840px;width:200px;height:100px">
+                <div class="wf-node-head">
+                  <span class="wf-node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5h8M18.5 7.5H20M4 16.5h2M12.5 16.5H20"/><circle cx="15" cy="7.5" r="2.3"/><circle cx="9" cy="16.5" r="2.3"/></svg></span>
+                  <span class="wf-node-title">Beschikbaarheid &amp; afspraak</span>
+                </div>
+                <div class="wf-node-body" title="Gebruik dit zodra de beller wil weten of er een tafel vrij is. Gebruik dit zodra de beller wil reserveren en akkoord is met een voorgesteld tijdstip."><span class="wf-clamp">Gebruik dit zodra de beller wil weten of er een tafel vrij is. Gebruik dit zodra de beller wil reserveren en akkoord is met een voorgesteld tijdstip.</span></div>
+              </div><div class="wf-node wf-node-human" style="left:160px;top:1040px;width:200px;height:100px">
+                <div class="wf-node-head">
+                  <span class="wf-node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8.5" r="3"/><path d="M5.5 20c0-3.6 3-6 6.5-6s6.5 2.4 6.5 6"/></svg></span>
+                  <span class="wf-node-title">Samenvatting</span>
+                </div>
+                <div class="wf-node-body" title="Vat kort samen wat er is afgesproken en bevestigt uw telefoonnummer — de samenvatting staat direct in uw dashboard."><span class="wf-clamp">Vat kort samen wat er is afgesproken en bevestigt uw telefoonnummer — de samenvatting staat direct in uw dashboard.</span></div>
+              </div><div class="wf-node wf-node-end" style="left:160px;top:1240px;width:200px;height:100px">
+                <div class="wf-node-head">
+                  <span class="wf-node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M9 12.2l2 2 4-4.4"/></svg></span>
+                  <span class="wf-node-title">Einde</span>
+                </div>
+                <div class="wf-node-body" title="Gesprek beëindigd."><span class="wf-clamp">Gesprek beëindigd.</span></div>
+              </div></div></div>
+              </div>
             </div>
           </div>
         </div>
