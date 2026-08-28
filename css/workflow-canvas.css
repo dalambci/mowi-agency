@@ -38,11 +38,43 @@
    underneath. */
 .tpl-panels .pill-panel:not([hidden]){display:flex;flex-direction:column;gap:2rem}
 
+/* ---------- Hero → showcase spacing (this page only) ---------- */
+/* Sal, 2026-08-28: "reduce the space between the hero body and the first
+   two tiles". Overrides style.css's shared .hero-tight-bottom (40px /
+   24px on phones) and the section's own top padding here, so no other
+   page moves. */
+.hero-tight-bottom{padding-bottom:16px}
+.tpl-showcase{padding-top:2.5rem}   /* .section default is 5rem */
+/* The site's own pill-tabs component adds 32px above the tab row and
+   48px between it and its panels — on this page the section padding
+   already provides the breathing room above, and the tiles read as the
+   tabs' own content, so both are tightened here (desktop chain hero
+   text → tiles: 16 + 40 + 44 tab row + 24 = 124px, was 244px). */
+.tpl-showcase .pill-tablist{margin-top:0}
+.tpl-showcase .pill-panels{margin-top:1.5rem}
+@media (max-width:47.9rem){
+  .hero-tight-bottom{padding-bottom:12px}
+  .tpl-showcase{padding-top:1.5rem}
+}
+
 /* ---------- Branche list ---------- */
+/* Right-edge fade (Sal, 2026-08-28: "a visible fade on the right so it
+   becomes more clear it can be scrolled"). A mask on the scroll container
+   itself stays put at the scrollport's edge while the tiles scroll under
+   it. js/workflow-canvas.js toggles .is-at-end (no right fade once the
+   last tile is fully in view — otherwise it would look cut off) and
+   .is-scrolled (a matching left fade once there is content hidden on
+   that side). The 3rem fade is the same width as the gap the last tile
+   would otherwise vanish into. */
 .tpl-branche-list{
   display:flex;gap:.625rem;overflow-x:auto;padding-bottom:.25rem;
   scrollbar-width:none;
+  --tpl-fade-l:0rem;--tpl-fade-r:3rem;
+  -webkit-mask-image:linear-gradient(to right,transparent 0,#000 var(--tpl-fade-l),#000 calc(100% - var(--tpl-fade-r)),transparent 100%);
+  mask-image:linear-gradient(to right,transparent 0,#000 var(--tpl-fade-l),#000 calc(100% - var(--tpl-fade-r)),transparent 100%);
 }
+.tpl-branche-list.is-scrolled{--tpl-fade-l:3rem}
+.tpl-branche-list.is-at-end{--tpl-fade-r:0rem}
 .tpl-branche-list::-webkit-scrollbar{display:none}
 .tpl-branche-btn{
   flex:0 0 auto;width:13rem;text-align:left;background:var(--surface);
@@ -69,8 +101,15 @@
   background:var(--muted);overflow:hidden;isolation:isolate;height:24rem;
 }
 @media (min-width:48rem){ .wf-canvas{height:28rem} }
+/* touch-action:pan-y, not none (Sal, 2026-08-28: "on mobile the page
+   scroll stops for the widget"): a finger on the canvas scrolls the PAGE
+   by default, exactly like an embedded Google Map. A two-finger pinch is
+   not a pan-y gesture, so the browser leaves it to us — js/workflow-
+   canvas.js zooms the canvas with it and then adds .wf-armed, which flips
+   this to none so one-finger drags pan the canvas; scrolling the canvas
+   out of view disarms it again ("use two fingers to move the map"). */
 .wf-viewport{
-  position:absolute;inset:0;overflow:hidden;cursor:grab;touch-action:none;
+  position:absolute;inset:0;overflow:hidden;cursor:grab;touch-action:pan-y;
   -webkit-user-select:none;user-select:none;
   background-image:radial-gradient(var(--wf-dot) 1.25px,transparent 0);background-size:20px 20px;
 }
@@ -124,6 +163,14 @@
 }
 .wf-hint-hidden{opacity:0}
 
+.wf-viewport.wf-armed{touch-action:none}
+
+/* Phones: exactly two and a half tiles in view (Sal, 2026-08-28: "show
+   half of the 3rd tile so it becomes even more clear it can be
+   scrolled") — sized from the list's own width, so it holds on every
+   phone width instead of depending on a fixed tile width happening to
+   leave a sliver. The width is a flex-basis on the scroll container's
+   visible width: two gaps plus 2.5 tiles fill it. */
 @media (max-width:47.9rem){
-  .tpl-branche-btn{width:11rem}
+  .tpl-branche-btn{width:auto;flex:0 0 calc((100% - 2 * .625rem) / 2.5)}
 }
