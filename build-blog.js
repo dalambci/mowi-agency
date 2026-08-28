@@ -297,7 +297,7 @@ function headerHtml() {
       </nav>
 
       <div class="header-actions">
-        <a href="https://my.mowi.agency/login" target="_blank" rel="noopener" class="header-login">Inloggen</a>
+        <a href="https://my.mowi.agency/login" class="header-login">Inloggen</a>
         <a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a>
       </div>
 
