@@ -546,7 +546,13 @@ applied to all 16, and `test.html` is the reliable copy-paste source.
   gemiste oproep." so the two agent pages rhyme. The sub's third beat changed with it (was
   "Geen offerteaanvraag die drie dagen blijft liggen" — same phrase as the new heading; now
   "Geen avond meer op de bank met uw inbox", the page's other pain). Keep the two agent heroes
-  parallel if either is rewritten again.
+  parallel if either is rewritten again. **Sub rewritten again later the same day** (Sal: "just
+  like you did for voice agent, direct marketing flavoured") in the same device as the Voice
+  sub: "Elke e-mail wordt gesorteerd en het antwoord staat klaar. Ook de aanvraag die
+  vrijdagavond binnenkomt. De agent vraagt zelf wat er nog mist. U leest het na en verstuurt."
+  Every claim maps to the page's cards (sorteert, conceptantwoord klaar, vraagt zelf door, u
+  controleert en verstuurt). The two agent subs now share one structure: outcome → the
+  objection → mechanism → you stay in control.
 - **Current positioning, unchanged by v2:** Mowi is a **conversational workflow-automation
   platform** for the Dutch MKB/SMB — "u zegt het, en het werkt." The product story is:
   describe what you want done in plain language, Mowi configures it from tested building
@@ -795,6 +801,19 @@ applied to all 16, and `test.html` is the reliable copy-paste source.
     `.icon-tile` glyphs: wrench / scissors / shopping bag / utensils (lucide-style paths,
     24-grid, stroke 1.75). (d) Voice agent hero sub rewritten (see Content & positioning).
     `style.css` `?v=` → `20260829-3` sitewide.
+  - **`/templates` showcase, desktop two-column layout (2026-08-29, Sal):** from 64rem the
+    capability panel (`.tpl-panels .pill-panel`) is a two-column grid — branche tiles left as a
+    **3-per-row grid** (no scroll, no fades; `.tpl-branche-list` switches from the rail to
+    `display:grid`), the example right with a **44rem portrait canvas** ("the workflow as a
+    vertical widget is perfect because the flow itself is vertical"). Tiles are top-aligned
+    there so titles sit on one line across a row (Sal: "make sure the titles align with the tile
+    next to it"); `overflow-wrap:anywhere` as a safety net for long compounds plus a `&shy;` in
+    "kennismakings&shy;gesprekken" in `templates.html` — deliberately **not** `hyphens:auto`,
+    which hyphenated ordinary words at that width. **Below 64rem nothing changes**: the
+    horizontal rail (2.5 tiles on phones, edge fades) with the canvas underneath stays as tuned
+    2026-08-28 — Sal: "this doesn't count for mobile, just desktop". CSS-only; the switcher JS
+    and fade classes need no change (an unscrollable grid computes to "at end"). Lives in
+    `css/workflow-canvas.css` (`?v=20260829-3` on the four pages loading it).
   - **Homepage icons (2026-08-29):** the eight `.placeholder-icon` slots in the "Eén platform"
     tab heads (5) and the "Gemaakt voor het Nederlandse MKB" reasons (3) are real glyphs now,
     per Sal "use the same icon style as the Inbox and Voice agent pages" — i.e. `.lp-card-icon`'s

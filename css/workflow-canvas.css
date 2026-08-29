@@ -207,6 +207,39 @@
 
 .wf-viewport.wf-armed{touch-action:none}
 
+/* ---------- Desktop: tiles left, workflow right (Sal, 2026-08-29) ----------
+   "List the branche tiles next to the graph widget, same row, tiles on the
+   left and the workflow on the right — the workflow as a vertical widget is
+   perfect because the flow itself is vertical. Desktop only." So from 64rem
+   the capability panel is a two-column grid: the branche rail turns into a
+   3-per-row tile grid (no scroll, no edge fades — js/workflow-canvas.js's
+   fade classes compute to "at end" on an unscrollable list and are
+   harmless), and the canvas gets a tall portrait frame so more of the flow
+   is in view. Below 64rem nothing changes: the horizontal rail with the
+   canvas underneath stays as tuned on 2026-08-28. */
+@media (min-width:64rem){
+  .tpl-panels .pill-panel:not([hidden]){
+    display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:2.5rem;align-items:start;
+  }
+  .tpl-branche-list{
+    display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.75rem;
+    overflow:visible;padding-bottom:0;scroll-snap-type:none;
+    -webkit-mask-image:none;mask-image:none;
+  }
+  /* Narrow tiles meet long Dutch compounds ("kennismakingsgesprekken"): let
+     them break rather than clip at the tile edge — overflow-wrap as the
+     safety net, plus a &shy; in that word in templates.html. NOT
+     hyphens:auto: at 3-per-row it hyphenated ordinary words ("zon-der",
+     "her-kent"), which read worse than the one clip it fixed. Content
+     top-aligned here
+     (the rail centres it): a one-line tagline would otherwise float its
+     title higher than a three-line neighbour's — Sal: "make sure the titles
+     horizontally align with the tile next to it". Grid rows share a height,
+     so top-aligned titles sit on one line across the row. */
+  .tpl-branche-btn{width:auto;min-height:6.5rem;justify-content:flex-start;overflow-wrap:anywhere}
+  .tpl-examples .wf-canvas{height:44rem}
+}
+
 /* Phones: exactly two and a half tiles in view (Sal, 2026-08-28: "show
    half of the 3rd tile so it becomes even more clear it can be
    scrolled") — sized from the list's own width, so it holds on every
