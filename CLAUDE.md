@@ -833,6 +833,19 @@ applied to all 16, and `test.html` is the reliable copy-paste source.
     heading per Sal ("for the inbox agent only") — not applied to `.hero h1` globally because
     the homepage heading uses deliberate `<br>`s. The Voice agent's heading would benefit from
     the same treatment; not done. `style.css` `?v=20260829-4` sitewide.
+  - **`zo-werkt-het.html` split visuals (2026-08-29, Sal):** the three "Voorbeeld volgt" tiles
+    in the process section are images now. (1) "U vertelt het in gewone taal" reuses the
+    homepage hero screenshot `assets/hero-dashboard.webp`. (2) "Eerst een testrun op uw eigen
+    gegevens" → `assets/zo-werkt-het/testrun.webp`, (3) "U ziet precies wat er gedaan is" →
+    `assets/zo-werkt-het/activiteit.webp` — both **the same series as the homepage slider cards**
+    (white UI card on the warm-duotone field photo with film grain), composed at 2× the slider's
+    design scale (600×400 scene, 400px card) because the slot is ~620px wide, rendered at 3× and
+    saved as 1200×800 WebP. Testrun card: "48 e-mails doorgelopen / Goed gesorteerd 44 / Concept
+    klaargezet 31 / Ter controle 4 / Niets is verstuurd. Live na uw akkoord. [Zet live]".
+    Activity card: four timestamped log rows, the last tagged "Aandacht" in ink. Illustrative
+    counts, not claims. Source composition was session scratch (`cards2.html`), like the slider's.
+    New rule `img.split-visual` in `style.css` (kills the placeholder `min-height`, adds the
+    hairline frame). `style.css` `?v=20260829-5` sitewide.
   - **Homepage icons (2026-08-29):** the eight `.placeholder-icon` slots in the "Eén platform"
     tab heads (5) and the "Gemaakt voor het Nederlandse MKB" reasons (3) are real glyphs now,
     per Sal "use the same icon style as the Inbox and Voice agent pages" — i.e. `.lp-card-icon`'s

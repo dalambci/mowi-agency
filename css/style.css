@@ -754,6 +754,10 @@ main { flex: 1 0 auto; }
 .split + .split { margin-top: 6rem; }
 .split-flip .split-visual { order: -1; }
 .split-visual { min-height: 380px; }
+/* A real image in the slot (zo-werkt-het, 2026-08-29): sized by its own
+   width/height attrs — the min-height above would stretch it — in the same
+   hairline frame as the other content cards. */
+img.split-visual { min-height: 0; width: 100%; height: auto; border-radius: var(--radius-card); border: 1px solid var(--border); }
 @media (max-width: 63.9rem) {
   .split { grid-template-columns: minmax(0, 1fr); gap: 1.75rem; }
   .split + .split { margin-top: 3.5rem; }
