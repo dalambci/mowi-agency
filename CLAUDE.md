@@ -537,6 +537,18 @@ applied to all 16, and `test.html` is the reliable copy-paste source.
   four-card pain grid that sat between "Wat de agent doet" and "Zo werkt het" on both
   `e-mail-agent.html` and `call-agent.html` was removed outright. Don't reintroduce it; the
   copy is in git history if ever wanted.
+- **Agent-page headings lost their trailing periods (2026-08-29, later still, Sal):** both
+  `<h1>`s are now "Nooit meer een mail die blijft liggen" / "Nooit meer een gemiste oproep" (no
+  dot), and the "Zo werkt het" `<h2>`s became one sentence without a dot: "Wij zetten uw agent
+  op en u mailt zoals u al deed" / "Wij zetten uw agent op en uw telefoon doet de rest". The
+  homepage's "Deploy Agents. Workflows. Dashboards." and `zo-werkt-het`'s "Eerst zien. Dan pas
+  live." keep their periods — multi-beat lines where the dot is the beat.
+- **`zo-werkt-het` hero (2026-08-29, Sal: "direct marketing response copy"):** `<h1>` "Eerst
+  zien.<br />Dan pas live." (was "Vertellen, testen, en dan pas live"); sub in the agent pages'
+  DR device: "Vertel in gewone taal wat er moet gebeuren. Mowi draait het eerst als proef op uw
+  eigen gegevens, zonder dat er iets verstuurd wordt. U leest terug wat er zou zijn gebeurd. Pas
+  na uw akkoord gaat het live." Maps 1:1 onto the page's three splits (vertellen / testrun /
+  zien). Old sub had an em dash; gone.
 - **Voice agent hero sub (2026-08-29, later):** Sal asked for "something direct response
   still but different than" the "Geen nieuwe centrale. Geen extra personeel. Geen voicemail
   die niemand terugluistert." triad (he labelled it the Inbox agent's, but quoted the Voice
