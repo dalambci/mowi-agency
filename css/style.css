@@ -1226,6 +1226,11 @@ main { flex: 1 0 auto; }
 .pill-panel-copy h3 { font-size: 1.375rem; line-height: 1.25; }
 .pill-panel-copy p { font-size: 1rem; color: var(--ink-2); margin-top: 0.875rem; max-width: 30rem; }
 .pill-panel-copy .btn-primary { margin-top: 1.5rem; }
+/* A secondary link directly under the panel's button (agent pages' branche
+   tabs, 2026-08-29: "Bekijk alle branches op de Templates-pagina →" used to sit
+   below the whole tab block, far from the CTA it belongs with; Sal: "align it
+   under the button"). Own line, own width, so it never rides beside the pill. */
+.pill-panel-copy .link-arrow { display: block; width: max-content; max-width: 100%; margin-top: 1.25rem; }
 .pill-panel-visual { min-height: 320px; }
 @media (max-width: 63.9rem) {
   .pill-panel-split { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }

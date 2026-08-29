@@ -530,6 +530,15 @@ applied to all 16, and `test.html` is the reliable copy-paste source.
   four-card pain grid that sat between "Wat de agent doet" and "Zo werkt het" on both
   `e-mail-agent.html` and `call-agent.html` was removed outright. Don't reintroduce it; the
   copy is in git history if ever wanted.
+- **Voice agent hero sub (2026-08-29, later):** Sal asked for "something direct response
+  still but different than" the "Geen nieuwe centrale. Geen extra personeel. Geen voicemail
+  die niemand terugluistert." triad (he labelled it the Inbox agent's, but quoted the Voice
+  agent's — the Voice one was changed; flagged to him). Now a different DR device — outcome,
+  objection-handling, mechanism, control: "Elke oproep wordt aangenomen. Ook op de ladder, in
+  gesprek of na sluitingstijd. De agent plant de afspraak in of legt een terugbelverzoek vast. U
+  belt terug wanneer het u uitkomt." Every claim maps to the page's own cards/flows (elke
+  oproep aangenomen; afspraak inplannen; terugbelverzoek). Heading "Nooit meer een gemiste
+  oproep." unchanged.
 - **Inbox agent hero (2026-08-29, Sal: "more of a direct response approach"):** `<h1>` is now
   **"Nooit meer een mail die blijft liggen."** (was "Uw inbox is 's ochtends al gesorteerd.") —
   a pain-elimination headline taken from the page's own story section ("De offerte die blijft
@@ -706,8 +715,15 @@ applied to all 16, and `test.html` is the reliable copy-paste source.
     each), one per card. Each is a small **monochrome** UI card (stat, sparkline, stepper,
     legend, chat, rows, bars) composited over ONE shared field/cloud photo with a film-grain
     overlay and ~12% darkening; the same photo is cropped/mirrored differently per card so it
-    doesn't read as nine copies. The photo carries the colour; the UI on it stays black-on-white
-    per the rule above. They are **rendered, not hand-drawn** — from an HTML/SVG composition in
+    doesn't read as nine copies. ~~The photo carries the colour; the UI on it stays black-on-white
+    per the rule above.~~ **Superseded 2026-08-29 (Sal: "the colours pop, not consistent with
+    the brand"): the photo is now a warm duotone in the site's own tokens** — shadows → `--ink`,
+    midtones → `--ink-3`, highlights → `--bg` (PIL `ImageOps.colorize` on the grayscale), grain
+    and darkening unchanged, the white UI cards untouched. Chosen over plain grayscale (colder
+    against the bone paper) and muted colour (still "the one coloured thing"). Baked into the
+    WebPs — no runtime `filter`, so nothing extra for iOS to composite. The "one deliberate
+    exception to no-colour" in this bullet's heading therefore now covers only the hero
+    screenshot (the dashboard's own greys); the slider is monochrome again. They are **rendered, not hand-drawn** — from an HTML/SVG composition in
     the site's own fonts (Plus Jakarta Sans / Inter Tight), screenshotted at 4× with Playwright.
     That source isn't in the repo (it lived in a session scratchpad); to change a label or
     number, rebuild the composition rather than editing the WebP. Numbers on the cards are
@@ -769,6 +785,16 @@ applied to all 16, and `test.html` is the reliable copy-paste source.
     Known generator lesson: the first version emitted one extra `</div>` per canvas, which
     pushed panels 3–4 outside the `[data-pill-tabs]` container so their tabs could never un-hide
     them — always check "panels in container == tabs" after splicing.
+    **Same-day follow-ups (Sal's review):** (a) windows open **60px above the key node** (the
+    first cut showed ~100px of bare arrow — "that part doesn't show anything"): call flows
+    `decision−60 … decision+340` (400px), e-mail `180 … 650` (470px, same as before, trimmed at
+    the bottom instead). (b) The "Bekijk alle branches op de Templates-pagina →" link moved
+    from a section-level `<p>` below the tab block into **each panel's copy column, directly
+    under the button** (`.pill-panel-copy .link-arrow` rule in `style.css`: own line, own
+    width) — four copies per page, one visible at a time. (c) The branche tab heads got
+    `.icon-tile` glyphs: wrench / scissors / shopping bag / utensils (lucide-style paths,
+    24-grid, stroke 1.75). (d) Voice agent hero sub rewritten (see Content & positioning).
+    `style.css` `?v=` → `20260829-3` sitewide.
   - **Homepage icons (2026-08-29):** the eight `.placeholder-icon` slots in the "Eén platform"
     tab heads (5) and the "Gemaakt voor het Nederlandse MKB" reasons (3) are real glyphs now,
     per Sal "use the same icon style as the Inbox and Voice agent pages" — i.e. `.lp-card-icon`'s
