@@ -432,6 +432,14 @@ main { flex: 1 0 auto; }
 .section-sub { color: var(--ink-2); font-size: 1.0625rem; margin-top: 0.875rem; max-width: 40rem; }
 .section-sub-center { text-align: center; margin-left: auto; margin-right: auto; }
 .section { padding: 5rem 0; }
+/* Heading line-break helpers (2026-08-29, Inbox agent hero on phones — Sal:
+   "doesn't look comfortable on mobile"). .h-balance evens out the lines of a
+   wrapped heading (progressive: Safari 17.5+/Chrome/Firefox; older browsers
+   ignore it); .h-nowrap keeps a phrase together so a verb pair like "blijft
+   liggen." is never split across lines. Opt-in per heading — not applied to
+   every .hero h1, since the homepage's uses deliberate <br>s. */
+.h-balance { text-wrap: balance; }
+.h-nowrap { white-space: nowrap; }
 .link-arrow { font-weight: 600; font-size: 0.9375rem; display: inline-block; margin-top: 1.25rem; }
 .link-arrow:hover { color: var(--ink-2); }
 

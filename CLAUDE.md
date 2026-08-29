@@ -820,7 +820,19 @@ applied to all 16, and `test.html` is the reliable copy-paste source.
     horizontal rail (2.5 tiles on phones, edge fades) with the canvas underneath stays as tuned
     2026-08-28 — Sal: "this doesn't count for mobile, just desktop". CSS-only; the switcher JS
     and fade classes need no change (an unscrollable grid computes to "at end"). Lives in
-    `css/workflow-canvas.css` (`?v=20260829-3` on the four pages loading it).
+    `css/workflow-canvas.css` (`?v=20260829-3` on the four pages loading it). **Later the same
+    day (Sal): the example summary moved from above the canvas to below it** — markup order in
+    every `.tpl-example` is now canvas → `.tpl-example-summary` → CTA (all 20, moved by script;
+    `.tpl-example-summary` carries a top margin now). `?v=20260829-4`.
+  - **Inbox agent hero heading on phones (2026-08-29, Sal: "doesn't look comfortable on
+    mobile"):** at 48px on a 390px phone it wrapped as *Nooit meer een / mail die blijft /
+    liggen.* — verb pair split, "liggen." orphaned. Fixed with two opt-in helpers in
+    `style.css`: `.h-balance` (`text-wrap: balance`, progressive — Safari 17.5+/Chrome/Firefox)
+    on the `<h1>`, and `.h-nowrap` on a span around "blijft liggen." (works everywhere). Result:
+    *Nooit meer / een mail die / blijft liggen.*; desktop stays one line. Scoped to this one
+    heading per Sal ("for the inbox agent only") — not applied to `.hero h1` globally because
+    the homepage heading uses deliberate `<br>`s. The Voice agent's heading would benefit from
+    the same treatment; not done. `style.css` `?v=20260829-4` sitewide.
   - **Homepage icons (2026-08-29):** the eight `.placeholder-icon` slots in the "Eén platform"
     tab heads (5) and the "Gemaakt voor het Nederlandse MKB" reasons (3) are real glyphs now,
     per Sal "use the same icon style as the Inbox and Voice agent pages" — i.e. `.lp-card-icon`'s

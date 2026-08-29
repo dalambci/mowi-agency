@@ -109,7 +109,10 @@
 
 /* ---------- One example (summary + canvas + CTA) ---------- */
 .tpl-example[hidden]{display:none}
-.tpl-example-summary{font-size:1rem;color:var(--ink-2);max-width:40rem;margin-bottom:1.25rem}
+/* Summary sits UNDER the canvas since 2026-08-29 (Sal: "sort the text under
+   the workflow graph instead of on top of it") — the markup order in
+   templates.html is canvas → summary → CTA, so this is a top margin now. */
+.tpl-example-summary{font-size:1rem;color:var(--ink-2);max-width:40rem;margin-top:1.25rem}
 .tpl-example .btn-primary{margin-top:1.5rem}
 
 /* ---------- The canvas itself ---------- */
