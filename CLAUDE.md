@@ -526,6 +526,13 @@ applied to all 16, and `test.html` is the reliable copy-paste source.
   proberen." No numbers, no "geen creditcard"-style claims (signup/trial terms are not verified
   from this repo). The previous copy ("Automatisering die naar u luistert" / "Mowi is het
   platform waar u in gewone taal zegt…") is superseded, kept only in git history.
+- **Homepage lost its "Gemaakt voor het Nederlandse MKB" section (2026-08-29, Sal's call):**
+  the closing three-reasons block (Eerlijk over de prijs / Klein beginnen kan / Altijd iemand
+  aanspreekbaar, with the `.icon-tile` glyphs added earlier that day) was removed outright from
+  `index.html`; the security strip now follows the "Eén platform" tabs directly. The
+  `.reasons-grid` CSS in `style.css` is now unused on the site — left in place (harmless, and
+  the section is one `git revert` away); delete it if it's still unused after the next design
+  pass. Don't reintroduce the section without asking.
 - **Agent pages lost their "Er is maar één probleem." section (2026-08-29, Sal's call):** the
   four-card pain grid that sat between "Wat de agent doet" and "Zo werkt het" on both
   `e-mail-agent.html` and `call-agent.html` was removed outright. Don't reintroduce it; the
