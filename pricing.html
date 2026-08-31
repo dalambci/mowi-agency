@@ -120,10 +120,28 @@
          headline number, and integer granularity fine enough to price a
          belminuut at something other than a multiple of EUR0,063.
 
-         Note what did NOT change, because it is the figure customers
-         actually read: "15 e-mails per werkdag" (Basis) and "75" (Pro) are
-         identical before and after -- 600 credits at 2/e-mail is the same
-         300 e-mails that 300 credits at 1/e-mail was.
+         Note what did NOT change on 2026-08-28, because it is the figure
+         customers actually read: "15 e-mails per werkdag" (Basis) and "75"
+         (Pro) were identical before and after -- 600 credits at 2/e-mail is
+         the same 300 e-mails that 300 credits at 1/e-mail was.
+
+         SUPERSEDED 2026-08-31 -- that figure HAS now changed, and this time
+         deliberately. An e-mail went 2 -> 1 credit (and a Builder-bericht
+         with it), so the same EUR19 bundle now covers 600 e-mails instead
+         of 300: "30 e-mails per werkdag" (Basis) and "150" (Pro) below. A
+         real 50% price cut on e-mail, not a rescaling.
+
+         Why it was affordable: a unit-economics review (vault Dashboard/
+         credit-unit-economics.md) measured e-mail running ~10x markup
+         against a ~$0,0065 cost while a belminuut ran only ~1,9x. That
+         headroom was spent on the customer-facing number. Voice stayed at
+         6 credits deliberately -- it is the one line with no room.
+
+         These two figures are DERIVED, not independent: e-mails per werkdag
+         = included_credits / credits-per-e-mail / 20 werkdagen. If the rate
+         in the dashboard's config/credits.php moves again they must move
+         with it -- AV art. 4.2 makes this page the contractually leading
+         price list, so it must never be left stale.
 
          The one real price change is voice: 1 belminuut went 10 -> 4 -> 6
          credits across two passes the same day. In money that is EUR0,63 ->
@@ -213,7 +231,7 @@
             <h2 class="tier-card-name">Basis</h2>
             <div class="tier-price"><span class="tier-price-amount">€19</span><span class="tier-price-period">/mnd</span></div>
             <p class="tier-price-sub">600 credits per maand</p>
-            <p class="tier-profile">Ongeveer 15 e-mails per werkdag</p>
+            <p class="tier-profile">Ongeveer 30 e-mails per werkdag</p>
             <ul class="tier-features">
               <li>Alles uit Start gratis</li>
               <li>600 credits per maand</li>
@@ -228,7 +246,7 @@
             <h2 class="tier-card-name">Pro</h2>
             <div class="tier-price"><span class="tier-price-amount">€79</span><span class="tier-price-period">/mnd</span></div>
             <p class="tier-price-sub">3.000 credits per maand</p>
-            <p class="tier-profile">Ongeveer 75 e-mails per werkdag</p>
+            <p class="tier-profile">Ongeveer 150 e-mails per werkdag</p>
             <ul class="tier-features">
               <li>Alles uit Basis</li>
               <li>3.000 credits per maand</li>
