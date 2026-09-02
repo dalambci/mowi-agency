@@ -8,8 +8,8 @@
   <meta name="robots" content="noindex" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260823-2" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&family=Inter+Tight:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css?v=20260829-5" />
   <link rel="icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="shortcut icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260804-3" />
@@ -35,48 +35,44 @@
             </button>
             <div class="nav-menu" id="product-menu">
               <div class="nav-menu-col">
-                <ul>
+                <ul class="nav-menu-item-grid">
                   <li class="nav-menu-heading">Agents</li>
-                  <li><a href="/workflows"><span class="nav-menu-item-title">Alle agents</span><span class="nav-menu-item-desc">Het volledige overzicht van alle Mowi-agents</span></a></li>
-                  <li><a href="/workflows#email-agent"><span class="nav-menu-item-title">E-mail agent</span><span class="nav-menu-item-desc">Sorteert en beantwoordt uw e-mail</span></a></li>
-                  <li><a href="/workflows#call-agent"><span class="nav-menu-item-title">Call agent</span><span class="nav-menu-item-desc">Neemt binnenkomende gesprekken aan</span></a></li>
+                  <li class="nav-menu-item-full"><a href="/workflows"><span class="nav-menu-item-title">Alle agents</span><span class="nav-menu-item-desc">Het volledige overzicht van alle Mowi-agents</span></a></li>
+                  <li><a href="/e-mail-agent"><span class="nav-menu-item-title">Inbox agent</span><span class="nav-menu-item-desc">Sorteert en beantwoordt uw e-mail</span></a></li>
+                  <li><a href="/call-agent"><span class="nav-menu-item-title">Voice agent</span><span class="nav-menu-item-desc">Neemt binnenkomende gesprekken aan</span></a></li>
                 </ul>
               </div>
               <div class="nav-menu-col nav-menu-col-divider">
-                <ul>
+                <ul class="nav-menu-item-grid">
                   <li class="nav-menu-heading">Workflows</li>
-                  <li><a href="/workflows"><span class="nav-menu-item-title">Alle workflows</span><span class="nav-menu-item-desc">Het volledige overzicht van wat Mowi automatiseert</span></a></li>
+                  <li class="nav-menu-item-full"><a href="/workflows"><span class="nav-menu-item-title">Alle workflows</span><span class="nav-menu-item-desc">Het volledige overzicht van wat Mowi automatiseert</span></a></li>
                   <li><a href="/workflows#order-status"><span class="nav-menu-item-title">Orderstatus</span><span class="nav-menu-item-desc">Zoekt bestellingen op in uw webshop</span></a></li>
                   <li><a href="/workflows#offerte-opvolging"><span class="nav-menu-item-title">Offerte-opvolging</span><span class="nav-menu-item-desc">Controleert en volgt offerteaanvragen op</span></a></li>
-                </ul>
-              </div>
-              <!-- Continuation of the Workflows column, split out as its own
-                   list so the dropdown doesn't run one column too tall — no
-                   repeated "Workflows" heading, it's still that same
-                   category, just spilled into a second list. Bottom-aligned
-                   (nav-menu-col-bottom) so "Agenda-samenvatting"/
-                   "CRM-synchronisatie" sit level with "Orderstatus"/
-                   "Offerte-opvolging" — "Alle workflows" deliberately has no
-                   neighbor. On mobile the column's height is just its
-                   content, so the bottom-align rule is a no-op there and it
-                   stacks flush like any other item list. -->
-              <div class="nav-menu-col nav-menu-col-bottom">
-                <ul>
                   <li><a href="/workflows#agenda-samenvatting"><span class="nav-menu-item-title">Agenda-samenvatting</span><span class="nav-menu-item-desc">Uw agenda samengevat, op uw tijdstip</span></a></li>
                   <li><a href="/workflows#crm-sync"><span class="nav-menu-item-title">CRM-synchronisatie</span><span class="nav-menu-item-desc">Herkent klanten en houdt uw CRM bij</span></a></li>
+                </ul>
+              </div>
+              <div class="nav-menu-col nav-menu-col-divider">
+                <ul class="nav-menu-item-grid">
+                  <li class="nav-menu-heading">Dashboards</li>
+                  <li class="nav-menu-item-full"><a href="/workflows#dashboards"><span class="nav-menu-item-title">Alle dashboards</span><span class="nav-menu-item-desc">Het volledige overzicht van al uw dashboards</span></a></li>
+                  <li><a href="/workflows#dashboard-directie-overzicht"><span class="nav-menu-item-title">Directie overzicht</span><span class="nav-menu-item-desc">De cijfers waar een eigenaar op stuurt</span></a></li>
+                  <li><a href="/workflows#dashboard-webshops-vergelijken"><span class="nav-menu-item-title">Webshops vergelijken</span><span class="nav-menu-item-desc">Kerncijfers per webshop naast elkaar</span></a></li>
+                  <li><a href="/workflows#dashboard-openstaande-facturen"><span class="nav-menu-item-title">Openstaande facturen</span><span class="nav-menu-item-desc">Welke facturen aandacht nodig hebben</span></a></li>
+                  <li><a href="/workflows#dashboard-winstgevendheid"><span class="nav-menu-item-title">Winstgevendheid</span><span class="nav-menu-item-desc">Marge op basis van uw eigen kostprijzen</span></a></li>
                 </ul>
               </div>
             </div>
           </li>
           <li><a href="/templates">Templates</a></li>
           <li><a href="/pricing">Prijzen</a></li>
-          <li class="nav-mobile-actions"><a href="https://my.mowi.agency/login" target="_blank" rel="noopener">Inloggen</a></li>
+          <li class="nav-mobile-actions"><a href="https://my.mowi.agency/login">Inloggen</a></li>
           <li class="nav-mobile-actions"><a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a></li>
         </ul>
       </nav>
 
       <div class="header-actions">
-        <a href="https://my.mowi.agency/login" target="_blank" rel="noopener" class="header-login">Inloggen</a>
+        <a href="https://my.mowi.agency/login" class="header-login">Inloggen</a>
         <a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a>
       </div>
 
@@ -99,8 +95,8 @@
     <h2>1. Waar gebruikt Mowi AI</h2>
     <p>Mowi zet AI op dit moment op twee plekken in bij haar klanten:</p>
     <ul>
-      <li><strong>E-mailclassificatie &amp; conceptantwoorden ("E-mail agent").</strong> De AI leest binnenkomende e-mail, sorteert deze naar de juiste categorie en stelt een conceptantwoord op. De AI verstuurt dit concept niet zelf naar de klant — zie punt 3 hieronder. Alleen als de klant daar bij het koppelen van de mailbox expliciet voor kiest, leest de AI ook doorlopend — niet eenmalig — een deel van de verzonden e-mail (de eigen eerdere antwoorden van het bedrijf), zo lang deze agent voor die klant actief is, om terugkerende vragen te herkennen en antwoordvoorstellen te doen. Deze voorstellen bevatten nooit een naam, ordernummer of ander tot een individu herleidbaar detail, en worden pas gebruikt nadat een medewerker van het bedrijf ze zelf heeft bekeken en overgenomen.</li>
-      <li><strong>Spraakgestuurde telefonie ("Call agent").</strong> De AI neemt inkomende telefoongesprekken op, beantwoordt vragen op basis van de website van het bedrijf dat u belt, en vat het gesprek samen voor de betreffende medewerker.</li>
+      <li><strong>E-mailclassificatie &amp; conceptantwoorden ("Inbox agent").</strong> De AI leest binnenkomende e-mail, sorteert deze naar de juiste categorie en stelt een conceptantwoord op. De AI verstuurt dit concept niet zelf naar de klant — zie punt 3 hieronder. Alleen als de klant daar bij het koppelen van de mailbox expliciet voor kiest, leest de AI ook doorlopend — niet eenmalig — een deel van de verzonden e-mail (de eigen eerdere antwoorden van het bedrijf), zo lang deze agent voor die klant actief is, om terugkerende vragen te herkennen en antwoordvoorstellen te doen. Deze voorstellen bevatten nooit een naam, ordernummer of ander tot een individu herleidbaar detail, en worden pas gebruikt nadat een medewerker van het bedrijf ze zelf heeft bekeken en overgenomen.</li>
+      <li><strong>Spraakgestuurde telefonie ("Voice agent").</strong> De AI neemt inkomende telefoongesprekken op, beantwoordt vragen op basis van de website van het bedrijf dat u belt, en vat het gesprek samen voor de betreffende medewerker.</li>
     </ul>
     <p>Beide workflows zijn ondersteunend: ze bereiden werk voor of geven een eerste antwoord, maar nemen — zoals hieronder toegelicht — geen beslissingen met rechtsgevolg voor u.</p>
 

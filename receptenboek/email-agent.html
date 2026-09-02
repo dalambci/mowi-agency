@@ -6,14 +6,16 @@
 
   <!-- Redirect stub. /receptenboek/email-agent was a live, publicly-deployed
        Receptenboek recipe detail page until the Stage 8 rebuild cleanup on
-       2026-08-17, when the gallery was retired as standalone pages — this
-       recipe's content now lives as a full panel at /workflows#email-agent.
-       Root-relative target below (not "../workflows...") since this file
-       lives one level down in receptenboek/ but the refresh/replace target
-       and canonical must resolve from the site root, exactly like the
-       sibling stubs at the site root. Without this file the old URL 404s
-       for anyone who bookmarked it, and for every external link and search
-       result still pointing at it.
+       2026-08-17, when it became a stub pointing at /workflows#email-agent.
+       Retargeted again 2026-08-28: that anchor was never real content (the
+       gallery panel was folded into workflows.html on paper but the page
+       stayed chrome-only), so this now points at the real /e-mail-agent
+       landing page. Root-relative target below (not "../e-mail-agent")
+       since this file lives one level down in receptenboek/ but the
+       refresh/replace target and canonical must resolve from the site
+       root, exactly like the sibling stubs at the site root. Without this
+       file the old URL 404s for anyone who bookmarked it, and for every
+       external link and search result still pointing at it.
 
        This is a client-side redirect, NOT a real 301 — a static host can't
        issue one from a file. It works for humans immediately; search engines
@@ -21,22 +23,22 @@
        rel="canonical" below is for. If the old URL turns out to matter for
        SEO, add a proper 301 as a Cloudways Web Rule (app mowi.agency /
        6590002 -> Web Rules -> Redirect, ^/receptenboek/email-agent$ ->
-       /workflows#email-agent) and delete this file.
+       /e-mail-agent) and delete this file.
 
        noindex keeps this stub itself out of search results — without it the
        stub can rank in place of the real page. -->
   <meta name="robots" content="noindex, follow" />
-  <meta http-equiv="refresh" content="0; url=/workflows#email-agent" />
-  <link rel="canonical" href="https://mowi.agency/workflows#email-agent" />
+  <meta http-equiv="refresh" content="0; url=/e-mail-agent" />
+  <link rel="canonical" href="https://mowi.agency/e-mail-agent" />
 
-  <title>Verplaatst naar /workflows#email-agent — Mowi</title>
+  <title>Verplaatst naar /e-mail-agent — Mowi</title>
 </head>
 <body>
-  <p>Deze pagina is verhuisd naar <a href="/workflows#email-agent">mowi.agency/workflows#email-agent</a>.</p>
+  <p>Deze pagina is verhuisd naar <a href="/e-mail-agent">mowi.agency/e-mail-agent</a>.</p>
 
   <!-- replace(), not href: keeps the dead URL out of the back-button history,
-       so "terug" from /workflows#email-agent doesn't bounce the visitor straight back here
+       so "terug" from /e-mail-agent doesn't bounce the visitor straight back here
        and into a redirect loop. -->
-  <script>window.location.replace("/workflows#email-agent");</script>
+  <script>window.location.replace("/e-mail-agent");</script>
 </body>
 </html>

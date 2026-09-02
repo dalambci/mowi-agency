@@ -32,7 +32,7 @@ var DOCS_NAV = [
   {
     category: "Agents",
     items: [
-      { title: "E-mail agent", href: "agent-email-triage" }
+      { title: "Inbox agent", href: "agent-email-triage" }
     ]
   },
   {

@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mowi — Zo werkt het</title>
-  <meta name="description" content="U vertelt in gewone taal wat u geregeld wilt hebben. Mowi test het eerst op uw eigen gegevens en gaat pas live na uw akkoord." />
-  <link rel="canonical" href="https://mowi.agency/zo-werkt-het" />
+  <title>Mowi — Waarom Mowi</title>
+  <meta name="description" content="Generieke AI-agents en chatbots beloven veel. Dit is waar dat voor uw boekhouding, uw CRM en uw telefoon anders ligt, en hoe Mowi dat aanpakt: eerst testen, per stap uw akkoord, Nederlandstalig." />
+  <link rel="canonical" href="https://mowi.agency/waarom-mowi" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&family=Inter+Tight:wght@600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260829-5" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css?v=20260826-4" />
   <link rel="icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="shortcut icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260804-3" />
@@ -18,7 +18,12 @@
 </head>
 <body>
 
-  <!-- Blank skeleton page — structure only, content comes later. Canonical shell lives in test.html. -->
+  <!-- Trust / comparison page. Positioned in nav/footer exactly like
+       security.html and ai-transparantie.html: footer "Bronnen" column only,
+       not a top-level nav item and not in the Product mega-menu (that menu
+       is reserved for concrete product surfaces — Agents/Workflows/
+       Dashboards — not positioning/trust content). See CLAUDE.md Navigation
+       section for that precedent. -->
   <header class="site-header">
     <div class="header-bar">
       <a href="/" class="wordmark" aria-label="Mowi - home">
@@ -28,7 +33,7 @@
 
       <nav class="main-nav" id="main-nav" aria-label="Hoofdmenu">
         <ul>
-          <li><a aria-current="page" href="/zo-werkt-het">Zo werkt het</a></li>
+          <li><a href="/zo-werkt-het">Zo werkt het</a></li>
           <li class="nav-dropdown">
             <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="product-menu" aria-haspopup="true">
               Product
@@ -39,8 +44,8 @@
                 <ul class="nav-menu-item-grid">
                   <li class="nav-menu-heading">Agents</li>
                   <li class="nav-menu-item-full"><a href="/workflows"><span class="nav-menu-item-title">Alle agents</span><span class="nav-menu-item-desc">Het volledige overzicht van alle Mowi-agents</span></a></li>
-                  <li><a href="/e-mail-agent"><span class="nav-menu-item-title">Inbox agent</span><span class="nav-menu-item-desc">Sorteert en beantwoordt uw e-mail</span></a></li>
-                  <li><a href="/call-agent"><span class="nav-menu-item-title">Voice agent</span><span class="nav-menu-item-desc">Neemt binnenkomende gesprekken aan</span></a></li>
+                  <li><a href="/workflows#email-agent"><span class="nav-menu-item-title">E-mail agent</span><span class="nav-menu-item-desc">Sorteert en beantwoordt uw e-mail</span></a></li>
+                  <li><a href="/workflows#call-agent"><span class="nav-menu-item-title">Call agent</span><span class="nav-menu-item-desc">Neemt binnenkomende gesprekken aan</span></a></li>
                 </ul>
               </div>
               <div class="nav-menu-col nav-menu-col-divider">
@@ -67,13 +72,13 @@
           </li>
           <li><a href="/templates">Templates</a></li>
           <li><a href="/pricing">Prijzen</a></li>
-          <li class="nav-mobile-actions"><a href="https://my.mowi.agency/login">Inloggen</a></li>
+          <li class="nav-mobile-actions"><a href="https://my.mowi.agency/login" target="_blank" rel="noopener">Inloggen</a></li>
           <li class="nav-mobile-actions"><a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a></li>
         </ul>
       </nav>
 
       <div class="header-actions">
-        <a href="https://my.mowi.agency/login" class="header-login">Inloggen</a>
+        <a href="https://my.mowi.agency/login" target="_blank" rel="noopener" class="header-login">Inloggen</a>
         <a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a>
       </div>
 
@@ -85,57 +90,204 @@
 
   <main>
 
-    <!-- ================= Hero ================= -->
+    <!-- ================= Hero =================
+         Same shape as zo-werkt-het.html's hero (centered, reduced h1,
+         tight bottom padding, one CTA — a hedged pair was explicitly
+         rejected sitewide per CLAUDE.md's copywriting-voice rule). -->
     <section class="hero container hero-h1-reduced hero-tight-bottom">
-      <h1>Eerst zien.<br />Dan pas live.</h1>
-      <p class="hero-sub">Vertel in gewone taal wat er moet gebeuren. Mowi draait het eerst als proef op uw eigen gegevens, zonder dat er iets verstuurd wordt. U leest terug wat er zou zijn gebeurd. Pas na uw akkoord gaat het live.</p>
+      <h1>Eerst laten zien.<br />Dan pas doen.</h1>
+      <p class="hero-sub">Er zijn genoeg AI-agents die beloven overal op internet te kunnen klikken, met uw eigen wachtwoorden. Voor uw boekhouding, uw CRM en de telefoon ligt de lat hoger. Zo pakt Mowi dat aan.</p>
       <div class="hero-actions">
         <a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a>
       </div>
     </section>
 
-    <!-- ================= Process: vertellen, testen, zien ================= -->
+    <!-- ================= Eerlijk over wat de rest ook kan =================
+         Three alternating splits, same rhythm as zo-werkt-het.html. First
+         one is deliberately a fair, non-strawman description of what
+         generic agent runtimes / chatbot platforms are actually good at,
+         before the next two explain why that shape doesn't fit this buyer's
+         accounting/CRM/phone use case. Framed by category behaviour, never
+         a brand name — brand claims age badly, this is marketing copy. -->
     <section class="section">
       <div class="container">
 
+        <div class="split">
+          <div class="split-copy">
+            <h2 class="section-heading">Zo'n AI-agent kan best veel</h2>
+            <p class="section-sub">Steeds meer AI-agents beloven alles te doen wat u vraagt. Ze lezen mee in uw browser, klikken zich door tientallen apps tegelijk en leren een nieuwe taak vaak al na een paar voorbeelden. Voor een persoonlijke taak op uw eigen laptop is dat knap werk, en soms precies wat u zoekt.</p>
+          </div>
+          <div class="placeholder-tile split-visual" aria-hidden="true"><span class="placeholder-label">Voorbeeld volgt</span></div>
+        </div>
+
         <div class="split split-flip">
           <div class="split-copy">
-            <h2 class="section-heading">U vertelt het in gewone taal</h2>
-            <p class="section-sub">Geen formulieren en geen technische termen. U legt uit wat er moet gebeuren, zoals u het aan een collega zou vertellen. Mowi zoekt uit hoe dat betrouwbaar kan, en zet het voor u klaar.</p>
+            <h2 class="section-heading">Voor uw bedrijf ligt de lat anders</h2>
+            <p class="section-sub">Diezelfde agent klikt meestal mee in één gedeelde browser, met uw eigen wachtwoorden erin. Een verplichte proefdraai voordat een actie echt gebeurt, ontbreekt meestal. En een volledig overzicht achteraf van wat er precies is gedaan, is er vaak nog niet of nog in ontwikkeling. Voor een taak die u zelf meteen kunt terugdraaien is dat te overzien. Voor een factuur, een klantdossier of een telefoongesprek met een klant is dat een ander verhaal.</p>
           </div>
-          <!-- Same dashboard-chat screenshot as the homepage hero (assets/hero-dashboard.webp). -->
-          <img class="split-visual" src="assets/hero-dashboard.webp" alt="Het Mowi-dashboard: een chatvenster waarin u in gewone taal zegt wat u geregeld wilt hebben." width="2178" height="1388" loading="lazy" decoding="async" />
+          <div class="placeholder-tile split-visual" aria-hidden="true"><span class="placeholder-label">Voorbeeld volgt</span></div>
         </div>
 
         <div class="split">
           <div class="split-copy">
-            <h2 class="section-heading">Eerst een testrun op uw eigen gegevens</h2>
-            <p class="section-sub">Elke workflow draait eerst als proef. Niet op nepdata, maar op uw eigen gegevens van de afgelopen periode. U leest in gewone taal terug wat er zou zijn gebeurd. Pas na uw akkoord gaat het live.</p>
+            <h2 class="section-heading">En een chatbot die alles belooft?</h2>
+            <p class="section-sub">Er zijn ook chatbots en platforms die beloven met vrijwel elk systeem te kunnen verbinden. Vaak kan dat ook, in theorie. Maar "kunnen verbinden" is iets anders dan "getest op uw eigen gegevens, in het Nederlands, vóórdat het uw boekhouding raakt". Mowi kiest bewust voor het tweede: een kleinere, geteste lijst met stappen in plaats van een onbeperkte belofte.</p>
           </div>
-          <!-- Rendered card (2026-08-29), same series as the homepage slider: a testrun
-               summary on the duotone field photo. Illustrative counts, not claims. -->
-          <img class="split-visual" src="assets/zo-werkt-het/testrun.webp" alt="" width="1200" height="800" loading="lazy" decoding="async" />
-        </div>
-
-        <div class="split split-flip">
-          <div class="split-copy">
-            <h2 class="section-heading">U ziet precies wat er gedaan is</h2>
-            <p class="section-sub">Elke run komt in uw dashboard te staan. U ziet wat er gedaan is en wanneer. Vraagt iets om aandacht, dan ziet u dat meteen.</p>
-          </div>
-          <!-- Rendered card (2026-08-29), same series: an activity log with one item
-               flagged "Aandacht". Illustrative, not real data. -->
-          <img class="split-visual" src="assets/zo-werkt-het/activiteit.webp" alt="" width="1200" height="800" loading="lazy" decoding="async" />
+          <div class="placeholder-tile split-visual" aria-hidden="true"><span class="placeholder-label">Voorbeeld volgt</span></div>
         </div>
 
       </div>
     </section>
 
+    <!-- ================= Vergelijkingstabel =================
+         Reuses .blog-table/.blog-table-wrap (css/style.css, currently only
+         used inside blog posts) rather than inventing a new table component
+         — per CLAUDE.md "prefer reusing existing classes". Every row
+         describes category behaviour (hedged with "vaak"/"meestal" where
+         the underlying research only covered specific tools, never all of
+         them), not a named competitor. Mowi's own column only states claims
+         already live elsewhere on this site: dry-run + Dutch playback +
+         per-step confirm (zo-werkt-het.html, security.html), the audit
+         trail ("Elke run komt in uw dashboard te staan", zo-werkt-het.html),
+         the verwerkersovereenkomst-on-request wording (verbatim from
+         docs/it-beveiliging.html, not the stronger "standaard aanwezig"
+         claim), and the credit billing pausing at zero (pricing.html). The
+         phone row is phrased as a design principle with an explicit "komt
+         binnenkort beschikbaar", matching pricing.html's own "zodra de call
+         agent verkrijgbaar is" — the Call agent is built but not yet sold,
+         see CLAUDE.md, so this deliberately does not claim it answers
+         phones today. -->
+    <section class="section" id="vergelijking">
+      <div class="container">
+        <div class="section-head-row section-head-row-center">
+          <h2 class="section-heading section-heading-center">Zonder mooie praatjes</h2>
+          <p class="section-sub section-sub-center">Niet elke AI-agent is hetzelfde, en dit is geen volledige lijst van alles wat er bestaat. Dit is het gedrag dat er voor een Nederlands MKB-bedrijf toe doet: bij de telefoon, de mailbox en de boekhouding.</p>
+        </div>
+
+        <div class="blog-table-wrap">
+          <table class="blog-table">
+            <thead>
+              <tr><th>Kenmerk</th><th>Generieke AI-agent of chatbot</th><th>Mowi</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Toegang tot uw systemen</td>
+                <td>Vaak via één gedeelde browser met uw eigen wachtwoorden erin, in plaats van een aparte koppeling per systeem</td>
+                <td>Via een aparte, geteste koppeling per systeem: boekhouding, webshop, CRM of agenda</td>
+              </tr>
+              <tr>
+                <td>Voordat een actie gebeurt</td>
+                <td>Een regel als "altijd toestaan" of "eerst vragen", meestal zonder verplichte proefdraai</td>
+                <td>Altijd eerst een proefdraai op uw eigen recente gegevens</td>
+              </tr>
+              <tr>
+                <td>Uw akkoord</td>
+                <td>Vooraf ingesteld per regel, niet per losse actie</td>
+                <td>In gewone taal uitgelegd, per stap opnieuw uw akkoord nodig</td>
+              </tr>
+              <tr>
+                <td>Overzicht achteraf</td>
+                <td>Wisselend, bij sommige aanbieders nog in ontwikkeling</td>
+                <td>Vast logboek per run, altijd terug te zien in uw dashboard</td>
+              </tr>
+              <tr>
+                <td>Taal en papieren</td>
+                <td>Meestal Engelstalig, en niet altijd inzichtelijk welke partijen verder meewerken</td>
+                <td>Nederlandstalig. Een verwerkersovereenkomst regelen we op aanvraag, en op onze <a href="/subverwerkers">subverwerkerspagina</a> ziet u wie er meewerkt</td>
+              </tr>
+              <tr>
+                <td>Telefoon</td>
+                <td>Meestal geen inkomende gesprekken, hooguit zelf naar buiten bellen</td>
+                <td>Gebouwd om ook inkomende gesprekken in het Nederlands aan te nemen. Dit onderdeel maken we binnenkort beschikbaar</td>
+              </tr>
+              <tr>
+                <td>Wat het kost</td>
+                <td>Vaak een vast bedrag per maand met een aparte, onbekende gebruikslimiet erboven</td>
+                <td>Vast tegoed per maand. Op is op: de agent pauzeert netjes, geen verrassingsrekening</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Zo pakt Mowi het aan =================
+         Same split-top/split-sticky + .trust-cards pattern as security.html
+         (copy sticky at left, cards stacked at right). Icons 1 and 3 are the
+         exact SVGs from security.html's own trust-cards (shield-check,
+         clock) for visual consistency; icon 2 is a plain globe/language
+         glyph in the same stroke style, since no existing icon fit that
+         card — decorative only, not a new CSS component. -->
+    <section class="section">
+      <div class="container">
+        <div class="split split-top split-sticky">
+          <div class="split-copy">
+            <h2 class="page-heading">Zo pakt Mowi het aan</h2>
+            <p class="page-body">Dit zijn geen losse features. Het is hoe elke actie bij Mowi verloopt, voordat hij uw systemen raakt.</p>
+          </div>
+          <div class="trust-cards">
+            <div class="trust-card">
+              <div class="trust-card-head">
+                <svg class="trust-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m9 12 2 2 4-4"/><path d="M12 3 4 6v6c0 4.5 3.4 7.7 8 9 4.6-1.3 8-4.5 8-9V6l-8-3Z"/></svg>
+                <h3>Eerst testen, dan live</h3>
+              </div>
+              <p>Elke workflow draait eerst als proef op uw eigen recente gegevens. U leest in gewone taal terug wat er zou gebeuren. Pas na uw akkoord gaat het live.</p>
+            </div>
+            <div class="trust-card">
+              <div class="trust-card-head">
+                <svg class="trust-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 4 5.6 4 9s-1.5 6.5-4 9c-2.5-2.5-4-5.6-4-9s1.5-6.5 4-9Z"/></svg>
+                <h3>Nederlandstalig en aangesloten op wat u gebruikt</h3>
+              </div>
+              <p>Mowi spreekt Nederlands en koppelt met systemen die u al gebruikt, zoals uw boekhoudpakket, webshop of CRM.</p>
+            </div>
+            <div class="trust-card">
+              <div class="trust-card-head">
+                <svg class="trust-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.5-6 8-6s8 2 8 6"/></svg>
+                <h3>Eén aanspreekpunt, geen ticketsysteem</h3>
+              </div>
+              <p>Gaat er iets mis, dan belt u niet naar een supportqueue. Er is één persoon die uw opzet kent en die u kunt aanspreken.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Wat Mowi bewust niet doet =================
+         Same .reasons-grid + centered .section-head-row as index.html's
+         "Gemaakt voor het Nederlandse MKB" closing block. Honesty
+         requirement: the smaller, tested menu is framed as a deliberate
+         trade-off, not hidden. -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head-row section-head-row-center">
+          <h2 class="section-heading section-heading-center">Wat Mowi bewust niet doet</h2>
+        </div>
+
+        <div class="reasons-grid">
+          <div>
+            <div class="placeholder-icon" aria-hidden="true"></div>
+            <h3>Geen vrij surfen op het web</h3>
+            <p>Mowi klikt niet zelf rond op willekeurige sites. Alles verloopt via een vaste, geteste lijst met stappen.</p>
+          </div>
+          <div>
+            <div class="placeholder-icon" aria-hidden="true"></div>
+            <h3>Niet duizenden apps tegelijk</h3>
+            <p>Mowi koppelt met de systemen die Nederlandse MKB-bedrijven echt gebruiken, geen onbeperkte app-catalogus.</p>
+          </div>
+          <div>
+            <div class="placeholder-icon" aria-hidden="true"></div>
+            <h3>Bellen komt eraan</h3>
+            <p>Mowi is gebouwd om ook inkomende gesprekken aan te nemen. Dit onderdeel maken we binnenkort beschikbaar.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ================= Integraties marquee =================
-         Copy of the homepage's marquee (added here 2026-08-22, Sal's call).
-         index.html's copy is CANONICAL — it carries the full provenance
-         comment (which logos are in/out and why, per the dashboard's
-         config/shop_platforms.php registry). Any logo-set change must now
-         sweep index.html + zo-werkt-het.html + pricing.html together. -->
+         Verbatim copy of the sitewide marquee (index.html/zo-werkt-het.html/
+         pricing.html). index.html's copy stays canonical — see its own
+         provenance comment for which logos are in/out and why. Any logo-set
+         change must now sweep this page too. -->
     <section class="section marquee-section">
       <div class="container">
         <p class="section-sub section-sub-center">Koppelt met wat u al gebruikt</p>
@@ -176,10 +328,8 @@
     </section>
 
     <!-- ================= Security strip =================
-         Copy of the homepage's strip (added here 2026-08-22, Sal's call).
-         Only GDPR is a real, held self-declaration; ISO 27001/42001 are
-         shown as visibly labelled "In voorbereiding" — never implied as
-         achieved. index.html's copy carries the fuller provenance note. -->
+         Verbatim copy of the sitewide strip. Only GDPR is a real, held
+         self-declaration; ISO 27001/42001 stay visibly "In voorbereiding". -->
     <section class="section">
       <div class="container">
         <div class="security-strip">
@@ -205,16 +355,16 @@
         </div>
       </div>
     </section>
+
   </main>
 
   <!-- ============================================================
        CANONICAL FOOTER — the measured shapes.co recipe:
        greige full-width band → pre-footer CTA on the band → light
        rounded-top panel (page-bg color) flush to the page bottom.
-       Structure modernized 2026-08-19: CTA is one row (headline +
-       button, no empty visual slot), brand block carries tagline +
-       LinkedIn, trimmed link columns (2-across on mobile), GDPR seal
-       lives in the bottom bar.
+       "Waarom Mowi" added to Bronnen, between "Zo werkt het" and
+       "Security" — same footer-only placement as Security/AI-transparantie,
+       no top-nav or Product-menu entry (see header comment above).
        ============================================================ -->
   <footer class="footer-wrap">
     <div class="container">

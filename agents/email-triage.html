@@ -6,21 +6,17 @@
 
   <!-- Redirect stub. /agents/email-triage was a live, publicly-deployed
        agent detail page until the Stage 7 rebrand cleanup on 2026-08-17,
-       when it was replaced by /receptenboek/email-agent — the rebranded
-       Receptenboek's own E-mail agent recipe page, covering the same
-       feature set. As of the Stage 8 rebuild cleanup (also 2026-08-17),
-       /receptenboek/email-agent itself became a redirect stub (the gallery
-       was retired as standalone pages — this recipe folded into /workflows
-       as a full recipe panel), so this file is retargeted straight at
-       /workflows#email-agent rather than bouncing through
-       /receptenboek/email-agent, to avoid a needless redirect chain
-       (/agents/email-triage -> /receptenboek/email-agent ->
-       /workflows#email-agent). Root-relative target below (not
-       "../workflows...") since this file lives one level down in agents/
-       but the refresh/replace target and canonical must resolve from the
-       site root, exactly like the sibling stubs at the site root. Without
-       this file the old URL 404s for anyone who bookmarked it, and for
-       every external link and search result still pointing at it.
+       when it was replaced by /receptenboek/email-agent, then folded into
+       /workflows#email-agent at Stage 8 (also 2026-08-17). Retargeted again
+       2026-08-28: /workflows#email-agent was never real content (the
+       anchor didn't exist — workflows.html was chrome-only), so this now
+       points straight at the real /e-mail-agent landing page, the first
+       actual page either agent has ever had. Root-relative target below
+       (not "../e-mail-agent") since this file lives one level down in
+       agents/ but the refresh/replace target and canonical must resolve
+       from the site root, exactly like the sibling stubs at the site root.
+       Without this file the old URL 404s for anyone who bookmarked it, and
+       for every external link and search result still pointing at it.
 
        This is a client-side redirect, NOT a real 301 — a static host can't
        issue one from a file. It works for humans immediately; search engines
@@ -28,22 +24,22 @@
        rel="canonical" below is for. If the old URL turns out to matter for
        SEO, add a proper 301 as a Cloudways Web Rule (app mowi.agency /
        6590002 -> Web Rules -> Redirect, ^/agents/email-triage$ ->
-       /workflows#email-agent) and delete this file.
+       /e-mail-agent) and delete this file.
 
        noindex keeps this stub itself out of search results — without it the
        stub can rank in place of the real page. -->
   <meta name="robots" content="noindex, follow" />
-  <meta http-equiv="refresh" content="0; url=/workflows#email-agent" />
-  <link rel="canonical" href="https://mowi.agency/workflows#email-agent" />
+  <meta http-equiv="refresh" content="0; url=/e-mail-agent" />
+  <link rel="canonical" href="https://mowi.agency/e-mail-agent" />
 
-  <title>Verplaatst naar /workflows#email-agent — Mowi</title>
+  <title>Verplaatst naar /e-mail-agent — Mowi</title>
 </head>
 <body>
-  <p>Deze pagina is verhuisd naar <a href="/workflows#email-agent">mowi.agency/workflows#email-agent</a>.</p>
+  <p>Deze pagina is verhuisd naar <a href="/e-mail-agent">mowi.agency/e-mail-agent</a>.</p>
 
   <!-- replace(), not href: keeps the dead URL out of the back-button history,
-       so "terug" from /workflows#email-agent doesn't bounce the visitor straight back here
+       so "terug" from /e-mail-agent doesn't bounce the visitor straight back here
        and into a redirect loop. -->
-  <script>window.location.replace("/workflows#email-agent");</script>
+  <script>window.location.replace("/e-mail-agent");</script>
 </body>
 </html>

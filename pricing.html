@@ -8,8 +8,8 @@
   <link rel="canonical" href="https://mowi.agency/pricing" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260823-2" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&family=Inter+Tight:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css?v=20260829-5" />
   <link rel="icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="shortcut icon" href="assets/icon-192.png?v=20260804-3" />
   <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260804-3" />
@@ -36,48 +36,44 @@
             </button>
             <div class="nav-menu" id="product-menu">
               <div class="nav-menu-col">
-                <ul>
+                <ul class="nav-menu-item-grid">
                   <li class="nav-menu-heading">Agents</li>
-                  <li><a href="/workflows"><span class="nav-menu-item-title">Alle agents</span><span class="nav-menu-item-desc">Het volledige overzicht van alle Mowi-agents</span></a></li>
-                  <li><a href="/workflows#email-agent"><span class="nav-menu-item-title">E-mail agent</span><span class="nav-menu-item-desc">Sorteert en beantwoordt uw e-mail</span></a></li>
-                  <li><a href="/workflows#call-agent"><span class="nav-menu-item-title">Call agent</span><span class="nav-menu-item-desc">Neemt binnenkomende gesprekken aan</span></a></li>
+                  <li class="nav-menu-item-full"><a href="/workflows"><span class="nav-menu-item-title">Alle agents</span><span class="nav-menu-item-desc">Het volledige overzicht van alle Mowi-agents</span></a></li>
+                  <li><a href="/e-mail-agent"><span class="nav-menu-item-title">Inbox agent</span><span class="nav-menu-item-desc">Sorteert en beantwoordt uw e-mail</span></a></li>
+                  <li><a href="/call-agent"><span class="nav-menu-item-title">Voice agent</span><span class="nav-menu-item-desc">Neemt binnenkomende gesprekken aan</span></a></li>
                 </ul>
               </div>
               <div class="nav-menu-col nav-menu-col-divider">
-                <ul>
+                <ul class="nav-menu-item-grid">
                   <li class="nav-menu-heading">Workflows</li>
-                  <li><a href="/workflows"><span class="nav-menu-item-title">Alle workflows</span><span class="nav-menu-item-desc">Het volledige overzicht van wat Mowi automatiseert</span></a></li>
+                  <li class="nav-menu-item-full"><a href="/workflows"><span class="nav-menu-item-title">Alle workflows</span><span class="nav-menu-item-desc">Het volledige overzicht van wat Mowi automatiseert</span></a></li>
                   <li><a href="/workflows#order-status"><span class="nav-menu-item-title">Orderstatus</span><span class="nav-menu-item-desc">Zoekt bestellingen op in uw webshop</span></a></li>
                   <li><a href="/workflows#offerte-opvolging"><span class="nav-menu-item-title">Offerte-opvolging</span><span class="nav-menu-item-desc">Controleert en volgt offerteaanvragen op</span></a></li>
-                </ul>
-              </div>
-              <!-- Continuation of the Workflows column, split out as its own
-                   list so the dropdown doesn't run one column too tall — no
-                   repeated "Workflows" heading, it's still that same
-                   category, just spilled into a second list. Bottom-aligned
-                   (nav-menu-col-bottom) so "Agenda-samenvatting"/
-                   "CRM-synchronisatie" sit level with "Orderstatus"/
-                   "Offerte-opvolging" — "Alle workflows" deliberately has no
-                   neighbor. On mobile the column's height is just its
-                   content, so the bottom-align rule is a no-op there and it
-                   stacks flush like any other item list. -->
-              <div class="nav-menu-col nav-menu-col-bottom">
-                <ul>
                   <li><a href="/workflows#agenda-samenvatting"><span class="nav-menu-item-title">Agenda-samenvatting</span><span class="nav-menu-item-desc">Uw agenda samengevat, op uw tijdstip</span></a></li>
                   <li><a href="/workflows#crm-sync"><span class="nav-menu-item-title">CRM-synchronisatie</span><span class="nav-menu-item-desc">Herkent klanten en houdt uw CRM bij</span></a></li>
+                </ul>
+              </div>
+              <div class="nav-menu-col nav-menu-col-divider">
+                <ul class="nav-menu-item-grid">
+                  <li class="nav-menu-heading">Dashboards</li>
+                  <li class="nav-menu-item-full"><a href="/workflows#dashboards"><span class="nav-menu-item-title">Alle dashboards</span><span class="nav-menu-item-desc">Het volledige overzicht van al uw dashboards</span></a></li>
+                  <li><a href="/workflows#dashboard-directie-overzicht"><span class="nav-menu-item-title">Directie overzicht</span><span class="nav-menu-item-desc">De cijfers waar een eigenaar op stuurt</span></a></li>
+                  <li><a href="/workflows#dashboard-webshops-vergelijken"><span class="nav-menu-item-title">Webshops vergelijken</span><span class="nav-menu-item-desc">Kerncijfers per webshop naast elkaar</span></a></li>
+                  <li><a href="/workflows#dashboard-openstaande-facturen"><span class="nav-menu-item-title">Openstaande facturen</span><span class="nav-menu-item-desc">Welke facturen aandacht nodig hebben</span></a></li>
+                  <li><a href="/workflows#dashboard-winstgevendheid"><span class="nav-menu-item-title">Winstgevendheid</span><span class="nav-menu-item-desc">Marge op basis van uw eigen kostprijzen</span></a></li>
                 </ul>
               </div>
             </div>
           </li>
           <li><a href="/templates">Templates</a></li>
           <li><a aria-current="page" href="/pricing">Prijzen</a></li>
-          <li class="nav-mobile-actions"><a href="https://my.mowi.agency/login" target="_blank" rel="noopener">Inloggen</a></li>
+          <li class="nav-mobile-actions"><a href="https://my.mowi.agency/login">Inloggen</a></li>
           <li class="nav-mobile-actions"><a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a></li>
         </ul>
       </nav>
 
       <div class="header-actions">
-        <a href="https://my.mowi.agency/login" target="_blank" rel="noopener" class="header-login">Inloggen</a>
+        <a href="https://my.mowi.agency/login" class="header-login">Inloggen</a>
         <a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a>
       </div>
 
@@ -92,23 +88,83 @@
     <!-- ================= Hero =================
          Left-aligned, blog-post H1 scale (.page-hero-heading/-body match
          .blog-article h1/p exactly) rather than the sitewide centered
-         .hero -- Sal's call for this page specifically. -->
+         .hero -- Sal's call for this page specifically.
+
+         TRIMMED 2026-08-28 (Sal, deliberately, not an accidental
+         regression): this hero used to also carry the raw credit rates
+         (2/e-mail, 6/belminuut, 2/Builder-bericht) and the Voice agent's
+         €12,50/mo number fee -- both added the same day for an AV art.
+         4.2 reason (see the tier-grid comment below: this page is the
+         contractually leading price list, so a real meter charge can't
+         be absent from it). Sal's call to cut them for now regardless
+         ("they will find out later"), with a named plan to bring the
+         Call-agent fee back as a 2x2 add-on-cards grid (Inbox agent
+         free, Voice agent +€12,50/mo covering the number + support) --
+         not built yet, deferred, not forgotten. -->
     <section class="section" id="pricing-hero">
       <div class="container">
         <h1 class="page-hero-heading">Betaal per gebruik</h1>
-        <p class="page-hero-body">Eén credit staat gelijk aan één verwerkte e-mail. Bellen en workflows verbruiken meer credits per gebruik. Belminuten volgen zodra de call agent op de site verkrijgbaar is.</p>
         <p class="page-hero-body">U kunt altijd bijkopen of overstappen. Uw configuratie blijft staan.</p>
       </div>
     </section>
 
     <!-- ================= Tier grid =================
-         Trial allocation ("30 gratis credits", no day count) is a proposal,
+         Trial allocation ("60 gratis credits", no day count) is a proposal,
          not a vault-confirmed figure -- the credit model never defined a
          trial and the 14-day framing is formally retired (masterplan §5).
-         The other figures (€19/mnd, 300 credits, 1 e-mail = 1 credit, 1
-         belminuut ≈ 10 credits) are the vault's own recommended figures,
-         confirmed by Sal 2026-08-22 when this page was built -- see the
-         Decisions log and the masterplan §5 update the same day.
+
+         REBASED 2026-08-28 (Sal): the credit is now worth HALF what it was.
+         Bundles doubled (EUR19 -> 600, EUR79 -> 3.000, trial 30 -> 60) and
+         every usage rate doubled with them, so the real prices below are
+         unchanged -- an e-mail still costs EUR0,063. Deliberate: a bigger
+         headline number, and integer granularity fine enough to price a
+         belminuut at something other than a multiple of EUR0,063.
+
+         Note what did NOT change on 2026-08-28, because it is the figure
+         customers actually read: "15 e-mails per werkdag" (Basis) and "75"
+         (Pro) were identical before and after -- 600 credits at 2/e-mail is
+         the same 300 e-mails that 300 credits at 1/e-mail was.
+
+         SUPERSEDED 2026-08-31 -- that figure HAS now changed, and this time
+         deliberately. An e-mail went 2 -> 1 credit (and a Builder-bericht
+         with it), so the same EUR19 bundle now covers 600 e-mails instead
+         of 300: "30 e-mails per werkdag" (Basis) and "150" (Pro) below. A
+         real 50% price cut on e-mail, not a rescaling.
+
+         Why it was affordable: a unit-economics review (vault Dashboard/
+         credit-unit-economics.md) measured e-mail running ~10x markup
+         against a ~$0,0065 cost while a belminuut ran only ~1,9x. That
+         headroom was spent on the customer-facing number. Voice stayed at
+         6 credits deliberately -- it is the one line with no room.
+
+         These two figures are DERIVED, not independent: e-mails per werkdag
+         = included_credits / credits-per-e-mail / 20 werkdagen. If the rate
+         in the dashboard's config/credits.php moves again they must move
+         with it -- AV art. 4.2 makes this page the contractually leading
+         price list, so it must never be left stale.
+
+         The one real price change is voice: 1 belminuut went 10 -> 4 -> 6
+         credits across two passes the same day. In money that is EUR0,63 ->
+         EUR0,19/min, a 70% cut from the original. Basis: the researched
+         Dutch market (Fonio EUR0,099/min, CallingBird EUR0,35, VoxFlow
+         EUR99/mo unlimited) against a corrected variable COGS of
+         EUR0,085-0,123/min -- the $7,70/mo number rental is NOT in that
+         figure, it is recovered separately by credits.fixed_addons. See
+         "Mowi - Competitive positioning 2026-08.md" in the vault.
+
+         The belminuut rate IS now on the hero. It used to be withheld
+         behind "volgen zodra de voice agent op de site verkrijgbaar is",
+         which as of 2026-08-28 is stale in both halves: the Voice agent is
+         available (agent_types.telefoon_agent.available = true, Twilio KYC
+         cleared and a real NL number is live), and the rate is settled at
+         6 credits. Keeping that sentence would have promised a price the
+         same paragraph had already stated.
+
+         NEW on the hero 2026-08-28: Builder messages now cost credits (2
+         each). They were previously free and unmetered. Stated here because
+         AV art. 4.2 makes this page the contractually leading price list --
+         a charge clients will actually see on their meter must not be
+         absent from it.
          Both self-serve CTAs point at signup ahead of CREDITS_ENABLED going
          true in production (Sal's explicit call, publish-now) -- a real
          signup today still runs the old retired per-agent trial model until
@@ -127,15 +183,20 @@
 
          Second tier added 2026-08-22 (still later the same day): "Agents"
          renamed to "Basis" (the name stopped describing anything once every
-         tier grants every agent) and a new "Pro" card (€79/1.500 credits)
+         tier grants every agent) and a new "Pro" card (€79/1.500 credits --
+         3.000 since the 2026-08-28 rebase below; the figure here is left as
+         it stood that day because this paragraph is a record of a decision,
+         not a live price)
          inserted above it. Deliberately ONE new tier, not the two Sal
          initially asked for -- margin math showed volume-discount tiers
          reduce usage profit (a customer on Pro pays LESS than the same
          usage on Basis+top-ups would cost them), which cuts against Sal's
          own stated goal of profit scaling with usage. Two tiers would also
          have meant a third published, contractually-binding (AV art. 4.2)
-         breakpoint set with zero real usage data -- credits are still
-         dormant (`config('credits.enabled')` false). Support-tier
+         breakpoint set with zero real usage data -- credits were still
+         dormant that day (`config('credits.enabled')` false; it is true in
+         production since 2026-08-27, so this reasoning is history, not a
+         current constraint). Support-tier
          differentiation (a mid-tier with faster/dedicated support) was
          considered and rejected: Mowi is a confirmed eenmanszaak, the
          masterplan is BINDING that Motion A support stays docs-first with
@@ -155,10 +216,10 @@
           <div class="tier-card tier-card-highlight">
             <h2 class="tier-card-name">Start gratis</h2>
             <div class="tier-price"><span class="tier-price-amount">€0</span></div>
-            <p class="tier-price-sub">30 gratis credits</p>
+            <p class="tier-price-sub">60 gratis credits</p>
             <p class="tier-profile">Genoeg om het uit te proberen</p>
             <ul class="tier-features">
-              <li>30 gratis credits</li>
+              <li>60 gratis credits</li>
               <li>Geen betaalgegevens nodig</li>
               <li>Toegang tot alle agents en workflows</li>
               <li>Geen automatische overgang naar betaald</li>
@@ -169,11 +230,11 @@
           <div class="tier-card">
             <h2 class="tier-card-name">Basis</h2>
             <div class="tier-price"><span class="tier-price-amount">€19</span><span class="tier-price-period">/mnd</span></div>
-            <p class="tier-price-sub">300 credits per maand</p>
-            <p class="tier-profile">Ongeveer 15 e-mails per werkdag</p>
+            <p class="tier-price-sub">600 credits per maand</p>
+            <p class="tier-profile">Ongeveer 30 e-mails per werkdag</p>
             <ul class="tier-features">
               <li>Alles uit Start gratis</li>
-              <li>300 credits per maand</li>
+              <li>600 credits per maand</li>
               <li>Eén tegoed voor alle agents en workflows</li>
               <li>Bijkopen wanneer u wilt</li>
               <li>Pauzeert netjes bij op tegoed</li>
@@ -184,11 +245,11 @@
           <div class="tier-card">
             <h2 class="tier-card-name">Pro</h2>
             <div class="tier-price"><span class="tier-price-amount">€79</span><span class="tier-price-period">/mnd</span></div>
-            <p class="tier-price-sub">1.500 credits per maand</p>
-            <p class="tier-profile">Ongeveer 75 e-mails per werkdag</p>
+            <p class="tier-price-sub">3.000 credits per maand</p>
+            <p class="tier-profile">Ongeveer 150 e-mails per werkdag</p>
             <ul class="tier-features">
               <li>Alles uit Basis</li>
-              <li>1.500 credits per maand</li>
+              <li>3.000 credits per maand</li>
               <li>Voordeliger per credit</li>
               <li>Bijkopen wanneer u wilt</li>
             </ul>
@@ -390,6 +451,7 @@
                 <li><a href="/docs/">Documentatie</a></li>
                 <li><a href="/blog/">Blog</a></li>
                 <li><a href="/zo-werkt-het">Zo werkt het</a></li>
+                <li><a href="/waarom-mowi">Waarom Mowi</a></li>
                 <li><a href="/security">Security</a></li>
                 <li><a href="/ai-transparantie">AI-transparantie</a></li>
               </ul>

@@ -1,0 +1,314 @@
+/* ==========================================================================
+   Illustrative workflow-template canvas (templates.html, 2026-08-27; also
+   loaded by index.html since 2026-08-29 for the STATIC variant at the end
+   of this file — the homepage never loads js/workflow-canvas.js) —
+   ported 1:1 from the Mowi Dashboard's own Templates gallery (same feature,
+   same reference: elevenlabs.io/voice-agents' "Scale ElevenAgents across
+   every function"), retokenised to THIS site's own palette (see the
+   :root tokens in css/style.css — this file reads them directly, never
+   redefines them) rather than the dashboard's. No dark mode here (this
+   site has none); no build step (paired with js/workflow-canvas.js, a
+   second small vanilla-JS file loaded only on this page, same pattern as
+   docs.css being its own independent stylesheet).
+
+   Panning is a real CSS transform (translate + scale) driven by
+   js/workflow-canvas.js — drag in any direction, wheel/button zoom —
+   not native scroll (the dashboard's very first version tried native
+   scroll and it couldn't zoom or pan an axis that didn't already
+   overflow; fixed there before this port, so it's built correctly here
+   from the start).
+   ========================================================================== */
+
+:root{
+  --wf-dot:rgba(18,17,16,.10);
+  --wf-edge:var(--ink-3);
+  --wf-edge-label-border:rgba(18,17,16,.10);
+}
+
+/* ---------- Capability panels (Call agent / E-mail agent) ---------- */
+/* .pill-panel/.pill-tablist/.pill-tab are the site's own existing
+   component (css/style.css, js/main.js initPillTabs) — reused verbatim
+   for the Call-agent/E-mail-agent switch. Only the CONTENTS of each
+   panel (the branche list + canvas) are new, styled below. */
+/* :not([hidden]) is load-bearing, not defensive: without it this rule's
+   display:flex ties with the site's own .pill-panel[hidden]{display:none}
+   on specificity (two classes vs. one class + one attribute), and this
+   file loads AFTER style.css, so source order would make THIS win even
+   while hidden — a real bug caught live 2026-08-27: clicking the
+   E-mail-agent tab correctly flipped the ARIA/hidden state but the Call-
+   agent panel never actually disappeared, since it was still display:flex
+   underneath. */
+.tpl-panels .pill-panel:not([hidden]){display:flex;flex-direction:column;gap:2rem}
+
+/* ---------- Hero → showcase spacing (this page only) ---------- */
+/* Sal, 2026-08-28: "reduce the space between the hero body and the first
+   two tiles". Overrides style.css's shared .hero-tight-bottom (40px /
+   24px on phones) and the section's own top padding here, so no other
+   page moves. Scoped to .tpl-hero (a hook on templates.html's hero only)
+   since 2026-08-29, when index.html started loading this file too — the
+   homepage hero doesn't carry .hero-tight-bottom today, but the scope
+   makes that a non-issue rather than a coincidence. */
+.tpl-hero.hero-tight-bottom{padding-bottom:16px}
+.tpl-showcase{padding-top:2.5rem}   /* .section default is 5rem */
+/* The site's own pill-tabs component adds 32px above the tab row and
+   48px between it and its panels — on this page the section padding
+   already provides the breathing room above, and the tiles read as the
+   tabs' own content, so both are tightened here (desktop chain hero
+   text → tiles: 16 + 40 + 44 tab row + 24 = 124px, was 244px). */
+.tpl-showcase .pill-tablist{margin-top:0}
+.tpl-showcase .pill-panels{margin-top:1.5rem}
+@media (max-width:47.9rem){
+  .tpl-hero.hero-tight-bottom{padding-bottom:12px}
+  .tpl-showcase{padding-top:1.5rem}
+}
+
+/* ---------- Branche list ---------- */
+/* Right-edge fade (Sal, 2026-08-28: "a visible fade on the right so it
+   becomes more clear it can be scrolled"). A mask on the scroll container
+   itself stays put at the scrollport's edge while the tiles scroll under
+   it. js/workflow-canvas.js toggles .is-at-end (no right fade once the
+   last tile is fully in view — otherwise it would look cut off) and
+   .is-scrolled (a matching left fade once there is content hidden on
+   that side). The 3rem fade is the same width as the gap the last tile
+   would otherwise vanish into. */
+/* Rail polish (Sal, 2026-08-28, "make it visually more appealing"): what
+   makes a card rail read well is a peeking next card + an edge fade
+   (both above), tiles that stop on their own edges (scroll-snap), equal
+   tile heights with the text centered so short taglines don't leave a
+   ragged bottom, one hover/selected treatment shared with the site's
+   pill tabs (ink border + 5% ink wash), and — on phones — a rail that
+   runs to the screen edge while its first tile stays aligned with the
+   text column. No motion beyond the site's existing color/border
+   transitions. */
+.tpl-branche-list{
+  display:flex;gap:.75rem;overflow-x:auto;padding-bottom:.25rem;
+  scrollbar-width:none;
+  scroll-snap-type:x proximity;
+  --tpl-fade-l:0rem;--tpl-fade-r:3rem;
+  -webkit-mask-image:linear-gradient(to right,transparent 0,#000 var(--tpl-fade-l),#000 calc(100% - var(--tpl-fade-r)),transparent 100%);
+  mask-image:linear-gradient(to right,transparent 0,#000 var(--tpl-fade-l),#000 calc(100% - var(--tpl-fade-r)),transparent 100%);
+}
+.tpl-branche-list.is-scrolled{--tpl-fade-l:3rem}
+.tpl-branche-list.is-at-end{--tpl-fade-r:0rem}
+.tpl-branche-list::-webkit-scrollbar{display:none}
+.tpl-branche-btn{
+  flex:0 0 auto;width:13rem;min-height:6rem;text-align:left;background:var(--surface);
+  border:1px solid var(--border);border-radius:var(--radius-card);
+  padding:1rem 1.125rem;cursor:pointer;font-family:inherit;
+  display:flex;flex-direction:column;justify-content:center;
+  scroll-snap-align:start;
+  transition:border-color .15s ease,background-color .15s ease;
+}
+.tpl-branche-btn.active{border-color:var(--ink);background:rgba(18,17,16,.05)}
+@media (hover:hover){ .tpl-branche-btn:hover{border-color:var(--ink);background:rgba(18,17,16,.05)} }
+.tpl-branche-name{display:block;font-weight:700;font-size:.9375rem;color:var(--ink)}
+.tpl-branche-tag{
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+  margin-top:.25rem;font-size:.8125rem;color:var(--ink-2);line-height:1.4;
+}
+
+/* ---------- One example (summary + canvas + CTA) ---------- */
+.tpl-example[hidden]{display:none}
+/* Summary sits UNDER the canvas since 2026-08-29 (Sal: "sort the text under
+   the workflow graph instead of on top of it") — the markup order in
+   templates.html is canvas → summary → CTA, so this is a top margin now. */
+.tpl-example-summary{font-size:1rem;color:var(--ink-2);max-width:40rem;margin-top:1.25rem}
+.tpl-example .btn-primary{margin-top:1.5rem}
+
+/* ---------- The canvas itself ---------- */
+.wf-canvas{
+  position:relative;border-radius:var(--radius-card);border:1px solid var(--border);
+  background:var(--muted);overflow:hidden;isolation:isolate;height:24rem;
+}
+/* 32rem, was 28rem (2026-08-28): every flow is 1170-1370px tall, so the
+   frame only ever shows its top; four more rem brings a third node fully
+   into the first view instead of cutting it mid-card. */
+@media (min-width:48rem){ .wf-canvas{height:32rem} }
+/* touch-action:pan-y, not none (Sal, 2026-08-28: "on mobile the page
+   scroll stops for the widget"): a finger on the canvas scrolls the PAGE
+   by default, exactly like an embedded Google Map. A two-finger pinch is
+   not a pan-y gesture, so the browser leaves it to us — js/workflow-
+   canvas.js zooms the canvas with it and then adds .wf-armed, which flips
+   this to none so one-finger drags pan the canvas; scrolling the canvas
+   out of view disarms it again ("use two fingers to move the map"). */
+.wf-viewport{
+  position:absolute;inset:0;overflow:hidden;cursor:grab;touch-action:pan-y;
+  -webkit-user-select:none;user-select:none;
+  background-image:radial-gradient(var(--wf-dot) 1.25px,transparent 0);background-size:20px 20px;
+}
+.wf-viewport.wf-dragging{cursor:grabbing}
+/* No focus ring after pointer use (Sal, 2026-08-28: "remove the border
+   over the widget once active"): js/workflow-canvas.js focuses the
+   viewport on pointerdown so the keyboard shortcuts work, and the
+   browser then drew its default focus outline around the whole widget.
+   .wf-pointer-focus is set on pointerdown and cleared on the first
+   keydown, so someone who Tabs into the canvas still gets a visible
+   ring (the site's a/button :focus-visible treatment, inset so it
+   stays inside the rounded frame). */
+.wf-viewport:focus{outline:none}
+.wf-viewport:focus-visible:not(.wf-pointer-focus){outline:2px solid var(--ink);outline-offset:-2px}
+.wf-stage{position:relative;transform-origin:0 0;will-change:transform}
+.wf-edges{position:absolute;top:0;left:0;pointer-events:none}
+.wf-edge-path{fill:none;stroke:var(--wf-edge);stroke-width:1.5}
+.wf-edge-label{
+  position:absolute;transform:translate(-50%,-50%);max-width:132px;padding:.25rem .625rem;
+  border-radius:var(--radius-pill);background:var(--surface);border:1px solid var(--wf-edge-label-border);
+  font-size:.6875rem;font-weight:500;color:var(--ink-2);text-align:center;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;pointer-events:none;
+}
+.wf-node{
+  position:absolute;display:flex;flex-direction:column;border-radius:var(--radius-card);
+  border:1px solid var(--border);background:var(--surface);overflow:hidden;
+}
+.wf-node-head{display:flex;align-items:center;gap:.375rem;padding:.4375rem .5625rem .3125rem}
+.wf-node-icon{
+  width:1.125rem;height:1.125rem;flex-shrink:0;border-radius:.375rem;background:var(--muted);
+  color:var(--ink);display:flex;align-items:center;justify-content:center;
+}
+.wf-node-icon svg{width:.6875rem;height:.6875rem}
+.wf-node-title{font-size:.71875rem;font-weight:700;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wf-node-body{
+  margin:0 .4375rem .4375rem;padding:.4375rem .5rem;border-radius:.5625rem;background:var(--muted);
+  font-size:.65625rem;line-height:1.45;color:var(--ink-2);flex:1;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+}
+.wf-node-start .wf-node-icon,.wf-node-end .wf-node-icon{color:var(--ink-2)}
+.wf-node-decision .wf-node-head{background:var(--muted)}
+
+.wf-zoom-controls{
+  position:absolute;top:.875rem;right:.875rem;z-index:2;display:flex;flex-direction:column;
+  border-radius:var(--radius-btn);border:1px solid var(--border);background:var(--surface);
+  box-shadow:0 1px 2px rgba(18,17,16,.06);overflow:hidden;
+}
+.wf-zoom-controls button{
+  width:2rem;height:2rem;display:flex;align-items:center;justify-content:center;
+  background:none;border:none;color:var(--ink-2);cursor:pointer;padding:0;
+}
+.wf-zoom-controls button:not(:last-child){border-bottom:1px solid var(--border)}
+@media (hover:hover){ .wf-zoom-controls button:hover{background:var(--muted);color:var(--ink)} }
+.wf-zoom-controls button svg{width:1rem;height:1rem}
+
+.wf-hint{
+  position:absolute;left:50%;bottom:.875rem;transform:translateX(-50%);z-index:2;
+  font-size:.71875rem;color:var(--ink-3);background:var(--surface);padding:.3125rem .75rem;
+  border-radius:var(--radius-pill);border:1px solid var(--border);pointer-events:none;
+  transition:opacity .3s ease;
+}
+.wf-hint-hidden{opacity:0}
+/* Touch, not yet armed (Sal, 2026-08-28: "tap to interact, in the middle
+   of the frame so it's more noticeable"): the hint becomes the activator
+   itself — centered, ink-filled, tappable; js/workflow-canvas.js arms
+   the canvas on tap and then drops this class, so it turns back into the
+   small bottom indicator ("Sleep om te verkennen") and stops covering
+   the workflow. */
+.wf-hint.wf-hint-cta{
+  pointer-events:auto;cursor:pointer;top:50%;bottom:auto;transform:translate(-50%,-50%);
+  background:var(--ink);color:var(--bg);border-color:var(--ink);
+  font-size:.875rem;font-weight:600;padding:.625rem 1.125rem;
+  box-shadow:0 2px 8px rgba(18,17,16,.18);
+}
+
+.wf-viewport.wf-armed{touch-action:none}
+
+/* ---------- Desktop: tiles left, workflow right (Sal, 2026-08-29) ----------
+   "List the branche tiles next to the graph widget, same row, tiles on the
+   left and the workflow on the right — the workflow as a vertical widget is
+   perfect because the flow itself is vertical. Desktop only." So from 64rem
+   the capability panel is a two-column grid: the branche rail turns into a
+   3-per-row tile grid (no scroll, no edge fades — js/workflow-canvas.js's
+   fade classes compute to "at end" on an unscrollable list and are
+   harmless), and the canvas gets a tall portrait frame so more of the flow
+   is in view. Below 64rem nothing changes: the horizontal rail with the
+   canvas underneath stays as tuned on 2026-08-28. */
+@media (min-width:64rem){
+  .tpl-panels .pill-panel:not([hidden]){
+    display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:2.5rem;align-items:start;
+  }
+  .tpl-branche-list{
+    display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.75rem;
+    overflow:visible;padding-bottom:0;scroll-snap-type:none;
+    -webkit-mask-image:none;mask-image:none;
+  }
+  /* Narrow tiles meet long Dutch compounds ("kennismakingsgesprekken"): let
+     them break rather than clip at the tile edge — overflow-wrap as the
+     safety net, plus a &shy; in that word in templates.html. NOT
+     hyphens:auto: at 3-per-row it hyphenated ordinary words ("zon-der",
+     "her-kent"), which read worse than the one clip it fixed. Content
+     top-aligned here
+     (the rail centres it): a one-line tagline would otherwise float its
+     title higher than a three-line neighbour's — Sal: "make sure the titles
+     horizontally align with the tile next to it". Grid rows share a height,
+     so top-aligned titles sit on one line across the row. */
+  .tpl-branche-btn{width:auto;min-height:6.5rem;justify-content:flex-start;overflow-wrap:anywhere}
+  .tpl-examples .wf-canvas{height:44rem}
+}
+
+/* Phones: exactly two and a half tiles in view (Sal, 2026-08-28: "show
+   half of the 3rd tile so it becomes even more clear it can be
+   scrolled") — sized from the list's own width, so it holds on every
+   phone width instead of depending on a fixed tile width happening to
+   leave a sliver. The width is a flex-basis on the scroll container's
+   visible width: two gaps plus 2.5 tiles fill it. */
+@media (max-width:47.9rem){
+  /* Rail bleeds to the screen edges (the .container's 20px padding is
+     pulled back with negative margins and re-added as the rail's own
+     padding), so a peeking tile touches the edge while the first tile
+     still lines up with the text column; scroll-padding keeps the snap
+     stops on that same column. The 2.5-tile width resolves against the
+     rail's content box — still the text column's width — so exactly two
+     and a half tiles sit in it and the half one runs into the fade. */
+  .tpl-branche-list{margin:0 -20px;padding:0 20px .25rem;scroll-padding-inline:20px}
+  .tpl-branche-btn{width:auto;flex:0 0 calc((100% - 2 * .75rem) / 2.5);min-height:5.5rem;padding:.875rem 1rem}
+}
+
+/* ---------- Static variant (index.html, 2026-08-29) ----------
+   The homepage's "Eén platform voor alles wat terugkomt" tabs show one
+   flow each as a plain picture: same nodes, edges and dot grid as above,
+   but no pan/zoom/drag, no zoom buttons, no hint, and js/workflow-
+   canvas.js is not loaded on that page at all (the markup carries no
+   data-wf-* hooks, so even if it were, nothing would mount). Sal's call
+   (2026-08-29): the flow stays vertical but is deliberately CUT OFF —
+   "only show the most important parts" — so each frame is a fixed
+   window onto the middle of its flow (tool step → decision → the two
+   outcomes), with the Start node's tail fading in at the top and the
+   branch nodes fading out at the bottom. The fade is the same mask idiom
+   .card-strip-wrap and .tpl-branche-list already use; it sits on the
+   viewport, so the frame border stays crisp while the content fades.
+
+   Layout: the viewport is a normal block here (not absolute); the stage
+   is centered in it, shifted up by --wf-off (how far into the flow the
+   window starts) and — on phones, where a 480px-wide flow doesn't fit
+   the text column — scaled down with a transform. A transform doesn't
+   change layout, so the window height and the offset are both multiplied
+   by --wf-s; each canvas sets --wf-win/--wf-off inline, and the media
+   query only has to change --wf-s. */
+.wf-canvas-static{height:auto}
+.wf-canvas-static .wf-viewport{
+  position:relative;inset:auto;overflow:hidden;cursor:default;touch-action:auto;
+  -webkit-user-select:auto;user-select:auto;
+  --wf-s:1;
+  height:calc(var(--wf-win) * var(--wf-s));
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 12%,#000 84%,transparent 100%);
+  mask-image:linear-gradient(to bottom,transparent 0,#000 12%,#000 84%,transparent 100%);
+}
+.wf-canvas-static .wf-stage{
+  position:absolute;left:50%;top:calc(-1 * var(--wf-off) * var(--wf-s));
+  transform:translateX(-50%) scale(var(--wf-s));transform-origin:top center;
+  will-change:auto;
+}
+/* Static nodes are 100px tall (the interactive ones are 88px and rely on
+   hover for the clipped 3rd line — a picture can't). Line-clamp clips at
+   the padding edge, so clamping the padded body let a 4th line's ascenders
+   peek into the bottom padding under the ellipsis. The static markup
+   therefore wraps the body text in .wf-clamp (no padding) and clamps THAT;
+   the body itself becomes a plain padded block that still fills the node. */
+.wf-canvas-static .wf-node-body{display:block}
+.wf-canvas-static .wf-clamp{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+/* Wide flows (the E-mail-agent branche flows are 760px: a three-way fan-out
+   after "Sorteren") don't fit the split-panel column at 1:1, so they scale
+   on desktop too; on phones 45% is what fits 760px in a 350px column. */
+.wf-canvas-static-wide .wf-viewport{--wf-s:.78}
+@media (max-width:47.9rem){
+  .wf-canvas-static .wf-viewport{--wf-s:.62}
+  .wf-canvas-static-wide .wf-viewport{--wf-s:.45}
+}

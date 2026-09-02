@@ -222,9 +222,15 @@ retype credentials from scratch or falling back to a password:
   value on all `<link>`/`<script>` tags referencing them, across every HTML page**, so browsers
   are forced to fetch the new file immediately rather than waiting out the cache. Use the
   current date (`YYYYMMDD`); if multiple deploys land same-day, append `-2`, `-3`, etc.
-  **Latest coordinated bump: `20260818`** (v2 rebuild Stage 9 — every real page loading either
+  **Latest coordinated bump: `20260829-2`** (2026-08-29, the WebKit card-strip fix below;
+  `-1` earlier the same day was the homepage icons, `20260828-12` the homepage imagery the day
+  before). Before that sweep, `pricing.html` had drifted to `-11` while
+  the other 21 pages sat on `-10` — a page-local bump from an earlier session. When bumping,
+  `grep -ho 'style.css?v=[0-9-]*' *.html blog/*.html | sort | uniq -c` should show exactly
+  one distinct value; if it shows two, take the higher one +1 so nothing goes backwards.
+  (Older record: `20260818`, v2 rebuild Stage 9 — every real page loading either
   file was swept and verified on this exact string, including `test.html` which had drifted one
-  version behind after Stage 0). Applies to every root marketing page, the 6 legal pages,
+  version behind after Stage 0.) Applies to every root marketing page, the 6 legal pages,
   `test.html`, and `blog/*` (whose version is auto-derived by `build-blog.js` from
   `index.html`'s own `?v=` — see its `CSS_VERSION` regex — don't hardcode it separately there).
   Does **not** apply to the 15 redirect stubs (root stubs, `agents/*`, and — new in v2 —
@@ -315,6 +321,36 @@ or `/tarieven`/`/pricing`. All of those pages (`agentic-ai.html`, `power-bi-dash
 `agents/phone-agent.html`, `contact.html`) are, and remain, **client-side redirect stubs**
 (see Folder structure below), not real content — don't add new links to them, and don't
 resurrect any of the old label names above for the current nav.
+
+### Navigation — current, re-verified 2026-08-26 (the section above predates several rounds
+### of nav changes this doc never caught up on — this replaces it; do not follow the 2026-08-18
+- **Header "Inloggen" link opens in the SAME tab (2026-08-28) — never `target="_blank"`.** It was the only link on the site opening a new tab, and on an iPhone in Chrome a new tab animates in while the page is already painting, so the dashboard login page visibly "jumped" every time it was opened from the site — and never any other way. Two days were spent looking for that inside the dashboard. Same-tab like the "Start gratis" CTA. There are TWO copies of the link per page — the desktop header (`class="header-login"`) and the mobile menu (`nav-mobile-actions`, the one actually tapped on a phone; the first fix missed it) — in every page and in `build-blog.js`, so change all 42 places together.
+### description above for the Product menu's contents)
+Verified by reading `test.html`'s live markup directly rather than assumed. `<nav class="
+main-nav">` top-level, in order: **"Zo werkt het"** (`/zo-werkt-het`) → **"Product"**
+(`.nav-dropdown-trigger` → `#product-menu`) → **"Templates"** (`/templates`) → **"Prijzen"**
+(`/pricing`); then `.header-actions`: **"Inloggen"** (external, `my.mowi.agency/login`) +
+**"Start gratis"** pill CTA (`my.mowi.agency/aanmelden`). "Docs"/"About"/"Blog" are **no
+longer top-level nav items** (footer-only now) — exactly when/why that changed wasn't
+re-derived, only that it's the current live state.
+
+**"Product" is now a 3-category mega-menu grid**, not the single-column Workflows/Koppelingen/
+Vertrouwen dropdown described above — Koppelingen and Vertrouwen are no longer in it either.
+Each category is one `.nav-menu-item-grid` (CSS Grid, `repeat(2, minmax(0,1fr))`) with a
+`.nav-menu-heading`, an `.nav-menu-item-full` "Alle X" row spanning both columns, and its
+items stacked 2-per-row beneath:
+- **Agents** — Alle agents (`/workflows`) · E-mail agent · Call agent.
+- **Workflows** — Alle workflows (`/workflows`) · Orderstatus · Offerte-opvolging ·
+  Agenda-samenvatting · CRM-synchronisatie.
+- **Dashboards** (added 2026-08-26, see [[Website/dashboards-nav-category]] in the Obsidian
+  vault) — Alle dashboards (`/workflows#dashboards`) · Webshop overzicht · Directie overzicht ·
+  Klanten en retouren · Webshops vergelijken · Agenda · Verkooppijplijn · Openstaande
+  facturen · Winstgevendheid.
+
+`.nav-menu` is 76rem wide (widened from an original 42rem across two follow-up rounds so every
+title stays on one line at 2-per-row). This exact `#product-menu` markup is duplicated
+identically across all 16 root HTML pages (no templating) — a change to one category must be
+applied to all 16, and `test.html` is the reliable copy-paste source.
 
 ## Documentation section (setup guides for clients)
 - Structure, page anatomy, navigation anatomy, and writing rules are defined in
@@ -478,6 +514,64 @@ resurrect any of the old label names above for the current nav.
 - Content is adapted from `reference/content-data-vista.md` (our own prior business
   website — safe to reuse/adapt in full: text, numbers, stats, client names, case studies) —
   historical source; both rebrands have since rewritten most of what actually ships.
+- **Homepage hero copy (2026-08-29, Sal's direct call):** `<h1>` is **"Deploy Agents.<br />
+  Workflows. Dashboards."** — Sal's own wording (typed "Workfows", corrected as an obvious typo;
+  the closing period added for the three-beat rhythm). **"Deploy" is English on purpose** — a
+  founder exception to the Dutch-only rule for this one heading, same category as the English
+  product nouns (Agents/Workflows/Dashboards) already used in the nav; don't "fix" it to Dutch
+  without asking. The `.hero-sub` was rewritten in the direct-response voice the agent pages
+  already use ("Geen X. Geen Y. Geen Z." → mechanism → risk-reversal close): "Geen inbox die
+  overloopt. Geen gemiste oproep. Geen order die u zelf opzoekt. Zeg in gewone taal wat er moet
+  gebeuren. Mowi bouwt het, test het en zet het live na uw akkoord. Vandaag gratis te
+  proberen." No numbers, no "geen creditcard"-style claims (signup/trial terms are not verified
+  from this repo). The previous copy ("Automatisering die naar u luistert" / "Mowi is het
+  platform waar u in gewone taal zegt…") is superseded, kept only in git history.
+- **Homepage lost its "Gemaakt voor het Nederlandse MKB" section (2026-08-29, Sal's call):**
+  the closing three-reasons block (Eerlijk over de prijs / Klein beginnen kan / Altijd iemand
+  aanspreekbaar, with the `.icon-tile` glyphs added earlier that day) was removed outright from
+  `index.html`; the security strip now follows the "Eén platform" tabs directly. The
+  `.reasons-grid` CSS in `style.css` is now unused on the site — left in place (harmless, and
+  the section is one `git revert` away); delete it if it's still unused after the next design
+  pass. Don't reintroduce the section without asking.
+- **Agent pages lost their "Er is maar één probleem." section (2026-08-29, Sal's call):** the
+  four-card pain grid that sat between "Wat de agent doet" and "Zo werkt het" on both
+  `e-mail-agent.html` and `call-agent.html` was removed outright. Don't reintroduce it; the
+  copy is in git history if ever wanted.
+- **Agent-page headings lost their trailing periods (2026-08-29, later still, Sal):** both
+  `<h1>`s are now "Nooit meer een mail die blijft liggen" / "Nooit meer een gemiste oproep" (no
+  dot), and the "Zo werkt het" `<h2>`s became one sentence without a dot: "Wij zetten uw agent
+  op en u mailt zoals u al deed" / "Wij zetten uw agent op en uw telefoon doet de rest". The
+  homepage's "Deploy Agents. Workflows. Dashboards." and `zo-werkt-het`'s "Eerst zien. Dan pas
+  live." keep their periods — multi-beat lines where the dot is the beat.
+- **`zo-werkt-het` hero (2026-08-29, Sal: "direct marketing response copy"):** `<h1>` "Eerst
+  zien.<br />Dan pas live." (was "Vertellen, testen, en dan pas live"); sub in the agent pages'
+  DR device: "Vertel in gewone taal wat er moet gebeuren. Mowi draait het eerst als proef op uw
+  eigen gegevens, zonder dat er iets verstuurd wordt. U leest terug wat er zou zijn gebeurd. Pas
+  na uw akkoord gaat het live." Maps 1:1 onto the page's three splits (vertellen / testrun /
+  zien). Old sub had an em dash; gone.
+- **Voice agent hero sub (2026-08-29, later):** Sal asked for "something direct response
+  still but different than" the "Geen nieuwe centrale. Geen extra personeel. Geen voicemail
+  die niemand terugluistert." triad (he labelled it the Inbox agent's, but quoted the Voice
+  agent's — the Voice one was changed; flagged to him). Now a different DR device — outcome,
+  objection-handling, mechanism, control: "Elke oproep wordt aangenomen. Ook op de ladder, in
+  gesprek of na sluitingstijd. De agent plant de afspraak in of legt een terugbelverzoek vast. U
+  belt terug wanneer het u uitkomt." Every claim maps to the page's own cards/flows (elke
+  oproep aangenomen; afspraak inplannen; terugbelverzoek). Heading "Nooit meer een gemiste
+  oproep." unchanged.
+- **Inbox agent hero (2026-08-29, Sal: "more of a direct response approach"):** `<h1>` is now
+  **"Nooit meer een mail die blijft liggen."** (was "Uw inbox is 's ochtends al gesorteerd.") —
+  a pain-elimination headline taken from the page's own story section ("De offerte die blijft
+  liggen … Hij belt de concurrent."), deliberately parallel to the Voice agent's "Nooit meer een
+  gemiste oproep." so the two agent pages rhyme. The sub's third beat changed with it (was
+  "Geen offerteaanvraag die drie dagen blijft liggen" — same phrase as the new heading; now
+  "Geen avond meer op de bank met uw inbox", the page's other pain). Keep the two agent heroes
+  parallel if either is rewritten again. **Sub rewritten again later the same day** (Sal: "just
+  like you did for voice agent, direct marketing flavoured") in the same device as the Voice
+  sub: "Elke e-mail wordt gesorteerd en het antwoord staat klaar. Ook de aanvraag die
+  vrijdagavond binnenkomt. De agent vraagt zelf wat er nog mist. U leest het na en verstuurt."
+  Every claim maps to the page's cards (sorteert, conceptantwoord klaar, vraagt zelf door, u
+  controleert en verstuurt). The two agent subs now share one structure: outcome → the
+  objection → mechanism → you stay in control.
 - **Current positioning, unchanged by v2:** Mowi is a **conversational workflow-automation
   platform** for the Dutch MKB/SMB — "u zegt het, en het werkt." The product story is:
   describe what you want done in plain language, Mowi configures it from tested building
@@ -636,6 +730,145 @@ resurrect any of the old label names above for the current nav.
   See `test.html` for a live rendered reference of every primitive — it was rebuilt in v2 as
   the canonical styleguide and is also the copy-paste source for the exact header/footer
   markup every other page must match.
+- **Homepage imagery (2026-08-28) — the one deliberate exception to "no colour anywhere".**
+  Two placeholder tiles on `index.html` became real images at the founder's request:
+  - **Hero:** `assets/hero-dashboard.webp` (2178×1388, ~66 KB), a real screenshot of the
+    dashboard's chat home, in a hairline-bordered `--radius-header` frame (`.hero-visual`, now
+    an `<img>` — the old `min-height` rules were removed because they'd stretch a real image).
+    Re-export from a fresh screenshot when the dashboard home changes.
+  - **"Workflows in minuten" slider:** nine `assets/workflows/*.webp` (900×600, 3:2, ~50–70 KB
+    each), one per card. Each is a small **monochrome** UI card (stat, sparkline, stepper,
+    legend, chat, rows, bars) composited over ONE shared field/cloud photo with a film-grain
+    overlay and ~12% darkening; the same photo is cropped/mirrored differently per card so it
+    doesn't read as nine copies. ~~The photo carries the colour; the UI on it stays black-on-white
+    per the rule above.~~ **Superseded 2026-08-29 (Sal: "the colours pop, not consistent with
+    the brand"): the photo is now a warm duotone in the site's own tokens** — shadows → `--ink`,
+    midtones → `--ink-3`, highlights → `--bg` (PIL `ImageOps.colorize` on the grayscale), grain
+    and darkening unchanged, the white UI cards untouched. Chosen over plain grayscale (colder
+    against the bone paper) and muted colour (still "the one coloured thing"). Baked into the
+    WebPs — no runtime `filter`, so nothing extra for iOS to composite. The "one deliberate
+    exception to no-colour" in this bullet's heading therefore now covers only the hero
+    screenshot (the dashboard's own greys); the slider is monochrome again. They are **rendered, not hand-drawn** — from an HTML/SVG composition in
+    the site's own fonts (Plus Jakarta Sans / Inter Tight), screenshotted at 4× with Playwright.
+    That source isn't in the repo (it lived in a session scratchpad); to change a label or
+    number, rebuild the composition rather than editing the WebP. Numbers on the cards are
+    illustrative activity counts ("31 facturen"), deliberately not performance claims.
+  - `.workflow-card-visual` is now an `<img>` rule (`width:100%; height:auto; aspect-ratio:
+    3/2; object-fit:cover`). The `height:auto` is load-bearing: without it the `<img>`'s
+    `height="600"` attribute wins and every card renders 600px tall (caught in QA).
+  - **WebKit regression from that swap, fixed the next day (2026-08-29) after Sal saw it on his
+    iPhone ("not infinite and way too fast" on the card slider, logo marquee fine):** the
+    `.card-strip` is `width: max-content`, and **WebKit sizes a flex container's max-content
+    from each item's content, ignoring a definite `flex-basis`** (Chromium honours it). A
+    900px-intrinsic `<img>` per card ballooned the track to **17,296px in WebKit vs 4,660px in
+    Chromium** — 12.6k of dead space and past Safari's ~16k animated-layer limit. Fix:
+    `.workflow-card` gets a definite `width: clamp(240px, 26vw, 300px)` (+ `flex: 0 0 auto`)
+    instead of only a flex-basis; measured 4,660px in both engines afterwards. **Lesson: any
+    `width: max-content` flex track on this site needs definite item widths, and mobile QA
+    must include Playwright's `webkit` with an iPhone device profile — Chromium-only
+    screenshots at 390px never showed this** (the logo marquee's `<img>`s have no intrinsic
+    size until loaded and are sized by CSS, which is why it was unaffected). Reproduce/verify
+    with `pw.webkit` + `pw.devices["iPhone 13"]`, reading `#workflow-card-strip`'s
+    `offsetWidth`.
+  - **"Eén platform voor alles wat terugkomt" tabs (2026-08-29):** the five "Voorbeeld volgt"
+    tiles are now **static workflow pictures** using the same `.wf-canvas` component as
+    `/templates` (nodes, curved edges, dot grid) via a `.wf-canvas-static` variant at the end of
+    `css/workflow-canvas.css` — which `index.html` now loads too (**styles only; the canvas JS is
+    deliberately not loaded on the homepage**, and the markup carries no `data-wf-*` hooks).
+    Each frame is a fixed window onto the *middle* of its flow (tool step → decision → two
+    labelled outcomes), Sal's call: "cut-off, only the most important parts" — the Start node's
+    tail fades in at the top and the branch nodes fade out at the bottom (same mask idiom as
+    `.card-strip-wrap`). Phones scale the stage to 62% via `--wf-s`; `--wf-win`/`--wf-off` are
+    set inline per canvas. The five flows (Klantvragen, Bestellingen, Offertes, Agenda,
+    Administratie) are **illustrative drafts**, 5 rows each on a 480×820 stage, nodes 100px tall
+    (templates' are 88 — a static picture has no hover tooltip, so all three body lines must
+    show); Offertes and Agenda have a loop-back edge. They were **generated by a script**
+    (`gen_home_flows.py`, session scratch, not in the repo — the geometry is trivial to redo:
+    rows at y=40/200/360/520/680, spine `left:140`, branches `left:20`/`left:260`). Sal intends
+    to replace them with the real workflows later. Loading this file on a second page is also why
+    its templates-only hero override is now scoped to `.tpl-hero` (a hook added to
+    `templates.html`'s hero section). `workflow-canvas.css` has its own `?v=` (`20260829-1`,
+    on `index.html` and `templates.html` — bump both together).
+  - **Agent pages' "Voor elke branche anders ingesteld" tabs (2026-08-29):** the eight
+    "Voorbeeld volgt" tiles on `e-mail-agent.html` and `call-agent.html` (Loodgieter / Kapper /
+    Webshop / Horeca × 2) are the same static cut-off pictures — but **verbatim copies of the
+    real `/templates` flows** (`call-agent.<branche>` / `email-agent.<branche>`, themselves
+    dumped from the dashboard catalog), not drafts. Generated by a scratch script
+    (`gen_agent_flows.py`, not in the repo) that extracts each `.wf-stage` from
+    `templates.html`, bumps nodes 88→100px, wraps each body text in `<span class="wf-clamp">`
+    and splices it into the panel; **regenerate from `templates.html` rather than hand-editing**
+    (the homepage's `gen_home_flows.py` does the same wrap). Windows: call flows open on the
+    decision node + its two branches (`--wf-off` = decision top − 130; webshop's decision is one
+    row lower); e-mail flows are a 760px three-way fan-out after "Sorteren", so they open on
+    that (`--wf-off:200`) and carry `.wf-canvas-static-wide` (78% on desktop, 45% on phones).
+    Two CSS rules came with this, both in `workflow-canvas.css`'s static block: the `-wide`
+    scale, and **`.wf-clamp`** — line-clamp clips at the padding edge, so clamping the padded
+    body let a 4th line's ascenders peek under the ellipsis; the static markup clamps an inner
+    span instead. Both agent pages now load `workflow-canvas.css` (`?v=20260829-2`, bumped on
+    all four pages that load it). The e-mail flows' branch labels touch/truncate exactly as
+    they do on `/templates` (132px label cap, labels 120px apart) — inherited, not fixed here.
+    Known generator lesson: the first version emitted one extra `</div>` per canvas, which
+    pushed panels 3–4 outside the `[data-pill-tabs]` container so their tabs could never un-hide
+    them — always check "panels in container == tabs" after splicing.
+    **Same-day follow-ups (Sal's review):** (a) windows open **60px above the key node** (the
+    first cut showed ~100px of bare arrow — "that part doesn't show anything"): call flows
+    `decision−60 … decision+340` (400px), e-mail `180 … 650` (470px, same as before, trimmed at
+    the bottom instead). (b) The "Bekijk alle branches op de Templates-pagina →" link moved
+    from a section-level `<p>` below the tab block into **each panel's copy column, directly
+    under the button** (`.pill-panel-copy .link-arrow` rule in `style.css`: own line, own
+    width) — four copies per page, one visible at a time. (c) The branche tab heads got
+    `.icon-tile` glyphs: wrench / scissors / shopping bag / utensils (lucide-style paths,
+    24-grid, stroke 1.75). (d) Voice agent hero sub rewritten (see Content & positioning).
+    `style.css` `?v=` → `20260829-3` sitewide.
+  - **`/templates` showcase, desktop two-column layout (2026-08-29, Sal):** from 64rem the
+    capability panel (`.tpl-panels .pill-panel`) is a two-column grid — branche tiles left as a
+    **3-per-row grid** (no scroll, no fades; `.tpl-branche-list` switches from the rail to
+    `display:grid`), the example right with a **44rem portrait canvas** ("the workflow as a
+    vertical widget is perfect because the flow itself is vertical"). Tiles are top-aligned
+    there so titles sit on one line across a row (Sal: "make sure the titles align with the tile
+    next to it"); `overflow-wrap:anywhere` as a safety net for long compounds plus a `&shy;` in
+    "kennismakings&shy;gesprekken" in `templates.html` — deliberately **not** `hyphens:auto`,
+    which hyphenated ordinary words at that width. **Below 64rem nothing changes**: the
+    horizontal rail (2.5 tiles on phones, edge fades) with the canvas underneath stays as tuned
+    2026-08-28 — Sal: "this doesn't count for mobile, just desktop". CSS-only; the switcher JS
+    and fade classes need no change (an unscrollable grid computes to "at end"). Lives in
+    `css/workflow-canvas.css` (`?v=20260829-3` on the four pages loading it). **Later the same
+    day (Sal): the example summary moved from above the canvas to below it** — markup order in
+    every `.tpl-example` is now canvas → `.tpl-example-summary` → CTA (all 20, moved by script;
+    `.tpl-example-summary` carries a top margin now). `?v=20260829-4`.
+  - **Inbox agent hero heading on phones (2026-08-29, Sal: "doesn't look comfortable on
+    mobile"):** at 48px on a 390px phone it wrapped as *Nooit meer een / mail die blijft /
+    liggen.* — verb pair split, "liggen." orphaned. Fixed with two opt-in helpers in
+    `style.css`: `.h-balance` (`text-wrap: balance`, progressive — Safari 17.5+/Chrome/Firefox)
+    on the `<h1>`, and `.h-nowrap` on a span around "blijft liggen." (works everywhere). Result:
+    *Nooit meer / een mail die / blijft liggen.*; desktop stays one line. Scoped to this one
+    heading per Sal ("for the inbox agent only") — not applied to `.hero h1` globally because
+    the homepage heading uses deliberate `<br>`s. The Voice agent's heading would benefit from
+    the same treatment; not done. `style.css` `?v=20260829-4` sitewide.
+  - **`zo-werkt-het.html` split visuals (2026-08-29, Sal):** the three "Voorbeeld volgt" tiles
+    in the process section are images now. (1) "U vertelt het in gewone taal" reuses the
+    homepage hero screenshot `assets/hero-dashboard.webp`. (2) "Eerst een testrun op uw eigen
+    gegevens" → `assets/zo-werkt-het/testrun.webp`, (3) "U ziet precies wat er gedaan is" →
+    `assets/zo-werkt-het/activiteit.webp` — both **the same series as the homepage slider cards**
+    (white UI card on the warm-duotone field photo with film grain), composed at 2× the slider's
+    design scale (600×400 scene, 400px card) because the slot is ~620px wide, rendered at 3× and
+    saved as 1200×800 WebP. Testrun card: "48 e-mails doorgelopen / Goed gesorteerd 44 / Concept
+    klaargezet 31 / Ter controle 4 / Niets is verstuurd. Live na uw akkoord. [Zet live]".
+    Activity card: four timestamped log rows, the last tagged "Aandacht" in ink. Illustrative
+    counts, not claims. Source composition was session scratch (`cards2.html`), like the slider's.
+    New rule `img.split-visual` in `style.css` (kills the placeholder `min-height`, adds the
+    hairline frame). `style.css` `?v=20260829-5` sitewide.
+  - **Homepage icons (2026-08-29):** the eight `.placeholder-icon` slots in the "Eén platform"
+    tab heads (5) and the "Gemaakt voor het Nederlandse MKB" reasons (3) are real glyphs now,
+    per Sal "use the same icon style as the Inbox and Voice agent pages" — i.e. `.lp-card-icon`'s
+    tinted circle + hairline + ink-2 stroke. Implemented as a new generic **`.icon-tile`**
+    component in `css/style.css` (same look; `.lp-card-icon` itself is untouched and predates
+    it — use `.icon-tile` for any new slot), sized to the slot by context rules next to the old
+    placeholder ones (2.25rem in tab heads, 2.75rem elsewhere). Glyphs are inline SVG on the
+    24-grid, stroke 1.75, round caps/joins, `fill="none"` except a single dot — the same drawing
+    rules as the agent-page cards and the workflow-canvas node icons. Chat bubble / parcel /
+    document / calendar / receipt for the tabs; price tag / two steps / person for the reasons.
+    The two ISO badge placeholders further down are deliberately still placeholders.
 - **Superseded 2026-08-17→18 (v1 rebrand) — prior-era reference only, do not follow:** v1 had
   a **warm-light palette with a Mowi-orange accent** (`--accent:#e8590c`, used sparingly for
   primary CTAs/highlights) and a gradient-color orb. If you find visual-style guidance

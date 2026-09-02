@@ -18,8 +18,8 @@
   <meta name="twitter:description" content="Een e-mailagent checkt offertes meteen op ontbrekende info en vraagt dit direct op — sneller contact, meer kans op de opdracht. Zo werkt het precies." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/style.css?v=20260823-2" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&family=Inter+Tight:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css?v=20260829-5" />
   <link rel="icon" href="/assets/icon-192.png?v=20260804-3" />
   <link rel="shortcut icon" href="/assets/icon-192.png?v=20260804-3" />
   <link rel="apple-touch-icon" href="/assets/apple-icon-180.png?v=20260804-3" />
@@ -47,41 +47,44 @@
             </button>
             <div class="nav-menu" id="product-menu">
               <div class="nav-menu-col">
-                <ul>
+                <ul class="nav-menu-item-grid">
                   <li class="nav-menu-heading">Agents</li>
-                  <li><a href="/workflows"><span class="nav-menu-item-title">Alle agents</span><span class="nav-menu-item-desc">Het volledige overzicht van alle Mowi-agents</span></a></li>
-                  <li><a href="/workflows#email-agent"><span class="nav-menu-item-title">E-mail agent</span><span class="nav-menu-item-desc">Sorteert en beantwoordt uw e-mail</span></a></li>
-                  <li><a href="/workflows#call-agent"><span class="nav-menu-item-title">Call agent</span><span class="nav-menu-item-desc">Neemt binnenkomende gesprekken aan</span></a></li>
+                  <li class="nav-menu-item-full"><a href="/workflows"><span class="nav-menu-item-title">Alle agents</span><span class="nav-menu-item-desc">Het volledige overzicht van alle Mowi-agents</span></a></li>
+                  <li><a href="/e-mail-agent"><span class="nav-menu-item-title">Inbox agent</span><span class="nav-menu-item-desc">Sorteert en beantwoordt uw e-mail</span></a></li>
+                  <li><a href="/call-agent"><span class="nav-menu-item-title">Voice agent</span><span class="nav-menu-item-desc">Neemt binnenkomende gesprekken aan</span></a></li>
                 </ul>
               </div>
               <div class="nav-menu-col nav-menu-col-divider">
-                <ul>
+                <ul class="nav-menu-item-grid">
                   <li class="nav-menu-heading">Workflows</li>
-                  <li><a href="/workflows"><span class="nav-menu-item-title">Alle workflows</span><span class="nav-menu-item-desc">Het volledige overzicht van wat Mowi automatiseert</span></a></li>
+                  <li class="nav-menu-item-full"><a href="/workflows"><span class="nav-menu-item-title">Alle workflows</span><span class="nav-menu-item-desc">Het volledige overzicht van wat Mowi automatiseert</span></a></li>
                   <li><a href="/workflows#order-status"><span class="nav-menu-item-title">Orderstatus</span><span class="nav-menu-item-desc">Zoekt bestellingen op in uw webshop</span></a></li>
                   <li><a href="/workflows#offerte-opvolging"><span class="nav-menu-item-title">Offerte-opvolging</span><span class="nav-menu-item-desc">Controleert en volgt offerteaanvragen op</span></a></li>
-                </ul>
-              </div>
-              <!-- Continuation of the Workflows column — see index.html's own
-                   header for the full rationale comment; kept in sync here so
-                   the dropdown renders identically on blog pages. -->
-              <div class="nav-menu-col nav-menu-col-bottom">
-                <ul>
                   <li><a href="/workflows#agenda-samenvatting"><span class="nav-menu-item-title">Agenda-samenvatting</span><span class="nav-menu-item-desc">Uw agenda samengevat, op uw tijdstip</span></a></li>
                   <li><a href="/workflows#crm-sync"><span class="nav-menu-item-title">CRM-synchronisatie</span><span class="nav-menu-item-desc">Herkent klanten en houdt uw CRM bij</span></a></li>
+                </ul>
+              </div>
+              <div class="nav-menu-col nav-menu-col-divider">
+                <ul class="nav-menu-item-grid">
+                  <li class="nav-menu-heading">Dashboards</li>
+                  <li class="nav-menu-item-full"><a href="/workflows#dashboards"><span class="nav-menu-item-title">Alle dashboards</span><span class="nav-menu-item-desc">Het volledige overzicht van al uw dashboards</span></a></li>
+                  <li><a href="/workflows#dashboard-directie-overzicht"><span class="nav-menu-item-title">Directie overzicht</span><span class="nav-menu-item-desc">De cijfers waar een eigenaar op stuurt</span></a></li>
+                  <li><a href="/workflows#dashboard-webshops-vergelijken"><span class="nav-menu-item-title">Webshops vergelijken</span><span class="nav-menu-item-desc">Kerncijfers per webshop naast elkaar</span></a></li>
+                  <li><a href="/workflows#dashboard-openstaande-facturen"><span class="nav-menu-item-title">Openstaande facturen</span><span class="nav-menu-item-desc">Welke facturen aandacht nodig hebben</span></a></li>
+                  <li><a href="/workflows#dashboard-winstgevendheid"><span class="nav-menu-item-title">Winstgevendheid</span><span class="nav-menu-item-desc">Marge op basis van uw eigen kostprijzen</span></a></li>
                 </ul>
               </div>
             </div>
           </li>
           <li><a href="/templates">Templates</a></li>
           <li><a href="/pricing">Prijzen</a></li>
-          <li class="nav-mobile-actions"><a href="https://my.mowi.agency/login" target="_blank" rel="noopener">Inloggen</a></li>
+          <li class="nav-mobile-actions"><a href="https://my.mowi.agency/login">Inloggen</a></li>
           <li class="nav-mobile-actions"><a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a></li>
         </ul>
       </nav>
 
       <div class="header-actions">
-        <a href="https://my.mowi.agency/login" target="_blank" rel="noopener" class="header-login">Inloggen</a>
+        <a href="https://my.mowi.agency/login" class="header-login">Inloggen</a>
         <a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a>
       </div>
 
@@ -102,7 +105,7 @@
 <p>De mailbox is vaak het eerste dat achterloopt zodra het drukker wordt. Offerteaanvragen blijven een dag liggen, een klantvraag verdwijnt tussen facturen en nieuwsbrieven, en alleen de eigenaar overziet nog wat urgent is en wat kan wachten.</p>
 <p>Precies dan komt de vraag boven: kun je dit automatiseren zonder dat klanten merken dat er niemand meer meeleest? Het antwoord hangt af van wat de agent doet — en van wat jij hem laat doen.</p>
 <h2>Wat doet een e-mailagent precies met een binnenkomende mail?</h2>
-<p>De agent leest elke binnenkomende mail, herkent om welk type het gaat, en routeert hem naar de juiste plek — vaak met een concept-antwoord er al bij. Bekijk de <a href="/agents/email-triage">E-mail agent</a> voor het volledige overzicht.</p>
+<p>De agent leest elke binnenkomende mail, herkent om welk type het gaat, en routeert hem naar de juiste plek — vaak met een concept-antwoord er al bij. Bekijk de <a href="/agents/email-triage">Inbox agent</a> voor het volledige overzicht.</p>
 <p>Vier categorieën komen het meest voor: een offerteaanvraag, een klantvraag, een factuur en een nieuwsbrief. Bij een offerteaanvraag haalt de agent de relevante velden eruit — klant, omvang, gewenste datum — en controleert meteen of alles compleet is. Ontbreekt er iets, dan gaat de vraag om aanvulling direct terug naar de klant; de agent stelt zelf geen offerte op, dat blijft mensenwerk. Bij een klantvraag staat er wel een concept-antwoord klaar. Facturen gaan naar de map Facturen, nieuwsbrieven naar het archief.</p>
 <p>Gaat het om iets dringends, dan krijgt iemand van het team daar een melding van — de mail blijft niet liggen tot de eerstvolgende keer dat iemand de inbox opent. De agent draait op een vast schema, niet continu; hoe vaak dat schema loopt spreek je af tijdens de inventarisatie, afgestemd op hoe druk de mailbox is. Niets verdwijnt ongezien: elke run is zichtbaar in het dashboard, ook de keren dat er iets misging.</p>
 <h2>Wat gebeurt er als informatie ontbreekt in de aanvraag?</h2>
@@ -118,7 +121,7 @@
 <p>Vul je eigen aantallen in; de uitkomst verschilt sterk per bedrijf en branche, en hangt af van hoeveel aanvragen je nu kwijtraakt puur omdat de aanvulling te laat kwam. Bij een lagere gemiddelde opdrachtwaarde of minder aanvragen per maand is het bedrag kleiner — maar de maandprijs van de agent schaalt evenredig mee naar beneden, dus de verhouding blijft grofweg gelijk.</p>
 <p>Belangrijk: snelheid alleen werkt niet. Een snel antwoord dat inhoudelijk niet klopt, kost meer dan een langzaam antwoord dat wel klopt. De winst zit in sneller én goed — niet in sneller alleen.</p>
 <h2>Praktijkvoorbeeld: onze eigen inbox</h2>
-<p>Mowi gebruikt de E-mail agent op de eigen inbox, en dat is precies waarom we weten waar hij wel en niet op vertrouwd kan worden.</p>
+<p>Mowi gebruikt de Inbox agent op de eigen inbox, en dat is precies waarom we weten waar hij wel en niet op vertrouwd kan worden.</p>
 <p>Elke ochtend staat er al een sortering klaar voordat iemand van het team de mailbox opent: aanvragen bovenaan, facturen weg, nieuwsbrieven eruit. Loopt er iets vast — een mail die niet in een categorie past, een koppeling die hapert — dan verschijnt dat direct onder "Needs attention" in het dashboard, in plaats van dat het pas opvalt als een klant erover belt.</p>
 <h2>Wat doet de agent bij elk type mail: het overzicht</h2>
 <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Soort mail</th><th>Wat de agent doet</th><th>Wie verstuurt</th></tr></thead><tbody><tr><td>Offerteaanvraag</td><td>Compleetheid checken, ontbrekende info direct opvragen</td><td>Agent (automatisch)</td></tr><tr><td>Klantvraag</td><td>Concept-antwoord opstellen</td><td>Jij, of de agent (instelbaar)</td></tr><tr><td>Factuur</td><td>Doorzetten naar de map Facturen</td><td>—</td></tr><tr><td>Nieuwsbrief</td><td>Archiveren</td><td>—</td></tr></tbody></table></div>
@@ -208,7 +211,7 @@
 
     </div>
   </footer>
-  <script src="/js/main.js?v=20260822-23"></script>
+  <script src="/js/main.js?v=20260826-4"></script>
   <script>
     document.querySelectorAll(".blog-video-facade").forEach(function (el) {
       el.addEventListener("click", function () {
