@@ -26,7 +26,7 @@
 # no docs page, and an oauth platform with fields => [] where the IT-partner
 # sheet has almost nothing to ask for. See SPEC section 5, "First check whether
 # there is anything to ask for at all".
-- [ ] T01 - integratie: pipedrive (lander + sheet) - allowed: koppeling-pipedrive.html, downloads/it-partner-pipedrive.html
+- [x] T01 - integratie: pipedrive (lander + sheet) - allowed: koppeling-pipedrive.html, downloads/it-partner-pipedrive.html
 - [ ] T02 - integratie: exact-online (lander + sheet) - allowed: koppeling-exact-online.html, downloads/it-partner-exact-online.html
 
 == RUN 2 ==

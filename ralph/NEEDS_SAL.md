@@ -83,3 +83,29 @@ always one past the highest ID already in **Open items**; there is no example en
 - Suggested next step: decide whether that commit belongs on master at all, and whether "Op de planning"
   counts as naming a vendor for D2's purposes. If it does, the hub page needs a separate pass - it is a
   shared file and out of this batch's reach.
+
+### S-006 missing fact - T01 pipedrive (and every later lander)
+- Needed: SPEC section 4 item 4 says to link the agent cards at `/workflows#email-agent` and
+  `/workflows#call-agent`, "the same fragments the sitewide nav already uses". The nav in
+  `test.html` does not use those: it links **Inbox agent -> `/e-mail-agent`** and **Voice agent ->
+  `/call-agent`**, both real pages with real content. Those two fragments appear nowhere on the
+  site, and `workflows.html` has an empty `<main>` carrying no anchors at all, so the spec's
+  literal URLs would have pointed at the top of a blank page while a better page existed.
+- Shipped instead: the two agent cards link to `/e-mail-agent` and `/call-agent` (the nav as it
+  actually is today). The third card links to `/workflows#crm-sync`, which IS a nav fragment, and
+  does land on the empty `workflows.html` - the known gap SPEC section 4 tells the loop to accept.
+- Suggested next step: confirm this reading for T02-T11 so all 11 landers agree, or say the word
+  and they all use `/workflows#...` for the agents too. Separately, `workflows.html`'s empty
+  `<main>` is the real fix: every workflow fragment on the site is dead until it has content.
+
+### S-007 missing fact - T01 pipedrive (sheet)
+- Needed: the sheet has to tell an IT-partner **how** to return the Pipedrive API-token. Live copy
+  says only what not to do ("niet per e-mail in platte tekst", `docs/koppeling-pipedrive.html`).
+  No named secure channel exists in any source: no vault entry, no dashboard upload field, no
+  password-vault or one-time-link tool that Mowi actually uses. Naming one would be invented.
+- Shipped instead: the prescribed conservative fallback, verbatim, in the "Hoe u het token
+  terugstuurt" block: "Mowi volgt dit direct met u op en geeft aan via welk kanaal u het veilig
+  kunt delen." Plus the grounded negative ("niet per e-mail in platte tekst").
+- Suggested next step: name the channel once (a vault line is enough) and all 11 sheets can carry
+  it instead of the fallback. If a self-serve credential field lands in the dashboard, that becomes
+  the answer and the fallback disappears entirely.

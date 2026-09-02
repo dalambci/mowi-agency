@@ -26,3 +26,20 @@ entry sitting in an otherwise empty log would read as a completed task and mask 
 ---
 
 ## Log
+
+### 2026-09-02 - T01 pipedrive
+- Built: `downloads/it-partner-pipedrive.html` (sheet, built first so the lander's `sheet-link`
+  check could resolve it) and `koppeling-pipedrive.html` (lander, 7 sections, 4-question FAQ).
+- Decisions: the 5 "Zo koppelt u" steps are one-per-entry from `pipedrive.instructions[]` in the
+  dashboard's `config/shop_platforms.php` (auth `static`, field label `API-token`), nothing merged.
+  Section 4 links to `/e-mail-agent` and `/call-agent` rather than SPEC section 4's literal
+  `/workflows#email-agent` / `#call-agent`: the sitewide nav in `test.html` uses the real agent
+  pages, and those two fragments exist nowhere on the site (see S-006). `/workflows#crm-sync` is
+  from the nav as written. Sheet's secure-channel step uses the prescribed fallback line (S-007).
+  Sources cited per SPEC 5: tier 1 `docs/koppeling-pipedrive.html` (read-only claim, token is
+  personal, 401 troubleshooting), tier 2 the dashboard config, tier 5 Pipedrive's own docs via
+  `generate-it-sheets.js` (the "beheerder moet API-toegang inschakelen" note, 2026-08-04).
+- Oddities: one `structure` FAIL on round 1, `<main` counted twice. The second hit was the literal
+  string in a head comment ("zodat `<main>` scriptvrij blijft") - `structure` is the one gate that
+  reads raw source, comments included. Reworded the comment; green on round 2, `--dom` green first try.
+- Status: [x] done
