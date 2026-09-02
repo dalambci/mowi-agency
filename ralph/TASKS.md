@@ -54,7 +54,7 @@
 - [x] T09 - integratie: moneybird - allowed: koppeling-moneybird.html, downloads/it-partner-moneybird.html
 - [x] T10 - integratie: google-agenda - allowed: koppeling-google-agenda.html, downloads/it-partner-google-agenda.html
 - [x] T11 - integratie: calendly - allowed: koppeling-calendly.html, downloads/it-partner-calendly.html
-- [ ] T20 - SEO-kruispas: cross-links tussen alle gebouwde pagina's + meta-lengtes nalopen - allowed: koppeling-*.html, downloads/it-partner-*.html
+- [x] T20 - SEO-kruispas: cross-links tussen alle gebouwde pagina's + meta-lengtes nalopen - allowed: koppeling-*.html, downloads/it-partner-*.html
 
 == SUPERVISED (not a loop run) ==
 # NOT part of RUN 1 or RUN 2. The loop never picks from this block, and the

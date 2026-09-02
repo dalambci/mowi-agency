@@ -437,3 +437,26 @@ entry sitting in an otherwise empty log would read as a completed task and mask 
 - Oddities: none - both gates green on round 1, 0 fix rounds, `--dom` green first try, 0 skips on the
   lander (4 on the sheet, as expected).
 - Status: [x] done
+
+### 2026-09-03 - T20 SEO-kruispas (cross-links + meta-length audit)
+- Built: no new files. Modified all 11 `downloads/it-partner-<slug>.html` sheets, adding one line to
+  each `.sheet-footer`: `Meer over deze koppeling: <a href="/koppeling-<slug>">mowi.agency/koppeling-
+  <slug></a>`. Landers were left untouched (see Decisions).
+- Decisions: read all 22 built files first. Landers already cross-link outward (breadcrumb to
+  `/koppelingen`, section 5's `.lp-trust-note` link to their own sheet per SPEC item 5), but the 11
+  sheets had **zero internal links** (`links` check read "0 internal href/src target(s)" on every sheet
+  pre-edit) - the lander-sheet cross-link was one-directional. Added the missing direction: a real,
+  working, extensionless `<a href="/koppeling-<slug>">` back to the lander, appended after the existing
+  `mowi.agency/bedrijfsgegevens` line rather than replacing it (unrelated, kept as-is). Did NOT add a
+  lander-to-lander "related integrations" section: D17 explicitly enumerates what's absent from the
+  template (no praktijkvoorbeeld, no author box, no Bronnen list, no comparison table) and the reference
+  file `koppeling-exact-online.html` carries no such section; inventing one would be a structural
+  template change beyond what this task's grounding covers. Logged as S-018
+  (`wanted-but-out-of-scope`) instead of built. Meta-length half of T20: ran `node ralph/verify.mjs`
+  (both structural and `--dom` passes) across all 22 files before touching anything - `title` and
+  `description` were already PASS on every file (0 failures sitewide), so no length fix was needed;
+  this is a measured confirmation, not an assumption.
+- Oddities: none. Re-ran both `verify.mjs` passes on all 11 modified sheets after the edit: still 0
+  failures, 0 warnings (`links` now reads "1 internal href/src target(s) resolve on disk" on each,
+  proving the new link resolves). Landers were not re-verified since they were not touched.
+- Status: [x] done

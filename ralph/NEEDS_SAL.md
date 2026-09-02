@@ -257,3 +257,21 @@ always one past the highest ID already in **Open items**; there is no example en
   Mowi".
 - Suggested next step: a real search-volume number for a Google Agenda-plus-AI query would let the
   title/H1 be built around the actual seed keyword instead - no rebuild needed, just a copy swap.
+
+### S-018 wanted-but-out-of-scope - T20 SEO-kruispas (2026-09-03)
+- Needed: a decision on whether the 11 landers should cross-link to each other (e.g. the 5 webshop
+  landers pointing at one another, the 3 CRM/boekhouding landers, the 2 agenda landers), the kind of
+  "related integrations" internal linking that usually does the most for SEO. Every source needed to do
+  this safely already exists and is grounded (`koppelingen.html`'s own category grouping), but D17's
+  reference template (`koppeling-exact-online.html`) has no such section, and D17 explicitly names what
+  is deliberately absent from a lander (praktijkvoorbeeld, author box, Bronnen list, comparison table).
+  Adding a new section type across all 11 pages is a template-shape decision, not a mechanical cross-
+  link fix, so T20 did not add it unattended.
+- Shipped instead: the direction of cross-linking that was unambiguous and already implied by the
+  existing template: each of the 11 `downloads/it-partner-<slug>.html` sheets now links back to its own
+  lander (`/koppeling-<slug>`), completing the lander-to-sheet link (SPEC section 4 item 5) that already
+  existed in the other direction. Meta title/description lengths were audited (`verify.mjs` on all 22
+  files, both passes) and were already compliant everywhere; no change needed there.
+- Suggested next step: one word from Sal on whether to add a "Andere koppelingen" links block (grouped
+  by category, same grouping `koppelingen.html` already uses) to all 11 landers, and if so, where in the
+  D17 template it should sit without disturbing the one-CTA-in-hero / no-standalone-closing-section rules.

@@ -552,3 +552,21 @@ pulled in `css/style.css`, and whether any FAQ answer claims more than live copy
   `config/shop_platforms.php` + `CalendlyGateway.php` only. No keyword numbers exist for `calendly`
   (same gap class as S-011/S-012/S-013/S-016/S-017), so H1/title use the fallback pattern. No
   cross-platform sub-question: no keyword supplied, section skipped per D17 item 6.
+
+### T20 SEO-kruispas (cross-links + meta-length audit)
+- Path: all 11 `downloads/it-partner-<slug>.html` sheets modified. No lander (`koppeling-*.html`) was
+  touched.
+- Open: any sheet, e.g. `http://localhost:8765/downloads/it-partner-exact-online.html` - the print CSS
+  means the new line renders like the rest of the footer.
+- [ ] Each sheet's `.sheet-footer` now has a second line: "Meer over deze koppeling:
+      mowi.agency/koppeling-<slug>" as a real link back to the lander. Confirm this doesn't look odd in
+      print preview (Ctrl+P) - it's the only clickable link in a footer otherwise made of plain text plus
+      a `mailto:`/`tel:` pair higher up the page.
+- [ ] Confirm the wording ("Meer over deze koppeling") is the right frame - an IT-partner or accountant
+      reading a forwarded A4 may not know or care what the marketing lander looks like; this assumes
+      they'd want to find it anyway.
+- Open questions: S-018 (lander-to-lander "related integrations" cross-links were considered and
+  deliberately NOT added - no such section exists in the D17 reference template, and adding one across
+  all 11 pages is a template-shape decision this task did not make unattended). Meta title/description
+  lengths were checked (`verify.mjs`) across all 22 built files and were already within spec everywhere;
+  nothing was changed there.
