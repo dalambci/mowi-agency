@@ -453,3 +453,52 @@ pulled in `css/style.css`, and whether any FAQ answer claims more than live copy
   No keyword numbers exist for `moneybird` (same gap class as S-011/S-012/S-013/S-016), so H1/title use
   the fallback pattern - not re-logged, same reasoning T06-T08 used. No cross-platform sub-question: no
   keyword supplied for moneybird, section skipped per D17 item 6.
+
+### T10 google-agenda
+- Path: `koppeling-google-agenda.html` (+ `downloads/it-partner-google-agenda.html`)
+- Open: `start-local-server.bat` then http://localhost:8765/koppeling-google-agenda
+- [ ] Built straight to the D17 template (no retrofit step): `.hero.lp-hero` with the logo above an
+      `<h1 class="h-balance">` question ("Wat kunt u met AI automatiseren in Google Agenda?"), a
+      direct-answer `.hero-sub`, one `.lp-cta-block` CTA, and a full-width `.dp-window-hero` preview
+      (masked available times, "Vrij" chip on two rows). This is the first lander whose grounding
+      required no fallback shrug: `docs/koppeling-google-agenda.html` is a live tier-1 source.
+- [ ] Tablet view (~768px, narrow the window): breadcrumb padding is not cramped against the header,
+      and the hero H1 does not overflow or jump a size.
+- [ ] **This is the first koppeling that genuinely writes, not just reads.** `GoogleCalendarGateway`
+      implements `createBooking()`, gated by BOTH the dashboard's "Agent mag zelf afspraken inplannen"
+      checkbox (`booking_autocreate_enabled`, default off) AND a separate human-confirmation step in the
+      workflow itself. The FAQ's first answer says "niet helemaal" rather than the "ja" every other
+      lander's alleen-lezend question gets. Confirm this nuance reads as accurate and not as a hedge -
+      it is a real, deliberate difference from every sibling lander, not an inconsistency.
+- [ ] "Hoe koppelt u Google Agenda aan Mowi?" is 5 steps from a 7-entry `instructions[]`, folded to match
+      `docs/koppeling-google-agenda.html`'s own 5-step split exactly (that page's own structure was the
+      fold rule, not an independent merge call this task made). A `.dp-window-tile` connect tile sits
+      under the steps. Step 2 shows the service-account address inline as `<code>`, no copy button (none
+      of the lander's shared CSS/JS provides one, and adding one would be a new-JS violation).
+- [ ] "Welke agents gebruiken de Google Agenda-koppeling?" is a `.split` with only **2** `.lp-card`s
+      (Voice agent, `/workflows#agenda-samenvatting`), fewer than every other lander so far. Deliberate:
+      no source (`shop_platforms.php`, `GoogleCalendarGateway.php`, `config/capabilities.php`'s
+      `agent_type` wiring) grounds an Inbox agent use case for this koppeling, so it was left out rather
+      than assumed by category pattern-matching, the exact overclaim class S-015 already flagged on
+      `koppeling-lightspeed-ecom.html`. Confirm 2 cards doesn't read as a thin section.
+- [ ] Side preview shows a booked appointment with a masked name (`Afspraak: &bull;&bull;&bull;&bull;&bull;&bull;`),
+      matching `createBooking()`'s own `'Afspraak: '.$name` summary format exactly. Confirm the masking
+      reads consistently with the hero's masked time slots, not as two different visual languages.
+- [ ] "Wat kan Mowi met Google Agenda?" is 4 icon `.lp-card`s (Vrije tijden gevonden / Agenda samengevat /
+      Zelf inplannen als u dat wilt / Eén gedeelde agenda) - the first lander whose card set is entirely
+      new copy (no sibling to reuse a pattern from, since no other platform is a booking/calendar gateway).
+- [ ] "Wat heeft uw IT-partner nodig?" is an `.lp-trust-note` box. Unlike every prior sheet, this is not a
+      personal-token ask: it is a calendar SHARE with a fixed Mowi service-account address plus a specific
+      permission level, and a note for IT-partners managing a Google Workspace environment that restricts
+      external sharing. Confirm the sheet doesn't undersell that this is a different kind of ask than
+      Pipedrive/HubSpot/Moneybird's "create and hand over a token."
+- [ ] Open `downloads/it-partner-google-agenda.html` and print-preview it (Ctrl+P): one A4, nothing
+      clipped, must NOT pull in `css/style.css` (own `<style>` block). Deliberately does NOT use S-007's
+      secure-channel fallback line: no secret is being handed to Mowi here (the Agenda-ID is entered by
+      the client directly in the dashboard, not sent via the IT-partner), so the sheet only asks for a
+      completion confirmation. Confirm that reasoning holds before this ships.
+- [ ] No standalone closing-CTA section (D17): the footer's own "Vertel het en Mowi regelt het" band is
+      the only CTA below the FAQ.
+- Open questions: no keyword numbers exist for `google-agenda` (same gap class as
+  S-011/S-012/S-013/S-016, logged as S-017), so H1/title use the fallback pattern. No cross-platform
+  sub-question: no keyword supplied, section skipped per D17 item 6.

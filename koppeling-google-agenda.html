@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Google Agenda koppeling met AI: wat kunt u automatiseren? — Mowi</title>
+  <meta name="description" content="Mowi checkt vrije tijden in Google Agenda en plant een afspraak, alleen als u dat toestaat. Delen met één adres, gratis te proberen." />
+  <link rel="canonical" href="https://mowi.agency/koppeling-google-agenda" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&family=Inter+Tight:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css?v=20260829-5" />
+  <link rel="icon" href="assets/icon-192.png?v=20260804-3" />
+  <link rel="shortcut icon" href="assets/icon-192.png?v=20260804-3" />
+  <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260804-3" />
+  <link rel="apple-touch-icon-precomposed" href="assets/apple-icon-180.png?v=20260804-3" />
+  <script defer data-domain="mowi.agency" src="https://plausible.io/js/script.js"></script>
+  <!-- FAQPage staat bewust hier in de head, zodat het paginabereik zelf
+       scriptvrij blijft. Elke vraag hieronder staat woordelijk als kop in
+       de FAQ-sectie verderop. Wijzig ze altijd samen. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is de Google Agenda-koppeling alleen lezend?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Niet helemaal. Mowi vraagt altijd naar vrije en bezette tijden. Zelf een afspraak inplannen kan alleen als u dat aanzet en nadat een mens de stap in de workflow heeft bevestigd." }
+      },
+      {
+        "@type": "Question",
+        "name": "Welk wachtwoord of welke API-sleutel moet ik invullen?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Geen. U deelt uw agenda met een vast Mowi-adres, zoals u dat ook met een collega zou doen." }
+      },
+      {
+        "@type": "Question",
+        "name": "Kan de agent alleen tijden voorstellen, zonder zelf in te plannen?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Ja. Laat u Agent mag zelf afspraken inplannen uit staan, dan stelt de agent alleen vrije tijden voor en bevestigt u de afspraak zelf." }
+      },
+      {
+        "@type": "Question",
+        "name": "De agenda wordt niet gevonden. Wat nu?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Controleer of u de agenda echt gedeeld heeft met het Mowi-adres en of het Agenda-ID in het dashboard exact overeenkomt met het ID uit Agenda integreren." }
+      },
+      {
+        "@type": "Question",
+        "name": "Wat kost de Google Agenda-koppeling?",
+        "acceptedAnswer": { "@type": "Answer", "text": "U start gratis, zonder betaalgegevens. Wat een agent daarna kost, staat op de prijzenpagina." }
+      }
+    ]
+  }
+  </script>
+  <style>
+    /* Page-scoped lander styles (D17, supersedes D15/D16). Nothing here touches
+       the shared stylesheet, so no other page moves and no cache-bust bump is
+       needed. Everything below is either a section-rhythm override, a mobile
+       fallback the shared .split lacks, or the koppeling preview: a monochrome
+       port of the dashboard Start page's own .dp-card mock
+       (resources/views/components/discover-preview.blade.php), so the site
+       shows the same picture the product does. The mock stays abstract on
+       purpose: real words only where they carry meaning, masked values and
+       grey bars everywhere else. An invented customer name or amount would be
+       fake data on a page the client reads before any of it is true. */
+    main .section { padding: 3rem 0; }
+    @media (max-width: 48rem) { main .section { padding: 2.25rem 0; } }
+
+    .lp-hero .blog-breadcrumb { margin-bottom: 1.75rem; }
+    .lp-hero-logo { display: block; margin: 0 auto 1.25rem; width: auto; height: 2.5rem; max-width: 10rem; }
+    .lp-hero .hero-sub { max-width: 40rem; margin-left: auto; margin-right: auto; }
+
+    main .split { align-items: center; }
+    @media (max-width: 48rem) { main .split { grid-template-columns: 1fr; gap: 2rem; } }
+    .lp-link-stack { display: grid; gap: 1rem; }
+    .lp-link-stack .lp-card { padding: 1.5rem 1.75rem; }
+    .lp-note-link { display: block; margin-top: 0.75rem; }
+
+    .dp-window {
+      height: 200px; overflow: hidden; display: flex; justify-content: center;
+      align-items: flex-start; padding-top: 22px;
+      background: var(--muted); border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+    }
+    .dp-window-hero { width: 100%; max-width: 40rem; height: 250px; margin: 2.75rem auto 0; padding-top: 28px; }
+    .dp-window-hero .dp-card { max-width: 340px; padding: 14px; }
+    .dp-window-side { height: 280px; }
+    .dp-window-tile { height: auto; padding: 1.25rem; max-width: 22rem; margin: 2.5rem auto 0; }
+    .dp-window-tile .dp-card { width: 100%; max-width: none; }
+    .dp-card {
+      width: 82%; max-width: 250px; flex-shrink: 0; text-align: left;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-card); padding: 12px;
+    }
+    .dp-head { font-size: 10.5px; color: var(--ink-3); line-height: 1.4; }
+    .dp-title { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.4; }
+    .dp-amount { font-size: 11px; color: var(--ink-3); margin-bottom: 10px; }
+    .dp-row {
+      display: flex; align-items: center; gap: 8px; margin-top: 6px;
+      border: 1px solid var(--border); border-radius: 6px; padding: 7px 8px;
+    }
+    .dp-avatar { width: 18px; height: 18px; border-radius: 5px; background: var(--muted); flex-shrink: 0; }
+    .dp-bars { flex: 1; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+    .dp-bar { height: 5px; border-radius: var(--radius-pill); background: var(--band); }
+    .dp-bar.short { width: 48%; }
+    .dp-chip {
+      font-size: 9.5px; font-weight: 600; white-space: nowrap; padding: 2px 6px;
+      border-radius: var(--radius-pill); background: var(--ink); color: var(--bg);
+    }
+    .dp-tile-row { display: flex; align-items: center; gap: 10px; }
+    .dp-tile-row img { width: 26px; height: 26px; object-fit: contain; flex-shrink: 0; }
+    .dp-tile-name { flex: 1; font-size: 13px; font-weight: 700; color: var(--ink); }
+    .dp-tile-sub { font-size: 11px; color: var(--ink-3); margin-top: 6px; }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-bar">
+      <a href="/" class="wordmark" aria-label="Mowi - home">
+        <img src="assets/mowi-icon.png" alt="" class="wordmark-icon" />
+        <img src="assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
+      </a>
+
+      <nav class="main-nav" id="main-nav" aria-label="Hoofdmenu">
+        <ul>
+          <li><a href="/zo-werkt-het">Zo werkt het</a></li>
+          <li class="nav-dropdown">
+            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="product-menu" aria-haspopup="true">
+              Product
+              <span class="nav-dropdown-icon" aria-hidden="true"></span>
+            </button>
+            <div class="nav-menu" id="product-menu">
+              <div class="nav-menu-col">
+                <ul class="nav-menu-item-grid">
+                  <li class="nav-menu-heading">Agents</li>
+                  <li class="nav-menu-item-full"><a href="/workflows"><span class="nav-menu-item-title">Alle agents</span><span class="nav-menu-item-desc">Het volledige overzicht van alle Mowi-agents</span></a></li>
+                  <li><a href="/e-mail-agent"><span class="nav-menu-item-title">Inbox agent</span><span class="nav-menu-item-desc">Sorteert en beantwoordt uw e-mail</span></a></li>
+                  <li><a href="/call-agent"><span class="nav-menu-item-title">Voice agent</span><span class="nav-menu-item-desc">Neemt binnenkomende gesprekken aan</span></a></li>
+                </ul>
+              </div>
+              <div class="nav-menu-col nav-menu-col-divider">
+                <ul class="nav-menu-item-grid">
+                  <li class="nav-menu-heading">Workflows</li>
+                  <li class="nav-menu-item-full"><a href="/workflows"><span class="nav-menu-item-title">Alle workflows</span><span class="nav-menu-item-desc">Het volledige overzicht van wat Mowi automatiseert</span></a></li>
+                  <li><a href="/workflows#order-status"><span class="nav-menu-item-title">Orderstatus</span><span class="nav-menu-item-desc">Zoekt bestellingen op in uw webshop</span></a></li>
+                  <li><a href="/workflows#offerte-opvolging"><span class="nav-menu-item-title">Offerte-opvolging</span><span class="nav-menu-item-desc">Controleert en volgt offerteaanvragen op</span></a></li>
+                  <li><a href="/workflows#agenda-samenvatting"><span class="nav-menu-item-title">Agenda-samenvatting</span><span class="nav-menu-item-desc">Uw agenda samengevat, op uw tijdstip</span></a></li>
+                  <li><a href="/workflows#crm-sync"><span class="nav-menu-item-title">CRM-synchronisatie</span><span class="nav-menu-item-desc">Herkent klanten en houdt uw CRM bij</span></a></li>
+                </ul>
+              </div>
+              <div class="nav-menu-col nav-menu-col-divider">
+                <ul class="nav-menu-item-grid">
+                  <li class="nav-menu-heading">Dashboards</li>
+                  <li class="nav-menu-item-full"><a href="/workflows#dashboards"><span class="nav-menu-item-title">Alle dashboards</span><span class="nav-menu-item-desc">Het volledige overzicht van al uw dashboards</span></a></li>
+                  <li><a href="/workflows#dashboard-directie-overzicht"><span class="nav-menu-item-title">Directie overzicht</span><span class="nav-menu-item-desc">De cijfers waar een eigenaar op stuurt</span></a></li>
+                  <li><a href="/workflows#dashboard-webshops-vergelijken"><span class="nav-menu-item-title">Webshops vergelijken</span><span class="nav-menu-item-desc">Kerncijfers per webshop naast elkaar</span></a></li>
+                  <li><a href="/workflows#dashboard-openstaande-facturen"><span class="nav-menu-item-title">Openstaande facturen</span><span class="nav-menu-item-desc">Welke facturen aandacht nodig hebben</span></a></li>
+                  <li><a href="/workflows#dashboard-winstgevendheid"><span class="nav-menu-item-title">Winstgevendheid</span><span class="nav-menu-item-desc">Marge op basis van uw eigen kostprijzen</span></a></li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li><a href="/templates">Templates</a></li>
+          <li><a href="/pricing">Prijzen</a></li>
+          <li class="nav-mobile-actions"><a href="https://my.mowi.agency/login">Inloggen</a></li>
+          <li class="nav-mobile-actions"><a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a href="https://my.mowi.agency/login" class="header-login">Inloggen</a>
+        <a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a>
+      </div>
+
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="main-nav" aria-label="Menu openen">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Hero: the question as H1, the direct answer in the first 80 words, the
+         page's only primary CTA, and the koppeling preview as the hero visual. -->
+    <section class="hero container lp-hero hero-tight-bottom" id="lander-hero">
+      <p class="blog-breadcrumb"><a href="/">Home</a> &rsaquo; <a href="/koppelingen">Koppelingen</a> &rsaquo; Google Agenda</p>
+      <img src="assets/logos/google-agenda.svg" alt="" class="integration-card-logo lp-hero-logo" />
+      <h1 class="h-balance">Wat kunt u met AI automatiseren in <span class="h-nowrap">Google Agenda?</span></h1>
+      <p class="hero-sub">Met de Google Agenda-koppeling checkt Mowi welke tijden vrij zijn in uw agenda. Uw Voice agent stelt een geschikt moment voor, of plant de afspraak direct in als u dat aanzet en na bevestiging in de workflow. U koppelt door uw agenda te delen met één vast Mowi-adres, in plaats van zelf een sleutel aan te maken. Gratis te proberen.</p>
+      <div class="hero-actions lp-cta-block">
+        <a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a>
+        <span class="lp-cta-micro">Geen betaalgegevens nodig.</span>
+      </div>
+      <div class="dp-window dp-window-hero" role="img" aria-label="Voorbeeld: vrije tijden die Mowi in de agenda vond, klaar om aan de klant voor te stellen">
+        <div class="dp-card">
+          <div class="dp-head">Vrije tijden deze week</div>
+          <div class="dp-title">&bull;&bull; &bull;&bull;:&bull;&bull;</div>
+          <div class="dp-amount">Uit uw eigen agenda</div>
+          <div class="dp-row"><span class="dp-avatar"></span><span class="dp-bars"><span class="dp-bar"></span><span class="dp-bar short"></span></span><span class="dp-chip">Vrij</span></div>
+          <div class="dp-row"><span class="dp-avatar"></span><span class="dp-bars"><span class="dp-bar short"></span><span class="dp-bar"></span></span></div>
+          <div class="dp-row"><span class="dp-avatar"></span><span class="dp-bars"><span class="dp-bar"></span><span class="dp-bar short"></span></span><span class="dp-chip">Vrij</span></div>
+          <div class="dp-row"><span class="dp-avatar"></span><span class="dp-bars"><span class="dp-bar short"></span><span class="dp-bar"></span></span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Every H2 is a sub-question; the line under it is the answer. -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head-row section-head-row-center">
+          <h2 class="lp-section-heading">Wat kan Mowi met Google Agenda?</h2>
+          <p class="section-sub section-sub-center">Twee bewegingen: kijken wat vrij is, en desgewenst zelf inplannen.</p>
+        </div>
+        <div class="lp-card-grid">
+          <div class="lp-card">
+            <span class="lp-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M9 15l2 2 4-4"/></svg></span>
+            <h3>Vrije tijden gevonden</h3>
+            <p>Mowi vraagt Google Agenda naar vrije en bezette tijden, zodat de agent altijd een geldig moment voorstelt.</p>
+          </div>
+          <div class="lp-card">
+            <span class="lp-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></span>
+            <h3>Agenda samengevat</h3>
+            <p>Aankomende afspraken op een rij, bijvoorbeeld voor een dagelijkse samenvatting op het tijdstip dat u zelf kiest.</p>
+          </div>
+          <div class="lp-card">
+            <span class="lp-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M12 14v6M9 17h6"/></svg></span>
+            <h3>Zelf inplannen, als u dat wilt</h3>
+            <p>Zet u dat aan, dan zet de agent een afspraak direct in uw agenda, pas na bevestiging in de workflow.</p>
+          </div>
+          <div class="lp-card">
+            <span class="lp-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v5c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-3z"/></svg></span>
+            <h3>Eén gedeelde agenda</h3>
+            <p>U deelt een agenda met het vaste Mowi-adres, zoals u dat ook met een collega zou doen. Toegang intrekken kan op elk moment.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head-row section-head-row-center">
+          <h2 class="lp-section-heading">Welke agents gebruiken de Google Agenda-koppeling?</h2>
+          <p class="section-sub section-sub-center">Vooral de Voice agent, en een workflow die uw agenda samenvat.</p>
+        </div>
+        <div class="split">
+          <div class="lp-link-stack">
+            <a href="/call-agent" class="lp-card">
+              <h3>Voice agent</h3>
+              <p>Stelt tijdens het gesprek een vrij moment voor, of plant de afspraak direct in als dat aanstaat.</p>
+            </a>
+            <a href="/workflows#agenda-samenvatting" class="lp-card">
+              <h3>Agenda-samenvatting</h3>
+              <p>Vat aankomende afspraken samen, op het tijdstip dat u zelf kiest.</p>
+            </a>
+          </div>
+          <div class="dp-window dp-window-side" role="img" aria-label="Voorbeeld: een afspraak die de agent na een telefoongesprek in de agenda heeft gezet">
+            <div class="dp-card">
+              <div class="dp-head">Afspraak ingepland</div>
+              <div class="dp-title">Afspraak: &bull;&bull;&bull;&bull;&bull;&bull;</div>
+              <div class="dp-amount">In uw agenda gezet</div>
+              <div class="dp-row"><span class="dp-avatar"></span><span class="dp-bars"><span class="dp-bar"></span><span class="dp-bar short"></span></span><span class="dp-chip">Bevestigd</span></div>
+              <div class="dp-row"><span class="dp-avatar"></span><span class="dp-bars"><span class="dp-bar short"></span><span class="dp-bar"></span></span></div>
+              <div class="dp-row"><span class="dp-avatar"></span><span class="dp-bars"><span class="dp-bar"></span><span class="dp-bar short"></span></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head-row section-head-row-center">
+          <h2 class="lp-section-heading">Hoe koppelt u Google Agenda aan Mowi?</h2>
+          <p class="section-sub section-sub-center">In 5 stappen, door uw agenda te delen met één adres.</p>
+        </div>
+        <div class="lp-steps">
+          <div class="lp-step">
+            <div class="lp-step-circle" aria-hidden="true">1</div>
+            <h3>Open de instellingen van uw agenda</h3>
+            <p>Open Google Agenda via calendar.google.com, ga met de muis over de agenda die de agent mag gebruiken en kies Instellingen en delen.</p>
+          </div>
+          <div class="lp-step">
+            <div class="lp-step-circle" aria-hidden="true">2</div>
+            <h3>Deel de agenda met het Mowi-adres</h3>
+            <p>Klik bij Gedeeld met op Personen en groepen toevoegen en plak <code>mowi-booking@mowi-dashboard.iam.gserviceaccount.com</code>.</p>
+          </div>
+          <div class="lp-step">
+            <div class="lp-step-circle" aria-hidden="true">3</div>
+            <h3>Kies de juiste rechten</h3>
+            <p>Kies bij Rechten de optie Wijzigingen aanbrengen en alle afspraakgegevens bekijken en klik op Verzenden.</p>
+          </div>
+          <div class="lp-step">
+            <div class="lp-step-circle" aria-hidden="true">4</div>
+            <h3>Vind het Agenda-ID</h3>
+            <p>Scroll op dezelfde pagina naar Agenda integreren en kopieer het Agenda-ID.</p>
+          </div>
+          <div class="lp-step">
+            <div class="lp-step-circle" aria-hidden="true">5</div>
+            <h3>Plak het Agenda-ID en klik op Koppelen</h3>
+            <p>Mowi test de verbinding meteen.</p>
+          </div>
+        </div>
+        <div class="dp-window dp-window-tile" role="img" aria-label="Voorbeeld: de koppelingstegel van Google Agenda in het Mowi-dashboard met de status Verbonden">
+          <div class="dp-card">
+            <div class="dp-tile-row">
+              <img src="assets/logos/google-agenda.svg" alt="" />
+              <span class="dp-tile-name">Google Agenda</span>
+              <span class="dp-chip">Verbonden</span>
+            </div>
+            <div class="dp-tile-sub">Gedeeld met Mowi, via uw eigen agenda</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head-row section-head-row-center">
+          <h2 class="lp-section-heading">Wat heeft uw IT-partner nodig?</h2>
+        </div>
+        <div class="lp-trust-note">
+          Alleen toestemming om de agenda te delen met het vaste Mowi-adres. Beheert uw IT-partner een Google Workspace-omgeving waar delen met externe accounts beperkt is, dan regelt die dat daar.
+          <a href="/downloads/it-partner-google-agenda.html" class="link-arrow lp-note-link">Open het A4 voor uw IT-partner</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head-row section-head-row-center">
+          <h2 class="lp-section-heading">Veelgestelde vragen</h2>
+        </div>
+        <div class="lp-card-grid">
+          <div class="lp-card">
+            <h3>Is de Google Agenda-koppeling alleen lezend?</h3>
+            <p>Niet helemaal. Mowi vraagt altijd naar vrije en bezette tijden. Zelf een afspraak inplannen kan alleen als u dat aanzet en nadat een mens de stap in de workflow heeft bevestigd.</p>
+          </div>
+          <div class="lp-card">
+            <h3>Welk wachtwoord of welke API-sleutel moet ik invullen?</h3>
+            <p>Geen. U deelt uw agenda met een vast Mowi-adres, zoals u dat ook met een collega zou doen.</p>
+          </div>
+          <div class="lp-card">
+            <h3>Kan de agent alleen tijden voorstellen, zonder zelf in te plannen?</h3>
+            <p>Ja. Laat u Agent mag zelf afspraken inplannen uit staan, dan stelt de agent alleen vrije tijden voor en bevestigt u de afspraak zelf.</p>
+          </div>
+          <div class="lp-card">
+            <h3>De agenda wordt niet gevonden. Wat nu?</h3>
+            <p>Controleer of u de agenda echt gedeeld heeft met het Mowi-adres en of het Agenda-ID in het dashboard exact overeenkomt met het ID uit Agenda integreren.</p>
+          </div>
+          <div class="lp-card">
+            <h3>Wat kost de Google Agenda-koppeling?</h3>
+            <p>U start gratis, zonder betaalgegevens. Wat een agent daarna kost, staat op de prijzenpagina.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       CANONICAL FOOTER — the measured shapes.co recipe:
+       greige full-width band → pre-footer CTA on the band → light
+       rounded-top panel (page-bg color) flush to the page bottom.
+       Structure modernized 2026-08-19: CTA is one row (headline +
+       button, no empty visual slot), brand block carries tagline +
+       LinkedIn, trimmed link columns (2-across on mobile), GDPR seal
+       lives in the bottom bar.
+       ============================================================ -->
+  <footer class="footer-wrap">
+    <div class="container">
+
+      <div class="footer-cta">
+        <h2 class="footer-cta-title">Vertel het en<br />Mowi regelt het</h2>
+        <a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a>
+      </div>
+
+      <div class="footer-panel">
+        <div class="footer-top">
+          <div class="footer-brand">
+            <a href="/" class="wordmark" aria-label="Mowi - home">
+              <img src="assets/mowi-icon.png" alt="" class="wordmark-icon" />
+              <img src="assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
+            </a>
+            <p class="footer-tagline">Automatisering voor het MKB.<br />Altijd eerst op proef.</p>
+            <a href="#" class="footer-social" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg></a>
+          </div>
+
+          <nav class="footer-menus" aria-label="Footer">
+            <div>
+              <h3 class="footer-menu-heading">Product</h3>
+              <ul>
+                <li><a href="/workflows">Alle workflows</a></li>
+                <li><a href="/templates">Templates</a></li>
+                <li><a href="/koppelingen">Koppelingen</a></li>
+                <li><a href="/pricing">Prijzen</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="footer-menu-heading">Bronnen</h3>
+              <ul>
+                <li><a href="/docs/">Documentatie</a></li>
+                <li><a href="/blog/">Blog</a></li>
+                <li><a href="/zo-werkt-het">Zo werkt het</a></li>
+                <li><a href="/waarom-mowi">Waarom Mowi</a></li>
+                <li><a href="/security">Security</a></li>
+                <li><a href="/ai-transparantie">AI-transparantie</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="footer-menu-heading">Contact</h3>
+              <ul>
+                <li><a href="tel:+31853335800">+31 85 333 58 00</a></li>
+                <li><a href="mailto:contact@mowi.agency">contact@mowi.agency</a></li>
+                <li><a href="/demo">Contact sales</a></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+
+        <div class="footer-bottom">
+          <span>&copy; 2026 Mowi. Alle rechten voorbehouden.</span>
+          <div class="footer-legal">
+            <a href="/algemene-voorwaarden">Algemene voorwaarden</a>
+            <a href="/privacyverklaring">Privacyverklaring</a>
+            <a href="/cookies">Cookies</a>
+            <!-- Bedrijfsgegevens moet wettelijk "gemakkelijk, rechtstreeks en
+                 permanent toegankelijk" blijven (art. 3:15d BW) — daarom hier,
+                 niet verwijderd, toen de Contact-kolom werd opgeschoond. -->
+            <a href="/bedrijfsgegevens">Bedrijfsgegevens</a>
+            <a href="/subverwerkers">Subverwerkers</a>
+            <!-- Alleen GDPR/AVG — een zelfverklaring, geen certificaat (dat
+                 bestaat niet voor de AVG); klopt zolang de registers en
+                 verklaringen in de vault (Legal/) worden bijgehouden. SOC 2 /
+                 ISO komen hier pas terug wanneer een echt certificaat behaald
+                 is. -->
+            <img src="assets/badges/gdpr.png" alt="GDPR" class="footer-badge" width="36" height="36" />
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <script src="js/main.js?v=20260822-23"></script>
+</body>
+</html>

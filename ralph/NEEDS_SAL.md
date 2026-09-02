@@ -248,3 +248,12 @@ always one past the highest ID already in **Open items**; there is no example en
 - Suggested next step: if Lightspeed eCom's API key creation screen does offer a permission choice,
   confirm it once (a screenshot or the vendor's own docs page) and the copy can be strengthened to match
   the WooCommerce pattern. Until then the current wording is the honest ceiling.
+
+### S-017 missing fact - T10 google-agenda (2026-09-03)
+- Needed: SPEC section 4 "Finding the question" step 2 - no real keyword numbers have been supplied for
+  `google-agenda`, same gap class as S-011/S-012/S-013/S-016.
+- Shipped instead: the fallback pattern proven on every prior lander - `<h1>` "Wat kunt u met AI
+  automatiseren in Google Agenda?", title "Google Agenda koppeling met AI: wat kunt u automatiseren? —
+  Mowi".
+- Suggested next step: a real search-volume number for a Google Agenda-plus-AI query would let the
+  title/H1 be built around the actual seed keyword instead - no rebuild needed, just a copy swap.

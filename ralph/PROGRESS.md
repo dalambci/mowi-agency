@@ -359,3 +359,41 @@ entry sitting in an otherwise empty log would read as a completed task and mask 
 - Oddities: none - both gates green on round 1, 0 fix rounds, `--dom` green first try, 0 skips on the
   lander (4 on the sheet, as expected).
 - Status: [x] done
+
+### 2026-09-03 - T10 google-agenda
+- Built: `downloads/it-partner-google-agenda.html` (sheet, built first) and `koppeling-google-agenda.html`
+  (lander), D17 template directly, no retrofit step. Cache-bust read live from `index.html`: unchanged
+  (`style.css?v=20260829-5`, `main.js?v=20260822-23`). Chrome copied from `koppeling-hubspot.html`,
+  itself byte-identical to `test.html`. Logo file confirmed on disk: `assets/logos/google-agenda.svg`.
+- Decisions: config key `google_agenda` (category `reserveren`, `auth => 'static'`, gateway
+  `GoogleCalendarGateway`, `doc_url` resolves - one of the 4 platforms with a live tier-1 docs page).
+  Read `GoogleCalendarGateway.php` directly (tier 2): unlike every prior lander this platform implements
+  `BookingGateway`+`CalendarGateway`, not a read-only lookup gateway - `checkAvailability()`/
+  `listUpcoming()` are reads but `createBooking()` genuinely writes an event. Checked
+  `config/capabilities.php`'s `booking.create` entry: it is gated by BOTH a per-connection flag
+  (`booking_autocreate_enabled`, the dashboard's "Agent mag zelf afspraken inplannen" checkbox, default
+  off) AND a separate flow-level human-confirmation step, "independent of and in addition to" each other
+  per the config's own docblock - so "alleen lezend" would have been false, but "not by default, only
+  after two explicit gates" is the accurate, grounded claim, shipped as its own FAQ entry and section-2
+  card rather than glossed over. `instructions[]` has 7 entries; folded to 5 `.lp-steps` following
+  `docs/koppeling-google-agenda.html`'s OWN 5-step split (entries 1+2 -> step 1, entries 3+4 -> step 2,
+  entries 5-7 stay 1:1 as steps 3-5) - a tier-1 precedent for the fold, not an independent merge call.
+  Section 3 ships only 2 link-stack cards (Voice agent, `/workflows#agenda-samenvatting`) rather than the
+  usual 3-4: found no grounding anywhere (config, gateway, capabilities.php agent_type wiring) that the
+  Inbox agent uses `reserveren`-category operations, so it was left out rather than assumed by category-
+  pattern-matching, the exact overclaim class S-015 already flagged on `koppeling-lightspeed-ecom.html`.
+  Side preview shows a booked appointment (masked name via `&bull;` run, matching `createBooking()`'s own
+  `'Afspraak: '.$name` summary format) as the second distinct moment beside the hero's availability list.
+  Sheet's ask is genuinely different from every static-auth platform so far: no personal token to create,
+  instead a calendar SHARE with a fixed Mowi service-account address plus a specific permission level
+  ("Wijzigingen aanbrengen en alle afspraakgegevens bekijken"), grounded in the docs page's own
+  "Voor uw IT-partner" block and the gateway's `serviceAccountEmailGoogleAgenda`. Did not reuse S-007's
+  secure-channel fallback: no secret credential is being transmitted here (a calendar share plus an
+  Agenda-ID, which the client enters directly in the dashboard, not through the IT-partner), so the sheet
+  asks only for a completion confirmation, not a secure return channel. No cross-platform sub-question:
+  no keyword supplied for `google-agenda`, section skipped per D17 item 6. No keyword numbers exist for
+  `google-agenda` either (same gap class as S-011/S-012/S-013/S-016), so H1/title use the fallback
+  pattern, not logged as a new NEEDS_SAL entry per the reasoning T06-T09 already established.
+- Oddities: none - both gates green on round 1, 0 fix rounds, `--dom` green first try, 0 skips on the
+  lander (4 on the sheet, as expected).
+- Status: [x] done
