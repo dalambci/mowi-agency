@@ -397,3 +397,43 @@ entry sitting in an otherwise empty log would read as a completed task and mask 
 - Oddities: none - both gates green on round 1, 0 fix rounds, `--dom` green first try, 0 skips on the
   lander (4 on the sheet, as expected).
 - Status: [x] done
+
+### 2026-09-03 - T11 calendly
+- Built: `downloads/it-partner-calendly.html` (sheet, built first) and `koppeling-calendly.html`
+  (lander), D17 template directly, no retrofit step. Cache-bust read live from `index.html`: unchanged
+  (`style.css?v=20260829-5`, `main.js?v=20260822-23`). Chrome copied from `koppeling-google-agenda.html`,
+  itself byte-identical to `test.html`. Logo file confirmed on disk: `assets/logos/calendly.svg`.
+- Decisions: config key `calendly` (category `reserveren`, `auth => 'static'`, gateway
+  `CalendlyGateway`, `doc_url` points at `mowi.agency/docs/koppeling-calendly`, which 404s per S-002 -
+  no tier-1 source). Read `CalendlyGateway.php` directly (tier 2): implements `BookingGateway` +
+  `CalendarGateway`, same shape as `GoogleCalendarGateway` (T10) - `checkAvailability()`/`listUpcoming()`
+  are reads, `createBooking()` writes. Unlike Google Agenda, this gateway's own docblock states a THIRD
+  gate beyond the connection flag + human confirmation Mowi already imposes: Calendly's own API rejects
+  `POST /invitees` with 402/403 unless the account is on a paid Calendly plan, which `createBooking()`
+  converts into an explicit Dutch RuntimeException rather than a generic error. Given that extra external
+  gate, chose NOT to reuse T10's "booked appointment" side preview (would overstate how reliably
+  auto-booking works for a typical free-plan SMB account) and instead made the side preview an agenda
+  summary (`listUpcoming()`, unconditionally true on any plan) - a deliberate departure from the T10
+  precedent, flagged here rather than silently copied. The paid-plan requirement is instead surfaced
+  explicitly: its own section-2 card ("Zelf inplannen, op een betaald plan"), its own FAQ ("Waarom kan de
+  agent geen afspraak inplannen?"), and the sheet's own permissions paragraph - three placements, matching
+  the "not by default, only after explicit gates" honesty pattern T10 set for Google Agenda's two gates,
+  extended to Calendly's three. `instructions[]` has 6 entries; the 6th ("Let op: het opvragen van
+  beschikbaarheid... vereist.") is a disclaimer, not a client action, so per the "a step is an action the
+  client performs" rule it was not built as a 6th step - its content was relocated into the FAQ/card
+  placements above instead, nothing dropped, matching the precedent T02 set for Exact Online's NL-only
+  OAuth caveat (also a code-comment-sourced disclaimer moved to FAQ rather than a step). The remaining 5
+  entries shipped 1:1 as 5 `.lp-steps`, entry 5's "wij testen de verbinding direct" confirmation folded
+  into step 5's body. Step 5 also carries the optional `event_type_uri` field
+  (`fields[event_type_uri]`, "alleen nodig bij meerdere typen afspraken") as a one-line aside rather than
+  a separate FAQ, keeping the FAQ count at Pipedrive's 4 rather than stretching to Google Agenda's 5.
+  Section 3 ships Google Agenda's own 2-card set (Voice agent, `/workflows#agenda-samenvatting`), no
+  Inbox-agent or dashboard card: same reasoning T10 used, `reserveren`-category operations have no
+  Inbox-agent or dashboard wiring anywhere in `config/capabilities.php`. Sheet's permissions section states
+  the free-plan limitation plainly since it changes what the IT-partner should tell the client to expect.
+  No cross-platform sub-question: no keyword supplied for `calendly`, section skipped per D17 item 6. No
+  keyword numbers exist for `calendly` either (same gap class as S-011/S-012/S-013/S-016), so H1/title use
+  the fallback pattern, not logged as a new NEEDS_SAL entry per the reasoning T06-T10 already established.
+- Oddities: none - both gates green on round 1, 0 fix rounds, `--dom` green first try, 0 skips on the
+  lander (4 on the sheet, as expected).
+- Status: [x] done

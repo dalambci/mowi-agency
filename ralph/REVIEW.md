@@ -502,3 +502,53 @@ pulled in `css/style.css`, and whether any FAQ answer claims more than live copy
 - Open questions: no keyword numbers exist for `google-agenda` (same gap class as
   S-011/S-012/S-013/S-016, logged as S-017), so H1/title use the fallback pattern. No cross-platform
   sub-question: no keyword supplied, section skipped per D17 item 6.
+
+### T11 calendly
+- Path: `koppeling-calendly.html` (+ `downloads/it-partner-calendly.html`)
+- Open: `start-local-server.bat` then http://localhost:8765/koppeling-calendly
+- [ ] Built straight to the D17 template (no retrofit step): `.hero.lp-hero` with the logo above an
+      `<h1 class="h-balance">` question ("Wat kunt u met AI automatiseren in Calendly?"), a
+      direct-answer `.hero-sub`, one `.lp-cta-block` CTA, and a full-width `.dp-window-hero` preview
+      (masked available times, "Vrij" chip on two rows) - same shape as Google Agenda's hero preview,
+      since `CalendlyGateway` also implements `checkAvailability()`.
+- [ ] Tablet view (~768px, narrow the window): breadcrumb padding is not cramped against the header,
+      and the hero H1 does not overflow or jump a size.
+- [ ] **A third gate beyond Google Agenda's two.** `CalendlyGateway::createBooking()` converts a
+      402/403 from Calendly's own API into an explicit error when the account is on the free plan -
+      automatic booking needs a paid Calendly plan, on top of the `booking_autocreate_enabled` flag and
+      the workflow's human-confirmation step every booking already requires. This is surfaced in a
+      section-2 card ("Zelf inplannen, op een betaald plan"), an FAQ ("Waarom kan de agent geen afspraak
+      inplannen?"), and the sheet's own permissions paragraph. Confirm the paid-plan requirement reads
+      clearly enough that a free-plan client isn't surprised later.
+- [ ] **Side preview deliberately differs from Google Agenda's precedent.** Instead of a booked-
+      appointment preview, the `.dp-window-side` shows an agenda summary (masked "&bull;&bull;
+      afspraken", from `listUpcoming()`) - a moment that's true on any Calendly plan, unlike booking
+      creation. Confirm this reads as a real second moment, not as a downgrade next to T10's page.
+- [ ] "Welke agents gebruiken de Calendly-koppeling?" is a `.split` with only **2** `.lp-card`s (Voice
+      agent, `/workflows#agenda-samenvatting`), same count and same reasoning as Google Agenda: no
+      source grounds an Inbox-agent or dashboard use for `reserveren`-category operations.
+- [ ] "Hoe koppelt u Calendly aan Mowi?" is 5 steps from a 6-entry `instructions[]`. The 6th entry (a
+      "Let op: ... vereist een betaald abonnement" disclaimer, not a client action) was not built as a
+      step - its content was relocated into the section-2 card and FAQ instead, per the "a step is an
+      action the client performs" rule. Step 5 also carries the optional event-type-URI field as a
+      one-line aside rather than a separate FAQ. A `.dp-window-tile` connect tile sits under the steps.
+- [ ] "Wat kan Mowi met Calendly?" is 4 icon `.lp-card`s (Vrije tijden gevonden / Agenda samengevat /
+      Zelf inplannen, op een betaald plan / Eén persoonlijke token) - icons reused from Google Agenda's
+      cards 1-3 plus Exact Online's key icon for card 4, per the "reuse the four already built, or a
+      close visual match" rule.
+- [ ] "Wat heeft uw IT-partner nodig?" is an `.lp-trust-note` box: a personal access-token the client
+      creates themselves, the Pipedrive/HubSpot shape, not Google Agenda's calendar-share shape. Confirm
+      that reads right given Calendly's auth is `static` (a token), unlike Google Agenda's share-based
+      connect flow.
+- [ ] Open `downloads/it-partner-calendly.html` and print-preview it (Ctrl+P): one A4, nothing clipped,
+      must NOT pull in `css/style.css` (own `<style>` block). Reuses S-007's secure-channel fallback
+      line (unlike Google Agenda's sheet, a real personal token is being handed over here). The
+      permissions section states the free-plan booking limitation plainly, since it changes what the
+      IT-partner should tell the client to expect.
+- [ ] No standalone closing-CTA section (D17): the footer's own "Vertel het en Mowi regelt het" band is
+      the only CTA below the FAQ.
+- Open questions: no docs page exists for this platform (`doc_url` in the config points at
+  `mowi.agency/docs/koppeling-calendly`, which 404s per S-002), so every claim traces to
+  `config/shop_platforms.php` + `CalendlyGateway.php` only. No keyword numbers exist for `calendly`
+  (same gap class as S-011/S-012/S-013/S-016/S-017), so H1/title use the fallback pattern. No
+  cross-platform sub-question: no keyword supplied, section skipped per D17 item 6.

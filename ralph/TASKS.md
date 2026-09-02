@@ -53,7 +53,7 @@
 - [x] T08 - integratie: hubspot - allowed: koppeling-hubspot.html, downloads/it-partner-hubspot.html
 - [x] T09 - integratie: moneybird - allowed: koppeling-moneybird.html, downloads/it-partner-moneybird.html
 - [x] T10 - integratie: google-agenda - allowed: koppeling-google-agenda.html, downloads/it-partner-google-agenda.html
-- [ ] T11 - integratie: calendly - allowed: koppeling-calendly.html, downloads/it-partner-calendly.html
+- [x] T11 - integratie: calendly - allowed: koppeling-calendly.html, downloads/it-partner-calendly.html
 - [ ] T20 - SEO-kruispas: cross-links tussen alle gebouwde pagina's + meta-lengtes nalopen - allowed: koppeling-*.html, downloads/it-partner-*.html
 
 == SUPERVISED (not a loop run) ==
