@@ -83,6 +83,26 @@ for (( i=1; i<=MAX; i++ )); do
   printf '%s\n' "$out"
   { echo "=== iteration $i/$MAX ($(date -Iseconds)) ==="; printf '%s\n' "$out"; } >> "$LOG"
 
+  # Account usage limit. Measured 2026-09-02: the limit landed mid-run and every
+  # remaining iteration returned "You've hit your session limit - resets 11pm"
+  # in about 9 seconds, so the run burned 25 of its 30 iterations doing nothing
+  # and then reported the generic "hit the cap without the promise" failure -
+  # which reads exactly like the loop being stuck on a hard task. It is not a
+  # task failure and there is nothing to debug in TASKS.md, so stop immediately
+  # and say so. Worse, it can stop BETWEEN Step 6 and Step 7: TASKS.md says [x]
+  # while the built files are still untracked, and the next run's paths gate
+  # would clean them as dirt. Hence the git-status hint below.
+  if printf '%s' "$out" | grep -qiE "hit your (session|usage) limit|limit .* resets|rate limit"; then
+    echo
+    echo "=== stopped: the account's usage limit, not a task failure ==="
+    printf '%s' "$out" | grep -iE "limit" | tail -n 1
+    echo "Every completed task is already committed. Before re-running, check"
+    echo "\`git status\` for a task that finished building but never got committed,"
+    echo "and commit it by hand - otherwise the next run treats it as dirt."
+    echo "Then re-run this exact command after the reset."
+    exit 3
+  fi
+
   # Match the wrapped form AND its position. Matching presence alone is not
   # enough: LOOP_PROMPT.md contains both promise strings already wrapped (it has
   # to, to specify them), and it is piped in as the prompt - so any iteration
