@@ -323,3 +323,39 @@ entry sitting in an otherwise empty log would read as a completed task and mask 
 - Oddities: none - both gates green on round 1, 0 fix rounds, `--dom` green first try, 0 skips on the
   lander (4 on the sheet, as expected).
 - Status: [x] done
+
+### 2026-09-03 - T09 moneybird
+- Built: `downloads/it-partner-moneybird.html` (sheet, built first) and `koppeling-moneybird.html`
+  (lander), D17 template directly, no retrofit step. Cache-bust read live from `index.html`: unchanged
+  (`style.css?v=20260829-5`, `main.js?v=20260822-23`). Chrome copied from `koppeling-hubspot.html`,
+  itself byte-identical to `test.html`. Logo file confirmed on disk: `assets/logos/moneybird.svg`.
+- Decisions: config key `moneybird` (listed `category => 'crm'` in the dashboard config despite sitting
+  under koppelingen.html's "Boekhouding" heading - a display grouping, not a capability signal), `auth
+  => 'static'`, gateway `MoneybirdGateway`, no `doc_url`/no docs page (no tier-1 source). Read
+  `MoneybirdGateway.php` directly (tier 2): it implements BOTH `CrmGateway` (findPersonByEmail/Phone,
+  returning name/company/customer_since but `open_deals`/`last_contact_date` hardcoded empty - its own
+  docblock states plainly "Moneybird is bookkeeping software, not a sales-pipeline CRM") AND
+  `InvoiceGateway` (open/overdue invoices, aging buckets, invoiced totals - the same shape T02's
+  `ExactOnlineGateway` has). So section 3 ships Exact Online's 3-card pattern (Inbox agent, Voice agent,
+  `/workflows#dashboard-openstaande-facturen`) rather than Pipedrive/HubSpot's CRM-sync card, with a
+  side preview built for invoices/aging (masked debtor name + "Te laat" chip) instead of a second
+  inbound-call card, since that is Moneybird's genuine second distinct moment. Section 7 gained a
+  Moneybird-only FAQ entry ("Ziet Mowi ook offertes of deals in Moneybird?" -> "Nee...") grounded
+  directly in that same docblock sentence, flagging the CRM-shape gap as a feature of honesty rather than
+  hiding it. `instructions[]` has 5 entries, folded to 4 `.lp-steps`: entries 3+4 (click "Nieuwe token",
+  name it, copy the shown-once token) merged into one same-screen creation step, the same class of fold
+  WooCommerce/Magento/HubSpot used for their own key-creation steps; entry 2 (navigate to settings) kept
+  as its own step since, unlike Pipedrive/HubSpot's config, Moneybird's entry never offered an
+  alternative menu route to fold it against. The sheet's "Welke rechten het token krijgt" section adds
+  one grounded caveat with no sibling precedent: the gateway always reads the FIRST Moneybird
+  administration returned by `/administrations.json` (per its own docblock), so a client with multiple
+  administrations under one token needs to say so - a real operational fact from tier-2 code, not
+  invented. Sheet reuses S-007's fallback line for the secure-return channel (no channel is named
+  anywhere in any source). S-008 already covers this gateway's "NOT live-verified against a real
+  Moneybird tenant" gap by name ("RUN 2's moneybird") - not re-logged. No keyword numbers exist for
+  `moneybird` (same gap class as S-011/S-012/S-013/S-016), so H1/title use the fallback pattern, not
+  re-logged per the reasoning T06-T08 already established. No cross-platform sub-question: no keyword
+  supplied for moneybird, section skipped per D17 item 6.
+- Oddities: none - both gates green on round 1, 0 fix rounds, `--dom` green first try, 0 skips on the
+  lander (4 on the sheet, as expected).
+- Status: [x] done

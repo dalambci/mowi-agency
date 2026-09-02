@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Moneybird-koppeling voor Mowi: instructies voor uw IT-partner</title>
+  <meta name="description" content="Instructies voor de IT-partner of beheerder die de Moneybird-koppeling met Mowi regelt: welk API-token nodig is en hoe u dat veilig deelt." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <!-- Page-scoped print CSS, adapted from the proven recipe in
+       generate-it-sheets.js. Deliberately self-contained: no css/style.css,
+       no js/main.js, no analytics. This is a document to print or forward,
+       not a page in the site's navigation. -->
+  <style>
+    @page { size: A4; margin: 22mm 20mm; }
+    * { box-sizing: border-box; }
+    body {
+      font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+      color: #16140f;
+      background: #fff;
+      margin: 0;
+      padding: 22mm 20mm;
+      max-width: 210mm;
+      font-size: 11pt;
+      line-height: 1.55;
+    }
+    @media print { body { padding: 0; max-width: none; } }
+    .brand { margin-bottom: 2.4em; }
+    .brand-name { font-size: 15pt; font-weight: 800; letter-spacing: -0.02em; }
+    h1 { font-size: 17pt; font-weight: 800; letter-spacing: -0.02em; margin: 0 0 0.3em; }
+    h2 { font-size: 11.5pt; font-weight: 800; margin: 2em 0 0.4em; }
+    p { margin: 0 0 0.9em; }
+    .sub { color: #6b6a63; margin: 0 0 2em; font-size: 10.5pt; }
+    ol, ul { margin: 0 0 0.9em; padding-left: 1.3em; }
+    li { margin-bottom: 0.45em; }
+    .note { font-size: 9.5pt; color: #6b6a63; }
+    .box { background: #fcfbfa; border: 1px solid #e6e2d8; padding: 1em 1.3em; margin: 0 0 0.9em; }
+    .sheet-footer { font-size: 9.5pt; color: #6b6a63; border-top: 1px solid #e6e2d8; padding-top: 1em; margin-top: 2.6em; }
+    a { color: inherit; }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="brand"><span class="brand-name">mowi</span></div>
+
+    <h1>Moneybird-koppeling voor Mowi instellen</h1>
+    <p class="sub">Eén A4 om door te sturen naar de collega, IT-partner of beheerder die de Moneybird-kant regelt.</p>
+
+    <h2>Wat er nodig is</h2>
+    <p>De organisatie die u ondersteunt koppelt Mowi aan Moneybird. Daarvoor is precies één ding nodig: een persoonlijk API-token uit Moneybird. Mowi gebruikt dat token om klantgegevens en openstaande facturen op te zoeken. Er wordt nooit iets in Moneybird aangepast.</p>
+
+    <h2>Waar u het token vindt</h2>
+    <ol>
+      <li>Log in bij Moneybird.</li>
+      <li>Ga naar <a href="https://moneybird.com/user/applications">moneybird.com/user/applications</a>, onder uw persoonlijke instellingen.</li>
+      <li>Klik op "Nieuwe token", geef deze een herkenbare naam (bijvoorbeeld "Mowi") en kopieer de token die verschijnt. Deze wordt maar één keer getoond.</li>
+    </ol>
+
+    <h2>Welke rechten het token krijgt</h2>
+    <p>Een persoonlijk API-token in Moneybird hoort bij één gebruikersaccount en erft de rechten van dat account. Kies dus bewust met welk account u koppelt, want met die rechten leest Mowi mee. Heeft dat account toegang tot meerdere Moneybird-administraties, dan gebruikt Mowi altijd de eerste administratie die Moneybird teruggeeft: heeft de klant er meerdere, meld dat dan aan Mowi. Mowi leest alleen en schrijft nooit terug.</p>
+
+    <h2>Hoe u het token terugstuurt</h2>
+    <div class="box">
+      <p>Stuur het token niet per e-mail in platte tekst. Mowi volgt dit direct met u op en geeft aan via welk kanaal u het veilig kunt delen.</p>
+    </div>
+    <p class="note">Het token blijft geldig tot het in Moneybird wordt vernieuwd of ingetrokken. Gebeurt dat, dan moet de koppeling opnieuw ingesteld worden.</p>
+
+    <h2>Vragen?</h2>
+    <p>Neem contact op via <a href="mailto:contact@mowi.agency">contact@mowi.agency</a>. Vermeld daarbij om welke organisatie het gaat.</p>
+
+    <div class="sheet-footer">Mowi &middot; +31 85 333 58 00 &middot; contact@mowi.agency &middot; mowi.agency/bedrijfsgegevens</div>
+  </main>
+</body>
+</html>

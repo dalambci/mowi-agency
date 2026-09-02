@@ -403,3 +403,53 @@ pulled in `css/style.css`, and whether any FAQ answer claims more than live copy
   gap class as S-011/S-012/S-013/S-016), so H1/title use the fallback pattern - not re-logged as a new
   NEEDS_SAL entry, same reasoning prior webshop tasks used. No cross-platform sub-question: no keyword
   supplied for hubspot, section skipped per D17 item 6.
+
+### T09 moneybird
+- Path: `koppeling-moneybird.html` (+ `downloads/it-partner-moneybird.html`)
+- Open: `start-local-server.bat` then http://localhost:8765/koppeling-moneybird
+- [ ] Built straight to the D17 template (no retrofit step): `.hero.lp-hero` with the logo above an
+      `<h1 class="h-balance">` question ("Wat kunt u met AI automatiseren in Moneybird?"), a
+      direct-answer `.hero-sub`, one `.lp-cta-block` CTA, and a full-width `.dp-window-hero` preview
+      (inbound e-mail, "Klant herkend"). Confirm it reads like `koppeling-pipedrive.html`/
+      `koppeling-hubspot.html`, the closest siblings (same CRM shape, same access-token auth).
+- [ ] Tablet view (~768px, narrow the window): breadcrumb padding is not cramped against the header,
+      and the hero H1 does not overflow or jump a size.
+- [ ] "Welke agents gebruiken de Moneybird-koppeling?" is a `.split`: 3 `.lp-card`s (Inbox agent, Voice
+      agent, Openstaande facturen) beside a `.dp-window-side` preview (masked debtor name, "Te laat"
+      chip) - deliberately **not** Pipedrive/HubSpot's CRM-sync card. `MoneybirdGateway.php` implements
+      both a `CrmGateway` (contact lookup) and an `InvoiceGateway` (open/overdue invoices, aging
+      buckets), the same shape as `ExactOnlineGateway` (T02), so this page follows Exact Online's
+      dashboard-card pattern instead of Pipedrive's. Confirm this reading is right, and that the invoice
+      preview doesn't read as a duplicate of the hero's contact-recognition preview.
+- [ ] "Wat leest Mowi uit Moneybird?" is 4 icon `.lp-card`s (Klant herkend / Openstaande facturen in
+      beeld / Alleen lezend / Uw eigen API-token). "Klant herkend" deliberately does NOT claim open
+      deals or last-contact-date (unlike Pipedrive/HubSpot's "Open deals in beeld" card):
+      `MoneybirdGateway::buildPersonShape()` hardcodes both fields empty, and the class's own docblock
+      says plainly "Moneybird is bookkeeping software, not a sales-pipeline CRM, so those two fields ...
+      are always empty/null here, not a bug." Confirm the FAQ entry below reads as an honest
+      clarification, not as a weakness.
+- [ ] FAQ has a Moneybird-only 2nd question with no sibling precedent: "Ziet Mowi ook offertes of deals
+      in Moneybird?" -> "Nee. Moneybird is boekhoudsoftware, geen verkoop-CRM. ..." - grounded in the
+      same gateway docblock sentence above. Confirm this reads as useful honesty, not as a page arguing
+      against itself.
+- [ ] "Hoe koppelt u Moneybird aan Mowi?" is 4 steps from a 5-entry `instructions[]`. Step 3 merges
+      clicking "Nieuwe token", naming it and copying the shown-once token into one same-screen action
+      (the same fold class WooCommerce/Magento/HubSpot used); step 2 (navigate to settings) stayed its
+      own step since, unlike Pipedrive/HubSpot's config, Moneybird's own `instructions[]` never offered
+      an alternative menu route to fold it against. A `.dp-window-tile` connect tile sits under the
+      steps.
+- [ ] "Wat heeft uw IT-partner of accountant nodig?" is an `.lp-trust-note` box linking the sheet.
+- [ ] No standalone closing-CTA section (D17): the footer's own "Vertel het en Mowi regelt het" band is
+      the only CTA below the FAQ.
+- [ ] Open `downloads/it-partner-moneybird.html` and print-preview it (Ctrl+P): one A4, nothing clipped,
+      must NOT pull in `css/style.css` (own `<style>` block). Same shape as the Pipedrive sheet (one
+      personal API-token to create and return), plus one caveat with no sibling sheet precedent: the
+      gateway always reads the FIRST Moneybird administration returned by the account's token, so a
+      client with several administrations needs to say so - grounded in `MoneybirdGateway.php`'s own
+      docblock (tier 2). Confirm this reads as useful, not as unnecessary complexity.
+- Open questions: no docs page exists for this platform, so every claim traces to
+  `config/shop_platforms.php` + `MoneybirdGateway.php` only. S-008 already names this gateway's "NOT
+  live-verified against a real Moneybird tenant" gap explicitly ("RUN 2's moneybird") - not re-logged.
+  No keyword numbers exist for `moneybird` (same gap class as S-011/S-012/S-013/S-016), so H1/title use
+  the fallback pattern - not re-logged, same reasoning T06-T08 used. No cross-platform sub-question: no
+  keyword supplied for moneybird, section skipped per D17 item 6.
