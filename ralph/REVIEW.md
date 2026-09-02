@@ -108,6 +108,39 @@ pulled in `css/style.css`, and whether any FAQ answer claims more than live copy
   Sal-supplied search term - worth a `missing fact` follow-up if real numbers ever surface for this
   platform.
 
+### T04R shopify (retrofit naar D17-sjabloon)
+- Path: `koppeling-shopify.html` (+ `downloads/it-partner-shopify.html`, unchanged - D17 only
+  redesigned the lander spec, the sheet spec/content did not move)
+- Open: `start-local-server.bat` then http://localhost:8765/koppeling-shopify
+- [ ] Hero now matches `koppeling-exact-online.html`'s shape: `.hero.lp-hero` with the logo above an
+      `<h1 class="h-balance">` question ("Wat kunt u met AI automatiseren in Shopify?"), a direct-answer
+      `.hero-sub`, the one `.lp-cta-block` CTA, and a full-width `.dp-window-hero` preview (order lookup,
+      "Verzonden"). Confirm it reads like T02/T01R/T03R, not like the old label-heading version.
+- [ ] Tablet view (~768px, narrow the window): breadcrumb padding is not cramped against the header,
+      and the hero H1 does not overflow or jump a size
+- [ ] "Hoe koppelt u Shopify aan Mowi?" stayed at **3** `.lp-steps`, unchanged from the pre-retrofit
+      page - 1:1 with `shopify.instructions[]` (adres invullen, Koppel met Shopify, toegang bevestigen),
+      nothing merged, nothing added. A `.dp-window-tile` connect tile sits under the steps.
+- [ ] "Welke agents gebruiken de Shopify-koppeling?" is now a `.split`: `.lp-link-stack` of 4
+      `<a class="lp-card">` (Inbox agent, Voice agent, Orderstatus, Dashboard Webshops vergelijken)
+      beside a new `.dp-window-side` preview (inbound call, "Bestelling gevonden"). Same 4-card set the
+      pre-retrofit page already used.
+- [ ] "Wat leest Mowi uit Shopify?" is now 4 icon `.lp-card`s (Bestelling opgezocht / Alleen lezend /
+      Uw eigen account / Ook oudere bestellingen) instead of the old 3 plain paragraphs. The 4th card
+      restates the FAQ's 60-dagen fact as a short claim - confirm it doesn't overstate anything.
+- [ ] "Wat heeft uw IT-partner of accountant nodig?" is now an `.lp-trust-note` box, not a bare paragraph.
+- [ ] FAQ content is byte-identical to the pre-retrofit page (4 Q&A, same JSON-LD) - only the section
+      wrapper changed from `.page-heading`/`.page-body` to `.lp-section-heading`/`.lp-card-grid`.
+- [ ] No standalone closing-CTA section anymore (D17): the footer's own "Vertel het en Mowi regelt het"
+      band is now the only CTA below the FAQ.
+- [ ] Open `downloads/it-partner-shopify.html` and print-preview it (Ctrl+P): one A4, nothing clipped,
+      and it must NOT pull in `css/style.css` (it carries its own `<style>`). Untouched by this retrofit.
+- Open questions: S-006 (agent cards link to `/e-mail-agent` + `/call-agent`; `/workflows#order-status`
+  and the dashboard fragment still land on an empty page), S-009 (the live docs page still describes the
+  retired concierge flow; this retrofit kept T04's original decision to follow the dashboard config's
+  self-serve OAuth flow instead, unchanged) and S-012 (no shopify-specific keyword numbers exist yet, so
+  the H1/title use the fallback pattern rather than a Sal-supplied search term).
+
 ### T02 exact-online
 - Path: `koppeling-exact-online.html` (+ `downloads/it-partner-exact-online.html`)
 - Open: `start-local-server.bat` then http://localhost:8765/koppeling-exact-online

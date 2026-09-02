@@ -183,3 +183,15 @@ always one past the highest ID already in **Open items**; there is no example en
 - Suggested next step: a real search-volume number for a WooCommerce-plus-AI query (Google Keyword
   Planner, same source as the Exact Online figures) would let the title/H1 be built around the actual
   seed keyword instead of the generic pattern - no rebuild needed, just a copy swap.
+
+### S-012 missing fact - T04R shopify (2026-09-03)
+- Needed: SPEC section 4 "Finding the question" step 2 - no real keyword numbers have been supplied for
+  `shopify` (unlike `exact_online`'s three Google Keyword Planner figures). This retrofit is the first
+  time Shopify gets the question-pattern `<h1>`/`<title>`; the pre-retrofit page used a different,
+  non-question title entirely ("Shopify koppelen aan Mowi: bestelstatus direct opgezocht"), so there was
+  no earlier point where this gap would have been logged.
+- Shipped instead: the fallback pattern proven on Exact Online/WooCommerce - `<h1>` "Wat kunt u met AI
+  automatiseren in Shopify?", title "Shopify koppeling met AI: wat kunt u automatiseren? — Mowi".
+- Suggested next step: a real search-volume number for a Shopify-plus-AI query (Google Keyword Planner,
+  same source as the Exact Online figures) would let the title/H1 be built around the actual seed
+  keyword instead of the generic pattern - no rebuild needed, just a copy swap.

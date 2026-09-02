@@ -162,3 +162,27 @@ entry sitting in an otherwise empty log would read as a completed task and mask 
 - Oddities: meta description was 160 chars on round 1 (need <=155); trimmed "gratis proberen" to "gratis",
   green on round 2. `--dom` green first try, 0 skips on the lander (4 on the sheet).
 - Status: [x] done
+
+### 2026-09-03 - T04R shopify (retrofit to D17 template)
+- Built: rewrote `koppeling-shopify.html` in place to the `koppeling-exact-online.html` template
+  (`.hero.lp-hero` question H1, `.lp-section-heading` sub-questions, 3 `.dp-window` previews, one CTA
+  in the hero, no closing-CTA section). `downloads/it-partner-shopify.html` untouched: D17 only
+  redesigned the lander spec (SPEC section 4), the sheet spec never moved.
+  No keyword numbers exist for `shopify` in NEEDS_SAL.md/DECISIONS.md, so the H1 uses the fallback
+  pattern per SPEC section 4 "Finding the question" step 2 - logged as S-012.
+- Decisions: same content, restructured, not re-derived. FAQ (4 Q&A) and JSON-LD carried over
+  byte-identical. Steps stayed at 3 (unchanged from the pre-retrofit page): T04's own PROGRESS entry
+  already ships `shopify.instructions[]` 1:1 with nothing merged, so no further change was made here.
+  Section 3 ("Welke agents...") kept T04's original 4-card link-stack (Inbox agent, Voice agent,
+  Orderstatus, Dashboard Webshops vergelijken) and paired it with a side preview (inbound call,
+  "Bestelling gevonden"), same reasoning T02/T03R used for their own side previews - `ShopifyGateway`
+  genuinely supports a second distinct moment beyond the hero's order-lookup card. Section 2 ("Wat
+  leest Mowi...") converted the 3 old plain paragraphs into 4 icon `.lp-card`s (Bestelling opgezocht /
+  Alleen lezend / Uw eigen account / Ook oudere bestellingen), the 4th restating the FAQ's 60-dagen fact
+  rather than adding a new claim. S-009 (docs page vs. dashboard config disagreement) carried over
+  unchanged: this retrofit did not re-open that call, it only restructured the page that already made
+  it. No cross-platform sub-question: no keyword was ever supplied for shopify, so D17 item 6 is
+  skipped outright, not logged again.
+- Oddities: none - both gates green on round 1, 0 fix rounds, `--dom` green first try, 0 skips on the
+  lander (4 on the sheet, as expected).
+- Status: [x] done
