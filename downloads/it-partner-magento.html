@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Magento Open Source-koppeling voor Mowi: instructies voor uw IT-partner</title>
+  <meta name="description" content="Instructies voor de IT-partner die de Magento Open Source-koppeling met Mowi regelt: welke Integration-sleutels nodig zijn en hoe u die deelt." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <!-- Page-scoped print CSS, adapted from the proven recipe in
+       generate-it-sheets.js. Deliberately self-contained: no shared
+       stylesheet, no shared script, no analytics. This is a document to
+       print or forward, not a page in the site's navigation. -->
+  <style>
+    @page { size: A4; margin: 22mm 20mm; }
+    * { box-sizing: border-box; }
+    body {
+      font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+      color: #16140f;
+      background: #fff;
+      margin: 0;
+      padding: 22mm 20mm;
+      max-width: 210mm;
+      font-size: 11pt;
+      line-height: 1.55;
+    }
+    @media print { body { padding: 0; max-width: none; } }
+    .brand { margin-bottom: 2.4em; }
+    .brand-name { font-size: 15pt; font-weight: 800; letter-spacing: -0.02em; }
+    h1 { font-size: 17pt; font-weight: 800; letter-spacing: -0.02em; margin: 0 0 0.3em; }
+    h2 { font-size: 11.5pt; font-weight: 800; margin: 2em 0 0.4em; }
+    p { margin: 0 0 0.9em; }
+    .sub { color: #6b6a63; margin: 0 0 2em; font-size: 10.5pt; }
+    ol, ul { margin: 0 0 0.9em; padding-left: 1.3em; }
+    li { margin-bottom: 0.45em; }
+    .note { font-size: 9.5pt; color: #6b6a63; }
+    .box { background: #fcfbfa; border: 1px solid #e6e2d8; padding: 1em 1.3em; margin: 0 0 0.9em; }
+    .sheet-footer { font-size: 9.5pt; color: #6b6a63; border-top: 1px solid #e6e2d8; padding-top: 1em; margin-top: 2.6em; }
+    a { color: inherit; }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="brand"><span class="brand-name">mowi</span></div>
+
+    <h1>Magento Open Source-koppeling voor Mowi instellen</h1>
+    <p class="sub">Eén A4 om door te sturen naar de collega of IT-partner die de Magento-kant regelt.</p>
+
+    <h2>Wat er nodig is</h2>
+    <p>De organisatie die u ondersteunt koppelt Mowi aan haar Magento Open Source-webshop. Daarvoor is een eigen Integration nodig met vier sleutels: Consumer Key, Consumer Secret, Access Token en Access Token Secret, met leesrechten (View) beperkt tot Sales, Orders. Mowi gebruikt deze sleutels alleen om bestellingen op te zoeken. Er wordt nooit iets in de webshop aangepast.</p>
+
+    <h2>Waar u de integratie aanmaakt</h2>
+    <ol>
+      <li>Log in op het beheer van de Magento-webshop (Magento Admin).</li>
+      <li>Ga naar Systeem, Extensies, Integraties (System, Extensions, Integrations).</li>
+      <li>Klik op Integratie toevoegen (Add New Integration), geef een naam, bijvoorbeeld Mowi, en zet bij API-rechten alleen leesrechten (View) aan voor Sales, Orders. Sla op.</li>
+      <li>Klik in de lijst naast de nieuwe integratie op Activeren (Activate) en bevestig.</li>
+      <li>Kopieer de vier getoonde sleutels: Consumer Key, Consumer Secret, Access Token en Access Token Secret.</li>
+    </ol>
+    <p class="note">Deze vier sleutels worden maar één keer getoond en vervangen samen een wachtwoord. Bewaar ze net zo zorgvuldig.</p>
+
+    <h2>Welke rechten de sleutels krijgen</h2>
+    <p>Mowi gebruikt de sleutels alleen om bestellingen en de bijbehorende adresgegevens op te zoeken. Er wordt nooit iets aangepast of verwijderd. De integratie staat los van een gebruikersaccount en kan op elk moment in Magento worden gedeactiveerd, zonder dat dit een account raakt.</p>
+
+    <h2>Hoe u de sleutels terugstuurt</h2>
+    <div class="box">
+      <p>Stuur de sleutels niet per e-mail in platte tekst. Mowi volgt dit direct met u op en geeft aan via welk kanaal u ze veilig kunt delen.</p>
+    </div>
+    <p class="note">Wordt de integratie later in Magento gedeactiveerd of verwijderd, dan moet de koppeling met nieuwe sleutels opnieuw ingesteld worden.</p>
+
+    <h2>Vragen?</h2>
+    <p>Neem contact op via <a href="mailto:contact@mowi.agency">contact@mowi.agency</a>. Vermeld daarbij om welke organisatie het gaat.</p>
+
+    <div class="sheet-footer">Mowi &middot; +31 85 333 58 00 &middot; contact@mowi.agency &middot; mowi.agency/bedrijfsgegevens</div>
+  </main>
+</body>
+</html>

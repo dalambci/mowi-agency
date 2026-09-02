@@ -312,3 +312,45 @@ pulled in `css/style.css`, and whether any FAQ answer claims more than live copy
   `prestashop` (same gap class as S-011/S-012/S-013/S-016), so H1/title use the fallback pattern. S-015
   flags a possible overclaim on the already-shipped `koppeling-lightspeed-ecom.html`, found while
   grounding this page - not fixed here, outside this task's allowed paths.
+
+### T07 magento
+- Path: `koppeling-magento.html` (+ `downloads/it-partner-magento.html`)
+- Open: `start-local-server.bat` then http://localhost:8765/koppeling-magento
+- [ ] Built straight to the D17 template (no retrofit step): `.hero.lp-hero` with the logo above an
+      `<h1 class="h-balance">` question ("Wat kunt u met AI automatiseren in Magento Open Source?"), a
+      direct-answer `.hero-sub`, one `.lp-cta-block` CTA, and a full-width `.dp-window-hero` preview
+      (order lookup, "In behandeling"). Confirm it reads like the other webshop landers, and that the
+      full "Magento Open Source" name (not just "Magento") doesn't crowd the `.h-nowrap` wrap on the H1.
+- [ ] Tablet view (~768px, narrow the window): breadcrumb padding is not cramped against the header,
+      and the hero H1 does not overflow or jump a size.
+- [ ] "Hoe koppelt u Magento Open Source aan Mowi?" is 5 steps from a 7-entry `instructions[]`, the
+      most raw entries folded of any lander so far. Step 3 merges creating the Integration with setting
+      its API permissions; step 4 merges activating it with copying the four shown keys (Consumer Key,
+      Consumer Secret, Access Token, Access Token Secret). Confirm step 4's body doesn't read as doing
+      two things at once next to the one-liners around it.
+- [ ] "Welke agents gebruiken de Magento Open Source-koppeling?" is a `.split`: **3** `.lp-card`s (Inbox
+      agent, Voice agent, Orderstatus), the PrestaShop pattern, not the 4-card WooCommerce/Shopify set -
+      `MagentoGateway.php` implements only `OrderGateway`, same shape as PrestaShop, so no "Webshops
+      vergelijken" dashboard card is claimed. Confirm this reading against S-015's flag on
+      `koppeling-lightspeed-ecom.html`, which may have overclaimed the same card on the same gateway
+      shape.
+- [ ] "Wat leest Mowi uit Magento Open Source?" is 4 icon `.lp-card`s (Bestelling opgezocht / Alleen
+      lezend / Eigen Integration-sleutels / Status altijd actueel). No vervoerder/tracking claim at all
+      (stronger omission than PrestaShop's "zodra die bekend is" hedge): `MagentoGateway::normalize()`
+      hardcodes `carrier` to null unconditionally. Confirm this reads right, not as a missing feature.
+- [ ] FAQ's two error-code questions (401, 404) are adapted from `MagentoGateway::testConnection()`'s
+      own summary strings. Confirm they still match if that method ever changes.
+- [ ] "Wat heeft uw IT-partner of accountant nodig?" is an `.lp-trust-note` box linking the sheet -
+      frames it as four sleutels uit een eigen Integration, not one key like the sibling webshop sheets.
+- [ ] No standalone closing-CTA section (D17): the footer's own "Vertel het en Mowi regelt het" band is
+      the only CTA below the FAQ.
+- [ ] Open `downloads/it-partner-magento.html` and print-preview it (Ctrl+P): one A4, nothing clipped,
+      must NOT pull in `css/style.css` (own `<style>` block). Describes four sleutels instead of one,
+      the OAuth 1.0a Integration shape, not a single API key/secret pair like WooCommerce/PrestaShop.
+- Open questions: no docs page exists for this platform (`doc_url` 404s, per S-002), so every claim
+  traces to `config/shop_platforms.php` + `MagentoGateway.php` only. No keyword numbers exist for
+  `magento` (same gap class as S-011/S-012/S-013/S-016), so H1/title use the fallback pattern. Not
+  claimed: a postcode-based identity-check capability, even though the gateway returns
+  `billing_postcode`/`shipping_postcode` - no sibling lander frames postcode data that way, so it was
+  left out rather than introduced as a new, ungrounded claim type. Worth a word from Sal if that's a
+  real feature worth adding across all the order-lookup landers at once.

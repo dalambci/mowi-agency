@@ -251,3 +251,42 @@ entry sitting in an otherwise empty log would read as a completed task and mask 
 - Oddities: none - both gates green on round 1, 0 fix rounds, `--dom` green first try, 0 skips on the
   lander (4 on the sheet, as expected).
 - Status: [x] done
+
+### 2026-09-03 - T07 magento
+- Built: `downloads/it-partner-magento.html` (sheet, built first) and `koppeling-magento.html` (lander),
+  D17 template directly, no retrofit step. Cache-bust read live from `index.html`: unchanged
+  (`style.css?v=20260829-5`, `main.js?v=20260822-23`). Chrome copied from `koppeling-prestashop.html`,
+  itself byte-identical to `test.html`. Pakket display name is "Magento Open Source" (byte-for-byte from
+  the `integration-card-name` span in `koppelingen.html`), used in full in the H1, title, breadcrumb and
+  tile preview, not shortened to "Magento".
+- Decisions: config key `magento` (webshop category, `auth => 'static'`, gateway `MagentoGateway`,
+  `doc_url` 404s per S-002, no tier-1 docs page). `instructions[]` has 7 entries; folded to 5 `.lp-steps`
+  with two merges: entries 3+4 (create the Integration + set API permissions to View for Sales, Orders)
+  fold into one step, the same same-screen create+configure fold WooCommerce/PrestaShop already used;
+  entries 5+6 (activate the integration + copy the four shown keys) fold into one step, grounded directly
+  in the config's own wording - entry 6 says the keys are "getoonde" (shown) right after the activate-and-
+  confirm action in entry 5, so both belong to the same on-screen moment, not two separate screens. Entry
+  7 (paste and connect, with the automatic connection test) stays its own final step, same "confirmation
+  folds into the step before it" pattern the other webshop landers used for their own last step. Read
+  `MagentoGateway.php` directly (tier 2, same precedent T05/T06 used for gateway files): `class
+  MagentoGateway implements OrderGateway` only, no `SalesGateway`/`OrderCountGateway`, the exact same
+  shape as `PrestaShopGateway` (T06) rather than the 4-card WooCommerce/Shopify/Lightspeed pattern, so
+  section 3 ships PrestaShop's **3**-card set (Inbox agent, Voice agent, Orderstatus), deliberately not
+  claiming a "Dashboard Webshops vergelijken" card, avoiding the exact overclaim S-015 flagged on
+  `koppeling-lightspeed-ecom.html`. No tracking/carrier claim: the gateway's own `normalize()` hardcodes
+  `'carrier' => null` unconditionally (its docblock cites the same accepted gap class as PrestaShop's
+  always-null `track_trace_url`), stronger than PrestaShop's case, so the copy never mentions a vervoerder
+  at all, only order number, status and date. Did not add a postcode/identity-verification capability
+  card even though `normalize()` returns `billing_postcode`/`shipping_postcode`: no sibling lander frames
+  postcode data as an identity-check feature (grep across all built landers/docs found zero precedent), so
+  inventing that framing here would have been a new, ungrounded capability narrative rather than a plain
+  restatement of what's read - left out per the Gap rule instead of stretched into a card. FAQ's two
+  error-code questions (401, 404) are adapted from `MagentoGateway::testConnection()`'s own summary
+  strings, with the source's em dash and parenthetical arrow rewritten to plain punctuation. No
+  cross-platform sub-question: no keyword supplied for `magento`, section skipped per D17 item 6. No
+  keyword numbers exist for `magento` either (same gap class as S-011/S-012/S-013/S-016), so H1/title use
+  the proven fallback pattern, not re-logged as a new NEEDS_SAL entry, same reasoning T06 used.
+- Oddities: none - both gates green on round 1, 0 fix rounds, `--dom` green first try, 0 skips on the
+  lander (4 on the sheet, as expected). Title landed at exactly 70 chars (the upper bound), confirmed
+  inclusive against `verify.mjs`'s own `title.length > 70` check before shipping.
+- Status: [x] done
