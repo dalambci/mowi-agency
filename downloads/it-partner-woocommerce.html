@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WooCommerce-koppeling voor Mowi: instructies voor uw IT-partner</title>
+  <meta name="description" content="Instructies voor de hostingpartij of IT-partner die de WooCommerce-kant van de Mowi-koppeling regelt: welke API-sleutel nodig is en hoe u die veilig deelt." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <!-- Page-scoped print CSS, adapted from the proven recipe in
+       generate-it-sheets.js. Deliberately self-contained: no shared
+       stylesheet, no shared script, no analytics. This is a document to
+       print or forward, not a page in the site's navigation. -->
+  <style>
+    @page { size: A4; margin: 22mm 20mm; }
+    * { box-sizing: border-box; }
+    body {
+      font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+      color: #16140f;
+      background: #fff;
+      margin: 0;
+      padding: 22mm 20mm;
+      max-width: 210mm;
+      font-size: 11pt;
+      line-height: 1.55;
+    }
+    @media print { body { padding: 0; max-width: none; } }
+    .brand { margin-bottom: 2.4em; }
+    .brand-name { font-size: 15pt; font-weight: 800; letter-spacing: -0.02em; }
+    h1 { font-size: 17pt; font-weight: 800; letter-spacing: -0.02em; margin: 0 0 0.3em; }
+    h2 { font-size: 11.5pt; font-weight: 800; margin: 2em 0 0.4em; }
+    p { margin: 0 0 0.9em; }
+    .sub { color: #6b6a63; margin: 0 0 2em; font-size: 10.5pt; }
+    ol, ul { margin: 0 0 0.9em; padding-left: 1.3em; }
+    li { margin-bottom: 0.45em; }
+    .note { font-size: 9.5pt; color: #6b6a63; }
+    .box { background: #fcfbfa; border: 1px solid #e6e2d8; padding: 1em 1.3em; margin: 0 0 0.9em; }
+    .sheet-footer { font-size: 9.5pt; color: #6b6a63; border-top: 1px solid #e6e2d8; padding-top: 1em; margin-top: 2.6em; }
+    a { color: inherit; }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="brand"><span class="brand-name">mowi</span></div>
+
+    <h1>WooCommerce-koppeling voor Mowi instellen</h1>
+    <p class="sub">Eén A4 om door te sturen naar de collega, hostingpartij of IT-partner die de WooCommerce-kant regelt.</p>
+
+    <h2>Wat er nodig is</h2>
+    <p>De organisatie die u ondersteunt koppelt Mowi aan haar WooCommerce-webshop. Daarvoor zijn drie gegevens nodig: het webshop-adres en een REST API-sleutel uit WooCommerce, die bestaat uit een consumer key en een consumer secret. Mowi gebruikt die sleutel alleen om bestellingen op te zoeken. Er wordt nooit iets in de webshop aangepast.</p>
+
+    <h2>Waar u de sleutel aanmaakt</h2>
+    <ol>
+      <li>Log in op het WordPress-beheer van de webshop met beheerdersrechten.</li>
+      <li>Ga naar WooCommerce, dan Instellingen, dan het tabblad Geavanceerd, dan REST API.</li>
+      <li>Klik op Sleutel toevoegen (Add key). Is er nog geen enkele sleutel, dan heet de knop Create an API key.</li>
+      <li>Vul bij Beschrijving (Description) een naam in, bijvoorbeeld Mowi. Kies bij Rechten (Permissions) de optie Lezen (Read). Geen schrijfrechten.</li>
+      <li>Klik op Generate API Key. U ziet nu een Consumer key (begint met ck_) en een Consumer secret (begint met cs_). Kopieer beide meteen: de secret wordt maar één keer getoond.</li>
+    </ol>
+    <p class="note">De REST API van WooCommerce moet bereikbaar zijn op het pad /wp-json/ van de webshop. Blokkeert een beveiligingsplugin of serverinstelling dat pad, dan mislukt de koppeling met een 404.</p>
+
+    <h2>Welke rechten de sleutel krijgt</h2>
+    <p>Alleen Lezen. Daarmee kan Mowi bestellingen opzoeken, maar niets aanpassen of verwijderen. De sleutel staat los van de inloggegevens van de beheerder en kan op elk moment in WooCommerce worden ingetrokken, zonder dat dit een account raakt.</p>
+
+    <h2>Hoe u de sleutel terugstuurt</h2>
+    <div class="box">
+      <p>Stuur de consumer key en de consumer secret niet per e-mail in platte tekst. Mowi volgt dit direct met u op en geeft aan via welk kanaal u ze veilig kunt delen. Vermeld ook het volledige webshop-adres, inclusief https://.</p>
+    </div>
+    <p class="note">Wordt de sleutel later in WooCommerce ingetrokken of verwijderd, dan moet de koppeling met een nieuwe sleutel opnieuw ingesteld worden.</p>
+
+    <h2>Vragen?</h2>
+    <p>Neem contact op via <a href="mailto:contact@mowi.agency">contact@mowi.agency</a>. Vermeld daarbij om welke organisatie het gaat.</p>
+
+    <div class="sheet-footer">Mowi &middot; +31 85 333 58 00 &middot; contact@mowi.agency &middot; mowi.agency/bedrijfsgegevens</div>
+  </main>
+</body>
+</html>

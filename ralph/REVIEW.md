@@ -83,3 +83,31 @@ pulled in `css/style.css`, and whether any FAQ answer claims more than live copy
 - Open questions: S-006 (same agent-card link reading as T01, applied here too) and the NL-only
   caveat above (no NEEDS_SAL entry filed since the dashboard source is tier-2-authoritative for
   connect-flow facts per SPEC section 9, but it has no live-copy precedent to double-check against).
+
+### T03 woocommerce
+- Path: `koppeling-woocommerce.html` (+ `downloads/it-partner-woocommerce.html`)
+- Open: `start-local-server.bat` then http://localhost:8765/koppeling-woocommerce
+- [ ] Spacing matches the blog / koppelingen canon (section rhythm, heading margins, card gutters -
+      open koppelingen.html in a second tab and flip between them)
+- [ ] Exactly one CTA visible in the page body, and it is obvious - "Start gratis", pointing at
+      my.mowi.agency/aanmelden. Header and footer CTAs do not count.
+- [ ] Tablet view (~768px, narrow the window): breadcrumb padding is not cramped against the header,
+      and the hero H1 does not overflow or jump a size
+- [ ] "Zo koppelt u" has 5 steps from a 7-entry `instructions[]`. Step 3 ("Maak een sleutel aan")
+      folds three config entries into one action, the same grouping the live docs page uses. Check
+      the step-3 body does not read as too long next to the one-liners around it.
+- [ ] Four cards under "Werkt met deze agents en workflows" (2x2 on desktop), one more than T01/T02:
+      Inbox agent, Voice agent, Orderstatus (`/workflows#order-status`) and Webshops vergelijken
+      (`/workflows#dashboard-webshops-vergelijken`). The dashboard card is grounded in
+      `WooCommerceGateway` implementing the sales/order-count gateways (its docblock names that exact
+      dashboard on a real client store), not in customer-facing copy. Confirm the reading, and whether
+      four cards is the right count or three reads tighter.
+- [ ] The preview chip reads "In behandeling", a real WooCommerce status label from the gateway.
+      The head line "Waar blijft mijn bestelling?" is the docs page's own example question. Confirm
+      both read as illustrative, not as a claim.
+- [ ] Open `downloads/it-partner-woocommerce.html` and print-preview it (Ctrl+P): one A4, nothing
+      clipped, and it must NOT pull in `css/style.css` (it carries its own `<style>`). Slightly longer
+      than Pipedrive's sheet: three values to return (adres, key, secret) plus the /wp-json/ note.
+- Open questions: S-006 (agent cards link to `/e-mail-agent` + `/call-agent`; `/workflows#order-status`
+  and the dashboard fragment still land on an empty page) and S-007 (no named secure channel for the
+  key and secret, sheet uses the fallback line). No new entries filed.

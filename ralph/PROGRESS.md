@@ -66,3 +66,27 @@ entry sitting in an otherwise empty log would read as a completed task and mask 
 - Oddities: meta description was 157 chars on round 1 (need <=155); trimmed "met uw eigen account" to
   "met eigen account", green on round 2. `--dom` green first try.
 - Status: [x] done
+
+### 2026-09-02 - T03 woocommerce
+- Built: `downloads/it-partner-woocommerce.html` (sheet, built first) and `koppeling-woocommerce.html`
+  (lander, 7 sections, 5 steps, 4 cards, 4-question FAQ). Cache-bust read live from `index.html`:
+  unchanged (`style.css?v=20260829-5`, `main.js?v=20260822-23`). Chrome copied from the T01 lander,
+  which `verify.mjs` confirmed byte-identical to `test.html` at the start of this iteration.
+- Decisions: `woocommerce.instructions[]` has 7 entries (auth `static`, fields Webshop-adres / Consumer
+  key / Consumer secret). Shipped as 5 steps under the "a step is an action" rule and SPEC 4's 3-5 cap:
+  entries 3-5 (Sleutel toevoegen, Beschrijving + Rechten, Generate API Key) are one step "Maak een
+  sleutel aan", the exact grouping tier-1 `docs/koppeling-woocommerce.html` already uses for its own
+  step 4; entry 6's copy is step 4; entry 6's paste plus entry 7's Koppelen is step 5 (Pipedrive's own
+  config writes paste + Koppelen as one instruction). Nothing dropped. Section 4 has 4 cards (the grid
+  is 2-col, so 2x2): Inbox/Voice agent per S-006, `/workflows#order-status` (the nav's own "Zoekt
+  bestellingen op in uw webshop"), and `/workflows#dashboard-webshops-vergelijken`, grounded the way
+  T02's dashboard card was: `WooCommerceGateway.php` (tier 2) implements `OrderGateway`
+  (findByOrderNumber / findByEmail, which is where "op bestelnummer of e-mailadres" comes from) plus the
+  Sales / OrderCount / ProductSales / CustomerSales gateways, and its docblock names the "Webshops
+  vergelijken" dashboard on a real client store. Preview chip "In behandeling" is a real label from that
+  gateway's STATUS_LABELS, not invented. Sheet reuses S-007's fallback line and adds the /wp-json/
+  reachability note from the docs page's 404 troubleshooting. No new NEEDS_SAL entries. Unlike S-008's
+  platforms, this gateway is live-verified against a real store (2026-08-25, per its own docblock).
+- Oddities: none. Both gates green on round 1, 0 skips on the lander. Both meta descriptions measure
+  exactly 155, the ceiling: fine, but one added word breaks them.
+- Status: [x] done
