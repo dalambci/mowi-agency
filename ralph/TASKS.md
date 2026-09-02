@@ -45,7 +45,7 @@
 # run before T05-T11 so every fresh build after them has 4 real examples of
 # the template to match, not 1.
 - [x] T01R - retrofit: pipedrive naar D17-sjabloon - allowed: koppeling-pipedrive.html, downloads/it-partner-pipedrive.html
-- [ ] T03R - retrofit: woocommerce naar D17-sjabloon - allowed: koppeling-woocommerce.html, downloads/it-partner-woocommerce.html
+- [x] T03R - retrofit: woocommerce naar D17-sjabloon - allowed: koppeling-woocommerce.html, downloads/it-partner-woocommerce.html
 - [ ] T04R - retrofit: shopify naar D17-sjabloon - allowed: koppeling-shopify.html, downloads/it-partner-shopify.html
 - [ ] T05 - integratie: lightspeed-ecom - allowed: koppeling-lightspeed-ecom.html, downloads/it-partner-lightspeed-ecom.html
 - [ ] T06 - integratie: prestashop - allowed: koppeling-prestashop.html, downloads/it-partner-prestashop.html

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WooCommerce koppelen aan Mowi: bestelstatus direct opgezocht — Mowi</title>
-  <meta name="description" content="Koppel WooCommerce aan Mowi en laat uw agent de bestelstatus opzoeken in uw eigen webshop. De koppeling is alleen lezend. Zo stelt u hem stap voor stap in." />
+  <title>WooCommerce koppeling met AI: wat kunt u automatiseren? — Mowi</title>
+  <meta name="description" content="Mowi leest bestellingen uit WooCommerce, alleen lezend. Uw agent zoekt de bestelstatus op zodra een klant ernaar vraagt. Koppelen in 5 stappen, gratis." />
   <link rel="canonical" href="https://mowi.agency/koppeling-woocommerce" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -26,65 +26,61 @@
       {
         "@type": "Question",
         "name": "Is de WooCommerce-koppeling alleen lezend?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Ja. De sleutel krijgt alleen leesrechten. Mowi zoekt bestellingen op en past nooit iets aan of verwijdert iets."
-        }
+        "acceptedAnswer": { "@type": "Answer", "text": "Ja. De sleutel krijgt alleen leesrechten. Mowi zoekt bestellingen op en past nooit iets aan of verwijdert iets." }
       },
       {
         "@type": "Question",
         "name": "Wat zijn een consumer key en secret?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Een aparte sleutel die u in WooCommerce aanmaakt, met precies de rechten die u toekent. WooCommerce geeft Mowi nooit toegang met uw WordPress-wachtwoord."
-        }
+        "acceptedAnswer": { "@type": "Answer", "text": "Een aparte sleutel die u in WooCommerce aanmaakt, met precies de rechten die u toekent. WooCommerce geeft Mowi nooit toegang met uw WordPress-wachtwoord." }
       },
       {
         "@type": "Question",
         "name": "De sleutel werd geweigerd (401). Wat nu?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "De sleutel is ongeldig of ingetrokken, of heeft geen leesrechten. Maak in WooCommerce een nieuwe sleutel aan met rechten Lezen en vul die in bij Sleutel wijzigen."
-        }
+        "acceptedAnswer": { "@type": "Answer", "text": "De sleutel is ongeldig of ingetrokken, of heeft geen leesrechten. Maak in WooCommerce een nieuwe sleutel aan met rechten Lezen en vul die in bij Sleutel wijzigen." }
       },
       {
         "@type": "Question",
         "name": "De REST API is niet gevonden (404). Wat nu?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Controleer het webshop-adres op typefouten. Blijft de fout, vraag dan uw hostingpartij of het pad /wp-json/ door een beveiligingsplugin wordt geblokkeerd."
-        }
+        "acceptedAnswer": { "@type": "Answer", "text": "Controleer het webshop-adres op typefouten. Blijft de fout, vraag dan uw hostingpartij of het pad /wp-json/ door een beveiligingsplugin wordt geblokkeerd." }
       }
     ]
   }
   </script>
   <style>
-    /* Page-scoped lander styles (D15/D16). Nothing here touches the shared stylesheet,
-       so no other page moves and no sitewide cache-bust bump is needed.
-
-       1. Section rhythm. The shared .section is 5rem 0, so two stacked sections
-          put 10rem between blocks. Too airy for a short lander (Sal, 2026-09-02).
-       2. The koppeling preview. A monochrome port of the dashboard Start page's
-          own .dp-card mock (resources/views/components/discover-preview.blade.php)
-          so the site shows the same picture the product does. Abstract on purpose:
-          real labels only where they carry meaning, masked values and grey bars
-          everywhere else. Inventing a customer name or an amount would put fake
-          data on a page the client reads before any of it is true. Colour is
-          swapped for the site's monochrome tokens: the chip is a black fill,
-          never a green one. */
+    /* Page-scoped lander styles (D17, supersedes D15/D16). Nothing here touches
+       the shared stylesheet, so no other page moves and no cache-bust bump is
+       needed. Everything below is either a section-rhythm override, a mobile
+       fallback the shared .split lacks, or the koppeling preview: a monochrome
+       port of the dashboard Start page's own .dp-card mock
+       (resources/views/components/discover-preview.blade.php), so the site
+       shows the same picture the product does. The mock stays abstract on
+       purpose: real words only where they carry meaning, masked values and
+       grey bars everywhere else. An invented customer name or amount would be
+       fake data on a page the client reads before any of it is true. */
     main .section { padding: 3rem 0; }
-    main .section#lander-hero { padding-top: 4rem; }
     @media (max-width: 48rem) { main .section { padding: 2.25rem 0; } }
 
-    .lp-hero-logo { display: block; margin-bottom: 1.25rem; }
+    .lp-hero .blog-breadcrumb { margin-bottom: 1.75rem; }
+    .lp-hero-logo { display: block; margin: 0 auto 1.25rem; width: auto; height: 2.5rem; max-width: 10rem; }
+    .lp-hero .hero-sub { max-width: 40rem; margin-left: auto; margin-right: auto; }
+
+    main .split { align-items: center; }
+    @media (max-width: 48rem) { main .split { grid-template-columns: 1fr; gap: 2rem; } }
+    .lp-link-stack { display: grid; gap: 1rem; }
+    .lp-link-stack .lp-card { padding: 1.5rem 1.75rem; }
+    .lp-note-link { display: block; margin-top: 0.75rem; }
 
     .dp-window {
-      height: 190px; max-width: 21rem; margin: 2.25rem auto 0;
-      overflow: hidden; display: flex; justify-content: center;
-      align-items: flex-start; padding-top: 20px;
+      height: 200px; overflow: hidden; display: flex; justify-content: center;
+      align-items: flex-start; padding-top: 22px;
       background: var(--muted); border: 1px solid var(--border);
       border-radius: var(--radius-card);
     }
+    .dp-window-hero { width: 100%; max-width: 40rem; height: 250px; margin: 2.75rem auto 0; padding-top: 28px; }
+    .dp-window-hero .dp-card { max-width: 340px; padding: 14px; }
+    .dp-window-side { height: 280px; }
+    .dp-window-tile { height: auto; padding: 1.25rem; max-width: 22rem; margin: 2.5rem auto 0; }
+    .dp-window-tile .dp-card { width: 100%; max-width: none; }
     .dp-card {
       width: 82%; max-width: 250px; flex-shrink: 0; text-align: left;
       background: var(--surface); border: 1px solid var(--border);
@@ -105,6 +101,10 @@
       font-size: 9.5px; font-weight: 600; white-space: nowrap; padding: 2px 6px;
       border-radius: var(--radius-pill); background: var(--ink); color: var(--bg);
     }
+    .dp-tile-row { display: flex; align-items: center; gap: 10px; }
+    .dp-tile-row img { width: 26px; height: 26px; object-fit: contain; flex-shrink: 0; }
+    .dp-tile-name { flex: 1; font-size: 13px; font-weight: 700; color: var(--ink); }
+    .dp-tile-sub { font-size: 11px; color: var(--ink-3); margin-top: 6px; }
   </style>
 </head>
 <body>
@@ -175,124 +175,167 @@
 
   <main>
 
-    <!-- ================= Hero =================
-         Breadcrumb is de eerste child van de hero-container, zoals op
-         blog/*.html en cookies.html. Geen eigen <nav>, geen aria-label. -->
-    <section class="section" id="lander-hero">
-      <div class="container">
-        <p class="blog-breadcrumb"><a href="/">Home</a> &rsaquo; <a href="/koppelingen">Koppelingen</a> &rsaquo; WooCommerce</p>
-        <img src="assets/logos/woocommerce.svg" alt="" class="integration-card-logo lp-hero-logo" />
-      <h1 class="page-hero-heading">Automatiseren in WooCommerce.</h1>
-        <p class="page-hero-body">Uw agent zoekt de bestelstatus op in uw eigen webshop, zodra een klant ernaar vraagt.</p>
-        <p class="page-hero-body">Alleen lezend. Er verandert niets in uw webshop.</p>
+    <!-- Hero: the question as H1, the direct answer in the first 80 words, the
+         page's only primary CTA, and the koppeling preview as the hero visual. -->
+    <section class="hero container lp-hero hero-tight-bottom" id="lander-hero">
+      <p class="blog-breadcrumb"><a href="/">Home</a> &rsaquo; <a href="/koppelingen">Koppelingen</a> &rsaquo; WooCommerce</p>
+      <img src="assets/logos/woocommerce.svg" alt="" class="integration-card-logo lp-hero-logo" />
+      <h1 class="h-balance">Wat kunt u met AI automatiseren in <span class="h-nowrap">WooCommerce?</span></h1>
+      <p class="hero-sub">Met de WooCommerce-koppeling leest Mowi uw bestellingen, alleen lezend. Uw Inbox agent en Voice agent zoeken de bestelstatus op zodra een klant ernaar vraagt, op bestelnummer of e-mailadres. Koppelen kost 5 stappen met een aparte sleutel uit uw eigen webshop, niet uw WordPress-wachtwoord. Die sleutel trekt u zelf in, wanneer u wilt.</p>
+      <div class="hero-actions lp-cta-block">
+        <a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a>
+        <span class="lp-cta-micro">Geen betaalgegevens nodig.</span>
+      </div>
+      <div class="dp-window dp-window-hero" role="img" aria-label="Voorbeeld: een klantvraag over een bestelling, met de bestelstatus opgezocht in WooCommerce">
+        <div class="dp-card">
+          <div class="dp-head">Waar blijft mijn bestelling?</div>
+          <div class="dp-title">Bestelling #&bull;&bull;&bull;&bull;&bull;</div>
+          <div class="dp-amount">Gevonden in WooCommerce</div>
+          <div class="dp-row"><span class="dp-avatar"></span><span class="dp-bars"><span class="dp-bar"></span><span class="dp-bar short"></span></span><span class="dp-chip">In behandeling</span></div>
+          <div class="dp-row"><span class="dp-avatar"></span><span class="dp-bars"><span class="dp-bar short"></span><span class="dp-bar"></span></span></div>
+          <div class="dp-row"><span class="dp-avatar"></span><span class="dp-bars"><span class="dp-bar"></span><span class="dp-bar short"></span></span></div>
+        </div>
       </div>
     </section>
 
-    <!-- ================= Wat de koppeling doet ================= -->
+    <!-- Every H2 is a sub-question; the line under it is the answer. -->
     <section class="section">
       <div class="container">
-        <h2 class="page-heading">Wat de koppeling doet</h2>
-        <p class="page-body">Mowi leest bestellingen uit uw WooCommerce-webshop, op bestelnummer of op het e-mailadres van de klant. Uw agent ziet meteen welke status een bestelling heeft.</p>
-        <p class="page-body">Één kant op: Mowi leest, Mowi schrijft niet. De sleutel die u aanmaakt heeft alleen leesrechten.</p>
-        <p class="page-body">U koppelt met een aparte sleutel uit WooCommerce, niet met uw WordPress-wachtwoord. Die sleutel trekt u zelf in, wanneer u wilt.</p>
-        <div class="dp-window" role="img" aria-label="Voorbeeld: een klantvraag over een bestelling, met de bestelstatus opgezocht in WooCommerce">
-          <div class="dp-card">
-            <div class="dp-head">Waar blijft mijn bestelling?</div>
-            <div class="dp-title">Bestelling #&bull;&bull;&bull;&bull;&bull;</div>
-            <div class="dp-amount">Gevonden in WooCommerce</div>
-            <div class="dp-row"><span class="dp-avatar"></span><span class="dp-bars"><span class="dp-bar"></span><span class="dp-bar short"></span></span><span class="dp-chip">In behandeling</span></div>
-            <div class="dp-row"><span class="dp-avatar"></span><span class="dp-bars"><span class="dp-bar short"></span><span class="dp-bar"></span></span></div>
-            <div class="dp-row"><span class="dp-avatar"></span><span class="dp-bars"><span class="dp-bar"></span><span class="dp-bar short"></span></span></div>
+        <div class="section-head-row section-head-row-center">
+          <h2 class="lp-section-heading">Wat leest Mowi uit WooCommerce?</h2>
+          <p class="section-sub section-sub-center">Uw bestellingen. Niets anders, en nooit schrijvend.</p>
+        </div>
+        <div class="lp-card-grid">
+          <div class="lp-card">
+            <span class="lp-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13"/><path d="M3 6h.01M3 12h.01M3 18h.01"/></svg></span>
+            <h3>Bestelling opgezocht</h3>
+            <p>Op bestelnummer of op het e-mailadres van de klant. Uw agent ziet meteen welke status een bestelling heeft.</p>
+          </div>
+          <div class="lp-card">
+            <span class="lp-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span>
+            <h3>Alleen lezend</h3>
+            <p>Mowi past nooit iets aan in uw webshop. De sleutel die u aanmaakt krijgt alleen leesrechten.</p>
+          </div>
+          <div class="lp-card">
+            <span class="lp-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M10.9 12.1L21 2M15 8l3 3M18 5l3 3"/></svg></span>
+            <h3>Uw eigen sleutel</h3>
+            <p>U koppelt met een aparte sleutel uit WooCommerce, niet met uw WordPress-wachtwoord. Die trekt u zelf in.</p>
+          </div>
+          <div class="lp-card">
+            <span class="lp-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v3M16 3v3"/></svg></span>
+            <h3>Status altijd actueel</h3>
+            <p>Rechtstreeks uit uw eigen webshop, dus nooit verouderd of dubbel bijgehouden.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ================= Werkt met deze agents en workflows =================
-         Links volgen de sitewide navigatie zoals die vandaag in test.html
-         staat: /e-mail-agent en /call-agent voor de agents, /workflows#...
-         voor de workflows en dashboards. Nooit /agents/*, die pagina's
-         bestaan niet meer. -->
     <section class="section">
       <div class="container">
-        <h2 class="page-heading">Werkt met deze agents en workflows</h2>
-        <p class="page-body">Dit is wat er met de koppeling gebeurt.</p>
-        <div class="lp-card-grid">
-          <a href="/e-mail-agent" class="lp-card">
-            <h3>Inbox agent</h3>
-            <p>Zoekt de bestelling op bij een vraag per e-mail, voordat het concept klaarstaat.</p>
-          </a>
-          <a href="/call-agent" class="lp-card">
-            <h3>Voice agent</h3>
-            <p>Zoekt de bestelling op terwijl de klant aan de lijn is.</p>
-          </a>
-          <a href="/workflows#order-status" class="lp-card">
-            <h3>Orderstatus</h3>
-            <p>Zoekt bestellingen op in uw webshop. Alleen lezen.</p>
-          </a>
-          <a href="/workflows#dashboard-webshops-vergelijken" class="lp-card">
-            <h3>Webshops vergelijken</h3>
-            <p>Kerncijfers per webshop naast elkaar, uit dezelfde koppeling.</p>
-          </a>
+        <div class="section-head-row section-head-row-center">
+          <h2 class="lp-section-heading">Welke agents gebruiken de WooCommerce-koppeling?</h2>
+          <p class="section-sub section-sub-center">Twee agents en een dashboard, allemaal via dezelfde koppeling.</p>
+        </div>
+        <div class="split">
+          <div class="lp-link-stack">
+            <a href="/e-mail-agent" class="lp-card">
+              <h3>Inbox agent</h3>
+              <p>Zoekt de bestelling op bij een vraag per e-mail, voordat het conceptantwoord klaarstaat.</p>
+            </a>
+            <a href="/call-agent" class="lp-card">
+              <h3>Voice agent</h3>
+              <p>Zoekt de bestelling op terwijl de klant aan de lijn is.</p>
+            </a>
+            <a href="/workflows#order-status" class="lp-card">
+              <h3>Orderstatus</h3>
+              <p>Zoekt bestellingen op in uw webshop. Alleen lezen.</p>
+            </a>
+            <a href="/workflows#dashboard-webshops-vergelijken" class="lp-card">
+              <h3>Dashboard Webshops vergelijken</h3>
+              <p>Kerncijfers per webshop naast elkaar, uit dezelfde koppeling.</p>
+            </a>
+          </div>
+          <div class="dp-window dp-window-side" role="img" aria-label="Voorbeeld: een inkomend gesprek waarbij de bestelling van de beller is opgezocht in WooCommerce">
+            <div class="dp-card">
+              <div class="dp-head">Inkomend gesprek</div>
+              <div class="dp-title">+31 6 &bull;&bull; &bull;&bull; &bull;&bull; &bull;&bull;</div>
+              <div class="dp-amount">1:42</div>
+              <div class="dp-row"><span class="dp-avatar"></span><span class="dp-bars"><span class="dp-bar"></span><span class="dp-bar short"></span></span><span class="dp-chip">Bestelling gevonden</span></div>
+              <div class="dp-row"><span class="dp-avatar"></span><span class="dp-bars"><span class="dp-bar short"></span><span class="dp-bar"></span></span></div>
+              <div class="dp-row"><span class="dp-avatar"></span><span class="dp-bars"><span class="dp-bar"></span><span class="dp-bar short"></span></span></div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- ================= Zo koppelt u WooCommerce =================
-         Vijf stappen uit de zeven regels van woocommerce.instructions[] in
-         de dashboard-config (config/shop_platforms.php): inloggen, REST API
-         openen, sleutel aanmaken (regels 3-5, dezelfde groepering als de
-         docs-pagina), beide codes kopiëren (regel 6), plakken en Koppelen
-         (regels 6-7). Niets weggelaten, niets toegevoegd. De velden heten
-         daar Webshop-adres, Consumer key en Consumer secret. -->
+    <!-- Vijf stappen uit de zeven regels van woocommerce.instructions[] in de
+         dashboard-config: inloggen, REST API openen, sleutel aanmaken (regels
+         3-5, dezelfde groepering als de docs-pagina), beide codes kopiëren
+         (regel 6), plakken en Koppelen (regels 6-7). Niets weggelaten. -->
     <section class="section">
       <div class="container">
-        <h2 class="page-heading">Zo koppelt u WooCommerce</h2>
+        <div class="section-head-row section-head-row-center">
+          <h2 class="lp-section-heading">Hoe koppelt u WooCommerce aan Mowi?</h2>
+          <p class="section-sub section-sub-center">In 5 stappen, met een aparte sleutel uit uw webshop.</p>
+        </div>
         <div class="lp-steps">
-        <div class="lp-step">
-          <div class="lp-step-circle" aria-hidden="true">1</div>
-          <h3>Log in op het beheer van uw webshop</h3>
-          <p>Uw WordPress-beheer, met beheerdersrechten.</p>
+          <div class="lp-step">
+            <div class="lp-step-circle" aria-hidden="true">1</div>
+            <h3>Log in op het beheer van uw webshop</h3>
+            <p>Uw WordPress-beheer, met beheerdersrechten.</p>
+          </div>
+          <div class="lp-step">
+            <div class="lp-step-circle" aria-hidden="true">2</div>
+            <h3>Open de REST API-instellingen</h3>
+            <p>Via het menu: WooCommerce, Instellingen, tabblad Geavanceerd, REST API.</p>
+          </div>
+          <div class="lp-step">
+            <div class="lp-step-circle" aria-hidden="true">3</div>
+            <h3>Maak een sleutel aan</h3>
+            <p>Klik op Sleutel toevoegen. Nog geen sleutel? Dan heet de knop Create an API key. Vul bij Beschrijving een naam in, bijvoorbeeld Mowi. Kies bij Rechten de optie Lezen. Klik op Generate API Key.</p>
+          </div>
+          <div class="lp-step">
+            <div class="lp-step-circle" aria-hidden="true">4</div>
+            <h3>Kopieer de Consumer key en de Consumer secret</h3>
+            <p>Ze beginnen met ck_ en cs_. De secret ziet u maar één keer.</p>
+          </div>
+          <div class="lp-step">
+            <div class="lp-step-circle" aria-hidden="true">5</div>
+            <h3>Plak ze met uw webshop-adres en klik op Koppelen</h3>
+            <p>Mowi test de verbinding meteen.</p>
+          </div>
         </div>
-        <div class="lp-step">
-          <div class="lp-step-circle" aria-hidden="true">2</div>
-          <h3>Open de REST API-instellingen</h3>
-          <p>Via het menu: WooCommerce, Instellingen, tabblad Geavanceerd, REST API.</p>
+        <div class="dp-window dp-window-tile" role="img" aria-label="Voorbeeld: de koppelingstegel van WooCommerce in het Mowi-dashboard met de status Verbonden">
+          <div class="dp-card">
+            <div class="dp-tile-row">
+              <img src="assets/logos/woocommerce.svg" alt="" />
+              <span class="dp-tile-name">WooCommerce</span>
+              <span class="dp-chip">Verbonden</span>
+            </div>
+            <div class="dp-tile-sub">Alleen lezend, via uw eigen sleutel</div>
+          </div>
         </div>
-        <div class="lp-step">
-          <div class="lp-step-circle" aria-hidden="true">3</div>
-          <h3>Maak een sleutel aan</h3>
-          <p>Klik op Sleutel toevoegen. Nog geen sleutel? Dan heet de knop Create an API key. Vul bij Beschrijving een naam in, bijvoorbeeld Mowi. Kies bij Rechten de optie Lezen. Klik op Generate API Key.</p>
-        </div>
-        <div class="lp-step">
-          <div class="lp-step-circle" aria-hidden="true">4</div>
-          <h3>Kopieer de Consumer key en de Consumer secret</h3>
-          <p>Ze beginnen met ck_ en cs_. De secret ziet u maar één keer.</p>
-        </div>
-        <div class="lp-step">
-          <div class="lp-step-circle" aria-hidden="true">5</div>
-          <h3>Plak ze met uw webshop-adres en klik op Koppelen</h3>
-          <p>Mowi test de verbinding meteen.</p>
-        </div>
-      </div>
       </div>
     </section>
 
-    <!-- ================= Voor uw IT-partner ================= -->
     <section class="section">
       <div class="container">
-        <h2 class="page-heading">Voor uw IT-partner</h2>
-        <p class="page-body">Regelt uw hostingpartij of IT-partner dit voor u? Één A4 met wat er nodig is, waar de sleutel staat en hoe die veilig terugkomt.</p>
-        <p class="page-body"><a href="/downloads/it-partner-woocommerce.html" class="link-arrow">Open het A4 voor uw IT-partner</a></p>
+        <div class="section-head-row section-head-row-center">
+          <h2 class="lp-section-heading">Wat heeft uw IT-partner of accountant nodig?</h2>
+        </div>
+        <div class="lp-trust-note">
+          Alleen een aparte sleutel uit WooCommerce (consumer key en secret), niet uw WordPress-wachtwoord. Die maakt uw IT-partner zelf aan, met alleen leesrechten.
+          <a href="/downloads/it-partner-woocommerce.html" class="link-arrow lp-note-link">Open het A4 voor uw IT-partner</a>
+        </div>
       </div>
     </section>
 
-    <!-- ================= Veelgestelde vragen =================
-         Elke <h3> hieronder staat woordelijk in het FAQPage-blok in de
-         <head>. Wijzig ze altijd samen. -->
     <section class="section">
       <div class="container">
-        <h2 class="page-heading">Veelgestelde vragen</h2>
+        <div class="section-head-row section-head-row-center">
+          <h2 class="lp-section-heading">Veelgestelde vragen</h2>
+        </div>
         <div class="lp-card-grid">
           <div class="lp-card">
             <h3>Is de WooCommerce-koppeling alleen lezend?</h3>
@@ -311,15 +354,6 @@
             <p>Controleer het webshop-adres op typefouten. Blijft de fout, vraag dan uw hostingpartij of het pad /wp-json/ door een beveiligingsplugin wordt geblokkeerd.</p>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- ================= Afsluitende CTA ================= -->
-    <section class="section">
-      <div class="container">
-        <h2 class="page-heading">Klaar om WooCommerce te koppelen</h2>
-        <p class="page-body">Begin gratis en koppel wanneer het u uitkomt. Benieuwd naar de kosten? Bekijk de <a href="/pricing">prijzen</a>.</p>
-        <a href="https://my.mowi.agency/aanmelden" class="btn-primary page-cta" data-event="Signup Click">Start gratis</a>
       </div>
     </section>
 

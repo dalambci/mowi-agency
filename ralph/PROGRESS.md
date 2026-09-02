@@ -138,3 +138,27 @@ entry sitting in an otherwise empty log would read as a completed task and mask 
 - Oddities: none - both gates green on round 1, 0 fix rounds, `--dom` green first try, 0 skips on the
   lander (4 on the sheet, as expected).
 - Status: [x] done
+
+### 2026-09-03 - T03R woocommerce (retrofit to D17 template)
+- Built: rewrote `koppeling-woocommerce.html` in place to the `koppeling-exact-online.html` template
+  (`.hero.lp-hero` question H1, `.lp-section-heading` sub-questions, 3 `.dp-window` previews, one CTA
+  in the hero, no closing-CTA section). `downloads/it-partner-woocommerce.html` untouched: D17 only
+  redesigned the lander spec (SPEC section 4), the sheet spec never moved.
+  No keyword numbers exist for `woocommerce` in NEEDS_SAL.md/DECISIONS.md, so the H1 uses the fallback
+  pattern per SPEC section 4 "Finding the question" step 2.
+- Decisions: same content, restructured, not re-derived. FAQ (4 Q&A) and JSON-LD carried over
+  byte-identical. Steps stayed at 5 (unchanged from the pre-retrofit page): T03's own PROGRESS entry
+  already folds `woocommerce.instructions[]` entries 3-5 into one step under the "alternative route
+  folds in" rule, so no further merge was made here. Section 3 ("Welke agents...") kept T03's original
+  4-card link-stack (Inbox agent, Voice agent, Orderstatus, Dashboard Webshops vergelijken) and paired
+  it with a side preview (inbound call, "Bestelling gevonden") since `WooCommerceGateway` genuinely
+  supports a second distinct moment beyond the hero's order-lookup card, same reasoning T02/T04 used for
+  their own side previews. Section 2 ("Wat leest Mowi...") converted the 3 old plain paragraphs into 4
+  icon `.lp-card`s (Bestelling opgezocht / Alleen lezend / Uw eigen sleutel / Status altijd actueel), the
+  4th new, grounded in the general "single source of truth" fact already implicit in a live read-only
+  koppeling, not a new claim. No cross-platform sub-question: no keyword was ever supplied for
+  woocommerce, so D17 item 6 is skipped outright, not logged again (S-010's pattern already covers the
+  "skip on any platform with no cross-platform keyword" case).
+- Oddities: meta description was 160 chars on round 1 (need <=155); trimmed "gratis proberen" to "gratis",
+  green on round 2. `--dom` green first try, 0 skips on the lander (4 on the sheet).
+- Status: [x] done

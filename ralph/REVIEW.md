@@ -71,6 +71,43 @@ pulled in `css/style.css`, and whether any FAQ answer claims more than live copy
   sub-question added: "pipedrive exact online" is already logged as S-010/D18 (cut, not content) on
   the Exact Online side, and applies here the same way - skipped, not re-logged.
 
+### T03R woocommerce (retrofit naar D17-sjabloon)
+- Path: `koppeling-woocommerce.html` (+ `downloads/it-partner-woocommerce.html`, unchanged - D17 only
+  redesigned the lander spec, the sheet spec/content did not move)
+- Open: `start-local-server.bat` then http://localhost:8765/koppeling-woocommerce
+- [ ] Hero now matches `koppeling-exact-online.html`'s shape: `.hero.lp-hero` with the logo above an
+      `<h1 class="h-balance">` question ("Wat kunt u met AI automatiseren in WooCommerce?"), a
+      direct-answer `.hero-sub`, the one `.lp-cta-block` CTA, and a full-width `.dp-window-hero` preview
+      (order lookup, "In behandeling"). Confirm it reads like T02/T01R, not like the old label-heading
+      version.
+- [ ] Tablet view (~768px, narrow the window): breadcrumb padding is not cramped against the header,
+      and the hero H1 does not overflow or jump a size
+- [ ] "Hoe koppelt u WooCommerce aan Mowi?" stayed at **5** `.lp-steps`, unchanged from the pre-retrofit
+      page - T03's own build already folded the sleutel-aanmaken sub-steps into one step, so no further
+      merge happened this pass. A `.dp-window-tile` connect tile sits under the steps.
+- [ ] "Welke agents gebruiken de WooCommerce-koppeling?" is now a `.split`: `.lp-link-stack` of 4
+      `<a class="lp-card">` (Inbox agent, Voice agent, Orderstatus, Dashboard Webshops vergelijken)
+      beside a new `.dp-window-side` preview (inbound call, "Bestelling gevonden"). Confirm 4 cards in a
+      `.split` layout reads right, not cramped, next to Exact Online's 3-card version.
+- [ ] "Wat leest Mowi uit WooCommerce?" is now 4 icon `.lp-card`s (Bestelling opgezocht / Alleen lezend /
+      Uw eigen sleutel / Status altijd actueel) instead of the old 3 plain paragraphs. The 4th card
+      ("Status altijd actueel") is new copy this retrofit added - confirm it doesn't overstate anything
+      the koppeling does not do.
+- [ ] "Wat heeft uw IT-partner of accountant nodig?" is now an `.lp-trust-note` box, not a bare paragraph.
+- [ ] FAQ content is byte-identical to the pre-retrofit page (4 Q&A, same JSON-LD) - only the section
+      wrapper changed from `.page-heading`/`.page-body` to `.lp-section-heading`/`.lp-card-grid`.
+- [ ] No standalone closing-CTA section anymore (D17): the footer's own "Vertel het en Mowi regelt het"
+      band is now the only CTA below the FAQ.
+- [ ] Open `downloads/it-partner-woocommerce.html` and print-preview it (Ctrl+P): one A4, nothing
+      clipped, and it must NOT pull in `css/style.css` (it carries its own `<style>`). Untouched by
+      this retrofit.
+- Open questions: S-006 (agent cards link to `/e-mail-agent` + `/call-agent`, not the spec's
+  `/workflows#email-agent`; `/workflows#order-status` and the dashboard fragment still land on an empty
+  page) and S-007 (no named secure channel for the key and secret, sheet uses the fallback line). No
+  woocommerce-specific keyword numbers exist yet, so the H1/title use the fallback pattern rather than a
+  Sal-supplied search term - worth a `missing fact` follow-up if real numbers ever surface for this
+  platform.
+
 ### T02 exact-online
 - Path: `koppeling-exact-online.html` (+ `downloads/it-partner-exact-online.html`)
 - Open: `start-local-server.bat` then http://localhost:8765/koppeling-exact-online
