@@ -31,7 +31,7 @@
 
 == RUN 2 ==
 - [x] T03 - integratie: woocommerce - allowed: koppeling-woocommerce.html, downloads/it-partner-woocommerce.html
-- [ ] T04 - integratie: shopify - allowed: koppeling-shopify.html, downloads/it-partner-shopify.html
+- [x] T04 - integratie: shopify - allowed: koppeling-shopify.html, downloads/it-partner-shopify.html
 - [ ] T05 - integratie: lightspeed-ecom - allowed: koppeling-lightspeed-ecom.html, downloads/it-partner-lightspeed-ecom.html
 - [ ] T06 - integratie: prestashop - allowed: koppeling-prestashop.html, downloads/it-partner-prestashop.html
 - [ ] T07 - integratie: magento - allowed: koppeling-magento.html, downloads/it-partner-magento.html

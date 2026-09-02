@@ -90,3 +90,29 @@ entry sitting in an otherwise empty log would read as a completed task and mask 
 - Oddities: none. Both gates green on round 1, 0 skips on the lander. Both meta descriptions measure
   exactly 155, the ceiling: fine, but one added word breaks them.
 - Status: [x] done
+
+### 2026-09-02 - T04 shopify
+- Built: `downloads/it-partner-shopify.html` (sheet, built first) and `koppeling-shopify.html` (lander,
+  7 sections, 3 steps, 4 cards, 4-question FAQ). Cache-bust read live from `index.html`: unchanged
+  (`style.css?v=20260829-5`, `main.js?v=20260822-23`). Chrome copied from the T03 lander, which
+  `verify.mjs` confirmed byte-identical to `test.html`.
+- Decisions: click-path follows tier 2, `shopify` in `config/shop_platforms.php`: `auth => 'oauth'` with
+  `requires_shop_domain`, 3 `instructions[]` entries shipped 1:1 as 3 steps (adres invullen / Koppel met
+  Shopify / toegang bevestigen), the "U komt automatisch terug ... Verbonden" confirmation folded into
+  step 3's body. Field label "Shopify-adres", its hint and the button text read from
+  `update-shop-connection-form.blade.php`. The config's `fields[]` (Admin API-token) is admin/concierge
+  only per its own comment, so neither page mentions a token. **Tier 1 `docs/koppeling-shopify.html`
+  contradicts the config**: it still describes the pre-OAuth concierge flow (ask via Support, receive an
+  approval link, Mowi finishes it). SPEC 9 makes the dashboard the only admissible click-path source, so
+  the lander follows the config; logged as S-009. Cards mirror T03 (Inbox, Voice, Orderstatus, Webshops
+  vergelijken): `ShopifyGateway.php` implements the same `OrderGateway` (findByOrderNumber/findByEmail)
+  plus the OrderCount/Sales/ProductSales/CustomerSales gateways, live-verified against a real store per
+  its docblock. The track-en-trace claim comes from its `FIELDS` (`fulfillments.trackingInfo`) and the
+  docs page. FAQ "60 dagen" grounded in the docs page plus the `read_all_orders` scope; "toegang
+  intrekken" (Instellingen, Apps, Mowi-app verwijderen, status Fout) from the docs page and the blade's
+  status labels. Preview chip "Verzonden" is a real `STATUS_LABELS` value. Sheet is the oauth shape like
+  T02: nothing to create or hand over, only an owner/admin login (owner/admin requirement from the docs
+  page's prereqs). No em dash or arrow from the config's instruction strings made it into copy.
+- Oddities: sheet meta description was 157 chars on round 1 (need <=155); "wie die kan bevestigen" to
+  "wie die bevestigt", green on round 2. `--dom` green both rounds, 0 skips on the lander.
+- Status: [x] done

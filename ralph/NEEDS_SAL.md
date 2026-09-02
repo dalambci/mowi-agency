@@ -131,3 +131,21 @@ always one past the highest ID already in **Open items**; there is no example en
   soon, the cheap alternative is to hold just those two pages back and ship the other nine - the
   batch does not depend on them. Belgian clients are a separate, already-disclosed gap: Exact Online
   is wired to `start.exactonline.nl` only, so a Belgian account cannot complete the flow at all.
+
+### S-009 wanted-but-out-of-scope - T04 shopify (2026-09-02)
+- Needed: the live docs page `docs/koppeling-shopify.html` (tier 1) and the dashboard's
+  `config/shop_platforms.php` (tier 2) disagree about how Shopify is connected. The docs page says
+  "Deze koppeling zet u niet zelf in elkaar": open Support in the dashboard, receive one approval link
+  from Mowi, open it while logged in to Shopify, and Mowi finishes the connection. The config's own
+  comment says that concierge path was replaced by a one-button OAuth flow against Mowi's own "Mowi
+  Koppeling" app: the client types the `.myshopify.com` address, clicks "Koppel met Shopify", confirms
+  read-only order access, and lands on Verbonden without Mowi doing anything. The `Admin API-token`
+  field is kept for the admin path only and never shown to a client.
+- Shipped instead: the lander and the sheet follow the config (SPEC section 9: the dashboard is the
+  only admissible click-path source), so 3 self-serve steps, no Support step, no approval link. Facts
+  both sources agree on were kept: read-only scope, the 60-day / `read_all_orders` note, revoking via
+  Instellingen, Apps, and the status jumping to Fout.
+- Suggested next step: rewrite the warning callout, the "De koppeling inrichten" steps and the
+  IT-partner message on `docs/koppeling-shopify.html` to the self-serve flow. It is a pre-existing
+  file, so out of this batch's reach. Until then the dashboard's own "Bekijk de documentatie" link on
+  the Shopify tile sends a client to steps that no longer match the screen they are looking at.
