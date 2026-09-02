@@ -232,3 +232,40 @@ pulled in `css/style.css`, and whether any FAQ answer claims more than live copy
       nothing to create or return, only an owner/admin login and a confirmation.
 - Open questions: S-006 (same agent-card link reading as T01-T03) and S-009 (docs page describes the
   retired concierge flow; the lander follows the dashboard's self-serve OAuth flow).
+
+### T05 lightspeed-ecom
+- Path: `koppeling-lightspeed-ecom.html` (+ `downloads/it-partner-lightspeed-ecom.html`)
+- Open: `start-local-server.bat` then http://localhost:8765/koppeling-lightspeed-ecom
+- [ ] Built straight to the D17 template (no retrofit step): `.hero.lp-hero` with the logo above an
+      `<h1 class="h-balance">` question ("Wat kunt u met AI automatiseren in Lightspeed eCom?"), a
+      direct-answer `.hero-sub`, one `.lp-cta-block` CTA, and a full-width `.dp-window-hero` preview
+      (order lookup, "Verzonden"). Confirm it reads like T02/T01R/T03R/T04R.
+- [ ] Tablet view (~768px, narrow the window): breadcrumb padding is not cramped against the header,
+      and the hero H1 does not overflow or jump a size.
+- [ ] "Hoe koppelt u Lightspeed eCom aan Mowi?" is 5 steps from a 6-entry `instructions[]`. Step 4
+      merges copying the API-adres into the API Key/Secret copy step (same page, per the config's own
+      "dit staat op dezelfde pagina" note). A `.dp-window-tile` connect tile sits under the steps.
+- [ ] "Welke agents gebruiken de Lightspeed eCom-koppeling?" is a `.split`: 4 `.lp-card`s (Inbox agent,
+      Voice agent, Orderstatus, Dashboard Webshops vergelijken) beside a `.dp-window-side` preview
+      (inbound call, "Bestelling gevonden") - same 4-card set T03R/T04R use, grounded in
+      `LightspeedGateway` implementing the same order-lookup shape (findByOrderNumber/findByEmail).
+- [ ] "Wat leest Mowi uit Lightspeed eCom?" is 4 icon `.lp-card`s. Note the "Alleen lezend" and "Uw
+      eigen sleutel" cards deliberately do NOT claim the API key itself is scoped to read-only by the
+      client (unlike the WooCommerce/Magento/PrestaShop copy) - `lightspeed.instructions[]` never asks
+      the client to pick a permission level, so the read-only guarantee is framed as what Mowi's gateway
+      does with the key, not a right the client grants at creation. Confirm this reading is right before
+      publishing, since it is a real difference from the sibling webshop landers.
+- [ ] FAQ's two error-code questions (401 sleutel geweigerd, 404 geen omgeving gevonden) are lifted
+      verbatim from `LightspeedGateway::testConnection()`'s own summary strings - confirm they still
+      match if that method ever changes.
+- [ ] "Wat heeft uw IT-partner of accountant nodig?" is an `.lp-trust-note` box linking the sheet.
+- [ ] No standalone closing-CTA section (D17): the footer's own "Vertel het en Mowi regelt het" band is
+      the only CTA below the FAQ.
+- [ ] Open `downloads/it-partner-lightspeed-ecom.html` and print-preview it (Ctrl+P): one A4, nothing
+      clipped, must NOT pull in `css/style.css` (own `<style>` block). Three values to return (API-adres,
+      API Key, API Secret), same shape as the WooCommerce sheet.
+- Open questions: no docs page exists for this platform (`doc_url` in the config 404s, per S-002), so
+  every claim traces to `config/shop_platforms.php` + `LightspeedGateway.php` only, no tier-1 source to
+  cross-check against - a new, not-yet-logged instance of the same gap the TASKS.md header already flags
+  for 7 of the 11 platforms. No keyword numbers exist for `lightspeed-ecom` (same class of gap as
+  S-011/S-012), so H1/title use the fallback pattern.

@@ -186,3 +186,30 @@ entry sitting in an otherwise empty log would read as a completed task and mask 
 - Oddities: none - both gates green on round 1, 0 fix rounds, `--dom` green first try, 0 skips on the
   lander (4 on the sheet, as expected).
 - Status: [x] done
+
+### 2026-09-03 - T05 lightspeed-ecom
+- Built: `downloads/it-partner-lightspeed-ecom.html` (sheet, built first) and
+  `koppeling-lightspeed-ecom.html` (lander, D17 template directly, no retrofit step needed), both new
+  in RUN 2. Cache-bust read live from `index.html`: unchanged (`style.css?v=20260829-5`,
+  `main.js?v=20260822-23`). Chrome copied from `koppeling-shopify.html`, itself byte-identical to
+  `test.html`.
+- Decisions: config key is `lightspeed` (webshop category, `auth => 'static'`, gateway
+  `LightspeedGateway`, `doc_url` points at a docs page that does not exist per S-002 - no tier-1 source,
+  matches TASKS.md header). `instructions[]` has 6 entries; folded to 5 `.lp-steps` by merging entry 5
+  ("kopieer ook het API-adres... staat op dezelfde pagina") into step 4's copy action, same "same-screen
+  alternative folds in" rule T03/T01R used - nothing dropped. Read `LightspeedGateway.php` directly
+  (tier 2, same precedent S-008/T01R used for gateway files beyond the SPEC's named list): only `.get()`
+  calls exist (findByOrderNumber/findByEmail/listRecent/testConnection), no write endpoint, so "alleen
+  lezend" is grounded in Mowi's own behaviour rather than a read-only scope the client sets - the config's
+  instructions never mention selecting permissions the way WooCommerce's do, so the copy deliberately
+  frames read-only as what Mowi does with the key, not a right the client grants. Order lookup + tracking
+  (carrier/track-and-trace) mirrors Shopify's gateway shape, so section 3 reused the Inbox/Voice/
+  Orderstatus/Dashboard-Webshops-vergelijken 4-card set. FAQ's two error-code questions (401/404) are
+  lifted verbatim from `testConnection()`'s own summary strings. No keyword numbers exist for
+  `lightspeed-ecom`, so H1/title use the proven fallback pattern (not re-logged - S-011/S-012 already
+  cover this exact gap type). No cross-platform sub-question: no keyword supplied, section skipped per D17
+  item 6.
+- Oddities: sheet meta description was 159 chars on round 1 (need <=155); trimmed "de Lightspeed
+  eCom-kant van de Mowi-koppeling regelt" to "de Lightspeed eCom-koppeling met Mowi regelt", green on
+  round 2. `--dom` green first try, 0 skips on the lander (4 on the sheet, as expected).
+- Status: [x] done

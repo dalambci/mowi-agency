@@ -195,3 +195,29 @@ always one past the highest ID already in **Open items**; there is no example en
 - Suggested next step: a real search-volume number for a Shopify-plus-AI query (Google Keyword Planner,
   same source as the Exact Online figures) would let the title/H1 be built around the actual seed
   keyword instead of the generic pattern - no rebuild needed, just a copy swap.
+
+### S-013 missing fact - T05 lightspeed-ecom (2026-09-03)
+- Needed: SPEC section 4 "Finding the question" step 2 - no real keyword numbers have been supplied for
+  `lightspeed-ecom`, same gap class as S-011/S-012.
+- Shipped instead: the fallback pattern proven on the other three webshop platforms - `<h1>` "Wat kunt u
+  met AI automatiseren in Lightspeed eCom?", title "Lightspeed eCom koppeling met AI: wat kunt u
+  automatiseren? — Mowi".
+- Suggested next step: a real search-volume number for a Lightspeed-plus-AI query would let the
+  title/H1 be built around the actual seed keyword instead - no rebuild needed, just a copy swap.
+
+### S-014 missing fact - T05 lightspeed-ecom (2026-09-03)
+- Needed: whether Lightspeed eCom's "New API Key" screen actually offers a read/write permission choice
+  the client can set, the way WooCommerce ("Rechten: Lezen"), Magento ("API-rechten alleen View aan")
+  and PrestaShop ("Rechten alleen Bekijken aan") explicitly do. `lightspeed.instructions[]` in
+  `config/shop_platforms.php` never mentions choosing a permission level - it only says to name the key
+  and confirm - so there is no tier-2 source (and no tier-1 docs page exists for this platform at all,
+  see S-002) confirming either way.
+- Shipped instead: conservative framing. The lander and sheet both say Mowi only ever uses the key to
+  read (grounded in `LightspeedGateway.php`, which implements only `.get()` calls, no write method
+  exists), rather than claiming the key itself is scoped to read-only by the client the way the
+  WooCommerce/Magento/PrestaShop copy does. This is a real difference in wording from the sibling
+  webshop landers, not an inconsistency in fact - each claim is exactly as strong as its own platform's
+  grounding allows.
+- Suggested next step: if Lightspeed eCom's API key creation screen does offer a permission choice,
+  confirm it once (a screenshot or the vendor's own docs page) and the copy can be strengthened to match
+  the WooCommerce pattern. Until then the current wording is the honest ceiling.
