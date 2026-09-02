@@ -42,3 +42,44 @@ always one past the highest ID already in **Open items**; there is no example en
   file legitimately changed on this branch, done during setup, not by the loop. The loop must never edit
   it again **and must never revert it**: ` M .gitignore` in `git status` is sanctioned state, not dirt.
 - Suggested next step: none. Left in place as the record of why that line exists.
+
+### S-002 wanted-but-out-of-scope - setup (2026-09-02)
+- Needed: eight platforms in the dashboard's `config/shop_platforms.php` carry a `doc_url` pointing at a
+  docs page that **does not exist** on mowi.agency, so the "lees de handleiding" link in the dashboard's
+  own connect screen 404s today: `koppeling-lightspeed`, `koppeling-shopware`, `koppeling-magento`,
+  `koppeling-bol`, `koppeling-prestashop`, `koppeling-hubspot`, `koppeling-guestplan`,
+  `koppeling-calendly`. Only `woocommerce`, `shopify`, `pipedrive` and `google-agenda` resolve.
+- Shipped instead: nothing - this is a dashboard-side bug found while sourcing grounding material, not a
+  batch task. It is also **why** 7 of the 11 landers have no docs page to ground copy in (TASKS.md header).
+- Suggested next step: decide whether the missing docs pages get written (they would ground both the
+  landers and the dashboard link), or whether the dashboard should drop the `doc_url` for those eight
+  until a page exists. Either is a separate job from this batch.
+
+### S-003 wanted-but-out-of-scope - setup (2026-09-02)
+- Needed: **Shopware, bol.com and Guestplan** are `implemented => true` in the dashboard - a customer can
+  connect them today - but `koppelingen.html` still lists all three under "Op de planning". They are
+  therefore out of scope under D2/D14 and have no lander.
+- Shipped instead: nothing. The 11 landers cover only what the public hub page calls live.
+- Suggested next step: one word from Sal. If those three are genuinely live, they become T12-T14 on the
+  same spec and the hub page's cards move from "Op de planning" to "Nu al te koppelen" in the supervised
+  T99 wiring pass - the hub page is a shared file, so it cannot move inside a loop run.
+
+### S-004 wanted-but-out-of-scope - setup (2026-09-02)
+- Needed: master's working tree had two uncommitted `.gitignore` additions (`out/` and
+  `content/social-templates/.render-tmp.html`) that blocked the branch switch. They are parked in
+  `stash@{0}` ("ralph phase0: master .gitignore additions...").
+- Shipped instead: the same two lines were added to this branch's `.gitignore` directly, so the loop is
+  not affected either way. The stash is a belt-and-braces copy, deliberately not dropped.
+- Suggested next step: when the social-content workstream gets committed on master, `git stash pop` there
+  (or just re-add the two lines) and drop the stash. Nothing in this batch depends on it.
+
+### S-005 wanted-but-out-of-scope - setup (2026-09-02)
+- Needed: commit `2f0991b` (2026-08-24, "Add accounting workflows and 3 boekhouding integrations from
+  autoboeker.nl") lives on this branch only - it is not on `origin/master`. It edits `index.html` and
+  `koppelingen.html`, and it adds **Twinfield, SnelStart and e-Boekhouden.nl** to the hub page's "Op de
+  planning" list. `verify.mjs`'s `vendors` check treats "SnelStart" and "Twinfield" as forbidden names
+  (D2), so the existing hub page now fails that check - new landers are unaffected, they never name them.
+- Shipped instead: nothing changed. The commit predates this session and is unrelated to the batch.
+- Suggested next step: decide whether that commit belongs on master at all, and whether "Op de planning"
+  counts as naming a vendor for D2's purposes. If it does, the hub page needs a separate pass - it is a
+  shared file and out of this batch's reach.

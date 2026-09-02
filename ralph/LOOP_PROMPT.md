@@ -9,10 +9,16 @@ THE ONLY STATE.** Trust `ralph/TASKS.md` and `git`, never recollection. Do exact
 Run `git status --porcelain`.
 
 - Clean -> continue to Step 1.
-- ` M .gitignore` -> **sanctioned branch-setup state. Leave it exactly as it is.** It carries the ignore
-  rules for `.claude/ralph-loop.local.md` and `ralph/logs/`, and `run.sh` writes every transcript into
-  `ralph/logs/`. Never revert it, never edit it, never log it as an incident. It may appear on its own or
-  alongside real dirt; either way it is not dirt.
+- **Sanctioned pre-existing state. Leave every one of these exactly as it is.** They may appear on their
+  own or alongside real dirt; either way they are not dirt. Never revert them, never `git clean` them,
+  never edit them, never log them as an incident:
+  - ` M .gitignore` - carries the ignore rules for `.claude/ralph-loop.local.md`, `ralph/logs/` (where
+    `run.sh` writes every transcript) and the parked social-content build output `out/`.
+  - `?? gratis.html`, `?? PUBLISHING-SOCIAL.md`, `?? build-carousels.js`, `?? content/social/`,
+    `?? content/social-templates/`, `?? .claude/skills/mowi-content/` - a separate, unfinished
+    social-content workstream of Sal's, uncommitted since 2026-08-28 and **existing nowhere else: not on
+    origin, not in any commit, not in any other branch**. A `git clean` on any of them destroys the only
+    copy that exists. They sit outside every task's allowed paths and you will never need to touch them.
 - Dirt **only** inside the current first-unchecked task's allowed paths, or inside `ralph/` ->
   a previous iteration was interrupted. Adopt that work and continue it as this iteration's task.
 - Anything else (any path outside those) -> revert it before doing anything else:

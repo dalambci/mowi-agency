@@ -7,3 +7,9 @@ blog-preview/
 
 # ralph loop run transcripts - useful for debugging a run, not worth committing
 ralph/logs/
+
+# Build output + render scratch from the social-content workstream (parked,
+# uncommitted on master as of 2026-09-02). Ignored here so the loop's paths
+# gate does not see them as dirt.
+out/
+content/social-templates/.render-tmp.html

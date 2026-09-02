@@ -155,3 +155,50 @@ almost nothing legitimate to ask for. Four of its lander sections and most of it
 conservative copy plus `NEEDS_SAL.md` entries, which is *correct* behaviour under the Gap rule but a poor
 first proof of the pipeline. Hitting it second, with the mechanics already proven, keeps the two failure
 kinds separate: "the pipeline is broken" versus "this integration has no material".
+
+### D12 - The branch was refreshed onto current origin/master before RUN 1 (2026-09-02)
+
+This branch was cut 2026-08-23 and by 2026-09-02 sat **56 commits behind `origin/master`**. Measured
+before merging: the `<head>` block, the `<header>` and the `<footer>` of `koppelingen.html` all differed
+from origin's, and the sitewide cache-bust had moved `20260823-2` -> `20260829-5`.
+
+That is not cosmetic. `LOOP_PROMPT.md` Step 3 copies the chrome **verbatim from `test.html`** and reads
+the `?v=` strings **live from `index.html`**, so every one of the 11 landers would have shipped with
+2026-08-23 chrome and a stale cache-bust: 11 files of rework, discovered only at Sal's review.
+
+Done: `git merge-tree --write-tree` first (clean, no working tree touched), then a real merge
+(commit `114f5b4`). Nothing pushed, nothing deployed - guardrail 3 is untouched by a local merge.
+`verify.mjs` needed no change, because it reads both canons live rather than hardcoding them; re-smoke-
+tested afterwards against `koppelingen.html`, where `chrome` and `cachebust` both PASS.
+
+Carried along, and **not** on `origin/master`: commit `2f0991b` (2026-08-24, "Add accounting workflows
+and 3 boekhouding integrations from autoboeker.nl"), which edits `index.html` and `koppelingen.html`.
+It predates this session and is unrelated to the batch, but it rides along in any merge back to master.
+See `S-005`.
+
+### D13 - Sal's parked social-content files are sanctioned state, never cleaned (2026-09-02)
+
+Six untracked paths sit in the working tree, last touched 2026-08-27/28: `gratis.html`,
+`PUBLISHING-SOCIAL.md`, `build-carousels.js`, `content/social/`, `content/social-templates/`,
+`.claude/skills/mowi-content/`. Checked against `origin/master` and every local branch: they exist in
+**no commit anywhere**. The working tree is the only copy.
+
+`LOOP_PROMPT.md` Step 0 previously told the loop to `git clean -f -- <path>` anything untracked outside
+the active task's allowed paths. On iteration 1 that would have permanently destroyed all six. Step 0 now
+names them as sanctioned pre-existing state, in the same breath as ` M .gitignore`, with an explicit
+"a `git clean` on any of them destroys the only copy that exists".
+
+`.gitignore` on this branch also re-adds `out/` and `content/social-templates/.render-tmp.html`, which
+were in master's uncommitted `.gitignore` and are parked in `stash@{0}` (see `S-004`) - without them the
+build output of that workstream shows up as dirt in the paths gate every single iteration.
+
+### D14 - The dashboard now implements 14 platforms; the batch stays at the site's 11 (2026-09-02)
+
+`config/shop_platforms.php` in the Mowi Dashboard repo now has `implemented => true` for **14**
+platforms - three more than when D2 was written: **Shopware, bol.com, Guestplan**. All three are still
+listed under **"Op de planning"** on the public `koppelingen.html`.
+
+D2 stands unchanged: planned on the site is out of scope. A lander that says a platform is connectable
+today, one click from a hub page that says it is not, is a contradiction Sal has not sanctioned - and the
+hub page is a shared file this batch may not edit. The task list stays at 11. `S-003` records it; one
+word from Sal moves those three in as T12-T14.
