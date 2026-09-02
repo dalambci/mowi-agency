@@ -91,8 +91,83 @@ The lander lives at the repo **root**, not in a folder. Canonical URL is extensi
 - Never `git push`. Never `ssh`, `scp`, `rsync`, `curl` at a host, or anything pointed at Cloudways or the
   droplet. `.claude/settings.local.json` allowlists `Bash(ssh *)`; the loop must never use it.
 - Never run `build-blog.js` or `generate-it-sheets.js` outside T99.
-- Never add CSS, JS, a `<style>` block, or a new asset **on a lander**. (Sheets are the deliberate
-  exception, see section 5.)
+- Never add JS or a new asset **on a lander**, and never edit the shared stylesheet. A lander carries
+  exactly **one** `<style>` block: the block below, copied verbatim into every lander, placed last in
+  `<head>`. Do not extend it, do not write a second one, do not use a `style=` attribute. Rationale in
+  D15/D16. Note the comment says "the shared stylesheet" and never spells the filename: the `cachebust`
+  check counts every occurrence of that filename in the file, so naming it in a comment fails the page.
+
+    <style>
+      /* Page-scoped lander styles (D15/D16). Nothing here touches the shared stylesheet,
+         so no other page moves and no sitewide cache-bust bump is needed.
+  
+         1. Section rhythm. The shared .section is 5rem 0, so two stacked sections
+            put 10rem between blocks. Too airy for a short lander (Sal, 2026-09-02).
+         2. The koppeling preview. A monochrome port of the dashboard Start page's
+            own .dp-card mock (resources/views/components/discover-preview.blade.php)
+            so the site shows the same picture the product does. Abstract on purpose:
+            real labels only where they carry meaning, masked values and grey bars
+            everywhere else. Inventing a customer name or an amount would put fake
+            data on a page the client reads before any of it is true. Colour is
+            swapped for the site's monochrome tokens: the chip is a black fill,
+            never a green one. */
+      main .section { padding: 3rem 0; }
+      main .section#lander-hero { padding-top: 4rem; }
+      @media (max-width: 48rem) { main .section { padding: 2.25rem 0; } }
+  
+      .lp-hero-logo { display: block; margin-bottom: 1.25rem; }
+  
+      .dp-window {
+        height: 190px; max-width: 21rem; margin: 2.25rem auto 0;
+        overflow: hidden; display: flex; justify-content: center;
+        align-items: flex-start; padding-top: 20px;
+        background: var(--muted); border: 1px solid var(--border);
+        border-radius: var(--radius-card);
+      }
+      .dp-card {
+        width: 82%; max-width: 250px; flex-shrink: 0; text-align: left;
+        background: var(--surface); border: 1px solid var(--border);
+        border-radius: var(--radius-card); padding: 12px;
+      }
+      .dp-head { font-size: 10.5px; color: var(--ink-3); line-height: 1.4; }
+      .dp-title { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.4; }
+      .dp-amount { font-size: 11px; color: var(--ink-3); margin-bottom: 10px; }
+      .dp-row {
+        display: flex; align-items: center; gap: 8px; margin-top: 6px;
+        border: 1px solid var(--border); border-radius: 6px; padding: 7px 8px;
+      }
+      .dp-avatar { width: 18px; height: 18px; border-radius: 5px; background: var(--muted); flex-shrink: 0; }
+      .dp-bars { flex: 1; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+      .dp-bar { height: 5px; border-radius: var(--radius-pill); background: var(--band); }
+      .dp-bar.short { width: 48%; }
+      .dp-chip {
+        font-size: 9.5px; font-weight: 600; white-space: nowrap; padding: 2px 6px;
+        border-radius: var(--radius-pill); background: var(--ink); color: var(--bg);
+      }
+    </style>
+
+  Anything the block does not cover is a `NEEDS_SAL.md` entry, not a bigger block. (Sheets are a
+  separate, deliberate exception, see section 5.)
+- **The platform logo, once per lander.** In the hero, directly above the `<h1>`:
+  `<img src="assets/logos/<file>" alt="" class="integration-card-logo lp-hero-logo" />`. Take the exact
+  filename from that platform card in `koppelingen.html` (they are not all `.svg`; Exact, HubSpot and
+  AFAS are `.png`). `alt=""` because the `<h1>` beside it already names the platform. Every one of these
+  files already ships live on `koppelingen.html`, so this adds no asset and no new trademark exposure.
+- **One preview per lander**, the `.dp-window` markup, placed after the prose in "Wat de koppeling doet".
+  Fill it with what that koppeling actually produces for the client, and mask every value that would
+  otherwise be invented: `&bull;` runs for an address or an amount, grey bars for the rest, real words
+  only in the head, the chip and the caption. A plausible-looking customer name, shop name or euro
+  amount is fake data on a page the client reads before any of it is true. Give the wrapper
+  `role="img"` and an `aria-label` describing what is shown.
+- **A step is an action the client performs.** An alternative route to the same screen, or a
+  confirmation that it worked, is not a step: fold it into the body of the step before it. Pipedrive
+  went 5 steps to 4 this way, Exact Online 3 to 2 (Sal, 2026-09-02: "make it look very easy and quick
+  to do, which it is"). Never drop an instruction to hit a lower number, and never merge two genuinely
+  separate actions.
+- **Fewest words that still carry the meaning.** Cut throat-clearing openers ("De koppeling staat nooit
+  op zichzelf"), restatements of the platform name the reader just read in the `<h1>`, and any sentence
+  that only sets up the next one. Keep every qualifier that changes what is true: "alleen lezend", the
+  NL-only limitation, who owns a token. Shorter, never vaguer.
 - Never an em dash **anywhere inside `<main>`, attribute values included** (`alt`, `aria-label`, `title`,
   an `href`), nor in the meta description, nor in any JSON-LD string. Every spelling is the same hit,
   because the check decodes entities before looking: `—`, `&mdash;`, `&#8212;`, `&#08212;`, `&#x2014;`,

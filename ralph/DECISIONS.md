@@ -202,3 +202,44 @@ D2 stands unchanged: planned on the site is out of scope. A lander that says a p
 today, one click from a hub page that says it is not, is a contradiction Sal has not sanctioned - and the
 hub page is a shared file this batch may not edit. The task list stays at 11. `S-003` records it; one
 word from Sal moves those three in as T12-T14.
+
+### D15 - Landers carry one page-scoped `<style>` block (2026-09-02)
+
+Sal asked for less space between sections. The shared `.section` is `padding: 5rem 0`, so two stacked
+sections put 10rem between blocks. It is used by every page on the site, so changing it would move all
+of them and, per CLAUDE.md's cache-busting rule, force a `?v=` bump across ~30 pages.
+
+A page-scoped block is what `RALPH_SITE_BATCH.md` section 3.1 explicitly permits ("New pages get
+page-scoped styles only"). This supersedes the earlier SPEC line banning `<style>` on a lander, which
+was this project's own tightening, not the governing file's rule.
+
+Two traps found while doing it, both now written into the SPEC block itself:
+- The comment must not spell the stylesheet's filename. The `cachebust` check counts every occurrence
+  of it in the file and requires each to carry the current `?v=`, so a prose mention fails the page.
+- The comment must not contain the literal string `<main`. The `structure` check reads raw source and
+  would count it as a second opening tag.
+
+### D16 - The koppeling preview, and the three copy rules that came with it (2026-09-02)
+
+Sal asked for "one image graph per page, like the dashboard start page images used for the widgets".
+Those are not image files: they are the HTML/CSS mock in
+`resources/views/components/discover-preview.blade.php` (`.discover-preview` / `.dp-*`). Ported to the
+site's monochrome tokens inside the D15 block, which means **no new asset**, no binary in the repo, and
+the site showing the same picture the product shows.
+
+The component's own honesty rule is carried over verbatim and matters more than the styling: real
+labels only where they carry meaning, masked values (`&bull;` runs) and grey bars everywhere else.
+Its source comment says it plainly, and it applies exactly as much on a public lander: *"Inventing
+plausible customer names, subject lines or shop names would put fake data on a page the client reads
+before any of it is true."* The dashboard's green "success" chip becomes a black fill, because the
+site's v2 design system is monochrome.
+
+Three copy decisions landed in the same pass, all now SPEC rules:
+1. **The platform logo appears once**, in the hero above the `<h1>`. The original plan said text pills
+   only, no third-party logos. That was superseded in practice: `koppelingen.html` already ships all 29
+   logo files live, so a lander using one adds no asset and no new trademark exposure.
+2. **A step is an action the client performs.** An alternative route to the same screen, or a
+   confirmation that it worked, folds into the step before it. Pipedrive went 5 to 4, Exact Online 3 to
+   2. Sal: "make it look very easy and quick to do, which it is."
+3. **Fewest words that still carry the meaning.** Cut openers and restatements; keep every qualifier
+   that changes what is true (alleen lezend, the NL-only limit, who owns a token). Shorter, never vaguer.

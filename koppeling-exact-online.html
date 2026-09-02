@@ -28,7 +28,7 @@
         "name": "Is de Exact Online-koppeling alleen lezend?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Ja. Mowi leest klant- en factuurgegevens uit Exact Online en past er nooit iets in aan."
+          "text": "Ja. Mowi leest en past nooit iets aan."
         }
       },
       {
@@ -36,7 +36,7 @@
         "name": "Welk wachtwoord of API-sleutel moet ik invullen?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Geen. U logt in met uw eigen Exact Online-account en bevestigt de toegang. Er verlaat geen wachtwoord of sleutel uw organisatie."
+          "text": "Geen. U logt in met uw eigen account en bevestigt de toegang. Er verlaat geen wachtwoord of sleutel uw organisatie."
         }
       },
       {
@@ -52,12 +52,60 @@
         "name": "Kan een collega of accountant de koppeling maken?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Dat kan. Diegene heeft alleen een eigen Exact Online-account nodig met toegang tot de juiste administratie. Gebruik hiervoor het A4 voor uw IT-partner."
+          "text": "Ja. Diegene heeft alleen een eigen account nodig met toegang tot de juiste administratie. Gebruik daarvoor het A4."
         }
       }
     ]
   }
   </script>
+  <style>
+    /* Page-scoped lander styles (D15/D16). Nothing here touches the shared stylesheet,
+       so no other page moves and no sitewide cache-bust bump is needed.
+
+       1. Section rhythm. The shared .section is 5rem 0, so two stacked sections
+          put 10rem between blocks. Too airy for a short lander (Sal, 2026-09-02).
+       2. The koppeling preview. A monochrome port of the dashboard Start page's
+          own .dp-card mock (resources/views/components/discover-preview.blade.php)
+          so the site shows the same picture the product does. Abstract on purpose:
+          real labels only where they carry meaning, masked values and grey bars
+          everywhere else. Inventing a customer name or an amount would put fake
+          data on a page the client reads before any of it is true. Colour is
+          swapped for the site's monochrome tokens: the chip is a black fill,
+          never a green one. */
+    main .section { padding: 3rem 0; }
+    main .section#lander-hero { padding-top: 4rem; }
+    @media (max-width: 48rem) { main .section { padding: 2.25rem 0; } }
+
+    .lp-hero-logo { display: block; margin-bottom: 1.25rem; }
+
+    .dp-window {
+      height: 190px; max-width: 21rem; margin: 2.25rem auto 0;
+      overflow: hidden; display: flex; justify-content: center;
+      align-items: flex-start; padding-top: 20px;
+      background: var(--muted); border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+    }
+    .dp-card {
+      width: 82%; max-width: 250px; flex-shrink: 0; text-align: left;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-card); padding: 12px;
+    }
+    .dp-head { font-size: 10.5px; color: var(--ink-3); line-height: 1.4; }
+    .dp-title { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.4; }
+    .dp-amount { font-size: 11px; color: var(--ink-3); margin-bottom: 10px; }
+    .dp-row {
+      display: flex; align-items: center; gap: 8px; margin-top: 6px;
+      border: 1px solid var(--border); border-radius: 6px; padding: 7px 8px;
+    }
+    .dp-avatar { width: 18px; height: 18px; border-radius: 5px; background: var(--muted); flex-shrink: 0; }
+    .dp-bars { flex: 1; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+    .dp-bar { height: 5px; border-radius: var(--radius-pill); background: var(--band); }
+    .dp-bar.short { width: 48%; }
+    .dp-chip {
+      font-size: 9.5px; font-weight: 600; white-space: nowrap; padding: 2px 6px;
+      border-radius: var(--radius-pill); background: var(--ink); color: var(--bg);
+    }
+  </style>
 </head>
 <body>
 
@@ -133,9 +181,10 @@
     <section class="section" id="lander-hero">
       <div class="container">
         <p class="blog-breadcrumb"><a href="/">Home</a> &rsaquo; <a href="/koppelingen">Koppelingen</a> &rsaquo; Exact Online</p>
-        <h1 class="page-hero-heading">Automatiseren in Exact Online.</h1>
-        <p class="page-hero-body">Mowi sluit aan op de Exact Online die u al gebruikt. Uw agent herkent een klant bij naam en weet meteen welke facturen nog openstaan.</p>
-        <p class="page-hero-body">De koppeling is alleen lezend. Er wordt nooit iets in uw Exact Online aangepast.</p>
+        <img src="assets/logos/exact.png" alt="" class="integration-card-logo lp-hero-logo" />
+      <h1 class="page-hero-heading">Automatiseren in Exact Online.</h1>
+        <p class="page-hero-body">Uw agent herkent een klant bij naam en ziet meteen welke facturen openstaan.</p>
+        <p class="page-hero-body">Alleen lezend. Er verandert niets in Exact Online.</p>
       </div>
     </section>
 
@@ -143,9 +192,19 @@
     <section class="section">
       <div class="container">
         <h2 class="page-heading">Wat de koppeling doet</h2>
-        <p class="page-body">Exact Online is de boekhoudsoftware waarin uw klant- en factuurgegevens staan. Mowi leest die gegevens uit, zodat uw agent een klant bij naam herkent en direct weet welke facturen nog openstaan.</p>
-        <p class="page-body">De koppeling werkt maar één kant op. Mowi leest, Mowi schrijft niet in Exact Online.</p>
-        <p class="page-body">U koppelt met uw eigen Exact Online-account. Er komt geen los wachtwoord of API-sleutel aan te pas. U logt in bij Exact Online, kiest de administratie en bevestigt de toegang.</p>
+        <p class="page-body">Mowi leest uw klant- en factuurgegevens uit Exact Online. Uw agent herkent een klant bij naam en ziet welke facturen openstaan.</p>
+        <p class="page-body">Één kant op: Mowi leest, Mowi schrijft niet.</p>
+        <p class="page-body">U logt in met uw eigen account, kiest de administratie en bevestigt. Geen wachtwoord of API-sleutel nodig.</p>
+        <div class="dp-window" role="img" aria-label="Voorbeeld: een overzicht van openstaande facturen in het Mowi-dashboard">
+          <div class="dp-card">
+            <div class="dp-head">Openstaande facturen</div>
+            <div class="dp-title">&euro; &bull;&bull;.&bull;&bull;&bull;</div>
+            <div class="dp-amount">Uit uw eigen administratie</div>
+            <div class="dp-row"><span class="dp-avatar"></span><span class="dp-bars"><span class="dp-bar"></span><span class="dp-bar short"></span></span><span class="dp-chip">Bijgewerkt</span></div>
+            <div class="dp-row"><span class="dp-avatar"></span><span class="dp-bars"><span class="dp-bar short"></span><span class="dp-bar"></span></span></div>
+            <div class="dp-row"><span class="dp-avatar"></span><span class="dp-bars"><span class="dp-bar"></span><span class="dp-bar short"></span></span></div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -156,19 +215,19 @@
     <section class="section">
       <div class="container">
         <h2 class="page-heading">Werkt met deze agents en workflows</h2>
-        <p class="page-body">De Exact Online-koppeling staat nooit op zichzelf. Dit is wat er daadwerkelijk mee gebeurt.</p>
+        <p class="page-body">Dit is wat er met de koppeling gebeurt.</p>
         <div class="lp-card-grid">
           <a href="/e-mail-agent" class="lp-card">
             <h3>Inbox agent</h3>
-            <p>Herkent de afzender aan de hand van uw klantgegevens in Exact Online, voordat het conceptantwoord voor u klaarstaat.</p>
+            <p>Herkent de afzender aan uw klantgegevens, voordat het concept klaarstaat.</p>
           </a>
           <a href="/call-agent" class="lp-card">
             <h3>Voice agent</h3>
-            <p>Weet wie er belt. Het gesprek hoeft niet te beginnen met opnieuw uitvragen wie iemand is.</p>
+            <p>Weet wie er belt. Geen uitvraagronde meer aan het begin.</p>
           </a>
           <a href="/workflows#dashboard-openstaande-facturen" class="lp-card">
             <h3>Openstaande facturen</h3>
-            <p>Laat zien welke facturen uit Exact Online nog openstaan en welke aandacht nodig hebben.</p>
+            <p>Laat zien welke facturen openstaan en aandacht nodig hebben.</p>
           </a>
         </div>
       </div>
@@ -182,22 +241,17 @@
       <div class="container">
         <h2 class="page-heading">Zo koppelt u Exact Online</h2>
         <div class="lp-steps">
-          <div class="lp-step">
-            <div class="lp-step-circle" aria-hidden="true">1</div>
-            <h3>Klik op Koppel met Exact Online</h3>
-            <p>Log in met uw eigen Exact Online-account. Ondersteund is op dit moment alleen het Nederlandse Exact Online (start.exactonline.nl).</p>
-          </div>
-          <div class="lp-step">
-            <div class="lp-step-circle" aria-hidden="true">2</div>
-            <h3>Kies de juiste administratie</h3>
-            <p>Kies de administratie die u wilt koppelen en bevestig de toegang.</p>
-          </div>
-          <div class="lp-step">
-            <div class="lp-step-circle" aria-hidden="true">3</div>
-            <h3>U bent verbonden</h3>
-            <p>U komt automatisch terug in het dashboard en de koppeling staat op Verbonden.</p>
-          </div>
+        <div class="lp-step">
+          <div class="lp-step-circle" aria-hidden="true">1</div>
+          <h3>Klik op Koppel met Exact Online</h3>
+          <p>Log in met uw eigen account. Alleen het Nederlandse Exact Online (start.exactonline.nl).</p>
         </div>
+        <div class="lp-step">
+          <div class="lp-step-circle" aria-hidden="true">2</div>
+          <h3>Kies uw administratie en bevestig</h3>
+          <p>U komt terug in het dashboard en de koppeling staat op Verbonden.</p>
+        </div>
+      </div>
       </div>
     </section>
 
@@ -205,7 +259,7 @@
     <section class="section">
       <div class="container">
         <h2 class="page-heading">Voor uw IT-partner</h2>
-        <p class="page-body">Regelt een collega, IT-partner of accountant de koppeling met Exact Online? Dat kan. Er is geen wachtwoord of API-sleutel te delen, alleen een eigen Exact Online-account met toegang tot de juiste administratie. Er is één A4 met precies wat er gevraagd wordt.</p>
+        <p class="page-body">Regelt een collega of accountant dit voor u? Er valt geen wachtwoord of sleutel te delen, alleen een eigen account met toegang tot de juiste administratie. Één A4 met wat er nodig is.</p>
         <p class="page-body"><a href="/downloads/it-partner-exact-online.html" class="link-arrow">Open het A4 voor uw IT-partner</a></p>
       </div>
     </section>
@@ -219,11 +273,11 @@
         <div class="lp-card-grid">
           <div class="lp-card">
             <h3>Is de Exact Online-koppeling alleen lezend?</h3>
-            <p>Ja. Mowi leest klant- en factuurgegevens uit Exact Online en past er nooit iets in aan.</p>
+            <p>Ja. Mowi leest en past nooit iets aan.</p>
           </div>
           <div class="lp-card">
             <h3>Welk wachtwoord of API-sleutel moet ik invullen?</h3>
-            <p>Geen. U logt in met uw eigen Exact Online-account en bevestigt de toegang. Er verlaat geen wachtwoord of sleutel uw organisatie.</p>
+            <p>Geen. U logt in met uw eigen account en bevestigt de toegang. Er verlaat geen wachtwoord of sleutel uw organisatie.</p>
           </div>
           <div class="lp-card">
             <h3>Werkt de koppeling ook met de Belgische of Duitse Exact Online?</h3>
@@ -231,7 +285,7 @@
           </div>
           <div class="lp-card">
             <h3>Kan een collega of accountant de koppeling maken?</h3>
-            <p>Dat kan. Diegene heeft alleen een eigen Exact Online-account nodig met toegang tot de juiste administratie. Gebruik hiervoor het A4 voor uw IT-partner.</p>
+            <p>Ja. Diegene heeft alleen een eigen account nodig met toegang tot de juiste administratie. Gebruik daarvoor het A4.</p>
           </div>
         </div>
       </div>
@@ -241,7 +295,7 @@
     <section class="section">
       <div class="container">
         <h2 class="page-heading">Klaar om Exact Online te koppelen</h2>
-        <p class="page-body">Begin gratis en koppel Exact Online wanneer het u uitkomt. Wilt u eerst weten wat het kost? Bekijk de <a href="/pricing">prijzen</a>.</p>
+        <p class="page-body">Begin gratis en koppel wanneer het u uitkomt. Benieuwd naar de kosten? Bekijk de <a href="/pricing">prijzen</a>.</p>
         <a href="https://my.mowi.agency/aanmelden" class="btn-primary page-cta" data-event="Signup Click">Start gratis</a>
       </div>
     </section>
