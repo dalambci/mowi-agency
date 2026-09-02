@@ -354,3 +354,52 @@ pulled in `css/style.css`, and whether any FAQ answer claims more than live copy
   `billing_postcode`/`shipping_postcode` - no sibling lander frames postcode data that way, so it was
   left out rather than introduced as a new, ungrounded claim type. Worth a word from Sal if that's a
   real feature worth adding across all the order-lookup landers at once.
+
+### T08 hubspot
+- Path: `koppeling-hubspot.html` (+ `downloads/it-partner-hubspot.html`)
+- Open: `start-local-server.bat` then http://localhost:8765/koppeling-hubspot
+- [ ] Built straight to the D17 template (no retrofit step): `.hero.lp-hero` with the logo above an
+      `<h1 class="h-balance">` question ("Wat kunt u met AI automatiseren in HubSpot?"), a
+      direct-answer `.hero-sub`, one `.lp-cta-block` CTA, and a full-width `.dp-window-hero` preview
+      (inbound e-mail, "Klant herkend"). Confirm it reads like `koppeling-pipedrive.html`, the closest
+      sibling (same CRM shape, same access-token auth).
+- [ ] Tablet view (~768px, narrow the window): breadcrumb padding is not cramped against the header,
+      and the hero H1 does not overflow or jump a size.
+- [ ] "Hoe koppelt u HubSpot aan Mowi?" is 4 steps from a 6-entry `instructions[]`. Step 2 folds the
+      direct Private Apps link and the "via het menu" alternative route into one step's body (same
+      "alternative route is not its own step" rule Pipedrive/Exact Online used). Step 3 folds creating
+      the private app + setting its scope + copying the shown-once token into one step (a same-screen
+      create-and-copy action, same fold class WooCommerce/Magento used for their own key-creation step).
+      Confirm step 3's body doesn't read as doing too much at once next to the one-liners around it.
+- [ ] "Welke agents gebruiken de HubSpot-koppeling?" is a `.split`: 3 `.lp-card`s (Inbox agent, Voice
+      agent, CRM-synchronisatie), the Pipedrive pattern, not a dashboard card - `HubSpotGateway.php`
+      implements `DealGateway` (pipeline/win-rate aggregates), but per NEEDS_SAL S-008 those methods are
+      explicitly un-verified against a real portal, so only the live-verified `CrmGateway` contact-lookup
+      half (which the hero/side previews already draw from) is claimed. Confirm this reading is right.
+- [ ] "Wat leest Mowi uit HubSpot?" is 4 icon `.lp-card`s (Klant herkend / Open deals in beeld / Alleen
+      lezend / Uw eigen access-token). "Open deals in beeld" is grounded in
+      `HubSpotGateway::buildPersonShape()`'s `open_deals` field (title + stage from the associations +
+      batch/read calls), part of the same contact-lookup path as the recognized-caller claim, not the
+      separate unverified DealGateway aggregate methods.
+- [ ] Hero/FAQ claim "Notities uit HubSpot ziet de agent nooit": grounded in the `properties` list
+      `findPerson()` actually requests (firstname/lastname/email/phone/mobilephone/company/
+      lifecyclestage/createdate/lastmodifieddate) - no note-related property is ever fetched. Confirm
+      this reads as accurate, not as a stronger privacy claim than intended.
+- [ ] FAQ's "access-token werd geweigerd" answer is adapted from `HubSpotGateway::testConnection()`'s
+      own 401 summary string, with the source's em dash rewritten to a period. The 4th FAQ ("kan een
+      collega het token aanmaken?") answers "ja" because a HubSpot private-app token belongs to the app/
+      portal, not a personal account - the opposite answer from Pipedrive's own FAQ (whose token IS
+      personal). Confirm this distinction is correct before publishing.
+- [ ] "Wat heeft uw IT-partner nodig?" is an `.lp-trust-note` box linking the sheet.
+- [ ] No standalone closing-CTA section (D17): the footer's own "Vertel het en Mowi regelt het" band is
+      the only CTA below the FAQ.
+- [ ] Open `downloads/it-partner-hubspot.html` and print-preview it (Ctrl+P): one A4, nothing clipped,
+      must NOT pull in `css/style.css` (own `<style>` block). Same shape as the Pipedrive sheet (one
+      token to create and return), but frames the scope as `crm.objects.contacts.read` on a private app
+      rather than a personal API token.
+- Open questions: no docs page exists for this platform (`doc_url` in the config points at
+  `mowi.agency/docs/koppeling-hubspot`, which 404s per S-002), so every claim traces to
+  `config/shop_platforms.php` + `HubSpotGateway.php` only. No keyword numbers exist for `hubspot` (same
+  gap class as S-011/S-012/S-013/S-016), so H1/title use the fallback pattern - not re-logged as a new
+  NEEDS_SAL entry, same reasoning prior webshop tasks used. No cross-platform sub-question: no keyword
+  supplied for hubspot, section skipped per D17 item 6.

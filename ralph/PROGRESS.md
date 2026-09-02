@@ -290,3 +290,36 @@ entry sitting in an otherwise empty log would read as a completed task and mask 
   lander (4 on the sheet, as expected). Title landed at exactly 70 chars (the upper bound), confirmed
   inclusive against `verify.mjs`'s own `title.length > 70` check before shipping.
 - Status: [x] done
+
+### 2026-09-03 - T08 hubspot
+- Built: `downloads/it-partner-hubspot.html` (sheet, built first) and `koppeling-hubspot.html` (lander),
+  D17 template directly, no retrofit step. Cache-bust read live from `index.html`: unchanged
+  (`style.css?v=20260829-5`, `main.js?v=20260822-23`). Chrome copied from `koppeling-magento.html`,
+  itself byte-identical to `test.html`. Logo file confirmed on disk: `assets/logos/hubspot.png`.
+- Decisions: config key `hubspot` (crm category, `auth => 'static'`, gateway `HubSpotGateway`,
+  `doc_url` points at `mowi.agency/docs/koppeling-hubspot`, which 404s per S-002 - no tier-1 source).
+  `instructions[]` has 6 entries; folded to 4 `.lp-steps`: step 2 merges the direct Private Apps link
+  with the "liever via het menu" alternative route (same fold Pipedrive/Exact Online used for their own
+  alternative-route entries); step 3 merges create-private-app + set scope + copy the shown-once token
+  into one same-screen action (the same class of fold WooCommerce/Magento used for their own
+  key-creation steps). Read `HubSpotGateway.php` directly (tier 2): it implements both `CrmGateway`
+  (findPersonByEmail/findPersonByPhone) and `DealGateway` (pipeline/win-rate aggregates), the same shape
+  as Pipedrive. NEEDS_SAL S-008 already flags HubSpot's `CrmGateway` contact-lookup half as
+  live-verified against a real sandbox while its `DealGateway` aggregate methods are explicitly
+  un-verified (class docblock: "NOT live-verified against a real portal"), so section 3 ships
+  Pipedrive's own 3-card set (Inbox agent, Voice agent, CRM-synchronisatie) with no dashboard card,
+  same reasoning T01R used for Pipedrive's own DealGateway. "Open deals in beeld" IS claimed in section
+  2, grounded in `buildPersonShape()`'s `open_deals` field, which is called from `findPerson()` and is
+  therefore part of the verified contact-lookup path, not the separate unverified aggregate methods -
+  same distinction T01R drew for Pipedrive. Added one claim with no direct sibling precedent: "Notities
+  uit HubSpot ziet de agent nooit," grounded in the exact `properties` array `findPerson()` requests
+  (no note-related property is ever fetched), flagged in REVIEW.md for Sal to confirm the wording reads
+  as accurate. FAQ's "kan een collega het token aanmaken?" answers "ja" for the opposite reason
+  Pipedrive's does: a HubSpot private-app token belongs to the app/portal, not a personal account
+  (Pipedrive's IS personal) - a genuine platform difference, not an inconsistency. No cross-platform
+  sub-question: no keyword supplied for `hubspot`, section skipped per D17 item 6. No keyword numbers
+  exist for `hubspot` either (same gap class as S-011/S-012/S-013/S-016), so H1/title use the proven
+  fallback pattern, not re-logged as a new NEEDS_SAL entry.
+- Oddities: none - both gates green on round 1, 0 fix rounds, `--dom` green first try, 0 skips on the
+  lander (4 on the sheet, as expected).
+- Status: [x] done
