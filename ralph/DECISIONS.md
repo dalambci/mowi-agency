@@ -243,3 +243,128 @@ Three copy decisions landed in the same pass, all now SPEC rules:
    2. Sal: "make it look very easy and quick to do, which it is."
 3. **Fewest words that still carry the meaning.** Cut openers and restatements; keep every qualifier
    that changes what is true (alleen lezend, the NL-only limit, who owns a token). Shorter, never vaguer.
+
+### D17 - Full lander redesign: question-first, keyword-grounded, the new template (2026-09-02)
+
+Sal, after seeing the D15/D16 pilot pages live: "redesign it completely, in terms of spacing,
+responsiveness, image sizing and positioning... and then we use that as new template. just do it for
+exact online then we can adjust the other landing pages using a cheaper model." Applied in full to
+`koppeling-exact-online.html` (commit `5e3b2bc`); T01/T03/T04 still carry the D15/D16 shape and are
+queued as retrofit tasks, T05-T11 build to this template directly. **This section supersedes SPEC.md
+section 4 in full** - the old 7-section/label-heading spec is replaced below, not amended.
+
+**Why the old shape was wrong, not just plain.** Section 4's original spec (built 2026-08-23, before
+this redesign) produced pages structured as a specification document: a label per section
+("Wat de koppeling doet", "Werkt met deze agents en workflows"), an `<h1>` that was a title
+("Automatiseren in Exact Online.") rather than a question, no image anywhere, one CTA buried at the
+bottom in its own section. It was internally consistent and passed every `verify.mjs` check, but it was
+never built against what a person actually searches for - `RALPH_SITE_BATCH.md` never asked for that,
+and neither did the original SPEC.md. Sal supplied three real Google Keyword Planner numbers mid-review
+("exact online ai" 30/mo, "koppelingen exact online" 50/mo, "pipedrive exact online" 10/mo) that the
+old page addressed nowhere. This is exactly the gap the vault's AI Search Blog Method note
+(Website/Blog/Mowi - AI Search Blog Method.md) was written to close for blog posts; D17 is that method
+applied to landers for the first time.
+
+**The method, applied to a lander (not a blog post - adapted, see divergences below):**
+1. `<h1>` is the question a person would say out loud, not a product label. Built from the seed keyword:
+   `exact_online` -> "Wat kunt u met AI automatiseren in Exact Online?"
+2. `<title>` carries the head terms Sal supplied, still 45-70 chars ending in the site's usual em-dash
+   " Mowi" suffix: "Exact Online koppeling met AI: wat kunt u automatiseren? — Mowi" (63 chars).
+3. Hero body is the **direct answer**, 50-70 words, every claim traceable to config/docs exactly as
+   section 9's Gap rule already required - keyword-grounding changes phrasing, never truthfulness.
+4. Every `<h2>` is a sub-question; the paragraph or line immediately under it answers it in the first
+   sentence. Sub-questions come from: (a) what the platform's own config supports (grounded, as before),
+   (b) an adjacent real search Sal supplies (e.g. "pipedrive exact online" -> a dedicated H2 answering it
+   honestly - Mowi does not sync the two, both koppelingen are independently read-only). Never invent a
+   sub-question with no keyword or grounding behind it just to hit a count.
+5. **Divergence from the blog Method, deliberate:** no praktijkvoorbeeld/non-commodity-ingredient section
+   (Method rule 4) - a lander is a product page, not an article, and inventing a scene or number here
+   would violate the Gap rule harder than skipping the section does. No author box (Method rule 8) or
+   Bronnen list (anatomy item 11) - not article conventions this page type carries. Table (anatomy item
+   6) only where a real comparison exists to show (none does here, so it's absent, not stubbed).
+
+**Layout: the site's own landing-page kit, not the blank `.section`/`.page-heading` skeleton.**
+Section 1 (hero) is now `<section class="hero container lp-hero hero-tight-bottom" id="lander-hero">` -
+the exact class set `e-mail-agent.html` and `call-agent.html` use - not `<section class="section">`.
+This is what most of "spacing, responsiveness, image sizing" meant: the D15 page-scoped rhythm override
+is gone, because the shared `.hero`/`.lp-hero`/`.lp-card-grid`/`.split`/`.lp-steps`/`.lp-trust-note`
+classes already carry the right rhythm - fighting them with a parallel `.section` override was solving a
+problem the site's own component kit already solves. The page-scoped `<style>` block that remains
+(D15/D16's own rule still applies: one block, in `<head>`, comment must never spell the stylesheet
+filename or contain the literal string `<main`) now holds only: the `.dp-*` preview markup (unchanged
+from D16, still the honesty rule verbatim - masked values, grey bars, no invented names or amounts) and
+one true gap-fill, a mobile `grid-template-columns: 1fr` fallback for `.split`, which the shared
+stylesheet does not define at any breakpoint (checked: `css/style.css` has no `@media` rule for `.split`
+at all - every existing page using `.split` happens to only need the desktop grid, this is the first
+lander to hit that gap).
+
+**The hero carries the page's one CTA. Section 8 (the standalone closing-CTA section) is deleted.**
+The footer band that sits directly under `</main>` on every page (`.footer-cta`, "Vertel het en Mowi
+regelt het" + its own "Start gratis") already **is** a closing CTA - the old spec's section 8 put a
+second, near-identical one immediately above it, one scroll away. D4's CTA-count arithmetic changes
+accordingly: **1** `btn-primary` in the hero (inside `<main>`, inside `.lp-cta-block` with the
+`lp-cta-micro` "Geen betaalgegevens nodig." line beneath it, same markup `e-mail-agent.html` uses) + 2
+in the header chrome (desktop/mobile) + 1 in the footer band = **4 total**, same total D4 always
+required, redistributed. `verify.mjs`'s `cta` check already asserts "1 in main, N total (chrome-counted
+live from test.html) + 1" - unchanged mechanically, this just moves where in `<main>` that 1 sits.
+
+**Previews: three per page, not one, each the `.dp-card` mock from D16 in a different frame.** Sal's
+ask ("a few more images like these 1 or if its even relevant") is answered per-page by what the
+platform's config genuinely supports showing, not a fixed count:
+- **Hero preview** (`.dp-window-hero`, full container width): the single clearest thing the koppeling
+  produces. Exact Online -> open invoices; a CRM platform -> a recognised inbound contact.
+- **Side preview** (`.dp-window-side`, beside the "Werkt met deze agents" link stack in a `.split`): a
+  second, different product moment, shown only where the platform genuinely supports two distinct
+  moments (Exact Online: invoices in the hero, a recognised call here). Skip it, don't force a second
+  window, on a platform where there is only one real thing to show.
+- **Tile preview** (`.dp-window-tile`, under the connect steps): the koppeling's own tile as it will
+  appear on the client's Koppelingen screen post-connect - platform logo, name, "Verbonden" chip, one
+  line of what it can see. Every platform can show this one; build it every time.
+Never fabricate a fourth kind of preview to hit a round number. Three is what this page happened to
+support: hero + side + tile is the ceiling, not a quota.
+
+**Logo colour:** the Exact Online mark renders in its brand red in the hero on this page (same as it
+already does, uncontested, on the live `koppelingen.html` hub page - not a new exception). The site's
+v2 monochrome rule (CLAUDE.md) governs Mowi's own UI chrome; a third-party trademark mark showing its
+own brand color is a different thing and was never in scope of that rule. Flagged to Sal for an explicit
+call rather than assumed either way - S-009 in NEEDS_SAL.md.
+
+**Retrofit vs. fresh build.** T01 (pipedrive), T03 (woocommerce), T04 (shopify) already shipped under
+the D15/D16 shape and are re-opened as `T01R`/`T03R`/`T04R` retrofit tasks - same content grounding,
+same FAQ facts, restructured into this template. T05-T11 have not been built yet and go straight to
+this template with no separate retrofit step. T20 (SEO cross-pass) and T99 (supervised wiring) are
+unchanged in nature.
+
+**Model note.** From this point the loop runs on Sonnet, not Opus (Sal, 2026-09-02: "adjust the other
+landing pages using a cheaper model"). `run.sh` now pins `--model sonnet` explicitly rather than
+inheriting whatever this interactive session's `/model` happens to be set to at invocation time - three
+different models were the session default at three different points while this branch was being worked
+(Opus, Fable, Sonnet), and a loop that silently inherits ambient state instead of pinning it explicitly
+is exactly the class of bug D10 already found once (the plugin's hook silently assumed `bash` meant Git
+Bash). Override with `MODEL=opus bash ralph/run.sh 2` if a task needs it. Nothing about this task is
+judgment-heavy: the template, the grounding rules, and the verify gate are now explicit enough that
+following them precisely - which is what remains - does not need Opus-level reasoning. Rebuilding the
+template itself, or any future task that requires resolving an ambiguity the spec does not already
+answer, still should not run on Sonnet unattended.
+
+### D18 - A bare "no" is not content, even with real search volume behind it (2026-09-02)
+
+D17's Exact Online template included a sixth section answering "pipedrive exact online" (10/mo) with
+"Nee, Mowi zet niets over tussen Pipedrive en Exact Online." Sal, on review: not relevant enough to keep
+as-is, and pointed at the real fix — build the sync as an actual workflow later, so the honest answer
+becomes yes and the search volume is worth capturing for real. Cut from the live page immediately (the
+whole `<section>`, not softened).
+
+Generalised into SPEC.md section 4, item 6: a cross-platform sub-question only earns a place on the page
+when the true answer gives the reader something — a capability, a distinction, a next step. A section
+whose entire content is "no, Mowi doesn't do that" fails Rule 6 of the AI Search Blog Method in spirit
+(answer the questions competitors dodge) while technically satisfying its letter (an honest answer to a
+real keyword) — the method assumes an honest "no" still teaches something; this one didn't, it was pure
+negative space. The keyword and the gap go to `NEEDS_SAL.md` as `wanted-but-out-of-scope` (S-010) instead
+of onto the page — a missing feature is Sal's call to build, not the loop's to write copy around.
+
+The actual feature idea (a Pipedrive <-> Exact Online sync workflow, distinct from the existing
+CRM-synchronisatie workflow which only recognizes customers) is a product decision, not a site-batch
+task, and is logged in the vault (`Ideas for agents.md`) rather than only here — this branch's files stop
+existing the moment it merges or gets abandoned, and a real product idea backed by real keyword data
+should survive that.

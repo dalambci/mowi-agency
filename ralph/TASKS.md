@@ -30,8 +30,23 @@
 - [x] T02 - integratie: exact-online (lander + sheet) - allowed: koppeling-exact-online.html, downloads/it-partner-exact-online.html
 
 == RUN 2 ==
-- [x] T03 - integratie: woocommerce - allowed: koppeling-woocommerce.html, downloads/it-partner-woocommerce.html
-- [x] T04 - integratie: shopify - allowed: koppeling-shopify.html, downloads/it-partner-shopify.html
+# D17 (2026-09-02, ralph/DECISIONS.md): koppeling-exact-online.html was rebuilt
+# completely as the new template - question-first H1, keyword-grounded title,
+# the site's own .hero/.lp-* landing-page kit, 3 dashboard-style previews, one
+# CTA in the hero, no standalone closing-CTA section. Read ralph/SPEC.md
+# section 4 in full before touching ANY task below - the old 7-section spec it
+# describes is gone, replaced by what koppeling-exact-online.html now shows.
+# D18: a cross-platform sub-question only ships if the honest answer is worth
+# reading - a bare "no" goes to NEEDS_SAL.md instead, never onto the page.
+#
+# T01R/T03R/T04R retrofit the 3 landers already built under the old shape.
+# Same grounding, same FAQ facts already gathered - restructure into the new
+# template, do not re-derive facts that already passed verify.mjs once. They
+# run before T05-T11 so every fresh build after them has 4 real examples of
+# the template to match, not 1.
+- [ ] T01R - retrofit: pipedrive naar D17-sjabloon - allowed: koppeling-pipedrive.html, downloads/it-partner-pipedrive.html
+- [ ] T03R - retrofit: woocommerce naar D17-sjabloon - allowed: koppeling-woocommerce.html, downloads/it-partner-woocommerce.html
+- [ ] T04R - retrofit: shopify naar D17-sjabloon - allowed: koppeling-shopify.html, downloads/it-partner-shopify.html
 - [ ] T05 - integratie: lightspeed-ecom - allowed: koppeling-lightspeed-ecom.html, downloads/it-partner-lightspeed-ecom.html
 - [ ] T06 - integratie: prestashop - allowed: koppeling-prestashop.html, downloads/it-partner-prestashop.html
 - [ ] T07 - integratie: magento - allowed: koppeling-magento.html, downloads/it-partner-magento.html

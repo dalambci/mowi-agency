@@ -184,92 +184,168 @@ The lander lives at the repo **root**, not in a folder. Canonical URL is extensi
 
 ## 4. Lander page spec
 
-`koppeling-<slug>.html` at repo root. Full standard page: `<head>` block copied from `koppelingen.html`'s
-shape, chrome copied verbatim from `test.html`, content between them.
+**Superseded by D17 (2026-09-02) — this section describes the CURRENT template.** The 7-section,
+label-heading version this replaced is preserved only in git history (see `koppeling-exact-online.html`
+before commit `5e3b2bc` if you need it); do not resurrect it. `koppeling-exact-online.html` as it stands
+right now is the reference implementation — when this text and the live file ever disagree, read the
+file, then fix this text.
+
+`koppeling-<slug>.html` at repo root. Full standard page: `<head>` block copied from
+`koppelingen.html`'s shape, chrome copied verbatim from `test.html`, content between them.
 
 ### Head
 
-- `<title>` 45-70 chars, ending `" — Mowi"`. Pattern that works: `<Pakket> koppelen aan Mowi: <wat het oplevert> — Mowi`.
-  Length is measured on the decoded text with runs of whitespace collapsed to one space, so breaking the
-  title across indented lines does not inflate the count. Keeping it on one line is still the clearer habit.
-- `<meta name="description">` 120-155 chars, no em dash, formal u.
+- `<title>` 45-70 chars, ending `" — Mowi"`. Built around the real search terms Sal supplies for this
+  platform (see "Finding the question" below), not a fixed pattern — `exact_online`'s is "Exact Online
+  koppeling met AI: wat kunt u automatiseren? — Mowi" (63 chars). Length measured on decoded text with
+  whitespace collapsed to one space.
+- `<meta name="description">` 120-155 chars, no em dash, formal u. Compresses the hero's direct answer;
+  should read as useful even unclicked (AI Search Blog Method rule 2, applied to the meta description
+  the way the method applies it to a post's own opening).
 - `<link rel="canonical" href="https://mowi.agency/koppeling-<slug>" />` (extensionless, no `.html`).
 - `css/style.css?v=...` and `js/main.js?v=...` values read live from `index.html` this iteration.
 - Same font preconnects, favicon set, and Plausible script as `koppelingen.html`. Nothing else.
 - The FAQPage JSON-LD block goes in `<head>`, after the Plausible script, so `<main>` stays script-free.
 
-### The 7 sections, in this order
+### Finding the question (do this before writing anything)
 
-`<main>` contains **7** `<section class="section"><div class="container">...</div></section>` blocks.
-Headings use `.page-hero-heading` / `.page-hero-body` for the hero (pricing.html precedent) and
-`.page-heading` / `.page-body` for the rest.
+Every lander is built around one real search, not an assumed one:
 
-The breadcrumb is **not** a section of its own. Section 1 (the hero) carries it as the first child of its
-container, before the `<h1>`, which is where `blog/*.html` and `cookies.html` put it. The list below numbers
-the breadcrumb as item 1 for readability, so items 2-8 are sections 1-7.
+1. Check `ralph/NEEDS_SAL.md` and `ralph/DECISIONS.md` for keyword numbers Sal has already supplied for
+   this platform (D17 recorded three: "exact online ai" 30/mo, "koppelingen exact online" 50/mo,
+   "pipedrive exact online" 10/mo). Use them as given — never invent a search-volume number.
+2. If none exist for this platform, use the pattern proven on Exact Online: `<h1>` = "Wat kunt u met AI
+   automatiseren in <Pakket>?", phrased as a person would say it out loud, and log in `NEEDS_SAL.md`
+   (category `missing fact`) that real keyword numbers for this platform would sharpen the title —
+   Sal can supply them later without a rebuild.
+3. A cross-platform search Sal supplies (e.g. "pipedrive exact online") becomes its own `<h2>`
+   sub-question on the relevant page(s), answered honestly per the Gap rule — see the `<main>` spec
+   below. Never bend the honest answer to make a keyword's implied intent true.
 
-1. **Breadcrumb.** First child of the **hero** section's container, immediately before the `<h1>`. Exact
-   markup, `&rsaquo;` entities, current page as bare text, no `<nav>`, no `aria-label`:
+### `<main>` — the question-first template
+
+Section 1 (hero) is `<section class="hero container lp-hero hero-tight-bottom" id="lander-hero">` —
+the site's own landing-page hero, the same class set `e-mail-agent.html` and `call-agent.html` use.
+Every section after it is `<section class="section"><div class="container">...</div></section>` using
+`.lp-section-heading` inside a `.section-head-row.section-head-row-center` (heading + one-line
+`.section-sub`), matching how `e-mail-agent.html` structures its own body sections. No fixed section
+count: build what the platform's real config and the sub-questions in scope actually support. Every
+page still needs, in order:
+
+1. **Hero.** Breadcrumb first, exact markup from the old spec unchanged:
    ```html
    <p class="blog-breadcrumb"><a href="/">Home</a> &rsaquo; <a href="/koppelingen">Koppelingen</a> &rsaquo; Exact Online</p>
    ```
-   Parent crumb is always `/koppelingen` (root-absolute form, as in `blog/*.html`). All three parts are
-   checked: the `Home` crumb, the parent crumb anchor, and non-empty bare text for the current page. A
-   breadcrumb truncated after `Home &rsaquo;` is a FAIL.
-2. **Static hero.** Exactly one `<h1>`, exact pattern `Automatiseren in <Pakket>.` with the trailing period,
-   e.g. `Automatiseren in Exact Online.` Followed by 1-2 `.page-hero-body` paragraphs. No image, no
-   animation, no CTA in the hero.
-3. **`Wat de koppeling doet`** (`<h2 class="page-heading">`). What Mowi reads from the system and what that
-   makes possible, grounded in the `integration-card-desc` from `koppelingen.html` plus the platform's
-   `instructions` / gateway role in the dashboard config. Say read-only where read-only is true (the
-   Pipedrive docs page says so explicitly). No throughput, accuracy, or time-saved numbers.
-4. **`Werkt met deze agents en workflows`.** Link cards to the same fragments the sitewide nav already
-   uses: `/workflows#email-agent`, `/workflows#call-agent`, and where relevant `/workflows#order-status`,
-   `/workflows#offerte-opvolging`, `/workflows#agenda-samenvatting`, `/workflows#crm-sync`. **Never link to
-   `/agents/*`; those pages do not exist.** Do not invent new fragments beyond that nav list. (Known gap:
-   `workflows.html`'s `<main>` is currently empty and carries none of these anchors, so the fragments land
-   at the top of an empty page. Log once in `NEEDS_SAL.md`, then match the nav anyway; the nav is the
-   sitewide precedent and will be fixed in one place.)
-5. **`Zo koppelt u <Pakket>`.** **3 to 5 steps: one per entry in the platform's `instructions[]` where that
-   array exists, in the same order, with nothing dropped and nothing added.** The old "exactly 3" figure was
-   ungrounded and contradicted both pilots: `exact_online.instructions` has 3 entries but the middle one is
-   the Exact-specific `Kies de administratie die u wilt koppelen en bevestig de toegang.`, and
-   `pipedrive.instructions` has 5. Compressing to 3 forces the builder to invent a merge, which is exactly
-   the failure mode the click-path rule exists to prevent. `verify.mjs` does not count steps, so this costs
-   nothing mechanically and everything in truthfulness.
-   Ground every click-path **read-only** against the Laravel
-   app at `C:/Users/SalP1/Desktop/Mowi Dashboard`, primarily
-   `config/shop_platforms.php` (the platform entry's `instructions[]`, `auth` = `oauth` or `static`, and
-   `fields[]` labels/help), then `resources/views/account/koppelingen.blade.php` and
-   `resources/views/agents/partials/setup-step-webshop.blade.php` for the surrounding UI. Never invent a
-   click-path. The shape differs by `auth`:
-   - `oauth` (Exact Online, HubSpot, Google Agenda, Shopify, ...): the user clicks "Koppel met `<Pakket>`"
-     and logs in, and comes back automatically with the status on Verbonden. **No credential fields at all**
-     (`fields => []`), so nothing is created, copied or pasted. Any middle steps the platform's
-     `instructions[]` adds (Exact Online has `Kies de administratie die u wilt koppelen en bevestig de
-     toegang.`) are kept, not merged away.
-   - `static` (Pipedrive, WooCommerce, Moneybird, ...): the key/token is created in the vendor's own UI and
-     pasted into the field named by `fields[].label`, then **Koppelen**.
-   If the platform's real path is not verifiable in the dashboard config or a live docs page, write the
-   generic 3 steps (open Koppelingen in het dashboard / kies de tegel `<Pakket>` / volg de stappen in het
-   paneel) and log the gap in `NEEDS_SAL.md`. Never name a screen you have not read.
-6. **`Voor uw IT-partner`.** One paragraph explaining that a collega, IT-partner, or accountant can do the
-   `<Pakket>`-side work, plus a link to the sheet: `<a href="/downloads/it-partner-<slug>.html">`. Keep the
-   `.html` here; the sheet is a file, not an extensionless route. No CTA button.
-7. **FAQ, 3 to 5 questions.** Visible `<h3>` question + `<p>` answer pairs **inside `<main>`**, plus one
-   `<script type="application/ld+json">` FAQPage block in `<head>` whose `name` and
-   `acceptedAnswer.text` strings match the visible text **exactly**. The check matches each `name` against
-   the visible text of `<main>` only, after entity decoding and whitespace collapsing, so the apostrophe
-   form has to agree too: use a plain `'` in both the JSON and the `<h3>`, never `&rsquo;` in one and `'` in
-   the other. Answers stay inside what live copy supports. Every string in this block is scanned for em
-   dashes and forbidden vendor names exactly like visible copy is, because Google publishes it verbatim.
-   Good sources of real questions: the "Problemen oplossen" headings on the docs pages.
-8. **Closing CTA section.** `<h2 class="page-heading">`, one `.page-body` line, and **exactly one**
-   `btn-primary`, D4 markup verbatim:
+   Then the platform logo (`<img src="assets/logos/<file>" alt="" class="integration-card-logo lp-hero-logo" />`
+   — exact filename from that platform's card on `koppelingen.html`; not all are `.svg`, Exact/HubSpot/AFAS
+   are `.png`), then the `<h1>` (the question, `class="h-balance"`, wrap an `<span class="h-nowrap">`
+   around the last 2-3 words the way "Exact Online?" is wrapped), then the direct-answer `.hero-sub`
+   (50-70 words, every claim traceable per the Gap rule), then the **page's one primary CTA**:
    ```html
-   <a href="https://my.mowi.agency/aanmelden" class="btn-primary page-cta" data-event="Signup Click">Start gratis</a>
+   <div class="hero-actions lp-cta-block">
+     <a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a>
+     <span class="lp-cta-micro">Geen betaalgegevens nodig.</span>
+   </div>
    ```
-   This is the only `btn-primary` inside `<main>`; the file total is 4.
+   Then the **hero preview** (see Previews below) as the hero visual.
+   **There is no separate closing-CTA section anywhere else on the page** — see CTA count below.
+2. **What Mowi reads / what the koppeling does**, as a sub-question `<h2>` with icon cards
+   (`.lp-card-grid` of `.lp-card`, each with an `.lp-card-icon` SVG — reuse the four already built on
+   `koppeling-exact-online.html`, or a close visual match, never a bare `.lp-card` with no icon here).
+   Grounded exactly as the old spec required: `integration-card-desc` from `koppelingen.html` plus the
+   platform's `instructions[]` / gateway role in `config/shop_platforms.php`. Say read-only where
+   read-only is true. No throughput, accuracy, or time-saved numbers.
+3. **Which agents/workflows use this koppeling**, as a sub-question `<h2>`, laid out as a `.split`
+   (`.lp-link-stack` of `<a class="lp-card">` cards on one side) with the **side preview** on the other
+   where the platform supports a second distinct moment (see Previews). Link targets are the real pages
+   now, not nav fragments: `/e-mail-agent`, `/call-agent`, and a `/workflows#<fragment>` only for a
+   dashboard view that genuinely has one (e.g. `/workflows#dashboard-openstaande-facturen`). **Never link
+   to `/agents/*`; those pages do not exist.**
+4. **How you connect**, as a sub-question `<h2>` ("Hoe koppelt u <Pakket> aan Mowi?"), `.lp-steps` with
+   **3 to 5 steps: one per entry in the platform's `instructions[]` where that array exists, in the same
+   order, nothing dropped, nothing added** (unchanged from the old spec — this rule was never the
+   problem). Ground every click-path read-only against `config/shop_platforms.php` (`instructions[]`,
+   `auth`, `fields[]`), then the surrounding Blade views for context. Never invent a click-path; if
+   unverifiable, write the generic fallback and log the gap. The **tile preview** (see Previews) goes
+   directly under the steps, every time.
+5. **What your IT-partner needs**, as a sub-question `<h2>` ("Wat heeft uw IT-partner of accountant
+   nodig?"), rendered as an `.lp-trust-note` box (not a bare paragraph) containing the explanation plus
+   `<a class="link-arrow lp-note-link" href="/downloads/it-partner-<slug>.html">Open het A4 voor uw
+   IT-partner</a>`. Keep the `.html` — the sheet is a file, not an extensionless route. No CTA button.
+6. **A cross-platform sub-question, only if the honest answer is itself worth reading.** Sal supplies
+   the keyword (see "Finding the question" above), but a section built from it earns its place only when
+   the true answer gives the reader something — a real capability, a real distinction, a real next step.
+   **A section whose entire content is "no, Mowi doesn't do that" is not good content and must not be
+   published**, even when real search volume backs the keyword (found live, 2026-09-02: "pipedrive exact
+   online" 10/mo prompted exactly this, cut from `koppeling-exact-online.html` — see D18). Log the
+   keyword and the gap it points at in `NEEDS_SAL.md` as `wanted-but-out-of-scope` instead: a feature
+   that doesn't exist is a product decision for Sal, and the content only becomes worth publishing once
+   the answer can be a real "yes" or a real "here's what to do instead." Skip the section entirely on any
+   platform with no cross-platform keyword.
+7. **FAQ**, 3 to 5 questions, unchanged from the old spec: visible `<h3>`/`<p>` pairs inside `<main>`
+   (an `.lp-card-grid` of plain `.lp-card`s, no icon needed here) plus a `<script type="application/
+   ld+json">` FAQPage block in `<head>` whose `name`/`acceptedAnswer.text` match the visible text
+   exactly (same apostrophe, same everything, after entity-decode and whitespace-collapse). Every FAQ
+   string is scanned for em dashes and forbidden vendor names exactly like visible copy. Good sources:
+   the "Problemen oplossen" headings on the docs pages.
+
+**No standalone closing-CTA section, no praktijkvoorbeeld/non-commodity section, no author box, no
+Bronnen list, no comparison table unless a real one exists to show** — see D17 for why each is
+deliberately absent from a lander even though some are Blog Method conventions.
+
+### CTA count (D17 redistributes D4's total, does not change it)
+
+**Exactly 1** `btn-primary` inside `<main>` — in the hero, nowhere else. File total is still **4**: that
+1, plus 2 in the header chrome (desktop + mobile), plus 1 in the footer band that sits directly under
+`</main>` on every page (which is why section 8 of the old spec — a second closing CTA — is gone: the
+footer band already is one, one scroll below).
+
+### Previews — the `.dp-card` mock, D16's honesty rule unchanged
+
+Up to three per page, each the same monochrome port of the dashboard Start page's `.dp-card` mock
+(`resources/views/components/discover-preview.blade.php`) in a different frame — never a fourth kind,
+never forced to hit a round number:
+
+- **`.dp-window.dp-window-hero`** (full container width, in the hero) — the single clearest thing this
+  koppeling produces.
+- **`.dp-window.dp-window-side`** (beside the agent/workflow link stack in section 3's `.split`) — a
+  second, genuinely different product moment. Omit this window entirely on a platform where there is
+  only one real thing to show; do not duplicate the hero preview into a second frame.
+- **`.dp-window.dp-window-tile`** (under section 4's steps) — the koppeling's own post-connect tile:
+  platform logo, name, a `Verbonden` chip, one line of what it can now see. Build this one every time.
+
+Same honesty rule as always: real words only where they carry meaning (a head, a chip, a caption),
+`&bull;` runs and grey `.dp-bar` bars for anything that would otherwise be an invented name or amount.
+Copy the exact `.dp-*` CSS block from `koppeling-exact-online.html`'s `<style>` rather than re-deriving
+it — the class names and values are the shared vocabulary these previews all speak.
+
+### Page-scoped `<style>` — one block, and only these things belong in it
+
+Same D15 rule: exactly one `<style>` block, last in `<head>`, never a `style=` attribute anywhere, never
+edit the shared stylesheet. Its comment must never spell the stylesheet's filename (breaks the
+`cachebust` check, which counts every occurrence) and must never contain the literal string `<main`
+(breaks the `structure` check). It holds exactly two things now — not the old full section-rhythm
+override, which is gone because the shared `.hero`/`.lp-*` classes already carry the right spacing:
+1. The `.dp-*` preview rules (copy from `koppeling-exact-online.html` verbatim).
+2. `@media (max-width: 48rem) { main .split { grid-template-columns: 1fr; gap: 2rem; } }` — the one real
+   gap-fill, because the shared stylesheet defines no mobile fallback for `.split` at all. If a lander
+   doesn't use `.split` (no side preview), this rule isn't needed either.
+Anything beyond those two is a new-CSS violation. A lander that seems to need more is a `NEEDS_SAL.md`
+entry, not a bigger block.
+
+### Logo colour
+
+Platform logos render in their own brand color (Exact Online's red, as already shipped uncontested on
+`koppelingen.html`). This is a third-party trademark mark, not Mowi's own UI — the site's monochrome
+rule (CLAUDE.md) was never about vendor logos. See S-009 for the one open item: Sal has not yet
+explicitly confirmed this reading; if he says otherwise, greyscale every logo with the same CSS filter
+the marquee already uses (`filter: grayscale(1); opacity: 0.7`) and log which pages need the fix.
+
+### Copy — merge and cut, same rule as D16, still in force
+
+A step is an action the client performs; an alternative route or a success confirmation folds into the
+step before it. Fewest words that keep the meaning; cut openers and restatements, keep every qualifier
+that changes what's true (alleen lezend, an NL-only limit, who owns a token).
 
 ---
 

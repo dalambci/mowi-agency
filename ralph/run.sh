@@ -46,6 +46,15 @@ case "$RUN" in
 esac
 MAX="${2:-$DEFAULT_MAX}"
 
+# Model pinned explicitly (D17, 2026-09-02), not inherited from whatever the
+# interactive session's /model happens to be set to when this launches. This
+# same branch had 3 different session defaults (Opus, Fable, Sonnet) while it
+# was being worked, and a loop that silently trusts ambient state instead of
+# pinning it is the exact bug class D10 already found once (the ralph-loop
+# plugin's hook silently assumed `bash` meant Git Bash). Override per-run:
+#   MODEL=opus bash ralph/run.sh 2
+MODEL="${MODEL:-sonnet}"
+
 # The brakes. Deny rules win over allow rules, so the denies below hold even if
 # an allow pattern would otherwise cover them. Everything the loop legitimately
 # needs is listed; anything else is refused by the harness, not by the prompt.
@@ -68,7 +77,7 @@ mkdir -p ralph/logs
 STAMP="$(date +%Y%m%d-%H%M%S)"
 LOG="ralph/logs/run${RUN}-${STAMP}.log"
 
-echo "ralph: RUN $RUN, max $MAX iterations, promise \"$PROMISE\""
+echo "ralph: RUN $RUN, model $MODEL, max $MAX iterations, promise \"$PROMISE\""
 echo "ralph: logging to $LOG"
 echo
 
@@ -78,7 +87,7 @@ for (( i=1; i<=MAX; i++ )); do
   # Fresh process, fresh context, same prompt every time. TASKS.md and git are
   # the only state carried between iterations - that is the whole Ralph idea.
   out=$( { cat ralph/LOOP_PROMPT.md; printf '\n\nActive run: RUN %s.\n' "$RUN"; } \
-         | claude -p --allowedTools "$ALLOW" --disallowedTools "$DENY" 2>&1 )
+         | claude -p --model "$MODEL" --allowedTools "$ALLOW" --disallowedTools "$DENY" 2>&1 )
 
   printf '%s\n' "$out"
   { echo "=== iteration $i/$MAX ($(date -Iseconds)) ==="; printf '%s\n' "$out"; } >> "$LOG"

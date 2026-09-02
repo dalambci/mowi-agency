@@ -149,3 +149,25 @@ always one past the highest ID already in **Open items**; there is no example en
   IT-partner message on `docs/koppeling-shopify.html` to the self-serve flow. It is a pre-existing
   file, so out of this batch's reach. Until then the dashboard's own "Bekijk de documentatie" link on
   the Shopify tile sends a client to steps that no longer match the screen they are looking at.
+
+### S-009 wanted-but-out-of-scope - T02 exact-online, template-wide (2026-09-02)
+- Needed: a confirmed call on whether platform logos in a lander hero render in their own brand
+  color (Exact Online ships red, matching koppelingen.html) or get greyscaled to match the sitewide
+  monochrome rule. D17 reasons the monochrome rule governs Mowi UI, not a third-party trademark mark,
+  and treats brand-color as the default - but this is Sal's call, not a default worth assuming silently
+  across 11 pages.
+- Shipped instead: koppeling-exact-online.html ships the Exact mark in its real red, same as the live
+  hub page.
+- Suggested next step: one word from Sal. If greyscale is wanted, apply
+  `filter: grayscale(1); opacity: 0.7` (the marquee's own treatment) to every lander logo in one pass -
+  cheap to do at any point, so it is not a blocker for RUN 2.
+
+### S-010 wanted-but-out-of-scope - T02 exact-online (2026-09-02)
+- Needed: "pipedrive exact online" (10/mo, Sal) has a real cross-platform search behind it, but the
+  honest answer today is "Mowi doesn't sync them" - not useful content, cut per D18 rather than
+  published as a thin no-answer section.
+- Shipped instead: nothing on the page. The section that answered this was removed entirely.
+- Suggested next step: a genuine Pipedrive <-> Exact Online sync workflow (distinct from the existing
+  CRM-synchronisatie workflow, which only recognizes customers, never writes) would turn this into a
+  real yes and make the keyword worth capturing. Logged as a product idea in the vault
+  (`Ideas for agents.md`), not only here - this is Sal's call to build, not a site-copy fix.
