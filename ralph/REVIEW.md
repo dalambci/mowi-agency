@@ -245,10 +245,16 @@ pulled in `css/style.css`, and whether any FAQ answer claims more than live copy
 - [ ] "Hoe koppelt u Lightspeed eCom aan Mowi?" is 5 steps from a 6-entry `instructions[]`. Step 4
       merges copying the API-adres into the API Key/Secret copy step (same page, per the config's own
       "dit staat op dezelfde pagina" note). A `.dp-window-tile` connect tile sits under the steps.
-- [ ] "Welke agents gebruiken de Lightspeed eCom-koppeling?" is a `.split`: 4 `.lp-card`s (Inbox agent,
-      Voice agent, Orderstatus, Dashboard Webshops vergelijken) beside a `.dp-window-side` preview
-      (inbound call, "Bestelling gevonden") - same 4-card set T03R/T04R use, grounded in
-      `LightspeedGateway` implementing the same order-lookup shape (findByOrderNumber/findByEmail).
+- [x] **Fixed post-build (commit `e3c9ad3`), not part of the original T05 output:** "Welke agents
+      gebruiken de Lightspeed eCom-koppeling?" originally shipped 4 `.lp-card`s, copying T03R/T04R's
+      "Dashboard Webshops vergelijken" card by webshop-category pattern-matching rather than checking
+      `LightspeedGateway`'s own `implements` line. Caught by the loop itself while building T06
+      (`NEEDS_SAL.md` S-015) but outside T06's allowed paths to fix, then confirmed independently
+      against source before shipping: `LightspeedGateway implements OrderGateway` only - the narrower
+      shape `PrestaShopGateway`/`MagentoGateway` share, not the 5-interface shape `WooCommerceGateway`/
+      `ShopifyGateway` have that the "Webshops vergelijken" dashboard actually needs. The card is
+      removed; the section now correctly ships 3 cards (Inbox agent, Voice agent, Orderstatus) beside
+      the `.dp-window-side` preview, matching PrestaShop's pattern.
 - [ ] "Wat leest Mowi uit Lightspeed eCom?" is 4 icon `.lp-card`s. Note the "Alleen lezend" and "Uw
       eigen sleutel" cards deliberately do NOT claim the API key itself is scoped to read-only by the
       client (unlike the WooCommerce/Magento/PrestaShop copy) - `lightspeed.instructions[]` never asks
