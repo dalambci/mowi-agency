@@ -205,6 +205,33 @@ always one past the highest ID already in **Open items**; there is no example en
 - Suggested next step: a real search-volume number for a Lightspeed-plus-AI query would let the
   title/H1 be built around the actual seed keyword instead - no rebuild needed, just a copy swap.
 
+### S-015 wanted-but-out-of-scope - T06 prestashop (2026-09-03)
+- Needed: a check on whether T05's `koppeling-lightspeed-ecom.html` overclaims. Its section 3 includes
+  a "Dashboard Webshops vergelijken" card (`/workflows#dashboard-webshops-vergelijken`), grounded per
+  its own PROGRESS entry in "mirrors Shopify's gateway shape". Building T06 (prestashop) required
+  reading `WooCommerceGateway.php`'s docblock on why that dashboard's card is safe to claim: it was
+  added specifically because that dashboard needs `OrderCountGateway`/`SalesGateway`/`ProductSalesGateway`/
+  `CustomerSalesGateway`, which `WooCommerceGateway` and `ShopifyGateway` both implement. Checking
+  `LightspeedGateway.php` directly (same `implements` line grep used for this task) shows it implements
+  only `OrderGateway` - the same shape as `PrestaShopGateway`, which is why T06 deliberately ships 3
+  cards, not 4. T05 appears to have copied the 4-card set by platform-category pattern-matching
+  (webshop == WooCommerce's card set) rather than re-checking that specific gateway's own
+  `implements` line the way T02/T03R's dashboard-card decisions did.
+- Shipped instead: nothing changed on `koppeling-lightspeed-ecom.html` - it is outside T06's allowed
+  paths (`koppeling-prestashop.html`, `downloads/it-partner-prestashop.html` only). `koppeling-
+  prestashop.html` itself ships the correct, narrower 3-card set.
+- Suggested next step: one word from Sal on whether to open a small T06.1-style fix task (or fold it
+  into T20's cross-pass) to drop the "Dashboard Webshops vergelijken" card from
+  `koppeling-lightspeed-ecom.html`'s section 3, since `LightspeedGateway` cannot actually back it.
+
+### S-016 missing fact - T06 prestashop (2026-09-03)
+- Needed: SPEC section 4 "Finding the question" step 2 - no real keyword numbers have been supplied for
+  `prestashop`, same gap class as S-011/S-012/S-013.
+- Shipped instead: the fallback pattern proven on the other webshop platforms - `<h1>` "Wat kunt u met
+  AI automatiseren in PrestaShop?", title "PrestaShop koppeling met AI: wat kunt u automatiseren? — Mowi".
+- Suggested next step: a real search-volume number for a PrestaShop-plus-AI query would let the
+  title/H1 be built around the actual seed keyword instead - no rebuild needed, just a copy swap.
+
 ### S-014 missing fact - T05 lightspeed-ecom (2026-09-03)
 - Needed: whether Lightspeed eCom's "New API Key" screen actually offers a read/write permission choice
   the client can set, the way WooCommerce ("Rechten: Lezen"), Magento ("API-rechten alleen View aan")

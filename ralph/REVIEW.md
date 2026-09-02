@@ -269,3 +269,46 @@ pulled in `css/style.css`, and whether any FAQ answer claims more than live copy
   cross-check against - a new, not-yet-logged instance of the same gap the TASKS.md header already flags
   for 7 of the 11 platforms. No keyword numbers exist for `lightspeed-ecom` (same class of gap as
   S-011/S-012), so H1/title use the fallback pattern.
+
+### T06 prestashop
+- Path: `koppeling-prestashop.html` (+ `downloads/it-partner-prestashop.html`)
+- Open: `start-local-server.bat` then http://localhost:8765/koppeling-prestashop
+- [ ] Built straight to the D17 template (no retrofit step): `.hero.lp-hero` with the logo above an
+      `<h1 class="h-balance">` question ("Wat kunt u met AI automatiseren in PrestaShop?"), a
+      direct-answer `.hero-sub`, one `.lp-cta-block` CTA, and a full-width `.dp-window-hero` preview
+      (order lookup, "Verzonden"). Confirm it reads like the other webshop landers.
+- [ ] Tablet view (~768px, narrow the window): breadcrumb padding is not cramped against the header,
+      and the hero H1 does not overflow or jump a size.
+- [ ] "Hoe koppelt u PrestaShop aan Mowi?" is 5 steps from a 6-entry `instructions[]`. Step 3 merges
+      "Klik op Sleutel toevoegen" with the naam+Rechten-instellen entry into one "Maak een sleutel aan"
+      step, the same fold WooCommerce's own step 3 uses. A `.dp-window-tile` connect tile sits under
+      the steps.
+- [ ] "Welke agents gebruiken de PrestaShop-koppeling?" is a `.split`: **3** `.lp-card`s (Inbox agent,
+      Voice agent, Orderstatus), not the 4-card set the other webshop landers use - deliberate,
+      because `PrestaShopGateway.php` implements only `OrderGateway`, not the `SalesGateway`/
+      `OrderCountGateway` pair the "Webshops vergelijken" dashboard actually needs (confirmed by
+      reading `WooCommerceGateway.php`'s own docblock on why it added those interfaces). See S-015:
+      this same check suggests `koppeling-lightspeed-ecom.html`'s 4th card may be an overclaim, since
+      `LightspeedGateway` has the same OrderGateway-only shape - flagged there, not fixed here (outside
+      this task's allowed paths). Side preview (inbound call, "Bestelling gevonden") kept alongside the
+      3 cards, same as Exact Online's 3-card layout.
+- [ ] "Wat leest Mowi uit PrestaShop?" is 4 icon `.lp-card`s (Bestelling opgezocht / Alleen lezend / Uw
+      eigen sleutel / Status altijd actueel). No track-en-tracecode claim (unlike Lightspeed/Shopify):
+      `PrestaShopGateway::normalize()` always sets `track_trace_url` to null (PrestaShop core has no
+      generic tracking URL), so the copy says "de vervoerder zodra die bekend is" instead. Confirm this
+      reads right next to the sibling webshop landers' stronger tracking claim.
+- [ ] FAQ's two error-code questions (401 sleutel geweigerd, 404 webservice niet gevonden) are adapted
+      from `PrestaShopGateway::testConnection()`'s own summary strings, with the source's em dash and
+      arrow rewritten to plain punctuation. Confirm they still match if that method ever changes.
+- [ ] "Wat heeft uw IT-partner of accountant nodig?" is an `.lp-trust-note` box linking the sheet.
+- [ ] No standalone closing-CTA section (D17): the footer's own "Vertel het en Mowi regelt het" band is
+      the only CTA below the FAQ.
+- [ ] Open `downloads/it-partner-prestashop.html` and print-preview it (Ctrl+P): one A4, nothing
+      clipped, must NOT pull in `css/style.css` (own `<style>` block). Notes PrestaShop's own
+      no-separate-password webservice-auth quirk (the key is used as the username, no password field)
+      since it's a genuine detail an IT-partner would otherwise expect to fill in.
+- Open questions: no docs page exists for this platform (`doc_url` 404s, per S-002), so every claim
+  traces to `config/shop_platforms.php` + `PrestaShopGateway.php` only. No keyword numbers exist for
+  `prestashop` (same gap class as S-011/S-012/S-013/S-016), so H1/title use the fallback pattern. S-015
+  flags a possible overclaim on the already-shipped `koppeling-lightspeed-ecom.html`, found while
+  grounding this page - not fixed here, outside this task's allowed paths.

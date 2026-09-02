@@ -213,3 +213,41 @@ entry sitting in an otherwise empty log would read as a completed task and mask 
   eCom-kant van de Mowi-koppeling regelt" to "de Lightspeed eCom-koppeling met Mowi regelt", green on
   round 2. `--dom` green first try, 0 skips on the lander (4 on the sheet, as expected).
 - Status: [x] done
+
+### 2026-09-03 - T06 prestashop
+- Built: `downloads/it-partner-prestashop.html` (sheet, built first) and `koppeling-prestashop.html`
+  (lander, D17 template directly, no retrofit step needed). Cache-bust read live from `index.html`:
+  unchanged (`style.css?v=20260829-5`, `main.js?v=20260822-23`). Chrome copied from
+  `koppeling-lightspeed-ecom.html`, itself byte-identical to `test.html`. Noticed while re-reading the
+  template that SPEC.md section 4's own "Page-scoped `<style>`" prose (only 2 rules) is stale against
+  the live `koppeling-exact-online.html` reference file, which carries the full D15/D16-era block
+  (section-rhythm override, `.lp-hero-logo` sizing, `.lp-link-stack`, `.split` centering) - built the
+  style block from the live file per SPEC's own "when this text and the live file disagree, read the
+  file" rule, not from the stale prose. Not logged as a NEEDS_SAL entry since SPEC.md is outside this
+  task's allowed paths and the rule already tells the builder which one wins.
+- Decisions: config key `prestashop` (webshop category, `auth => 'static'`, gateway
+  `PrestaShopGateway`, `doc_url` 404s per S-002 - no tier-1 source). `instructions[]` has 6 entries;
+  folded to 5 `.lp-steps` by merging entry 3 (Klik op Sleutel toevoegen) with entry 4 (naam + Rechten op
+  Bekijken instellen) into one "Maak een sleutel aan" step, the same-screen key-creation fold WooCommerce
+  used for its own three entries. Entry 6's "en klik op Koppelen, wij testen de verbinding" confirmation
+  folded into step 5's body per the "confirmation is not its own step" rule. Read `PrestaShopGateway.php`
+  directly (tier 2): it implements only `OrderGateway` (findByOrderNumber via `reference`, findByEmail via
+  a customer lookup, listRecent, testConnection) - no `SalesGateway`/`OrderCountGateway`, unlike
+  WooCommerce/Shopify. Checked what "Webshops vergelijken" actually needs (`WooCommerceGateway.php`'s own
+  docblock: added specifically for that dashboard, requires `OrderCountGateway`/`SalesGateway`/etc.) and
+  confirmed PrestaShop does not implement them, so section 3 deliberately ships **3** cards (Inbox agent,
+  Voice agent, Orderstatus) with no dashboard card, unlike T03R/T04R/T05's 4-card set - flagged as S-015
+  below since T05 (lightspeed-ecom) claimed the same "Dashboard Webshops vergelijken" card while
+  `LightspeedGateway.php` also implements only `OrderGateway`, the same shape as PrestaShop, which reads
+  as an ungrounded claim on an already-shipped page outside this task's allowed paths. Side preview kept
+  (inbound call, "Bestelling gevonden") since order-lookup-by-phone is still a genuine second moment. No
+  track-en-tracecode claim (unlike Lightspeed/Shopify): the gateway's own `normalize()` sets
+  `track_trace_url` to `null` always (PrestaShop core has no generic tracking URL, only a carrier-specific
+  raw number per its own code comment) - copy says "de vervoerder zodra die bekend is" instead. FAQ's two
+  error-code questions are adapted from `testConnection()`'s own summary strings, with the em dash and
+  arrow character in the source rewritten to a period/comma per the guardrail. No keyword numbers exist
+  for `prestashop` (same gap class as S-011/S-012/S-013), so H1/title use the proven fallback pattern -
+  logged as S-016. No cross-platform sub-question: no keyword supplied, section skipped per D17 item 6.
+- Oddities: none - both gates green on round 1, 0 fix rounds, `--dom` green first try, 0 skips on the
+  lander (4 on the sheet, as expected).
+- Status: [x] done

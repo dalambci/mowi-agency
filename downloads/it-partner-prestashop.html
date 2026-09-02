@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PrestaShop-koppeling voor Mowi: instructies voor uw IT-partner</title>
+  <meta name="description" content="Instructies voor de hostingpartij of IT-partner die de PrestaShop-koppeling met Mowi regelt: welke webservice-sleutel nodig is en hoe u die deelt." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <!-- Page-scoped print CSS, adapted from the proven recipe in
+       generate-it-sheets.js. Deliberately self-contained: no shared
+       stylesheet, no shared script, no analytics. This is a document to
+       print or forward, not a page in the site's navigation. -->
+  <style>
+    @page { size: A4; margin: 22mm 20mm; }
+    * { box-sizing: border-box; }
+    body {
+      font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+      color: #16140f;
+      background: #fff;
+      margin: 0;
+      padding: 22mm 20mm;
+      max-width: 210mm;
+      font-size: 11pt;
+      line-height: 1.55;
+    }
+    @media print { body { padding: 0; max-width: none; } }
+    .brand { margin-bottom: 2.4em; }
+    .brand-name { font-size: 15pt; font-weight: 800; letter-spacing: -0.02em; }
+    h1 { font-size: 17pt; font-weight: 800; letter-spacing: -0.02em; margin: 0 0 0.3em; }
+    h2 { font-size: 11.5pt; font-weight: 800; margin: 2em 0 0.4em; }
+    p { margin: 0 0 0.9em; }
+    .sub { color: #6b6a63; margin: 0 0 2em; font-size: 10.5pt; }
+    ol, ul { margin: 0 0 0.9em; padding-left: 1.3em; }
+    li { margin-bottom: 0.45em; }
+    .note { font-size: 9.5pt; color: #6b6a63; }
+    .box { background: #fcfbfa; border: 1px solid #e6e2d8; padding: 1em 1.3em; margin: 0 0 0.9em; }
+    .sheet-footer { font-size: 9.5pt; color: #6b6a63; border-top: 1px solid #e6e2d8; padding-top: 1em; margin-top: 2.6em; }
+    a { color: inherit; }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="brand"><span class="brand-name">mowi</span></div>
+
+    <h1>PrestaShop-koppeling voor Mowi instellen</h1>
+    <p class="sub">Eén A4 om door te sturen naar de collega, hostingpartij of IT-partner die de PrestaShop-kant regelt.</p>
+
+    <h2>Wat er nodig is</h2>
+    <p>De organisatie die u ondersteunt koppelt Mowi aan haar PrestaShop-webshop. Daarvoor is één gegeven nodig: een webservice-sleutel uit PrestaShop, met Rechten (Permissions) beperkt tot Bekijken (View) voor Bestellingen, Klanten, Adressen, Vervoerders en Bestelstatussen. Mowi gebruikt die sleutel alleen om bestellingen op te zoeken. Er wordt nooit iets in de webshop aangepast.</p>
+
+    <h2>Waar u de sleutel aanmaakt</h2>
+    <ol>
+      <li>Log in op het beheer van de PrestaShop-webshop.</li>
+      <li>Ga naar Geavanceerde parameters, dan Webservice, en zet de webservice aan indien nodig.</li>
+      <li>Klik op Sleutel toevoegen (Add new webservice key).</li>
+      <li>Geef de sleutel een naam, bijvoorbeeld Mowi, en zet bij Rechten alleen Bekijken aan voor Bestellingen, Klanten, Adressen, Vervoerders en Bestelstatussen.</li>
+      <li>Sla op. Kopieer de gegenereerde sleutel.</li>
+    </ol>
+    <p class="note">PrestaShop gebruikt de sleutel zelf als gebruikersnaam, zonder apart wachtwoord. Bewaar hem daarom net zo zorgvuldig als een wachtwoord.</p>
+
+    <h2>Welke rechten de sleutel krijgt</h2>
+    <p>Mowi gebruikt de sleutel alleen om bestellingen, klanten, adressen, vervoerders en bestelstatussen op te zoeken. Er wordt nooit iets aangepast of verwijderd. De sleutel staat los van de inloggegevens van de beheerder en kan op elk moment in PrestaShop worden ingetrokken, zonder dat dit een account raakt.</p>
+
+    <h2>Hoe u de sleutel terugstuurt</h2>
+    <div class="box">
+      <p>Stuur de webservice-sleutel niet per e-mail in platte tekst. Mowi volgt dit direct met u op en geeft aan via welk kanaal u de sleutel veilig kunt delen.</p>
+    </div>
+    <p class="note">Wordt de sleutel later in PrestaShop ingetrokken of verwijderd, dan moet de koppeling met een nieuwe sleutel opnieuw ingesteld worden.</p>
+
+    <h2>Vragen?</h2>
+    <p>Neem contact op via <a href="mailto:contact@mowi.agency">contact@mowi.agency</a>. Vermeld daarbij om welke organisatie het gaat.</p>
+
+    <div class="sheet-footer">Mowi &middot; +31 85 333 58 00 &middot; contact@mowi.agency &middot; mowi.agency/bedrijfsgegevens</div>
+  </main>
+</body>
+</html>
