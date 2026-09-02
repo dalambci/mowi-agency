@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Exact Online koppelen aan Mowi: klanten en facturen in beeld — Mowi</title>
+  <meta name="description" content="Koppel Exact Online aan Mowi en laat uw agent klantgegevens en openstaande facturen herkennen. De koppeling is alleen lezend, u logt in met eigen account." />
+  <link rel="canonical" href="https://mowi.agency/koppeling-exact-online" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&family=Inter+Tight:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css?v=20260829-5" />
+  <link rel="icon" href="assets/icon-192.png?v=20260804-3" />
+  <link rel="shortcut icon" href="assets/icon-192.png?v=20260804-3" />
+  <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260804-3" />
+  <link rel="apple-touch-icon-precomposed" href="assets/apple-icon-180.png?v=20260804-3" />
+  <script defer data-domain="mowi.agency" src="https://plausible.io/js/script.js"></script>
+  <!-- FAQPage staat bewust hier in de head, zodat het paginabereik zelf
+       scriptvrij blijft. Elke vraag hieronder staat woordelijk als kop in
+       de FAQ-sectie verderop. Wijzig ze altijd samen. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is de Exact Online-koppeling alleen lezend?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ja. Mowi leest klant- en factuurgegevens uit Exact Online en past er nooit iets in aan."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Welk wachtwoord of API-sleutel moet ik invullen?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Geen. U logt in met uw eigen Exact Online-account en bevestigt de toegang. Er verlaat geen wachtwoord of sleutel uw organisatie."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Werkt de koppeling ook met de Belgische of Duitse Exact Online?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Nee. Op dit moment wordt alleen het Nederlandse Exact Online ondersteund."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Kan een collega of accountant de koppeling maken?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Dat kan. Diegene heeft alleen een eigen Exact Online-account nodig met toegang tot de juiste administratie. Gebruik hiervoor het A4 voor uw IT-partner."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-bar">
+      <a href="/" class="wordmark" aria-label="Mowi - home">
+        <img src="assets/mowi-icon.png" alt="" class="wordmark-icon" />
+        <img src="assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
+      </a>
+
+      <nav class="main-nav" id="main-nav" aria-label="Hoofdmenu">
+        <ul>
+          <li><a href="/zo-werkt-het">Zo werkt het</a></li>
+          <li class="nav-dropdown">
+            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="product-menu" aria-haspopup="true">
+              Product
+              <span class="nav-dropdown-icon" aria-hidden="true"></span>
+            </button>
+            <div class="nav-menu" id="product-menu">
+              <div class="nav-menu-col">
+                <ul class="nav-menu-item-grid">
+                  <li class="nav-menu-heading">Agents</li>
+                  <li class="nav-menu-item-full"><a href="/workflows"><span class="nav-menu-item-title">Alle agents</span><span class="nav-menu-item-desc">Het volledige overzicht van alle Mowi-agents</span></a></li>
+                  <li><a href="/e-mail-agent"><span class="nav-menu-item-title">Inbox agent</span><span class="nav-menu-item-desc">Sorteert en beantwoordt uw e-mail</span></a></li>
+                  <li><a href="/call-agent"><span class="nav-menu-item-title">Voice agent</span><span class="nav-menu-item-desc">Neemt binnenkomende gesprekken aan</span></a></li>
+                </ul>
+              </div>
+              <div class="nav-menu-col nav-menu-col-divider">
+                <ul class="nav-menu-item-grid">
+                  <li class="nav-menu-heading">Workflows</li>
+                  <li class="nav-menu-item-full"><a href="/workflows"><span class="nav-menu-item-title">Alle workflows</span><span class="nav-menu-item-desc">Het volledige overzicht van wat Mowi automatiseert</span></a></li>
+                  <li><a href="/workflows#order-status"><span class="nav-menu-item-title">Orderstatus</span><span class="nav-menu-item-desc">Zoekt bestellingen op in uw webshop</span></a></li>
+                  <li><a href="/workflows#offerte-opvolging"><span class="nav-menu-item-title">Offerte-opvolging</span><span class="nav-menu-item-desc">Controleert en volgt offerteaanvragen op</span></a></li>
+                  <li><a href="/workflows#agenda-samenvatting"><span class="nav-menu-item-title">Agenda-samenvatting</span><span class="nav-menu-item-desc">Uw agenda samengevat, op uw tijdstip</span></a></li>
+                  <li><a href="/workflows#crm-sync"><span class="nav-menu-item-title">CRM-synchronisatie</span><span class="nav-menu-item-desc">Herkent klanten en houdt uw CRM bij</span></a></li>
+                </ul>
+              </div>
+              <div class="nav-menu-col nav-menu-col-divider">
+                <ul class="nav-menu-item-grid">
+                  <li class="nav-menu-heading">Dashboards</li>
+                  <li class="nav-menu-item-full"><a href="/workflows#dashboards"><span class="nav-menu-item-title">Alle dashboards</span><span class="nav-menu-item-desc">Het volledige overzicht van al uw dashboards</span></a></li>
+                  <li><a href="/workflows#dashboard-directie-overzicht"><span class="nav-menu-item-title">Directie overzicht</span><span class="nav-menu-item-desc">De cijfers waar een eigenaar op stuurt</span></a></li>
+                  <li><a href="/workflows#dashboard-webshops-vergelijken"><span class="nav-menu-item-title">Webshops vergelijken</span><span class="nav-menu-item-desc">Kerncijfers per webshop naast elkaar</span></a></li>
+                  <li><a href="/workflows#dashboard-openstaande-facturen"><span class="nav-menu-item-title">Openstaande facturen</span><span class="nav-menu-item-desc">Welke facturen aandacht nodig hebben</span></a></li>
+                  <li><a href="/workflows#dashboard-winstgevendheid"><span class="nav-menu-item-title">Winstgevendheid</span><span class="nav-menu-item-desc">Marge op basis van uw eigen kostprijzen</span></a></li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li><a href="/templates">Templates</a></li>
+          <li><a href="/pricing">Prijzen</a></li>
+          <li class="nav-mobile-actions"><a href="https://my.mowi.agency/login">Inloggen</a></li>
+          <li class="nav-mobile-actions"><a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a href="https://my.mowi.agency/login" class="header-login">Inloggen</a>
+        <a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a>
+      </div>
+
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="main-nav" aria-label="Menu openen">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ================= Hero =================
+         Breadcrumb is de eerste child van de hero-container, zoals op
+         blog/*.html en cookies.html. Geen eigen <nav>, geen aria-label. -->
+    <section class="section" id="lander-hero">
+      <div class="container">
+        <p class="blog-breadcrumb"><a href="/">Home</a> &rsaquo; <a href="/koppelingen">Koppelingen</a> &rsaquo; Exact Online</p>
+        <h1 class="page-hero-heading">Automatiseren in Exact Online.</h1>
+        <p class="page-hero-body">Mowi sluit aan op de Exact Online die u al gebruikt. Uw agent herkent een klant bij naam en weet meteen welke facturen nog openstaan.</p>
+        <p class="page-hero-body">De koppeling is alleen lezend. Er wordt nooit iets in uw Exact Online aangepast.</p>
+      </div>
+    </section>
+
+    <!-- ================= Wat de koppeling doet ================= -->
+    <section class="section">
+      <div class="container">
+        <h2 class="page-heading">Wat de koppeling doet</h2>
+        <p class="page-body">Exact Online is de boekhoudsoftware waarin uw klant- en factuurgegevens staan. Mowi leest die gegevens uit, zodat uw agent een klant bij naam herkent en direct weet welke facturen nog openstaan.</p>
+        <p class="page-body">De koppeling werkt maar één kant op. Mowi leest, Mowi schrijft niet in Exact Online.</p>
+        <p class="page-body">U koppelt met uw eigen Exact Online-account. Er komt geen los wachtwoord of API-sleutel aan te pas. U logt in bij Exact Online, kiest de administratie en bevestigt de toegang.</p>
+      </div>
+    </section>
+
+    <!-- ================= Werkt met deze agents en workflows =================
+         Links volgen de sitewide navigatie zoals die vandaag in test.html
+         staat: /e-mail-agent en /call-agent voor de agents, /workflows#...
+         voor de workflows. Nooit /agents/*, die pagina's bestaan niet meer. -->
+    <section class="section">
+      <div class="container">
+        <h2 class="page-heading">Werkt met deze agents en workflows</h2>
+        <p class="page-body">De Exact Online-koppeling staat nooit op zichzelf. Dit is wat er daadwerkelijk mee gebeurt.</p>
+        <div class="lp-card-grid">
+          <a href="/e-mail-agent" class="lp-card">
+            <h3>Inbox agent</h3>
+            <p>Herkent de afzender aan de hand van uw klantgegevens in Exact Online, voordat het conceptantwoord voor u klaarstaat.</p>
+          </a>
+          <a href="/call-agent" class="lp-card">
+            <h3>Voice agent</h3>
+            <p>Weet wie er belt. Het gesprek hoeft niet te beginnen met opnieuw uitvragen wie iemand is.</p>
+          </a>
+          <a href="/workflows#dashboard-openstaande-facturen" class="lp-card">
+            <h3>Openstaande facturen</h3>
+            <p>Laat zien welke facturen uit Exact Online nog openstaan en welke aandacht nodig hebben.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Zo koppelt u Exact Online =================
+         Drie stappen, één per regel uit exact_online.instructions[] in de
+         dashboard-config (config/shop_platforms.php). Niets samengevoegd,
+         niets toegevoegd. auth is oauth, fields => [], dus geen los veld. -->
+    <section class="section">
+      <div class="container">
+        <h2 class="page-heading">Zo koppelt u Exact Online</h2>
+        <div class="lp-steps">
+          <div class="lp-step">
+            <div class="lp-step-circle" aria-hidden="true">1</div>
+            <h3>Klik op Koppel met Exact Online</h3>
+            <p>Log in met uw eigen Exact Online-account. Ondersteund is op dit moment alleen het Nederlandse Exact Online (start.exactonline.nl).</p>
+          </div>
+          <div class="lp-step">
+            <div class="lp-step-circle" aria-hidden="true">2</div>
+            <h3>Kies de juiste administratie</h3>
+            <p>Kies de administratie die u wilt koppelen en bevestig de toegang.</p>
+          </div>
+          <div class="lp-step">
+            <div class="lp-step-circle" aria-hidden="true">3</div>
+            <h3>U bent verbonden</h3>
+            <p>U komt automatisch terug in het dashboard en de koppeling staat op Verbonden.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Voor uw IT-partner ================= -->
+    <section class="section">
+      <div class="container">
+        <h2 class="page-heading">Voor uw IT-partner</h2>
+        <p class="page-body">Regelt een collega, IT-partner of accountant de koppeling met Exact Online? Dat kan. Er is geen wachtwoord of API-sleutel te delen, alleen een eigen Exact Online-account met toegang tot de juiste administratie. Er is één A4 met precies wat er gevraagd wordt.</p>
+        <p class="page-body"><a href="/downloads/it-partner-exact-online.html" class="link-arrow">Open het A4 voor uw IT-partner</a></p>
+      </div>
+    </section>
+
+    <!-- ================= Veelgestelde vragen =================
+         Elke <h3> hieronder staat woordelijk in het FAQPage-blok in de
+         <head>. Wijzig ze altijd samen. -->
+    <section class="section">
+      <div class="container">
+        <h2 class="page-heading">Veelgestelde vragen</h2>
+        <div class="lp-card-grid">
+          <div class="lp-card">
+            <h3>Is de Exact Online-koppeling alleen lezend?</h3>
+            <p>Ja. Mowi leest klant- en factuurgegevens uit Exact Online en past er nooit iets in aan.</p>
+          </div>
+          <div class="lp-card">
+            <h3>Welk wachtwoord of API-sleutel moet ik invullen?</h3>
+            <p>Geen. U logt in met uw eigen Exact Online-account en bevestigt de toegang. Er verlaat geen wachtwoord of sleutel uw organisatie.</p>
+          </div>
+          <div class="lp-card">
+            <h3>Werkt de koppeling ook met de Belgische of Duitse Exact Online?</h3>
+            <p>Nee. Op dit moment wordt alleen het Nederlandse Exact Online ondersteund.</p>
+          </div>
+          <div class="lp-card">
+            <h3>Kan een collega of accountant de koppeling maken?</h3>
+            <p>Dat kan. Diegene heeft alleen een eigen Exact Online-account nodig met toegang tot de juiste administratie. Gebruik hiervoor het A4 voor uw IT-partner.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Afsluitende CTA ================= -->
+    <section class="section">
+      <div class="container">
+        <h2 class="page-heading">Klaar om Exact Online te koppelen</h2>
+        <p class="page-body">Begin gratis en koppel Exact Online wanneer het u uitkomt. Wilt u eerst weten wat het kost? Bekijk de <a href="/pricing">prijzen</a>.</p>
+        <a href="https://my.mowi.agency/aanmelden" class="btn-primary page-cta" data-event="Signup Click">Start gratis</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       CANONICAL FOOTER — the measured shapes.co recipe:
+       greige full-width band → pre-footer CTA on the band → light
+       rounded-top panel (page-bg color) flush to the page bottom.
+       Structure modernized 2026-08-19: CTA is one row (headline +
+       button, no empty visual slot), brand block carries tagline +
+       LinkedIn, trimmed link columns (2-across on mobile), GDPR seal
+       lives in the bottom bar.
+       ============================================================ -->
+  <footer class="footer-wrap">
+    <div class="container">
+
+      <div class="footer-cta">
+        <h2 class="footer-cta-title">Vertel het en<br />Mowi regelt het</h2>
+        <a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a>
+      </div>
+
+      <div class="footer-panel">
+        <div class="footer-top">
+          <div class="footer-brand">
+            <a href="/" class="wordmark" aria-label="Mowi - home">
+              <img src="assets/mowi-icon.png" alt="" class="wordmark-icon" />
+              <img src="assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
+            </a>
+            <p class="footer-tagline">Automatisering voor het MKB.<br />Altijd eerst op proef.</p>
+            <a href="#" class="footer-social" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg></a>
+          </div>
+
+          <nav class="footer-menus" aria-label="Footer">
+            <div>
+              <h3 class="footer-menu-heading">Product</h3>
+              <ul>
+                <li><a href="/workflows">Alle workflows</a></li>
+                <li><a href="/templates">Templates</a></li>
+                <li><a href="/koppelingen">Koppelingen</a></li>
+                <li><a href="/pricing">Prijzen</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="footer-menu-heading">Bronnen</h3>
+              <ul>
+                <li><a href="/docs/">Documentatie</a></li>
+                <li><a href="/blog/">Blog</a></li>
+                <li><a href="/zo-werkt-het">Zo werkt het</a></li>
+                <li><a href="/waarom-mowi">Waarom Mowi</a></li>
+                <li><a href="/security">Security</a></li>
+                <li><a href="/ai-transparantie">AI-transparantie</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="footer-menu-heading">Contact</h3>
+              <ul>
+                <li><a href="tel:+31853335800">+31 85 333 58 00</a></li>
+                <li><a href="mailto:contact@mowi.agency">contact@mowi.agency</a></li>
+                <li><a href="/demo">Contact sales</a></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+
+        <div class="footer-bottom">
+          <span>&copy; 2026 Mowi. Alle rechten voorbehouden.</span>
+          <div class="footer-legal">
+            <a href="/algemene-voorwaarden">Algemene voorwaarden</a>
+            <a href="/privacyverklaring">Privacyverklaring</a>
+            <a href="/cookies">Cookies</a>
+            <!-- Bedrijfsgegevens moet wettelijk "gemakkelijk, rechtstreeks en
+                 permanent toegankelijk" blijven (art. 3:15d BW) — daarom hier,
+                 niet verwijderd, toen de Contact-kolom werd opgeschoond. -->
+            <a href="/bedrijfsgegevens">Bedrijfsgegevens</a>
+            <a href="/subverwerkers">Subverwerkers</a>
+            <!-- Alleen GDPR/AVG — een zelfverklaring, geen certificaat (dat
+                 bestaat niet voor de AVG); klopt zolang de registers en
+                 verklaringen in de vault (Legal/) worden bijgehouden. SOC 2 /
+                 ISO komen hier pas terug wanneer een echt certificaat behaald
+                 is. -->
+            <img src="assets/badges/gdpr.png" alt="GDPR" class="footer-badge" width="36" height="36" />
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <script src="js/main.js?v=20260822-23"></script>
+</body>
+</html>

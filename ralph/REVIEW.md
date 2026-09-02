@@ -52,3 +52,34 @@ pulled in `css/style.css`, and whether any FAQ answer claims more than live copy
 - Open questions: S-006 (agent cards link to `/e-mail-agent` + `/call-agent`, not the spec's
   `/workflows#email-agent`; `/workflows#crm-sync` still lands on an empty page) and S-007 (no named
   secure channel for handing over the API-token, sheet uses the fallback line).
+
+### T02 exact-online
+- Path: `koppeling-exact-online.html` (+ `downloads/it-partner-exact-online.html`)
+- Open: `start-local-server.bat` then http://localhost:8765/koppeling-exact-online
+- [ ] Spacing matches the blog / koppelingen canon (section rhythm, heading margins, card gutters -
+      open koppelingen.html in a second tab and flip between them)
+- [ ] Exactly one CTA visible in the page body, and it is obvious - "Start gratis", pointing at
+      my.mowi.agency/aanmelden. Header and footer CTAs do not count.
+- [ ] Tablet view (~768px, narrow the window): breadcrumb padding is not cramped against the header,
+      and the hero H1 does not overflow or jump a size
+- [ ] `.lp-steps` renders acceptably with only 3 steps (Pipedrive had 5) - check it does not look
+      sparse or unevenly spaced compared to the 5-step version.
+- [ ] The three cards under "Werkt met deze agents en workflows" are `<a class="lp-card">`. This
+      lander picks Inbox agent, Voice agent and the "Openstaande facturen" dashboard fragment
+      (`/workflows#dashboard-openstaande-facturen`) instead of Pipedrive's CRM-sync card - grounded
+      in `ExactOnlineGateway` implementing both `CrmGateway` (findPersonByEmail/Phone) and
+      `InvoiceGateway` (open/overdue invoices), read-only against `config/shop_platforms.php`.
+  Confirm that reading is right, not just Pipedrive's pattern copy-pasted.
+- [ ] This is the oauth/`fields => []` case: no credential field anywhere, "Zo koppelt u" has only 3
+      steps (1:1 with `exact_online.instructions[]`), and both the lander's "Voor uw IT-partner"
+      paragraph and the whole sheet say plainly that nothing is created or shared, only a login with
+      the right account/administration. Confirm this reads right and not like a missing section.
+- [ ] The NL-only caveat ("alleen het Nederlandse Exact Online") is grounded only in a dashboard
+      code comment (`ExactOnlineGateway.php`, tier 2), not in any customer-facing UI copy. Confirm
+      it is true today before this ships, since it is not currently stated anywhere the client sees.
+- [ ] Open `downloads/it-partner-exact-online.html` and print-preview it (Ctrl+P): one A4, nothing
+      clipped, and it must NOT pull in `css/style.css` (it carries its own `<style>`). Shorter than
+      Pipedrive's sheet on purpose (no token to create or return).
+- Open questions: S-006 (same agent-card link reading as T01, applied here too) and the NL-only
+  caveat above (no NEEDS_SAL entry filed since the dashboard source is tier-2-authoritative for
+  connect-flow facts per SPEC section 9, but it has no live-copy precedent to double-check against).

@@ -43,3 +43,26 @@ entry sitting in an otherwise empty log would read as a completed task and mask 
   string in a head comment ("zodat `<main>` scriptvrij blijft") - `structure` is the one gate that
   reads raw source, comments included. Reworded the comment; green on round 2, `--dom` green first try.
 - Status: [x] done
+
+### 2026-09-02 - T02 exact-online
+- Built: `downloads/it-partner-exact-online.html` (sheet, built first) and `koppeling-exact-online.html`
+  (lander, 7 sections, 4-question FAQ). Cache-bust read live from `index.html`: unchanged from T01
+  (`style.css?v=20260829-5`, `main.js?v=20260822-23`).
+- Decisions: this is the spec's own oauth/`fields => []` example (`exact_online.auth = 'oauth'` in
+  `config/shop_platforms.php`), so "Zo koppelt u" is 3 steps (1:1 with `instructions[]`, nothing
+  merged) and both the lander's IT-partner paragraph and the whole sheet say plainly there is no
+  credential to create or hand over, only a login with the right account/administration - per SPEC
+  section 5's "first check whether there is anything to ask for at all." Section 4 cards: read
+  `ExactOnlineGateway.php` (tier 2) and found it implements both `CrmGateway`
+  (findPersonByEmail/findPersonByPhone, same interface Pipedrive's recognition claim rests on) and
+  `InvoiceGateway` (open/overdue invoices, aging buckets) - so cards are Inbox agent, Voice agent, and
+  `/workflows#dashboard-openstaande-facturen` (matches the nav's own "Welke facturen aandacht nodig
+  hebben" description) rather than reusing Pipedrive's third CRM-sync card. Followed S-006's precedent
+  of linking `/e-mail-agent` + `/call-agent` literally rather than the spec's `#email-agent`/`#call-agent`
+  fragments, for consistency with T01. Added one grounded FAQ/step caveat not in T01: Exact Online's
+  OAuth only covers the Netherlands entry point (`start.exactonline.nl`), sourced from a code comment
+  in `ExactOnlineGateway.php`, not customer-facing UI copy - flagged in REVIEW.md for Sal to confirm
+  since it has no live-copy precedent.
+- Oddities: meta description was 157 chars on round 1 (need <=155); trimmed "met uw eigen account" to
+  "met eigen account", green on round 2. `--dom` green first try.
+- Status: [x] done
