@@ -116,3 +116,25 @@ entry sitting in an otherwise empty log would read as a completed task and mask 
 - Oddities: sheet meta description was 157 chars on round 1 (need <=155); "wie die kan bevestigen" to
   "wie die bevestigt", green on round 2. `--dom` green both rounds, 0 skips on the lander.
 - Status: [x] done
+
+### 2026-09-03 - T01R pipedrive (retrofit to D17 template)
+- Built: rewrote `koppeling-pipedrive.html` in place to the `koppeling-exact-online.html` template
+  (`.hero.lp-hero` question H1, `.lp-section-heading` sub-questions, 3 `.dp-window` previews, one CTA
+  in the hero, no closing-CTA section). `downloads/it-partner-pipedrive.html` untouched: D17 only
+  redesigned the lander spec (SPEC section 4), the sheet spec (section 5) never moved.
+- Decisions: same content, restructured, not re-derived. FAQ (4 Q&A) and JSON-LD carried over
+  byte-identical. Steps folded from 5 to 4 the same way T02 went 3 to 2: `pipedrive.instructions[]`
+  entries 2+3 (direct link vs. via-menu route to the same API-settings screen) merged into one step's
+  body, nothing dropped. Section 3 ("Welke agents...") kept T01's original 3-card link-stack (Inbox
+  agent, Voice agent, CRM-synchronisatie) with no dashboard card and no side-preview swap: re-read
+  `PipedriveGateway.php` for the retrofit and confirmed its `DealGateway` methods (pipeline/win-rate
+  aggregates) carry the same "NOT live-verified against a real sandbox" docblock pattern S-008 already
+  flagged for Exact Online/Moneybird, while only the `CrmGateway` contact-lookup half (which the hero/
+  side previews already draw from) was live-verified - so no new dashboard claim was added. Section 2
+  ("Wat leest Mowi...") gained a 4th icon card, "Open deals in beeld", grounded in
+  `buildPersonShape()`'s `open_deals` field (title + stage), which IS part of the verified contact-
+  lookup path. No cross-platform sub-question added (D18/S-010 already covers "pipedrive exact
+  online" from the Exact Online side; same "no" answer, not re-logged).
+- Oddities: none - both gates green on round 1, 0 fix rounds, `--dom` green first try, 0 skips on the
+  lander (4 on the sheet, as expected).
+- Status: [x] done

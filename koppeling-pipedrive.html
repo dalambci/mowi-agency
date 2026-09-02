@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pipedrive koppelen aan Mowi: klanten direct herkend — Mowi</title>
-  <meta name="description" content="Koppel Pipedrive aan Mowi en laat uw agent klantgegevens opzoeken in uw eigen CRM. De koppeling is alleen lezend. Zo stelt u hem stap voor stap in." />
+  <title>Pipedrive koppeling met AI: wat kunt u automatiseren? — Mowi</title>
+  <meta name="description" content="Mowi leest klanten en open deals uit Pipedrive, alleen lezend. Uw agent herkent wie er mailt of belt. Koppelen in 4 stappen, gratis te proberen." />
   <link rel="canonical" href="https://mowi.agency/koppeling-pipedrive" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -26,65 +26,61 @@
       {
         "@type": "Question",
         "name": "Is de Pipedrive-koppeling alleen lezend?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Ja. Mowi leest en past nooit iets aan. Vrije-tekstnotities krijgt de agent niet te zien."
-        }
+        "acceptedAnswer": { "@type": "Answer", "text": "Ja. Mowi leest en past nooit iets aan. Vrije-tekstnotities krijgt de agent niet te zien." }
       },
       {
         "@type": "Question",
         "name": "Wat is een API-token?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Een lange, willekeurige code bij uw eigen account. Pipedrive geeft externe toepassingen nooit toegang met uw wachtwoord."
-        }
+        "acceptedAnswer": { "@type": "Answer", "text": "Een lange, willekeurige code bij uw eigen account. Pipedrive geeft externe toepassingen nooit toegang met uw wachtwoord." }
       },
       {
         "@type": "Question",
         "name": "Het API-token werd geweigerd. Wat nu?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Het token is ongeldig of vernieuwd. Kopieer het huidige token uit uw API-instellingen en vul het in bij Sleutel wijzigen."
-        }
+        "acceptedAnswer": { "@type": "Answer", "text": "Het token is ongeldig of vernieuwd. Kopieer het huidige token uit uw API-instellingen en vul het in bij Sleutel wijzigen." }
       },
       {
         "@type": "Question",
         "name": "Kan een collega het token aanmaken?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Ja. Het token is persoonlijk, dus u koppelt met de rechten van dat account."
-        }
+        "acceptedAnswer": { "@type": "Answer", "text": "Ja. Het token is persoonlijk, dus u koppelt met de rechten van dat account." }
       }
     ]
   }
   </script>
   <style>
-    /* Page-scoped lander styles (D15/D16). Nothing here touches the shared stylesheet,
-       so no other page moves and no sitewide cache-bust bump is needed.
-
-       1. Section rhythm. The shared .section is 5rem 0, so two stacked sections
-          put 10rem between blocks. Too airy for a short lander (Sal, 2026-09-02).
-       2. The koppeling preview. A monochrome port of the dashboard Start page's
-          own .dp-card mock (resources/views/components/discover-preview.blade.php)
-          so the site shows the same picture the product does. Abstract on purpose:
-          real labels only where they carry meaning, masked values and grey bars
-          everywhere else. Inventing a customer name or an amount would put fake
-          data on a page the client reads before any of it is true. Colour is
-          swapped for the site's monochrome tokens: the chip is a black fill,
-          never a green one. */
+    /* Page-scoped lander styles (D17, supersedes D15/D16). Nothing here touches
+       the shared stylesheet, so no other page moves and no cache-bust bump is
+       needed. Everything below is either a section-rhythm override, a mobile
+       fallback the shared .split lacks, or the koppeling preview: a monochrome
+       port of the dashboard Start page's own .dp-card mock
+       (resources/views/components/discover-preview.blade.php), so the site
+       shows the same picture the product does. The mock stays abstract on
+       purpose: real words only where they carry meaning, masked values and
+       grey bars everywhere else. An invented customer name or amount would be
+       fake data on a page the client reads before any of it is true. */
     main .section { padding: 3rem 0; }
-    main .section#lander-hero { padding-top: 4rem; }
     @media (max-width: 48rem) { main .section { padding: 2.25rem 0; } }
 
-    .lp-hero-logo { display: block; margin-bottom: 1.25rem; }
+    .lp-hero .blog-breadcrumb { margin-bottom: 1.75rem; }
+    .lp-hero-logo { display: block; margin: 0 auto 1.25rem; width: auto; height: 2.5rem; max-width: 10rem; }
+    .lp-hero .hero-sub { max-width: 40rem; margin-left: auto; margin-right: auto; }
+
+    main .split { align-items: center; }
+    @media (max-width: 48rem) { main .split { grid-template-columns: 1fr; gap: 2rem; } }
+    .lp-link-stack { display: grid; gap: 1rem; }
+    .lp-link-stack .lp-card { padding: 1.5rem 1.75rem; }
+    .lp-note-link { display: block; margin-top: 0.75rem; }
 
     .dp-window {
-      height: 190px; max-width: 21rem; margin: 2.25rem auto 0;
-      overflow: hidden; display: flex; justify-content: center;
-      align-items: flex-start; padding-top: 20px;
+      height: 200px; overflow: hidden; display: flex; justify-content: center;
+      align-items: flex-start; padding-top: 22px;
       background: var(--muted); border: 1px solid var(--border);
       border-radius: var(--radius-card);
     }
+    .dp-window-hero { width: 100%; max-width: 40rem; height: 250px; margin: 2.75rem auto 0; padding-top: 28px; }
+    .dp-window-hero .dp-card { max-width: 340px; padding: 14px; }
+    .dp-window-side { height: 280px; }
+    .dp-window-tile { height: auto; padding: 1.25rem; max-width: 22rem; margin: 2.5rem auto 0; }
+    .dp-window-tile .dp-card { width: 100%; max-width: none; }
     .dp-card {
       width: 82%; max-width: 250px; flex-shrink: 0; text-align: left;
       background: var(--surface); border: 1px solid var(--border);
@@ -105,6 +101,10 @@
       font-size: 9.5px; font-weight: 600; white-space: nowrap; padding: 2px 6px;
       border-radius: var(--radius-pill); background: var(--ink); color: var(--bg);
     }
+    .dp-tile-row { display: flex; align-items: center; gap: 10px; }
+    .dp-tile-row img { width: 26px; height: 26px; object-fit: contain; flex-shrink: 0; }
+    .dp-tile-name { flex: 1; font-size: 13px; font-weight: 700; color: var(--ink); }
+    .dp-tile-sub { font-size: 11px; color: var(--ink-3); margin-top: 6px; }
   </style>
 </head>
 <body>
@@ -175,111 +175,155 @@
 
   <main>
 
-    <!-- ================= Hero =================
-         Breadcrumb is de eerste child van de hero-container, zoals op
-         blog/*.html en cookies.html. Geen eigen <nav>, geen aria-label. -->
-    <section class="section" id="lander-hero">
-      <div class="container">
-        <p class="blog-breadcrumb"><a href="/">Home</a> &rsaquo; <a href="/koppelingen">Koppelingen</a> &rsaquo; Pipedrive</p>
-        <img src="assets/logos/pipedrive.svg" alt="" class="integration-card-logo lp-hero-logo" />
-      <h1 class="page-hero-heading">Automatiseren in Pipedrive.</h1>
-        <p class="page-hero-body">Uw agent zoekt klantgegevens op in uw eigen Pipedrive en herkent wie er belt of mailt.</p>
-        <p class="page-hero-body">Alleen lezend. Er verandert niets in Pipedrive.</p>
+    <!-- Hero: the question as H1, the direct answer in the first 80 words, the
+         page's only primary CTA, and the koppeling preview as the hero visual. -->
+    <section class="hero container lp-hero hero-tight-bottom" id="lander-hero">
+      <p class="blog-breadcrumb"><a href="/">Home</a> &rsaquo; <a href="/koppelingen">Koppelingen</a> &rsaquo; Pipedrive</p>
+      <img src="assets/logos/pipedrive.svg" alt="" class="integration-card-logo lp-hero-logo" />
+      <h1 class="h-balance">Wat kunt u met AI automatiseren in <span class="h-nowrap">Pipedrive?</span></h1>
+      <p class="hero-sub">Met de Pipedrive-koppeling leest Mowi uw klantgegevens en open deals, alleen lezend. Uw Inbox agent en Voice agent herkennen daardoor wie er mailt of belt, zonder ernaar te vragen. Koppelen kost 4 stappen met een persoonlijk API-token uit uw eigen account, dat u zelf beheert. Vrije-tekstnotities krijgt de agent nooit te zien.</p>
+      <div class="hero-actions lp-cta-block">
+        <a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a>
+        <span class="lp-cta-micro">Geen betaalgegevens nodig.</span>
+      </div>
+      <div class="dp-window dp-window-hero" role="img" aria-label="Voorbeeld: een binnenkomende e-mail met de afzender herkend als bestaande klant uit Pipedrive">
+        <div class="dp-card">
+          <div class="dp-head">Inkomende e-mail</div>
+          <div class="dp-title">&bull;&bull;&bull;&bull;&bull;&bull;@&bull;&bull;&bull;&bull;&bull;&bull;.nl</div>
+          <div class="dp-amount">Gevonden in Pipedrive</div>
+          <div class="dp-row"><span class="dp-avatar"></span><span class="dp-bars"><span class="dp-bar"></span><span class="dp-bar short"></span></span><span class="dp-chip">Klant herkend</span></div>
+          <div class="dp-row"><span class="dp-avatar"></span><span class="dp-bars"><span class="dp-bar short"></span><span class="dp-bar"></span></span></div>
+          <div class="dp-row"><span class="dp-avatar"></span><span class="dp-bars"><span class="dp-bar"></span><span class="dp-bar short"></span></span></div>
+        </div>
       </div>
     </section>
 
-    <!-- ================= Wat de koppeling doet ================= -->
+    <!-- Every H2 is a sub-question; the line under it is the answer. -->
     <section class="section">
       <div class="container">
-        <h2 class="page-heading">Wat de koppeling doet</h2>
-        <p class="page-body">Mowi leest uw klant- en verkoopgegevens uit Pipedrive. Uw agent herkent een klant bij naam en hoeft niet te vragen met wie hij spreekt.</p>
-        <p class="page-body">Één kant op: Mowi leest, Mowi schrijft niet. Vrije-tekstnotities krijgt de agent nooit te zien.</p>
-        <p class="page-body">U koppelt met een persoonlijk API-token uit uw eigen account. Dat token vernieuwt u zelf, wanneer u wilt.</p>
-        <div class="dp-window" role="img" aria-label="Voorbeeld: een binnenkomende e-mail met de afzender herkend als bestaande klant">
-          <div class="dp-card">
-            <div class="dp-head">Inkomende e-mail</div>
-            <div class="dp-title">&bull;&bull;&bull;&bull;&bull;&bull;@&bull;&bull;&bull;&bull;&bull;&bull;.nl</div>
-            <div class="dp-amount">Gevonden in Pipedrive</div>
-            <div class="dp-row"><span class="dp-avatar"></span><span class="dp-bars"><span class="dp-bar"></span><span class="dp-bar short"></span></span><span class="dp-chip">Klant herkend</span></div>
-            <div class="dp-row"><span class="dp-avatar"></span><span class="dp-bars"><span class="dp-bar short"></span><span class="dp-bar"></span></span></div>
-            <div class="dp-row"><span class="dp-avatar"></span><span class="dp-bars"><span class="dp-bar"></span><span class="dp-bar short"></span></span></div>
+        <div class="section-head-row section-head-row-center">
+          <h2 class="lp-section-heading">Wat leest Mowi uit Pipedrive?</h2>
+          <p class="section-sub section-sub-center">Uw klantgegevens en open deals. Niets anders, en nooit schrijvend.</p>
+        </div>
+        <div class="lp-card-grid">
+          <div class="lp-card">
+            <span class="lp-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span>
+            <h3>Klant herkend</h3>
+            <p>Naam, bedrijf en contactgegevens uit uw contactpersonen. Zo weet de agent wie er belt of mailt, zonder ernaar te vragen.</p>
+          </div>
+          <div class="lp-card">
+            <span class="lp-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13"/><path d="M3 6h.01M3 12h.01M3 18h.01"/></svg></span>
+            <h3>Open deals in beeld</h3>
+            <p>Welke deals openstaan en in welke fase ze zitten, rechtstreeks uit uw pipeline.</p>
+          </div>
+          <div class="lp-card">
+            <span class="lp-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span>
+            <h3>Alleen lezend</h3>
+            <p>Mowi past nooit iets aan in Pipedrive. Vrije-tekstnotities krijgt de agent nooit te zien.</p>
+          </div>
+          <div class="lp-card">
+            <span class="lp-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M10.9 12.1L21 2M15 8l3 3M18 5l3 3"/></svg></span>
+            <h3>Uw eigen API-token</h3>
+            <p>U koppelt met een persoonlijk token uit uw eigen account. Dat vernieuwt u zelf, wanneer u wilt.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ================= Werkt met deze agents en workflows =================
-         Links volgen de sitewide navigatie zoals die vandaag in test.html
-         staat: /e-mail-agent en /call-agent voor de agents, /workflows#...
-         voor de workflows. Nooit /agents/*, die pagina's bestaan niet meer. -->
     <section class="section">
       <div class="container">
-        <h2 class="page-heading">Werkt met deze agents en workflows</h2>
-        <p class="page-body">Dit is wat er met de koppeling gebeurt.</p>
-        <div class="lp-card-grid">
-          <a href="/e-mail-agent" class="lp-card">
-            <h3>Inbox agent</h3>
-            <p>Herkent de afzender aan uw Pipedrive-gegevens, voordat het concept klaarstaat.</p>
-          </a>
-          <a href="/call-agent" class="lp-card">
-            <h3>Voice agent</h3>
-            <p>Weet wie er belt. Geen uitvraagronde meer aan het begin.</p>
-          </a>
-          <a href="/workflows#crm-sync" class="lp-card">
-            <h3>CRM-synchronisatie</h3>
-            <p>Zoekt klantgegevens op in Pipedrive. Alleen lezen.</p>
-          </a>
+        <div class="section-head-row section-head-row-center">
+          <h2 class="lp-section-heading">Welke agents gebruiken de Pipedrive-koppeling?</h2>
+          <p class="section-sub section-sub-center">Twee agents en een workflow, allemaal via dezelfde koppeling.</p>
+        </div>
+        <div class="split">
+          <div class="lp-link-stack">
+            <a href="/e-mail-agent" class="lp-card">
+              <h3>Inbox agent</h3>
+              <p>Herkent de afzender aan uw Pipedrive-gegevens, voordat het conceptantwoord klaarstaat.</p>
+            </a>
+            <a href="/call-agent" class="lp-card">
+              <h3>Voice agent</h3>
+              <p>Weet wie er belt. Geen uitvraagronde aan het begin van het gesprek.</p>
+            </a>
+            <a href="/workflows#crm-sync" class="lp-card">
+              <h3>CRM-synchronisatie</h3>
+              <p>Zoekt klantgegevens op in Pipedrive en houdt uw agents up-to-date. Alleen lezend.</p>
+            </a>
+          </div>
+          <div class="dp-window dp-window-side" role="img" aria-label="Voorbeeld: een inkomend gesprek waarbij de beller herkend is als bestaande klant uit Pipedrive">
+            <div class="dp-card">
+              <div class="dp-head">Inkomend gesprek</div>
+              <div class="dp-title">+31 6 &bull;&bull; &bull;&bull; &bull;&bull; &bull;&bull;</div>
+              <div class="dp-amount">2:14</div>
+              <div class="dp-row"><span class="dp-avatar"></span><span class="dp-bars"><span class="dp-bar"></span><span class="dp-bar short"></span></span><span class="dp-chip">Klant herkend</span></div>
+              <div class="dp-row"><span class="dp-avatar"></span><span class="dp-bars"><span class="dp-bar short"></span><span class="dp-bar"></span></span></div>
+              <div class="dp-row"><span class="dp-avatar"></span><span class="dp-bars"><span class="dp-bar"></span><span class="dp-bar short"></span></span></div>
+              <div class="dp-row"><span class="dp-avatar"></span><span class="dp-bars"><span class="dp-bar short"></span><span class="dp-bar"></span></span></div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- ================= Zo koppelt u Pipedrive =================
-         Vijf stappen, één per regel uit pipedrive.instructions[] in de
-         dashboard-config (config/shop_platforms.php). Niets samengevoegd,
-         niets toegevoegd. Het veld heet daar API-token (fields.api_key). -->
     <section class="section">
       <div class="container">
-        <h2 class="page-heading">Zo koppelt u Pipedrive</h2>
+        <div class="section-head-row section-head-row-center">
+          <h2 class="lp-section-heading">Hoe koppelt u Pipedrive aan Mowi?</h2>
+          <p class="section-sub section-sub-center">In 4 stappen, met een persoonlijk API-token.</p>
+        </div>
         <div class="lp-steps">
-        <div class="lp-step">
-          <div class="lp-step-circle" aria-hidden="true">1</div>
-          <h3>Log in bij Pipedrive</h3>
-          <p>Het account waarmee u wilt koppelen.</p>
+          <div class="lp-step">
+            <div class="lp-step-circle" aria-hidden="true">1</div>
+            <h3>Log in bij Pipedrive</h3>
+            <p>Het account waarmee u wilt koppelen.</p>
+          </div>
+          <div class="lp-step">
+            <div class="lp-step-circle" aria-hidden="true">2</div>
+            <h3>Open uw API-instellingen</h3>
+            <p>Direct via <a href="https://app.pipedrive.com/settings/api">app.pipedrive.com/settings/api</a>. Of via het menu: uw accountnaam rechtsboven, Company settings, Personal preferences, tabblad API.</p>
+          </div>
+          <div class="lp-step">
+            <div class="lp-step-circle" aria-hidden="true">3</div>
+            <h3>Kopieer uw API-token</h3>
+            <p>Staat er nog geen token? Genereer er een met de knop.</p>
+          </div>
+          <div class="lp-step">
+            <div class="lp-step-circle" aria-hidden="true">4</div>
+            <h3>Plak het token en klik op Koppelen</h3>
+            <p>Mowi test de verbinding meteen.</p>
+          </div>
         </div>
-        <div class="lp-step">
-          <div class="lp-step-circle" aria-hidden="true">2</div>
-          <h3>Open uw API-instellingen</h3>
-          <p>Direct via <a href="https://app.pipedrive.com/settings/api">app.pipedrive.com/settings/api</a>. Of via het menu: uw accountnaam rechtsboven, Company settings, Personal preferences, tabblad API.</p>
+        <div class="dp-window dp-window-tile" role="img" aria-label="Voorbeeld: de koppelingstegel van Pipedrive in het Mowi-dashboard met de status Verbonden">
+          <div class="dp-card">
+            <div class="dp-tile-row">
+              <img src="assets/logos/pipedrive.svg" alt="" />
+              <span class="dp-tile-name">Pipedrive</span>
+              <span class="dp-chip">Verbonden</span>
+            </div>
+            <div class="dp-tile-sub">Alleen lezend, via uw eigen API-token</div>
+          </div>
         </div>
-        <div class="lp-step">
-          <div class="lp-step-circle" aria-hidden="true">3</div>
-          <h3>Kopieer uw API-token</h3>
-          <p>Staat er nog geen token? Genereer er een met de knop.</p>
-        </div>
-        <div class="lp-step">
-          <div class="lp-step-circle" aria-hidden="true">4</div>
-          <h3>Plak het token en klik op Koppelen</h3>
-          <p>Mowi test de verbinding meteen.</p>
-        </div>
-      </div>
       </div>
     </section>
 
-    <!-- ================= Voor uw IT-partner ================= -->
     <section class="section">
       <div class="container">
-        <h2 class="page-heading">Voor uw IT-partner</h2>
-        <p class="page-body">Regelt een collega of IT-partner dit voor u? Één A4 met wat er nodig is, waar het token staat en hoe het veilig terugkomt.</p>
-        <p class="page-body"><a href="/downloads/it-partner-pipedrive.html" class="link-arrow">Open het A4 voor uw IT-partner</a></p>
+        <div class="section-head-row section-head-row-center">
+          <h2 class="lp-section-heading">Wat heeft uw IT-partner nodig?</h2>
+        </div>
+        <div class="lp-trust-note">
+          Alleen een persoonlijk API-token uit uw eigen Pipedrive-account. Dat maakt u zelf aan, in uw eigen API-instellingen.
+          <a href="/downloads/it-partner-pipedrive.html" class="link-arrow lp-note-link">Open het A4 voor uw IT-partner</a>
+        </div>
       </div>
     </section>
 
-    <!-- ================= Veelgestelde vragen =================
-         Elke <h3> hieronder staat woordelijk in het FAQPage-blok in de
-         <head>. Wijzig ze altijd samen. -->
     <section class="section">
       <div class="container">
-        <h2 class="page-heading">Veelgestelde vragen</h2>
+        <div class="section-head-row section-head-row-center">
+          <h2 class="lp-section-heading">Veelgestelde vragen</h2>
+        </div>
         <div class="lp-card-grid">
           <div class="lp-card">
             <h3>Is de Pipedrive-koppeling alleen lezend?</h3>
@@ -298,15 +342,6 @@
             <p>Ja. Het token is persoonlijk, dus u koppelt met de rechten van dat account.</p>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- ================= Afsluitende CTA ================= -->
-    <section class="section">
-      <div class="container">
-        <h2 class="page-heading">Klaar om Pipedrive te koppelen</h2>
-        <p class="page-body">Begin gratis en koppel wanneer het u uitkomt. Benieuwd naar de kosten? Bekijk de <a href="/pricing">prijzen</a>.</p>
-        <a href="https://my.mowi.agency/aanmelden" class="btn-primary page-cta" data-event="Signup Click">Start gratis</a>
       </div>
     </section>
 

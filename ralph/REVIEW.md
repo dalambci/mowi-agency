@@ -33,25 +33,43 @@ pulled in `css/style.css`, and whether any FAQ answer claims more than live copy
 
 ## Queue
 
-### T01 pipedrive
-- Path: `koppeling-pipedrive.html` (+ `downloads/it-partner-pipedrive.html`)
+### T01R pipedrive (retrofit naar D17-sjabloon)
+- Path: `koppeling-pipedrive.html` (+ `downloads/it-partner-pipedrive.html`, unchanged - D17 only
+  redesigned the lander spec, the sheet spec/content did not move)
 - Open: `start-local-server.bat` then http://localhost:8765/koppeling-pipedrive
-- [ ] Spacing matches the blog / koppelingen canon (section rhythm, heading margins, card gutters -
-      open koppelingen.html in a second tab and flip between them)
-- [ ] Exactly one CTA visible in the page body, and it is obvious - "Start gratis", pointing at
-      my.mowi.agency/aanmelden. Header and footer CTAs do not count.
+- [ ] Hero now matches `koppeling-exact-online.html`'s shape: `.hero.lp-hero` with the logo above an
+      `<h1 class="h-balance">` question ("Wat kunt u met AI automatiseren in Pipedrive?"), a direct-answer
+      `.hero-sub`, the one `.lp-cta-block` CTA, and a full-width `.dp-window-hero` preview (inbound e-mail,
+      "Klant herkend"). Confirm it reads like T02, not like the old label-heading version.
 - [ ] Tablet view (~768px, narrow the window): breadcrumb padding is not cramped against the header,
       and the hero H1 does not overflow or jump a size
-- [ ] `.lp-steps` renders acceptably here. It is the site's numbered-step component (both agent
-      pages use it) but it centres its own text, and this page's headings are left-aligned
-      `.page-heading`. Five steps instead of the usual three, one per `instructions[]` entry.
-- [ ] The three cards under "Werkt met deze agents en workflows" are `<a class="lp-card">`, not the
-      `<div>` the agent pages use. Check the whole card is clickable and the hover reads as a link.
+- [ ] "Zo koppelt u" is now **4** `.lp-steps` (was 5 pre-retrofit): entries 2+3 of
+      `pipedrive.instructions[]` (direct link vs. via-menu route to the same API-settings screen) were
+      folded into one step's body, same "alternative route is not its own step" rule Exact Online used to
+      go 3→2. Nothing dropped. A `.dp-window-tile` connect tile sits under the steps.
+- [ ] "Welke agents gebruiken de Pipedrive-koppeling?" is now a `.split`: `.lp-link-stack` of 3
+      `<a class="lp-card">` (Inbox agent, Voice agent, CRM-synchronisatie) beside a `.dp-window-side`
+      preview (inbound call, "Klant herkend"). No dashboard card here - unlike Exact Online/WooCommerce,
+      Pipedrive's deal/pipeline reporting methods are the ones flagged un-verified in S-008-style reads
+      of `PipedriveGateway.php` (only the contact-lookup half was live-verified), and no nav dashboard
+      fragment matches "sales pipeline" today, so none was claimed.
+- [ ] "Wat leest Mowi uit Pipedrive?" is now 4 icon `.lp-card`s (Klant herkend / Open deals in beeld /
+      Alleen lezend / Uw eigen API-token) instead of the old 3 plain paragraphs. "Open deals in beeld" is
+      grounded in `PipedriveGateway::buildPersonShape()`'s `open_deals` (title + stage), part of the
+      live-verified contact-lookup path, not the separate unverified DealGateway aggregate methods.
+- [ ] "Wat heeft uw IT-partner nodig?" is now an `.lp-trust-note` box, not a bare paragraph.
+- [ ] FAQ content is byte-identical to the pre-retrofit page (4 Q&A, same JSON-LD) - only the section
+      wrapper changed from `.page-heading`/`.page-body` to `.lp-section-heading`/`.lp-card-grid`.
+- [ ] No standalone closing-CTA section anymore (D17): the footer's own "Vertel het en Mowi regelt het"
+      band is now the only CTA below the FAQ. Confirm that doesn't read as the page ending abruptly.
 - [ ] Open `downloads/it-partner-pipedrive.html` and print-preview it (Ctrl+P): one A4, nothing
-      clipped, and it must NOT pull in `css/style.css` (it carries its own `<style>`).
+      clipped, and it must NOT pull in `css/style.css` (it carries its own `<style>`). Untouched by
+      this retrofit.
 - Open questions: S-006 (agent cards link to `/e-mail-agent` + `/call-agent`, not the spec's
   `/workflows#email-agent`; `/workflows#crm-sync` still lands on an empty page) and S-007 (no named
-  secure channel for handing over the API-token, sheet uses the fallback line).
+  secure channel for handing over the API-token, sheet uses the fallback line). No cross-platform
+  sub-question added: "pipedrive exact online" is already logged as S-010/D18 (cut, not content) on
+  the Exact Online side, and applies here the same way - skipped, not re-logged.
 
 ### T02 exact-online
 - Path: `koppeling-exact-online.html` (+ `downloads/it-partner-exact-online.html`)
