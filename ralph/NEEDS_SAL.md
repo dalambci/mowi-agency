@@ -109,3 +109,25 @@ always one past the highest ID already in **Open items**; there is no example en
 - Suggested next step: name the channel once (a vault line is enough) and all 11 sheets can carry
   it instead of the fallback. If a self-serve credential field lands in the dashboard, that becomes
   the answer and the fallback disappears entirely.
+
+### S-008 wanted-but-out-of-scope - T02 exact-online (and RUN 2's moneybird) (2026-09-02)
+- Needed: a decision on whether these landers may publish before the koppeling is proven to work.
+  Found by reading the gateway sources directly, which is below what any lander check looks at:
+  - `ExactOnlineGateway.php`: *"NOT live-verified against a real Exact Online tenant (no sandbox
+    credentials available to this build) ... Before any real client connects Exact Online: walk through
+    one real OAuth round-trip and one real contact lookup against a sandbox/trial account."* Both the
+    CRM and the Invoice methods carry that gap.
+  - `MoneybirdGateway.php` (RUN 2, T09): the same, in the same words, for both method groups.
+  - By contrast `PipedriveGateway.php` and `HubSpotGateway.php` had their core contact-lookup methods
+    **live-verified against a real sandbox**; only the later dashboard deal-reporting methods are
+    unverified. T01 pipedrive is therefore on solid ground and is not part of this entry.
+- Shipped instead: nothing was overstated on the page - `koppeling-exact-online.html` claims only what
+  the config and the gateway support, and it correctly discloses the NL-only limitation. The point is
+  narrower: an SEO lander's whole job is to send strangers down a connect flow that no one has ever
+  completed end to end. `koppelingen.html` already lists both platforms under "Nu al te koppelen", so
+  the claim is live on the site today - the lander amplifies it, it does not invent it.
+- Suggested next step: one real OAuth round-trip plus one contact lookup on an Exact Online trial
+  account, and the same on a Moneybird account, before either page is deployed. If that cannot happen
+  soon, the cheap alternative is to hold just those two pages back and ship the other nine - the
+  batch does not depend on them. Belgian clients are a separate, already-disclosed gap: Exact Online
+  is wired to `start.exactonline.nl` only, so a Belgian account cannot complete the flow at all.
