@@ -806,7 +806,24 @@ img.split-visual { min-height: 0; width: 100%; height: auto; border-radius: var(
   border: 1px solid var(--border);
   border-radius: var(--radius-card);
   padding: 1rem 1.25rem;
+  transition: border-color 0.15s ease;
 }
+/* Bug fix (2026-09-03, Sal: "text falls out of its card" on mobile) -- the
+   text wrapper is a flex item with no min-width set, so its default
+   min-width:auto let long content (e.g. "Odoo" + its description) push past
+   the card's own bounds and overflow the whole page horizontally on every
+   width under the 2-column breakpoint. min-width:0 is the standard flex-item
+   fix: it lets the wrapper shrink to the track and text wrap normally instead
+   of forcing the row wider than its column. Verified with Playwright at
+   320-430px on both koppelingen.html and workflows.html (the only two
+   consumers of .integration-card): 0 cards overflow their own box afterward,
+   0 page-level horizontal scroll. */
+.integration-card > div { min-width: 0; }
+/* Live cards are now real links (T99) -- planned cards under #binnenkort stay
+   inert <div>s, so this is scoped to #live only rather than to a shared
+   .integration-card-planned:not() negation that would need updating if a
+   planned platform ever ships. Same hover convention as .blog-card. */
+#live .integration-card:hover { border-color: var(--ink-3); }
 .integration-card-logo { width: 2.75rem; height: 2.75rem; flex-shrink: 0; object-fit: contain; }
 .integration-card-logo-fallback {
   width: 2.75rem;
@@ -821,19 +838,34 @@ img.split-visual { min-height: 0; width: 100%; height: auto; border-radius: var(
   font-size: 0.9375rem;
   color: var(--ink-2);
 }
-.integration-card-name { font-weight: 700; font-size: 0.9375rem; }
-.integration-card-desc { font-size: 0.8125rem; color: var(--ink-2); margin-top: 0.125rem; }
+/* overflow-wrap on both (2026-09-03): min-width:0 above only let the FLEX
+   ITEM shrink -- an unbroken single-word name like "WooCommerce" or
+   "HubSpot" still has nowhere to break inside that shrunk box, since
+   browsers never break mid-word by default. This is the actual source of
+   "falls out of its card": the name span, not the paragraph. */
+.integration-card-name { font-weight: 700; font-size: 0.9375rem; display: inline-block; overflow-wrap: break-word; }
+.integration-card-desc { font-size: 0.8125rem; color: var(--ink-2); margin-top: 0.125rem; overflow-wrap: break-word; }
 .integration-card-planned .integration-card-logo { filter: grayscale(1); opacity: 0.6; }
 .integration-card-planned .integration-card-logo-fallback { color: var(--ink-3); }
 .integration-card-tag { display: inline-block; margin-top: 0.25rem; font-size: 0.6875rem; font-weight: 600; color: var(--ink-3); }
 @media (max-width: 63.9rem) {
   .integration-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
-/* Two tiles per row all the way down to phone width, not one -- see the
-   card's own gap/padding shrink alongside it below. */
 @media (max-width: 47.9rem) {
   .integration-grid { gap: 0.75rem; }
   .integration-card { padding: 0.75rem; gap: 0.625rem; }
+}
+/* Single column below phone width (2026-09-03, fixes "text falls out of its
+   card"). Two tiles per row down to phone width used to be the rule (see git
+   history), but the 44px logo alone eats a third of a ~130px column at
+   360-320px, leaving too little room for even wrapped text -- verified with
+   Playwright: min-width:0 + overflow-wrap on the name/desc above closed most
+   of the gap, but 320-390px still overflowed until this. Threshold measured
+   empirically (2 columns hold up fine at 430px and above once text wraps
+   correctly; 390px and below do not), not copied from another component's
+   breakpoint value. */
+@media (max-width: 26rem) {
+  .integration-grid { grid-template-columns: 1fr; }
 }
 
 /* Section headings on this page read at the same scale as the blog's own
