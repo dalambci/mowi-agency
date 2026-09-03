@@ -263,8 +263,8 @@ function headerHtml() {
                 <ul class="nav-menu-item-grid">
                   <li class="nav-menu-heading">Agents</li>
                   <li class="nav-menu-item-full"><a href="/workflows"><span class="nav-menu-item-title">Alle agents</span><span class="nav-menu-item-desc">Het volledige overzicht van alle Mowi-agents</span></a></li>
-                  <li><a href="/workflows#email-agent"><span class="nav-menu-item-title">Inbox agent</span><span class="nav-menu-item-desc">Sorteert en beantwoordt uw e-mail</span></a></li>
-                  <li><a href="/workflows#call-agent"><span class="nav-menu-item-title">Voice agent</span><span class="nav-menu-item-desc">Neemt binnenkomende gesprekken aan</span></a></li>
+                  <li><a href="/e-mail-agent"><span class="nav-menu-item-title">Inbox agent</span><span class="nav-menu-item-desc">Sorteert en beantwoordt uw e-mail</span></a></li>
+                  <li><a href="/call-agent"><span class="nav-menu-item-title">Voice agent</span><span class="nav-menu-item-desc">Neemt binnenkomende gesprekken aan</span></a></li>
                 </ul>
               </div>
               <div class="nav-menu-col nav-menu-col-divider">
@@ -464,7 +464,7 @@ function renderPost(post) {
   <meta name="twitter:description" content="${post.description}" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&family=Inter+Tight:wght@600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/css/style.css?v=${CSS_VERSION}" />
   <link rel="icon" href="/assets/icon-192.png?v=20260804-3" />
   <link rel="shortcut icon" href="/assets/icon-192.png?v=20260804-3" />
@@ -516,7 +516,7 @@ function renderIndex(posts) {
   <link rel="canonical" href="${SITE_URL}/blog" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&family=Inter+Tight:wght@600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/css/style.css?v=${CSS_VERSION}" />
   <link rel="icon" href="/assets/icon-192.png?v=20260804-3" />
   <link rel="shortcut icon" href="/assets/icon-192.png?v=20260804-3" />
@@ -549,6 +549,18 @@ function buildSitemap(posts) {
   // /contact) — a noindex stub should never be in the sitemap.
   const staticPages = [
     "", "workflows", "receptenboek", "koppelingen", "security", "pricing", "over", "zo-werkt-het", "demo", "docs/",
+    // e-mail-agent/call-agent/waarom-mowi (2026-09-03): these three real,
+    // non-stub, non-noindex pages were already in sitemap.xml on disk but
+    // NOT in this array -- they'd have silently dropped out of the sitemap
+    // the moment this script next ran, unrelated to anything this task
+    // changed. Restored here rather than shipped as a regression alongside
+    // the 11 koppeling-<slug> additions below.
+    "e-mail-agent", "call-agent", "waarom-mowi",
+    // T99 (ralph/SPEC.md section 8, 2026-09-03): the 11 koppeling landers.
+    "koppeling-exact-online", "koppeling-pipedrive", "koppeling-woocommerce",
+    "koppeling-shopify", "koppeling-lightspeed-ecom", "koppeling-prestashop",
+    "koppeling-magento", "koppeling-hubspot", "koppeling-moneybird",
+    "koppeling-google-agenda", "koppeling-calendly",
   ];
   // docs/, receptenboek/ are read from disk rather than hand-listed, so a new
   // page in either folder is in the sitemap the next time this script runs —
