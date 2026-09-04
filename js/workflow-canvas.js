@@ -419,6 +419,36 @@
         viewport.addEventListener("pointerup", endPointer);
         viewport.addEventListener("pointercancel", endPointer);
 
+        // ---------- The guarantee (2026-09-04, evening) ----------
+        // Everything above relies on touch-action to keep the PAGE still while
+        // a finger pans the canvas, and WebKit on Sal's iPhone has now shown
+        // two different ways of not honouring it in this layout — the
+        // overflow:hidden scroll-container boundary (fixed in CSS the same
+        // evening) and a rarer residual one that still leaked one swipe in
+        // many afterwards. Rather than hunt a third region quirk, stop
+        // depending on regions at all: preventDefault() on touchstart from a
+        // NON-passive listener is the one mechanism WebKit treats as
+        // authoritative — the browser waits for the handler and, if the event
+        // is cancelled, never begins a scroll for that gesture. Evaluated live
+        // in JS, so there is no stale region, no boundary walk, no timing
+        // window. touchmove is cancelled too, as belt and braces.
+        //
+        // Registered on the whole frame (root), not just the viewport, so a
+        // swipe starting on the hint strip or the controls cluster is covered
+        // as well. Buttons and links are exempt: cancelling touchstart on a
+        // button suppresses its click on iOS, and the zoom controls must keep
+        // working. Only while armed — disarmed, the page must scroll as
+        // before. The CSS touch-action rules stay as the first line; this is
+        // the line that cannot be argued with.
+        function blockNativeScroll(e) {
+            if (!armed) return;
+            if (e.target && e.target.closest && e.target.closest("button, a, [data-wf-hint]")) return;
+            if (e.cancelable) e.preventDefault();
+            if (e.type === "touchstart") wfDbg("  JS-blocked");
+        }
+        root.addEventListener("touchstart", blockNativeScroll, { passive: false });
+        root.addEventListener("touchmove", blockNativeScroll, { passive: false });
+
         viewport.addEventListener(
             "wheel",
             function (e) {
