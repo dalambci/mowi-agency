@@ -270,7 +270,21 @@
             // keyboard pan/zoom shortcuts below still work post-drag.
             e.preventDefault();
             viewport.classList.add("wf-pointer-focus");
-            viewport.focus();
+            // preventScroll is the whole point of this line (Sal, 2026-09-04:
+            // "it still happens"). Element.focus() scrolls the element into
+            // view BY DEFAULT, and .wf-viewport is tabindex="0", so every
+            // armed one-finger touch asked the browser to bring the canvas
+            // fully into view. When it already was, nothing happened; when it
+            // was not — the ordinary case halfway down a tall flow on a phone
+            // — the PAGE jumped, which is indistinguishable from "my swipe
+            // scrolled the page instead of the graph". Positional, so it felt
+            // like roughly one swipe in seven.
+            //
+            // Focus itself has to stay: the keyboard pan/zoom shortcuts below
+            // read from this element, and it is deliberately focused here
+            // because e.preventDefault() above suppressed the browser's own
+            // focus-on-pointerdown.
+            viewport.focus({ preventScroll: true });
             dragging = true;
             moved = false;
             startX = e.clientX;
