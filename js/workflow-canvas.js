@@ -27,6 +27,30 @@
     var MAX_SCALE = 2;
 
     var coarsePointer = window.matchMedia && window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+
+    // ---------- Field diagnostics (2026-09-04) ----------
+    // Three fixes for "a swipe inside the graph sometimes scrolls the page"
+    // were shipped on reasoning plus Chromium emulation, and none matched
+    // what Sal sees on his phone. This repo already records once that
+    // Chromium emulation missed a WebKit-only bug. So: gate an on-screen log
+    // behind ?wfdebug=1 and let the real device report. Off by default,
+    // zero cost when off, safe to leave in.
+    var WF_DEBUG = /[?&#]wfdebug/.test(location.search + location.hash);
+    var wfDbgBox = null, wfDbgLines = [], wfDbgDrags = 0, wfDbgLeaks = 0;
+    function wfDbg(line) {
+        if (!WF_DEBUG) return;
+        if (!wfDbgBox) {
+            wfDbgBox = document.createElement("pre");
+            wfDbgBox.style.cssText = "position:fixed;left:0;right:0;top:0;z-index:99999;margin:0;padding:6px 8px;"
+                + "background:rgba(0,0,0,.85);color:#0f0;font:11px/1.35 monospace;white-space:pre-wrap;pointer-events:none;max-height:45vh;overflow:hidden";
+            document.body.appendChild(wfDbgBox);
+            wfDbgLines.push("UA " + navigator.userAgent.replace(/Mozilla\/5.0 \(/, "(").slice(0, 90));
+            wfDbgLines.push("coarse=" + coarsePointer + " maxTouch=" + (navigator.maxTouchPoints || 0));
+        }
+        wfDbgLines.push(line);
+        if (wfDbgLines.length > 12) wfDbgLines.splice(2, wfDbgLines.length - 12);
+        wfDbgBox.textContent = "drags=" + wfDbgDrags + " LEAKS=" + wfDbgLeaks + "\n" + wfDbgLines.join("\n");
+    }
     // Cooperative wheel (Sal, 2026-08-28: scrolling the page with the
     // cursor over the widget zoomed the widget instead — the same trap
     // Google Maps solves with "use Ctrl + scroll to zoom the map"): a
@@ -152,6 +176,7 @@
         function setArmed(next) {
             armed = next;
             if (armed) everArmed = true;
+            wfDbg((next ? "ARM" : "DISARM") + " " + (root.getAttribute("data-wf-id") || root.closest("[data-tpl-example]") && root.closest("[data-tpl-example]").getAttribute("data-tpl-example") || ""));
             viewport.classList.toggle("wf-armed", armed);
             setHint(armed ? HINT_TOUCH_ARMED : HINT_TOUCH_DISARMED, true);
             // Disarmed on touch: the hint is the tap-to-arm button, centered
@@ -213,6 +238,7 @@
                     // Never mid-gesture: a finger is on the canvas, so the
                     // person is plainly still using it, and disarming here
                     // would break their very next swipe.
+                    if (WF_DEBUG && armed) wfDbg("io ratio=" + entry.intersectionRatio.toFixed(2) + " ptrs=" + pointerCount);
                     if (armed && pointerCount === 0 && entry.intersectionRatio < 0.12) setArmed(false);
                 });
             }, { threshold: [0, 0.12, 0.5, 1] }).observe(root);
@@ -259,6 +285,23 @@
                 midX: (a.x + b.x) / 2 - rect.left,
                 midY: (a.y + b.y) / 2 - rect.top
             };
+        }
+
+        if (WF_DEBUG) {
+            var dbgStartY = 0, dbgCancelled = false, dbgPd = false;
+            viewport.addEventListener("touchstart", function (e) {
+                dbgStartY = window.scrollY; dbgCancelled = false; dbgPd = false;
+                var tgt = e.target; var tag = tgt && (tgt.tagName + (tgt.className && typeof tgt.className === "string" ? "." + tgt.className.split(" ")[0] : ""));
+                wfDbg("TS n=" + e.touches.length + " armed=" + armed + " ta=" + getComputedStyle(viewport).touchAction + " on " + tag);
+            }, { capture: true, passive: true });
+            viewport.addEventListener("pointerdown", function (e) { dbgPd = true; wfDbg("  pd " + e.pointerType + " armed=" + armed); }, { capture: true, passive: true });
+            viewport.addEventListener("pointercancel", function () { dbgCancelled = true; wfDbg("  CANCEL (browser took the gesture)"); }, { capture: true, passive: true });
+            viewport.addEventListener("touchend", function () {
+                var dy = window.scrollY - dbgStartY;
+                wfDbgDrags++;
+                if (dy !== 0) wfDbgLeaks++;
+                wfDbg("  end dy=" + dy + (dy !== 0 ? "  <<< LEAK" : "") + " pd=" + dbgPd + " cancel=" + dbgCancelled);
+            }, { capture: true, passive: true });
         }
 
         viewport.addEventListener("pointerdown", function (e) {
