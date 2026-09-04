@@ -770,6 +770,25 @@ applied to all 16, and `test.html` is the reliable copy-paste source.
     size until loaded and are sized by CSS, which is why it was unaffected). Reproduce/verify
     with `pw.webkit` + `pw.devices["iPhone 13"]`, reading `#workflow-card-strip`'s
     `offsetWidth`.
+  - **Workflow canvas touch on iPhone (2026-09-04/05) — the second time Chromium emulation hid
+    a WebKit bug, and the rule that came out of it.** Sal: "1 in 7 swipes inside the graph scrolls
+    the page instead". Three fixes built on reasoning + Chromium touch emulation (observer
+    threshold, `focus({preventScroll})`, arming across the branche switcher) each looked right,
+    one even reproduced 8/8→0/8 in Chromium, and none was it. The real cause only appeared once
+    the live page reported from his phone: `.wf-node-body` has `overflow:hidden` (three-line
+    clamp), the Pointer Events spec resolves `touch-action` only up to the *nearest scroll
+    container*, and WebKit treats that box as one — so a swipe starting on node text never reached
+    the viewport's `touch-action:none`. Chromium only counts ancestors that actually scroll, hence
+    0 leaks in every emulation run. Fixed twice over: `.wf-viewport *{touch-action:inherit}`, and
+    — the actual guarantee, after a residual leak — a **non-passive `touchstart`/`touchmove`
+    listener on the canvas root that calls `preventDefault()` while armed** (buttons/hint exempt),
+    the one mechanism WebKit treats as authoritative. Confirmed on Sal's phone 2026-09-05.
+    **Rules:** (1) a mobile touch bug on this site is measured on the real device *before*
+    anything is changed — `js/workflow-canvas.js` carries a `?wfdebug=1` overlay (per touch:
+    armed, computed `touch-action` of viewport and target, hit element, `pointercancel`, scrollY
+    delta) for exactly that; (2) never rely on `touch-action` alone to keep the page still under a
+    custom gesture — cancel the touch in JS. The dashboard carries an identical copy of this
+    file; keep the two in step by hand.
   - **"Eén platform voor alles wat terugkomt" tabs (2026-08-29):** the five "Voorbeeld volgt"
     tiles are now **static workflow pictures** using the same `.wf-canvas` component as
     `/templates` (nodes, curved edges, dot grid) via a `.wf-canvas-static` variant at the end of
