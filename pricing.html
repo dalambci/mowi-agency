@@ -143,6 +143,30 @@
          with it -- AV art. 4.2 makes this page the contractually leading
          price list, so it must never be left stale.
 
+         UPDATED 2026-09-04 (Sal): the BUNDLES moved this time, not the rate.
+         Basis 600 -> 800 credits and Pro 3.000 -> 3.600, at unchanged EUR19
+         and EUR79, so "30 e-mails per werkdag" becomes 40 and "150" becomes
+         180. Why: a top-up pack was cheaper per credit than either plan
+         (pack l EUR0,0257 vs Basis EUR0,0317), so a client had no per-credit
+         reason to subscribe at all -- an item config/credits.php had flagged
+         as open since 2026-08-31. Sal's rule is that the pack ladder keeps
+         its bulk discount but no pack may undercut a plan, and the fix went
+         to the plans because the packs had just been repriced to close a
+         margin bleed. The ladder now reads, ct/credit excl. btw:
+         pack s 2,996 > pack m 2,612 > pack l 2,570 > Basis 2,375 > Pro 2,194.
+
+         What may be claimed from this: "credits zijn goedkoper in een
+         abonnement" (true per credit). NOT "een abonnement is altijd
+         goedkoper" -- at 50 belminuten/mnd the number plus a pack is still
+         cheaper in total than Basis, because Basis buys credits that client
+         will not use.
+
+         NOT done here, and it matters: algemene-voorwaarden.html art. 4.2
+         still names 600 / 3.000 in its own binding table. That is legal text
+         and Sal's to change; it now understates what a client receives,
+         which is the safe direction, and it is tracked in the vault's
+         approved-but-unshipped AV amendment.
+
          The one real price change is voice: 1 belminuut went 10 -> 4 -> 6
          credits across two passes the same day. In money that is EUR0,63 ->
          EUR0,19/min, a 70% cut from the original. Basis: the researched
@@ -230,11 +254,11 @@
           <div class="tier-card">
             <h2 class="tier-card-name">Basis</h2>
             <div class="tier-price"><span class="tier-price-amount">€19</span><span class="tier-price-period">/mnd</span></div>
-            <p class="tier-price-sub">600 credits per maand</p>
-            <p class="tier-profile">Ongeveer 30 e-mails per werkdag</p>
+            <p class="tier-price-sub">800 credits per maand</p>
+            <p class="tier-profile">Ongeveer 40 e-mails per werkdag</p>
             <ul class="tier-features">
               <li>Alles uit Start gratis</li>
-              <li>600 credits per maand</li>
+              <li>800 credits per maand</li>
               <li>Eén tegoed voor alle agents en workflows</li>
               <li>Bijkopen wanneer u wilt</li>
               <li>Pauzeert netjes bij op tegoed</li>
@@ -245,11 +269,11 @@
           <div class="tier-card">
             <h2 class="tier-card-name">Pro</h2>
             <div class="tier-price"><span class="tier-price-amount">€79</span><span class="tier-price-period">/mnd</span></div>
-            <p class="tier-price-sub">3.000 credits per maand</p>
-            <p class="tier-profile">Ongeveer 150 e-mails per werkdag</p>
+            <p class="tier-price-sub">3.600 credits per maand</p>
+            <p class="tier-profile">Ongeveer 180 e-mails per werkdag</p>
             <ul class="tier-features">
               <li>Alles uit Basis</li>
-              <li>3.000 credits per maand</li>
+              <li>3.600 credits per maand</li>
               <li>Voordeliger per credit</li>
               <li>Bijkopen wanneer u wilt</li>
             </ul>
