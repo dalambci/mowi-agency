@@ -38,6 +38,27 @@
     var HINT_TOUCH_DISARMED = "Tik om te verkennen";
     var HINT_TOUCH_ARMED = "Sleep om te verkennen";
 
+    // Has this visitor armed ANY canvas on this page yet? (2026-09-04.)
+    //
+    // Arming was strictly per-canvas, and /templates carries TWENTY of them —
+    // one per branche, swapped by the tile switcher. So the sequence was: arm
+    // this flow, pan it happily, tap the next branche, swipe, and the page
+    // scrolled, because that canvas had never been armed. Sal reported it as
+    // "for every 7 times, 1 time it will register a page scroll instead of
+    // scroll inside the graph", which is not random at all — it is once per
+    // flow you switch to, and reproducing it needed a tile switch rather than
+    // more swiping. Twelve armed swipes in a row never leak; the very first
+    // swipe after a switch always does.
+    //
+    // Once someone has said "I want to pan these", asking again for every
+    // sibling flow is friction, not safety. The safety that matters is the
+    // PASSIVE case — a finger landing on a canvas you happened to scroll past
+    // — and that is still covered, because the IntersectionObserver disarms a
+    // canvas that leaves the viewport and this flag never re-arms one behind
+    // your back. It only decides how a canvas you deliberately revealed
+    // starts out.
+    var everArmed = false;
+
     function mountWorkflowCanvas(root) {
         var viewport = root.querySelector("[data-wf-viewport]");
         var stage = root.querySelector("[data-wf-stage]");
@@ -130,6 +151,7 @@
 
         function setArmed(next) {
             armed = next;
+            if (armed) everArmed = true;
             viewport.classList.toggle("wf-armed", armed);
             setHint(armed ? HINT_TOUCH_ARMED : HINT_TOUCH_DISARMED, true);
             // Disarmed on touch: the hint is the tap-to-arm button, centered
@@ -399,6 +421,15 @@
 
         center();
         root.__wfFrame = center;
+        // Lets a tile switch arm a canvas it has just revealed — see
+        // refitVisibleWorkflowCanvases and the everArmed note up top.
+        root.__wfArm = setArmed;
+        root.__wfIsArmed = function () { return armed; };
+
+        // Mounted while the visitor has already armed another flow on this
+        // page: start armed, so the first swipe after switching branche pans
+        // instead of scrolling the page.
+        if (everArmed) setArmed(true);
     }
 
     function mountAllWorkflowCanvases() {
@@ -412,7 +443,23 @@
     function refitVisibleWorkflowCanvases() {
         var canvases = document.querySelectorAll("[data-wf-canvas][data-wf-mounted]");
         canvases.forEach(function (el) {
-            if (el.offsetParent !== null && typeof el.__wfFrame === "function") el.__wfFrame();
+            if (el.offsetParent === null) return;
+            if (typeof el.__wfFrame === "function") el.__wfFrame();
+            // A canvas revealed by the branche switcher was mounted long ago,
+            // so the arm-on-mount above never ran for it. Arm it now if this
+            // visitor has already armed a sibling: switching flow is a
+            // deliberate "show me this one", and making them tap again for
+            // each of the twenty branches is the friction that read as a bug.
+            // everArmed can only be true because a TOUCH user armed a canvas
+            // (setArmed's touch paths, and the zoom buttons' own touchSeen
+            // guard), so it already implies a touch device — no second check
+            // is needed here, and touchSeen is function-scoped inside
+            // mountWorkflowCanvas anyway, so naming it here would throw.
+            if (everArmed
+                && typeof el.__wfArm === "function"
+                && typeof el.__wfIsArmed === "function" && !el.__wfIsArmed()) {
+                el.__wfArm(true);
+            }
         });
     }
 
