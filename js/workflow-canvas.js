@@ -290,9 +290,9 @@
         if (WF_DEBUG) {
             var dbgStartY = 0, dbgCancelled = false, dbgPd = false;
             viewport.addEventListener("touchstart", function (e) {
-                dbgStartY = window.scrollY; dbgCancelled = false; dbgPd = false;
+                dbgStartY = window.scrollY;
                 var tgt = e.target; var tag = tgt && (tgt.tagName + (tgt.className && typeof tgt.className === "string" ? "." + tgt.className.split(" ")[0] : ""));
-                wfDbg("TS n=" + e.touches.length + " armed=" + armed + " ta=" + getComputedStyle(viewport).touchAction + " on " + tag);
+                wfDbg("TS n=" + e.touches.length + " armed=" + armed + " ta=" + getComputedStyle(viewport).touchAction + " tgt=" + (tgt && tgt.nodeType === 1 ? getComputedStyle(tgt).touchAction : "?") + " on " + tag);
             }, { capture: true, passive: true });
             viewport.addEventListener("pointerdown", function (e) { dbgPd = true; wfDbg("  pd " + e.pointerType + " armed=" + armed); }, { capture: true, passive: true });
             viewport.addEventListener("pointercancel", function () { dbgCancelled = true; wfDbg("  CANCEL (browser took the gesture)"); }, { capture: true, passive: true });
@@ -301,6 +301,7 @@
                 wfDbgDrags++;
                 if (dy !== 0) wfDbgLeaks++;
                 wfDbg("  end dy=" + dy + (dy !== 0 ? "  <<< LEAK" : "") + " pd=" + dbgPd + " cancel=" + dbgCancelled);
+                dbgCancelled = false; dbgPd = false;
             }, { capture: true, passive: true });
         }
 

@@ -209,6 +209,19 @@
 }
 
 .wf-viewport.wf-armed{touch-action:none}
+/* Every descendant carries the viewport's touch-action (2026-09-04). Found
+   on Sal's iPhone with the ?wfdebug overlay, after three fixes on Chromium
+   emulation missed it: a swipe starting on the dot grid or a node header
+   panned, a swipe starting on a NODE BODY scrolled the page — armed=true and
+   the viewport's computed touch-action "none" both confirmed at touchstart.
+   The Pointer Events spec resolves touch-action from the hit element up to
+   its NEAREST SCROLL CONTAINER, and .wf-node-body is one: it has
+   overflow:hidden for the three-line clamp. So on WebKit the walk stops at
+   the body itself (touch-action auto), never reaches the viewport's none,
+   and the page scrolls. Chromium only counts ancestors that actually
+   scroll, which is why emulation could not reproduce it. `inherit` makes
+   the whole subtree follow the viewport in both states, pan-y and none. */
+.wf-viewport *{touch-action:inherit}
 
 /* ---------- Desktop: tiles left, workflow right (Sal, 2026-08-29) ----------
    "List the branche tiles next to the graph widget, same row, tiles on the
