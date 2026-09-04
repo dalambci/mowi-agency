@@ -164,15 +164,36 @@
         } else {
             setHint(HINT_DESKTOP, !hintSeen);
         }
-        // Disarm once the canvas is mostly scrolled out of view — for every
-        // device, since any touch input can arm it (see touchSeen); it only
-        // ever acts while armed.
+        // Disarm once the canvas is scrolled out of view — for every device,
+        // since any touch input can arm it (see touchSeen); it only ever acts
+        // while armed. The point is that a finger landing on a canvas you have
+        // already scrolled past must not trap the page, which is why nothing
+        // re-arms automatically: two fingers, deliberately, same as a map.
+        //
+        // The threshold was 0.5, and that was the bug (Sal, 2026-09-04: "for
+        // every 7 times, 1 time it will register a page scroll instead of
+        // scroll inside the graph"). On a phone this canvas is 24rem — 384px
+        // — so half of it leaving the viewport is an ordinary reading
+        // position while inspecting a tall flow, not an exit. Worse, on iOS
+        // and Android the address bar collapsing changes the visual viewport
+        // and therefore the ratio without the user scrolling at all. So the
+        // canvas silently disarmed mid-inspection; the CURRENT drag kept
+        // working, because the browser latches touch-action when a gesture
+        // begins, and the NEXT swipe scrolled the page. Intermittent, roughly
+        // positional, and with no visible cause — exactly the reported shape.
+        //
+        // 0.12 means "genuinely gone" rather than "partly off-screen", and
+        // the gap to the 0.5 threshold that used to trip gives hysteresis
+        // room, so a canvas hovering near the old boundary can no longer flap.
         if (window.IntersectionObserver) {
             new IntersectionObserver(function (entries) {
                 entries.forEach(function (entry) {
-                    if (armed && entry.intersectionRatio < 0.5) setArmed(false);
+                    // Never mid-gesture: a finger is on the canvas, so the
+                    // person is plainly still using it, and disarming here
+                    // would break their very next swipe.
+                    if (armed && pointerCount === 0 && entry.intersectionRatio < 0.12) setArmed(false);
                 });
-            }, { threshold: [0, 0.5, 1] }).observe(root);
+            }, { threshold: [0, 0.12, 0.5, 1] }).observe(root);
         }
 
         function zoomBy(factor, originX, originY) {
