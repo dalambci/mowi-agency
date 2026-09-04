@@ -10,10 +10,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&family=Inter+Tight:wght@600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css?v=20260903" />
-  <link rel="icon" href="assets/icon-192.png?v=20260904" />
-  <link rel="shortcut icon" href="assets/icon-192.png?v=20260904" />
-  <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260904" />
-  <link rel="apple-touch-icon-precomposed" href="assets/apple-icon-180.png?v=20260904" />
+  <link rel="icon" href="assets/icon-192.png?v=20260904-2" />
+  <link rel="shortcut icon" href="assets/icon-192.png?v=20260904-2" />
+  <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260904-2" />
+  <link rel="apple-touch-icon-precomposed" href="assets/apple-icon-180.png?v=20260904-2" />
   <script defer data-domain="mowi.agency" src="https://plausible.io/js/script.js"></script>
 </head>
 <body>
@@ -234,6 +234,16 @@
          cards -- the masterplan's packaging rule made physically true, not
          just visually implied. See masterplan §5 and the Decisions log,
          2026-08-22, for the full reasoning. -->
+    <!-- BTW basis stated on the page, 2026-09-04 (Sal: "I want to use
+         exclusief btw communicated prices everywhere"). These figures were
+         always excl. BTW -- config/plans.php holds them that way and AV art.
+         4.1 says so -- but the page said nothing, while /call-agent quoted
+         the number fee INCL. So one product advertised two bases, and a
+         client reading EUR19 was debited EUR22,99 with nothing on the page to
+         explain the gap (a new subscription has been charged incl. since
+         2026-08-28, config/billing.php's App\Billing\Btw). Now every price
+         Mowi shows, here and in the dashboard, is excl. BTW and says so.
+         "Start gratis" carries no label on purpose: BTW on EUR0 is noise. -->
     <section class="section" id="pricing-tiers">
       <div class="container">
         <div class="tier-grid">
@@ -253,7 +263,7 @@
 
           <div class="tier-card">
             <h2 class="tier-card-name">Basis</h2>
-            <div class="tier-price"><span class="tier-price-amount">€19</span><span class="tier-price-period">/mnd</span></div>
+            <div class="tier-price"><span class="tier-price-amount">€19</span><span class="tier-price-period">/mnd excl. btw</span></div>
             <p class="tier-price-sub">800 credits per maand</p>
             <p class="tier-profile">Ongeveer 40 e-mails per werkdag</p>
             <ul class="tier-features">
@@ -268,7 +278,7 @@
 
           <div class="tier-card">
             <h2 class="tier-card-name">Pro</h2>
-            <div class="tier-price"><span class="tier-price-amount">€79</span><span class="tier-price-period">/mnd</span></div>
+            <div class="tier-price"><span class="tier-price-amount">€79</span><span class="tier-price-period">/mnd excl. btw</span></div>
             <p class="tier-price-sub">3.600 credits per maand</p>
             <p class="tier-profile">Ongeveer 180 e-mails per werkdag</p>
             <ul class="tier-features">
