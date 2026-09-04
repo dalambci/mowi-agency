@@ -466,10 +466,10 @@ function renderPost(post) {
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&family=Inter+Tight:wght@600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/css/style.css?v=${CSS_VERSION}" />
-  <link rel="icon" href="/assets/icon-192.png?v=20260904-2" />
-  <link rel="shortcut icon" href="/assets/icon-192.png?v=20260904-2" />
-  <link rel="apple-touch-icon" href="/assets/apple-icon-180.png?v=20260904-2" />
-  <link rel="apple-touch-icon-precomposed" href="/assets/apple-icon-180.png?v=20260904-2" />
+  <link rel="icon" href="/assets/icon-192.png?v=20260904-3" />
+  <link rel="shortcut icon" href="/assets/icon-192.png?v=20260904-3" />
+  <link rel="apple-touch-icon" href="/assets/apple-icon-180.png?v=20260904-3" />
+  <link rel="apple-touch-icon-precomposed" href="/assets/apple-icon-180.png?v=20260904-3" />
   ${PLAUSIBLE_SNIPPET}
   ${articleJsonLd(post, url)}
 </head>
@@ -518,10 +518,10 @@ function renderIndex(posts) {
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&family=Inter+Tight:wght@600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/css/style.css?v=${CSS_VERSION}" />
-  <link rel="icon" href="/assets/icon-192.png?v=20260904-2" />
-  <link rel="shortcut icon" href="/assets/icon-192.png?v=20260904-2" />
-  <link rel="apple-touch-icon" href="/assets/apple-icon-180.png?v=20260904-2" />
-  <link rel="apple-touch-icon-precomposed" href="/assets/apple-icon-180.png?v=20260904-2" />
+  <link rel="icon" href="/assets/icon-192.png?v=20260904-3" />
+  <link rel="shortcut icon" href="/assets/icon-192.png?v=20260904-3" />
+  <link rel="apple-touch-icon" href="/assets/apple-icon-180.png?v=20260904-3" />
+  <link rel="apple-touch-icon-precomposed" href="/assets/apple-icon-180.png?v=20260904-3" />
   ${PLAUSIBLE_SNIPPET}
 </head>
 <body>
