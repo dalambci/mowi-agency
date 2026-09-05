@@ -836,9 +836,15 @@ applied to all 16, and `test.html` is the reliable copy-paste source.
     var(--surface)}`, `workflow-canvas.css?v=20260905-1`): its full-bleed grey tint sat on the
     card border against the grey dotted canvas and read as the card "kissing" the background;
     padding it inward would have cost body-text height in the fixed 88px draggable nodes. The
-    question-mark icon carries the decision cue. **Keep the two generators in step:** a
-    dashboard unit test (`tests/Unit/GraphLayoutTest.php`) pins STUB 48 / rise 24 / row 184;
-    if either side's rule changes, change both and re-run the rewriter here.
+    question-mark icon carries the decision cue. **Static pictures only, third pass the same
+    evening (Sal: "the 2 arrow after the first card from above thats visible, reduce the height
+    of that particular arrow down with 50% ... do not do this for the draggable ones"):** a row
+    whose every edge into the next row is a straight, unlabelled drop gets a 48px gap instead of
+    96, so the picture rows are NOT uniform any more (homepage: 40/188/336/532/728, i.e. two
+    tight straight drops, then the full gap for the branch rows). The draggable `/templates`
+    canvases keep the uniform 184 pitch, matching the dashboard. **Keep the two generators in
+    step:** a dashboard unit test (`tests/Unit/GraphLayoutTest.php`) pins STUB 48 / rise 24 /
+    row 184; if either side's rule changes, change both and re-run the rewriter here.
   - **Agent pages' "Voor elke branche anders ingesteld" tabs (2026-08-29):** the eight
     "Voorbeeld volgt" tiles on `e-mail-agent.html` and `call-agent.html` (Loodgieter / Kapper /
     Webshop / Horeca × 2) are the same static cut-off pictures — but **verbatim copies of the
