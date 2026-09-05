@@ -278,6 +278,20 @@ main { flex: 1 0 auto; }
 .nav-menu-item-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 0.25rem; }
 .nav-menu-item-grid .nav-menu-heading,
 .nav-menu-item-full { grid-column: 1 / -1; }
+/* iPad band (2026-09-05, Sal: "the menu items are not responsive to their
+   ipad dimensions yet"). Between the mobile header (63.9rem) and the width
+   where the panel is its full 76rem again (~80rem), the panel is only as wide
+   as the header bar: 964px at 1024, 1134px at 1194. Two items per row in a
+   ~300–370px column made every item 150–178px wide, so "Webshops vergelijken",
+   "Agenda-samenvatting", "Openstaande facturen" wrapped and their descriptions
+   ran to three lines. One item per row here; the column has the room and the
+   panel simply gets taller (about 560px for the Dashboards category, well
+   inside an iPad's 834px landscape height). Rows a touch tighter so eight
+   stacked items don't turn the panel into a scroll. */
+@media (min-width: 64rem) and (max-width: 79.9rem) {
+  .nav-menu-item-grid { grid-template-columns: minmax(0, 1fr); }
+  .nav-menu li a { padding: 0.5rem 0.75rem; }
+}
 /* The "Alle X" row is a listing link, not a peer of the items below it —
    --bg (the page's own lighter beige, not the darker --band footer tone)
    marks it as a distinct "see everything" row rather than just the first
@@ -406,6 +420,36 @@ main { flex: 1 0 auto; }
     margin-top: 0.25rem;
     padding-top: 0.75rem;
   }
+  /* Columns span the sheet (2026-09-05, Sal on an iPad Air: "it's iphone
+     width for menu items at ipad display"). The desktop rule's
+     align-items:flex-start carried into this column-direction flex, so each
+     category shrank to its own content width (~300px) and the right half of
+     an 820px sheet stayed empty. Stretch is right on a phone too: an item's
+     tap target and active pill then run the full width like the top-level
+     links above them. */
+  .nav-menu { align-items: stretch; }
+  .nav-menu-col { width: 100%; }
+}
+
+/* Tablet band, 768–1022px (iPad Air 820, iPad Pro 11 834, iPad 810 in
+   portrait): still the hamburger sheet, but the sheet is wide enough for the
+   three categories to sit side by side like the desktop panel, one item per
+   row in each ~250px column, instead of one very long stacked list with a
+   blank right half. The vertical divider comes back between the columns. */
+@media (min-width: 48rem) and (max-width: 63.9rem) {
+  .nav-menu { flex-direction: row; align-items: flex-start; gap: 0.25rem; padding-right: 0.875rem; }
+  .nav-menu-col { flex: 1 1 0; min-width: 0; width: auto; }
+  .nav-menu-col-divider {
+    border-top: 0;
+    margin-top: 0;
+    padding-top: 0;
+    border-left: 1px solid var(--border);
+    margin-left: 0.5rem;
+    padding-left: 0.5rem;
+  }
+}
+
+@media (max-width: 63.9rem) {
   /* Each category's item list is a 2-column CSS Grid on desktop (see
      .nav-menu-item-grid above) — never reset for the mobile sheet, so it
      was squeezing every item into a cramped half-width column instead of

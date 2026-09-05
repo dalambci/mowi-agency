@@ -339,6 +339,22 @@ cut. Lesson for the file's checklist: **a hidden-with-visibility absolutely posi
 still counts toward page overflow; when the page scrolls sideways on one device size, hide
 candidates with `display:none` in DevTools and re-measure `scrollWidth`.**
 
+**Second finding the same evening, iPad Air (820×1180, i.e. the hamburger sheet):** Sal, "it's
+iphone width for menu items at ipad display". The sheet's `.nav-menu` is a column-direction
+flex that inherited the desktop rule's `align-items:flex-start`, so each Product category
+shrank to its own content width (~300px) and the right half of the 796px sheet stayed empty.
+Two rules in `css/style.css`: (1) inside the ≤63.9rem block, `.nav-menu{align-items:stretch}`
++ `.nav-menu-col{width:100%}`, so on any phone or tablet the items span the sheet like the
+top-level links; (2) a **tablet band `(min-width:48rem) and (max-width:63.9rem)`** (iPad Air
+820, iPad Pro 11 834, iPad 810 in portrait) lays the three categories side by side with the
+vertical divider back, one item per row per ~240px column — the sheet keeps the hamburger, the
+Product list just stops being one 1000px-tall column. Below 48rem (iPad Mini 744, phones) the
+stacked single list stays, now full width. Between 64rem and 79.9rem the DESKTOP mega-menu
+stacks its items one per row instead (`.nav-menu-item-grid{grid-template-columns:minmax(0,1fr)}`),
+because the panel there is only as wide as the header bar (964px at 1024) and two per row
+wrapped six titles. Measured on all of these with Playwright WebKit; `style.css`/`main.js`
+at `?v=20260905-2`.
+
 ### Navigation — current, re-verified 2026-08-26 (the section above predates several rounds
 ### of nav changes this doc never caught up on — this replaces it; do not follow the 2026-08-18
 - **Header "Inloggen" link opens in the SAME tab (2026-08-28) — never `target="_blank"`.** It was the only link on the site opening a new tab, and on an iPhone in Chrome a new tab animates in while the page is already painting, so the dashboard login page visibly "jumped" every time it was opened from the site — and never any other way. Two days were spent looking for that inside the dashboard. Same-tab like the "Start gratis" CTA. There are TWO copies of the link per page — the desktop header (`class="header-login"`) and the mobile menu (`nav-mobile-actions`, the one actually tapped on a phone; the first fix missed it) — in every page and in `build-blog.js`, so change all 42 places together.
