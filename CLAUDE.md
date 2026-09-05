@@ -753,6 +753,13 @@ applied to all 16, and `test.html` is the reliable copy-paste source.
     That source isn't in the repo (it lived in a session scratchpad); to change a label or
     number, rebuild the composition rather than editing the WebP. Numbers on the cards are
     illustrative activity counts ("31 facturen"), deliberately not performance claims.
+  - **Slider trimmed to the nine cards that have an image (2026-09-05, Sal: "remove the
+    workflow cards sliders with no image").** Three cards had been added later with a
+    "Voorbeeld volgt" `.placeholder-tile` instead of a WebP (Automatisch boeken → `/workflows
+    #automatisch-boeken`, Bankmatching → `#bankmatching`, Vraagposten → `#vraagposten`); they
+    are removed from `index.html`. The `/workflows` panels they pointed at still exist and are
+    unchanged; only the homepage teaser lost them. If one of them gets a real card image later,
+    add the card back with an `<img>` like the other nine, never with a placeholder.
   - `.workflow-card-visual` is now an `<img>` rule (`width:100%; height:auto; aspect-ratio:
     3/2; object-fit:cover`). The `height:auto` is load-bearing: without it the `<img>`'s
     `height="600"` attribute wins and every card renders 600px tall (caught in QA).
