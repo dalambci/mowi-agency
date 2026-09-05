@@ -173,7 +173,12 @@
   display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
 }
 .wf-node-start .wf-node-icon,.wf-node-end .wf-node-icon{color:var(--ink-2)}
-.wf-node-decision .wf-node-head{background:var(--muted)}
+/* No grey head on a decision node since 2026-09-05 (Sal: it "kisses the grey
+   background", the full-bleed tint sat straight on the card border against the
+   dotted canvas). Padding it inward instead would cost body-text height inside
+   an 88px node that already clips its third line; the question-mark icon marks
+   the decision on its own. Same rule in the dashboard's copy of this file. */
+.wf-node-decision .wf-node-head{background:var(--surface)}
 
 .wf-zoom-controls{
   position:absolute;top:.875rem;right:.875rem;z-index:2;display:flex;flex-direction:column;
