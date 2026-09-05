@@ -548,6 +548,10 @@ function buildSitemap(posts) {
   // /contact) — a noindex stub should never be in the sitemap.
   const staticPages = [
     "", "workflows", "receptenboek", "koppelingen", "security", "pricing", "over", "zo-werkt-het", "demo", "docs/",
+    // Templates marketplace (2026-09-05, build-templates.js) — the index
+    // page; its own detail pages are read from disk below, same pattern
+    // as docs/receptenboek, since that set churns as templates are added.
+    "templates",
     // e-mail-agent/call-agent/waarom-mowi (2026-09-03): these three real,
     // non-stub, non-noindex pages were already in sitemap.xml on disk but
     // NOT in this array -- they'd have silently dropped out of the sitemap
@@ -580,10 +584,12 @@ function buildSitemap(posts) {
       .map((f) => folder + "/" + f.replace(/\.html$/, ""));
   const docsSlugs = readFolderSlugs("docs");
   const receptenboekSlugs = readFolderSlugs("receptenboek");
+  const templatesSlugs = readFolderSlugs("templates");
   const urls = [
     ...staticPages.map((p) => `${SITE_URL}/${p}`),
     ...docsSlugs.map((p) => `${SITE_URL}/${p}`),
     ...receptenboekSlugs.map((p) => `${SITE_URL}/${p}`),
+    ...templatesSlugs.map((p) => `${SITE_URL}/${p}`),
     `${SITE_URL}/blog`,
     ...posts.map((p) => `${SITE_URL}/blog/${p.slug}`),
   ];
