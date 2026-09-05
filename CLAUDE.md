@@ -815,6 +815,25 @@ applied to all 16, and `test.html` is the reliable copy-paste source.
     its templates-only hero override is now scoped to `.tpl-hero` (a hook added to
     `templates.html`'s hero section). `workflow-canvas.css` has its own `?v=` (`20260829-1`,
     on `index.html` and `templates.html` — bump both together).
+  - **Canvas edge rule changed 2026-09-05 (Sal: "the arrows look skuffed and one card kisses
+    the grey Wat is het card above").** Every baked-in canvas on this site (5 on `index.html`,
+    4 on `e-mail-agent.html`, 4 on `call-agent.html`, 20 on `templates.html`) was rewritten by a
+    geometry script (session scratch, `wf_rewrite.py`, not in the repo — it parses the inline
+    node/path/label coordinates, so it can be redone from the markup alone) to the SAME rule
+    the dashboard's `App\Templates\Graph\GraphLayout` now uses: rows are `NODE_H + 136`
+    apart (homepage/agent pages: 236 for 100px nodes; templates: 224 for 88px nodes — the
+    y=40/200/360/520/680 figures quoted above are therefore superseded, rows are now
+    40/276/512/748/984), a sideways edge curves into a **60px vertical stub above its child**
+    and then a straight line in, and its label pill sits **on that stub, 30px above the child**
+    instead of at the edge's midpoint (which, for a bezier with both control points there, is
+    exactly its inflection: the pill hid the bend and two disconnected hooks showed either side
+    of it). Straight edges and the two hand-drawn loop-backs (Offertes, Agenda) keep their shape
+    with y's remapped. Static windows (`--wf-off`/`--wf-win`) were remapped through the same
+    row mapping so each picture still frames the same nodes. The decision node keeps its grey
+    head: the "kiss" was the 16px between card and pill, not the colour, and the spacing
+    removes it. **Keep the two generators in step:** a dashboard unit test
+    (`tests/Unit/GraphLayoutTest.php`) pins STUB 60 / rise 30 / row 224; if either side's rule
+    changes, change both and re-run the rewriter here.
   - **Agent pages' "Voor elke branche anders ingesteld" tabs (2026-08-29):** the eight
     "Voorbeeld volgt" tiles on `e-mail-agent.html` and `call-agent.html` (Loodgieter / Kapper /
     Webshop / Horeca × 2) are the same static cut-off pictures — but **verbatim copies of the
