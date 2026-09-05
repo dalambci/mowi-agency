@@ -322,6 +322,23 @@ or `/tarieven`/`/pricing`. All of those pages (`agentic-ai.html`, `power-bi-dash
 (see Folder structure below), not real content — don't add new links to them, and don't
 resurrect any of the old label names above for the current nav.
 
+### iPad Pro / 1023–1280px: the closed Product menu was the page's horizontal overflow (2026-09-05)
+Sal: the header looked "too wide" on an iPad Pro, "that particular device alone". Root cause,
+measured with Playwright (Chromium 1024/1194/1280, WebKit iPad Pro 11 landscape): `.nav-menu` was
+`min-width: 76rem` (1216px), centred under `.site-header` and hidden with `visibility:hidden` +
+`opacity:0`, which still takes layout space. Below ~1280px it stuck out past the header (96px past
+the right edge at 1024, 11px at 1194) and gave `document.scrollWidth` that much overflow, so the
+page could be panned sideways on exactly the iPad Pro viewports (12.9" portrait = 1024, 11"
+landscape = 1194); phones were fine because the ≤63.9rem mobile header replaces the menu, and
+laptops ≥1280 were fine because the menu fit. With the menu `display:none` the overflow measured
+0, which pinned it. Fix in `css/style.css`: `.nav-menu { width: min(76rem, 100%); min-width: 0 }`
+(100% = the header's width, its containing block), so the closed panel can never exceed the
+header and the open panel between 1023 and 1280px is as wide as the header bar. Don't put an
+`overflow: clip` on `.site-header` instead: the open panel hangs below the header and would be
+cut. Lesson for the file's checklist: **a hidden-with-visibility absolutely positioned panel
+still counts toward page overflow; when the page scrolls sideways on one device size, hide
+candidates with `display:none` in DevTools and re-measure `scrollWidth`.**
+
 ### Navigation — current, re-verified 2026-08-26 (the section above predates several rounds
 ### of nav changes this doc never caught up on — this replaces it; do not follow the 2026-08-18
 - **Header "Inloggen" link opens in the SAME tab (2026-08-28) — never `target="_blank"`.** It was the only link on the site opening a new tab, and on an iPhone in Chrome a new tab animates in while the page is already painting, so the dashboard login page visibly "jumped" every time it was opened from the site — and never any other way. Two days were spent looking for that inside the dashboard. Same-tab like the "Start gratis" CTA. There are TWO copies of the link per page — the desktop header (`class="header-login"`) and the mobile menu (`nav-mobile-actions`, the one actually tapped on a phone; the first fix missed it) — in every page and in `build-blog.js`, so change all 42 places together.

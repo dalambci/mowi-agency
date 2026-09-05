@@ -209,8 +209,19 @@ main { flex: 1 0 auto; }
      retouren" onto 2 lines. Dashboards later dropped that item along with
      3 others (2026-08-26, same day) — kept at 76rem rather than
      re-narrowing since "Webshops vergelijken"/"Openstaande facturen" are
-     still long enough to need the room; re-measure before narrowing. */
-  min-width: 76rem;
+     still long enough to need the room; re-measure before narrowing.
+
+     Capped to the header's own width since 2026-09-05 (Sal: the site is
+     "too wide" on an iPad Pro). The panel is centred under .site-header and
+     hidden with visibility, not display, so while CLOSED it still occupied
+     layout: at every viewport under ~1280px its 76rem stuck out past the
+     header (96px past the right edge at 1024, 11px at 1194) and gave the
+     whole page a horizontal scroll on exactly the iPad Pro sizes. 100% here
+     is .site-header's width (the containing block); above ~1280px it still
+     resolves to the full 76rem. Between 1023 and 1280px the open panel is
+     therefore as wide as the header bar and its columns share that width. */
+  width: min(76rem, 100%);
+  min-width: 0;
   background: var(--surface);
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 16px;
