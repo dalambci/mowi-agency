@@ -136,7 +136,7 @@ backstop in case something important didn't get written down.
   mowi:export-templates <path>` in that repo). Never hand-edit the output; change the generator or
   re-export, run `node build-templates.js`, and commit the regenerated files with it. A second run
   is byte-identical (checked). The page's own assets are `css/templates.css` + `js/templates.js`,
-  versioned together by `TPL_ASSET_VERSION` in the generator (**`20260906-5`**); `style.css`/
+  versioned together by `TPL_ASSET_VERSION` in the generator (**`20260906-6`**); `style.css`/
   `main.js`/`workflow-canvas.*` are untouched by this page, so a templates change never needs the
   sitewide bump. The vault note `Dashboard/templates-marketplace-plan.md` is the build record.
 - **The filters were silently broken for a day (2026-09-05→06), and the lesson is a rule:** the
@@ -192,6 +192,12 @@ backstop in case something important didn't get written down.
   pill wrapped to two lines in frames under ~640px) — `?v=20260906-1` on the four pages that
   load it (`index.html`, `call-agent.html`, `e-mail-agent.html`, and `templates.html` +
   `templates/*` via the generator, which reads the version off `index.html`).
+- **Vertical rhythm on `/templates` (2026-09-06, Sal: "make sure the hero has consistent vertical
+  spacing between the items"):** the toolbar has no padding and a section pads below its top edge
+  only when it draws a divider, so the header's bottom padding (1.5rem, 1rem on phones) above the
+  toolbar and the first section's margin (1.5rem / 1rem) below it are the only gaps — measure
+  subline→toolbar and toolbar→first heading, they must be equal. The search input is `1rem` on
+  phones: below 16px iOS Safari zooms the page into a focused input. The dashboard mirrors both.
 
 ## HTTPS enforcement lives in Cloudways, not this repo
 - The production host was serving plain `http://mowi.agency` with a 200 OK instead of

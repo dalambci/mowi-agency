@@ -20,7 +20,7 @@
    Longhand padding only: .container's own inset lives in its padding
    shorthand, so a `padding:` here would silently reset it (see .hero's
    own warning in style.css). */
-.tpl-head{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;padding-top:2.5rem;padding-bottom:1.25rem}
+.tpl-head{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;padding-top:2.5rem;padding-bottom:1.5rem}
 .tpl-head .page-hero-body{margin-top:.5rem}
 .tpl-search{
   display:flex;align-items:center;gap:.5rem;padding:.625rem .875rem;width:20rem;max-width:100%;flex-shrink:0;
@@ -33,7 +33,9 @@
 
 /* ---------- Toolbar band ---------- */
 .tpl-toolbar{
-  display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;padding:.625rem 0;
+  display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;padding:0;
+  /* No padding: the header's 1.5rem above and the first section's 1.5rem
+     below carry one even rhythm (mirrors the dashboard, 2026-09-06). */
   /* No hairline above or below (Sal, 2026-09-06, on the dashboard's copy of
      this page: "remove the 3 line borders above and below the filters",
      then "mirror that one") — the third was the first section's own top
@@ -85,11 +87,12 @@
 
 /* ---------- Sections per kind + the grid ---------- */
 .tpl-marketplace{padding-bottom:3rem}
-.tpl-section{padding-top:1.25rem;margin-top:1.25rem}
+.tpl-section{margin-top:1.5rem}
 /* A divider only between two VISIBLE sections, never above the first one on
    screen (under the filters). js/templates.js hides an empty section with
-   the `hidden` attribute, so CSS can see it. */
-.tpl-section:not([hidden]) ~ .tpl-section:not([hidden]){border-top:1px solid var(--border)}
+   the `hidden` attribute, so CSS can see it. Only a section WITH a divider
+   pads below it. */
+.tpl-section:not([hidden]) ~ .tpl-section:not([hidden]){border-top:1px solid var(--border);padding-top:1.25rem}
 .tpl-section-head{display:flex;align-items:baseline;justify-content:space-between;gap:.75rem;margin-bottom:.75rem}
 .tpl-section-head h2{font-size:1.0625rem;margin:0;display:flex;align-items:baseline;gap:.5rem}
 .tpl-count{font-size:.8125rem;font-weight:600;color:var(--ink-3);font-variant-numeric:tabular-nums}
@@ -166,15 +169,18 @@
    full width, the "+N" tile dropped so two logo tiles and the glyph still
    fit a 170px picture. */
 @media (max-width:47.9rem){
-  .tpl-head{flex-direction:column;align-items:stretch;gap:.875rem;padding-top:1.5rem;padding-bottom:.875rem}
+  .tpl-head{flex-direction:column;align-items:stretch;gap:.875rem;padding-top:1.5rem;padding-bottom:1rem}
   .tpl-head .page-hero-body{display:none}
   .tpl-search{width:100%;padding:.5rem .75rem}
-  .tpl-toolbar{gap:.375rem;padding:.5rem 0}
+  /* 16px: below that iOS Safari zooms the page into a focused input. */
+  .tpl-search input{font-size:1rem}
+  .tpl-toolbar{gap:.375rem}
   .tpl-seg{width:100%;display:flex}
   .tpl-seg button{flex:1;text-align:center;padding-left:.375rem;padding-right:.375rem}
   .tpl-dd-btn{padding:.375rem .5rem .375rem .625rem}
   .tpl-dd-menu{min-width:min(16rem,calc(100vw - 3rem))}
-  .tpl-section{padding-top:.875rem;margin-top:.875rem}
+  .tpl-section{margin-top:1rem}
+  .tpl-section:not([hidden]) ~ .tpl-section:not([hidden]){padding-top:1rem}
   .tpl-section-head{flex-wrap:wrap;gap:.25rem .75rem}
   .tpl-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:.625rem}
   .tpl-picture{height:6rem;padding:0 .5rem}
