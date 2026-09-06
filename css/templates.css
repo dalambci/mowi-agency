@@ -167,7 +167,6 @@
    fit a 170px picture. */
 @media (max-width:47.9rem){
   .tpl-head{flex-direction:column;align-items:stretch;gap:.875rem;padding-top:1.5rem;padding-bottom:.875rem}
-  .tpl-detail-section{padding-top:1.5rem}
   .tpl-head .page-hero-body{display:none}
   .tpl-search{width:100%;padding:.5rem .75rem}
   .tpl-toolbar{gap:.375rem;padding:.5rem 0}
@@ -233,6 +232,10 @@
    replaced by .tpl-head's own 2.5rem (1.5rem on phones), so the back link
    sits exactly where the index's H1 sits. */
 .tpl-detail-section{padding-top:2.5rem}
+/* Declared here, AFTER the base rule: the shared phone block higher up in
+   this file comes before it in source order and would lose on equal
+   specificity (it did, for one build). */
+@media (max-width:47.9rem){ .tpl-detail-section{padding-top:1.5rem} }
 .tpl-detail-back{margin:0 0 1rem}
 .tpl-detail-back .link-arrow{margin-top:0}
 .tpl-detail{display:grid;grid-template-columns:minmax(0,1fr);gap:1.25rem;grid-template-areas:"intro" "visual" "nodes" "needs"}
