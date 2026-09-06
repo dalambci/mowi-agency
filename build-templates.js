@@ -589,7 +589,9 @@ function renderDetailPage(template, related, art) {
   const planned = template.status !== "live";
   const nodes = isAgent && template.graph ? template.graph.nodes.filter((n) => n.kind !== "start" && n.kind !== "end") : [];
 
-  // The one CTA, under the copy. A planned template gets the card's own
+  // The one CTA, under the copy — just the button (the "Vandaag gratis te
+  // proberen." micro line went 2026-09-06, Sal: "remove text ... from all
+  // template specific pages"). A planned template gets the card's own
   // disabled "Binnenkort" chip with the reason under it (the dashboard
   // shows its resolver's reason in the same spot).
   const ctaHtml = planned
@@ -598,7 +600,6 @@ function renderDetailPage(template, related, art) {
       }`
     : `<div class="tpl-detail-cta">
           <a href="${SIGNUP_URL}" class="btn-primary" data-event="Signup Click">Laat Mowi dit bouwen</a>
-          <span class="lp-cta-micro">Vandaag gratis te proberen.</span>
         </div>`;
 
   // The picture: the interactive flow, a dashboard's tile mock, or — for a
