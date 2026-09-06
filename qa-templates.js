@@ -155,36 +155,47 @@ async function run(browserType, label, viewport, device) {
   // 9. A detail page: canvas mounted, signup CTA, logo tiles with names
   await page.goto(BASE + "/templates/klant-opzoeken");
   await page.waitForTimeout(400);
-  check(`${label} detail page renders the canvas + CTA + named logos`, await page.evaluate(() => !!document.querySelector("[data-wf-canvas] .wf-node") && !!document.querySelector(".tpl-detail-actions a.btn-primary") && document.querySelectorAll(".tpl-logo-list .tpl-logo img[alt]").length > 0));
+  check(`${label} detail page renders the canvas + CTA + named logos + numbered steps`, await page.evaluate(() => !!document.querySelector(".tpl-detail-visual-wrap [data-wf-canvas] .wf-node") && !!document.querySelector(".tpl-detail-cta a.btn-primary") && document.querySelectorAll(".tpl-needs .tpl-logo-list .tpl-logo img[alt]").length > 0 && document.querySelectorAll(".tpl-detail-nodes .tpl-node .tpl-node-num").length > 0));
   await page.screenshot({ path: path.join(OUT, `tpl-${label}-detail.png`) });
 
-  // 10. An agent template page is a per-branche landing page (2026-09-06):
-  // tagline as the headline, identity row, the flow's nodes as cards, the
-  // agent page's three steps, the canvas beside the copy, other branches.
+  // 10. A detail page mirrors the dashboard's (2026-09-06): identity row,
+  // the label as H1, the flow's nodes as cards, a needs checklist, the
+  // canvas beside the copy (fitted whole: every node inside the frame),
+  // a same-branche related row — and the same grid: stacked (intro /
+  // visual / nodes / needs) below 1024px; from 1024px the intro and the
+  // needs share the left column next to the visual, the nodes full width
+  // under both.
   const phone = !viewport || viewport.width < 1024;
   await page.goto(BASE + "/templates/voice-agent-kapper");
-  await page.waitForTimeout(400);
+  await page.waitForTimeout(500);
   const agent = await page.evaluate(() => {
-    const copy = document.querySelector(".tpl-agent-copy");
-    const visual = document.querySelector(".tpl-agent-hero .tpl-detail-visual");
-    const c = copy ? copy.getBoundingClientRect() : null;
-    const v = visual ? visual.getBoundingClientRect() : null;
+    const r = (sel) => { const el = document.querySelector(sel); return el ? el.getBoundingClientRect() : null; };
+    const i = r(".tpl-detail-intro"), v = r(".tpl-detail-visual-wrap"), n = r(".tpl-detail-nodes"), d = r(".tpl-detail-needs");
+    const all = !!(i && v && n && d);
+    const vp = document.querySelector(".tpl-detail-visual-wrap [data-wf-viewport]");
+    const nodes = Array.from(document.querySelectorAll(".tpl-detail-visual-wrap .wf-node"));
+    const vr = vp ? vp.getBoundingClientRect() : null;
+    const fitted = !!vr && nodes.length > 0 && nodes.every((el) => { const b = el.getBoundingClientRect(); return b.top >= vr.top - 1 && b.bottom <= vr.bottom + 1 && b.left >= vr.left - 1 && b.right <= vr.right + 1; });
+    const related = Array.from(document.querySelectorAll(".tpl-detail-related [data-tpl-card]")).map((c) => c.getAttribute("data-tpl-industries") || "");
     return {
       h1: document.querySelector("h1") ? document.querySelector("h1").textContent.trim() : "",
       identity: !!document.querySelector(".tpl-agent-identity .tpl-mascot svg") && !!document.querySelector('.tpl-agent-identity .tpl-glyph svg[data-glyph="phone"]'),
-      cards: document.querySelectorAll(".tpl-agent-cards .lp-card").length,
-      steps: document.querySelectorAll(".lp-steps .lp-step").length,
-      canvas: !!document.querySelector(".tpl-agent-hero [data-wf-canvas] .wf-node"),
-      cta: !!document.querySelector(".tpl-agent-cta a.btn-primary"),
-      more: document.querySelectorAll(".tpl-agent-more [data-tpl-card]").length,
-      stacked: !!(c && v) && v.top >= c.bottom - 1,
-      sideBySide: !!(c && v) && v.left >= c.right - 1,
+      cards: document.querySelectorAll(".tpl-detail-nodes .tpl-node").length,
+      needs: document.querySelectorAll(".tpl-needs li").length,
+      canvas: nodes.length > 0,
+      fitted,
+      cta: !!document.querySelector(".tpl-detail-cta a.btn-primary"),
+      related,
+      stacked: all && v.top >= i.bottom - 1 && n.top >= v.bottom - 1 && d.top >= n.bottom - 1,
+      sideBySide: all && v.left >= i.right - 1 && Math.abs(v.top - i.top) < 2 && d.left < v.left && d.top >= i.bottom - 1 && n.top >= Math.max(v.bottom, d.bottom) - 1 && n.width > v.width,
       overflow: document.documentElement.scrollWidth - window.innerWidth,
     };
   });
-  check(`${label} agent page: the tagline is the headline, without a trailing period or em dash`, agent.h1 === "Plant knipbeurten in zonder dat u de telefoon hoeft op te nemen" && !agent.h1.includes("—"), agent.h1);
-  check(`${label} agent page: identity row, flow cards, 3 steps, canvas, CTA, other branches`, agent.identity && agent.cards >= 3 && agent.steps === 3 && agent.canvas && agent.cta && agent.more >= 2, JSON.stringify({ identity: agent.identity, cards: agent.cards, steps: agent.steps, canvas: agent.canvas, cta: agent.cta, more: agent.more }));
-  check(`${label} agent page: hero ${phone ? "stacks copy above the flow" : "puts copy beside the flow"}`, phone ? agent.stacked : agent.sideBySide);
+  check(`${label} agent page: the label is the H1`, agent.h1 === "Voice agent — Kapper", agent.h1);
+  check(`${label} agent page: identity row, flow cards, needs list, canvas, CTA`, agent.identity && agent.cards >= 3 && agent.needs >= 1 && agent.canvas && agent.cta, JSON.stringify({ identity: agent.identity, cards: agent.cards, needs: agent.needs, canvas: agent.canvas, cta: agent.cta }));
+  check(`${label} agent page: the whole flow is fitted inside the frame`, agent.fitted);
+  check(`${label} agent page: related row is same-branche only (kapper)`, agent.related.length >= 2 && agent.related.every((ind) => ind.split(",").includes("kapper")), JSON.stringify(agent.related));
+  check(`${label} agent page: ${phone ? "stacked intro / visual / nodes / needs" : "intro + needs left of the visual, nodes full width below"}`, phone ? agent.stacked : agent.sideBySide);
   check(`${label} agent page: no horizontal overflow`, agent.overflow === 0, String(agent.overflow));
 
   check(`${label} zero console errors`, consoleErrors.filter((m) => !m.includes("interactive-widget")).length === 0, consoleErrors.slice(0, 3).join(" | "));

@@ -5,16 +5,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nieuwe bestelling met klantdossier — Templates — Mowi</title>
-  <meta name="description" content="Zodra er een bestelling binnenkomt, wordt meteen opgezocht wie de klant is in uw CRM." />
+  <meta name="description" content="Nieuwe bestelling, klant meteen opgezocht." />
   <link rel="canonical" href="https://mowi.agency/templates/nieuwe-bestelling-klantdossier" />
   <meta property="og:title" content="Nieuwe bestelling met klantdossier — Mowi" />
-  <meta property="og:description" content="Zodra er een bestelling binnenkomt, wordt meteen opgezocht wie de klant is in uw CRM." />
+  <meta property="og:description" content="Nieuwe bestelling, klant meteen opgezocht." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&family=Inter+Tight:wght@600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/css/style.css?v=20260905-2" />
-  <link rel="stylesheet" href="/css/workflow-canvas.css?v=20260905-1" />
-  <link rel="stylesheet" href="/css/templates.css?v=20260906-2" />
+  <link rel="stylesheet" href="/css/workflow-canvas.css?v=20260906-1" />
+  <link rel="stylesheet" href="/css/templates.css?v=20260906-3" />
   <link rel="icon" href="/assets/icon-192.png?v=20260904-3" />
   <link rel="shortcut icon" href="/assets/icon-192.png?v=20260904-3" />
   <link rel="apple-touch-icon" href="/assets/apple-icon-180.png?v=20260904-3" />
@@ -90,14 +90,21 @@
 <main>
 <section class="section">
   <div class="container">
-    <p><a href="/templates" class="link-arrow">← Templates</a></p>
+    <p class="tpl-detail-back"><a href="/templates" class="link-arrow">← Templates</a></p>
 
-    <div class="tpl-detail-hero">
+    <div class="tpl-detail">
       <div class="tpl-detail-intro">
         <h1>Nieuwe bestelling met klantdossier</h1>
+        <p class="tpl-detail-summary tpl-detail-tagline">Nieuwe bestelling, klant meteen opgezocht.</p>
         <p class="tpl-detail-summary">Zodra er een bestelling binnenkomt, wordt meteen opgezocht wie de klant is in uw CRM.</p>
+        <div class="tpl-detail-cta">
+          <a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Laat Mowi dit bouwen</a>
+          <span class="lp-cta-micro">Vandaag gratis te proberen.</span>
+        </div>
       </div>
-      <div class="tpl-detail-visual"><div class="wf-canvas" data-wf-canvas data-wf-fit="fit" role="group" aria-label="Nieuwe bestelling met klantdossier">
+
+      <div class="tpl-detail-visual-wrap">
+        <div class="tpl-detail-visual"><div class="wf-canvas" data-wf-canvas data-wf-fit="center" role="group" aria-label="Nieuwe bestelling met klantdossier">
   <div class="wf-viewport" data-wf-viewport tabindex="0">
     <div class="wf-stage" data-wf-stage style="width:280px;height:536px">
       <svg class="wf-edges" width="280" height="536" aria-hidden="true"><defs><marker id="wftpl26-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--wf-edge)" /></marker></defs><path d="M140,128 C140,176 140,176 140,224" class="wf-edge-path" marker-end="url(#wftpl26-arrow)" /><path d="M140,312 C140,360 140,360 140,408" class="wf-edge-path" marker-end="url(#wftpl26-arrow)" /></svg>
@@ -131,58 +138,121 @@
     <button type="button" data-wf-zoom-in aria-label="Inzoomen" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M20 20l-4.35-4.35M10.5 8v5M8 10.5h5"/></svg></button>
   </div>
   <span class="wf-hint" data-wf-hint>Sleep om te verkennen — scroll om te zoomen</span>
-</div><div class="tpl-detail-actions"><a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Laat Mowi dit bouwen</a></div></div>
+</div></div>
+      </div>
+
+      <section class="tpl-detail-nodes">
+        <div class="tpl-section-head"><h2>Zo werkt het</h2></div>
+        <div class="tpl-node-grid">
+        <div class="tpl-node">
+          <span class="tpl-node-icon tpl-node-num" aria-hidden="true">1</span>
+          <strong>Nieuwe bestellingen ophalen</strong>
+          <span>Nieuwe bestellingen ophalen (Aantal dagen terugkijken: 1)</span>
+        </div>
+        <div class="tpl-node">
+          <span class="tpl-node-icon tpl-node-num" aria-hidden="true">2</span>
+          <strong>CRM-contact opzoeken op e-mailadres</strong>
+          <span>CRM-contact opzoeken op e-mailadres (E-mailadres: uit de nieuwe billing_email)</span>
+        </div>
+        <div class="tpl-node">
+          <span class="tpl-node-icon tpl-node-num" aria-hidden="true">3</span>
+          <strong>Nieuwe bestelling</strong>
+          <span>Er is zojuist een bestelling binnengekomen. Hieronder staat wat er over deze klant bekend is.</span>
+        </div>
+      </div>
+      </section>
+
+      <section class="tpl-detail-needs">
+        <div class="tpl-section-head"><h2>Wat u nodig heeft</h2></div>
+        <ul class="tpl-needs">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 12.2l2.4 2.4 4.6-4.8"/></svg><span>Start: Nieuwe bestellingen ophalen.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 12.2l2.4 2.4 4.6-4.8"/></svg><span>Werkt met een van deze koppelingen:<span class="tpl-logo-list"><span title="WooCommerce"><span class="tpl-logo"><img src="/assets/logos/integrations/woocommerce.svg" alt="WooCommerce" /></span></span><span title="Shopify"><span class="tpl-logo"><img src="/assets/logos/integrations/shopify.svg" alt="Shopify" /></span></span><span title="Lightspeed eCom"><span class="tpl-logo"><img src="/assets/logos/integrations/lightspeed.svg" alt="Lightspeed eCom" /></span></span><span title="Shopware"><span class="tpl-logo"><img src="/assets/logos/integrations/shopware.svg" alt="Shopware" /></span></span><span title="Magento Open Source"><span class="tpl-logo"><img src="/assets/logos/integrations/magento.svg" alt="Magento Open Source" /></span></span><span title="bol.com"><span class="tpl-logo"><img src="/assets/logos/integrations/bol.svg" alt="bol.com" /></span></span><span title="PrestaShop"><span class="tpl-logo"><img src="/assets/logos/integrations/prestashop.svg" alt="PrestaShop" /></span></span><span title="Exact Online"><span class="tpl-logo"><img src="/assets/logos/integrations/exact_online.svg" alt="Exact Online" /></span></span><span title="Pipedrive"><span class="tpl-logo"><img src="/assets/logos/integrations/pipedrive.svg" alt="Pipedrive" /></span></span><span title="HubSpot"><span class="tpl-logo"><img src="/assets/logos/integrations/hubspot.svg" alt="HubSpot" /></span></span><span title="Moneybird"><span class="tpl-logo"><img src="/assets/logos/integrations/moneybird.svg" alt="Moneybird" /></span></span></span></span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 12.2l2.4 2.4 4.6-4.8"/></svg><span>Ook voor: Webshop / e-commerce, Groothandel.</span></li>
+        </ul>
+      </section>
     </div>
 
-    <div class="tpl-detail-grid">
-      <section class="tpl-detail-section">
-        <h2>Zo werkt het</h2>
-        <ol class="tpl-detail-steps"><li><strong>Nieuwe bestellingen ophalen</strong><span>Nieuwe bestellingen ophalen (Aantal dagen terugkijken: 1)</span></li><li><strong>CRM-contact opzoeken op e-mailadres</strong><span>CRM-contact opzoeken op e-mailadres (E-mailadres: uit de nieuwe billing_email)</span></li><li><strong>Nieuwe bestelling</strong><span>Er is zojuist een bestelling binnengekomen. Hieronder staat wat er over deze klant bekend is.</span></li></ol>
-      </section>
-      <section class="tpl-detail-section">
-        <h2>Wat u nodig heeft</h2>
-        <p>Werkt met een van deze koppelingen:</p><div class="tpl-logo-list"><span title="WooCommerce"><span class="tpl-logo"><img src="/assets/logos/integrations/woocommerce.svg" alt="WooCommerce" /></span></span><span title="Shopify"><span class="tpl-logo"><img src="/assets/logos/integrations/shopify.svg" alt="Shopify" /></span></span><span title="Lightspeed eCom"><span class="tpl-logo"><img src="/assets/logos/integrations/lightspeed.svg" alt="Lightspeed eCom" /></span></span><span title="Shopware"><span class="tpl-logo"><img src="/assets/logos/integrations/shopware.svg" alt="Shopware" /></span></span><span title="Magento Open Source"><span class="tpl-logo"><img src="/assets/logos/integrations/magento.svg" alt="Magento Open Source" /></span></span><span title="bol.com"><span class="tpl-logo"><img src="/assets/logos/integrations/bol.svg" alt="bol.com" /></span></span><span title="PrestaShop"><span class="tpl-logo"><img src="/assets/logos/integrations/prestashop.svg" alt="PrestaShop" /></span></span><span title="Exact Online"><span class="tpl-logo"><img src="/assets/logos/integrations/exact_online.svg" alt="Exact Online" /></span></span><span title="Pipedrive"><span class="tpl-logo"><img src="/assets/logos/integrations/pipedrive.svg" alt="Pipedrive" /></span></span><span title="HubSpot"><span class="tpl-logo"><img src="/assets/logos/integrations/hubspot.svg" alt="HubSpot" /></span></span><span title="Moneybird"><span class="tpl-logo"><img src="/assets/logos/integrations/moneybird.svg" alt="Moneybird" /></span></span></div>
-        
-        <p>Ook voor: Webshop / e-commerce, Groothandel.</p>
-        <div class="tpl-prompt-box">Wat de Builder krijgt: "Bouw de automatisering &quot;Nieuwe bestelling met klantdossier&quot; voor mij."</div>
-      </section>
-    </div>
-
-    <section class="tpl-section">
-    <div class="tpl-section-head"><h2>Vergelijkbaar</h2></div>
-    <div class="tpl-grid">
-      <a href="/templates/dagelijkse-nieuwe-bestellingen" class="tpl-card" data-tpl-card data-tpl-kind="workflow" data-tpl-industries="loodgieter,webshop,groothandel" data-tpl-koppelingen="woocommerce,shopify,lightspeed,shopware,magento,bol,prestashop" data-tpl-trigger="schedule" data-tpl-status="live" data-tpl-search="dagelijks besteloverzicht elke ochtend de bestellingen van gisteren. elke ochtend een overzicht van de bestellingen van gisteren. loodgieter / installatiebedrijf webshop / e-commerce groothandel woocommerce shopify lightspeed ecom shopware magento open source bol.com prestashop">
-  <div class="tpl-picture tpl-picture-workflow">
-    <span class="tpl-badge">Dagelijks</span>
-    <div class="tpl-picture-row"><span class="tpl-logo"><img src="/assets/logos/integrations/woocommerce.svg" alt="WooCommerce" /></span><span class="tpl-logo"><img src="/assets/logos/integrations/shopify.svg" alt="Shopify" /></span><span class="tpl-logo tpl-logo-more" title="Lightspeed eCom, Shopware, Magento Open Source, bol.com, PrestaShop">+5</span><span class="tpl-glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-glyph="box"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/><path d="m7.5 4.27 9 5.15"/></svg></span></div>
+    <section class="tpl-section tpl-detail-related">
+      <div class="tpl-section-head"><h2>Ook interessant</h2></div>
+      <div class="tpl-grid">
+        <a href="/templates/voice-agent-webshop" class="tpl-card" data-tpl-card data-tpl-kind="agent" data-tpl-industries="webshop" data-tpl-koppelingen="" data-tpl-trigger="" data-tpl-status="live" data-tpl-search="voice agent — webshop zoekt de bestelling op vóórdat er iets wordt beloofd. vraagt naar het ordernummer of e-mailadres, zoekt de bestelling op en geeft de status direct door — wordt niets gevonden, dan legt de agent een terugbelverzoek vast. webshop / e-commerce">
+  <div class="tpl-picture tpl-picture-agent">
+    <div class="tpl-picture-row"><span class="tpl-mascot"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false" data-shape="ghost">
+    <g transform="translate(-0.73,0.57) scale(1.045)">
+        <g fill="var(--agent-fill, #B8B4AE)">
+                                <path d="M15.86 4 Q12.54 4.27 11.83 4.51 Q11.12 4.75 9.93 5.46 Q8.75 6.16 7.69 7.24 Q6.63 8.32 5.89 9.74 Q5.15 11.16 4.69 12.58 Q4.23 14 4.12 15.43 Q4 16.85 4.1 18.98 Q4.2 21.11 4.4 21.59 Q4.6 22.06 4.64 22.54 Q4.67 23.01 4.95 23.48 Q5.23 23.95 5.81 24.54 Q6.38 25.13 6.86 25.24 Q7.33 25.35 8.28 25.26 Q9.22 25.17 9.7 24.93 Q10.17 24.68 11.12 23.81 Q12.07 22.95 13.25 24.06 Q14.44 25.17 15.62 25.17 Q16.8 25.16 17.28 24.9 Q17.75 24.64 18.7 23.79 Q19.65 22.94 20.84 24.03 Q22.02 25.11 22.97 25.37 Q23.91 25.63 24.86 25.41 Q25.81 25.19 26.63 24.34 Q27.46 23.48 27.72 22.3 Q27.97 21.11 27.97 17.56 Q27.96 14 27.52 12.34 Q27.07 10.69 26.31 9.27 Q25.55 7.84 24.97 7.31 Q24.39 6.77 23.21 5.98 Q22.02 5.18 20.6 4.71 Q19.17 4.24 17.75 4.13 Q16.33 4.01 15.86 4 Z"/>
+                            </g>
+        <g fill="var(--agent-eye, #121110)">
+                            <circle cx="12.5" cy="15" r="1.7"/>
+                            <circle cx="19.5" cy="15" r="1.7"/>
+                    </g>
+    </g>
+</svg></span><span class="tpl-glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-glyph="phone"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span></div>
   </div>
   <div class="tpl-card-body">
-    <h3 class="tpl-card-title">Dagelijks besteloverzicht</h3>
-    <p class="tpl-card-line">Elke ochtend de bestellingen van gisteren.</p>
+    <h3 class="tpl-card-title">Voice agent — Webshop</h3>
+    <p class="tpl-card-line">Zoekt de bestelling op vóórdat er iets wordt beloofd.</p>
   </div>
 </a>
-      <a href="/templates/weekoverzicht-bestellingen" class="tpl-card" data-tpl-card data-tpl-kind="workflow" data-tpl-industries="webshop,groothandel" data-tpl-koppelingen="woocommerce,shopify,lightspeed,shopware,magento,bol,prestashop" data-tpl-trigger="schedule" data-tpl-status="live" data-tpl-search="wekelijks besteloverzicht elke maandag de bestellingen van de week. elke maandagochtend een overzicht van de bestellingen van de afgelopen week. webshop / e-commerce groothandel woocommerce shopify lightspeed ecom shopware magento open source bol.com prestashop">
-  <div class="tpl-picture tpl-picture-workflow">
-    <span class="tpl-badge">Wekelijks</span>
-    <div class="tpl-picture-row"><span class="tpl-logo"><img src="/assets/logos/integrations/woocommerce.svg" alt="WooCommerce" /></span><span class="tpl-logo"><img src="/assets/logos/integrations/shopify.svg" alt="Shopify" /></span><span class="tpl-logo tpl-logo-more" title="Lightspeed eCom, Shopware, Magento Open Source, bol.com, PrestaShop">+5</span><span class="tpl-glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-glyph="box"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/><path d="m7.5 4.27 9 5.15"/></svg></span></div>
+        <a href="/templates/voice-agent-groothandel" class="tpl-card" data-tpl-card data-tpl-kind="agent" data-tpl-industries="groothandel" data-tpl-koppelingen="" data-tpl-trigger="" data-tpl-status="live" data-tpl-search="voice agent — groothandel zoekt de order op vóórdat er iets wordt beloofd. vraagt naar het klant- of ordernummer, zoekt de order op en geeft de status door — wordt niets gevonden, dan legt de agent een terugbelverzoek vast. groothandel">
+  <div class="tpl-picture tpl-picture-agent">
+    <div class="tpl-picture-row"><span class="tpl-mascot"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false" data-shape="ghost">
+    <g transform="translate(-0.73,0.57) scale(1.045)">
+        <g fill="var(--agent-fill, #B8B4AE)">
+                                <path d="M15.86 4 Q12.54 4.27 11.83 4.51 Q11.12 4.75 9.93 5.46 Q8.75 6.16 7.69 7.24 Q6.63 8.32 5.89 9.74 Q5.15 11.16 4.69 12.58 Q4.23 14 4.12 15.43 Q4 16.85 4.1 18.98 Q4.2 21.11 4.4 21.59 Q4.6 22.06 4.64 22.54 Q4.67 23.01 4.95 23.48 Q5.23 23.95 5.81 24.54 Q6.38 25.13 6.86 25.24 Q7.33 25.35 8.28 25.26 Q9.22 25.17 9.7 24.93 Q10.17 24.68 11.12 23.81 Q12.07 22.95 13.25 24.06 Q14.44 25.17 15.62 25.17 Q16.8 25.16 17.28 24.9 Q17.75 24.64 18.7 23.79 Q19.65 22.94 20.84 24.03 Q22.02 25.11 22.97 25.37 Q23.91 25.63 24.86 25.41 Q25.81 25.19 26.63 24.34 Q27.46 23.48 27.72 22.3 Q27.97 21.11 27.97 17.56 Q27.96 14 27.52 12.34 Q27.07 10.69 26.31 9.27 Q25.55 7.84 24.97 7.31 Q24.39 6.77 23.21 5.98 Q22.02 5.18 20.6 4.71 Q19.17 4.24 17.75 4.13 Q16.33 4.01 15.86 4 Z"/>
+                            </g>
+        <g fill="var(--agent-eye, #121110)">
+                            <circle cx="12.5" cy="15" r="1.7"/>
+                            <circle cx="19.5" cy="15" r="1.7"/>
+                    </g>
+    </g>
+</svg></span><span class="tpl-glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-glyph="phone"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span></div>
   </div>
   <div class="tpl-card-body">
-    <h3 class="tpl-card-title">Wekelijks besteloverzicht</h3>
-    <p class="tpl-card-line">Elke maandag de bestellingen van de week.</p>
+    <h3 class="tpl-card-title">Voice agent — Groothandel</h3>
+    <p class="tpl-card-line">Zoekt de order op vóórdat er iets wordt beloofd.</p>
   </div>
 </a>
-      <a href="/templates/nieuwe-bestelling-direct" class="tpl-card" data-tpl-card data-tpl-kind="workflow" data-tpl-industries="webshop" data-tpl-koppelingen="woocommerce,shopify,lightspeed,shopware,magento,bol,prestashop" data-tpl-trigger="poll" data-tpl-status="live" data-tpl-search="melding bij elke nieuwe bestelling direct een bericht bij elke bestelling. een bericht zodra er een bestelling binnenkomt, in plaats van een overzicht de volgende ochtend. webshop / e-commerce woocommerce shopify lightspeed ecom shopware magento open source bol.com prestashop">
-  <div class="tpl-picture tpl-picture-workflow">
-    <span class="tpl-badge">Direct</span>
-    <div class="tpl-picture-row"><span class="tpl-logo"><img src="/assets/logos/integrations/woocommerce.svg" alt="WooCommerce" /></span><span class="tpl-logo"><img src="/assets/logos/integrations/shopify.svg" alt="Shopify" /></span><span class="tpl-logo tpl-logo-more" title="Lightspeed eCom, Shopware, Magento Open Source, bol.com, PrestaShop">+5</span><span class="tpl-glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-glyph="box"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/><path d="m7.5 4.27 9 5.15"/></svg></span></div>
+        <a href="/templates/inbox-agent-webshop" class="tpl-card" data-tpl-card data-tpl-kind="agent" data-tpl-industries="webshop" data-tpl-koppelingen="" data-tpl-trigger="" data-tpl-status="live" data-tpl-search="inbox agent — webshop orderstatus, retour of klacht: nooit meer kwijt. sorteert elke e-mail, vraagt zelf het ordernummer op bij een onvolledige vraag, en meldt een klacht direct in plaats van hem te laten liggen. webshop / e-commerce">
+  <div class="tpl-picture tpl-picture-agent">
+    <div class="tpl-picture-row"><span class="tpl-mascot"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false" data-shape="ghost">
+    <g transform="translate(-0.73,0.57) scale(1.045)">
+        <g fill="var(--agent-fill, #B8B4AE)">
+                                <path d="M15.86 4 Q12.54 4.27 11.83 4.51 Q11.12 4.75 9.93 5.46 Q8.75 6.16 7.69 7.24 Q6.63 8.32 5.89 9.74 Q5.15 11.16 4.69 12.58 Q4.23 14 4.12 15.43 Q4 16.85 4.1 18.98 Q4.2 21.11 4.4 21.59 Q4.6 22.06 4.64 22.54 Q4.67 23.01 4.95 23.48 Q5.23 23.95 5.81 24.54 Q6.38 25.13 6.86 25.24 Q7.33 25.35 8.28 25.26 Q9.22 25.17 9.7 24.93 Q10.17 24.68 11.12 23.81 Q12.07 22.95 13.25 24.06 Q14.44 25.17 15.62 25.17 Q16.8 25.16 17.28 24.9 Q17.75 24.64 18.7 23.79 Q19.65 22.94 20.84 24.03 Q22.02 25.11 22.97 25.37 Q23.91 25.63 24.86 25.41 Q25.81 25.19 26.63 24.34 Q27.46 23.48 27.72 22.3 Q27.97 21.11 27.97 17.56 Q27.96 14 27.52 12.34 Q27.07 10.69 26.31 9.27 Q25.55 7.84 24.97 7.31 Q24.39 6.77 23.21 5.98 Q22.02 5.18 20.6 4.71 Q19.17 4.24 17.75 4.13 Q16.33 4.01 15.86 4 Z"/>
+                            </g>
+        <g fill="var(--agent-eye, #121110)">
+                            <circle cx="12.5" cy="15" r="1.7"/>
+                            <circle cx="19.5" cy="15" r="1.7"/>
+                    </g>
+    </g>
+</svg></span><span class="tpl-glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-glyph="mail"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span></div>
   </div>
   <div class="tpl-card-body">
-    <h3 class="tpl-card-title">Melding bij elke nieuwe bestelling</h3>
-    <p class="tpl-card-line">Direct een bericht bij elke bestelling.</p>
+    <h3 class="tpl-card-title">Inbox agent — Webshop</h3>
+    <p class="tpl-card-line">Orderstatus, retour of klacht: nooit meer kwijt.</p>
   </div>
 </a>
-    </div>
-  </section>
+        <a href="/templates/inbox-agent-groothandel" class="tpl-card" data-tpl-card data-tpl-kind="agent" data-tpl-industries="groothandel" data-tpl-koppelingen="" data-tpl-trigger="" data-tpl-status="live" data-tpl-search="inbox agent — groothandel bestellingen, voorraadvragen en klachten: gesorteerd. sorteert elke e-mail, vraagt zelf het klant- of ordernummer op bij een onvolledige vraag, en meldt een klacht direct. groothandel">
+  <div class="tpl-picture tpl-picture-agent">
+    <div class="tpl-picture-row"><span class="tpl-mascot"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false" data-shape="ghost">
+    <g transform="translate(-0.73,0.57) scale(1.045)">
+        <g fill="var(--agent-fill, #B8B4AE)">
+                                <path d="M15.86 4 Q12.54 4.27 11.83 4.51 Q11.12 4.75 9.93 5.46 Q8.75 6.16 7.69 7.24 Q6.63 8.32 5.89 9.74 Q5.15 11.16 4.69 12.58 Q4.23 14 4.12 15.43 Q4 16.85 4.1 18.98 Q4.2 21.11 4.4 21.59 Q4.6 22.06 4.64 22.54 Q4.67 23.01 4.95 23.48 Q5.23 23.95 5.81 24.54 Q6.38 25.13 6.86 25.24 Q7.33 25.35 8.28 25.26 Q9.22 25.17 9.7 24.93 Q10.17 24.68 11.12 23.81 Q12.07 22.95 13.25 24.06 Q14.44 25.17 15.62 25.17 Q16.8 25.16 17.28 24.9 Q17.75 24.64 18.7 23.79 Q19.65 22.94 20.84 24.03 Q22.02 25.11 22.97 25.37 Q23.91 25.63 24.86 25.41 Q25.81 25.19 26.63 24.34 Q27.46 23.48 27.72 22.3 Q27.97 21.11 27.97 17.56 Q27.96 14 27.52 12.34 Q27.07 10.69 26.31 9.27 Q25.55 7.84 24.97 7.31 Q24.39 6.77 23.21 5.98 Q22.02 5.18 20.6 4.71 Q19.17 4.24 17.75 4.13 Q16.33 4.01 15.86 4 Z"/>
+                            </g>
+        <g fill="var(--agent-eye, #121110)">
+                            <circle cx="12.5" cy="15" r="1.7"/>
+                            <circle cx="19.5" cy="15" r="1.7"/>
+                    </g>
+    </g>
+</svg></span><span class="tpl-glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-glyph="mail"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span></div>
+  </div>
+  <div class="tpl-card-body">
+    <h3 class="tpl-card-title">Inbox agent — Groothandel</h3>
+    <p class="tpl-card-line">Bestellingen, voorraadvragen en klachten: gesorteerd.</p>
+  </div>
+</a>
+      </div>
+    </section>
   </div>
 </section>
 </main>
@@ -252,7 +322,7 @@
     </div>
   </footer>
   <script src="/js/main.js?v=20260905-2"></script>
-  <script src="/js/workflow-canvas.js?v=20260904-6"></script>
+  <script src="/js/workflow-canvas.js?v=20260906-1"></script>
 
 </body>
 </html>

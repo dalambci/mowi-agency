@@ -34,7 +34,10 @@
 /* ---------- Toolbar band ---------- */
 .tpl-toolbar{
   display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;padding:.625rem 0;
-  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  /* No hairline above or below (Sal, 2026-09-06, on the dashboard's copy of
+     this page: "remove the 3 line borders above and below the filters",
+     then "mirror that one") — the third was the first section's own top
+     border, see .tpl-section. */
 }
 .tpl-seg{display:inline-flex;flex-shrink:0;background:var(--muted);border-radius:var(--radius-btn);padding:3px;gap:2px}
 .tpl-seg button{
@@ -82,7 +85,11 @@
 
 /* ---------- Sections per kind + the grid ---------- */
 .tpl-marketplace{padding-bottom:3rem}
-.tpl-section{padding-top:1.25rem;margin-top:1.25rem;border-top:1px solid var(--border)}
+.tpl-section{padding-top:1.25rem;margin-top:1.25rem}
+/* A divider only between two VISIBLE sections, never above the first one on
+   screen (under the filters). js/templates.js hides an empty section with
+   the `hidden` attribute, so CSS can see it. */
+.tpl-section:not([hidden]) ~ .tpl-section:not([hidden]){border-top:1px solid var(--border)}
 .tpl-section-head{display:flex;align-items:baseline;justify-content:space-between;gap:.75rem;margin-bottom:.75rem}
 .tpl-section-head h2{font-size:1.0625rem;margin:0;display:flex;align-items:baseline;gap:.5rem}
 .tpl-count{font-size:.8125rem;font-weight:600;color:var(--ink-3);font-variant-numeric:tabular-nums}
@@ -204,72 +211,72 @@
 .tpl-dash-tile-title{font-size:.59375rem;font-weight:600;color:var(--ink-2);line-height:1.3;overflow-wrap:anywhere}
 .tpl-dash-tile-body{flex:1;margin-top:.25rem;border-radius:.3125rem;background:var(--muted)}
 
-/* ---------- Agent template page (2026-09-06, Sal: "completely re-do the
-   design of the agent template page, so voice agent kapper for example") ----------
-   A per-branche landing page for ONE agent, built from the same components
-   /call-agent and /e-mail-agent already use (.split hero, .lp-card grid,
-   .lp-steps, the marketplace cards) so it reads as one family with them
-   rather than as a generic record view. Hero: an identity row (the card's
-   own mascot + channel glyph, "Voice agent · Kapper / salon"), the
-   TAGLINE as the headline (the promise, like the agent pages' own heroes;
-   the label stays in <title>), the summary, one CTA; the conversation flow
-   as the interactive canvas beside it (.split: copy left, visual right,
-   one column below 64rem). Then the flow's own nodes as feature cards,
-   the agent page's own three onboarding steps, and other branches. */
-.tpl-agent-hero{align-items:center}
-.tpl-agent-identity{display:flex;align-items:center;gap:.625rem;margin-bottom:1.25rem}
-.tpl-agent-identity .tpl-mascot{width:2.5rem;height:2.5rem}
-.tpl-agent-identity .tpl-glyph{width:2.5rem;height:2.5rem;margin-left:0}
-.tpl-agent-identity .tpl-glyph svg{width:1.25rem;height:1.25rem}
-.tpl-agent-kind{font-weight:600;font-size:.9375rem;color:var(--ink-2);margin-left:.25rem}
-.tpl-agent-title{font-size:clamp(2.25rem,3.4vw,3rem);line-height:1.1;letter-spacing:-.02em;overflow-wrap:break-word}
-.tpl-agent-sub{font-size:1.125rem;line-height:1.6;color:var(--ink-2);margin-top:1.25rem;max-width:32rem}
-/* .lp-cta-block centres its children for the agent pages' centred heroes;
-   this hero is left-aligned copy, so the block follows the text. */
-.tpl-agent-cta{align-items:flex-start;margin-top:2rem}
-.tpl-agent-cta .btn-primary{width:auto}
-.tpl-agent-hero .tpl-detail-visual{min-height:0;margin:0}
-.tpl-agent-hero .wf-canvas{height:36rem}
-.tpl-agent-cards .lp-card p{margin:0}
-/* The related row reuses the marketplace card grid; "Ook interessant" =
-   the same branche's other agent first, then this agent for other branches. */
-.tpl-agent-more .tpl-section{border-top:0;padding-top:0;margin-top:0}
-@media (max-width:47.9rem){
-  .tpl-agent-title{font-size:2rem}
-  .tpl-agent-hero .wf-canvas{height:28rem}
-  .tpl-agent-identity{margin-bottom:1rem}
-}
-
-/* ---------- Detail page ---------- */
-/* Hero: text left, visual right (2026-09-06, Sal: "left align the text
-   and right align the workflow graph" -- then, on the follow-up: "the
-   spacing in the hero on desktop, its not consistent and way too much,
-   use the same ratios as mobile"). The second complaint was really the
-   first one unfixed: a graph in "full"/fit mode scales to whatever box
-   it's given, and the box used to be the full page width -- a 520px-wide
-   flow ended up centred in a ~1300px-wide, mostly empty dot-grid field on
-   desktop, filled edge to edge only on a phone. Giving the visual its OWN
-   narrower column (instead of the page's full width) is the actual fix:
-   "fit" then scales it to roughly the same proportion of its box on any
-   screen, matching how it already looks on mobile, where the box is
-   naturally narrow. Single column (text above the visual, the OLD
-   stacked order -- no reflow surprise) until there's room for both side
-   by side. */
-.tpl-detail-hero{display:grid;grid-template-columns:1fr;gap:1.5rem;align-items:start;margin-bottom:1.5rem}
-.tpl-detail-intro h1{margin:0}
-.tpl-detail-summary{margin:.75rem 0 0;font-size:1rem;line-height:1.5;color:var(--ink-2)}
-@media (min-width:64rem){
-  .tpl-detail-hero{grid-template-columns:minmax(18rem,26rem) 1fr;gap:2.5rem;align-items:center}
-  .tpl-detail-intro{padding-top:.25rem}
-}
+/* ---------- Detail page (restructured 2026-09-06) ----------
+   Mirrors the dashboard's flows/template-show.blade.php and the block of the
+   same name in its workflow-canvas.css, rule for rule (Sal: "apply the same
+   entire styling on the website mowi.agency templates page as well ... use
+   the dashboard template page as example thats how we want to have it").
+   One grid with four named areas, so the DOM order (intro, visual, nodes,
+   needs) can differ per width:
+   - below 64rem: intro / visual / nodes / needs, stacked;
+   - from 64rem: the intro and "Wat u nodig heeft" share the LEFT column,
+     both top-aligned with the graph on the right, and "Wat de agent doet"
+     / "Zo werkt het" runs full width underneath, three cards per row.
+   No wrapper cards: the index page's section-head + grid idiom. The graph
+   is 30rem tall there, like the dashboard's, and since 2026-09-06 this
+   site's canvas honours data-wf-fit too (a wide graph is fitted whole, a
+   narrow one opens at 1:1 and pans), so both pages frame a flow alike. */
+.tpl-detail-back{margin:0 0 1.25rem}
+.tpl-detail-back .link-arrow{margin-top:0}
+.tpl-detail{display:grid;grid-template-columns:minmax(0,1fr);gap:1.25rem;grid-template-areas:"intro" "visual" "nodes" "needs"}
+.tpl-detail-intro{grid-area:intro;min-width:0}
+.tpl-detail-visual-wrap{grid-area:visual;min-width:0}
+.tpl-detail-nodes{grid-area:nodes;min-width:0}
+.tpl-detail-needs{grid-area:needs;min-width:0}
+.tpl-detail-intro h1{margin:0;font-size:clamp(1.625rem,2.2vw,2rem);line-height:1.2;letter-spacing:-.015em;overflow-wrap:break-word}
+.tpl-detail-summary{margin:.75rem 0 0;font-size:1rem;line-height:1.55;color:var(--ink-2)}
+.tpl-detail-tagline{color:var(--ink);font-weight:600;font-size:1.0625rem}
+.tpl-detail-tagline + .tpl-detail-summary{margin-top:.375rem}
+.tpl-detail-cta{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;margin-top:1.25rem}
+.tpl-detail-cta .btn-primary{width:auto}
+.tpl-detail-cta-reason{margin-top:.5rem}
+.tpl-chip-lg{font-size:.8125rem;padding:.5rem .875rem}
+.tpl-detail .hint{margin:0;font-size:.875rem;line-height:1.5;color:var(--ink-3)}
+/* Agent identity row above the title: mascot + channel glyph + kind · branche. */
+.tpl-agent-identity{display:flex;align-items:center;gap:.5rem;margin-bottom:.75rem}
+.tpl-agent-identity .tpl-mascot{width:2rem;height:2rem}
+.tpl-agent-identity .tpl-glyph{width:2rem;height:2rem;margin-left:0}
+.tpl-agent-identity .tpl-glyph svg{width:1rem;height:1rem}
+.tpl-agent-kind{font-size:.8125rem;font-weight:600;color:var(--ink-2);margin-left:.125rem}
 .tpl-detail-visual{border-radius:var(--radius-card);border:1px solid var(--border);overflow:hidden;background:var(--muted)}
-.tpl-detail-visual .tpl-dash-mock{position:relative;height:22rem;padding:1.25rem}
-.tpl-detail-actions{padding:1rem}
-.tpl-detail-grid{display:grid;grid-template-columns:1fr;gap:1.5rem;margin-bottom:2.5rem}
-@media (min-width:48rem){ .tpl-detail-grid{grid-template-columns:1fr 1fr} }
-.tpl-detail-section h2{font-size:1rem;margin:0 0 .75rem}
-.tpl-detail-section p{margin:0 0 .5rem;font-size:.9375rem;color:var(--ink-2)}
-.tpl-detail-steps{margin:0;padding-left:1.25rem;display:flex;flex-direction:column;gap:.625rem}
-.tpl-detail-steps li strong{display:block;font-size:.875rem;color:var(--ink)}
-.tpl-detail-steps li span{font-size:.8125rem;color:var(--ink-2)}
-.tpl-prompt-box{margin-top:1rem;padding:.75rem .875rem;border-radius:var(--radius-btn);border:1px solid var(--border);background:var(--muted);font-size:.8125rem;color:var(--ink-2)}
+.tpl-detail-visual-inner{position:relative;height:22rem}
+.tpl-detail-visual .tpl-dash-mock{position:absolute;inset:0;padding:1.25rem}
+.tpl-detail-visual-empty{padding:1.5rem;background:var(--surface)}
+/* "Wat u nodig heeft" as a short checklist. */
+.tpl-needs{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.5rem}
+.tpl-needs li{display:flex;gap:.5rem;align-items:flex-start;font-size:.9375rem;line-height:1.5;color:var(--ink-2)}
+.tpl-needs li > svg{width:1rem;height:1rem;flex-shrink:0;margin-top:.25rem;color:var(--ink-3)}
+.tpl-needs .tpl-logo-list{display:flex;margin:.375rem 0 0}
+/* The flow's nodes (agents) or steps (workflows/dashboards) as small cards
+   with the canvas's own icons, or a step number. */
+.tpl-node-grid{display:grid;grid-template-columns:1fr;gap:.625rem}
+.tpl-node{display:flex;flex-direction:column;gap:.25rem;padding:.875rem 1rem;border:1px solid var(--border);border-radius:var(--radius-card);background:var(--surface)}
+.tpl-node-icon{width:1.75rem;height:1.75rem;border-radius:50%;border:1px solid var(--border);background:var(--surface);color:var(--ink-2);display:inline-flex;align-items:center;justify-content:center;margin-bottom:.25rem}
+.tpl-node-icon svg{width:.875rem;height:.875rem}
+.tpl-node-num{font-size:.75rem;font-weight:700;font-variant-numeric:tabular-nums}
+.tpl-node strong{font-size:.9375rem;color:var(--ink)}
+.tpl-node span{font-size:.875rem;color:var(--ink-2);line-height:1.5}
+/* The related row keeps a divider above it; it is not a sibling of another
+   .tpl-section here, so the between-sections rule above can't give it one. */
+.tpl-detail-related{border-top:1px solid var(--border);margin-top:2rem;padding-top:1.5rem}
+@media (min-width:48rem){
+  .tpl-node-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (min-width:64rem){
+  .tpl-detail{
+    grid-template-columns:minmax(20rem,30rem) minmax(0,1fr);grid-template-rows:auto 1fr auto;
+    grid-template-areas:"intro visual" "needs visual" "nodes nodes";column-gap:2rem;row-gap:1.75rem;align-items:start;
+  }
+  .tpl-detail .wf-canvas{height:30rem}
+  .tpl-node-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}

@@ -5,16 +5,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Wie belde er vandaag — Templates — Mowi</title>
-  <meta name="description" content="Elke avond een overzicht van de telefoongesprekken van vandaag." />
+  <meta name="description" content="Elke avond wie er vandaag belde." />
   <link rel="canonical" href="https://mowi.agency/templates/wie-belde-vandaag" />
   <meta property="og:title" content="Wie belde er vandaag — Mowi" />
-  <meta property="og:description" content="Elke avond een overzicht van de telefoongesprekken van vandaag." />
+  <meta property="og:description" content="Elke avond wie er vandaag belde." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&family=Inter+Tight:wght@600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/css/style.css?v=20260905-2" />
-  <link rel="stylesheet" href="/css/workflow-canvas.css?v=20260905-1" />
-  <link rel="stylesheet" href="/css/templates.css?v=20260906-2" />
+  <link rel="stylesheet" href="/css/workflow-canvas.css?v=20260906-1" />
+  <link rel="stylesheet" href="/css/templates.css?v=20260906-3" />
   <link rel="icon" href="/assets/icon-192.png?v=20260904-3" />
   <link rel="shortcut icon" href="/assets/icon-192.png?v=20260904-3" />
   <link rel="apple-touch-icon" href="/assets/apple-icon-180.png?v=20260904-3" />
@@ -90,14 +90,21 @@
 <main>
 <section class="section">
   <div class="container">
-    <p><a href="/templates" class="link-arrow">← Templates</a></p>
+    <p class="tpl-detail-back"><a href="/templates" class="link-arrow">← Templates</a></p>
 
-    <div class="tpl-detail-hero">
+    <div class="tpl-detail">
       <div class="tpl-detail-intro">
         <h1>Wie belde er vandaag</h1>
+        <p class="tpl-detail-summary tpl-detail-tagline">Elke avond wie er vandaag belde.</p>
         <p class="tpl-detail-summary">Elke avond een overzicht van de telefoongesprekken van vandaag.</p>
+        <div class="tpl-detail-cta">
+          <a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Laat Mowi dit bouwen</a>
+          <span class="lp-cta-micro">Vandaag gratis te proberen.</span>
+        </div>
       </div>
-      <div class="tpl-detail-visual"><div class="wf-canvas" data-wf-canvas data-wf-fit="fit" role="group" aria-label="Wie belde er vandaag">
+
+      <div class="tpl-detail-visual-wrap">
+        <div class="tpl-detail-visual"><div class="wf-canvas" data-wf-canvas data-wf-fit="center" role="group" aria-label="Wie belde er vandaag">
   <div class="wf-viewport" data-wf-viewport tabindex="0">
     <div class="wf-stage" data-wf-stage style="width:280px;height:536px">
       <svg class="wf-edges" width="280" height="536" aria-hidden="true"><defs><marker id="wftpl34-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--wf-edge)" /></marker></defs><path d="M140,128 C140,176 140,176 140,224" class="wf-edge-path" marker-end="url(#wftpl34-arrow)" /><path d="M140,312 C140,360 140,360 140,408" class="wf-edge-path" marker-end="url(#wftpl34-arrow)" /></svg>
@@ -131,58 +138,121 @@
     <button type="button" data-wf-zoom-in aria-label="Inzoomen" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M20 20l-4.35-4.35M10.5 8v5M8 10.5h5"/></svg></button>
   </div>
   <span class="wf-hint" data-wf-hint>Sleep om te verkennen — scroll om te zoomen</span>
-</div><div class="tpl-detail-actions"><a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Laat Mowi dit bouwen</a></div></div>
+</div></div>
+      </div>
+
+      <section class="tpl-detail-nodes">
+        <div class="tpl-section-head"><h2>Zo werkt het</h2></div>
+        <div class="tpl-node-grid">
+        <div class="tpl-node">
+          <span class="tpl-node-icon tpl-node-num" aria-hidden="true">1</span>
+          <strong>Elke dag</strong>
+          <span>Elke dag om 17:30.</span>
+        </div>
+        <div class="tpl-node">
+          <span class="tpl-node-icon tpl-node-num" aria-hidden="true">2</span>
+          <strong>Recente gesprekken ophalen</strong>
+          <span>Recente gesprekken ophalen (Aantal dagen terugkijken: 0)</span>
+        </div>
+        <div class="tpl-node">
+          <span class="tpl-node-icon tpl-node-num" aria-hidden="true">3</span>
+          <strong>Overzicht telefoongesprekken vandaag</strong>
+          <span>Hier is het overzicht van de gesprekken van vandaag.</span>
+        </div>
+      </div>
+      </section>
+
+      <section class="tpl-detail-needs">
+        <div class="tpl-section-head"><h2>Wat u nodig heeft</h2></div>
+        <ul class="tpl-needs">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 12.2l2.4 2.4 4.6-4.8"/></svg><span>Start: op een vast moment.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 12.2l2.4 2.4 4.6-4.8"/></svg><span>Voice agent</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 12.2l2.4 2.4 4.6-4.8"/></svg><span>Ook voor: Kapper / salon, Loodgieter / installatiebedrijf, Autogarage / APK, Restaurant / horeca, Bureau / adviseur / makelaar, Hotel / B&amp;B.</span></li>
+        </ul>
+      </section>
     </div>
 
-    <div class="tpl-detail-grid">
-      <section class="tpl-detail-section">
-        <h2>Zo werkt het</h2>
-        <ol class="tpl-detail-steps"><li><strong>Elke dag</strong><span>Elke dag om 17:30.</span></li><li><strong>Recente gesprekken ophalen</strong><span>Recente gesprekken ophalen (Aantal dagen terugkijken: 0)</span></li><li><strong>Overzicht telefoongesprekken vandaag</strong><span>Hier is het overzicht van de gesprekken van vandaag.</span></li></ol>
-      </section>
-      <section class="tpl-detail-section">
-        <h2>Wat u nodig heeft</h2>
-        
-        
-        <p>Ook voor: Kapper / salon, Loodgieter / installatiebedrijf, Autogarage / APK, Restaurant / horeca, Bureau / adviseur / makelaar, Hotel / B&amp;B.</p>
-        <div class="tpl-prompt-box">Wat de Builder krijgt: "Bouw de automatisering &quot;Wie belde er vandaag&quot; voor mij."</div>
-      </section>
-    </div>
-
-    <section class="tpl-section">
-    <div class="tpl-section-head"><h2>Vergelijkbaar</h2></div>
-    <div class="tpl-grid">
-      <a href="/templates/dagelijkse-afspraken" class="tpl-card" data-tpl-card data-tpl-kind="workflow" data-tpl-industries="kapper,schoonheidssalon,garage,zakelijke_dienstverlening,hotel,tattooshop" data-tpl-koppelingen="guestplan,google_agenda,calendly" data-tpl-trigger="schedule" data-tpl-status="live" data-tpl-search="dagelijks agenda-overzicht elke ochtend de afspraken van vandaag. elke ochtend een overzicht van de afspraken van vandaag. kapper / salon schoonheidssalon / wellness autogarage / apk bureau / adviseur / makelaar hotel / b&amp;b tattooshop / piercingstudio guestplan google agenda calendly">
-  <div class="tpl-picture tpl-picture-workflow">
-    <span class="tpl-badge">Dagelijks</span>
-    <div class="tpl-picture-row"><span class="tpl-logo"><img src="/assets/logos/integrations/guestplan.svg" alt="Guestplan" /></span><span class="tpl-logo"><img src="/assets/logos/integrations/google_agenda.svg" alt="Google Agenda" /></span><span class="tpl-logo tpl-logo-more" title="Calendly">+1</span><span class="tpl-glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-glyph="calendar"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span></div>
+    <section class="tpl-section tpl-detail-related">
+      <div class="tpl-section-head"><h2>Ook interessant</h2></div>
+      <div class="tpl-grid">
+        <a href="/templates/voice-agent-loodgieter" class="tpl-card" data-tpl-card data-tpl-kind="agent" data-tpl-industries="loodgieter" data-tpl-koppelingen="" data-tpl-trigger="" data-tpl-status="live" data-tpl-search="voice agent — loodgieter spoed of afspraak? de agent weet het verschil. neemt elke oproep aan, herkent een lekkage, storing of gaslucht en handelt dat als spoed af — voor een routineverzoek plant de agent zelf onderhoud of een keuring in. loodgieter / installatiebedrijf">
+  <div class="tpl-picture tpl-picture-agent">
+    <div class="tpl-picture-row"><span class="tpl-mascot"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false" data-shape="ghost">
+    <g transform="translate(-0.73,0.57) scale(1.045)">
+        <g fill="var(--agent-fill, #B8B4AE)">
+                                <path d="M15.86 4 Q12.54 4.27 11.83 4.51 Q11.12 4.75 9.93 5.46 Q8.75 6.16 7.69 7.24 Q6.63 8.32 5.89 9.74 Q5.15 11.16 4.69 12.58 Q4.23 14 4.12 15.43 Q4 16.85 4.1 18.98 Q4.2 21.11 4.4 21.59 Q4.6 22.06 4.64 22.54 Q4.67 23.01 4.95 23.48 Q5.23 23.95 5.81 24.54 Q6.38 25.13 6.86 25.24 Q7.33 25.35 8.28 25.26 Q9.22 25.17 9.7 24.93 Q10.17 24.68 11.12 23.81 Q12.07 22.95 13.25 24.06 Q14.44 25.17 15.62 25.17 Q16.8 25.16 17.28 24.9 Q17.75 24.64 18.7 23.79 Q19.65 22.94 20.84 24.03 Q22.02 25.11 22.97 25.37 Q23.91 25.63 24.86 25.41 Q25.81 25.19 26.63 24.34 Q27.46 23.48 27.72 22.3 Q27.97 21.11 27.97 17.56 Q27.96 14 27.52 12.34 Q27.07 10.69 26.31 9.27 Q25.55 7.84 24.97 7.31 Q24.39 6.77 23.21 5.98 Q22.02 5.18 20.6 4.71 Q19.17 4.24 17.75 4.13 Q16.33 4.01 15.86 4 Z"/>
+                            </g>
+        <g fill="var(--agent-eye, #121110)">
+                            <circle cx="12.5" cy="15" r="1.7"/>
+                            <circle cx="19.5" cy="15" r="1.7"/>
+                    </g>
+    </g>
+</svg></span><span class="tpl-glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-glyph="phone"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span></div>
   </div>
   <div class="tpl-card-body">
-    <h3 class="tpl-card-title">Dagelijks agenda-overzicht</h3>
-    <p class="tpl-card-line">Elke ochtend de afspraken van vandaag.</p>
+    <h3 class="tpl-card-title">Voice agent — Loodgieter</h3>
+    <p class="tpl-card-line">Spoed of afspraak? De agent weet het verschil.</p>
   </div>
 </a>
-      <a href="/templates/weekoverzicht-agenda" class="tpl-card" data-tpl-card data-tpl-kind="workflow" data-tpl-industries="kapper,zakelijke_dienstverlening,hotel,tattooshop" data-tpl-koppelingen="guestplan,google_agenda,calendly" data-tpl-trigger="schedule" data-tpl-status="live" data-tpl-search="wekelijks agenda-overzicht elke maandag de hele week op een rij. elke maandagochtend een overzicht van de afspraken van de hele week. kapper / salon bureau / adviseur / makelaar hotel / b&amp;b tattooshop / piercingstudio guestplan google agenda calendly">
-  <div class="tpl-picture tpl-picture-workflow">
-    <span class="tpl-badge">Wekelijks</span>
-    <div class="tpl-picture-row"><span class="tpl-logo"><img src="/assets/logos/integrations/guestplan.svg" alt="Guestplan" /></span><span class="tpl-logo"><img src="/assets/logos/integrations/google_agenda.svg" alt="Google Agenda" /></span><span class="tpl-logo tpl-logo-more" title="Calendly">+1</span><span class="tpl-glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-glyph="calendar"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span></div>
+        <a href="/templates/voice-agent-kapper" class="tpl-card" data-tpl-card data-tpl-kind="agent" data-tpl-industries="kapper" data-tpl-koppelingen="" data-tpl-trigger="" data-tpl-status="live" data-tpl-search="voice agent — kapper plant knipbeurten in zonder dat u de telefoon hoeft op te nemen. vraagt welke behandeling het is en voor wie, checkt de beschikbaarheid en stelt zelf een tijd voor — of beantwoordt een vraag uit de kennisbank. kapper / salon">
+  <div class="tpl-picture tpl-picture-agent">
+    <div class="tpl-picture-row"><span class="tpl-mascot"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false" data-shape="ghost">
+    <g transform="translate(-0.73,0.57) scale(1.045)">
+        <g fill="var(--agent-fill, #B8B4AE)">
+                                <path d="M15.86 4 Q12.54 4.27 11.83 4.51 Q11.12 4.75 9.93 5.46 Q8.75 6.16 7.69 7.24 Q6.63 8.32 5.89 9.74 Q5.15 11.16 4.69 12.58 Q4.23 14 4.12 15.43 Q4 16.85 4.1 18.98 Q4.2 21.11 4.4 21.59 Q4.6 22.06 4.64 22.54 Q4.67 23.01 4.95 23.48 Q5.23 23.95 5.81 24.54 Q6.38 25.13 6.86 25.24 Q7.33 25.35 8.28 25.26 Q9.22 25.17 9.7 24.93 Q10.17 24.68 11.12 23.81 Q12.07 22.95 13.25 24.06 Q14.44 25.17 15.62 25.17 Q16.8 25.16 17.28 24.9 Q17.75 24.64 18.7 23.79 Q19.65 22.94 20.84 24.03 Q22.02 25.11 22.97 25.37 Q23.91 25.63 24.86 25.41 Q25.81 25.19 26.63 24.34 Q27.46 23.48 27.72 22.3 Q27.97 21.11 27.97 17.56 Q27.96 14 27.52 12.34 Q27.07 10.69 26.31 9.27 Q25.55 7.84 24.97 7.31 Q24.39 6.77 23.21 5.98 Q22.02 5.18 20.6 4.71 Q19.17 4.24 17.75 4.13 Q16.33 4.01 15.86 4 Z"/>
+                            </g>
+        <g fill="var(--agent-eye, #121110)">
+                            <circle cx="12.5" cy="15" r="1.7"/>
+                            <circle cx="19.5" cy="15" r="1.7"/>
+                    </g>
+    </g>
+</svg></span><span class="tpl-glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-glyph="phone"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span></div>
   </div>
   <div class="tpl-card-body">
-    <h3 class="tpl-card-title">Wekelijks agenda-overzicht</h3>
-    <p class="tpl-card-line">Elke maandag de hele week op een rij.</p>
+    <h3 class="tpl-card-title">Voice agent — Kapper</h3>
+    <p class="tpl-card-line">Plant knipbeurten in zonder dat u de telefoon hoeft op te nemen.</p>
   </div>
 </a>
-      <a href="/templates/dagelijkse-nieuwe-bestellingen" class="tpl-card" data-tpl-card data-tpl-kind="workflow" data-tpl-industries="loodgieter,webshop,groothandel" data-tpl-koppelingen="woocommerce,shopify,lightspeed,shopware,magento,bol,prestashop" data-tpl-trigger="schedule" data-tpl-status="live" data-tpl-search="dagelijks besteloverzicht elke ochtend de bestellingen van gisteren. elke ochtend een overzicht van de bestellingen van gisteren. loodgieter / installatiebedrijf webshop / e-commerce groothandel woocommerce shopify lightspeed ecom shopware magento open source bol.com prestashop">
-  <div class="tpl-picture tpl-picture-workflow">
-    <span class="tpl-badge">Dagelijks</span>
-    <div class="tpl-picture-row"><span class="tpl-logo"><img src="/assets/logos/integrations/woocommerce.svg" alt="WooCommerce" /></span><span class="tpl-logo"><img src="/assets/logos/integrations/shopify.svg" alt="Shopify" /></span><span class="tpl-logo tpl-logo-more" title="Lightspeed eCom, Shopware, Magento Open Source, bol.com, PrestaShop">+5</span><span class="tpl-glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-glyph="box"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/><path d="m7.5 4.27 9 5.15"/></svg></span></div>
+        <a href="/templates/voice-agent-garage" class="tpl-card" data-tpl-card data-tpl-kind="agent" data-tpl-industries="garage" data-tpl-koppelingen="" data-tpl-trigger="" data-tpl-status="live" data-tpl-search="voice agent — garage checkt eerst of de auto nog veilig rijdt, dan pas de afspraak. vraagt om welke dienst het gaat (apk, onderhoud, reparatie) en of de auto nog rijklaar en veilig is — is dat niet zo, dan verbindt de agent door in plaats van een afspraak te plannen. autogarage / apk">
+  <div class="tpl-picture tpl-picture-agent">
+    <div class="tpl-picture-row"><span class="tpl-mascot"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false" data-shape="ghost">
+    <g transform="translate(-0.73,0.57) scale(1.045)">
+        <g fill="var(--agent-fill, #B8B4AE)">
+                                <path d="M15.86 4 Q12.54 4.27 11.83 4.51 Q11.12 4.75 9.93 5.46 Q8.75 6.16 7.69 7.24 Q6.63 8.32 5.89 9.74 Q5.15 11.16 4.69 12.58 Q4.23 14 4.12 15.43 Q4 16.85 4.1 18.98 Q4.2 21.11 4.4 21.59 Q4.6 22.06 4.64 22.54 Q4.67 23.01 4.95 23.48 Q5.23 23.95 5.81 24.54 Q6.38 25.13 6.86 25.24 Q7.33 25.35 8.28 25.26 Q9.22 25.17 9.7 24.93 Q10.17 24.68 11.12 23.81 Q12.07 22.95 13.25 24.06 Q14.44 25.17 15.62 25.17 Q16.8 25.16 17.28 24.9 Q17.75 24.64 18.7 23.79 Q19.65 22.94 20.84 24.03 Q22.02 25.11 22.97 25.37 Q23.91 25.63 24.86 25.41 Q25.81 25.19 26.63 24.34 Q27.46 23.48 27.72 22.3 Q27.97 21.11 27.97 17.56 Q27.96 14 27.52 12.34 Q27.07 10.69 26.31 9.27 Q25.55 7.84 24.97 7.31 Q24.39 6.77 23.21 5.98 Q22.02 5.18 20.6 4.71 Q19.17 4.24 17.75 4.13 Q16.33 4.01 15.86 4 Z"/>
+                            </g>
+        <g fill="var(--agent-eye, #121110)">
+                            <circle cx="12.5" cy="15" r="1.7"/>
+                            <circle cx="19.5" cy="15" r="1.7"/>
+                    </g>
+    </g>
+</svg></span><span class="tpl-glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-glyph="phone"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span></div>
   </div>
   <div class="tpl-card-body">
-    <h3 class="tpl-card-title">Dagelijks besteloverzicht</h3>
-    <p class="tpl-card-line">Elke ochtend de bestellingen van gisteren.</p>
+    <h3 class="tpl-card-title">Voice agent — Garage</h3>
+    <p class="tpl-card-line">Checkt eerst of de auto nog veilig rijdt, dan pas de afspraak.</p>
   </div>
 </a>
-    </div>
-  </section>
+        <a href="/templates/voice-agent-horeca" class="tpl-card" data-tpl-card data-tpl-kind="agent" data-tpl-industries="horeca" data-tpl-koppelingen="" data-tpl-trigger="" data-tpl-status="live" data-tpl-search="voice agent — restaurant neemt reserveringen aan, inclusief dieetwensen. vraagt het aantal personen, datum en tijd en eventuele dieetwensen, en stelt zelf een tijd voor — of beantwoordt een vraag over het menu. restaurant / horeca">
+  <div class="tpl-picture tpl-picture-agent">
+    <div class="tpl-picture-row"><span class="tpl-mascot"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false" data-shape="ghost">
+    <g transform="translate(-0.73,0.57) scale(1.045)">
+        <g fill="var(--agent-fill, #B8B4AE)">
+                                <path d="M15.86 4 Q12.54 4.27 11.83 4.51 Q11.12 4.75 9.93 5.46 Q8.75 6.16 7.69 7.24 Q6.63 8.32 5.89 9.74 Q5.15 11.16 4.69 12.58 Q4.23 14 4.12 15.43 Q4 16.85 4.1 18.98 Q4.2 21.11 4.4 21.59 Q4.6 22.06 4.64 22.54 Q4.67 23.01 4.95 23.48 Q5.23 23.95 5.81 24.54 Q6.38 25.13 6.86 25.24 Q7.33 25.35 8.28 25.26 Q9.22 25.17 9.7 24.93 Q10.17 24.68 11.12 23.81 Q12.07 22.95 13.25 24.06 Q14.44 25.17 15.62 25.17 Q16.8 25.16 17.28 24.9 Q17.75 24.64 18.7 23.79 Q19.65 22.94 20.84 24.03 Q22.02 25.11 22.97 25.37 Q23.91 25.63 24.86 25.41 Q25.81 25.19 26.63 24.34 Q27.46 23.48 27.72 22.3 Q27.97 21.11 27.97 17.56 Q27.96 14 27.52 12.34 Q27.07 10.69 26.31 9.27 Q25.55 7.84 24.97 7.31 Q24.39 6.77 23.21 5.98 Q22.02 5.18 20.6 4.71 Q19.17 4.24 17.75 4.13 Q16.33 4.01 15.86 4 Z"/>
+                            </g>
+        <g fill="var(--agent-eye, #121110)">
+                            <circle cx="12.5" cy="15" r="1.7"/>
+                            <circle cx="19.5" cy="15" r="1.7"/>
+                    </g>
+    </g>
+</svg></span><span class="tpl-glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-glyph="phone"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span></div>
+  </div>
+  <div class="tpl-card-body">
+    <h3 class="tpl-card-title">Voice agent — Restaurant</h3>
+    <p class="tpl-card-line">Neemt reserveringen aan, inclusief dieetwensen.</p>
+  </div>
+</a>
+      </div>
+    </section>
   </div>
 </section>
 </main>
@@ -252,7 +322,7 @@
     </div>
   </footer>
   <script src="/js/main.js?v=20260905-2"></script>
-  <script src="/js/workflow-canvas.js?v=20260904-6"></script>
+  <script src="/js/workflow-canvas.js?v=20260906-1"></script>
 
 </body>
 </html>

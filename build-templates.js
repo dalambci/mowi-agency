@@ -17,10 +17,11 @@
    Update flow: dashboard session runs `php artisan mowi:export-templates`,
    copies the output to content/templates/templates.json, then this.
 
-   Agent template pages (2026-09-06, later): kind "agent" renders through
-   renderAgentDetailPage() — a per-branche landing page built from the
-   agent pages' own components (see that function's comment); workflows
-   and dashboards keep renderDetailPage().
+   Detail pages (2026-09-06, later): ONE renderDetailPage() for all three
+   kinds, mirroring the dashboard's flows/template-show.blade.php after its
+   restructure (see that function's comment). An earlier per-branche
+   landing-page variant for agents lived here for a few hours — git
+   history has it.
 
    Round 2 (2026-09-06): the index is a compact page — left-aligned header
    with the search beside it, ONE toolbar (segmented type control + three
@@ -64,11 +65,11 @@ const CSS_VERSION = readVersion(/css\/style\.css\?v=([0-9-]+)/, "index.html");
 // file is ever edited (it is deliberately NOT touched by this pass -- see
 // this file's header comment).
 const WF_CSS_VERSION = readVersion(/workflow-canvas\.css\?v=([0-9-]+)/, "index.html");
-const WF_JS_VERSION = "20260904-6";
+const WF_JS_VERSION = "20260906-1";
 // This file's OWN two new assets get one shared version, bumped whenever
 // either changes — same "one value per file-pair, bump together" rule
 // the rest of the site's cache-busting convention already follows.
-const TPL_ASSET_VERSION = "20260906-2";
+const TPL_ASSET_VERSION = "20260906-3";
 
 // ---------------------------------------------------------------------------
 // Escaping — every field below can eventually carry CLIENT-authored text
@@ -311,7 +312,10 @@ function renderEdgeLabels(graph) {
 function renderCanvasInteractive(template) {
   const graph = template.graph;
   const uid = nextUid();
-  return `<div class="wf-canvas" data-wf-canvas data-wf-fit="fit" role="group" aria-label="${esc(template.label)}">
+  // Framing mirrors the dashboard's x-workflow-canvas size rule: a narrow
+  // single-column graph (under 400px) opens at 1:1 and pans, a wide one is
+  // fitted whole (js/workflow-canvas.js reads data-wf-fit since 2026-09-06).
+  return `<div class="wf-canvas" data-wf-canvas data-wf-fit="${graph.width < 400 ? "center" : "fit"}" role="group" aria-label="${esc(template.label)}">
   <div class="wf-viewport" data-wf-viewport tabindex="0">
     <div class="wf-stage" data-wf-stage style="width:${graph.width}px;height:${graph.height}px">
       ${renderEdgesSvg(uid, graph)}
@@ -541,81 +545,152 @@ ${footerHtml(`  <script src="/js/templates.js?v=${TPL_ASSET_VERSION}"></script>\
 }
 
 // ---------------------------------------------------------------------------
-// Agent template page (2026-09-06, Sal: "completely re-do the design of the
-// agent template page, so voice agent kapper for example"). A per-branche
-// LANDING page for one agent, built from the components /call-agent and
-// /e-mail-agent already use, so it reads as one family with them rather
-// than as a generic record view:
-//   hero (.split): identity row (the card's own mascot + channel glyph,
-//     "Voice agent · Kapper / salon"), the TAGLINE as the headline — the
-//     promise, like the agent pages' own heroes; the label stays in
-//     <title> — the summary, one CTA; the conversation flow (interactive
-//     canvas) beside it, copy left, visual right, one column below 64rem;
-//   "Wat de agent doet": the flow's own nodes as .lp-card feature cards,
-//     with the same icons the canvas draws — never a second, hand-typed
-//     list of what the agent does;
-//   the agent page's own three onboarding steps + trust note, READ from
-//     /call-agent or /e-mail-agent at build time (readAgentSteps below) so
-//     that copy stays single-sourced and this page can never say
-//     something the agent's own page doesn't;
-//   "Ook interessant": the same branche's other agent, then this agent for
-//     other branches (siblingsFor in main()).
-// Workflows and dashboards keep renderDetailPage(); only kind "agent"
-// routes here.
+// Detail page — ONE renderer for all three kinds, mirroring the dashboard's
+// flows/template-show.blade.php after its restructure (2026-09-06, Sal:
+// "apply the same entire styling on the website mowi.agency templates page
+// as well ... use the dashboard template page as example thats how we want
+// to have it"). Same grid, same four named areas (intro, visual, nodes,
+// needs), laid out by css/templates.css exactly like the dashboard's
+// workflow-canvas.css: stacked below 64rem; from 64rem the intro and "Wat u
+// nodig heeft" share the left column, top-aligned with the graph on the
+// right, and "Wat de agent doet" / "Zo werkt het" runs full width
+// underneath, three cards per row. The earlier per-branche landing-page
+// variant of the agent pages (the tagline as a display headline, the
+// onboarding steps read out of /call-agent) went with this — git history
+// has it. Website-only differences, deliberate: the CTA is signup (no
+// Builder here), so the dashboard's "what the Builder receives" box is not
+// mirrored, and a planned template shows the card's own "Binnenkort" chip.
 // ---------------------------------------------------------------------------
-const AGENT_LANDING_PAGE = { telefoon_agent: "call-agent.html", email_triage: "e-mail-agent.html" };
 const AGENT_KIND_LABEL = { telefoon_agent: "Voice agent", email_triage: "Inbox agent" };
+const CHECK_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 12.2l2.4 2.4 4.6-4.8"/></svg>';
+const KIND_ORDER = { agent: 0, workflow: 1, dashboard: 2 };
 
-/** The landing page's "Zo werkt het" heading, its three steps and (voice only) the trust note — throws if the page's structure drifts. */
-function readAgentSteps(agentType) {
-  const file = AGENT_LANDING_PAGE[agentType];
-  if (!file) throw new Error(`build-templates: no landing page known for agent type '${agentType}'`);
-  const html = fs.readFileSync(path.join(ROOT, file), "utf8");
-  // The steps are nested divs, so a non-greedy "up to the next </div>"
-  // would stop at the first step's number circle; take the whole section
-  // the block sits in instead, and the heading just before it.
-  const start = html.indexOf('<div class="lp-steps">');
-  const end = start === -1 ? -1 : html.indexOf("</section>", start);
-  if (start === -1 || end === -1) throw new Error(`build-templates: could not find the lp-steps block in ${file}`);
-  const section = html.slice(start, end);
-  const headings = Array.from(html.slice(0, start).matchAll(/<h2 class="lp-section-heading">([^<]*)<\/h2>/g));
-  if (headings.length === 0) throw new Error(`build-templates: no lp-section-heading before the lp-steps block in ${file}`);
-  const steps = Array.from(section.matchAll(/<h3>([\s\S]*?)<\/h3>\s*<p>([\s\S]*?)<\/p>/g)).map((m) => [m[1].trim(), m[2].trim()]);
-  if (steps.length !== 3) throw new Error(`build-templates: expected 3 steps in ${file}, found ${steps.length}`);
-  const trust = section.match(/<div class="lp-trust-note">([\s\S]*?)<\/div>/);
-  return { heading: headings[headings.length - 1][1].trim(), steps, trustNote: trust ? trust[1].trim().replace(/\s+/g, " ") : null };
+/** The "Ook interessant" row (the dashboard's FlowTemplateController::relatedTo(), same rule): only templates for the SAME branche (Sal, 2026-09-06: "its not relevant to suggest barber templates to a hotel"), agents first, then workflows, then dashboards, four at most. A template without a branche gets the other branche-less ones. */
+function relatedFor(template, templates) {
+  const pool = templates.filter((o) => o.key !== template.key && (template.industries.length === 0 ? o.industries.length === 0 : o.industries.some((i) => template.industries.includes(i))));
+  return pool.sort((a, b) => (KIND_ORDER[a.kind] ?? 9) - (KIND_ORDER[b.kind] ?? 9)).slice(0, 4);
 }
 
-function renderAgentDetailPage(template, siblings, art) {
-  assertNoEmDash(template.tagline, `template ${template.key} tagline`);
+// .container and .section are never combined on one element anywhere else
+// on the site (see e.g. koppelingen.html: <section class="section"> wrapping
+// its own <div class="container">) -- .section's own `padding: 5rem 0`
+// shorthand zeroes whatever horizontal padding .container just set on the
+// SAME element, and .container relies on padding (not margin) for its own
+// mobile inset. Combining them on one div (round 1, 2026-09-05) is exactly
+// the landmine CLAUDE.md already documents for .hero, just not caught
+// then: every one of the 51 detail pages had ZERO side padding on mobile
+// until this was measured and fixed 2026-09-06. Keep them on separate
+// elements below -- do not recombine them onto one div.
+function renderDetailPage(template, related, art) {
   assertNoEmDash(template.summary, `template ${template.key} summary`);
-  const kind = AGENT_KIND_LABEL[template.agent_type] || "Agent";
-  // The tagline is a sentence on the card; as a headline it drops its
-  // trailing period (site rule: headings carry no trailing punctuation).
-  const headline = (template.tagline || template.label).replace(/\.\s*$/, "");
-  const identity = kind + (template.industry_labels.length > 0 ? " · " + template.industry_labels.join(", ") : "");
-  const nodes = (template.graph ? template.graph.nodes : []).filter((n) => n.kind !== "start" && n.kind !== "end");
-  const onboarding = readAgentSteps(template.agent_type);
+  if (template.tagline) assertNoEmDash(template.tagline, `template ${template.key} tagline`);
 
-  const cards = nodes
-    .map(
-      (n) => `<div class="lp-card">
-          <span class="lp-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">${nodeIcon(n.kind)}</svg></span>
-          <h3>${esc(n.title)}</h3>
-          <p>${esc(n.text)}</p>
+  const isAgent = template.kind === "agent";
+  const planned = template.status !== "live";
+  const kindLabel = isAgent ? AGENT_KIND_LABEL[template.agent_type] || "Agent" : KIND_LABELS[template.kind];
+  const nodes = isAgent && template.graph ? template.graph.nodes.filter((n) => n.kind !== "start" && n.kind !== "end") : [];
+
+  // The card's own picture as the page's identity: mascot + channel glyph +
+  // "Voice agent · Kapper / salon". Agents only, like the dashboard.
+  const identityHtml = isAgent
+    ? `<div class="tpl-agent-identity">
+          <span class="tpl-mascot">${art.mascots.ghost}</span>
+          <span class="tpl-glyph">${glyphSvg(art, template.picture.glyph)}</span>
+          <span class="tpl-agent-kind">${esc(kindLabel + (template.industry_labels.length > 0 ? " · " + template.industry_labels.join(", ") : ""))}</span>
+        </div>
+        `
+    : "";
+
+  // The one CTA, under the copy. A planned template gets the card's own
+  // disabled "Binnenkort" chip with the reason under it (the dashboard
+  // shows its resolver's reason in the same spot).
+  const ctaHtml = planned
+    ? `<div class="tpl-detail-cta"><span class="tpl-chip tpl-chip-off tpl-chip-lg">Binnenkort</span></div>${
+        template.blocked_reason ? `\n        <p class="hint tpl-detail-cta-reason">${esc(template.blocked_reason)}</p>` : ""
+      }`
+    : `<div class="tpl-detail-cta">
+          <a href="${SIGNUP_URL}" class="btn-primary" data-event="Signup Click">Laat Mowi dit bouwen</a>
+          <span class="lp-cta-micro">Vandaag gratis te proberen.</span>
+        </div>`;
+
+  // The picture: the interactive flow, a dashboard's tile mock, or — for a
+  // planned template, which has neither — a line saying so. The WHY sits
+  // under the chip above, not here, or the same sentence shows twice.
+  const visual = template.graph
+    ? `<div class="tpl-detail-visual">${renderCanvasInteractive(template)}</div>`
+    : template.tiles
+    ? `<div class="tpl-detail-visual"><div class="tpl-detail-visual-inner">${renderDashMock(template.tiles)}</div></div>`
+    : `<div class="tpl-detail-visual tpl-detail-visual-empty"><p class="hint">Voorbeeld volgt zodra dit template beschikbaar is.</p></div>`;
+
+  // "Wat de agent doet": the flow's own nodes with the canvas's icons —
+  // never a second, hand-typed list. "Zo werkt het": a workflow's or
+  // dashboard's steps as the same cards, numbered.
+  const nodeCards =
+    nodes.length > 0
+      ? nodes
+          .map(
+            (n) => `<div class="tpl-node">
+          <span class="tpl-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">${nodeIcon(n.kind)}</svg></span>
+          <strong>${esc(n.title)}</strong>
+          <span>${esc(n.text)}</span>
         </div>`
-    )
-    .join("\n        ");
+          )
+          .join("\n        ")
+      : template.steps.length > 0
+      ? template.steps
+          .map(
+            (st, i) => `<div class="tpl-node">
+          <span class="tpl-node-icon tpl-node-num" aria-hidden="true">${i + 1}</span>
+          <strong>${esc(st.title)}</strong>
+          <span>${esc(st.text)}</span>
+        </div>`
+          )
+          .join("\n        ")
+      : "";
+  // steps is only ever empty for a planned template, whose reason already
+  // sits under its chip — say only that there is nothing to list yet.
+  const nodesHtml = nodeCards ? `<div class="tpl-node-grid">\n        ${nodeCards}\n      </div>` : `<p class="hint">Nog geen stappen beschikbaar.</p>`;
 
-  const stepsHtml = onboarding.steps
-    .map(
-      ([title, text], i) => `<div class="lp-step">
-            <div class="lp-step-circle" aria-hidden="true">${i + 1}</div>
-            <h3>${title}</h3>
-            <p>${text}</p>
-          </div>`
-    )
-    .join("\n          ");
+  // "Wat u nodig heeft" as the dashboard's checklist. A planned template
+  // with no real trigger configured yet has no operation_label — guard on
+  // that, not on the trigger object's mere presence, or it renders a bare
+  // "Start: .". An agent page already names its branche in the identity
+  // row, so "Ook voor" is for workflows and dashboards only.
+  const needs = [];
+  const trigger = template.trigger;
+  if (trigger && (trigger.kind === "schedule" || trigger.operation_label)) {
+    needs.push(trigger.kind === "schedule" ? "Start: op een vast moment." : `Start: ${esc(trigger.operation_label)}${trigger.filter_text ? ", " + esc(trigger.filter_text) : ""}.`);
+  }
+  if (template.picture.platforms.length > 0) {
+    needs.push(
+      `Werkt met een van deze koppelingen:<span class="tpl-logo-list">${template.picture.platforms.map((pf) => `<span title="${esc(pf.name)}">${logoTile(pf, false)}</span>`).join("")}</span>`
+    );
+  }
+  if (template.needs.koppeling_hint) needs.push(esc(template.needs.koppeling_hint));
+  (template.needs.agents || []).forEach((a) => needs.push(esc(AGENT_KIND_LABEL[a] || a)));
+  if (isAgent) {
+    needs.push(template.agent_type === "telefoon_agent" ? "Uw website-adres. Daarmee wordt de Voice agent voor het eerst ingesteld." : "Een gekoppelde mailbox. Dat regelt u in stap 1 van de setup, direct na het aanmaken.");
+  }
+  if (!isAgent && template.industry_labels.length > 0) needs.push(`Ook voor: ${esc(template.industry_labels.join(", "))}.`);
+  const needsHtml =
+    needs.length > 0
+      ? `<section class="tpl-detail-needs">
+        <div class="tpl-section-head"><h2>Wat u nodig heeft</h2></div>
+        <ul class="tpl-needs">
+          ${needs.map((n) => `<li>${CHECK_SVG}<span>${n}</span></li>`).join("\n          ")}
+        </ul>
+      </section>`
+      : "";
+
+  const relatedHtml =
+    related.length > 0
+      ? `<section class="tpl-section tpl-detail-related">
+      <div class="tpl-section-head"><h2>Ook interessant</h2></div>
+      <div class="tpl-grid">
+        ${related.map((t) => renderCard(t, art)).join("\n        ")}
+      </div>
+    </section>`
+      : "";
 
   const breadcrumbJsonLd = JSON.stringify({
     "@context": "https://schema.org",
@@ -655,185 +730,25 @@ ${headerHtml("/templates")}
 <main>
 <section class="section">
   <div class="container">
-    <p><a href="/templates" class="link-arrow">← Templates</a></p>
-    <div class="split tpl-agent-hero">
-      <div class="split-copy tpl-agent-copy">
-        <div class="tpl-agent-identity">
-          <span class="tpl-mascot">${art.mascots.ghost}</span>
-          <span class="tpl-glyph">${glyphSvg(art, template.picture.glyph)}</span>
-          <span class="tpl-agent-kind">${esc(identity)}</span>
-        </div>
-        <h1 class="tpl-agent-title">${esc(headline)}</h1>
-        <p class="tpl-agent-sub">${esc(template.summary)}</p>
-        <div class="lp-cta-block tpl-agent-cta">
-          <a href="${SIGNUP_URL}" class="btn-primary" data-event="Signup Click">Laat Mowi dit bouwen</a>
-          <span class="lp-cta-micro">Vandaag gratis te proberen.</span>
-        </div>
-      </div>
-      <div class="split-visual tpl-detail-visual">${template.graph ? renderCanvasInteractive(template) : ""}</div>
-    </div>
-  </div>
-</section>
+    <p class="tpl-detail-back"><a href="/templates" class="link-arrow">← Templates</a></p>
 
-<section class="section">
-  <div class="container">
-    <div class="section-head-row section-head-row-center">
-      <h2 class="lp-section-heading">Wat de agent doet</h2>
-    </div>
-    <div class="lp-card-grid tpl-agent-cards">
-        ${cards}
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <div class="section-head-row section-head-row-center">
-      <h2 class="lp-section-heading">${onboarding.heading}</h2>
-    </div>
-    <div class="lp-steps">
-          ${stepsHtml}
-    </div>
-    ${onboarding.trustNote ? `<div class="lp-trust-note">${onboarding.trustNote}</div>` : ""}
-  </div>
-</section>
-
-${
-  siblings.length > 0
-    ? `<section class="section tpl-agent-more">
-  <div class="container">
-    <section class="tpl-section">
-      <div class="tpl-section-head"><h2>Ook interessant</h2></div>
-      <div class="tpl-grid">
-        ${siblings.map((t) => renderCard(t, art)).join("\n        ")}
-      </div>
-    </section>
-  </div>
-</section>
-`
-    : ""
-}</main>
-${footerHtml(`  <script src="/js/workflow-canvas.js?v=${WF_JS_VERSION}"></script>\n`)}
-</body>
-</html>
-`;
-}
-
-/** An agent's related row: the same branche's other agent first, then this same agent for other branches. */
-function siblingsFor(template, templates) {
-  const agents = templates.filter((t) => t.kind === "agent" && t.key !== template.key);
-  const counterpart = agents.find((t) => t.agent_type !== template.agent_type && t.industries.some((i) => template.industries.includes(i)));
-  const others = agents.filter((t) => t.agent_type === template.agent_type).slice(0, 3);
-  return [counterpart, ...others].filter(Boolean);
-}
-
-// .container and .section are never combined on one element anywhere else
-// on the site (see e.g. koppelingen.html: <section class="section"> wrapping
-// its own <div class="container">) -- .section's own `padding: 5rem 0`
-// shorthand zeroes whatever horizontal padding .container just set on the
-// SAME element, and .container relies on padding (not margin) for its own
-// mobile inset. Combining them on one div (round 1, 2026-09-05) is exactly
-// the landmine CLAUDE.md already documents for .hero, just not caught
-// then: every one of the 51 detail pages had ZERO side padding on mobile
-// until this was measured and fixed 2026-09-06. Keep them on separate
-// elements below -- do not recombine them onto one div.
-function renderDetailPage(template, related, art) {
-  assertNoEmDash(template.summary, `template ${template.key} summary`);
-
-  const visual = template.graph
-    ? `<div class="tpl-detail-visual">${renderCanvasInteractive(template)}<div class="tpl-detail-actions"><a href="${SIGNUP_URL}" class="btn-primary" data-event="Signup Click">Laat Mowi dit bouwen</a></div></div>`
-    : template.tiles
-    ? `<div class="tpl-detail-visual"><div class="tpl-detail-visual-inner" style="position:relative;height:22rem">${renderDashMock(template.tiles)}</div><div class="tpl-detail-actions"><a href="${SIGNUP_URL}" class="btn-primary" data-event="Signup Click">Laat Mowi dit bouwen</a></div></div>`
-    : `<div class="tpl-detail-visual"><p class="hint" style="padding:1.5rem">${esc(template.blocked_reason || "Nog niet beschikbaar.")}</p></div>`;
-
-  // template.steps is only ever empty for a planned template, whose
-  // blocked_reason is already shown in the hero card right beside the
-  // visual (see `visual` above) -- repeating it here put the exact same
-  // sentence twice on one screen.
-  const stepsHtml =
-    template.steps.length > 0
-      ? `<ol class="tpl-detail-steps">${template.steps
-          .map((s) => `<li><strong>${esc(s.title)}</strong><span>${esc(s.text)}</span></li>`)
-          .join("")}</ol>`
-      : `<p class="hint">Nog geen stappen beschikbaar.</p>`;
-
-  const platformsHtml =
-    template.picture.platforms.length > 0
-      ? `<p>Werkt met een van deze koppelingen:</p><div class="tpl-logo-list">${template.picture.platforms
-          .map((p) => `<span title="${esc(p.name)}">${logoTile(p, false)}</span>`)
-          .join("")}</div>`
-      : "";
-
-  const relatedHtml =
-    related.length > 0
-      ? `<section class="tpl-section">
-    <div class="tpl-section-head"><h2>Vergelijkbaar</h2></div>
-    <div class="tpl-grid">
-      ${related.map((t) => renderCard(t, art)).join("\n      ")}
-    </div>
-  </section>`
-      : "";
-
-  const breadcrumbJsonLd = JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Templates", item: `${SITE_URL}/templates` },
-      { "@type": "ListItem", position: 2, name: template.label, item: `${SITE_URL}/templates/${template.slug}` },
-    ],
-  });
-
-  return `<!-- Generated by build-templates.js from content/templates/templates.json — do not hand-edit. -->
-<!DOCTYPE html>
-<html lang="nl">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>${esc(template.label)} — Templates — Mowi</title>
-  <meta name="description" content="${esc(template.summary)}" />
-  <link rel="canonical" href="${SITE_URL}/templates/${template.slug}" />
-  <meta property="og:title" content="${esc(template.label)} — Mowi" />
-  <meta property="og:description" content="${esc(template.summary)}" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&family=Inter+Tight:wght@600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/style.css?v=${CSS_VERSION}" />
-  <link rel="stylesheet" href="/css/workflow-canvas.css?v=${WF_CSS_VERSION}" />
-  <link rel="stylesheet" href="/css/templates.css?v=${TPL_ASSET_VERSION}" />
-  <link rel="icon" href="/assets/icon-192.png?v=20260904-3" />
-  <link rel="shortcut icon" href="/assets/icon-192.png?v=20260904-3" />
-  <link rel="apple-touch-icon" href="/assets/apple-icon-180.png?v=20260904-3" />
-  <link rel="apple-touch-icon-precomposed" href="/assets/apple-icon-180.png?v=20260904-3" />
-  <script type="application/ld+json">${breadcrumbJsonLd}</script>
-  <script defer data-domain="mowi.agency" src="https://plausible.io/js/script.js"></script>
-</head>
-<body>
-${headerHtml("/templates")}
-<main>
-<section class="section">
-  <div class="container">
-    <p><a href="/templates" class="link-arrow">← Templates</a></p>
-
-    <div class="tpl-detail-hero">
+    <div class="tpl-detail">
       <div class="tpl-detail-intro">
-        <h1>${esc(template.label)}</h1>
-        <p class="tpl-detail-summary">${esc(template.summary)}</p>
+        ${identityHtml}<h1>${esc(template.label)}</h1>
+        ${template.tagline ? `<p class="tpl-detail-summary tpl-detail-tagline">${esc(template.tagline)}</p>\n        ` : ""}<p class="tpl-detail-summary">${esc(template.summary)}</p>
+        ${ctaHtml}
       </div>
-      ${visual}
-    </div>
 
-    <div class="tpl-detail-grid">
-      <section class="tpl-detail-section">
-        <h2>Zo werkt het</h2>
-        ${stepsHtml}
+      <div class="tpl-detail-visual-wrap">
+        ${visual}
+      </div>
+
+      <section class="tpl-detail-nodes">
+        <div class="tpl-section-head"><h2>${isAgent ? "Wat de agent doet" : "Zo werkt het"}</h2></div>
+        ${nodesHtml}
       </section>
-      <section class="tpl-detail-section">
-        <h2>Wat u nodig heeft</h2>
-        ${platformsHtml}
-        ${template.needs.koppeling_hint ? `<p>${esc(template.needs.koppeling_hint)}</p>` : ""}
-        ${template.industry_labels.length > 0 ? `<p>Ook voor: ${esc(template.industry_labels.join(", "))}.</p>` : ""}
-        <div class="tpl-prompt-box">Wat de Builder krijgt: "${esc(promptFor(template))}"</div>
-      </section>
+
+      ${needsHtml}
     </div>
 
     ${relatedHtml}
@@ -867,14 +782,7 @@ function main() {
   if (!fs.existsSync(DETAIL_DIR)) fs.mkdirSync(DETAIL_DIR);
 
   templates.forEach((t) => {
-    if (t.kind === "agent") {
-      fs.writeFileSync(path.join(DETAIL_DIR, `${t.slug}.html`), renderAgentDetailPage(t, siblingsFor(t, templates), art));
-      return;
-    }
-    const related = templates
-      .filter((o) => o.key !== t.key && o.kind === t.kind && o.industries.some((i) => t.industries.includes(i)))
-      .slice(0, 3);
-    fs.writeFileSync(path.join(DETAIL_DIR, `${t.slug}.html`), renderDetailPage(t, related, art));
+    fs.writeFileSync(path.join(DETAIL_DIR, `${t.slug}.html`), renderDetailPage(t, relatedFor(t, templates), art));
   });
   console.log(`Wrote ${templates.length} detail pages to templates/.`);
 

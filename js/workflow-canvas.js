@@ -96,6 +96,14 @@
         var scale = 1;
         var offsetX = 0;
         var offsetY = 0;
+        // data-wf-fit="fit" (the template detail pages' wide graphs, since
+        // 2026-09-06 — ported from the dashboard's copy of this widget so
+        // both sites frame a flow the same way): the whole graph is scaled
+        // into the frame. Anything else opens at 1:1 and pans (center()).
+        var fitMode = root.getAttribute("data-wf-fit") === "fit";
+        // The zoom floor: MIN_SCALE, or the fit scale when that is lower,
+        // so zooming out always stops exactly at the fitted view.
+        var minScale = MIN_SCALE;
 
         function apply() {
             stage.style.transform = "translate(" + offsetX + "px, " + offsetY + "px) scale(" + scale + ")";
@@ -128,6 +136,28 @@
             offsetY = Math.max(24, (viewport.clientHeight - size.h * scale) / 2);
             clamp();
             apply();
+        }
+
+        function fit() {
+            var size = stageSize();
+            var padding = 32;
+            // The hint pill sits over the bottom edge (.wf-hint, bottom:14px);
+            // fit the graph to the space ABOVE it and centre it there.
+            var hintReserve = hint && !hint.classList.contains("wf-hint-cta") ? hint.offsetHeight + 14 : 0;
+            var bottom = Math.max(padding, hintReserve + 12);
+            var availH = viewport.clientHeight - padding - bottom;
+            var fitScale = Math.min((viewport.clientWidth - padding * 2) / size.w, availH / size.h);
+            minScale = Math.min(MIN_SCALE, fitScale);
+            scale = Math.min(MAX_SCALE, Math.max(minScale, fitScale));
+            offsetX = (viewport.clientWidth - size.w * scale) / 2;
+            offsetY = padding + (availH - size.h * scale) / 2;
+            clamp();
+            apply();
+        }
+
+        function frame() {
+            if (fitMode) fit();
+            else center();
         }
 
         // ---------- Hint ----------
@@ -245,7 +275,7 @@
         }
 
         function zoomBy(factor, originX, originY) {
-            var newScale = Math.min(MAX_SCALE, Math.max(MIN_SCALE, scale * factor));
+            var newScale = Math.min(MAX_SCALE, Math.max(minScale, scale * factor));
             if (newScale === scale) return;
             var stagePointX = (originX - offsetX) / scale;
             var stagePointY = (originY - offsetY) / scale;
@@ -468,13 +498,13 @@
         );
 
         viewport.addEventListener("dblclick", function () {
-            center();
+            frame();
             markExplored();
         });
 
         if (zoomInBtn) zoomInBtn.addEventListener("click", function () { zoomAtCenter(1.3); if (touchSeen) setArmed(true); });
         if (zoomOutBtn) zoomOutBtn.addEventListener("click", function () { zoomAtCenter(1 / 1.3); if (touchSeen) setArmed(true); });
-        if (resetBtn) resetBtn.addEventListener("click", function () { center(); markExplored(); });
+        if (resetBtn) resetBtn.addEventListener("click", function () { frame(); markExplored(); });
 
         viewport.addEventListener("keydown", function (e) {
             // Keyboard use: the focus ring is welcome again (see
@@ -487,14 +517,14 @@
             else if (e.key === "ArrowDown") { offsetY -= step; clamp(); apply(); }
             else if (e.key === "+" || e.key === "=") zoomAtCenter(1.3);
             else if (e.key === "-" || e.key === "_") zoomAtCenter(1 / 1.3);
-            else if (e.key === "0") center();
+            else if (e.key === "0") frame();
             else return;
             e.preventDefault();
             markExplored();
         });
 
-        center();
-        root.__wfFrame = center;
+        frame();
+        root.__wfFrame = frame;
         // Lets a tile switch arm a canvas it has just revealed — see
         // refitVisibleWorkflowCanvases and the everArmed note up top.
         root.__wfArm = setArmed;

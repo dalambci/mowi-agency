@@ -195,6 +195,10 @@
 
 .wf-hint{
   position:absolute;left:50%;bottom:.875rem;transform:translateX(-50%);z-index:2;
+  /* An absolutely positioned box at left:50% only gets half the frame to
+     shrink-wrap in, so the sentence wrapped to two lines in any frame under
+     ~640px wide (mirrors the dashboard's fix, 2026-09-06). */
+  width:max-content;max-width:calc(100% - 1.5rem);text-align:center;
   font-size:.71875rem;color:var(--ink-3);background:var(--surface);padding:.3125rem .75rem;
   border-radius:var(--radius-pill);border:1px solid var(--border);pointer-events:none;
   transition:opacity .3s ease;
