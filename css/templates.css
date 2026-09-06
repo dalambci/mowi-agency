@@ -175,8 +175,11 @@
   /* 16px: below that iOS Safari zooms the page into a focused input. */
   .tpl-search input{font-size:1rem}
   .tpl-toolbar{gap:.375rem}
-  .tpl-seg{width:100%;display:flex}
-  .tpl-seg button{flex:1;text-align:center;padding-left:.375rem;padding-right:.375rem}
+  /* The tabs as round as the filter buttons next to them (mirrors the
+     dashboard, Sal 2026-09-06): the TAB gets the filters' radius and the
+     track is concentric with it (+3px padding). */
+  .tpl-seg{width:100%;display:flex;border-radius:calc(var(--radius-btn) + 3px)}
+  .tpl-seg button{flex:1;text-align:center;padding-left:.375rem;padding-right:.375rem;border-radius:var(--radius-btn)}
   .tpl-dd-btn{padding:.375rem .5rem .375rem .625rem}
   .tpl-dd-menu{min-width:min(16rem,calc(100vw - 3rem))}
   .tpl-section{margin-top:1rem}
