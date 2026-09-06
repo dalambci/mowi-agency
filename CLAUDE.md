@@ -646,12 +646,20 @@ applied to all 16, and `test.html` is the reliable copy-paste source.
   op en u mailt zoals u al deed" / "Wij zetten uw agent op en uw telefoon doet de rest". The
   homepage's "Deploy Agents. Workflows. Dashboards." and `zo-werkt-het`'s "Eerst zien. Dan pas
   live." keep their periods — multi-beat lines where the dot is the beat.
-- **`zo-werkt-het` hero (2026-08-29, Sal: "direct marketing response copy"):** `<h1>` "Eerst
-  zien.<br />Dan pas live." (was "Vertellen, testen, en dan pas live"); sub in the agent pages'
-  DR device: "Vertel in gewone taal wat er moet gebeuren. Mowi draait het eerst als proef op uw
-  eigen gegevens, zonder dat er iets verstuurd wordt. U leest terug wat er zou zijn gebeurd. Pas
-  na uw akkoord gaat het live." Maps 1:1 onto the page's three splits (vertellen / testrun /
-  zien). Old sub had an em dash; gone.
+- **`zo-werkt-het` hero — current, 2026-09-06 (Sal: the heading "should include something like
+  that its easy to setup and can be done in 10 minutes", with "direct response marketing flavoured
+  backing"):** `<h1>` "Simpel opgezet.<br />Klaar in <span class="h-nowrap">10 minuten.</span>"
+  (the no-wrap span keeps "10 minuten." together on phones, where it otherwise orphaned
+  "minuten."; the two-beat periods are the deliberate exception to the no-trailing-period rule,
+  like the old heading's). Sub in the agent pages' DR device, objection → mechanism → control:
+  "Geen implementatietraject. Geen IT'er nodig. Vertel in gewone taal wat er moet gebeuren en
+  Mowi zet het voor u op. U ziet eerst een proef op uw eigen gegevens. Pas na uw akkoord gaat het
+  live." Still maps onto the page's three splits. Meta description updated to match. The "10
+  minuten" figure is Sal's own claim, not measured from this repo.
+  **Superseded 2026-09-06, kept for history:** ~~`<h1>` "Eerst zien.<br />Dan pas live." (2026-08-29,
+  was "Vertellen, testen, en dan pas live"); sub: "Vertel in gewone taal wat er moet gebeuren. Mowi
+  draait het eerst als proef op uw eigen gegevens, zonder dat er iets verstuurd wordt. U leest terug
+  wat er zou zijn gebeurd. Pas na uw akkoord gaat het live."~~
 - **Voice agent hero sub (2026-08-29, later):** Sal asked for "something direct response
   still but different than" the "Geen nieuwe centrale. Geen extra personeel. Geen voicemail
   die niemand terugluistert." triad (he labelled it the Inbox agent's, but quoted the Voice
