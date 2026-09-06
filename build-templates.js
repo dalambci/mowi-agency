@@ -15,7 +15,16 @@
 
    Run with: node build-templates.js
    Update flow: dashboard session runs `php artisan mowi:export-templates`,
-   copies the output to content/templates/templates.json, then this. */
+   copies the output to content/templates/templates.json, then this.
+
+   Round 2 (2026-09-06): the index is a compact page — left-aligned header
+   with the search beside it, ONE toolbar (segmented type control + three
+   dropdowns with faceted counts, js/templates.js), three sections per
+   kind — and a card shows a picture built from the record (integration
+   logo tiles, one domain glyph, the ghost mascot for agents) instead of a
+   cropped canvas. The generator mirrors the dashboard's Blade markup
+   (resources/views/flows/templates.blade.php + components/template-card.
+   blade.php) hook for hook, so both pages filter identically. */
 
 const fs = require("fs");
 const path = require("path");
@@ -54,7 +63,7 @@ const WF_JS_VERSION = "20260904-6";
 // This file's OWN two new assets get one shared version, bumped whenever
 // either changes — same "one value per file-pair, bump together" rule
 // the rest of the site's cache-busting convention already follows.
-const TPL_ASSET_VERSION = "20260905-1";
+const TPL_ASSET_VERSION = "20260906-1";
 
 // ---------------------------------------------------------------------------
 // Escaping — every field below can eventually carry CLIENT-authored text
@@ -293,20 +302,6 @@ function renderEdgeLabels(graph) {
     .join("\n");
 }
 
-/** Static, non-interactive crop for a card and for the "no build" fallback — never loads workflow-canvas.js. */
-function renderCanvasStatic(template) {
-  const graph = template.graph;
-  const uid = nextUid();
-  const wide = graph.width > 600 ? " wf-canvas-static-wide" : "";
-  return `<div class="wf-canvas wf-canvas-static${wide}" style="--wf-win:${template.crop.win}px;--wf-off:${template.crop.off}px" aria-hidden="true">
-  <div class="wf-viewport"><div class="wf-stage" style="width:${graph.width}px;height:${graph.height}px">
-    ${renderEdgesSvg(uid, graph)}
-    ${renderEdgeLabels(graph)}
-    ${graph.nodes.map((n) => renderNode(n, true)).join("\n    ")}
-  </div></div>
-</div>`;
-}
-
 /** Full interactive canvas for a detail page — needs js/workflow-canvas.js, already loaded on every page in templates/. */
 function renderCanvasInteractive(template) {
   const graph = template.graph;
@@ -341,12 +336,6 @@ function renderDashMock(tiles) {
 </div>`;
 }
 
-function cardVisual(template) {
-  if (template.graph) return renderCanvasStatic(template);
-  if (template.tiles) return renderDashMock(template.tiles);
-  return "";
-}
-
 const KIND_LABELS = { agent: "Agent", workflow: "Workflow", dashboard: "Dashboard" };
 
 /** Every current template's CTA — see this file's own header comment on
@@ -356,7 +345,31 @@ const KIND_LABELS = { agent: "Agent", workflow: "Workflow", dashboard: "Dashboar
     live page's own CTA already does today. */
 const SIGNUP_URL = "https://my.mowi.agency/aanmelden";
 
-function renderCard(template) {
+// ---------------------------------------------------------------------------
+// Card art (round 2, 2026-09-06 — Sal: "logos + one big glyph, no text").
+// The export carries the shared art ONCE at its top level: `glyphs` (name
+// -> inner-SVG fragment, App\Templates\Glyphs) and `mascots.ghost` (the
+// agent mascot rendered through the dashboard's own component). A record
+// only names its glyph (picture.glyph); this file never keeps art of its
+// own, so the two sites can't drift. Missing art is a build error, never a
+// silent blank — same loud-over-silent rule as main()'s slug checks.
+// ---------------------------------------------------------------------------
+function glyphSvg(art, name) {
+  const inner = art.glyphs[name];
+  if (!inner) throw new Error(`build-templates: unknown glyph '${name}' (not in the export's glyphs)`);
+  return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-glyph="${esc(name)}">${inner}</svg>`;
+}
+
+/** One integration logo tile. Logos stay <img> (six of the brand SVGs carry
+    internal ids); the file must exist under assets/logos/ — a missing logo
+    fails the build instead of vanishing the way the old onerror hack did. */
+function logoTile(platform, small) {
+  const file = path.join(ROOT, "assets", "logos", platform.icon);
+  if (!fs.existsSync(file)) throw new Error(`build-templates: logo missing for '${platform.key}': assets/logos/${platform.icon}`);
+  return `<span class="tpl-logo${small ? " tpl-logo-sm" : ""}"><img src="/assets/logos/${esc(platform.icon)}" alt="${small ? "" : esc(platform.name)}" /></span>`;
+}
+
+function renderCard(template, art) {
   // Only prose fields are checked, not 'label' — a card/detail-page label
   // like "Voice agent — Loodgieter" (type — branche) is dashboard-owned
   // compound-title data, not written prose the site's own "no em dash"
@@ -364,28 +377,30 @@ function renderCard(template) {
   // e.g. this file's own summary/tagline fields below).
   assertNoEmDash(template.tagline || template.summary, `template ${template.key} summary`);
 
-  const platformsHtml =
-    template.needs.platforms.length > 0
-      ? `<div class="tpl-card-platforms">${template.needs.platforms
-          .slice(0, 4)
-          .map((p) => `<img src="/assets/logos/${esc(p)}.svg" alt="" class="tpl-card-platform-icon" onerror="this.remove()" />`)
-          .join("")}</div>`
-      : "";
+  const picture = template.picture;
+  if (!picture) throw new Error(`build-templates: template '${template.key}' has no picture — re-export from the dashboard`);
+  // Two logo tiles + a "+N" tile is the most a 15rem card fits next to the
+  // glyph once a wordmark (Moneybird, Pipedrive) is among them.
+  const shown = picture.platforms.slice(0, 2);
+  const more = picture.platforms.length - shown.length;
+  const moreTitle = picture.platforms.slice(2).map((p) => p.name).join(", ");
+  const search = [template.label, template.tagline, template.summary, template.industry_labels.join(" "), picture.platforms.map((p) => p.name).join(" ")]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+  // A status chip only when it is not the default: on the public site the
+  // only non-default state is a planned template ("Binnenkort").
+  const foot = template.status !== "live" ? `\n  <div class="tpl-card-foot"><span class="tpl-chip tpl-chip-off">Binnenkort</span></div>` : "";
 
-  const statusClass = template.status !== "live" ? "tpl-chip-off" : "tpl-chip-on";
-  const statusLabel = template.status !== "live" ? "Binnenkort" : "Beschikbaar";
-
-  return `<a href="/templates/${esc(template.slug)}" class="tpl-card" data-tpl-card data-tpl-kind="${esc(template.kind)}" data-tpl-industries="${esc(template.industries.join(","))}" data-tpl-koppelingen="${esc(template.needs.platforms.join(","))}" data-tpl-trigger="${esc((template.trigger && template.trigger.kind) || "")}" data-tpl-search="${esc((template.label + " " + (template.tagline || "") + " " + template.summary).toLowerCase())}">
-  <div class="tpl-card-visual">${cardVisual(template)}</div>
-  <div class="tpl-card-body">
-    <div class="tpl-card-meta">
-      <span class="tpl-chip tpl-chip-kind">${KIND_LABELS[template.kind]}</span>
-      <span class="tpl-chip ${statusClass}">${statusLabel}</span>
-    </div>
-    <h3 class="tpl-card-title">${esc(template.label)}</h3>
-    <p class="tpl-card-summary">${esc(template.tagline || template.summary)}</p>
-    ${platformsHtml}
+  return `<a href="/templates/${esc(template.slug)}" class="tpl-card" data-tpl-card data-tpl-kind="${esc(template.kind)}" data-tpl-industries="${esc(template.industries.join(","))}" data-tpl-koppelingen="${esc(template.needs.platforms.join(","))}" data-tpl-trigger="${esc((template.trigger && template.trigger.kind) || "")}" data-tpl-status="${esc(template.status)}" data-tpl-search="${esc(search)}">
+  <div class="tpl-picture tpl-picture-${esc(template.kind)}">
+    <span class="tpl-kind" title="${KIND_LABELS[template.kind]}">${glyphSvg(art, "kind-" + template.kind)}<span class="visually-hidden">${KIND_LABELS[template.kind]}</span></span>
+    <div class="tpl-picture-row">${picture.mascot === "ghost" ? `<span class="tpl-mascot">${art.mascots.ghost}</span>` : ""}${shown.map((p) => logoTile(p, false)).join("")}${more > 0 ? `<span class="tpl-logo tpl-logo-more" title="${esc(moreTitle)}">+${more}</span>` : ""}<span class="tpl-glyph">${glyphSvg(art, picture.glyph)}</span></div>
   </div>
+  <div class="tpl-card-body">
+    <h3 class="tpl-card-title">${esc(template.label)}</h3>
+    <p class="tpl-card-line">${esc(template.tagline || template.summary)}</p>
+  </div>${foot}
 </a>`;
 }
 
@@ -395,39 +410,58 @@ function promptFor(template) {
   return `Bouw het dashboard "${template.label}" voor mij.`;
 }
 
-function renderIndexPage(templates) {
-  const koppelingen = Array.from(new Set(templates.flatMap((t) => t.needs.platforms))).sort();
-  const featured = templates.filter((t) => t.status === "live" && t.featured).slice(0, 8);
+function renderIndexPage(templates, art) {
   const communityCount = templates.filter((t) => t.source === "community").length;
-  const heroSub =
+  const intro =
     communityCount > 0
-      ? "Agents, workflows en dashboards gebouwd met Mowi, door de Mowi-community en door Mowi zelf. Kies er een, Mowi zet hem klaar in uw account."
+      ? "Agents, workflows en dashboards, gebouwd door Mowi en de Mowi-community. Kies er een, Mowi zet hem klaar in uw account."
       : "Agents, workflows en dashboards die Mowi voor u bouwt. Kies er een, Mowi zet hem klaar in uw account.";
 
-  const typeChip = (value, label) =>
-    `<button type="button" class="tpl-filter-chip" data-tpl-filter="type" data-tpl-value="${value}" aria-pressed="false">${label}</button>`;
-  const brancheOrder = [];
-  templates.forEach((t) => t.industry_labels.forEach((label, i) => brancheOrder.push([t.industries[i], label])));
-  const brancheMap = new Map(brancheOrder);
-  const brancheChips = Array.from(brancheMap.entries())
-    .sort((a, b) => a[1].localeCompare(b[1]))
-    .map(([key, label]) => `<button type="button" class="tpl-filter-chip" data-tpl-filter="branche" data-tpl-value="${esc(key)}" aria-pressed="false">${esc(label)}</button>`)
-    .join("\n        ");
-  const koppelingChips = koppelingen
-    .map((key) => `<button type="button" class="tpl-filter-chip" data-tpl-filter="koppeling" data-tpl-value="${esc(key)}" aria-pressed="false">${esc(key.replace(/_/g, " "))}</button>`)
-    .join("\n        ");
+  // The three dropdowns' options, with the count each option would leave
+  // on an unfiltered page (real numbers without JS; js/templates.js keeps
+  // them faceted against the other active filters from then on).
+  const brancheMap = new Map();
+  templates.forEach((t) => t.industries.forEach((key, i) => brancheMap.set(key, t.industry_labels[i] || key)));
+  const branches = Array.from(brancheMap.entries()).sort((a, b) => a[1].localeCompare(b[1], "nl"));
+  const platformMap = new Map();
+  templates.forEach((t) => t.picture.platforms.forEach((p) => platformMap.set(p.key, p)));
+  const platforms = Array.from(platformMap.values()).sort((a, b) => a.name.localeCompare(b.name, "nl"));
+  const triggers = [
+    ["schedule", "Op een vast moment"],
+    ["poll", "Bij een nieuw item"],
+  ];
+  const countBranche = (key) => templates.filter((t) => t.industries.includes(key)).length;
+  const countPlatform = (key) => templates.filter((t) => t.needs.platforms.includes(key)).length;
+  const countTrigger = (key) => templates.filter((t) => t.trigger && t.trigger.kind === key).length;
 
-  const featuredRow =
-    featured.length > 0
-      ? `<div class="tpl-row" data-tpl-curated-row>
-      <div class="tpl-row-head"><h2>Aanbevolen</h2></div>
-      <div class="tpl-grid">
-        ${featured.map(renderCard).join("\n        ")}
+  const option = (group, value, label, count, prefix) =>
+    `<button type="button" role="option" data-tpl-filter="${group}" data-tpl-value="${esc(value)}" aria-selected="false" aria-disabled="${count === 0 ? "true" : "false"}">${prefix || ""}<span class="tpl-dd-label" data-tpl-label>${esc(label)}</span><span class="tpl-dd-count">${count}</span></button>`;
+  const dropdown = (group, label, optionsHtml) => `<div class="tpl-dd" data-tpl-dd="${group}">
+      <button type="button" class="tpl-dd-btn" aria-haspopup="listbox" aria-expanded="false" aria-controls="tpl-dd-${group}"><span data-tpl-dd-label data-tpl-dd-default="${esc(label)}">${esc(label)}</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+      <div class="tpl-dd-menu" id="tpl-dd-${group}" role="listbox" aria-label="${esc(label)}">
+        ${optionsHtml}
       </div>
-    </div>`
-      : "";
+    </div>`;
+  const typeButton = (value, label, pressed) =>
+    `<button type="button" data-tpl-filter="type" data-tpl-value="${value}" aria-pressed="${pressed ? "true" : "false"}">${label}</button>`;
 
-  const allGrid = templates.map(renderCard).join("\n        ");
+  const sections = [
+    ["agent", "Agents"],
+    ["workflow", "Workflows"],
+    ["dashboard", "Dashboards"],
+  ]
+    .map(([kind, label]) => {
+      const cards = templates.filter((t) => t.kind === kind);
+      if (cards.length === 0) return "";
+      return `<section class="tpl-section" data-tpl-section="${kind}">
+    <div class="tpl-section-head"><h2>${label} <span class="tpl-count" data-tpl-count>${cards.length}</span></h2></div>
+    <div class="tpl-grid">
+      ${cards.map((t) => renderCard(t, art)).join("\n      ")}
+    </div>
+  </section>`;
+    })
+    .filter(Boolean)
+    .join("\n\n  ");
 
   return `<!-- Generated by build-templates.js from content/templates/templates.json — do not hand-edit. -->
 <!DOCTYPE html>
@@ -455,45 +489,44 @@ function renderIndexPage(templates) {
 <body>
 ${headerHtml("/templates")}
 <main>
-<section class="hero container hero-h1-reduced hero-tight-bottom">
-  <h1>Templates</h1>
-  <p class="hero-sub">${heroSub}</p>
+<section class="container tpl-head">
+  <div>
+    <h1 class="page-hero-heading">Templates</h1>
+    <p class="page-hero-body">${intro}</p>
+  </div>
+  <label class="tpl-search">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+    <input type="search" data-tpl-filter="q" placeholder="Zoek een template" aria-label="Zoek een template" />
+  </label>
 </section>
 
-<section class="section container" id="voorbeelden">
+<section class="container tpl-marketplace" id="voorbeelden" data-tpl-marketplace>
   <div class="tpl-toolbar" data-tpl-toolbar>
-    <label class="tpl-search">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-      <input type="search" data-tpl-search-input placeholder="Zoek een template of beschrijf een taak" aria-label="Zoek een template" />
-    </label>
-    <div class="tpl-filter-row" role="group" aria-label="Type">
-      ${typeChip("agents", "Agents")}
-      ${typeChip("workflows", "Workflows")}
-      ${typeChip("dashboards", "Dashboards")}
+    <div class="tpl-seg" role="group" aria-label="Type">
+      ${typeButton("", "Alles", true)}
+      ${typeButton("agents", "Agents", false)}
+      ${typeButton("workflows", "Workflows", false)}
+      ${typeButton("dashboards", "Dashboards", false)}
     </div>
-    <div class="tpl-filter-row" role="group" aria-label="Branche">
-        ${brancheChips}
-    </div>
-    <div class="tpl-filter-row" role="group" aria-label="Koppeling">
-        ${koppelingChips}
-    </div>
-    <div class="tpl-filter-row" role="group" aria-label="Trigger">
-      <button type="button" class="tpl-filter-chip" data-tpl-filter="trigger" data-tpl-value="schedule" aria-pressed="false">Op een vast moment</button>
-      <button type="button" class="tpl-filter-chip" data-tpl-filter="trigger" data-tpl-value="poll" aria-pressed="false">Bij een nieuw item</button>
-    </div>
+    ${dropdown("branche", "Branche", branches.map(([key, label]) => option("branche", key, label, countBranche(key))).join("\n        "))}
+    ${dropdown("koppeling", "Koppeling", platforms.map((p) => option("koppeling", p.key, p.name, countPlatform(p.key), logoTile(p, true))).join("\n        "))}
+    ${dropdown("trigger", "Trigger", triggers.map(([key, label]) => option("trigger", key, label, countTrigger(key))).join("\n        "))}
   </div>
 
-  ${featuredRow}
+  <div class="tpl-active" data-tpl-active hidden>
+    <span data-tpl-pills></span>
+    <button type="button" class="tpl-clear" data-tpl-clear="">Wis filters</button>
+    <span class="tpl-result-count"><span data-tpl-total>${templates.length}</span> resultaten</span>
+  </div>
 
-  <div class="tpl-row">
-    <div class="tpl-row-head"><h2 data-tpl-results-heading>Alle templates (${templates.length})</h2></div>
-    <div class="tpl-grid" data-tpl-all-grid>
-      ${allGrid}
+  ${sections}
+
+  <div class="tpl-empty" data-tpl-empty hidden>
+    <p>Niets gevonden voor deze combinatie.</p>
+    <div class="tpl-empty-actions">
+      <button type="button" class="btn-primary" data-tpl-clear="">Wis filters</button>
+      <a href="${SIGNUP_URL}" class="tpl-btn-secondary" data-event="Signup Click">Beschrijf het aan Mowi</a>
     </div>
-    <p class="tpl-empty" data-tpl-empty hidden>
-      Niets gevonden voor deze combinatie.<br />
-      <a href="${SIGNUP_URL}" class="btn-primary" data-event="Signup Click">Beschrijf het aan Mowi</a>
-    </p>
   </div>
 </section>
 </main>
@@ -503,7 +536,7 @@ ${footerHtml(`  <script src="/js/templates.js?v=${TPL_ASSET_VERSION}"></script>\
 `;
 }
 
-function renderDetailPage(template, related) {
+function renderDetailPage(template, related, art) {
   assertNoEmDash(template.summary, `template ${template.key} summary`);
 
   const visual = template.graph
@@ -520,20 +553,20 @@ function renderDetailPage(template, related) {
       : `<p class="hint">${esc(template.blocked_reason || "Nog geen stappen beschikbaar.")}</p>`;
 
   const platformsHtml =
-    template.needs.platforms.length > 0
-      ? `<div class="tpl-card-platforms" style="margin-bottom:.625rem">${template.needs.platforms
-          .map((p) => `<img src="/assets/logos/${esc(p)}.svg" alt="${esc(p.replace(/_/g, " "))}" class="tpl-card-platform-icon" style="height:1.25rem" onerror="this.remove()" />`)
+    template.picture.platforms.length > 0
+      ? `<p>Werkt met een van deze koppelingen:</p><div class="tpl-logo-list">${template.picture.platforms
+          .map((p) => `<span title="${esc(p.name)}">${logoTile(p, false)}</span>`)
           .join("")}</div>`
       : "";
 
   const relatedHtml =
     related.length > 0
-      ? `<div class="tpl-row">
-    <div class="tpl-row-head"><h2>Vergelijkbaar</h2></div>
+      ? `<section class="tpl-section">
+    <div class="tpl-section-head"><h2>Vergelijkbaar</h2></div>
     <div class="tpl-grid">
-      ${related.map(renderCard).join("\n      ")}
+      ${related.map((t) => renderCard(t, art)).join("\n      ")}
     </div>
-  </div>`
+  </section>`
       : "";
 
   const breadcrumbJsonLd = JSON.stringify({
@@ -605,6 +638,10 @@ ${footerHtml(`  <script src="/js/workflow-canvas.js?v=${WF_JS_VERSION}"></script
 function main() {
   const data = JSON.parse(fs.readFileSync(DATA_PATH, "utf8"));
   const templates = data.templates;
+  if (!data.glyphs || !data.mascots || !data.mascots.ghost) {
+    throw new Error("build-templates: the export carries no glyphs/mascots — re-run `php artisan mowi:export-templates` on a dashboard that has round 2 (2026-09-06)");
+  }
+  const art = { glyphs: data.glyphs, mascots: data.mascots };
 
   const slugs = new Set();
   templates.forEach((t) => {
@@ -613,7 +650,7 @@ function main() {
     if (t.slug.indexOf(".") !== -1) throw new Error(`build-templates: slug '${t.slug}' contains a dot, which breaks this site's extensionless-URL convention`);
   });
 
-  fs.writeFileSync(path.join(ROOT, "templates.html"), renderIndexPage(templates));
+  fs.writeFileSync(path.join(ROOT, "templates.html"), renderIndexPage(templates, art));
   console.log(`Wrote templates.html (${templates.length} templates, generated ${data.generated_at}, dashboard commit ${data.commit || "unknown"}).`);
 
   if (!fs.existsSync(DETAIL_DIR)) fs.mkdirSync(DETAIL_DIR);
@@ -622,7 +659,7 @@ function main() {
     const related = templates
       .filter((o) => o.key !== t.key && o.kind === t.kind && o.industries.some((i) => t.industries.includes(i)))
       .slice(0, 3);
-    fs.writeFileSync(path.join(DETAIL_DIR, `${t.slug}.html`), renderDetailPage(t, related));
+    fs.writeFileSync(path.join(DETAIL_DIR, `${t.slug}.html`), renderDetailPage(t, related, art));
   });
   console.log(`Wrote ${templates.length} detail pages to templates/.`);
 

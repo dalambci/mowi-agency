@@ -1,6 +1,21 @@
 {
-    "generated_at": "2026-09-05T19:27:18+00:00",
-    "commit": "36bd4bf",
+    "generated_at": "2026-09-06T08:51:16+00:00",
+    "commit": "af95be9",
+    "glyphs": {
+        "box": "<path d=\"M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z\"/><path d=\"m3.3 7 8.7 5 8.7-5\"/><path d=\"M12 22V12\"/><path d=\"m7.5 4.27 9 5.15\"/>",
+        "calendar": "<rect x=\"3\" y=\"4\" width=\"18\" height=\"18\" rx=\"2\"/><path d=\"M16 2v4M8 2v4M3 10h18\"/>",
+        "handshake": "<path d=\"m11 17 2 2a1 1 0 1 0 3-3\"/><path d=\"m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4\"/><path d=\"m21 3 1 11h-2\"/><path d=\"M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3\"/><path d=\"M3 4h8\"/>",
+        "receipt": "<path d=\"M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z\"/><path d=\"M8 8h8M8 12h8M8 16h5\"/>",
+        "phone": "<path d=\"M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z\"/>",
+        "mail": "<rect x=\"2\" y=\"4\" width=\"20\" height=\"16\" rx=\"2\"/><path d=\"m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7\"/>",
+        "chart": "<path d=\"M3 3v18h18\"/><path d=\"M18 17V9\"/><path d=\"M13 17V5\"/><path d=\"M8 17v-3\"/>",
+        "kind-agent": "<path d=\"M5 20V11a7 7 0 0 1 14 0v9l-2.33-1.75L14.33 20 12 18.25 9.67 20 7.33 18.25 5 20Z\"/><circle cx=\"9.5\" cy=\"11\" r=\".75\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"14.5\" cy=\"11\" r=\".75\" fill=\"currentColor\" stroke=\"none\"/>",
+        "kind-workflow": "<rect x=\"3\" y=\"3\" width=\"8\" height=\"8\" rx=\"2\"/><path d=\"M7 11v4a2 2 0 0 0 2 2h4\"/><rect x=\"13\" y=\"13\" width=\"8\" height=\"8\" rx=\"2\"/>",
+        "kind-dashboard": "<rect x=\"3\" y=\"3\" width=\"7\" height=\"9\" rx=\"1.5\"/><rect x=\"14\" y=\"3\" width=\"7\" height=\"5\" rx=\"1.5\"/><rect x=\"14\" y=\"12\" width=\"7\" height=\"9\" rx=\"1.5\"/><rect x=\"3\" y=\"16\" width=\"7\" height=\"5\" rx=\"1.5\"/>"
+    },
+    "mascots": {
+        "ghost": "<svg viewBox=\"0 0 32 32\" aria-hidden=\"true\" focusable=\"false\" data-shape=\"ghost\">\n    <g transform=\"translate(-0.73,0.57) scale(1.045)\">\n        <g fill=\"var(--agent-fill, #B8B4AE)\">\n                                <path d=\"M15.86 4 Q12.54 4.27 11.83 4.51 Q11.12 4.75 9.93 5.46 Q8.75 6.16 7.69 7.24 Q6.63 8.32 5.89 9.74 Q5.15 11.16 4.69 12.58 Q4.23 14 4.12 15.43 Q4 16.85 4.1 18.98 Q4.2 21.11 4.4 21.59 Q4.6 22.06 4.64 22.54 Q4.67 23.01 4.95 23.48 Q5.23 23.95 5.81 24.54 Q6.38 25.13 6.86 25.24 Q7.33 25.35 8.28 25.26 Q9.22 25.17 9.7 24.93 Q10.17 24.68 11.12 23.81 Q12.07 22.95 13.25 24.06 Q14.44 25.17 15.62 25.17 Q16.8 25.16 17.28 24.9 Q17.75 24.64 18.7 23.79 Q19.65 22.94 20.84 24.03 Q22.02 25.11 22.97 25.37 Q23.91 25.63 24.86 25.41 Q25.81 25.19 26.63 24.34 Q27.46 23.48 27.72 22.3 Q27.97 21.11 27.97 17.56 Q27.96 14 27.52 12.34 Q27.07 10.69 26.31 9.27 Q25.55 7.84 24.97 7.31 Q24.39 6.77 23.21 5.98 Q22.02 5.18 20.6 4.71 Q19.17 4.24 17.75 4.13 Q16.33 4.01 15.86 4 Z\"/>\n                            </g>\n        <g fill=\"var(--agent-eye, #121110)\">\n                            <circle cx=\"12.5\" cy=\"15\" r=\"1.7\"/>\n                            <circle cx=\"19.5\" cy=\"15\" r=\"1.7\"/>\n                    </g>\n    </g>\n</svg>"
+    },
     "templates": [
         {
             "key": "voice-agent.loodgieter",
@@ -216,6 +231,12 @@
             "crop": {
                 "off": 532,
                 "win": 480
+            },
+            "picture": {
+                "glyph": "phone",
+                "trigger": null,
+                "mascot": "ghost",
+                "platforms": []
             },
             "status": "live",
             "blocked_reason": null,
@@ -441,6 +462,12 @@
                 "off": 532,
                 "win": 480
             },
+            "picture": {
+                "glyph": "phone",
+                "trigger": null,
+                "mascot": "ghost",
+                "platforms": []
+            },
             "status": "live",
             "blocked_reason": null,
             "superseded_by": null,
@@ -664,6 +691,12 @@
             "crop": {
                 "off": 532,
                 "win": 480
+            },
+            "picture": {
+                "glyph": "phone",
+                "trigger": null,
+                "mascot": "ghost",
+                "platforms": []
             },
             "status": "live",
             "blocked_reason": null,
@@ -889,6 +922,12 @@
                 "off": 532,
                 "win": 480
             },
+            "picture": {
+                "glyph": "phone",
+                "trigger": null,
+                "mascot": "ghost",
+                "platforms": []
+            },
             "status": "live",
             "blocked_reason": null,
             "superseded_by": null,
@@ -1112,6 +1151,12 @@
             "crop": {
                 "off": 532,
                 "win": 480
+            },
+            "picture": {
+                "glyph": "phone",
+                "trigger": null,
+                "mascot": "ghost",
+                "platforms": []
             },
             "status": "live",
             "blocked_reason": null,
@@ -1337,6 +1382,12 @@
                 "off": 532,
                 "win": 480
             },
+            "picture": {
+                "glyph": "phone",
+                "trigger": null,
+                "mascot": "ghost",
+                "platforms": []
+            },
             "status": "live",
             "blocked_reason": null,
             "superseded_by": null,
@@ -1560,6 +1611,12 @@
             "crop": {
                 "off": 532,
                 "win": 480
+            },
+            "picture": {
+                "glyph": "phone",
+                "trigger": null,
+                "mascot": "ghost",
+                "platforms": []
             },
             "status": "live",
             "blocked_reason": null,
@@ -1785,6 +1842,12 @@
                 "off": 532,
                 "win": 480
             },
+            "picture": {
+                "glyph": "phone",
+                "trigger": null,
+                "mascot": "ghost",
+                "platforms": []
+            },
             "status": "live",
             "blocked_reason": null,
             "superseded_by": null,
@@ -2009,6 +2072,12 @@
                 "off": 716,
                 "win": 480
             },
+            "picture": {
+                "glyph": "phone",
+                "trigger": null,
+                "mascot": "ghost",
+                "platforms": []
+            },
             "status": "live",
             "blocked_reason": null,
             "superseded_by": null,
@@ -2232,6 +2301,12 @@
             "crop": {
                 "off": 716,
                 "win": 480
+            },
+            "picture": {
+                "glyph": "phone",
+                "trigger": null,
+                "mascot": "ghost",
+                "platforms": []
             },
             "status": "live",
             "blocked_reason": null,
@@ -2465,6 +2540,12 @@
                 "off": 0,
                 "win": 480
             },
+            "picture": {
+                "glyph": "mail",
+                "trigger": null,
+                "mascot": "ghost",
+                "platforms": []
+            },
             "status": "live",
             "blocked_reason": null,
             "superseded_by": null,
@@ -2696,6 +2777,12 @@
             "crop": {
                 "off": 0,
                 "win": 480
+            },
+            "picture": {
+                "glyph": "mail",
+                "trigger": null,
+                "mascot": "ghost",
+                "platforms": []
             },
             "status": "live",
             "blocked_reason": null,
@@ -2929,6 +3016,12 @@
                 "off": 0,
                 "win": 480
             },
+            "picture": {
+                "glyph": "mail",
+                "trigger": null,
+                "mascot": "ghost",
+                "platforms": []
+            },
             "status": "live",
             "blocked_reason": null,
             "superseded_by": null,
@@ -3160,6 +3253,12 @@
             "crop": {
                 "off": 0,
                 "win": 480
+            },
+            "picture": {
+                "glyph": "mail",
+                "trigger": null,
+                "mascot": "ghost",
+                "platforms": []
             },
             "status": "live",
             "blocked_reason": null,
@@ -3393,6 +3492,12 @@
                 "off": 0,
                 "win": 480
             },
+            "picture": {
+                "glyph": "mail",
+                "trigger": null,
+                "mascot": "ghost",
+                "platforms": []
+            },
             "status": "live",
             "blocked_reason": null,
             "superseded_by": null,
@@ -3624,6 +3729,12 @@
             "crop": {
                 "off": 0,
                 "win": 480
+            },
+            "picture": {
+                "glyph": "mail",
+                "trigger": null,
+                "mascot": "ghost",
+                "platforms": []
             },
             "status": "live",
             "blocked_reason": null,
@@ -3857,6 +3968,12 @@
                 "off": 0,
                 "win": 480
             },
+            "picture": {
+                "glyph": "mail",
+                "trigger": null,
+                "mascot": "ghost",
+                "platforms": []
+            },
             "status": "live",
             "blocked_reason": null,
             "superseded_by": null,
@@ -4058,6 +4175,12 @@
             "crop": {
                 "off": 0,
                 "win": 480
+            },
+            "picture": {
+                "glyph": "mail",
+                "trigger": null,
+                "mascot": "ghost",
+                "platforms": []
             },
             "status": "live",
             "blocked_reason": null,
@@ -4291,6 +4414,12 @@
                 "off": 0,
                 "win": 480
             },
+            "picture": {
+                "glyph": "mail",
+                "trigger": null,
+                "mascot": "ghost",
+                "platforms": []
+            },
             "status": "live",
             "blocked_reason": null,
             "superseded_by": null,
@@ -4523,6 +4652,12 @@
                 "off": 0,
                 "win": 480
             },
+            "picture": {
+                "glyph": "mail",
+                "trigger": null,
+                "mascot": "ghost",
+                "platforms": []
+            },
             "status": "live",
             "blocked_reason": null,
             "superseded_by": null,
@@ -4537,7 +4672,7 @@
             "kind": "workflow",
             "slug": "dagelijkse-afspraken",
             "label": "Dagelijks agenda-overzicht",
-            "tagline": null,
+            "tagline": "Elke ochtend de afspraken van vandaag.",
             "summary": "Elke ochtend een overzicht van de afspraken van vandaag.",
             "industries": [
                 "kapper",
@@ -4653,6 +4788,28 @@
                 "off": 0,
                 "win": 480
             },
+            "picture": {
+                "glyph": "calendar",
+                "trigger": "schedule",
+                "mascot": null,
+                "platforms": [
+                    {
+                        "key": "guestplan",
+                        "name": "Guestplan",
+                        "icon": "integrations/guestplan.svg"
+                    },
+                    {
+                        "key": "google_agenda",
+                        "name": "Google Agenda",
+                        "icon": "integrations/google_agenda.svg"
+                    },
+                    {
+                        "key": "calendly",
+                        "name": "Calendly",
+                        "icon": "integrations/calendly.svg"
+                    }
+                ]
+            },
             "status": "live",
             "blocked_reason": null,
             "superseded_by": null,
@@ -4667,7 +4824,7 @@
             "kind": "workflow",
             "slug": "weekoverzicht-agenda",
             "label": "Wekelijks agenda-overzicht",
-            "tagline": null,
+            "tagline": "Elke maandag de hele week op een rij.",
             "summary": "Elke maandagochtend een overzicht van de afspraken van de hele week.",
             "industries": [
                 "kapper",
@@ -4779,6 +4936,28 @@
                 "off": 0,
                 "win": 480
             },
+            "picture": {
+                "glyph": "calendar",
+                "trigger": "schedule",
+                "mascot": null,
+                "platforms": [
+                    {
+                        "key": "guestplan",
+                        "name": "Guestplan",
+                        "icon": "integrations/guestplan.svg"
+                    },
+                    {
+                        "key": "google_agenda",
+                        "name": "Google Agenda",
+                        "icon": "integrations/google_agenda.svg"
+                    },
+                    {
+                        "key": "calendly",
+                        "name": "Calendly",
+                        "icon": "integrations/calendly.svg"
+                    }
+                ]
+            },
             "status": "live",
             "blocked_reason": null,
             "superseded_by": null,
@@ -4793,7 +4972,7 @@
             "kind": "workflow",
             "slug": "dagelijkse-nieuwe-bestellingen",
             "label": "Dagelijks besteloverzicht",
-            "tagline": null,
+            "tagline": "Elke ochtend de bestellingen van gisteren.",
             "summary": "Elke ochtend een overzicht van de bestellingen van gisteren.",
             "industries": [
                 "loodgieter",
@@ -4907,6 +5086,48 @@
                 "off": 0,
                 "win": 480
             },
+            "picture": {
+                "glyph": "box",
+                "trigger": "schedule",
+                "mascot": null,
+                "platforms": [
+                    {
+                        "key": "woocommerce",
+                        "name": "WooCommerce",
+                        "icon": "integrations/woocommerce.svg"
+                    },
+                    {
+                        "key": "shopify",
+                        "name": "Shopify",
+                        "icon": "integrations/shopify.svg"
+                    },
+                    {
+                        "key": "lightspeed",
+                        "name": "Lightspeed eCom",
+                        "icon": "integrations/lightspeed.svg"
+                    },
+                    {
+                        "key": "shopware",
+                        "name": "Shopware",
+                        "icon": "integrations/shopware.svg"
+                    },
+                    {
+                        "key": "magento",
+                        "name": "Magento Open Source",
+                        "icon": "integrations/magento.svg"
+                    },
+                    {
+                        "key": "bol",
+                        "name": "bol.com",
+                        "icon": "integrations/bol.svg"
+                    },
+                    {
+                        "key": "prestashop",
+                        "name": "PrestaShop",
+                        "icon": "integrations/prestashop.svg"
+                    }
+                ]
+            },
             "status": "live",
             "blocked_reason": null,
             "superseded_by": null,
@@ -4921,7 +5142,7 @@
             "kind": "workflow",
             "slug": "weekoverzicht-bestellingen",
             "label": "Wekelijks besteloverzicht",
-            "tagline": null,
+            "tagline": "Elke maandag de bestellingen van de week.",
             "summary": "Elke maandagochtend een overzicht van de bestellingen van de afgelopen week.",
             "industries": [
                 "webshop",
@@ -5033,6 +5254,48 @@
                 "off": 0,
                 "win": 480
             },
+            "picture": {
+                "glyph": "box",
+                "trigger": "schedule",
+                "mascot": null,
+                "platforms": [
+                    {
+                        "key": "woocommerce",
+                        "name": "WooCommerce",
+                        "icon": "integrations/woocommerce.svg"
+                    },
+                    {
+                        "key": "shopify",
+                        "name": "Shopify",
+                        "icon": "integrations/shopify.svg"
+                    },
+                    {
+                        "key": "lightspeed",
+                        "name": "Lightspeed eCom",
+                        "icon": "integrations/lightspeed.svg"
+                    },
+                    {
+                        "key": "shopware",
+                        "name": "Shopware",
+                        "icon": "integrations/shopware.svg"
+                    },
+                    {
+                        "key": "magento",
+                        "name": "Magento Open Source",
+                        "icon": "integrations/magento.svg"
+                    },
+                    {
+                        "key": "bol",
+                        "name": "bol.com",
+                        "icon": "integrations/bol.svg"
+                    },
+                    {
+                        "key": "prestashop",
+                        "name": "PrestaShop",
+                        "icon": "integrations/prestashop.svg"
+                    }
+                ]
+            },
             "status": "live",
             "blocked_reason": null,
             "superseded_by": null,
@@ -5047,7 +5310,7 @@
             "kind": "workflow",
             "slug": "nieuwe-bestelling-direct",
             "label": "Melding bij elke nieuwe bestelling",
-            "tagline": null,
+            "tagline": "Direct een bericht bij elke bestelling.",
             "summary": "Een bericht zodra er een bestelling binnenkomt, in plaats van een overzicht de volgende ochtend.",
             "industries": [
                 "webshop"
@@ -5153,6 +5416,48 @@
                 "off": 0,
                 "win": 480
             },
+            "picture": {
+                "glyph": "box",
+                "trigger": "poll",
+                "mascot": null,
+                "platforms": [
+                    {
+                        "key": "woocommerce",
+                        "name": "WooCommerce",
+                        "icon": "integrations/woocommerce.svg"
+                    },
+                    {
+                        "key": "shopify",
+                        "name": "Shopify",
+                        "icon": "integrations/shopify.svg"
+                    },
+                    {
+                        "key": "lightspeed",
+                        "name": "Lightspeed eCom",
+                        "icon": "integrations/lightspeed.svg"
+                    },
+                    {
+                        "key": "shopware",
+                        "name": "Shopware",
+                        "icon": "integrations/shopware.svg"
+                    },
+                    {
+                        "key": "magento",
+                        "name": "Magento Open Source",
+                        "icon": "integrations/magento.svg"
+                    },
+                    {
+                        "key": "bol",
+                        "name": "bol.com",
+                        "icon": "integrations/bol.svg"
+                    },
+                    {
+                        "key": "prestashop",
+                        "name": "PrestaShop",
+                        "icon": "integrations/prestashop.svg"
+                    }
+                ]
+            },
             "status": "live",
             "blocked_reason": null,
             "superseded_by": null,
@@ -5167,7 +5472,7 @@
             "kind": "workflow",
             "slug": "nieuwe-bestelling-klantdossier",
             "label": "Nieuwe bestelling met klantdossier",
-            "tagline": null,
+            "tagline": "Nieuwe bestelling, klant meteen opgezocht.",
             "summary": "Zodra er een bestelling binnenkomt, wordt meteen opgezocht wie de klant is in uw CRM.",
             "industries": [
                 "webshop",
@@ -5280,6 +5585,68 @@
                 "off": 0,
                 "win": 480
             },
+            "picture": {
+                "glyph": "box",
+                "trigger": "poll",
+                "mascot": null,
+                "platforms": [
+                    {
+                        "key": "woocommerce",
+                        "name": "WooCommerce",
+                        "icon": "integrations/woocommerce.svg"
+                    },
+                    {
+                        "key": "shopify",
+                        "name": "Shopify",
+                        "icon": "integrations/shopify.svg"
+                    },
+                    {
+                        "key": "lightspeed",
+                        "name": "Lightspeed eCom",
+                        "icon": "integrations/lightspeed.svg"
+                    },
+                    {
+                        "key": "shopware",
+                        "name": "Shopware",
+                        "icon": "integrations/shopware.svg"
+                    },
+                    {
+                        "key": "magento",
+                        "name": "Magento Open Source",
+                        "icon": "integrations/magento.svg"
+                    },
+                    {
+                        "key": "bol",
+                        "name": "bol.com",
+                        "icon": "integrations/bol.svg"
+                    },
+                    {
+                        "key": "prestashop",
+                        "name": "PrestaShop",
+                        "icon": "integrations/prestashop.svg"
+                    },
+                    {
+                        "key": "exact_online",
+                        "name": "Exact Online",
+                        "icon": "integrations/exact_online.svg"
+                    },
+                    {
+                        "key": "pipedrive",
+                        "name": "Pipedrive",
+                        "icon": "integrations/pipedrive.svg"
+                    },
+                    {
+                        "key": "hubspot",
+                        "name": "HubSpot",
+                        "icon": "integrations/hubspot.svg"
+                    },
+                    {
+                        "key": "moneybird",
+                        "name": "Moneybird",
+                        "icon": "integrations/moneybird.svg"
+                    }
+                ]
+            },
             "status": "live",
             "blocked_reason": null,
             "superseded_by": null,
@@ -5294,7 +5661,7 @@
             "kind": "workflow",
             "slug": "ochtend-beschikbaarheid",
             "label": "Dagelijkse beschikbaarheid",
-            "tagline": null,
+            "tagline": "Elke ochtend de vrije plekken van vandaag.",
             "summary": "Elke ochtend een overzicht van de vrije plekken voor vandaag.",
             "industries": [
                 "schoonheidssalon",
@@ -5406,6 +5773,28 @@
                 "off": 0,
                 "win": 480
             },
+            "picture": {
+                "glyph": "calendar",
+                "trigger": "schedule",
+                "mascot": null,
+                "platforms": [
+                    {
+                        "key": "guestplan",
+                        "name": "Guestplan",
+                        "icon": "integrations/guestplan.svg"
+                    },
+                    {
+                        "key": "google_agenda",
+                        "name": "Google Agenda",
+                        "icon": "integrations/google_agenda.svg"
+                    },
+                    {
+                        "key": "calendly",
+                        "name": "Calendly",
+                        "icon": "integrations/calendly.svg"
+                    }
+                ]
+            },
             "status": "live",
             "blocked_reason": null,
             "superseded_by": null,
@@ -5420,7 +5809,7 @@
             "kind": "workflow",
             "slug": "no-show-opvolging",
             "label": "No-show opvolging",
-            "tagline": null,
+            "tagline": "Volgt automatisch op als een klant niet komt.",
             "summary": "Automatisch opvolgen als een klant niet komt opdagen voor een afspraak.",
             "industries": [
                 "kapper",
@@ -5458,6 +5847,12 @@
                 "off": 0,
                 "win": 0
             },
+            "picture": {
+                "glyph": "kind-workflow",
+                "trigger": null,
+                "mascot": null,
+                "platforms": []
+            },
             "status": "planned",
             "blocked_reason": "Er bestaat nog geen no-show- of annuleringsgegeven om op te reageren: geen enkele operatie in de manifest levert \"afspraak gemist\". Stap-chaining is sinds 2026-08-20 niet langer de blokkade; het ontbrekende signaal wel.",
             "superseded_by": null,
@@ -5472,7 +5867,7 @@
             "kind": "workflow",
             "slug": "orderstatus-opzoeken",
             "label": "Orderstatus opzoeken",
-            "tagline": null,
+            "tagline": "Orderstatus opgezocht zodra een klant vraagt.",
             "summary": "Automatisch de status van een bestelling opzoeken zodra een klant erover mailt of belt.",
             "industries": [
                 "webshop"
@@ -5502,6 +5897,12 @@
                 "off": 0,
                 "win": 0
             },
+            "picture": {
+                "glyph": "kind-workflow",
+                "trigger": null,
+                "mascot": null,
+                "platforms": []
+            },
             "status": "planned",
             "blocked_reason": "Het bestelnummer dat een klant noemt staat in de vrije tekst van de e-mail — inbox.list_recent (2026-08-28) is wel een trigger op inkomende e-mail, maar geeft bewust nooit het onderwerp of de tekst van het bericht terug (Beveiligingsplan R5: klantcontent is onbetrouwbaar totdat het via een eigen, gecontroleerde stap is verwerkt), dus er is geen veld om naar order.find_by_number door te koppelen. Er is dus geen ontbrekende trigger meer, wel ontbrekende gegevensextractie.",
             "superseded_by": null,
@@ -5516,7 +5917,7 @@
             "kind": "workflow",
             "slug": "klant-opzoeken",
             "label": "Klant opzoeken bij binnenkomend gesprek",
-            "tagline": null,
+            "tagline": "Na elk gesprek het CRM-dossier erbij.",
             "summary": "Zoekt automatisch het CRM-dossier op zodra de Voice agent een gesprek heeft gevoerd.",
             "industries": [
                 "zakelijke_dienstverlening"
@@ -5621,6 +6022,33 @@
                 "off": 0,
                 "win": 480
             },
+            "picture": {
+                "glyph": "phone",
+                "trigger": "poll",
+                "mascot": null,
+                "platforms": [
+                    {
+                        "key": "exact_online",
+                        "name": "Exact Online",
+                        "icon": "integrations/exact_online.svg"
+                    },
+                    {
+                        "key": "pipedrive",
+                        "name": "Pipedrive",
+                        "icon": "integrations/pipedrive.svg"
+                    },
+                    {
+                        "key": "hubspot",
+                        "name": "HubSpot",
+                        "icon": "integrations/hubspot.svg"
+                    },
+                    {
+                        "key": "moneybird",
+                        "name": "Moneybird",
+                        "icon": "integrations/moneybird.svg"
+                    }
+                ]
+            },
             "status": "live",
             "blocked_reason": null,
             "superseded_by": null,
@@ -5635,7 +6063,7 @@
             "kind": "workflow",
             "slug": "weekbriefing-webshop",
             "label": "Wekelijkse omzet- en verkoopbriefing",
-            "tagline": null,
+            "tagline": "Elke maandag omzet, retouren en topproducten.",
             "summary": "Elke maandagochtend omzet, bestellingen, retourpercentage, nieuwe klanten en topproducten van de afgelopen week.",
             "industries": [
                 "webshop",
@@ -5835,6 +6263,48 @@
                 "off": 0,
                 "win": 480
             },
+            "picture": {
+                "glyph": "chart",
+                "trigger": "schedule",
+                "mascot": null,
+                "platforms": [
+                    {
+                        "key": "woocommerce",
+                        "name": "WooCommerce",
+                        "icon": "integrations/woocommerce.svg"
+                    },
+                    {
+                        "key": "shopify",
+                        "name": "Shopify",
+                        "icon": "integrations/shopify.svg"
+                    },
+                    {
+                        "key": "lightspeed",
+                        "name": "Lightspeed eCom",
+                        "icon": "integrations/lightspeed.svg"
+                    },
+                    {
+                        "key": "shopware",
+                        "name": "Shopware",
+                        "icon": "integrations/shopware.svg"
+                    },
+                    {
+                        "key": "magento",
+                        "name": "Magento Open Source",
+                        "icon": "integrations/magento.svg"
+                    },
+                    {
+                        "key": "bol",
+                        "name": "bol.com",
+                        "icon": "integrations/bol.svg"
+                    },
+                    {
+                        "key": "prestashop",
+                        "name": "PrestaShop",
+                        "icon": "integrations/prestashop.svg"
+                    }
+                ]
+            },
             "status": "live",
             "blocked_reason": null,
             "superseded_by": null,
@@ -5849,7 +6319,7 @@
             "kind": "workflow",
             "slug": "weekbriefing-agenda",
             "label": "Wekelijkse agendabriefing",
-            "tagline": null,
+            "tagline": "Elke maandag de komende week vooruit.",
             "summary": "Elke maandagochtend een overzicht van de geplande afspraken voor de komende week.",
             "industries": [
                 "kapper",
@@ -5961,6 +6431,28 @@
                 "off": 0,
                 "win": 480
             },
+            "picture": {
+                "glyph": "calendar",
+                "trigger": "schedule",
+                "mascot": null,
+                "platforms": [
+                    {
+                        "key": "guestplan",
+                        "name": "Guestplan",
+                        "icon": "integrations/guestplan.svg"
+                    },
+                    {
+                        "key": "google_agenda",
+                        "name": "Google Agenda",
+                        "icon": "integrations/google_agenda.svg"
+                    },
+                    {
+                        "key": "calendly",
+                        "name": "Calendly",
+                        "icon": "integrations/calendly.svg"
+                    }
+                ]
+            },
             "status": "live",
             "blocked_reason": null,
             "superseded_by": null,
@@ -5975,7 +6467,7 @@
             "kind": "workflow",
             "slug": "weekbriefing-pijplijn",
             "label": "Wekelijkse pijplijnbriefing",
-            "tagline": null,
+            "tagline": "Elke maandag uw pijplijn in cijfers.",
             "summary": "Elke maandagochtend openstaande pijplijnwaarde, gewonnen deals, winratio en de pijplijn per fase.",
             "industries": [
                 "zakelijke_dienstverlening"
@@ -6148,6 +6640,33 @@
                 "off": 0,
                 "win": 480
             },
+            "picture": {
+                "glyph": "handshake",
+                "trigger": "schedule",
+                "mascot": null,
+                "platforms": [
+                    {
+                        "key": "exact_online",
+                        "name": "Exact Online",
+                        "icon": "integrations/exact_online.svg"
+                    },
+                    {
+                        "key": "pipedrive",
+                        "name": "Pipedrive",
+                        "icon": "integrations/pipedrive.svg"
+                    },
+                    {
+                        "key": "hubspot",
+                        "name": "HubSpot",
+                        "icon": "integrations/hubspot.svg"
+                    },
+                    {
+                        "key": "moneybird",
+                        "name": "Moneybird",
+                        "icon": "integrations/moneybird.svg"
+                    }
+                ]
+            },
             "status": "live",
             "blocked_reason": null,
             "superseded_by": null,
@@ -6162,7 +6681,7 @@
             "kind": "workflow",
             "slug": "openstaande-factuur-signaal",
             "label": "Signaal bij vervallen factuur",
-            "tagline": null,
+            "tagline": "Een melding zodra een factuur vervalt.",
             "summary": "Een melding zodra een factuur vervalt en nog niet is betaald.",
             "industries": [
                 "loodgieter",
@@ -6271,6 +6790,33 @@
                 "off": 0,
                 "win": 480
             },
+            "picture": {
+                "glyph": "receipt",
+                "trigger": "poll",
+                "mascot": null,
+                "platforms": [
+                    {
+                        "key": "exact_online",
+                        "name": "Exact Online",
+                        "icon": "integrations/exact_online.svg"
+                    },
+                    {
+                        "key": "pipedrive",
+                        "name": "Pipedrive",
+                        "icon": "integrations/pipedrive.svg"
+                    },
+                    {
+                        "key": "hubspot",
+                        "name": "HubSpot",
+                        "icon": "integrations/hubspot.svg"
+                    },
+                    {
+                        "key": "moneybird",
+                        "name": "Moneybird",
+                        "icon": "integrations/moneybird.svg"
+                    }
+                ]
+            },
             "status": "live",
             "blocked_reason": null,
             "superseded_by": null,
@@ -6285,7 +6831,7 @@
             "kind": "workflow",
             "slug": "afspraak-morgen-herinnering",
             "label": "Herinnering: afspraak morgen",
-            "tagline": null,
+            "tagline": "Een melding voor elke afspraak van morgen.",
             "summary": "Een melding zodra er een afspraak voor morgen op de agenda staat.",
             "industries": [
                 "kapper",
@@ -6397,6 +6943,28 @@
                 "off": 0,
                 "win": 480
             },
+            "picture": {
+                "glyph": "calendar",
+                "trigger": "poll",
+                "mascot": null,
+                "platforms": [
+                    {
+                        "key": "guestplan",
+                        "name": "Guestplan",
+                        "icon": "integrations/guestplan.svg"
+                    },
+                    {
+                        "key": "google_agenda",
+                        "name": "Google Agenda",
+                        "icon": "integrations/google_agenda.svg"
+                    },
+                    {
+                        "key": "calendly",
+                        "name": "Calendly",
+                        "icon": "integrations/calendly.svg"
+                    }
+                ]
+            },
             "status": "live",
             "blocked_reason": null,
             "superseded_by": null,
@@ -6411,7 +6979,7 @@
             "kind": "workflow",
             "slug": "wie-belde-vandaag",
             "label": "Wie belde er vandaag",
-            "tagline": null,
+            "tagline": "Elke avond wie er vandaag belde.",
             "summary": "Elke avond een overzicht van de telefoongesprekken van vandaag.",
             "industries": [
                 "kapper",
@@ -6523,6 +7091,12 @@
                 "off": 0,
                 "win": 480
             },
+            "picture": {
+                "glyph": "phone",
+                "trigger": "schedule",
+                "mascot": "ghost",
+                "platforms": []
+            },
             "status": "live",
             "blocked_reason": null,
             "superseded_by": null,
@@ -6537,7 +7111,7 @@
             "kind": "workflow",
             "slug": "terugbelverzoek-opvolging",
             "label": "Opvolging terugbelverzoek",
-            "tagline": null,
+            "tagline": "Beller opgezocht, terugbelverzoek gemeld.",
             "summary": "Zoekt de beller op en meldt het zodra de Voice agent een terugbelverzoek noteert.",
             "industries": [
                 "loodgieter",
@@ -6714,6 +7288,33 @@
                 "off": 164,
                 "win": 480
             },
+            "picture": {
+                "glyph": "phone",
+                "trigger": "poll",
+                "mascot": null,
+                "platforms": [
+                    {
+                        "key": "exact_online",
+                        "name": "Exact Online",
+                        "icon": "integrations/exact_online.svg"
+                    },
+                    {
+                        "key": "pipedrive",
+                        "name": "Pipedrive",
+                        "icon": "integrations/pipedrive.svg"
+                    },
+                    {
+                        "key": "hubspot",
+                        "name": "HubSpot",
+                        "icon": "integrations/hubspot.svg"
+                    },
+                    {
+                        "key": "moneybird",
+                        "name": "Moneybird",
+                        "icon": "integrations/moneybird.svg"
+                    }
+                ]
+            },
             "status": "live",
             "blocked_reason": null,
             "superseded_by": null,
@@ -6728,7 +7329,7 @@
             "kind": "workflow",
             "slug": "gemiste-oproepen",
             "label": "Gemiste oproepen",
-            "tagline": null,
+            "tagline": "Een melding bij elke gemiste oproep.",
             "summary": "Een melding zodra een beller op voicemail belandt of het gesprek wordt afgebroken.",
             "industries": [
                 "kapper",
@@ -6854,6 +7455,12 @@
                 "off": 164,
                 "win": 480
             },
+            "picture": {
+                "glyph": "phone",
+                "trigger": "poll",
+                "mascot": "ghost",
+                "platforms": []
+            },
             "status": "live",
             "blocked_reason": null,
             "superseded_by": null,
@@ -6868,7 +7475,7 @@
             "kind": "workflow",
             "slug": "spoed-lead-melding",
             "label": "Spoed- en leadmelding",
-            "tagline": null,
+            "tagline": "Een melding bij spoed of een nieuwe lead.",
             "summary": "Een melding zodra er een urgente e-mail of nieuwe lead binnenkomt.",
             "industries": [
                 "loodgieter",
@@ -6994,6 +7601,12 @@
                 "off": 164,
                 "win": 480
             },
+            "picture": {
+                "glyph": "mail",
+                "trigger": "poll",
+                "mascot": "ghost",
+                "platforms": []
+            },
             "status": "live",
             "blocked_reason": null,
             "superseded_by": null,
@@ -7008,7 +7621,7 @@
             "kind": "workflow",
             "slug": "retour-alarm",
             "label": "Retour-alarm",
-            "tagline": null,
+            "tagline": "Een melding bij elke terugbetaling.",
             "summary": "Een melding zodra een bestelling wordt terugbetaald.",
             "industries": [
                 "webshop",
@@ -7138,6 +7751,48 @@
                 "off": 0,
                 "win": 480
             },
+            "picture": {
+                "glyph": "box",
+                "trigger": "poll",
+                "mascot": null,
+                "platforms": [
+                    {
+                        "key": "woocommerce",
+                        "name": "WooCommerce",
+                        "icon": "integrations/woocommerce.svg"
+                    },
+                    {
+                        "key": "shopify",
+                        "name": "Shopify",
+                        "icon": "integrations/shopify.svg"
+                    },
+                    {
+                        "key": "lightspeed",
+                        "name": "Lightspeed eCom",
+                        "icon": "integrations/lightspeed.svg"
+                    },
+                    {
+                        "key": "shopware",
+                        "name": "Shopware",
+                        "icon": "integrations/shopware.svg"
+                    },
+                    {
+                        "key": "magento",
+                        "name": "Magento Open Source",
+                        "icon": "integrations/magento.svg"
+                    },
+                    {
+                        "key": "bol",
+                        "name": "bol.com",
+                        "icon": "integrations/bol.svg"
+                    },
+                    {
+                        "key": "prestashop",
+                        "name": "PrestaShop",
+                        "icon": "integrations/prestashop.svg"
+                    }
+                ]
+            },
             "status": "live",
             "blocked_reason": null,
             "superseded_by": null,
@@ -7152,7 +7807,7 @@
             "kind": "workflow",
             "slug": "bestelling-blijft-liggen",
             "label": "Bestelling blijft liggen",
-            "tagline": null,
+            "tagline": "Betaald, maar na 3 dagen nog niet verzonden.",
             "summary": "Een melding zodra een betaalde bestelling al 3 dagen niet is verzonden.",
             "industries": [
                 "webshop",
@@ -7260,6 +7915,48 @@
                 "off": 0,
                 "win": 480
             },
+            "picture": {
+                "glyph": "box",
+                "trigger": "poll",
+                "mascot": null,
+                "platforms": [
+                    {
+                        "key": "woocommerce",
+                        "name": "WooCommerce",
+                        "icon": "integrations/woocommerce.svg"
+                    },
+                    {
+                        "key": "shopify",
+                        "name": "Shopify",
+                        "icon": "integrations/shopify.svg"
+                    },
+                    {
+                        "key": "lightspeed",
+                        "name": "Lightspeed eCom",
+                        "icon": "integrations/lightspeed.svg"
+                    },
+                    {
+                        "key": "shopware",
+                        "name": "Shopware",
+                        "icon": "integrations/shopware.svg"
+                    },
+                    {
+                        "key": "magento",
+                        "name": "Magento Open Source",
+                        "icon": "integrations/magento.svg"
+                    },
+                    {
+                        "key": "bol",
+                        "name": "bol.com",
+                        "icon": "integrations/bol.svg"
+                    },
+                    {
+                        "key": "prestashop",
+                        "name": "PrestaShop",
+                        "icon": "integrations/prestashop.svg"
+                    }
+                ]
+            },
             "status": "live",
             "blocked_reason": null,
             "superseded_by": null,
@@ -7274,7 +7971,7 @@
             "kind": "workflow",
             "slug": "grote-bestelling",
             "label": "Grote bestelling",
-            "tagline": null,
+            "tagline": "Een melding bij een bestelling vanaf €500.",
             "summary": "Een melding zodra er een bestelling van minimaal €500 binnenkomt.",
             "industries": [
                 "webshop",
@@ -7431,6 +8128,68 @@
                 "off": 0,
                 "win": 480
             },
+            "picture": {
+                "glyph": "box",
+                "trigger": "poll",
+                "mascot": null,
+                "platforms": [
+                    {
+                        "key": "woocommerce",
+                        "name": "WooCommerce",
+                        "icon": "integrations/woocommerce.svg"
+                    },
+                    {
+                        "key": "shopify",
+                        "name": "Shopify",
+                        "icon": "integrations/shopify.svg"
+                    },
+                    {
+                        "key": "lightspeed",
+                        "name": "Lightspeed eCom",
+                        "icon": "integrations/lightspeed.svg"
+                    },
+                    {
+                        "key": "shopware",
+                        "name": "Shopware",
+                        "icon": "integrations/shopware.svg"
+                    },
+                    {
+                        "key": "magento",
+                        "name": "Magento Open Source",
+                        "icon": "integrations/magento.svg"
+                    },
+                    {
+                        "key": "bol",
+                        "name": "bol.com",
+                        "icon": "integrations/bol.svg"
+                    },
+                    {
+                        "key": "prestashop",
+                        "name": "PrestaShop",
+                        "icon": "integrations/prestashop.svg"
+                    },
+                    {
+                        "key": "exact_online",
+                        "name": "Exact Online",
+                        "icon": "integrations/exact_online.svg"
+                    },
+                    {
+                        "key": "pipedrive",
+                        "name": "Pipedrive",
+                        "icon": "integrations/pipedrive.svg"
+                    },
+                    {
+                        "key": "hubspot",
+                        "name": "HubSpot",
+                        "icon": "integrations/hubspot.svg"
+                    },
+                    {
+                        "key": "moneybird",
+                        "name": "Moneybird",
+                        "icon": "integrations/moneybird.svg"
+                    }
+                ]
+            },
             "status": "live",
             "blocked_reason": null,
             "superseded_by": null,
@@ -7445,7 +8204,7 @@
             "kind": "workflow",
             "slug": "deal-gewonnen",
             "label": "Deal gewonnen",
-            "tagline": null,
+            "tagline": "Een melding zodra een deal is gewonnen.",
             "summary": "Een melding zodra een deal wordt gewonnen.",
             "industries": [
                 "groothandel",
@@ -7550,6 +8309,33 @@
                 "off": 0,
                 "win": 480
             },
+            "picture": {
+                "glyph": "handshake",
+                "trigger": "poll",
+                "mascot": null,
+                "platforms": [
+                    {
+                        "key": "exact_online",
+                        "name": "Exact Online",
+                        "icon": "integrations/exact_online.svg"
+                    },
+                    {
+                        "key": "pipedrive",
+                        "name": "Pipedrive",
+                        "icon": "integrations/pipedrive.svg"
+                    },
+                    {
+                        "key": "hubspot",
+                        "name": "HubSpot",
+                        "icon": "integrations/hubspot.svg"
+                    },
+                    {
+                        "key": "moneybird",
+                        "name": "Moneybird",
+                        "icon": "integrations/moneybird.svg"
+                    }
+                ]
+            },
             "status": "live",
             "blocked_reason": null,
             "superseded_by": null,
@@ -7564,7 +8350,7 @@
             "kind": "workflow",
             "slug": "stilgevallen-deals",
             "label": "Stilgevallen deals",
-            "tagline": null,
+            "tagline": "Elke week de deals die 14 dagen stilstaan.",
             "summary": "Elke week een overzicht van deals die al 14 dagen niet zijn bijgewerkt.",
             "industries": [
                 "zakelijke_dienstverlening"
@@ -7671,6 +8457,33 @@
                 "off": 0,
                 "win": 480
             },
+            "picture": {
+                "glyph": "handshake",
+                "trigger": "schedule",
+                "mascot": null,
+                "platforms": [
+                    {
+                        "key": "exact_online",
+                        "name": "Exact Online",
+                        "icon": "integrations/exact_online.svg"
+                    },
+                    {
+                        "key": "pipedrive",
+                        "name": "Pipedrive",
+                        "icon": "integrations/pipedrive.svg"
+                    },
+                    {
+                        "key": "hubspot",
+                        "name": "HubSpot",
+                        "icon": "integrations/hubspot.svg"
+                    },
+                    {
+                        "key": "moneybird",
+                        "name": "Moneybird",
+                        "icon": "integrations/moneybird.svg"
+                    }
+                ]
+            },
             "status": "live",
             "blocked_reason": null,
             "superseded_by": null,
@@ -7685,7 +8498,7 @@
             "kind": "dashboard",
             "slug": "directie-overzicht",
             "label": "Directie overzicht",
-            "tagline": null,
+            "tagline": "De cijfers waar een eigenaar op stuurt.",
             "summary": "De cijfers waar een eigenaar op stuurt: omzet, loyaliteit, retouren en waar de omzet vandaan komt.",
             "industries": [
                 "webshop",
@@ -7822,6 +8635,48 @@
                 "off": 0,
                 "win": 0
             },
+            "picture": {
+                "glyph": "chart",
+                "trigger": null,
+                "mascot": null,
+                "platforms": [
+                    {
+                        "key": "woocommerce",
+                        "name": "WooCommerce",
+                        "icon": "integrations/woocommerce.svg"
+                    },
+                    {
+                        "key": "shopify",
+                        "name": "Shopify",
+                        "icon": "integrations/shopify.svg"
+                    },
+                    {
+                        "key": "lightspeed",
+                        "name": "Lightspeed eCom",
+                        "icon": "integrations/lightspeed.svg"
+                    },
+                    {
+                        "key": "shopware",
+                        "name": "Shopware",
+                        "icon": "integrations/shopware.svg"
+                    },
+                    {
+                        "key": "magento",
+                        "name": "Magento Open Source",
+                        "icon": "integrations/magento.svg"
+                    },
+                    {
+                        "key": "bol",
+                        "name": "bol.com",
+                        "icon": "integrations/bol.svg"
+                    },
+                    {
+                        "key": "prestashop",
+                        "name": "PrestaShop",
+                        "icon": "integrations/prestashop.svg"
+                    }
+                ]
+            },
             "status": "live",
             "blocked_reason": null,
             "superseded_by": null,
@@ -7836,7 +8691,7 @@
             "kind": "dashboard",
             "slug": "webshops-vergelijken",
             "label": "Webshops vergelijken",
-            "tagline": null,
+            "tagline": "Kerncijfers per webshop, naast elkaar.",
             "summary": "Dezelfde kerncijfers per webshop naast elkaar — alleen bij twee of meer gekoppelde webshops.",
             "industries": [
                 "webshop",
@@ -7910,6 +8765,48 @@
                 "off": 0,
                 "win": 0
             },
+            "picture": {
+                "glyph": "chart",
+                "trigger": null,
+                "mascot": null,
+                "platforms": [
+                    {
+                        "key": "woocommerce",
+                        "name": "WooCommerce",
+                        "icon": "integrations/woocommerce.svg"
+                    },
+                    {
+                        "key": "shopify",
+                        "name": "Shopify",
+                        "icon": "integrations/shopify.svg"
+                    },
+                    {
+                        "key": "lightspeed",
+                        "name": "Lightspeed eCom",
+                        "icon": "integrations/lightspeed.svg"
+                    },
+                    {
+                        "key": "shopware",
+                        "name": "Shopware",
+                        "icon": "integrations/shopware.svg"
+                    },
+                    {
+                        "key": "magento",
+                        "name": "Magento Open Source",
+                        "icon": "integrations/magento.svg"
+                    },
+                    {
+                        "key": "bol",
+                        "name": "bol.com",
+                        "icon": "integrations/bol.svg"
+                    },
+                    {
+                        "key": "prestashop",
+                        "name": "PrestaShop",
+                        "icon": "integrations/prestashop.svg"
+                    }
+                ]
+            },
             "status": "live",
             "blocked_reason": null,
             "superseded_by": null,
@@ -7924,7 +8821,7 @@
             "kind": "dashboard",
             "slug": "liquiditeit",
             "label": "Liquiditeit",
-            "tagline": null,
+            "tagline": "Saldo, verwachtingen en 13 weken kasstroom.",
             "summary": "Banksaldo, wat u nog krijgt en nog moet betalen, en de verwachte kasstroom voor 13 weken.",
             "industries": [
                 "loodgieter",
@@ -8037,6 +8934,33 @@
                 "off": 0,
                 "win": 0
             },
+            "picture": {
+                "glyph": "chart",
+                "trigger": null,
+                "mascot": null,
+                "platforms": [
+                    {
+                        "key": "exact_online",
+                        "name": "Exact Online",
+                        "icon": "integrations/exact_online.svg"
+                    },
+                    {
+                        "key": "pipedrive",
+                        "name": "Pipedrive",
+                        "icon": "integrations/pipedrive.svg"
+                    },
+                    {
+                        "key": "hubspot",
+                        "name": "HubSpot",
+                        "icon": "integrations/hubspot.svg"
+                    },
+                    {
+                        "key": "moneybird",
+                        "name": "Moneybird",
+                        "icon": "integrations/moneybird.svg"
+                    }
+                ]
+            },
             "status": "live",
             "blocked_reason": null,
             "superseded_by": null,
@@ -8051,7 +8975,7 @@
             "kind": "dashboard",
             "slug": "cashflow",
             "label": "Cashflow",
-            "tagline": null,
+            "tagline": "Wat er per week binnenkwam en uitging.",
             "summary": "Wat er per week binnenkwam en uitging, waar het geld heen ging, en hoe uw saldo zich ontwikkelde.",
             "industries": [
                 "loodgieter",
@@ -8164,6 +9088,33 @@
                 "off": 0,
                 "win": 0
             },
+            "picture": {
+                "glyph": "chart",
+                "trigger": null,
+                "mascot": null,
+                "platforms": [
+                    {
+                        "key": "exact_online",
+                        "name": "Exact Online",
+                        "icon": "integrations/exact_online.svg"
+                    },
+                    {
+                        "key": "pipedrive",
+                        "name": "Pipedrive",
+                        "icon": "integrations/pipedrive.svg"
+                    },
+                    {
+                        "key": "hubspot",
+                        "name": "HubSpot",
+                        "icon": "integrations/hubspot.svg"
+                    },
+                    {
+                        "key": "moneybird",
+                        "name": "Moneybird",
+                        "icon": "integrations/moneybird.svg"
+                    }
+                ]
+            },
             "status": "live",
             "blocked_reason": null,
             "superseded_by": null,
@@ -8178,7 +9129,7 @@
             "kind": "dashboard",
             "slug": "debiteuren-crediteuren",
             "label": "Debiteuren & crediteuren",
-            "tagline": null,
+            "tagline": "Openstaand bij klanten en leveranciers.",
             "summary": "Openstaand en vervallen bij klanten en leveranciers, betaaltermijnen, en welke facturen aandacht vragen.",
             "industries": [
                 "loodgieter",
@@ -8307,6 +9258,33 @@
                 "off": 0,
                 "win": 0
             },
+            "picture": {
+                "glyph": "chart",
+                "trigger": null,
+                "mascot": null,
+                "platforms": [
+                    {
+                        "key": "exact_online",
+                        "name": "Exact Online",
+                        "icon": "integrations/exact_online.svg"
+                    },
+                    {
+                        "key": "pipedrive",
+                        "name": "Pipedrive",
+                        "icon": "integrations/pipedrive.svg"
+                    },
+                    {
+                        "key": "hubspot",
+                        "name": "HubSpot",
+                        "icon": "integrations/hubspot.svg"
+                    },
+                    {
+                        "key": "moneybird",
+                        "name": "Moneybird",
+                        "icon": "integrations/moneybird.svg"
+                    }
+                ]
+            },
             "status": "live",
             "blocked_reason": null,
             "superseded_by": null,
@@ -8321,7 +9299,7 @@
             "kind": "dashboard",
             "slug": "openstaande-facturen",
             "label": "Openstaande facturen",
-            "tagline": null,
+            "tagline": "Openstaand, vervallen en wat aandacht vraagt.",
             "summary": "Openstaand en vervallen bedrag, gefactureerd, en welke facturen aandacht nodig hebben.",
             "industries": [
                 "loodgieter",
@@ -8423,6 +9401,33 @@
                 "off": 0,
                 "win": 0
             },
+            "picture": {
+                "glyph": "chart",
+                "trigger": null,
+                "mascot": null,
+                "platforms": [
+                    {
+                        "key": "exact_online",
+                        "name": "Exact Online",
+                        "icon": "integrations/exact_online.svg"
+                    },
+                    {
+                        "key": "pipedrive",
+                        "name": "Pipedrive",
+                        "icon": "integrations/pipedrive.svg"
+                    },
+                    {
+                        "key": "hubspot",
+                        "name": "HubSpot",
+                        "icon": "integrations/hubspot.svg"
+                    },
+                    {
+                        "key": "moneybird",
+                        "name": "Moneybird",
+                        "icon": "integrations/moneybird.svg"
+                    }
+                ]
+            },
             "status": "live",
             "blocked_reason": null,
             "superseded_by": "debiteuren-crediteuren",
@@ -8437,7 +9442,7 @@
             "kind": "dashboard",
             "slug": "winstgevendheid",
             "label": "Winstgevendheid",
-            "tagline": null,
+            "tagline": "Brutowinst en marge op uw eigen kostprijzen.",
             "summary": "Brutowinst en marge op basis van uw eigen kostprijzen, naast omzet en bestellingen.",
             "industries": [
                 "webshop",
@@ -8546,6 +9551,48 @@
             "crop": {
                 "off": 0,
                 "win": 0
+            },
+            "picture": {
+                "glyph": "chart",
+                "trigger": null,
+                "mascot": null,
+                "platforms": [
+                    {
+                        "key": "woocommerce",
+                        "name": "WooCommerce",
+                        "icon": "integrations/woocommerce.svg"
+                    },
+                    {
+                        "key": "shopify",
+                        "name": "Shopify",
+                        "icon": "integrations/shopify.svg"
+                    },
+                    {
+                        "key": "lightspeed",
+                        "name": "Lightspeed eCom",
+                        "icon": "integrations/lightspeed.svg"
+                    },
+                    {
+                        "key": "shopware",
+                        "name": "Shopware",
+                        "icon": "integrations/shopware.svg"
+                    },
+                    {
+                        "key": "magento",
+                        "name": "Magento Open Source",
+                        "icon": "integrations/magento.svg"
+                    },
+                    {
+                        "key": "bol",
+                        "name": "bol.com",
+                        "icon": "integrations/bol.svg"
+                    },
+                    {
+                        "key": "prestashop",
+                        "name": "PrestaShop",
+                        "icon": "integrations/prestashop.svg"
+                    }
+                ]
             },
             "status": "live",
             "blocked_reason": null,

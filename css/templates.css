@@ -1,86 +1,205 @@
 /* ==========================================================================
-   Templates marketplace (2026-09-05) — the search/filter toolbar, the
-   grid, one card, and the dashboard-template tile mock for /templates and
-   /templates/<slug>.html. Paired with js/templates.js (client-side
-   filtering, no build step) and reuses css/workflow-canvas.css UNCHANGED
-   for the actual canvas (.wf-canvas/.wf-node/etc. and its static-picture
-   variant) — this file only adds the marketplace chrome AROUND that
-   component, mirroring the Mowi Dashboard's own copy of this same page
-   (resources/css/workflow-canvas.css's own "Marketplace toolbar"/"Rows +
-   grid"/"One card"/"Dashboard tile mock" blocks) retokenised to this
-   site's own palette (--ink/--surface/--muted/--border), the same
-   translation every other shared component on this site already gets.
+   Templates marketplace (2026-09-05; round 2 on 2026-09-06) — the compact
+   header, the toolbar (segmented type control + three dropdowns), the
+   sections per kind, one card with its logo+glyph picture, and the
+   dashboard-template tile mock for /templates and /templates/<slug>.html.
+   Paired with js/templates.js (client-side filtering, no build step) and
+   reuses css/workflow-canvas.css UNCHANGED for the detail pages' canvas —
+   this file only adds the marketplace chrome, mirroring the Mowi
+   Dashboard's own copy of this page (resources/css/workflow-canvas.css's
+   marketplace blocks) retokenised to this site's palette (--ink/--surface/
+   --muted/--border), the same translation every shared component gets.
+   Class names deliberately avoid the dead .tpl-hero, .tpl-panels,
+   .tpl-showcase, .tpl-branche- and .tpl-example rules the pre-marketplace
+   gallery left behind in workflow-canvas.css (and never write a star-slash
+   sequence in this comment: it closed the comment early and silently ate
+   the first rule below, which is how .tpl-head went missing on 2026-09-06).
    ========================================================================== */
 
-/* ---------- Toolbar: search + type + filter chips ---------- */
-.tpl-toolbar{display:flex;flex-direction:column;gap:.75rem;margin-bottom:2rem}
+/* ---------- Header: title + one line left, search right ----------
+   Longhand padding only: .container's own inset lives in its padding
+   shorthand, so a `padding:` here would silently reset it (see .hero's
+   own warning in style.css). */
+.tpl-head{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;padding-top:2.5rem;padding-bottom:1.25rem}
+.tpl-head .page-hero-body{margin-top:.5rem}
 .tpl-search{
-  display:flex;align-items:center;gap:.5rem;padding:.75rem 1rem;border-radius:var(--radius-pill);
-  border:1px solid var(--border);background:var(--surface);max-width:32rem;
+  display:flex;align-items:center;gap:.5rem;padding:.625rem .875rem;width:20rem;max-width:100%;flex-shrink:0;
+  border-radius:var(--radius-pill);border:1px solid var(--border);background:var(--surface);
 }
+.tpl-search:focus-within{border-color:var(--ink)}
 .tpl-search svg{flex-shrink:0;color:var(--ink-3)}
-.tpl-search input{flex:1;border:none;background:none;font:inherit;color:var(--ink);outline:none}
+.tpl-search input{flex:1;min-width:0;border:none;background:none;font:inherit;font-size:.9375rem;color:var(--ink);outline:none}
 .tpl-search input::placeholder{color:var(--ink-3)}
-.tpl-filter-row{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
-.tpl-filter-chip{
-  flex-shrink:0;font-size:.8125rem;font-weight:500;color:var(--ink-2);background:var(--muted);border:1px solid transparent;
-  padding:.4375rem .8125rem;border-radius:var(--radius-pill);cursor:pointer;font-family:inherit;white-space:nowrap;
-  transition:border-color .15s ease,background-color .15s ease;
-}
-.tpl-filter-chip:hover{border-color:var(--ink)}
-.tpl-filter-chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 
-/* ---------- Rows + grid ---------- */
-.tpl-row{margin-bottom:2.5rem}
-.tpl-row-head{display:flex;align-items:baseline;justify-content:space-between;gap:.75rem;margin-bottom:1rem}
-.tpl-row-head h2{font-size:1.125rem;margin:0}
-.tpl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(17rem,1fr));gap:1rem}
-.tpl-empty{padding:3.5rem 1rem;text-align:center;color:var(--ink-2);font-size:.9375rem}
-.tpl-empty a{display:inline-block;margin-top:.75rem}
+/* ---------- Toolbar band ---------- */
+.tpl-toolbar{
+  display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;padding:.625rem 0;
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+}
+.tpl-seg{display:inline-flex;flex-shrink:0;background:var(--muted);border-radius:var(--radius-btn);padding:3px;gap:2px}
+.tpl-seg button{
+  font-size:.8125rem;font-weight:500;color:var(--ink-2);background:none;border:none;font-family:inherit;cursor:pointer;
+  padding:.3125rem .75rem;border-radius:calc(var(--radius-btn) - 3px);transition:background-color .15s ease,color .15s ease;
+}
+.tpl-seg button:hover{color:var(--ink)}
+.tpl-seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(18,17,16,.08)}
+.tpl-dd{position:relative}
+.tpl-dd-btn{
+  display:inline-flex;align-items:center;gap:.375rem;background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius-btn);padding:.4375rem .625rem .4375rem .75rem;font-size:.8125rem;font-weight:500;color:var(--ink);
+  font-family:inherit;cursor:pointer;white-space:nowrap;
+}
+.tpl-dd-btn:hover{border-color:var(--ink-3)}
+.tpl-dd-btn.is-set{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.tpl-dd-btn svg{width:.875rem;height:.875rem;color:var(--ink-3);transition:transform .15s ease}
+.tpl-dd-btn[aria-expanded="true"] svg{transform:rotate(180deg)}
+.tpl-dd-menu{
+  display:none;position:absolute;left:0;top:calc(100% + 4px);z-index:30;min-width:14.5rem;max-height:20rem;overflow:auto;
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-btn);box-shadow:0 8px 24px rgba(18,17,16,.10);padding:4px;
+}
+.tpl-dd-btn[aria-expanded="true"] + .tpl-dd-menu{display:block}
+.tpl-dd-menu [role="option"]{
+  display:flex;align-items:center;gap:.5rem;width:100%;text-align:left;padding:.4375rem .625rem;border-radius:6px;
+  font-size:.8125rem;font-weight:500;color:var(--ink-2);border:none;background:none;font-family:inherit;cursor:pointer;white-space:nowrap;
+}
+@media (hover:hover){.tpl-dd-menu [role="option"]:hover{background:var(--muted);color:var(--ink)}}
+.tpl-dd-menu [role="option"]:focus-visible{outline:2px solid var(--ink);outline-offset:-2px}
+.tpl-dd-menu [role="option"][aria-selected="true"]{color:var(--ink);background:var(--muted);font-weight:600}
+.tpl-dd-menu [role="option"][aria-disabled="true"]{opacity:.4;cursor:default}
+.tpl-dd-label{flex:1}
+.tpl-dd-count{font-size:.71875rem;font-weight:600;color:var(--ink-3);font-variant-numeric:tabular-nums}
+
+/* Active filters: removable pills + "Wis filters" + the live count. */
+.tpl-active{display:flex;flex-wrap:wrap;align-items:center;gap:.375rem;padding:.625rem 0 .125rem;font-size:.8125rem;color:var(--ink-2)}
+.tpl-pill{
+  display:inline-flex;align-items:center;gap:.375rem;padding:.25rem .5rem .25rem .625rem;border-radius:var(--radius-pill);
+  border:1px solid var(--ink);background:var(--ink);color:var(--bg);font-size:.75rem;font-weight:600;font-family:inherit;cursor:pointer;
+}
+.tpl-pill span[aria-hidden]{font-size:.9375rem;line-height:1;opacity:.8}
+.tpl-clear{margin-left:.25rem;background:none;border:none;padding:0;font:inherit;font-size:.8125rem;font-weight:600;color:var(--ink);cursor:pointer;text-decoration:underline;text-underline-offset:2px}
+.tpl-clear:hover{color:var(--ink-2)}
+.tpl-result-count{margin-left:auto;font-size:.8125rem;color:var(--ink-3);font-variant-numeric:tabular-nums}
+
+/* ---------- Sections per kind + the grid ---------- */
+.tpl-marketplace{padding-bottom:3rem}
+.tpl-section{padding-top:1.25rem;margin-top:1.25rem;border-top:1px solid var(--border)}
+.tpl-section-head{display:flex;align-items:baseline;justify-content:space-between;gap:.75rem;margin-bottom:.75rem}
+.tpl-section-head h2{font-size:1.0625rem;margin:0;display:flex;align-items:baseline;gap:.5rem}
+.tpl-count{font-size:.8125rem;font-weight:600;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.tpl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr));gap:.875rem}
+.tpl-empty{padding:3rem 1.25rem;text-align:center;color:var(--ink-2);font-size:.9375rem}
+.tpl-empty p{margin:0}
+.tpl-empty-actions{display:flex;justify-content:center;flex-wrap:wrap;gap:.5rem;margin-top:.875rem}
+/* style.css has one button style (.btn-primary) and plain text links; the
+   empty state's second action gets the bone-fill/ink-border sibling the
+   design system describes, kept local to this page. */
+.tpl-btn-secondary{
+  display:inline-flex;align-items:center;justify-content:center;background:var(--bg);color:var(--ink);border:1px solid var(--ink);
+  font-weight:600;font-size:.9375rem;padding:calc(.875rem - 1px) 1.5rem;border-radius:var(--radius-btn);transition:background-color .15s ease;
+}
+.tpl-btn-secondary:hover{background:var(--muted)}
+/* Load-bearing: js/templates.js toggles the `hidden` attribute, and an
+   author `display` rule (the card's display:flex below) silently beats the
+   browser's own [hidden]{display:none}. Without this line every filter on
+   this page was a no-op on 2026-09-05. */
+.tpl-card[hidden],.tpl-section[hidden],.tpl-active[hidden],.tpl-empty[hidden]{display:none}
 
 /* ---------- One card ---------- */
 .tpl-card{
   display:flex;flex-direction:column;border-radius:var(--radius-card);border:1px solid var(--border);
-  background:var(--surface);overflow:hidden;color:inherit;text-decoration:none;
-  transition:border-color .15s ease;
+  background:var(--surface);overflow:hidden;color:inherit;text-decoration:none;transition:border-color .15s ease;
 }
 .tpl-card:hover{border-color:var(--ink)}
-/* The canvas/tile-mock component brings its own border+radius for when it
-   stands alone (the detail page's larger copy); inside a card it becomes
-   the card's own top edge instead. */
-.tpl-card-visual{position:relative;height:11rem;overflow:hidden;background:var(--muted);border-bottom:1px solid var(--border)}
-.tpl-card-visual .wf-canvas-static{position:absolute;inset:0;border:none;border-radius:0;background:none;height:auto}
-.tpl-card-visual .wf-canvas-static .wf-viewport{height:100%}
-.tpl-card-visual .tpl-dash-mock{position:absolute;inset:0}
-.tpl-card-body{display:flex;flex-direction:column;gap:.375rem;padding:.9375rem 1rem 1rem}
-.tpl-card-meta{display:flex;align-items:center;gap:.375rem}
-.tpl-chip{font-size:.6875rem;font-weight:600;padding:.1875rem .5625rem;border-radius:var(--radius-pill);white-space:nowrap}
-.tpl-chip-kind{background:var(--muted);color:var(--ink-2)}
-.tpl-chip-on{background:var(--ink);color:var(--bg)}
-.tpl-chip-off{background:var(--muted);color:var(--ink-3);border:1px solid var(--border)}
-.tpl-card-title{font-size:.90625rem;font-weight:700;color:var(--ink);margin:0}
-.tpl-card-summary{
+/* The picture: the canvas family's dot grid as the field, white logo tiles
+   (baked-in brand fills) and ONE big glyph in a hairline circle; the kind
+   badge sits in the corner. No text. */
+.tpl-picture{
+  position:relative;height:7.5rem;display:flex;align-items:center;justify-content:center;padding:0 .75rem;
+  background:var(--muted);background-image:radial-gradient(var(--wf-dot,rgba(18,17,16,.10)) 1.25px,transparent 0);background-size:20px 20px;
+  border-bottom:1px solid var(--border);
+}
+.tpl-picture-row{display:flex;align-items:center;gap:.375rem;max-width:100%}
+.tpl-logo{
+  display:inline-flex;align-items:center;justify-content:center;height:2.25rem;min-width:2.25rem;padding:0 .5rem;flex-shrink:0;
+  border-radius:.5rem;border:1px solid var(--border);background:#fff;
+}
+.tpl-logo img{display:block;height:1.125rem;width:auto;max-width:3.25rem}
+.tpl-logo-more{background:var(--surface);color:var(--ink-2);font-size:.75rem;font-weight:600;min-width:1.875rem;padding:0 .375rem}
+.tpl-logo-sm{height:1.5rem;min-width:1.5rem;padding:0 .3125rem;border-radius:5px}
+.tpl-logo-sm img{height:.8125rem;max-width:3.125rem}
+.tpl-logo-list{display:flex;flex-wrap:wrap;gap:.375rem;margin-bottom:.625rem}
+.tpl-glyph{
+  width:3.5rem;height:3.5rem;margin-left:.375rem;border-radius:50%;border:1px solid var(--border);background:var(--surface);color:var(--ink);
+  display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.tpl-glyph svg{width:1.75rem;height:1.75rem}
+.tpl-picture-row > .tpl-glyph:first-child{margin-left:0}
+/* The ghost mascot's paints come from the same two custom properties the
+   dashboard's .c-ink sets (agent-icon.blade.php). */
+.tpl-mascot{width:3rem;height:3rem;flex-shrink:0;--agent-fill:var(--ink);--agent-eye:var(--bg)}
+.tpl-mascot svg{display:block;width:100%;height:100%}
+.tpl-kind{
+  position:absolute;top:.5rem;right:.5rem;width:1.375rem;height:1.375rem;border-radius:6px;border:1px solid var(--border);
+  background:var(--surface);color:var(--ink-2);display:inline-flex;align-items:center;justify-content:center;
+}
+.tpl-kind svg{width:.8125rem;height:.8125rem}
+.tpl-card-body{display:flex;flex-direction:column;gap:.25rem;padding:.75rem .875rem .875rem}
+.tpl-card-title{font-size:.9375rem;font-weight:700;color:var(--ink);margin:0;line-height:1.3}
+.tpl-card-line{
   font-size:.8125rem;color:var(--ink-2);line-height:1.45;margin:0;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
 }
-.tpl-card-platforms{display:flex;gap:.25rem;margin-top:.125rem}
-.tpl-card-platform-icon{height:.875rem;width:auto;max-width:2.25rem;opacity:.7}
+.tpl-card-foot{padding:0 .875rem .75rem;margin-top:auto}
+.tpl-chip{display:inline-block;font-size:.6875rem;font-weight:600;padding:.1875rem .5625rem;border-radius:var(--radius-pill);white-space:nowrap}
+.tpl-chip-off{background:var(--muted);color:var(--ink-3);border:1px solid var(--border)}
 
-/* ---------- Dashboard tile mock (the sibling of the canvas crop for a
-   dashboard template, which has tiles instead of a graph) ---------- */
+/* Phones: header stacks, two compact cards per row, the segmented control
+   full width, the "+N" tile dropped so two logo tiles and the glyph still
+   fit a 170px picture. */
+@media (max-width:47.9rem){
+  .tpl-head{flex-direction:column;align-items:stretch;gap:.875rem;padding-top:1.5rem;padding-bottom:.875rem}
+  .tpl-head .page-hero-body{display:none}
+  .tpl-search{width:100%;padding:.5rem .75rem}
+  .tpl-toolbar{gap:.375rem;padding:.5rem 0}
+  .tpl-seg{width:100%;display:flex}
+  .tpl-seg button{flex:1;text-align:center;padding-left:.375rem;padding-right:.375rem}
+  .tpl-dd-btn{padding:.375rem .5rem .375rem .625rem}
+  .tpl-dd-menu{min-width:min(16rem,calc(100vw - 3rem))}
+  .tpl-section{padding-top:.875rem;margin-top:.875rem}
+  .tpl-section-head{flex-wrap:wrap;gap:.25rem .75rem}
+  .tpl-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:.625rem}
+  .tpl-picture{height:6rem;padding:0 .5rem}
+  .tpl-picture-row{gap:.25rem}
+  .tpl-logo{height:1.75rem;min-width:1.75rem;padding:0 .375rem;border-radius:6px}
+  .tpl-logo img{height:.875rem;max-width:2.75rem}
+  .tpl-logo-more{display:none}
+  .tpl-glyph{width:2.75rem;height:2.75rem;margin-left:.25rem}
+  .tpl-glyph svg{width:1.375rem;height:1.375rem}
+  .tpl-mascot{width:2.5rem;height:2.5rem}
+  .tpl-kind{top:.375rem;right:.375rem;width:1.25rem;height:1.25rem}
+  .tpl-card-body{padding:.625rem .75rem .75rem;gap:.1875rem}
+  .tpl-card-title{font-size:.8125rem}
+  .tpl-card-line{font-size:.75rem}
+  .tpl-card-foot{padding:0 .75rem .625rem}
+}
+
+/* ---------- Dashboard tile mock (the detail page's picture for a dashboard
+   template, which has tiles instead of a graph) ----------
+   minmax(0,1fr), not 1fr: a bare 1fr column can't shrink below its
+   min-content, so a long tile title clipped mid-word in the 4-column mock. */
 .tpl-dash-mock{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:.375rem;padding:.875rem;align-content:start;
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.375rem;padding:.875rem;align-content:start;
   -webkit-mask-image:linear-gradient(to bottom,#000 70%,transparent 100%);
   mask-image:linear-gradient(to bottom,#000 70%,transparent 100%);
 }
 .tpl-dash-tile{
   border-radius:.5rem;border:1px solid var(--border);background:var(--surface);padding:.5rem;
-  display:flex;flex-direction:column;justify-content:space-between;min-height:3.25rem;
+  display:flex;flex-direction:column;justify-content:space-between;min-height:3.25rem;min-width:0;
 }
 .tpl-dash-tile-small{grid-column:span 1}
 .tpl-dash-tile-half{grid-column:span 2}
 .tpl-dash-tile-wide{grid-column:span 4}
-.tpl-dash-tile-title{font-size:.59375rem;font-weight:600;color:var(--ink-2);line-height:1.3}
+.tpl-dash-tile-title{font-size:.59375rem;font-weight:600;color:var(--ink-2);line-height:1.3;overflow-wrap:anywhere}
 .tpl-dash-tile-body{flex:1;margin-top:.25rem;border-radius:.3125rem;background:var(--muted)}
 
 /* ---------- Detail page ---------- */
@@ -90,6 +209,7 @@
 .tpl-detail-grid{display:grid;grid-template-columns:1fr;gap:1.5rem;margin-bottom:2.5rem}
 @media (min-width:48rem){ .tpl-detail-grid{grid-template-columns:1fr 1fr} }
 .tpl-detail-section h2{font-size:1rem;margin:0 0 .75rem}
+.tpl-detail-section p{margin:0 0 .5rem;font-size:.9375rem;color:var(--ink-2)}
 .tpl-detail-steps{margin:0;padding-left:1.25rem;display:flex;flex-direction:column;gap:.625rem}
 .tpl-detail-steps li strong{display:block;font-size:.875rem;color:var(--ink)}
 .tpl-detail-steps li span{font-size:.8125rem;color:var(--ink-2)}
