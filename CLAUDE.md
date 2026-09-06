@@ -136,7 +136,7 @@ backstop in case something important didn't get written down.
   mowi:export-templates <path>` in that repo). Never hand-edit the output; change the generator or
   re-export, run `node build-templates.js`, and commit the regenerated files with it. A second run
   is byte-identical (checked). The page's own assets are `css/templates.css` + `js/templates.js`,
-  versioned together by `TPL_ASSET_VERSION` in the generator (**`20260906-6`**); `style.css`/
+  versioned together by `TPL_ASSET_VERSION` in the generator (**`20260906-7`**); `style.css`/
   `main.js`/`workflow-canvas.*` are untouched by this page, so a templates change never needs the
   sitewide bump. The vault note `Dashboard/templates-marketplace-plan.md` is the build record.
 - **The filters were silently broken for a day (2026-09-05→06), and the lesson is a rule:** the
@@ -173,8 +173,9 @@ backstop in case something important didn't get written down.
   evening — Sal: "apply the same entire styling on the website mowi.agency templates page as well
   ... use the dashboard template page as example thats how we want to have it").** Same grid as
   the dashboard's `flows/template-show.blade.php`: four named areas (intro, visual, nodes, needs)
-  in `css/templates.css` — stacked below 64rem; from 64rem the intro (identity row for agents, the
-  label as H1, tagline, summary, one CTA) and the "Wat u nodig heeft" checklist share the left
+  in `css/templates.css` — stacked below 64rem; from 64rem the intro (the label as H1, tagline,
+  summary, one CTA — the agents' mascot-and-glyph identity row above the title was removed the same
+  evening, Sal: "too much text and makes it too busy with the icons") and the "Wat u nodig heeft" checklist share the left
   column next to the 30rem graph, and "Wat de agent doet" / "Zo werkt het" runs full width
   underneath as three cards per row (agent nodes with the canvas's icons, workflow/dashboard steps
   numbered). "Ook interessant" is **same-branche only** on both sites (Sal: "not relevant to

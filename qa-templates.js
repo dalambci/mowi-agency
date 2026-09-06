@@ -158,8 +158,7 @@ async function run(browserType, label, viewport, device) {
   check(`${label} detail page renders the canvas + CTA + named logos + numbered steps`, await page.evaluate(() => !!document.querySelector(".tpl-detail-visual-wrap [data-wf-canvas] .wf-node") && !!document.querySelector(".tpl-detail-cta a.btn-primary") && document.querySelectorAll(".tpl-needs .tpl-logo-list .tpl-logo img[alt]").length > 0 && document.querySelectorAll(".tpl-detail-nodes .tpl-node .tpl-node-num").length > 0));
   await page.screenshot({ path: path.join(OUT, `tpl-${label}-detail.png`) });
 
-  // 10. A detail page mirrors the dashboard's (2026-09-06): identity row,
-  // the label as H1, the flow's nodes as cards, a needs checklist, the
+  // 10. A detail page mirrors the dashboard's (2026-09-06): the label as H1, the flow's nodes as cards, a needs checklist, the
   // canvas beside the copy (fitted whole: every node inside the frame),
   // a same-branche related row — and the same grid: stacked (intro /
   // visual / nodes / needs) below 1024px; from 1024px the intro and the
@@ -185,9 +184,10 @@ async function run(browserType, label, viewport, device) {
     const related = Array.from(document.querySelectorAll(".tpl-detail-related [data-tpl-card]")).map((c) => c.getAttribute("data-tpl-industries") || "");
     return {
       h1: document.querySelector("h1") ? document.querySelector("h1").textContent.trim() : "",
-      identity: !!document.querySelector(".tpl-agent-identity .tpl-mascot svg") && !!document.querySelector('.tpl-agent-identity .tpl-glyph svg[data-glyph="phone"]'),
       cards: document.querySelectorAll(".tpl-detail-nodes .tpl-node").length,
       needs: document.querySelectorAll(".tpl-needs li").length,
+      // Removed 2026-09-06 (Sal: "too much text and makes it too busy with the icons").
+      identityRow: !!document.querySelector(".tpl-agent-identity"),
       canvas: nodes.length > 0,
       fitted,
       cta: !!document.querySelector(".tpl-detail-cta a.btn-primary"),
@@ -198,7 +198,7 @@ async function run(browserType, label, viewport, device) {
     };
   });
   check(`${label} agent page: the label is the H1`, agent.h1 === "Voice agent — Kapper", agent.h1);
-  check(`${label} agent page: identity row, flow cards, needs list, canvas, CTA`, agent.identity && agent.cards >= 3 && agent.needs >= 1 && agent.canvas && agent.cta, JSON.stringify({ identity: agent.identity, cards: agent.cards, needs: agent.needs, canvas: agent.canvas, cta: agent.cta }));
+  check(`${label} agent page: flow cards, needs list, canvas, CTA, no identity row`, agent.cards >= 3 && agent.needs >= 1 && agent.canvas && agent.cta && !agent.identityRow, JSON.stringify({ cards: agent.cards, needs: agent.needs, canvas: agent.canvas, cta: agent.cta, identityRow: agent.identityRow }));
   check(`${label} agent page: the whole flow is fitted inside the frame`, agent.fitted);
   check(`${label} agent page: related row is same-branche only (kapper)`, agent.related.length >= 2 && agent.related.every((ind) => ind.split(",").includes("kapper")), JSON.stringify(agent.related));
   check(`${label} agent page: ${phone ? "stacked intro / visual / nodes / needs" : "intro + needs left of the visual, nodes full width below"}`, phone ? agent.stacked : agent.sideBySide);

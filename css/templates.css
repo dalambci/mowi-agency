@@ -258,12 +258,6 @@
 .tpl-detail-cta-reason{margin-top:.5rem}
 .tpl-chip-lg{font-size:.8125rem;padding:.5rem .875rem}
 .tpl-detail .hint{margin:0;font-size:.875rem;line-height:1.5;color:var(--ink-3)}
-/* Agent identity row above the title: mascot + channel glyph + kind · branche. */
-.tpl-agent-identity{display:flex;align-items:center;gap:.5rem;margin-bottom:.75rem}
-.tpl-agent-identity .tpl-mascot{width:2rem;height:2rem}
-.tpl-agent-identity .tpl-glyph{width:2rem;height:2rem;margin-left:0}
-.tpl-agent-identity .tpl-glyph svg{width:1rem;height:1rem}
-.tpl-agent-kind{font-size:.8125rem;font-weight:600;color:var(--ink-2);margin-left:.125rem}
 .tpl-detail-visual{border-radius:var(--radius-card);border:1px solid var(--border);overflow:hidden;background:var(--muted)}
 .tpl-detail-visual-inner{position:relative;height:22rem}
 .tpl-detail-visual .tpl-dash-mock{position:absolute;inset:0;padding:1.25rem}

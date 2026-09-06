@@ -69,7 +69,7 @@ const WF_JS_VERSION = "20260906-1";
 // This file's OWN two new assets get one shared version, bumped whenever
 // either changes — same "one value per file-pair, bump together" rule
 // the rest of the site's cache-busting convention already follows.
-const TPL_ASSET_VERSION = "20260906-6";
+const TPL_ASSET_VERSION = "20260906-7";
 
 // ---------------------------------------------------------------------------
 // Escaping — every field below can eventually carry CLIENT-authored text
@@ -587,19 +587,7 @@ function renderDetailPage(template, related, art) {
 
   const isAgent = template.kind === "agent";
   const planned = template.status !== "live";
-  const kindLabel = isAgent ? AGENT_KIND_LABEL[template.agent_type] || "Agent" : KIND_LABELS[template.kind];
   const nodes = isAgent && template.graph ? template.graph.nodes.filter((n) => n.kind !== "start" && n.kind !== "end") : [];
-
-  // The card's own picture as the page's identity: mascot + channel glyph +
-  // "Voice agent · Kapper / salon". Agents only, like the dashboard.
-  const identityHtml = isAgent
-    ? `<div class="tpl-agent-identity">
-          <span class="tpl-mascot">${art.mascots.ghost}</span>
-          <span class="tpl-glyph">${glyphSvg(art, template.picture.glyph)}</span>
-          <span class="tpl-agent-kind">${esc(kindLabel + (template.industry_labels.length > 0 ? " · " + template.industry_labels.join(", ") : ""))}</span>
-        </div>
-        `
-    : "";
 
   // The one CTA, under the copy. A planned template gets the card's own
   // disabled "Binnenkort" chip with the reason under it (the dashboard
@@ -734,7 +722,7 @@ ${headerHtml("/templates")}
 
     <div class="tpl-detail">
       <div class="tpl-detail-intro">
-        ${identityHtml}<h1>${esc(template.label)}</h1>
+        <h1>${esc(template.label)}</h1>
         ${template.tagline ? `<p class="tpl-detail-summary tpl-detail-tagline">${esc(template.tagline)}</p>\n        ` : ""}<p class="tpl-detail-summary">${esc(template.summary)}</p>
         ${ctaHtml}
       </div>
