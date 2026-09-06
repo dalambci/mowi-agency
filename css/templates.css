@@ -167,6 +167,7 @@
    fit a 170px picture. */
 @media (max-width:47.9rem){
   .tpl-head{flex-direction:column;align-items:stretch;gap:.875rem;padding-top:1.5rem;padding-bottom:.875rem}
+  .tpl-detail-section{padding-top:1.5rem}
   .tpl-head .page-hero-body{display:none}
   .tpl-search{width:100%;padding:.5rem .75rem}
   .tpl-toolbar{gap:.375rem;padding:.5rem 0}
@@ -226,7 +227,13 @@
    is 30rem tall there, like the dashboard's, and since 2026-09-06 this
    site's canvas honours data-wf-fit too (a wide graph is fitted whole, a
    narrow one opens at 1:1 and pans), so both pages frame a flow alike. */
-.tpl-detail-back{margin:0 0 1.25rem}
+/* The detail page starts as high as the templates page does (Sal,
+   2026-09-06: "hero same padding margin top compared to templates page, now
+   it has too much space above"): .section's generic 5rem top padding is
+   replaced by .tpl-head's own 2.5rem (1.5rem on phones), so the back link
+   sits exactly where the index's H1 sits. */
+.tpl-detail-section{padding-top:2.5rem}
+.tpl-detail-back{margin:0 0 1rem}
 .tpl-detail-back .link-arrow{margin-top:0}
 .tpl-detail{display:grid;grid-template-columns:minmax(0,1fr);gap:1.25rem;grid-template-areas:"intro" "visual" "nodes" "needs"}
 .tpl-detail-intro{grid-area:intro;min-width:0}

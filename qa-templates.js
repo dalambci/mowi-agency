@@ -166,8 +166,14 @@ async function run(browserType, label, viewport, device) {
   // needs share the left column next to the visual, the nodes full width
   // under both.
   const phone = !viewport || viewport.width < 1024;
+  // The detail page starts as high as the index: back link top == index H1 top (both relative to the header).
+  await page.goto(BASE + "/templates");
+  await page.waitForTimeout(300);
+  const indexTop = await page.evaluate(() => Math.round(document.querySelector(".tpl-head h1").getBoundingClientRect().top - document.querySelector(".site-header").getBoundingClientRect().bottom));
   await page.goto(BASE + "/templates/voice-agent-kapper");
   await page.waitForTimeout(500);
+  const detailTop = await page.evaluate(() => Math.round(document.querySelector(".tpl-detail-back").getBoundingClientRect().top - document.querySelector(".site-header").getBoundingClientRect().bottom));
+  check(`${label} detail page starts as high as the templates page`, Math.abs(indexTop - detailTop) <= 1, `index ${indexTop}px vs detail ${detailTop}px`);
   const agent = await page.evaluate(() => {
     const r = (sel) => { const el = document.querySelector(sel); return el ? el.getBoundingClientRect() : null; };
     const i = r(".tpl-detail-intro"), v = r(".tpl-detail-visual-wrap"), n = r(".tpl-detail-nodes"), d = r(".tpl-detail-needs");

@@ -69,7 +69,7 @@ const WF_JS_VERSION = "20260906-1";
 // This file's OWN two new assets get one shared version, bumped whenever
 // either changes — same "one value per file-pair, bump together" rule
 // the rest of the site's cache-busting convention already follows.
-const TPL_ASSET_VERSION = "20260906-3";
+const TPL_ASSET_VERSION = "20260906-4";
 
 // ---------------------------------------------------------------------------
 // Escaping — every field below can eventually carry CLIENT-authored text
@@ -728,7 +728,7 @@ function renderDetailPage(template, related, art) {
 <body>
 ${headerHtml("/templates")}
 <main>
-<section class="section">
+<section class="section tpl-detail-section">
   <div class="container">
     <p class="tpl-detail-back"><a href="/templates" class="link-arrow">← Templates</a></p>
 
