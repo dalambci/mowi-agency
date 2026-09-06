@@ -17,6 +17,11 @@
    Update flow: dashboard session runs `php artisan mowi:export-templates`,
    copies the output to content/templates/templates.json, then this.
 
+   Agent template pages (2026-09-06, later): kind "agent" renders through
+   renderAgentDetailPage() — a per-branche landing page built from the
+   agent pages' own components (see that function's comment); workflows
+   and dashboards keep renderDetailPage().
+
    Round 2 (2026-09-06): the index is a compact page — left-aligned header
    with the search beside it, ONE toolbar (segmented type control + three
    dropdowns with faceted counts, js/templates.js), three sections per
@@ -63,7 +68,7 @@ const WF_JS_VERSION = "20260904-6";
 // This file's OWN two new assets get one shared version, bumped whenever
 // either changes — same "one value per file-pair, bump together" rule
 // the rest of the site's cache-busting convention already follows.
-const TPL_ASSET_VERSION = "20260906-1";
+const TPL_ASSET_VERSION = "20260906-2";
 
 // ---------------------------------------------------------------------------
 // Escaping — every field below can eventually carry CLIENT-authored text
@@ -535,6 +540,193 @@ ${footerHtml(`  <script src="/js/templates.js?v=${TPL_ASSET_VERSION}"></script>\
 `;
 }
 
+// ---------------------------------------------------------------------------
+// Agent template page (2026-09-06, Sal: "completely re-do the design of the
+// agent template page, so voice agent kapper for example"). A per-branche
+// LANDING page for one agent, built from the components /call-agent and
+// /e-mail-agent already use, so it reads as one family with them rather
+// than as a generic record view:
+//   hero (.split): identity row (the card's own mascot + channel glyph,
+//     "Voice agent · Kapper / salon"), the TAGLINE as the headline — the
+//     promise, like the agent pages' own heroes; the label stays in
+//     <title> — the summary, one CTA; the conversation flow (interactive
+//     canvas) beside it, copy left, visual right, one column below 64rem;
+//   "Wat de agent doet": the flow's own nodes as .lp-card feature cards,
+//     with the same icons the canvas draws — never a second, hand-typed
+//     list of what the agent does;
+//   the agent page's own three onboarding steps + trust note, READ from
+//     /call-agent or /e-mail-agent at build time (readAgentSteps below) so
+//     that copy stays single-sourced and this page can never say
+//     something the agent's own page doesn't;
+//   "Ook interessant": the same branche's other agent, then this agent for
+//     other branches (siblingsFor in main()).
+// Workflows and dashboards keep renderDetailPage(); only kind "agent"
+// routes here.
+// ---------------------------------------------------------------------------
+const AGENT_LANDING_PAGE = { telefoon_agent: "call-agent.html", email_triage: "e-mail-agent.html" };
+const AGENT_KIND_LABEL = { telefoon_agent: "Voice agent", email_triage: "Inbox agent" };
+
+/** The landing page's "Zo werkt het" heading, its three steps and (voice only) the trust note — throws if the page's structure drifts. */
+function readAgentSteps(agentType) {
+  const file = AGENT_LANDING_PAGE[agentType];
+  if (!file) throw new Error(`build-templates: no landing page known for agent type '${agentType}'`);
+  const html = fs.readFileSync(path.join(ROOT, file), "utf8");
+  // The steps are nested divs, so a non-greedy "up to the next </div>"
+  // would stop at the first step's number circle; take the whole section
+  // the block sits in instead, and the heading just before it.
+  const start = html.indexOf('<div class="lp-steps">');
+  const end = start === -1 ? -1 : html.indexOf("</section>", start);
+  if (start === -1 || end === -1) throw new Error(`build-templates: could not find the lp-steps block in ${file}`);
+  const section = html.slice(start, end);
+  const headings = Array.from(html.slice(0, start).matchAll(/<h2 class="lp-section-heading">([^<]*)<\/h2>/g));
+  if (headings.length === 0) throw new Error(`build-templates: no lp-section-heading before the lp-steps block in ${file}`);
+  const steps = Array.from(section.matchAll(/<h3>([\s\S]*?)<\/h3>\s*<p>([\s\S]*?)<\/p>/g)).map((m) => [m[1].trim(), m[2].trim()]);
+  if (steps.length !== 3) throw new Error(`build-templates: expected 3 steps in ${file}, found ${steps.length}`);
+  const trust = section.match(/<div class="lp-trust-note">([\s\S]*?)<\/div>/);
+  return { heading: headings[headings.length - 1][1].trim(), steps, trustNote: trust ? trust[1].trim().replace(/\s+/g, " ") : null };
+}
+
+function renderAgentDetailPage(template, siblings, art) {
+  assertNoEmDash(template.tagline, `template ${template.key} tagline`);
+  assertNoEmDash(template.summary, `template ${template.key} summary`);
+  const kind = AGENT_KIND_LABEL[template.agent_type] || "Agent";
+  // The tagline is a sentence on the card; as a headline it drops its
+  // trailing period (site rule: headings carry no trailing punctuation).
+  const headline = (template.tagline || template.label).replace(/\.\s*$/, "");
+  const identity = kind + (template.industry_labels.length > 0 ? " · " + template.industry_labels.join(", ") : "");
+  const nodes = (template.graph ? template.graph.nodes : []).filter((n) => n.kind !== "start" && n.kind !== "end");
+  const onboarding = readAgentSteps(template.agent_type);
+
+  const cards = nodes
+    .map(
+      (n) => `<div class="lp-card">
+          <span class="lp-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">${nodeIcon(n.kind)}</svg></span>
+          <h3>${esc(n.title)}</h3>
+          <p>${esc(n.text)}</p>
+        </div>`
+    )
+    .join("\n        ");
+
+  const stepsHtml = onboarding.steps
+    .map(
+      ([title, text], i) => `<div class="lp-step">
+            <div class="lp-step-circle" aria-hidden="true">${i + 1}</div>
+            <h3>${title}</h3>
+            <p>${text}</p>
+          </div>`
+    )
+    .join("\n          ");
+
+  const breadcrumbJsonLd = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Templates", item: `${SITE_URL}/templates` },
+      { "@type": "ListItem", position: 2, name: template.label, item: `${SITE_URL}/templates/${template.slug}` },
+    ],
+  });
+
+  return `<!-- Generated by build-templates.js from content/templates/templates.json — do not hand-edit. -->
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>${esc(template.label)} — Templates — Mowi</title>
+  <meta name="description" content="${esc(template.tagline || template.summary)}" />
+  <link rel="canonical" href="${SITE_URL}/templates/${template.slug}" />
+  <meta property="og:title" content="${esc(template.label)} — Mowi" />
+  <meta property="og:description" content="${esc(template.tagline || template.summary)}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&family=Inter+Tight:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css?v=${CSS_VERSION}" />
+  <link rel="stylesheet" href="/css/workflow-canvas.css?v=${WF_CSS_VERSION}" />
+  <link rel="stylesheet" href="/css/templates.css?v=${TPL_ASSET_VERSION}" />
+  <link rel="icon" href="/assets/icon-192.png?v=20260904-3" />
+  <link rel="shortcut icon" href="/assets/icon-192.png?v=20260904-3" />
+  <link rel="apple-touch-icon" href="/assets/apple-icon-180.png?v=20260904-3" />
+  <link rel="apple-touch-icon-precomposed" href="/assets/apple-icon-180.png?v=20260904-3" />
+  <script type="application/ld+json">${breadcrumbJsonLd}</script>
+  <script defer data-domain="mowi.agency" src="https://plausible.io/js/script.js"></script>
+</head>
+<body>
+${headerHtml("/templates")}
+<main>
+<section class="section">
+  <div class="container">
+    <p><a href="/templates" class="link-arrow">← Templates</a></p>
+    <div class="split tpl-agent-hero">
+      <div class="split-copy tpl-agent-copy">
+        <div class="tpl-agent-identity">
+          <span class="tpl-mascot">${art.mascots.ghost}</span>
+          <span class="tpl-glyph">${glyphSvg(art, template.picture.glyph)}</span>
+          <span class="tpl-agent-kind">${esc(identity)}</span>
+        </div>
+        <h1 class="tpl-agent-title">${esc(headline)}</h1>
+        <p class="tpl-agent-sub">${esc(template.summary)}</p>
+        <div class="lp-cta-block tpl-agent-cta">
+          <a href="${SIGNUP_URL}" class="btn-primary" data-event="Signup Click">Laat Mowi dit bouwen</a>
+          <span class="lp-cta-micro">Vandaag gratis te proberen.</span>
+        </div>
+      </div>
+      <div class="split-visual tpl-detail-visual">${template.graph ? renderCanvasInteractive(template) : ""}</div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head-row section-head-row-center">
+      <h2 class="lp-section-heading">Wat de agent doet</h2>
+    </div>
+    <div class="lp-card-grid tpl-agent-cards">
+        ${cards}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head-row section-head-row-center">
+      <h2 class="lp-section-heading">${onboarding.heading}</h2>
+    </div>
+    <div class="lp-steps">
+          ${stepsHtml}
+    </div>
+    ${onboarding.trustNote ? `<div class="lp-trust-note">${onboarding.trustNote}</div>` : ""}
+  </div>
+</section>
+
+${
+  siblings.length > 0
+    ? `<section class="section tpl-agent-more">
+  <div class="container">
+    <section class="tpl-section">
+      <div class="tpl-section-head"><h2>Ook interessant</h2></div>
+      <div class="tpl-grid">
+        ${siblings.map((t) => renderCard(t, art)).join("\n        ")}
+      </div>
+    </section>
+  </div>
+</section>
+`
+    : ""
+}</main>
+${footerHtml(`  <script src="/js/workflow-canvas.js?v=${WF_JS_VERSION}"></script>\n`)}
+</body>
+</html>
+`;
+}
+
+/** An agent's related row: the same branche's other agent first, then this same agent for other branches. */
+function siblingsFor(template, templates) {
+  const agents = templates.filter((t) => t.kind === "agent" && t.key !== template.key);
+  const counterpart = agents.find((t) => t.agent_type !== template.agent_type && t.industries.some((i) => template.industries.includes(i)));
+  const others = agents.filter((t) => t.agent_type === template.agent_type).slice(0, 3);
+  return [counterpart, ...others].filter(Boolean);
+}
+
 // .container and .section are never combined on one element anywhere else
 // on the site (see e.g. koppelingen.html: <section class="section"> wrapping
 // its own <div class="container">) -- .section's own `padding: 5rem 0`
@@ -675,6 +867,10 @@ function main() {
   if (!fs.existsSync(DETAIL_DIR)) fs.mkdirSync(DETAIL_DIR);
 
   templates.forEach((t) => {
+    if (t.kind === "agent") {
+      fs.writeFileSync(path.join(DETAIL_DIR, `${t.slug}.html`), renderAgentDetailPage(t, siblingsFor(t, templates), art));
+      return;
+    }
     const related = templates
       .filter((o) => o.key !== t.key && o.kind === t.kind && o.industries.some((i) => t.industries.includes(i)))
       .slice(0, 3);

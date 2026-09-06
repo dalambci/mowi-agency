@@ -158,6 +158,35 @@ async function run(browserType, label, viewport, device) {
   check(`${label} detail page renders the canvas + CTA + named logos`, await page.evaluate(() => !!document.querySelector("[data-wf-canvas] .wf-node") && !!document.querySelector(".tpl-detail-actions a.btn-primary") && document.querySelectorAll(".tpl-logo-list .tpl-logo img[alt]").length > 0));
   await page.screenshot({ path: path.join(OUT, `tpl-${label}-detail.png`) });
 
+  // 10. An agent template page is a per-branche landing page (2026-09-06):
+  // tagline as the headline, identity row, the flow's nodes as cards, the
+  // agent page's three steps, the canvas beside the copy, other branches.
+  const phone = !viewport || viewport.width < 1024;
+  await page.goto(BASE + "/templates/voice-agent-kapper");
+  await page.waitForTimeout(400);
+  const agent = await page.evaluate(() => {
+    const copy = document.querySelector(".tpl-agent-copy");
+    const visual = document.querySelector(".tpl-agent-hero .tpl-detail-visual");
+    const c = copy ? copy.getBoundingClientRect() : null;
+    const v = visual ? visual.getBoundingClientRect() : null;
+    return {
+      h1: document.querySelector("h1") ? document.querySelector("h1").textContent.trim() : "",
+      identity: !!document.querySelector(".tpl-agent-identity .tpl-mascot svg") && !!document.querySelector('.tpl-agent-identity .tpl-glyph svg[data-glyph="phone"]'),
+      cards: document.querySelectorAll(".tpl-agent-cards .lp-card").length,
+      steps: document.querySelectorAll(".lp-steps .lp-step").length,
+      canvas: !!document.querySelector(".tpl-agent-hero [data-wf-canvas] .wf-node"),
+      cta: !!document.querySelector(".tpl-agent-cta a.btn-primary"),
+      more: document.querySelectorAll(".tpl-agent-more [data-tpl-card]").length,
+      stacked: !!(c && v) && v.top >= c.bottom - 1,
+      sideBySide: !!(c && v) && v.left >= c.right - 1,
+      overflow: document.documentElement.scrollWidth - window.innerWidth,
+    };
+  });
+  check(`${label} agent page: the tagline is the headline, without a trailing period or em dash`, agent.h1 === "Plant knipbeurten in zonder dat u de telefoon hoeft op te nemen" && !agent.h1.includes("—"), agent.h1);
+  check(`${label} agent page: identity row, flow cards, 3 steps, canvas, CTA, other branches`, agent.identity && agent.cards >= 3 && agent.steps === 3 && agent.canvas && agent.cta && agent.more >= 2, JSON.stringify({ identity: agent.identity, cards: agent.cards, steps: agent.steps, canvas: agent.canvas, cta: agent.cta, more: agent.more }));
+  check(`${label} agent page: hero ${phone ? "stacks copy above the flow" : "puts copy beside the flow"}`, phone ? agent.stacked : agent.sideBySide);
+  check(`${label} agent page: no horizontal overflow`, agent.overflow === 0, String(agent.overflow));
+
   check(`${label} zero console errors`, consoleErrors.filter((m) => !m.includes("interactive-widget")).length === 0, consoleErrors.slice(0, 3).join(" | "));
   check(`${label} zero 4xx/5xx responses`, bad.length === 0, bad.slice(0, 5).join(" | "));
   await browser.close();

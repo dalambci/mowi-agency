@@ -1,6 +1,6 @@
 {
-    "generated_at": "2026-09-06T09:16:28+00:00",
-    "commit": "3c44c44",
+    "generated_at": "2026-09-06T14:43:24+00:00",
+    "commit": "20c230f",
     "glyphs": {
         "box": "<path d=\"M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z\"/><path d=\"m3.3 7 8.7 5 8.7-5\"/><path d=\"M12 22V12\"/><path d=\"m7.5 4.27 9 5.15\"/>",
         "calendar": "<rect x=\"3\" y=\"4\" width=\"18\" height=\"18\" rx=\"2\"/><path d=\"M16 2v4M8 2v4M3 10h18\"/>",
@@ -2290,7 +2290,7 @@
             "kind": "agent",
             "slug": "inbox-agent-loodgieter",
             "label": "Inbox agent — Loodgieter",
-            "tagline": "Storing, offerte of factuur — gesorteerd zonder dat u het ziet.",
+            "tagline": "Storing, offerte of factuur: gesorteerd zonder dat u het ziet.",
             "summary": "Sorteert elke binnenkomende e-mail in de juiste map, herkent een offerteaanvraag en vraagt zelf de ontbrekende gegevens op, en meldt een storing of spoedgeval direct.",
             "industries": [
                 "loodgieter"
@@ -2995,7 +2995,7 @@
             "kind": "agent",
             "slug": "inbox-agent-garage",
             "label": "Inbox agent — Garage",
-            "tagline": "APK, onderhoud of storing — gesorteerd binnen.",
+            "tagline": "APK, onderhoud of storing: gesorteerd binnen.",
             "summary": "Sorteert elke e-mail in de juiste map, vraagt zelf het kenteken en de gewenste dienst op bij een offerteaanvraag, en meldt een storing direct.",
             "industries": [
                 "garage"
@@ -3230,7 +3230,7 @@
             "kind": "agent",
             "slug": "inbox-agent-webshop",
             "label": "Inbox agent — Webshop",
-            "tagline": "Orderstatus, retour of klacht — nooit meer kwijt.",
+            "tagline": "Orderstatus, retour of klacht: nooit meer kwijt.",
             "summary": "Sorteert elke e-mail, vraagt zelf het ordernummer op bij een onvolledige vraag, en meldt een klacht direct in plaats van hem te laten liggen.",
             "industries": [
                 "webshop"
@@ -3465,7 +3465,7 @@
             "kind": "agent",
             "slug": "inbox-agent-groothandel",
             "label": "Inbox agent — Groothandel",
-            "tagline": "Bestellingen, voorraadvragen en klachten — gesorteerd.",
+            "tagline": "Bestellingen, voorraadvragen en klachten: gesorteerd.",
             "summary": "Sorteert elke e-mail, vraagt zelf het klant- of ordernummer op bij een onvolledige vraag, en meldt een klacht direct.",
             "industries": [
                 "groothandel"
@@ -3700,7 +3700,7 @@
             "kind": "agent",
             "slug": "inbox-agent-horeca",
             "label": "Inbox agent — Restaurant",
-            "tagline": "Reserveringen en menuvragen — gesorteerd binnen.",
+            "tagline": "Reserveringen en menuvragen: gesorteerd binnen.",
             "summary": "Sorteert elke e-mail, schrijft een conceptantwoord voor veelgestelde vragen en houdt reserveringsverzoeken apart klaar voor u.",
             "industries": [
                 "horeca"
@@ -3935,7 +3935,7 @@
             "kind": "agent",
             "slug": "inbox-agent-zakelijke_dienstverlening",
             "label": "Inbox agent — Adviesbureau",
-            "tagline": "Afspraakverzoeken en klantvragen — gesorteerd binnen.",
+            "tagline": "Afspraakverzoeken en klantvragen: gesorteerd binnen.",
             "summary": "Sorteert elke e-mail, schrijft een conceptantwoord voor veelgestelde vragen en houdt afspraakverzoeken apart klaar voor u.",
             "industries": [
                 "zakelijke_dienstverlening"
@@ -4140,7 +4140,7 @@
             "kind": "agent",
             "slug": "inbox-agent-hotel",
             "label": "Inbox agent — Hotel",
-            "tagline": "Reserveringen, wijzigingen en klachten — gesorteerd.",
+            "tagline": "Reserveringen, wijzigingen en klachten: gesorteerd.",
             "summary": "Sorteert elke e-mail, vraagt zelf aankomst- en vertrekdatum en aantal gasten op bij een reserveringsaanvraag, en meldt een klacht direct.",
             "industries": [
                 "hotel"
@@ -4375,7 +4375,7 @@
             "kind": "agent",
             "slug": "inbox-agent-tattooshop",
             "label": "Inbox agent — Tattooshop",
-            "tagline": "Afspraakverzoeken en ontwerpvragen — gesorteerd binnen.",
+            "tagline": "Afspraakverzoeken en ontwerpvragen: gesorteerd binnen.",
             "summary": "Sorteert elke e-mail, vraagt zelf het gewenste ontwerp, de plek en de grootte op bij een afspraakverzoek, en houdt nazorgvragen apart klaar voor u.",
             "industries": [
                 "tattooshop"
