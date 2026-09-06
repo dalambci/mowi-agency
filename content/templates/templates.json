@@ -1,6 +1,6 @@
 {
-    "generated_at": "2026-09-06T08:51:16+00:00",
-    "commit": "af95be9",
+    "generated_at": "2026-09-06T09:16:28+00:00",
+    "commit": "3c44c44",
     "glyphs": {
         "box": "<path d=\"M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z\"/><path d=\"m3.3 7 8.7 5 8.7-5\"/><path d=\"M12 22V12\"/><path d=\"m7.5 4.27 9 5.15\"/>",
         "calendar": "<rect x=\"3\" y=\"4\" width=\"18\" height=\"18\" rx=\"2\"/><path d=\"M16 2v4M8 2v4M3 10h18\"/>",
@@ -9,9 +9,7 @@
         "phone": "<path d=\"M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z\"/>",
         "mail": "<rect x=\"2\" y=\"4\" width=\"20\" height=\"16\" rx=\"2\"/><path d=\"m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7\"/>",
         "chart": "<path d=\"M3 3v18h18\"/><path d=\"M18 17V9\"/><path d=\"M13 17V5\"/><path d=\"M8 17v-3\"/>",
-        "kind-agent": "<path d=\"M5 20V11a7 7 0 0 1 14 0v9l-2.33-1.75L14.33 20 12 18.25 9.67 20 7.33 18.25 5 20Z\"/><circle cx=\"9.5\" cy=\"11\" r=\".75\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"14.5\" cy=\"11\" r=\".75\" fill=\"currentColor\" stroke=\"none\"/>",
-        "kind-workflow": "<rect x=\"3\" y=\"3\" width=\"8\" height=\"8\" rx=\"2\"/><path d=\"M7 11v4a2 2 0 0 0 2 2h4\"/><rect x=\"13\" y=\"13\" width=\"8\" height=\"8\" rx=\"2\"/>",
-        "kind-dashboard": "<rect x=\"3\" y=\"3\" width=\"7\" height=\"9\" rx=\"1.5\"/><rect x=\"14\" y=\"3\" width=\"7\" height=\"5\" rx=\"1.5\"/><rect x=\"14\" y=\"12\" width=\"7\" height=\"9\" rx=\"1.5\"/><rect x=\"3\" y=\"16\" width=\"7\" height=\"5\" rx=\"1.5\"/>"
+        "workflow": "<rect x=\"3\" y=\"3\" width=\"8\" height=\"8\" rx=\"2\"/><path d=\"M7 11v4a2 2 0 0 0 2 2h4\"/><rect x=\"13\" y=\"13\" width=\"8\" height=\"8\" rx=\"2\"/>"
     },
     "mascots": {
         "ghost": "<svg viewBox=\"0 0 32 32\" aria-hidden=\"true\" focusable=\"false\" data-shape=\"ghost\">\n    <g transform=\"translate(-0.73,0.57) scale(1.045)\">\n        <g fill=\"var(--agent-fill, #B8B4AE)\">\n                                <path d=\"M15.86 4 Q12.54 4.27 11.83 4.51 Q11.12 4.75 9.93 5.46 Q8.75 6.16 7.69 7.24 Q6.63 8.32 5.89 9.74 Q5.15 11.16 4.69 12.58 Q4.23 14 4.12 15.43 Q4 16.85 4.1 18.98 Q4.2 21.11 4.4 21.59 Q4.6 22.06 4.64 22.54 Q4.67 23.01 4.95 23.48 Q5.23 23.95 5.81 24.54 Q6.38 25.13 6.86 25.24 Q7.33 25.35 8.28 25.26 Q9.22 25.17 9.7 24.93 Q10.17 24.68 11.12 23.81 Q12.07 22.95 13.25 24.06 Q14.44 25.17 15.62 25.17 Q16.8 25.16 17.28 24.9 Q17.75 24.64 18.7 23.79 Q19.65 22.94 20.84 24.03 Q22.02 25.11 22.97 25.37 Q23.91 25.63 24.86 25.41 Q25.81 25.19 26.63 24.34 Q27.46 23.48 27.72 22.3 Q27.97 21.11 27.97 17.56 Q27.96 14 27.52 12.34 Q27.07 10.69 26.31 9.27 Q25.55 7.84 24.97 7.31 Q24.39 6.77 23.21 5.98 Q22.02 5.18 20.6 4.71 Q19.17 4.24 17.75 4.13 Q16.33 4.01 15.86 4 Z\"/>\n                            </g>\n        <g fill=\"var(--agent-eye, #121110)\">\n                            <circle cx=\"12.5\" cy=\"15\" r=\"1.7\"/>\n                            <circle cx=\"19.5\" cy=\"15\" r=\"1.7\"/>\n                    </g>\n    </g>\n</svg>"
@@ -228,15 +226,12 @@
                 "height": 1272
             },
             "tiles": null,
-            "crop": {
-                "off": 532,
-                "win": 480
-            },
             "picture": {
                 "glyph": "phone",
                 "trigger": null,
                 "mascot": "ghost",
-                "platforms": []
+                "platforms": [],
+                "badge": null
             },
             "status": "live",
             "blocked_reason": null,
@@ -458,15 +453,12 @@
                 "height": 1272
             },
             "tiles": null,
-            "crop": {
-                "off": 532,
-                "win": 480
-            },
             "picture": {
                 "glyph": "phone",
                 "trigger": null,
                 "mascot": "ghost",
-                "platforms": []
+                "platforms": [],
+                "badge": null
             },
             "status": "live",
             "blocked_reason": null,
@@ -688,15 +680,12 @@
                 "height": 1272
             },
             "tiles": null,
-            "crop": {
-                "off": 532,
-                "win": 480
-            },
             "picture": {
                 "glyph": "phone",
                 "trigger": null,
                 "mascot": "ghost",
-                "platforms": []
+                "platforms": [],
+                "badge": null
             },
             "status": "live",
             "blocked_reason": null,
@@ -918,15 +907,12 @@
                 "height": 1272
             },
             "tiles": null,
-            "crop": {
-                "off": 532,
-                "win": 480
-            },
             "picture": {
                 "glyph": "phone",
                 "trigger": null,
                 "mascot": "ghost",
-                "platforms": []
+                "platforms": [],
+                "badge": null
             },
             "status": "live",
             "blocked_reason": null,
@@ -1148,15 +1134,12 @@
                 "height": 1272
             },
             "tiles": null,
-            "crop": {
-                "off": 532,
-                "win": 480
-            },
             "picture": {
                 "glyph": "phone",
                 "trigger": null,
                 "mascot": "ghost",
-                "platforms": []
+                "platforms": [],
+                "badge": null
             },
             "status": "live",
             "blocked_reason": null,
@@ -1378,15 +1361,12 @@
                 "height": 1272
             },
             "tiles": null,
-            "crop": {
-                "off": 532,
-                "win": 480
-            },
             "picture": {
                 "glyph": "phone",
                 "trigger": null,
                 "mascot": "ghost",
-                "platforms": []
+                "platforms": [],
+                "badge": null
             },
             "status": "live",
             "blocked_reason": null,
@@ -1608,15 +1588,12 @@
                 "height": 1272
             },
             "tiles": null,
-            "crop": {
-                "off": 532,
-                "win": 480
-            },
             "picture": {
                 "glyph": "phone",
                 "trigger": null,
                 "mascot": "ghost",
-                "platforms": []
+                "platforms": [],
+                "badge": null
             },
             "status": "live",
             "blocked_reason": null,
@@ -1838,15 +1815,12 @@
                 "height": 1272
             },
             "tiles": null,
-            "crop": {
-                "off": 532,
-                "win": 480
-            },
             "picture": {
                 "glyph": "phone",
                 "trigger": null,
                 "mascot": "ghost",
-                "platforms": []
+                "platforms": [],
+                "badge": null
             },
             "status": "live",
             "blocked_reason": null,
@@ -2068,15 +2042,12 @@
                 "height": 1272
             },
             "tiles": null,
-            "crop": {
-                "off": 716,
-                "win": 480
-            },
             "picture": {
                 "glyph": "phone",
                 "trigger": null,
                 "mascot": "ghost",
-                "platforms": []
+                "platforms": [],
+                "badge": null
             },
             "status": "live",
             "blocked_reason": null,
@@ -2298,15 +2269,12 @@
                 "height": 1272
             },
             "tiles": null,
-            "crop": {
-                "off": 716,
-                "win": 480
-            },
             "picture": {
                 "glyph": "phone",
                 "trigger": null,
                 "mascot": "ghost",
-                "platforms": []
+                "platforms": [],
+                "badge": null
             },
             "status": "live",
             "blocked_reason": null,
@@ -2536,15 +2504,12 @@
                 "height": 1088
             },
             "tiles": null,
-            "crop": {
-                "off": 0,
-                "win": 480
-            },
             "picture": {
                 "glyph": "mail",
                 "trigger": null,
                 "mascot": "ghost",
-                "platforms": []
+                "platforms": [],
+                "badge": null
             },
             "status": "live",
             "blocked_reason": null,
@@ -2774,15 +2739,12 @@
                 "height": 1088
             },
             "tiles": null,
-            "crop": {
-                "off": 0,
-                "win": 480
-            },
             "picture": {
                 "glyph": "mail",
                 "trigger": null,
                 "mascot": "ghost",
-                "platforms": []
+                "platforms": [],
+                "badge": null
             },
             "status": "live",
             "blocked_reason": null,
@@ -3012,15 +2974,12 @@
                 "height": 1088
             },
             "tiles": null,
-            "crop": {
-                "off": 0,
-                "win": 480
-            },
             "picture": {
                 "glyph": "mail",
                 "trigger": null,
                 "mascot": "ghost",
-                "platforms": []
+                "platforms": [],
+                "badge": null
             },
             "status": "live",
             "blocked_reason": null,
@@ -3250,15 +3209,12 @@
                 "height": 1088
             },
             "tiles": null,
-            "crop": {
-                "off": 0,
-                "win": 480
-            },
             "picture": {
                 "glyph": "mail",
                 "trigger": null,
                 "mascot": "ghost",
-                "platforms": []
+                "platforms": [],
+                "badge": null
             },
             "status": "live",
             "blocked_reason": null,
@@ -3488,15 +3444,12 @@
                 "height": 1088
             },
             "tiles": null,
-            "crop": {
-                "off": 0,
-                "win": 480
-            },
             "picture": {
                 "glyph": "mail",
                 "trigger": null,
                 "mascot": "ghost",
-                "platforms": []
+                "platforms": [],
+                "badge": null
             },
             "status": "live",
             "blocked_reason": null,
@@ -3726,15 +3679,12 @@
                 "height": 1088
             },
             "tiles": null,
-            "crop": {
-                "off": 0,
-                "win": 480
-            },
             "picture": {
                 "glyph": "mail",
                 "trigger": null,
                 "mascot": "ghost",
-                "platforms": []
+                "platforms": [],
+                "badge": null
             },
             "status": "live",
             "blocked_reason": null,
@@ -3964,15 +3914,12 @@
                 "height": 1088
             },
             "tiles": null,
-            "crop": {
-                "off": 0,
-                "win": 480
-            },
             "picture": {
                 "glyph": "mail",
                 "trigger": null,
                 "mascot": "ghost",
-                "platforms": []
+                "platforms": [],
+                "badge": null
             },
             "status": "live",
             "blocked_reason": null,
@@ -4172,15 +4119,12 @@
                 "height": 1088
             },
             "tiles": null,
-            "crop": {
-                "off": 0,
-                "win": 480
-            },
             "picture": {
                 "glyph": "mail",
                 "trigger": null,
                 "mascot": "ghost",
-                "platforms": []
+                "platforms": [],
+                "badge": null
             },
             "status": "live",
             "blocked_reason": null,
@@ -4410,15 +4354,12 @@
                 "height": 1088
             },
             "tiles": null,
-            "crop": {
-                "off": 0,
-                "win": 480
-            },
             "picture": {
                 "glyph": "mail",
                 "trigger": null,
                 "mascot": "ghost",
-                "platforms": []
+                "platforms": [],
+                "badge": null
             },
             "status": "live",
             "blocked_reason": null,
@@ -4648,15 +4589,12 @@
                 "height": 1088
             },
             "tiles": null,
-            "crop": {
-                "off": 0,
-                "win": 480
-            },
             "picture": {
                 "glyph": "mail",
                 "trigger": null,
                 "mascot": "ghost",
-                "platforms": []
+                "platforms": [],
+                "badge": null
             },
             "status": "live",
             "blocked_reason": null,
@@ -4784,10 +4722,6 @@
                 "height": 536
             },
             "tiles": null,
-            "crop": {
-                "off": 0,
-                "win": 480
-            },
             "picture": {
                 "glyph": "calendar",
                 "trigger": "schedule",
@@ -4808,7 +4742,8 @@
                         "name": "Calendly",
                         "icon": "integrations/calendly.svg"
                     }
-                ]
+                ],
+                "badge": "Dagelijks"
             },
             "status": "live",
             "blocked_reason": null,
@@ -4932,10 +4867,6 @@
                 "height": 536
             },
             "tiles": null,
-            "crop": {
-                "off": 0,
-                "win": 480
-            },
             "picture": {
                 "glyph": "calendar",
                 "trigger": "schedule",
@@ -4956,7 +4887,8 @@
                         "name": "Calendly",
                         "icon": "integrations/calendly.svg"
                     }
-                ]
+                ],
+                "badge": "Wekelijks"
             },
             "status": "live",
             "blocked_reason": null,
@@ -5082,10 +5014,6 @@
                 "height": 536
             },
             "tiles": null,
-            "crop": {
-                "off": 0,
-                "win": 480
-            },
             "picture": {
                 "glyph": "box",
                 "trigger": "schedule",
@@ -5126,7 +5054,8 @@
                         "name": "PrestaShop",
                         "icon": "integrations/prestashop.svg"
                     }
-                ]
+                ],
+                "badge": "Dagelijks"
             },
             "status": "live",
             "blocked_reason": null,
@@ -5250,10 +5179,6 @@
                 "height": 536
             },
             "tiles": null,
-            "crop": {
-                "off": 0,
-                "win": 480
-            },
             "picture": {
                 "glyph": "box",
                 "trigger": "schedule",
@@ -5294,7 +5219,8 @@
                         "name": "PrestaShop",
                         "icon": "integrations/prestashop.svg"
                     }
-                ]
+                ],
+                "badge": "Wekelijks"
             },
             "status": "live",
             "blocked_reason": null,
@@ -5412,10 +5338,6 @@
                 "height": 536
             },
             "tiles": null,
-            "crop": {
-                "off": 0,
-                "win": 480
-            },
             "picture": {
                 "glyph": "box",
                 "trigger": "poll",
@@ -5456,7 +5378,8 @@
                         "name": "PrestaShop",
                         "icon": "integrations/prestashop.svg"
                     }
-                ]
+                ],
+                "badge": "Direct"
             },
             "status": "live",
             "blocked_reason": null,
@@ -5581,10 +5504,6 @@
                 "height": 536
             },
             "tiles": null,
-            "crop": {
-                "off": 0,
-                "win": 480
-            },
             "picture": {
                 "glyph": "box",
                 "trigger": "poll",
@@ -5645,7 +5564,8 @@
                         "name": "Moneybird",
                         "icon": "integrations/moneybird.svg"
                     }
-                ]
+                ],
+                "badge": "Direct"
             },
             "status": "live",
             "blocked_reason": null,
@@ -5769,10 +5689,6 @@
                 "height": 536
             },
             "tiles": null,
-            "crop": {
-                "off": 0,
-                "win": 480
-            },
             "picture": {
                 "glyph": "calendar",
                 "trigger": "schedule",
@@ -5793,7 +5709,8 @@
                         "name": "Calendly",
                         "icon": "integrations/calendly.svg"
                     }
-                ]
+                ],
+                "badge": "Dagelijks"
             },
             "status": "live",
             "blocked_reason": null,
@@ -5843,15 +5760,12 @@
             "steps": [],
             "graph": null,
             "tiles": null,
-            "crop": {
-                "off": 0,
-                "win": 0
-            },
             "picture": {
-                "glyph": "kind-workflow",
+                "glyph": "workflow",
                 "trigger": null,
                 "mascot": null,
-                "platforms": []
+                "platforms": [],
+                "badge": null
             },
             "status": "planned",
             "blocked_reason": "Er bestaat nog geen no-show- of annuleringsgegeven om op te reageren: geen enkele operatie in de manifest levert \"afspraak gemist\". Stap-chaining is sinds 2026-08-20 niet langer de blokkade; het ontbrekende signaal wel.",
@@ -5893,15 +5807,12 @@
             "steps": [],
             "graph": null,
             "tiles": null,
-            "crop": {
-                "off": 0,
-                "win": 0
-            },
             "picture": {
-                "glyph": "kind-workflow",
+                "glyph": "workflow",
                 "trigger": null,
                 "mascot": null,
-                "platforms": []
+                "platforms": [],
+                "badge": null
             },
             "status": "planned",
             "blocked_reason": "Het bestelnummer dat een klant noemt staat in de vrije tekst van de e-mail — inbox.list_recent (2026-08-28) is wel een trigger op inkomende e-mail, maar geeft bewust nooit het onderwerp of de tekst van het bericht terug (Beveiligingsplan R5: klantcontent is onbetrouwbaar totdat het via een eigen, gecontroleerde stap is verwerkt), dus er is geen veld om naar order.find_by_number door te koppelen. Er is dus geen ontbrekende trigger meer, wel ontbrekende gegevensextractie.",
@@ -6018,10 +5929,6 @@
                 "height": 536
             },
             "tiles": null,
-            "crop": {
-                "off": 0,
-                "win": 480
-            },
             "picture": {
                 "glyph": "phone",
                 "trigger": "poll",
@@ -6047,7 +5954,8 @@
                         "name": "Moneybird",
                         "icon": "integrations/moneybird.svg"
                     }
-                ]
+                ],
+                "badge": "Direct"
             },
             "status": "live",
             "blocked_reason": null,
@@ -6259,10 +6167,6 @@
                 "height": 1272
             },
             "tiles": null,
-            "crop": {
-                "off": 0,
-                "win": 480
-            },
             "picture": {
                 "glyph": "chart",
                 "trigger": "schedule",
@@ -6303,7 +6207,8 @@
                         "name": "PrestaShop",
                         "icon": "integrations/prestashop.svg"
                     }
-                ]
+                ],
+                "badge": "Wekelijks"
             },
             "status": "live",
             "blocked_reason": null,
@@ -6427,10 +6332,6 @@
                 "height": 536
             },
             "tiles": null,
-            "crop": {
-                "off": 0,
-                "win": 480
-            },
             "picture": {
                 "glyph": "calendar",
                 "trigger": "schedule",
@@ -6451,7 +6352,8 @@
                         "name": "Calendly",
                         "icon": "integrations/calendly.svg"
                     }
-                ]
+                ],
+                "badge": "Wekelijks"
             },
             "status": "live",
             "blocked_reason": null,
@@ -6636,10 +6538,6 @@
                 "height": 1088
             },
             "tiles": null,
-            "crop": {
-                "off": 0,
-                "win": 480
-            },
             "picture": {
                 "glyph": "handshake",
                 "trigger": "schedule",
@@ -6665,7 +6563,8 @@
                         "name": "Moneybird",
                         "icon": "integrations/moneybird.svg"
                     }
-                ]
+                ],
+                "badge": "Wekelijks"
             },
             "status": "live",
             "blocked_reason": null,
@@ -6786,10 +6685,6 @@
                 "height": 536
             },
             "tiles": null,
-            "crop": {
-                "off": 0,
-                "win": 480
-            },
             "picture": {
                 "glyph": "receipt",
                 "trigger": "poll",
@@ -6815,7 +6710,8 @@
                         "name": "Moneybird",
                         "icon": "integrations/moneybird.svg"
                     }
-                ]
+                ],
+                "badge": "Direct"
             },
             "status": "live",
             "blocked_reason": null,
@@ -6939,10 +6835,6 @@
                 "height": 536
             },
             "tiles": null,
-            "crop": {
-                "off": 0,
-                "win": 480
-            },
             "picture": {
                 "glyph": "calendar",
                 "trigger": "poll",
@@ -6963,7 +6855,8 @@
                         "name": "Calendly",
                         "icon": "integrations/calendly.svg"
                     }
-                ]
+                ],
+                "badge": "Direct"
             },
             "status": "live",
             "blocked_reason": null,
@@ -7087,15 +6980,12 @@
                 "height": 536
             },
             "tiles": null,
-            "crop": {
-                "off": 0,
-                "win": 480
-            },
             "picture": {
                 "glyph": "phone",
                 "trigger": "schedule",
                 "mascot": "ghost",
-                "platforms": []
+                "platforms": [],
+                "badge": "Dagelijks"
             },
             "status": "live",
             "blocked_reason": null,
@@ -7284,10 +7174,6 @@
                 "height": 1088
             },
             "tiles": null,
-            "crop": {
-                "off": 164,
-                "win": 480
-            },
             "picture": {
                 "glyph": "phone",
                 "trigger": "poll",
@@ -7313,7 +7199,8 @@
                         "name": "Moneybird",
                         "icon": "integrations/moneybird.svg"
                     }
-                ]
+                ],
+                "badge": "Direct"
             },
             "status": "live",
             "blocked_reason": null,
@@ -7451,15 +7338,12 @@
                 "height": 720
             },
             "tiles": null,
-            "crop": {
-                "off": 164,
-                "win": 480
-            },
             "picture": {
                 "glyph": "phone",
                 "trigger": "poll",
                 "mascot": "ghost",
-                "platforms": []
+                "platforms": [],
+                "badge": "Direct"
             },
             "status": "live",
             "blocked_reason": null,
@@ -7597,15 +7481,12 @@
                 "height": 720
             },
             "tiles": null,
-            "crop": {
-                "off": 164,
-                "win": 480
-            },
             "picture": {
                 "glyph": "mail",
                 "trigger": "poll",
                 "mascot": "ghost",
-                "platforms": []
+                "platforms": [],
+                "badge": "Direct"
             },
             "status": "live",
             "blocked_reason": null,
@@ -7747,10 +7628,6 @@
                 "height": 720
             },
             "tiles": null,
-            "crop": {
-                "off": 0,
-                "win": 480
-            },
             "picture": {
                 "glyph": "box",
                 "trigger": "poll",
@@ -7791,7 +7668,8 @@
                         "name": "PrestaShop",
                         "icon": "integrations/prestashop.svg"
                     }
-                ]
+                ],
+                "badge": "Direct"
             },
             "status": "live",
             "blocked_reason": null,
@@ -7911,10 +7789,6 @@
                 "height": 536
             },
             "tiles": null,
-            "crop": {
-                "off": 0,
-                "win": 480
-            },
             "picture": {
                 "glyph": "box",
                 "trigger": "poll",
@@ -7955,7 +7829,8 @@
                         "name": "PrestaShop",
                         "icon": "integrations/prestashop.svg"
                     }
-                ]
+                ],
+                "badge": "Direct"
             },
             "status": "live",
             "blocked_reason": null,
@@ -8124,10 +7999,6 @@
                 "height": 904
             },
             "tiles": null,
-            "crop": {
-                "off": 0,
-                "win": 480
-            },
             "picture": {
                 "glyph": "box",
                 "trigger": "poll",
@@ -8188,7 +8059,8 @@
                         "name": "Moneybird",
                         "icon": "integrations/moneybird.svg"
                     }
-                ]
+                ],
+                "badge": "Direct"
             },
             "status": "live",
             "blocked_reason": null,
@@ -8305,10 +8177,6 @@
                 "height": 536
             },
             "tiles": null,
-            "crop": {
-                "off": 0,
-                "win": 480
-            },
             "picture": {
                 "glyph": "handshake",
                 "trigger": "poll",
@@ -8334,7 +8202,8 @@
                         "name": "Moneybird",
                         "icon": "integrations/moneybird.svg"
                     }
-                ]
+                ],
+                "badge": "Direct"
             },
             "status": "live",
             "blocked_reason": null,
@@ -8453,10 +8322,6 @@
                 "height": 536
             },
             "tiles": null,
-            "crop": {
-                "off": 0,
-                "win": 480
-            },
             "picture": {
                 "glyph": "handshake",
                 "trigger": "schedule",
@@ -8482,7 +8347,8 @@
                         "name": "Moneybird",
                         "icon": "integrations/moneybird.svg"
                     }
-                ]
+                ],
+                "badge": "Wekelijks"
             },
             "status": "live",
             "blocked_reason": null,
@@ -8631,10 +8497,6 @@
                     "size": "wide"
                 }
             ],
-            "crop": {
-                "off": 0,
-                "win": 0
-            },
             "picture": {
                 "glyph": "chart",
                 "trigger": null,
@@ -8675,7 +8537,8 @@
                         "name": "PrestaShop",
                         "icon": "integrations/prestashop.svg"
                     }
-                ]
+                ],
+                "badge": "30 dagen"
             },
             "status": "live",
             "blocked_reason": null,
@@ -8761,10 +8624,6 @@
                     "size": "half"
                 }
             ],
-            "crop": {
-                "off": 0,
-                "win": 0
-            },
             "picture": {
                 "glyph": "chart",
                 "trigger": null,
@@ -8805,7 +8664,8 @@
                         "name": "PrestaShop",
                         "icon": "integrations/prestashop.svg"
                     }
-                ]
+                ],
+                "badge": "30 dagen"
             },
             "status": "live",
             "blocked_reason": null,
@@ -8930,10 +8790,6 @@
                     "size": "half"
                 }
             ],
-            "crop": {
-                "off": 0,
-                "win": 0
-            },
             "picture": {
                 "glyph": "chart",
                 "trigger": null,
@@ -8959,7 +8815,8 @@
                         "name": "Moneybird",
                         "icon": "integrations/moneybird.svg"
                     }
-                ]
+                ],
+                "badge": "30 dagen"
             },
             "status": "live",
             "blocked_reason": null,
@@ -9084,10 +8941,6 @@
                     "size": "wide"
                 }
             ],
-            "crop": {
-                "off": 0,
-                "win": 0
-            },
             "picture": {
                 "glyph": "chart",
                 "trigger": null,
@@ -9113,7 +8966,8 @@
                         "name": "Moneybird",
                         "icon": "integrations/moneybird.svg"
                     }
-                ]
+                ],
+                "badge": "30 dagen"
             },
             "status": "live",
             "blocked_reason": null,
@@ -9254,10 +9108,6 @@
                     "size": "half"
                 }
             ],
-            "crop": {
-                "off": 0,
-                "win": 0
-            },
             "picture": {
                 "glyph": "chart",
                 "trigger": null,
@@ -9283,7 +9133,8 @@
                         "name": "Moneybird",
                         "icon": "integrations/moneybird.svg"
                     }
-                ]
+                ],
+                "badge": "30 dagen"
             },
             "status": "live",
             "blocked_reason": null,
@@ -9397,10 +9248,6 @@
                     "size": "wide"
                 }
             ],
-            "crop": {
-                "off": 0,
-                "win": 0
-            },
             "picture": {
                 "glyph": "chart",
                 "trigger": null,
@@ -9426,7 +9273,8 @@
                         "name": "Moneybird",
                         "icon": "integrations/moneybird.svg"
                     }
-                ]
+                ],
+                "badge": "30 dagen"
             },
             "status": "live",
             "blocked_reason": null,
@@ -9548,10 +9396,6 @@
                     "size": "wide"
                 }
             ],
-            "crop": {
-                "off": 0,
-                "win": 0
-            },
             "picture": {
                 "glyph": "chart",
                 "trigger": null,
@@ -9592,7 +9436,8 @@
                         "name": "PrestaShop",
                         "icon": "integrations/prestashop.svg"
                     }
-                ]
+                ],
+                "badge": "30 dagen"
             },
             "status": "live",
             "blocked_reason": null,

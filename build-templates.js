@@ -394,8 +394,7 @@ function renderCard(template, art) {
 
   return `<a href="/templates/${esc(template.slug)}" class="tpl-card" data-tpl-card data-tpl-kind="${esc(template.kind)}" data-tpl-industries="${esc(template.industries.join(","))}" data-tpl-koppelingen="${esc(template.needs.platforms.join(","))}" data-tpl-trigger="${esc((template.trigger && template.trigger.kind) || "")}" data-tpl-status="${esc(template.status)}" data-tpl-search="${esc(search)}">
   <div class="tpl-picture tpl-picture-${esc(template.kind)}">
-    <span class="tpl-kind" title="${KIND_LABELS[template.kind]}">${glyphSvg(art, "kind-" + template.kind)}<span class="visually-hidden">${KIND_LABELS[template.kind]}</span></span>
-    <div class="tpl-picture-row">${picture.mascot === "ghost" ? `<span class="tpl-mascot">${art.mascots.ghost}</span>` : ""}${shown.map((p) => logoTile(p, false)).join("")}${more > 0 ? `<span class="tpl-logo tpl-logo-more" title="${esc(moreTitle)}">+${more}</span>` : ""}<span class="tpl-glyph">${glyphSvg(art, picture.glyph)}</span></div>
+${picture.badge ? `    <span class="tpl-badge">${esc(picture.badge)}</span>\n` : ""}    <div class="tpl-picture-row">${picture.mascot === "ghost" ? `<span class="tpl-mascot">${art.mascots.ghost}</span>` : ""}${shown.map((p) => logoTile(p, false)).join("")}${more > 0 ? `<span class="tpl-logo tpl-logo-more" title="${esc(moreTitle)}">+${more}</span>` : ""}<span class="tpl-glyph">${glyphSvg(art, picture.glyph)}</span></div>
   </div>
   <div class="tpl-card-body">
     <h3 class="tpl-card-title">${esc(template.label)}</h3>

@@ -138,11 +138,13 @@
    dashboard's .c-ink sets (agent-icon.blade.php). */
 .tpl-mascot{width:3rem;height:3rem;flex-shrink:0;--agent-fill:var(--ink);--agent-eye:var(--bg)}
 .tpl-mascot svg{display:block;width:100%;height:100%}
-.tpl-kind{
-  position:absolute;top:.5rem;right:.5rem;width:1.375rem;height:1.375rem;border-radius:6px;border:1px solid var(--border);
-  background:var(--surface);color:var(--ink-2);display:inline-flex;align-items:center;justify-content:center;
+/* The corner label (2026-09-06, Sal: no kind glyph there, "maybe a dynamic
+   label for something") — a workflow's cadence today; nothing on agents and
+   dashboards. Text comes from the record (picture.badge), never guessed here. */
+.tpl-badge{
+  position:absolute;top:.5rem;right:.5rem;padding:.1875rem .5rem;border-radius:var(--radius-pill);border:1px solid var(--border);
+  background:var(--surface);color:var(--ink-2);font-size:.6875rem;font-weight:600;line-height:1.2;white-space:nowrap;
 }
-.tpl-kind svg{width:.8125rem;height:.8125rem}
 .tpl-card-body{display:flex;flex-direction:column;gap:.25rem;padding:.75rem .875rem .875rem}
 .tpl-card-title{font-size:.9375rem;font-weight:700;color:var(--ink);margin:0;line-height:1.3}
 .tpl-card-line{
@@ -176,7 +178,7 @@
   .tpl-glyph{width:2.75rem;height:2.75rem;margin-left:.25rem}
   .tpl-glyph svg{width:1.375rem;height:1.375rem}
   .tpl-mascot{width:2.5rem;height:2.5rem}
-  .tpl-kind{top:.375rem;right:.375rem;width:1.25rem;height:1.25rem}
+  .tpl-badge{top:.375rem;right:.375rem;font-size:.625rem;padding:.125rem .4375rem}
   .tpl-card-body{padding:.625rem .75rem .75rem;gap:.1875rem}
   .tpl-card-title{font-size:.8125rem}
   .tpl-card-line{font-size:.75rem}

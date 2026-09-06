@@ -70,15 +70,17 @@ async function run(browserType, label, viewport, device) {
     mascots: document.querySelectorAll(".tpl-picture-agent .tpl-mascot svg").length,
     agentGlyphs: Array.from(document.querySelectorAll(".tpl-picture-agent .tpl-glyph svg")).map((s) => s.dataset.glyph),
     charts: document.querySelectorAll('.tpl-picture-dashboard .tpl-glyph svg[data-glyph="chart"]').length,
-    kinds: document.querySelectorAll(".tpl-kind svg").length,
+    badges: Array.from(document.querySelectorAll(".tpl-picture-workflow .tpl-badge")).map((b) => b.textContent.trim()),
+    dashBadges: Array.from(document.querySelectorAll(".tpl-picture-dashboard .tpl-badge")).map((b) => b.textContent.trim()),
+    agentBadges: document.querySelectorAll(".tpl-picture-agent .tpl-badge").length,
   }));
   check(`${label} agent pictures = mascot + phone/mail`, art.mascots === a && art.agentGlyphs.every((g) => g === "phone" || g === "mail"), JSON.stringify(art));
   check(`${label} dashboard pictures use the chart glyph`, art.charts === d, String(art.charts));
-  check(`${label} every card carries a kind badge`, art.kinds === a + w + d, String(art.kinds));
+  check(`${label} corner labels: workflow cadence, dashboard period, none on agents`, art.badges.length > 0 && art.badges.every((b) => ["Dagelijks", "Wekelijks", "Elk uur", "Direct"].includes(b)) && art.dashBadges.length === d && art.dashBadges.every((b) => /^\d+ dagen$/.test(b)) && art.agentBadges === 0, JSON.stringify(art.badges.slice(0, 4)) + " " + JSON.stringify(art.dashBadges.slice(0, 2)) + " agent badges " + art.agentBadges);
   const overflow = await page.evaluate(() => Array.from(document.querySelectorAll(".tpl-picture")).filter((p) => { const r = p.querySelector(".tpl-picture-row"); return r && r.scrollWidth > p.clientWidth; }).length);
   check(`${label} no picture row overflows its card`, overflow === 0, String(overflow));
   check(`${label} no horizontal page overflow`, await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1));
-  // "No text" means the picture row itself — the corner badge's visually-hidden label is for screen readers, and "+N" is a count, not copy.
+  // "No text" means the picture row itself — the corner label is the one deliberate exception, and "+N" is a count, not copy.
   check(`${label} no visible text inside a picture`, await page.evaluate(() => Array.from(document.querySelectorAll(".tpl-picture-row")).every((r) => r.innerText.trim().replace(/\+\d+/g, "").trim() === "")));
   await page.screenshot({ path: path.join(OUT, `tpl-${label}-first.png`) });
 
