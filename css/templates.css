@@ -205,7 +205,28 @@
 .tpl-dash-tile-body{flex:1;margin-top:.25rem;border-radius:.3125rem;background:var(--muted)}
 
 /* ---------- Detail page ---------- */
-.tpl-detail-visual{border-radius:var(--radius-card);border:1px solid var(--border);overflow:hidden;background:var(--muted);margin-bottom:1.5rem}
+/* Hero: text left, visual right (2026-09-06, Sal: "left align the text
+   and right align the workflow graph" -- then, on the follow-up: "the
+   spacing in the hero on desktop, its not consistent and way too much,
+   use the same ratios as mobile"). The second complaint was really the
+   first one unfixed: a graph in "full"/fit mode scales to whatever box
+   it's given, and the box used to be the full page width -- a 520px-wide
+   flow ended up centred in a ~1300px-wide, mostly empty dot-grid field on
+   desktop, filled edge to edge only on a phone. Giving the visual its OWN
+   narrower column (instead of the page's full width) is the actual fix:
+   "fit" then scales it to roughly the same proportion of its box on any
+   screen, matching how it already looks on mobile, where the box is
+   naturally narrow. Single column (text above the visual, the OLD
+   stacked order -- no reflow surprise) until there's room for both side
+   by side. */
+.tpl-detail-hero{display:grid;grid-template-columns:1fr;gap:1.5rem;align-items:start;margin-bottom:1.5rem}
+.tpl-detail-intro h1{margin:0}
+.tpl-detail-summary{margin:.75rem 0 0;font-size:1rem;line-height:1.5;color:var(--ink-2)}
+@media (min-width:64rem){
+  .tpl-detail-hero{grid-template-columns:minmax(18rem,26rem) 1fr;gap:2.5rem;align-items:center}
+  .tpl-detail-intro{padding-top:.25rem}
+}
+.tpl-detail-visual{border-radius:var(--radius-card);border:1px solid var(--border);overflow:hidden;background:var(--muted)}
 .tpl-detail-visual .tpl-dash-mock{position:relative;height:22rem;padding:1.25rem}
 .tpl-detail-actions{padding:1rem}
 .tpl-detail-grid{display:grid;grid-template-columns:1fr;gap:1.5rem;margin-bottom:2.5rem}

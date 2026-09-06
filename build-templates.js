@@ -535,6 +535,16 @@ ${footerHtml(`  <script src="/js/templates.js?v=${TPL_ASSET_VERSION}"></script>\
 `;
 }
 
+// .container and .section are never combined on one element anywhere else
+// on the site (see e.g. koppelingen.html: <section class="section"> wrapping
+// its own <div class="container">) -- .section's own `padding: 5rem 0`
+// shorthand zeroes whatever horizontal padding .container just set on the
+// SAME element, and .container relies on padding (not margin) for its own
+// mobile inset. Combining them on one div (round 1, 2026-09-05) is exactly
+// the landmine CLAUDE.md already documents for .hero, just not caught
+// then: every one of the 51 detail pages had ZERO side padding on mobile
+// until this was measured and fixed 2026-09-06. Keep them on separate
+// elements below -- do not recombine them onto one div.
 function renderDetailPage(template, related, art) {
   assertNoEmDash(template.summary, `template ${template.key} summary`);
 
@@ -544,12 +554,16 @@ function renderDetailPage(template, related, art) {
     ? `<div class="tpl-detail-visual"><div class="tpl-detail-visual-inner" style="position:relative;height:22rem">${renderDashMock(template.tiles)}</div><div class="tpl-detail-actions"><a href="${SIGNUP_URL}" class="btn-primary" data-event="Signup Click">Laat Mowi dit bouwen</a></div></div>`
     : `<div class="tpl-detail-visual"><p class="hint" style="padding:1.5rem">${esc(template.blocked_reason || "Nog niet beschikbaar.")}</p></div>`;
 
+  // template.steps is only ever empty for a planned template, whose
+  // blocked_reason is already shown in the hero card right beside the
+  // visual (see `visual` above) -- repeating it here put the exact same
+  // sentence twice on one screen.
   const stepsHtml =
     template.steps.length > 0
       ? `<ol class="tpl-detail-steps">${template.steps
           .map((s) => `<li><strong>${esc(s.title)}</strong><span>${esc(s.text)}</span></li>`)
           .join("")}</ol>`
-      : `<p class="hint">${esc(template.blocked_reason || "Nog geen stappen beschikbaar.")}</p>`;
+      : `<p class="hint">Nog geen stappen beschikbaar.</p>`;
 
   const platformsHtml =
     template.picture.platforms.length > 0
@@ -604,29 +618,35 @@ function renderDetailPage(template, related, art) {
 <body>
 ${headerHtml("/templates")}
 <main>
-<div class="container section">
-  <p><a href="/templates" class="link-arrow">← Templates</a></p>
-  <h1 style="margin-top:1rem">${esc(template.label)}</h1>
-  <p class="hero-sub" style="margin-bottom:2rem">${esc(template.summary)}</p>
+<section class="section">
+  <div class="container">
+    <p><a href="/templates" class="link-arrow">← Templates</a></p>
 
-  ${visual}
+    <div class="tpl-detail-hero">
+      <div class="tpl-detail-intro">
+        <h1>${esc(template.label)}</h1>
+        <p class="tpl-detail-summary">${esc(template.summary)}</p>
+      </div>
+      ${visual}
+    </div>
 
-  <div class="tpl-detail-grid">
-    <section class="tpl-detail-section">
-      <h2>Zo werkt het</h2>
-      ${stepsHtml}
-    </section>
-    <section class="tpl-detail-section">
-      <h2>Wat u nodig heeft</h2>
-      ${platformsHtml}
-      ${template.needs.koppeling_hint ? `<p>${esc(template.needs.koppeling_hint)}</p>` : ""}
-      ${template.industry_labels.length > 0 ? `<p>Ook voor: ${esc(template.industry_labels.join(", "))}.</p>` : ""}
-      <div class="tpl-prompt-box">Wat de Builder krijgt: "${esc(promptFor(template))}"</div>
-    </section>
+    <div class="tpl-detail-grid">
+      <section class="tpl-detail-section">
+        <h2>Zo werkt het</h2>
+        ${stepsHtml}
+      </section>
+      <section class="tpl-detail-section">
+        <h2>Wat u nodig heeft</h2>
+        ${platformsHtml}
+        ${template.needs.koppeling_hint ? `<p>${esc(template.needs.koppeling_hint)}</p>` : ""}
+        ${template.industry_labels.length > 0 ? `<p>Ook voor: ${esc(template.industry_labels.join(", "))}.</p>` : ""}
+        <div class="tpl-prompt-box">Wat de Builder krijgt: "${esc(promptFor(template))}"</div>
+      </section>
+    </div>
+
+    ${relatedHtml}
   </div>
-
-  ${relatedHtml}
-</div>
+</section>
 </main>
 ${footerHtml(`  <script src="/js/workflow-canvas.js?v=${WF_JS_VERSION}"></script>\n`)}
 </body>
