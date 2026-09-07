@@ -67,14 +67,21 @@ async function run(browserType, label, viewport, device) {
   const imgs = await page.evaluate(() => Array.from(document.querySelectorAll(".tpl-picture img, .tpl-dd-menu img")).map((i) => ({ src: i.getAttribute("src"), ok: i.complete && i.naturalWidth > 0 })));
   check(`${label} every logo loaded (${imgs.length})`, imgs.length > 0 && imgs.every((i) => i.ok), imgs.filter((i) => !i.ok).map((i) => i.src).slice(0, 5).join(" "));
   const art = await page.evaluate(() => ({
-    mascots: document.querySelectorAll(".tpl-picture-agent .tpl-mascot svg").length,
-    agentGlyphs: Array.from(document.querySelectorAll(".tpl-picture-agent .tpl-glyph svg")).map((s) => s.dataset.glyph),
+    mascots: document.querySelectorAll(".tpl-picture-agent .tpl-mascot").length,
+    agentLead: Array.from(document.querySelectorAll(".tpl-picture-agent .tpl-glyph:not(.tpl-glyph-sm) svg")).map((s) => s.dataset.glyph),
+    agentChannel: Array.from(document.querySelectorAll(".tpl-picture-agent .tpl-glyph-sm svg")).map((s) => s.dataset.glyph),
     charts: document.querySelectorAll('.tpl-picture-dashboard .tpl-glyph svg[data-glyph="chart"]').length,
     badges: Array.from(document.querySelectorAll(".tpl-picture-workflow .tpl-badge")).map((b) => b.textContent.trim()),
     dashBadges: Array.from(document.querySelectorAll(".tpl-picture-dashboard .tpl-badge")).map((b) => b.textContent.trim()),
     agentBadges: document.querySelectorAll(".tpl-picture-agent .tpl-badge").length,
   }));
-  check(`${label} agent pictures = mascot + phone/mail`, art.mascots === a && art.agentGlyphs.every((g) => g === "phone" || g === "mail"), JSON.stringify(art));
+  // 2026-09-07: the ghost left the cards, the branche took its slot. This
+  // also pins the point of that change — an agent card's picture is now
+  // unique to its trade, where all 10 Voice cards used to be identical.
+  check(`${label} agent pictures = branche glyph + phone/mail, no mascot`,
+    art.mascots === 0 && art.agentLead.length === a && art.agentLead.every((g) => g && g.startsWith("branche-")) && art.agentChannel.length === a && art.agentChannel.every((g) => g === "phone" || g === "mail"),
+    JSON.stringify(art));
+  check(`${label} every branche is drawn differently`, new Set(art.agentLead).size === 10, String(new Set(art.agentLead).size));
   check(`${label} dashboard pictures use the chart glyph`, art.charts === d, String(art.charts));
   check(`${label} corner labels: workflow cadence, dashboard period, none on agents`, art.badges.length > 0 && art.badges.every((b) => ["Dagelijks", "Wekelijks", "Elk uur", "Direct"].includes(b)) && art.dashBadges.length === d && art.dashBadges.every((b) => /^\d+ dagen$/.test(b)) && art.agentBadges === 0, JSON.stringify(art.badges.slice(0, 4)) + " " + JSON.stringify(art.dashBadges.slice(0, 2)) + " agent badges " + art.agentBadges);
   const overflow = await page.evaluate(() => Array.from(document.querySelectorAll(".tpl-picture")).filter((p) => { const r = p.querySelector(".tpl-picture-row"); return r && r.scrollWidth > p.clientWidth; }).length);

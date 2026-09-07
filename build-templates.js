@@ -27,7 +27,7 @@
    with the search beside it, ONE toolbar (segmented type control + three
    dropdowns with faceted counts, js/templates.js), three sections per
    kind — and a card shows a picture built from the record (integration
-   logo tiles, one domain glyph, the ghost mascot for agents) instead of a
+   logo tiles, one domain glyph, a branche glyph for agents) instead of a
    cropped canvas. The generator mirrors the dashboard's Blade markup
    (resources/views/flows/templates.blade.php + components/template-card.
    blade.php) hook for hook, so both pages filter identically. */
@@ -69,7 +69,7 @@ const WF_JS_VERSION = "20260906-1";
 // This file's OWN two new assets get one shared version, bumped whenever
 // either changes — same "one value per file-pair, bump together" rule
 // the rest of the site's cache-busting convention already follows.
-const TPL_ASSET_VERSION = "20260906-8";
+const TPL_ASSET_VERSION = "20260907-1";
 
 // ---------------------------------------------------------------------------
 // Escaping — every field below can eventually carry CLIENT-authored text
@@ -357,10 +357,15 @@ const SIGNUP_URL = "https://my.mowi.agency/aanmelden";
 // ---------------------------------------------------------------------------
 // Card art (round 2, 2026-09-06 — Sal: "logos + one big glyph, no text").
 // The export carries the shared art ONCE at its top level: `glyphs` (name
-// -> inner-SVG fragment, App\Templates\Glyphs) and `mascots.ghost` (the
-// agent mascot rendered through the dashboard's own component). A record
-// only names its glyph (picture.glyph); this file never keeps art of its
-// own, so the two sites can't drift. Missing art is a build error, never a
+// -> inner-SVG fragment, App\Templates\Glyphs). A record only names its
+// glyph (picture.glyph) and, for an agent, its channel glyph
+// (picture.channel); this file never keeps art of its own, so the two
+// sites can't drift.
+//
+// The `mascots.ghost` dictionary went 2026-09-07 with the ghost itself
+// (Sal: "i honestly want to get rid of the mascot") — the branche glyph
+// took its slot on the card, which is also what made 20 agent cards stop
+// sharing 2 pictures. Missing art is a build error, never a
 // silent blank — same loud-over-silent rule as main()'s slug checks.
 // ---------------------------------------------------------------------------
 function glyphSvg(art, name) {
@@ -403,7 +408,7 @@ function renderCard(template, art) {
 
   return `<a href="/templates/${esc(template.slug)}" class="tpl-card" data-tpl-card data-tpl-kind="${esc(template.kind)}" data-tpl-industries="${esc(template.industries.join(","))}" data-tpl-koppelingen="${esc(template.needs.platforms.join(","))}" data-tpl-trigger="${esc((template.trigger && template.trigger.kind) || "")}" data-tpl-status="${esc(template.status)}" data-tpl-search="${esc(search)}">
   <div class="tpl-picture tpl-picture-${esc(template.kind)}">
-${picture.badge ? `    <span class="tpl-badge">${esc(picture.badge)}</span>\n` : ""}    <div class="tpl-picture-row">${picture.mascot === "ghost" ? `<span class="tpl-mascot">${art.mascots.ghost}</span>` : ""}${shown.map((p) => logoTile(p, false)).join("")}${more > 0 ? `<span class="tpl-logo tpl-logo-more" title="${esc(moreTitle)}">+${more}</span>` : ""}<span class="tpl-glyph">${glyphSvg(art, picture.glyph)}</span></div>
+${picture.badge ? `    <span class="tpl-badge">${esc(picture.badge)}</span>\n` : ""}    <div class="tpl-picture-row">${shown.map((p) => logoTile(p, false)).join("")}${more > 0 ? `<span class="tpl-logo tpl-logo-more" title="${esc(moreTitle)}">+${more}</span>` : ""}<span class="tpl-glyph">${glyphSvg(art, picture.glyph)}</span>${picture.channel ? `<span class="tpl-glyph tpl-glyph-sm">${glyphSvg(art, picture.channel)}</span>` : ""}</div>
   </div>
   <div class="tpl-card-body">
     <h3 class="tpl-card-title">${esc(template.label)}</h3>
@@ -753,10 +758,10 @@ ${footerHtml(`  <script src="/js/workflow-canvas.js?v=${WF_JS_VERSION}"></script
 function main() {
   const data = JSON.parse(fs.readFileSync(DATA_PATH, "utf8"));
   const templates = data.templates;
-  if (!data.glyphs || !data.mascots || !data.mascots.ghost) {
-    throw new Error("build-templates: the export carries no glyphs/mascots — re-run `php artisan mowi:export-templates` on a dashboard that has round 2 (2026-09-06)");
+  if (!data.glyphs || !data.glyphs["branche-kapper"]) {
+    throw new Error("build-templates: the export carries no glyphs (or no branche glyphs) — re-run `php artisan mowi:export-templates` on a dashboard that has the 2026-09-07 card art");
   }
-  const art = { glyphs: data.glyphs, mascots: data.mascots };
+  const art = { glyphs: data.glyphs };
 
   const slugs = new Set();
   templates.forEach((t) => {

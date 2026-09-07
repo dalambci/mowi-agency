@@ -1,6 +1,6 @@
 {
-    "generated_at": "2026-09-06T14:43:24+00:00",
-    "commit": "20c230f",
+    "generated_at": "2026-09-07T03:13:43+00:00",
+    "commit": "6d985d2",
     "glyphs": {
         "box": "<path d=\"M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z\"/><path d=\"m3.3 7 8.7 5 8.7-5\"/><path d=\"M12 22V12\"/><path d=\"m7.5 4.27 9 5.15\"/>",
         "calendar": "<rect x=\"3\" y=\"4\" width=\"18\" height=\"18\" rx=\"2\"/><path d=\"M16 2v4M8 2v4M3 10h18\"/>",
@@ -9,10 +9,17 @@
         "phone": "<path d=\"M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z\"/>",
         "mail": "<rect x=\"2\" y=\"4\" width=\"20\" height=\"16\" rx=\"2\"/><path d=\"m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7\"/>",
         "chart": "<path d=\"M3 3v18h18\"/><path d=\"M18 17V9\"/><path d=\"M13 17V5\"/><path d=\"M8 17v-3\"/>",
-        "workflow": "<rect x=\"3\" y=\"3\" width=\"8\" height=\"8\" rx=\"2\"/><path d=\"M7 11v4a2 2 0 0 0 2 2h4\"/><rect x=\"13\" y=\"13\" width=\"8\" height=\"8\" rx=\"2\"/>"
-    },
-    "mascots": {
-        "ghost": "<svg viewBox=\"0 0 32 32\" aria-hidden=\"true\" focusable=\"false\" data-shape=\"ghost\">\n    <g transform=\"translate(-0.73,0.57) scale(1.045)\">\n        <g fill=\"var(--agent-fill, #B8B4AE)\">\n                                <path d=\"M15.86 4 Q12.54 4.27 11.83 4.51 Q11.12 4.75 9.93 5.46 Q8.75 6.16 7.69 7.24 Q6.63 8.32 5.89 9.74 Q5.15 11.16 4.69 12.58 Q4.23 14 4.12 15.43 Q4 16.85 4.1 18.98 Q4.2 21.11 4.4 21.59 Q4.6 22.06 4.64 22.54 Q4.67 23.01 4.95 23.48 Q5.23 23.95 5.81 24.54 Q6.38 25.13 6.86 25.24 Q7.33 25.35 8.28 25.26 Q9.22 25.17 9.7 24.93 Q10.17 24.68 11.12 23.81 Q12.07 22.95 13.25 24.06 Q14.44 25.17 15.62 25.17 Q16.8 25.16 17.28 24.9 Q17.75 24.64 18.7 23.79 Q19.65 22.94 20.84 24.03 Q22.02 25.11 22.97 25.37 Q23.91 25.63 24.86 25.41 Q25.81 25.19 26.63 24.34 Q27.46 23.48 27.72 22.3 Q27.97 21.11 27.97 17.56 Q27.96 14 27.52 12.34 Q27.07 10.69 26.31 9.27 Q25.55 7.84 24.97 7.31 Q24.39 6.77 23.21 5.98 Q22.02 5.18 20.6 4.71 Q19.17 4.24 17.75 4.13 Q16.33 4.01 15.86 4 Z\"/>\n                            </g>\n        <g fill=\"var(--agent-eye, #121110)\">\n                            <circle cx=\"12.5\" cy=\"15\" r=\"1.7\"/>\n                            <circle cx=\"19.5\" cy=\"15\" r=\"1.7\"/>\n                    </g>\n    </g>\n</svg>"
+        "workflow": "<rect x=\"3\" y=\"3\" width=\"8\" height=\"8\" rx=\"2\"/><path d=\"M7 11v4a2 2 0 0 0 2 2h4\"/><rect x=\"13\" y=\"13\" width=\"8\" height=\"8\" rx=\"2\"/>",
+        "branche-loodgieter": "<path d=\"M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z\"/>",
+        "branche-kapper": "<circle cx=\"6\" cy=\"6\" r=\"3\"/><circle cx=\"6\" cy=\"18\" r=\"3\"/><path d=\"M8.12 8.12 12 12M20 4 8.12 15.88M14.8 14.8 20 20\"/>",
+        "branche-webshop": "<path d=\"M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z\"/><path d=\"M3 6h18M16 10a4 4 0 0 1-8 0\"/>",
+        "branche-horeca": "<path d=\"M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2M7 2v20M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7\"/>",
+        "branche-schoonheidssalon": "<path d=\"m12 3-1.9 5.8a2 2 0 0 1-1.29 1.29L3 12l5.81 1.91a2 2 0 0 1 1.29 1.29L12 21l1.9-5.8a2 2 0 0 1 1.29-1.29L21 12l-5.81-1.91a2 2 0 0 1-1.29-1.29Z\"/>",
+        "branche-garage": "<path d=\"M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2M9 17h6\"/><circle cx=\"7\" cy=\"17\" r=\"2\"/><circle cx=\"17\" cy=\"17\" r=\"2\"/>",
+        "branche-groothandel": "<path d=\"M22 8.35V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8.35A2 2 0 0 1 3.26 6.5l8-3.2a2 2 0 0 1 1.48 0l8 3.2A2 2 0 0 1 22 8.35Z\"/><path d=\"M6 18h12M6 14h12\"/><rect x=\"6\" y=\"10\" width=\"12\" height=\"12\"/>",
+        "branche-zakelijke_dienstverlening": "<path d=\"M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16\"/><rect x=\"2\" y=\"6\" width=\"20\" height=\"14\" rx=\"2\"/>",
+        "branche-hotel": "<path d=\"M2 4v16M2 8h18a2 2 0 0 1 2 2v10M2 17h20M6 8v9\"/>",
+        "branche-tattooshop": "<path d=\"M21.17 6.81a1 1 0 0 0-3.98-3.99L3.84 16.17a2 2 0 0 0-.5.83l-1.32 4.35a.5.5 0 0 0 .62.63l4.36-1.32a2 2 0 0 0 .83-.5z\"/>"
     },
     "templates": [
         {
@@ -227,9 +234,9 @@
             },
             "tiles": null,
             "picture": {
-                "glyph": "phone",
+                "glyph": "branche-loodgieter",
+                "channel": "phone",
                 "trigger": null,
-                "mascot": "ghost",
                 "platforms": [],
                 "badge": null
             },
@@ -454,9 +461,9 @@
             },
             "tiles": null,
             "picture": {
-                "glyph": "phone",
+                "glyph": "branche-kapper",
+                "channel": "phone",
                 "trigger": null,
-                "mascot": "ghost",
                 "platforms": [],
                 "badge": null
             },
@@ -681,9 +688,9 @@
             },
             "tiles": null,
             "picture": {
-                "glyph": "phone",
+                "glyph": "branche-schoonheidssalon",
+                "channel": "phone",
                 "trigger": null,
-                "mascot": "ghost",
                 "platforms": [],
                 "badge": null
             },
@@ -908,9 +915,9 @@
             },
             "tiles": null,
             "picture": {
-                "glyph": "phone",
+                "glyph": "branche-garage",
+                "channel": "phone",
                 "trigger": null,
-                "mascot": "ghost",
                 "platforms": [],
                 "badge": null
             },
@@ -1135,9 +1142,9 @@
             },
             "tiles": null,
             "picture": {
-                "glyph": "phone",
+                "glyph": "branche-horeca",
+                "channel": "phone",
                 "trigger": null,
-                "mascot": "ghost",
                 "platforms": [],
                 "badge": null
             },
@@ -1362,9 +1369,9 @@
             },
             "tiles": null,
             "picture": {
-                "glyph": "phone",
+                "glyph": "branche-zakelijke_dienstverlening",
+                "channel": "phone",
                 "trigger": null,
-                "mascot": "ghost",
                 "platforms": [],
                 "badge": null
             },
@@ -1589,9 +1596,9 @@
             },
             "tiles": null,
             "picture": {
-                "glyph": "phone",
+                "glyph": "branche-hotel",
+                "channel": "phone",
                 "trigger": null,
-                "mascot": "ghost",
                 "platforms": [],
                 "badge": null
             },
@@ -1816,9 +1823,9 @@
             },
             "tiles": null,
             "picture": {
-                "glyph": "phone",
+                "glyph": "branche-tattooshop",
+                "channel": "phone",
                 "trigger": null,
-                "mascot": "ghost",
                 "platforms": [],
                 "badge": null
             },
@@ -2043,9 +2050,9 @@
             },
             "tiles": null,
             "picture": {
-                "glyph": "phone",
+                "glyph": "branche-webshop",
+                "channel": "phone",
                 "trigger": null,
-                "mascot": "ghost",
                 "platforms": [],
                 "badge": null
             },
@@ -2270,9 +2277,9 @@
             },
             "tiles": null,
             "picture": {
-                "glyph": "phone",
+                "glyph": "branche-groothandel",
+                "channel": "phone",
                 "trigger": null,
-                "mascot": "ghost",
                 "platforms": [],
                 "badge": null
             },
@@ -2505,9 +2512,9 @@
             },
             "tiles": null,
             "picture": {
-                "glyph": "mail",
+                "glyph": "branche-loodgieter",
+                "channel": "mail",
                 "trigger": null,
-                "mascot": "ghost",
                 "platforms": [],
                 "badge": null
             },
@@ -2740,9 +2747,9 @@
             },
             "tiles": null,
             "picture": {
-                "glyph": "mail",
+                "glyph": "branche-kapper",
+                "channel": "mail",
                 "trigger": null,
-                "mascot": "ghost",
                 "platforms": [],
                 "badge": null
             },
@@ -2975,9 +2982,9 @@
             },
             "tiles": null,
             "picture": {
-                "glyph": "mail",
+                "glyph": "branche-schoonheidssalon",
+                "channel": "mail",
                 "trigger": null,
-                "mascot": "ghost",
                 "platforms": [],
                 "badge": null
             },
@@ -3210,9 +3217,9 @@
             },
             "tiles": null,
             "picture": {
-                "glyph": "mail",
+                "glyph": "branche-garage",
+                "channel": "mail",
                 "trigger": null,
-                "mascot": "ghost",
                 "platforms": [],
                 "badge": null
             },
@@ -3445,9 +3452,9 @@
             },
             "tiles": null,
             "picture": {
-                "glyph": "mail",
+                "glyph": "branche-webshop",
+                "channel": "mail",
                 "trigger": null,
-                "mascot": "ghost",
                 "platforms": [],
                 "badge": null
             },
@@ -3680,9 +3687,9 @@
             },
             "tiles": null,
             "picture": {
-                "glyph": "mail",
+                "glyph": "branche-groothandel",
+                "channel": "mail",
                 "trigger": null,
-                "mascot": "ghost",
                 "platforms": [],
                 "badge": null
             },
@@ -3915,9 +3922,9 @@
             },
             "tiles": null,
             "picture": {
-                "glyph": "mail",
+                "glyph": "branche-horeca",
+                "channel": "mail",
                 "trigger": null,
-                "mascot": "ghost",
                 "platforms": [],
                 "badge": null
             },
@@ -4120,9 +4127,9 @@
             },
             "tiles": null,
             "picture": {
-                "glyph": "mail",
+                "glyph": "branche-zakelijke_dienstverlening",
+                "channel": "mail",
                 "trigger": null,
-                "mascot": "ghost",
                 "platforms": [],
                 "badge": null
             },
@@ -4355,9 +4362,9 @@
             },
             "tiles": null,
             "picture": {
-                "glyph": "mail",
+                "glyph": "branche-hotel",
+                "channel": "mail",
                 "trigger": null,
-                "mascot": "ghost",
                 "platforms": [],
                 "badge": null
             },
@@ -4590,9 +4597,9 @@
             },
             "tiles": null,
             "picture": {
-                "glyph": "mail",
+                "glyph": "branche-tattooshop",
+                "channel": "mail",
                 "trigger": null,
-                "mascot": "ghost",
                 "platforms": [],
                 "badge": null
             },
@@ -4724,8 +4731,8 @@
             "tiles": null,
             "picture": {
                 "glyph": "calendar",
+                "channel": null,
                 "trigger": "schedule",
-                "mascot": null,
                 "platforms": [
                     {
                         "key": "guestplan",
@@ -4869,8 +4876,8 @@
             "tiles": null,
             "picture": {
                 "glyph": "calendar",
+                "channel": null,
                 "trigger": "schedule",
-                "mascot": null,
                 "platforms": [
                     {
                         "key": "guestplan",
@@ -5016,8 +5023,8 @@
             "tiles": null,
             "picture": {
                 "glyph": "box",
+                "channel": null,
                 "trigger": "schedule",
-                "mascot": null,
                 "platforms": [
                     {
                         "key": "woocommerce",
@@ -5181,8 +5188,8 @@
             "tiles": null,
             "picture": {
                 "glyph": "box",
+                "channel": null,
                 "trigger": "schedule",
-                "mascot": null,
                 "platforms": [
                     {
                         "key": "woocommerce",
@@ -5340,8 +5347,8 @@
             "tiles": null,
             "picture": {
                 "glyph": "box",
+                "channel": null,
                 "trigger": "poll",
-                "mascot": null,
                 "platforms": [
                     {
                         "key": "woocommerce",
@@ -5506,8 +5513,8 @@
             "tiles": null,
             "picture": {
                 "glyph": "box",
+                "channel": null,
                 "trigger": "poll",
-                "mascot": null,
                 "platforms": [
                     {
                         "key": "woocommerce",
@@ -5691,8 +5698,8 @@
             "tiles": null,
             "picture": {
                 "glyph": "calendar",
+                "channel": null,
                 "trigger": "schedule",
-                "mascot": null,
                 "platforms": [
                     {
                         "key": "guestplan",
@@ -5762,8 +5769,8 @@
             "tiles": null,
             "picture": {
                 "glyph": "workflow",
+                "channel": null,
                 "trigger": null,
-                "mascot": null,
                 "platforms": [],
                 "badge": null
             },
@@ -5809,8 +5816,8 @@
             "tiles": null,
             "picture": {
                 "glyph": "workflow",
+                "channel": null,
                 "trigger": null,
-                "mascot": null,
                 "platforms": [],
                 "badge": null
             },
@@ -5931,8 +5938,8 @@
             "tiles": null,
             "picture": {
                 "glyph": "phone",
+                "channel": null,
                 "trigger": "poll",
-                "mascot": null,
                 "platforms": [
                     {
                         "key": "exact_online",
@@ -6169,8 +6176,8 @@
             "tiles": null,
             "picture": {
                 "glyph": "chart",
+                "channel": null,
                 "trigger": "schedule",
-                "mascot": null,
                 "platforms": [
                     {
                         "key": "woocommerce",
@@ -6334,8 +6341,8 @@
             "tiles": null,
             "picture": {
                 "glyph": "calendar",
+                "channel": null,
                 "trigger": "schedule",
-                "mascot": null,
                 "platforms": [
                     {
                         "key": "guestplan",
@@ -6540,8 +6547,8 @@
             "tiles": null,
             "picture": {
                 "glyph": "handshake",
+                "channel": null,
                 "trigger": "schedule",
-                "mascot": null,
                 "platforms": [
                     {
                         "key": "exact_online",
@@ -6687,8 +6694,8 @@
             "tiles": null,
             "picture": {
                 "glyph": "receipt",
+                "channel": null,
                 "trigger": "poll",
-                "mascot": null,
                 "platforms": [
                     {
                         "key": "exact_online",
@@ -6837,8 +6844,8 @@
             "tiles": null,
             "picture": {
                 "glyph": "calendar",
+                "channel": null,
                 "trigger": "poll",
-                "mascot": null,
                 "platforms": [
                     {
                         "key": "guestplan",
@@ -6982,8 +6989,8 @@
             "tiles": null,
             "picture": {
                 "glyph": "phone",
+                "channel": null,
                 "trigger": "schedule",
-                "mascot": "ghost",
                 "platforms": [],
                 "badge": "Dagelijks"
             },
@@ -7176,8 +7183,8 @@
             "tiles": null,
             "picture": {
                 "glyph": "phone",
+                "channel": null,
                 "trigger": "poll",
-                "mascot": null,
                 "platforms": [
                     {
                         "key": "exact_online",
@@ -7340,8 +7347,8 @@
             "tiles": null,
             "picture": {
                 "glyph": "phone",
+                "channel": null,
                 "trigger": "poll",
-                "mascot": "ghost",
                 "platforms": [],
                 "badge": "Direct"
             },
@@ -7483,8 +7490,8 @@
             "tiles": null,
             "picture": {
                 "glyph": "mail",
+                "channel": null,
                 "trigger": "poll",
-                "mascot": "ghost",
                 "platforms": [],
                 "badge": "Direct"
             },
@@ -7630,8 +7637,8 @@
             "tiles": null,
             "picture": {
                 "glyph": "box",
+                "channel": null,
                 "trigger": "poll",
-                "mascot": null,
                 "platforms": [
                     {
                         "key": "woocommerce",
@@ -7791,8 +7798,8 @@
             "tiles": null,
             "picture": {
                 "glyph": "box",
+                "channel": null,
                 "trigger": "poll",
-                "mascot": null,
                 "platforms": [
                     {
                         "key": "woocommerce",
@@ -8001,8 +8008,8 @@
             "tiles": null,
             "picture": {
                 "glyph": "box",
+                "channel": null,
                 "trigger": "poll",
-                "mascot": null,
                 "platforms": [
                     {
                         "key": "woocommerce",
@@ -8179,8 +8186,8 @@
             "tiles": null,
             "picture": {
                 "glyph": "handshake",
+                "channel": null,
                 "trigger": "poll",
-                "mascot": null,
                 "platforms": [
                     {
                         "key": "exact_online",
@@ -8324,8 +8331,8 @@
             "tiles": null,
             "picture": {
                 "glyph": "handshake",
+                "channel": null,
                 "trigger": "schedule",
-                "mascot": null,
                 "platforms": [
                     {
                         "key": "exact_online",
@@ -8499,8 +8506,8 @@
             ],
             "picture": {
                 "glyph": "chart",
+                "channel": null,
                 "trigger": null,
-                "mascot": null,
                 "platforms": [
                     {
                         "key": "woocommerce",
@@ -8626,8 +8633,8 @@
             ],
             "picture": {
                 "glyph": "chart",
+                "channel": null,
                 "trigger": null,
-                "mascot": null,
                 "platforms": [
                     {
                         "key": "woocommerce",
@@ -8792,8 +8799,8 @@
             ],
             "picture": {
                 "glyph": "chart",
+                "channel": null,
                 "trigger": null,
-                "mascot": null,
                 "platforms": [
                     {
                         "key": "exact_online",
@@ -8943,8 +8950,8 @@
             ],
             "picture": {
                 "glyph": "chart",
+                "channel": null,
                 "trigger": null,
-                "mascot": null,
                 "platforms": [
                     {
                         "key": "exact_online",
@@ -9110,8 +9117,8 @@
             ],
             "picture": {
                 "glyph": "chart",
+                "channel": null,
                 "trigger": null,
-                "mascot": null,
                 "platforms": [
                     {
                         "key": "exact_online",
@@ -9250,8 +9257,8 @@
             ],
             "picture": {
                 "glyph": "chart",
+                "channel": null,
                 "trigger": null,
-                "mascot": null,
                 "platforms": [
                     {
                         "key": "exact_online",
@@ -9398,8 +9405,8 @@
             ],
             "picture": {
                 "glyph": "chart",
+                "channel": null,
                 "trigger": null,
-                "mascot": null,
                 "platforms": [
                     {
                         "key": "woocommerce",

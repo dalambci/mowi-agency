@@ -136,7 +136,7 @@ backstop in case something important didn't get written down.
   mowi:export-templates <path>` in that repo). Never hand-edit the output; change the generator or
   re-export, run `node build-templates.js`, and commit the regenerated files with it. A second run
   is byte-identical (checked). The page's own assets are `css/templates.css` + `js/templates.js`,
-  versioned together by `TPL_ASSET_VERSION` in the generator (**`20260906-8`**); `style.css`/
+  versioned together by `TPL_ASSET_VERSION` in the generator (**`20260907-1`**); `style.css`/
   `main.js`/`workflow-canvas.*` are untouched by this page, so a templates change never needs the
   sitewide bump. The vault note `Dashboard/templates-marketplace-plan.md` is the build record.
 - **The filters were silently broken for a day (2026-09-05→06), and the lesson is a rule:** the
@@ -156,7 +156,14 @@ backstop in case something important didn't get written down.
   "Wis filters", three `.tpl-section`s per kind with counts, and a card picture of integration
   logo tiles + ONE glyph (`.tpl-picture`; agents show the ghost mascot). Glyph fragments and the
   mascot come from the export's top-level `glyphs`/`mascots` — the generator keeps no art of its
-  own and throws on a missing glyph or logo file. Logos: `assets/logos/integrations/<key>.svg`
+  own and throws on a missing glyph or logo file. **The ghost mascot left the cards on 2026-09-07**
+  (Sal: "i honestly want to get rid of the mascot"): an agent card now leads with a **branche glyph**
+  (`branche-<industry key>`, one per `config/industries.php` key, four of them lifted verbatim from
+  the agent pages' own `.icon-tile` tabs so the same trade is never drawn two ways) with the channel
+  glyph smaller beside it. That was measured, not taste: 51 cards shared only 20 pictures, the two
+  biggest groups being 10 identical Voice cards and 10 identical Inbox cards, because the picture
+  drew the kind the title already states and never the trade. 38 distinct pictures after. The
+  export's `mascots` dictionary went with it. Logos: `assets/logos/integrations/<key>.svg`
   (the 14 implemented platforms under their dashboard registry key, copied from the dashboard's
   `public/images/integrations/`; `<img>` only, six carry internal ids). The older `assets/logos/*`
   files (marquee, koppelingen.html) are a separate set and stay as they are.

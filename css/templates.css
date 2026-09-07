@@ -143,11 +143,14 @@
   display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;
 }
 .tpl-glyph svg{width:1.75rem;height:1.75rem}
+/* The channel glyph beside a branche glyph: smaller on purpose, so the two
+   read as trade + qualifier rather than as a repeated element
+   (2026-09-07, mirrors the dashboard). */
+.tpl-glyph-sm{width:2.5rem;height:2.5rem;margin-left:.375rem}
+.tpl-glyph-sm svg{width:1.25rem;height:1.25rem}
 .tpl-picture-row > .tpl-glyph:first-child{margin-left:0}
 /* The ghost mascot's paints come from the same two custom properties the
    dashboard's .c-ink sets (agent-icon.blade.php). */
-.tpl-mascot{width:3rem;height:3rem;flex-shrink:0;--agent-fill:var(--ink);--agent-eye:var(--bg)}
-.tpl-mascot svg{display:block;width:100%;height:100%}
 /* The corner label (2026-09-06, Sal: no kind glyph there, "maybe a dynamic
    label for something") — a workflow's cadence today; nothing on agents and
    dashboards. Text comes from the record (picture.badge), never guessed here. */
@@ -193,7 +196,6 @@
   .tpl-logo-more{display:none}
   .tpl-glyph{width:2.75rem;height:2.75rem;margin-left:.25rem}
   .tpl-glyph svg{width:1.375rem;height:1.375rem}
-  .tpl-mascot{width:2.5rem;height:2.5rem}
   .tpl-badge{top:.375rem;right:.375rem;font-size:.625rem;padding:.125rem .4375rem}
   .tpl-card-body{padding:.625rem .75rem .75rem;gap:.1875rem}
   .tpl-card-title{font-size:.8125rem}
