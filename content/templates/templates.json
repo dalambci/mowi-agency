@@ -1,6 +1,6 @@
 {
-    "generated_at": "2026-09-08T13:48:53+00:00",
-    "commit": "a77c6d6",
+    "generated_at": "2026-09-08T15:38:29+00:00",
+    "commit": "29f6012",
     "glyphs": {
         "kind-voice": "<path d=\"M2 10v3\"/><path d=\"M6 6v11\"/><path d=\"M10 3v18\"/><path d=\"M14 8v7\"/><path d=\"M18 5v13\"/><path d=\"M22 10v3\"/>",
         "kind-inbox": "<rect width=\"20\" height=\"16\" x=\"2\" y=\"4\" rx=\"2\"/><path d=\"m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7\"/>",
@@ -30,7 +30,7 @@
             "key": "voice-agent.loodgieter",
             "kind": "agent",
             "slug": "voice-agent-loodgieter",
-            "label": "Voice agent — Loodgieter",
+            "label": "Loodgieter — Voice agent",
             "tagline": "Spoed of afspraak? De agent weet het verschil.",
             "summary": "Neemt elke oproep aan, herkent een lekkage, storing of gaslucht en handelt dat als spoed af — voor een routineverzoek plant de agent zelf onderhoud of een keuring in.",
             "industries": [
@@ -274,7 +274,7 @@
             "key": "voice-agent.kapper",
             "kind": "agent",
             "slug": "voice-agent-kapper",
-            "label": "Voice agent — Kapper",
+            "label": "Kapper — Voice agent",
             "tagline": "Plant knipbeurten in zonder dat u de telefoon hoeft op te nemen.",
             "summary": "Vraagt welke behandeling het is en voor wie, checkt de beschikbaarheid en stelt zelf een tijd voor — of beantwoordt een vraag uit de kennisbank.",
             "industries": [
@@ -518,7 +518,7 @@
             "key": "voice-agent.schoonheidssalon",
             "kind": "agent",
             "slug": "voice-agent-schoonheidssalon",
-            "label": "Voice agent — Schoonheidssalon",
+            "label": "Schoonheidssalon — Voice agent",
             "tagline": "Boekt behandelingen in en verbindt een huidreactie altijd meteen door.",
             "summary": "Plant behandelingen in en vraagt naar allergieën of huidaandoeningen — een huidreactie na een eerdere behandeling wordt altijd direct doorverbonden, zonder verder door te vragen.",
             "industries": [
@@ -762,7 +762,7 @@
             "key": "voice-agent.garage",
             "kind": "agent",
             "slug": "voice-agent-garage",
-            "label": "Voice agent — Garage",
+            "label": "Garage — Voice agent",
             "tagline": "Checkt eerst of de auto nog veilig rijdt, dan pas de afspraak.",
             "summary": "Vraagt om welke dienst het gaat (APK, onderhoud, reparatie) en of de auto nog rijklaar en veilig is — is dat niet zo, dan verbindt de agent door in plaats van een afspraak te plannen.",
             "industries": [
@@ -1006,7 +1006,7 @@
             "key": "voice-agent.horeca",
             "kind": "agent",
             "slug": "voice-agent-horeca",
-            "label": "Voice agent — Restaurant",
+            "label": "Restaurant — Voice agent",
             "tagline": "Neemt reserveringen aan, inclusief dieetwensen.",
             "summary": "Vraagt het aantal personen, datum en tijd en eventuele dieetwensen, en stelt zelf een tijd voor — of beantwoordt een vraag over het menu.",
             "industries": [
@@ -1250,7 +1250,7 @@
             "key": "voice-agent.zakelijke_dienstverlening",
             "kind": "agent",
             "slug": "voice-agent-zakelijke_dienstverlening",
-            "label": "Voice agent — Adviesbureau",
+            "label": "Adviesbureau — Voice agent",
             "tagline": "Plant kennismakingsgesprekken in, zonder ruis.",
             "summary": "Vraagt waar het gesprek over moet gaan en of de beller al klant is, en stelt zelf een tijd voor een afspraak of kennismakingsgesprek voor.",
             "industries": [
@@ -1494,7 +1494,7 @@
             "key": "voice-agent.hotel",
             "kind": "agent",
             "slug": "voice-agent-hotel",
-            "label": "Voice agent — Hotel",
+            "label": "Hotel — Voice agent",
             "tagline": "Boekt kamers en verbindt een gast met een probleem meteen door.",
             "summary": "Vraagt aankomst- en vertrekdatum, aantal gasten en kamertype voor een reservering — een probleem tijdens een lopend verblijf (geen verwarming, geen toegang) wordt altijd direct doorverbonden.",
             "industries": [
@@ -1738,7 +1738,7 @@
             "key": "voice-agent.tattooshop",
             "kind": "agent",
             "slug": "voice-agent-tattooshop",
-            "label": "Voice agent — Tattooshop",
+            "label": "Tattooshop — Voice agent",
             "tagline": "Plant consults in en herkent een nazorg-alarm.",
             "summary": "Vraagt naar het gewenste ontwerp, de plek en de grootte voor een consult of sessie — een nazorgvraag met tekenen van een mogelijke infectie wordt altijd doorverbonden, zonder zelf medisch advies te geven.",
             "industries": [
@@ -1982,7 +1982,7 @@
             "key": "voice-agent.webshop",
             "kind": "agent",
             "slug": "voice-agent-webshop",
-            "label": "Voice agent — Webshop",
+            "label": "Webshop — Voice agent",
             "tagline": "Zoekt de bestelling op vóórdat er iets wordt beloofd.",
             "summary": "Vraagt naar het ordernummer of e-mailadres, zoekt de bestelling op en geeft de status direct door — wordt niets gevonden, dan legt de agent een terugbelverzoek vast.",
             "industries": [
@@ -2266,7 +2266,7 @@
             "key": "voice-agent.groothandel",
             "kind": "agent",
             "slug": "voice-agent-groothandel",
-            "label": "Voice agent — Groothandel",
+            "label": "Groothandel — Voice agent",
             "tagline": "Zoekt de order op vóórdat er iets wordt beloofd.",
             "summary": "Vraagt naar het klant- of ordernummer, zoekt de order op en geeft de status door — wordt niets gevonden, dan legt de agent een terugbelverzoek vast.",
             "industries": [
@@ -2550,7 +2550,7 @@
             "key": "inbox-agent.loodgieter",
             "kind": "agent",
             "slug": "inbox-agent-loodgieter",
-            "label": "Inbox agent — Loodgieter",
+            "label": "Loodgieter — Inbox agent",
             "tagline": "Storing, offerte of factuur: gesorteerd zonder dat u het ziet.",
             "summary": "Sorteert elke binnenkomende e-mail in de juiste map, herkent een offerteaanvraag en vraagt zelf de ontbrekende gegevens op, en meldt een storing of spoedgeval direct.",
             "industries": [
@@ -2812,7 +2812,7 @@
             "key": "inbox-agent.kapper",
             "kind": "agent",
             "slug": "inbox-agent-kapper",
-            "label": "Inbox agent — Kapper",
+            "label": "Kapper — Inbox agent",
             "tagline": "Sorteert afspraakverzoeken en klantvragen automatisch.",
             "summary": "Sorteert elke e-mail, schrijft een conceptantwoord voor veelgestelde vragen en houdt afspraakverzoeken apart klaar voor u.",
             "industries": [
@@ -3074,7 +3074,7 @@
             "key": "inbox-agent.schoonheidssalon",
             "kind": "agent",
             "slug": "inbox-agent-schoonheidssalon",
-            "label": "Inbox agent — Schoonheidssalon",
+            "label": "Schoonheidssalon — Inbox agent",
             "tagline": "Sorteert afspraakverzoeken en behandelvragen automatisch.",
             "summary": "Sorteert elke e-mail, schrijft een conceptantwoord voor veelgestelde vragen en houdt afspraakverzoeken apart klaar voor u.",
             "industries": [
@@ -3336,7 +3336,7 @@
             "key": "inbox-agent.garage",
             "kind": "agent",
             "slug": "inbox-agent-garage",
-            "label": "Inbox agent — Garage",
+            "label": "Garage — Inbox agent",
             "tagline": "APK, onderhoud of storing: gesorteerd binnen.",
             "summary": "Sorteert elke e-mail in de juiste map, vraagt zelf het kenteken en de gewenste dienst op bij een offerteaanvraag, en meldt een storing direct.",
             "industries": [
@@ -3598,7 +3598,7 @@
             "key": "inbox-agent.webshop",
             "kind": "agent",
             "slug": "inbox-agent-webshop",
-            "label": "Inbox agent — Webshop",
+            "label": "Webshop — Inbox agent",
             "tagline": "Orderstatus, retour of klacht: nooit meer kwijt.",
             "summary": "Sorteert elke e-mail, vraagt zelf het ordernummer op bij een onvolledige vraag, en meldt een klacht direct in plaats van hem te laten liggen.",
             "industries": [
@@ -3900,7 +3900,7 @@
             "key": "inbox-agent.groothandel",
             "kind": "agent",
             "slug": "inbox-agent-groothandel",
-            "label": "Inbox agent — Groothandel",
+            "label": "Groothandel — Inbox agent",
             "tagline": "Bestellingen, voorraadvragen en klachten: gesorteerd.",
             "summary": "Sorteert elke e-mail, vraagt zelf het klant- of ordernummer op bij een onvolledige vraag, en meldt een klacht direct.",
             "industries": [
@@ -4202,7 +4202,7 @@
             "key": "inbox-agent.horeca",
             "kind": "agent",
             "slug": "inbox-agent-horeca",
-            "label": "Inbox agent — Restaurant",
+            "label": "Restaurant — Inbox agent",
             "tagline": "Reserveringen en menuvragen: gesorteerd binnen.",
             "summary": "Sorteert elke e-mail, schrijft een conceptantwoord voor veelgestelde vragen en houdt reserveringsverzoeken apart klaar voor u.",
             "industries": [
@@ -4464,7 +4464,7 @@
             "key": "inbox-agent.zakelijke_dienstverlening",
             "kind": "agent",
             "slug": "inbox-agent-zakelijke_dienstverlening",
-            "label": "Inbox agent — Adviesbureau",
+            "label": "Adviesbureau — Inbox agent",
             "tagline": "Afspraakverzoeken en klantvragen: gesorteerd binnen.",
             "summary": "Sorteert elke e-mail, schrijft een conceptantwoord voor veelgestelde vragen en houdt afspraakverzoeken apart klaar voor u.",
             "industries": [
@@ -4696,7 +4696,7 @@
             "key": "inbox-agent.hotel",
             "kind": "agent",
             "slug": "inbox-agent-hotel",
-            "label": "Inbox agent — Hotel",
+            "label": "Hotel — Inbox agent",
             "tagline": "Reserveringen, wijzigingen en klachten: gesorteerd.",
             "summary": "Sorteert elke e-mail, vraagt zelf aankomst- en vertrekdatum en aantal gasten op bij een reserveringsaanvraag, en meldt een klacht direct.",
             "industries": [
@@ -4958,7 +4958,7 @@
             "key": "inbox-agent.tattooshop",
             "kind": "agent",
             "slug": "inbox-agent-tattooshop",
-            "label": "Inbox agent — Tattooshop",
+            "label": "Tattooshop — Inbox agent",
             "tagline": "Afspraakverzoeken en ontwerpvragen: gesorteerd binnen.",
             "summary": "Sorteert elke e-mail, vraagt zelf het gewenste ontwerp, de plek en de grootte op bij een afspraakverzoek, en houdt nazorgvragen apart klaar voor u.",
             "industries": [

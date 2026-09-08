@@ -385,7 +385,7 @@ function logoTile(platform, small) {
 
 function renderCard(template, art) {
   // Only prose fields are checked, not 'label' — a card/detail-page label
-  // like "Voice agent — Loodgieter" (type — branche) is dashboard-owned
+  // like "Loodgieter — Voice agent" (branche — type, swapped 2026-09-08) is dashboard-owned
   // compound-title data, not written prose the site's own "no em dash"
   // copywriting rule was ever meant to police (that rule targets sentences,
   // e.g. this file's own summary/tagline fields below).

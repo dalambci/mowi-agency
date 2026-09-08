@@ -216,7 +216,7 @@ async function run(browserType, label, viewport, device) {
       overflow: document.documentElement.scrollWidth - window.innerWidth,
     };
   });
-  check(`${label} agent page: the label is the H1`, agent.h1 === "Voice agent — Kapper", agent.h1);
+  check(`${label} agent page: the label is the H1`, agent.h1 === "Kapper — Voice agent", agent.h1);
   check(`${label} agent page: flow cards, needs list, canvas, CTA, no identity row`, agent.cards >= 3 && agent.needs >= 1 && agent.canvas && agent.cta && !agent.identityRow, JSON.stringify({ cards: agent.cards, needs: agent.needs, canvas: agent.canvas, cta: agent.cta, identityRow: agent.identityRow }));
   check(`${label} agent page: the whole flow is fitted inside the frame`, agent.fitted);
   check(`${label} agent page: related row is same-branche only (kapper)`, agent.related.length >= 2 && agent.related.every((ind) => ind.split(",").includes("kapper")), JSON.stringify(agent.related));
