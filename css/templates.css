@@ -119,7 +119,11 @@
   display:flex;flex-direction:column;border-radius:var(--radius-card);border:1px solid var(--border);
   background:var(--surface);overflow:hidden;color:inherit;text-decoration:none;transition:border-color .15s ease;
 }
-.tpl-card:hover{border-color:var(--ink)}
+/* Only where a real pointer can hover — on touch the :hover state latches
+   after a tap and the outline stays behind. Mirrors the dashboard. */
+@media (hover:hover) and (pointer:fine){
+  .tpl-card:hover{border-color:var(--ink)}
+}
 /* The picture: the canvas family's dot grid as the field, white logo tiles
    (baked-in brand fills) and ONE big glyph in a hairline circle; the kind
    badge sits in the corner. No text. */

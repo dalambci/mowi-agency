@@ -1,6 +1,6 @@
 {
-    "generated_at": "2026-09-08T11:06:08+00:00",
-    "commit": "6c2651c",
+    "generated_at": "2026-09-08T11:54:31+00:00",
+    "commit": "8730863",
     "glyphs": {
         "box": "<path d=\"M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z\"/><path d=\"m3.3 7 8.7 5 8.7-5\"/><path d=\"M12 22V12\"/><path d=\"m7.5 4.27 9 5.15\"/>",
         "calendar": "<rect x=\"3\" y=\"4\" width=\"18\" height=\"18\" rx=\"2\"/><path d=\"M16 2v4M8 2v4M3 10h18\"/>",
@@ -237,7 +237,63 @@
                 "glyph": "branche-loodgieter",
                 "channel": "phone",
                 "trigger": null,
-                "platforms": [],
+                "platforms": [
+                    {
+                        "key": "exact_online",
+                        "name": "Exact Online",
+                        "icon": "integrations/exact_online.svg"
+                    },
+                    {
+                        "key": "pipedrive",
+                        "name": "Pipedrive",
+                        "icon": "integrations/pipedrive.svg"
+                    },
+                    {
+                        "key": "hubspot",
+                        "name": "HubSpot",
+                        "icon": "integrations/hubspot.svg"
+                    },
+                    {
+                        "key": "moneybird",
+                        "name": "Moneybird",
+                        "icon": "integrations/moneybird.svg"
+                    },
+                    {
+                        "key": "woocommerce",
+                        "name": "WooCommerce",
+                        "icon": "integrations/woocommerce.svg"
+                    },
+                    {
+                        "key": "shopify",
+                        "name": "Shopify",
+                        "icon": "integrations/shopify.svg"
+                    },
+                    {
+                        "key": "lightspeed",
+                        "name": "Lightspeed eCom",
+                        "icon": "integrations/lightspeed.svg"
+                    },
+                    {
+                        "key": "shopware",
+                        "name": "Shopware",
+                        "icon": "integrations/shopware.svg"
+                    },
+                    {
+                        "key": "magento",
+                        "name": "Magento Open Source",
+                        "icon": "integrations/magento.svg"
+                    },
+                    {
+                        "key": "bol",
+                        "name": "bol.com",
+                        "icon": "integrations/bol.svg"
+                    },
+                    {
+                        "key": "prestashop",
+                        "name": "PrestaShop",
+                        "icon": "integrations/prestashop.svg"
+                    }
+                ],
                 "badge": null
             },
             "status": "live",
@@ -464,7 +520,23 @@
                 "glyph": "branche-kapper",
                 "channel": "phone",
                 "trigger": null,
-                "platforms": [],
+                "platforms": [
+                    {
+                        "key": "guestplan",
+                        "name": "Guestplan",
+                        "icon": "integrations/guestplan.svg"
+                    },
+                    {
+                        "key": "google_agenda",
+                        "name": "Google Agenda",
+                        "icon": "integrations/google_agenda.svg"
+                    },
+                    {
+                        "key": "calendly",
+                        "name": "Calendly",
+                        "icon": "integrations/calendly.svg"
+                    }
+                ],
                 "badge": null
             },
             "status": "live",
@@ -691,7 +763,23 @@
                 "glyph": "branche-schoonheidssalon",
                 "channel": "phone",
                 "trigger": null,
-                "platforms": [],
+                "platforms": [
+                    {
+                        "key": "guestplan",
+                        "name": "Guestplan",
+                        "icon": "integrations/guestplan.svg"
+                    },
+                    {
+                        "key": "google_agenda",
+                        "name": "Google Agenda",
+                        "icon": "integrations/google_agenda.svg"
+                    },
+                    {
+                        "key": "calendly",
+                        "name": "Calendly",
+                        "icon": "integrations/calendly.svg"
+                    }
+                ],
                 "badge": null
             },
             "status": "live",
@@ -918,7 +1006,43 @@
                 "glyph": "branche-garage",
                 "channel": "phone",
                 "trigger": null,
-                "platforms": [],
+                "platforms": [
+                    {
+                        "key": "guestplan",
+                        "name": "Guestplan",
+                        "icon": "integrations/guestplan.svg"
+                    },
+                    {
+                        "key": "google_agenda",
+                        "name": "Google Agenda",
+                        "icon": "integrations/google_agenda.svg"
+                    },
+                    {
+                        "key": "calendly",
+                        "name": "Calendly",
+                        "icon": "integrations/calendly.svg"
+                    },
+                    {
+                        "key": "exact_online",
+                        "name": "Exact Online",
+                        "icon": "integrations/exact_online.svg"
+                    },
+                    {
+                        "key": "pipedrive",
+                        "name": "Pipedrive",
+                        "icon": "integrations/pipedrive.svg"
+                    },
+                    {
+                        "key": "hubspot",
+                        "name": "HubSpot",
+                        "icon": "integrations/hubspot.svg"
+                    },
+                    {
+                        "key": "moneybird",
+                        "name": "Moneybird",
+                        "icon": "integrations/moneybird.svg"
+                    }
+                ],
                 "badge": null
             },
             "status": "live",
@@ -1145,7 +1269,23 @@
                 "glyph": "branche-horeca",
                 "channel": "phone",
                 "trigger": null,
-                "platforms": [],
+                "platforms": [
+                    {
+                        "key": "guestplan",
+                        "name": "Guestplan",
+                        "icon": "integrations/guestplan.svg"
+                    },
+                    {
+                        "key": "google_agenda",
+                        "name": "Google Agenda",
+                        "icon": "integrations/google_agenda.svg"
+                    },
+                    {
+                        "key": "calendly",
+                        "name": "Calendly",
+                        "icon": "integrations/calendly.svg"
+                    }
+                ],
                 "badge": null
             },
             "status": "live",
@@ -1372,7 +1512,43 @@
                 "glyph": "branche-zakelijke_dienstverlening",
                 "channel": "phone",
                 "trigger": null,
-                "platforms": [],
+                "platforms": [
+                    {
+                        "key": "exact_online",
+                        "name": "Exact Online",
+                        "icon": "integrations/exact_online.svg"
+                    },
+                    {
+                        "key": "pipedrive",
+                        "name": "Pipedrive",
+                        "icon": "integrations/pipedrive.svg"
+                    },
+                    {
+                        "key": "hubspot",
+                        "name": "HubSpot",
+                        "icon": "integrations/hubspot.svg"
+                    },
+                    {
+                        "key": "moneybird",
+                        "name": "Moneybird",
+                        "icon": "integrations/moneybird.svg"
+                    },
+                    {
+                        "key": "guestplan",
+                        "name": "Guestplan",
+                        "icon": "integrations/guestplan.svg"
+                    },
+                    {
+                        "key": "google_agenda",
+                        "name": "Google Agenda",
+                        "icon": "integrations/google_agenda.svg"
+                    },
+                    {
+                        "key": "calendly",
+                        "name": "Calendly",
+                        "icon": "integrations/calendly.svg"
+                    }
+                ],
                 "badge": null
             },
             "status": "live",
@@ -1599,7 +1775,23 @@
                 "glyph": "branche-hotel",
                 "channel": "phone",
                 "trigger": null,
-                "platforms": [],
+                "platforms": [
+                    {
+                        "key": "guestplan",
+                        "name": "Guestplan",
+                        "icon": "integrations/guestplan.svg"
+                    },
+                    {
+                        "key": "google_agenda",
+                        "name": "Google Agenda",
+                        "icon": "integrations/google_agenda.svg"
+                    },
+                    {
+                        "key": "calendly",
+                        "name": "Calendly",
+                        "icon": "integrations/calendly.svg"
+                    }
+                ],
                 "badge": null
             },
             "status": "live",
@@ -1826,7 +2018,43 @@
                 "glyph": "branche-tattooshop",
                 "channel": "phone",
                 "trigger": null,
-                "platforms": [],
+                "platforms": [
+                    {
+                        "key": "guestplan",
+                        "name": "Guestplan",
+                        "icon": "integrations/guestplan.svg"
+                    },
+                    {
+                        "key": "google_agenda",
+                        "name": "Google Agenda",
+                        "icon": "integrations/google_agenda.svg"
+                    },
+                    {
+                        "key": "calendly",
+                        "name": "Calendly",
+                        "icon": "integrations/calendly.svg"
+                    },
+                    {
+                        "key": "exact_online",
+                        "name": "Exact Online",
+                        "icon": "integrations/exact_online.svg"
+                    },
+                    {
+                        "key": "pipedrive",
+                        "name": "Pipedrive",
+                        "icon": "integrations/pipedrive.svg"
+                    },
+                    {
+                        "key": "hubspot",
+                        "name": "HubSpot",
+                        "icon": "integrations/hubspot.svg"
+                    },
+                    {
+                        "key": "moneybird",
+                        "name": "Moneybird",
+                        "icon": "integrations/moneybird.svg"
+                    }
+                ],
                 "badge": null
             },
             "status": "live",
@@ -2053,7 +2281,63 @@
                 "glyph": "branche-webshop",
                 "channel": "phone",
                 "trigger": null,
-                "platforms": [],
+                "platforms": [
+                    {
+                        "key": "woocommerce",
+                        "name": "WooCommerce",
+                        "icon": "integrations/woocommerce.svg"
+                    },
+                    {
+                        "key": "shopify",
+                        "name": "Shopify",
+                        "icon": "integrations/shopify.svg"
+                    },
+                    {
+                        "key": "lightspeed",
+                        "name": "Lightspeed eCom",
+                        "icon": "integrations/lightspeed.svg"
+                    },
+                    {
+                        "key": "shopware",
+                        "name": "Shopware",
+                        "icon": "integrations/shopware.svg"
+                    },
+                    {
+                        "key": "magento",
+                        "name": "Magento Open Source",
+                        "icon": "integrations/magento.svg"
+                    },
+                    {
+                        "key": "bol",
+                        "name": "bol.com",
+                        "icon": "integrations/bol.svg"
+                    },
+                    {
+                        "key": "prestashop",
+                        "name": "PrestaShop",
+                        "icon": "integrations/prestashop.svg"
+                    },
+                    {
+                        "key": "exact_online",
+                        "name": "Exact Online",
+                        "icon": "integrations/exact_online.svg"
+                    },
+                    {
+                        "key": "pipedrive",
+                        "name": "Pipedrive",
+                        "icon": "integrations/pipedrive.svg"
+                    },
+                    {
+                        "key": "hubspot",
+                        "name": "HubSpot",
+                        "icon": "integrations/hubspot.svg"
+                    },
+                    {
+                        "key": "moneybird",
+                        "name": "Moneybird",
+                        "icon": "integrations/moneybird.svg"
+                    }
+                ],
                 "badge": null
             },
             "status": "live",
@@ -2280,7 +2564,63 @@
                 "glyph": "branche-groothandel",
                 "channel": "phone",
                 "trigger": null,
-                "platforms": [],
+                "platforms": [
+                    {
+                        "key": "woocommerce",
+                        "name": "WooCommerce",
+                        "icon": "integrations/woocommerce.svg"
+                    },
+                    {
+                        "key": "shopify",
+                        "name": "Shopify",
+                        "icon": "integrations/shopify.svg"
+                    },
+                    {
+                        "key": "lightspeed",
+                        "name": "Lightspeed eCom",
+                        "icon": "integrations/lightspeed.svg"
+                    },
+                    {
+                        "key": "shopware",
+                        "name": "Shopware",
+                        "icon": "integrations/shopware.svg"
+                    },
+                    {
+                        "key": "magento",
+                        "name": "Magento Open Source",
+                        "icon": "integrations/magento.svg"
+                    },
+                    {
+                        "key": "bol",
+                        "name": "bol.com",
+                        "icon": "integrations/bol.svg"
+                    },
+                    {
+                        "key": "prestashop",
+                        "name": "PrestaShop",
+                        "icon": "integrations/prestashop.svg"
+                    },
+                    {
+                        "key": "exact_online",
+                        "name": "Exact Online",
+                        "icon": "integrations/exact_online.svg"
+                    },
+                    {
+                        "key": "pipedrive",
+                        "name": "Pipedrive",
+                        "icon": "integrations/pipedrive.svg"
+                    },
+                    {
+                        "key": "hubspot",
+                        "name": "HubSpot",
+                        "icon": "integrations/hubspot.svg"
+                    },
+                    {
+                        "key": "moneybird",
+                        "name": "Moneybird",
+                        "icon": "integrations/moneybird.svg"
+                    }
+                ],
                 "badge": null
             },
             "status": "live",
@@ -2515,7 +2855,63 @@
                 "glyph": "branche-loodgieter",
                 "channel": "mail",
                 "trigger": null,
-                "platforms": [],
+                "platforms": [
+                    {
+                        "key": "exact_online",
+                        "name": "Exact Online",
+                        "icon": "integrations/exact_online.svg"
+                    },
+                    {
+                        "key": "pipedrive",
+                        "name": "Pipedrive",
+                        "icon": "integrations/pipedrive.svg"
+                    },
+                    {
+                        "key": "hubspot",
+                        "name": "HubSpot",
+                        "icon": "integrations/hubspot.svg"
+                    },
+                    {
+                        "key": "moneybird",
+                        "name": "Moneybird",
+                        "icon": "integrations/moneybird.svg"
+                    },
+                    {
+                        "key": "woocommerce",
+                        "name": "WooCommerce",
+                        "icon": "integrations/woocommerce.svg"
+                    },
+                    {
+                        "key": "shopify",
+                        "name": "Shopify",
+                        "icon": "integrations/shopify.svg"
+                    },
+                    {
+                        "key": "lightspeed",
+                        "name": "Lightspeed eCom",
+                        "icon": "integrations/lightspeed.svg"
+                    },
+                    {
+                        "key": "shopware",
+                        "name": "Shopware",
+                        "icon": "integrations/shopware.svg"
+                    },
+                    {
+                        "key": "magento",
+                        "name": "Magento Open Source",
+                        "icon": "integrations/magento.svg"
+                    },
+                    {
+                        "key": "bol",
+                        "name": "bol.com",
+                        "icon": "integrations/bol.svg"
+                    },
+                    {
+                        "key": "prestashop",
+                        "name": "PrestaShop",
+                        "icon": "integrations/prestashop.svg"
+                    }
+                ],
                 "badge": null
             },
             "status": "live",
@@ -2750,7 +3146,23 @@
                 "glyph": "branche-kapper",
                 "channel": "mail",
                 "trigger": null,
-                "platforms": [],
+                "platforms": [
+                    {
+                        "key": "guestplan",
+                        "name": "Guestplan",
+                        "icon": "integrations/guestplan.svg"
+                    },
+                    {
+                        "key": "google_agenda",
+                        "name": "Google Agenda",
+                        "icon": "integrations/google_agenda.svg"
+                    },
+                    {
+                        "key": "calendly",
+                        "name": "Calendly",
+                        "icon": "integrations/calendly.svg"
+                    }
+                ],
                 "badge": null
             },
             "status": "live",
@@ -2985,7 +3397,23 @@
                 "glyph": "branche-schoonheidssalon",
                 "channel": "mail",
                 "trigger": null,
-                "platforms": [],
+                "platforms": [
+                    {
+                        "key": "guestplan",
+                        "name": "Guestplan",
+                        "icon": "integrations/guestplan.svg"
+                    },
+                    {
+                        "key": "google_agenda",
+                        "name": "Google Agenda",
+                        "icon": "integrations/google_agenda.svg"
+                    },
+                    {
+                        "key": "calendly",
+                        "name": "Calendly",
+                        "icon": "integrations/calendly.svg"
+                    }
+                ],
                 "badge": null
             },
             "status": "live",
@@ -3220,7 +3648,43 @@
                 "glyph": "branche-garage",
                 "channel": "mail",
                 "trigger": null,
-                "platforms": [],
+                "platforms": [
+                    {
+                        "key": "guestplan",
+                        "name": "Guestplan",
+                        "icon": "integrations/guestplan.svg"
+                    },
+                    {
+                        "key": "google_agenda",
+                        "name": "Google Agenda",
+                        "icon": "integrations/google_agenda.svg"
+                    },
+                    {
+                        "key": "calendly",
+                        "name": "Calendly",
+                        "icon": "integrations/calendly.svg"
+                    },
+                    {
+                        "key": "exact_online",
+                        "name": "Exact Online",
+                        "icon": "integrations/exact_online.svg"
+                    },
+                    {
+                        "key": "pipedrive",
+                        "name": "Pipedrive",
+                        "icon": "integrations/pipedrive.svg"
+                    },
+                    {
+                        "key": "hubspot",
+                        "name": "HubSpot",
+                        "icon": "integrations/hubspot.svg"
+                    },
+                    {
+                        "key": "moneybird",
+                        "name": "Moneybird",
+                        "icon": "integrations/moneybird.svg"
+                    }
+                ],
                 "badge": null
             },
             "status": "live",
@@ -3455,7 +3919,63 @@
                 "glyph": "branche-webshop",
                 "channel": "mail",
                 "trigger": null,
-                "platforms": [],
+                "platforms": [
+                    {
+                        "key": "woocommerce",
+                        "name": "WooCommerce",
+                        "icon": "integrations/woocommerce.svg"
+                    },
+                    {
+                        "key": "shopify",
+                        "name": "Shopify",
+                        "icon": "integrations/shopify.svg"
+                    },
+                    {
+                        "key": "lightspeed",
+                        "name": "Lightspeed eCom",
+                        "icon": "integrations/lightspeed.svg"
+                    },
+                    {
+                        "key": "shopware",
+                        "name": "Shopware",
+                        "icon": "integrations/shopware.svg"
+                    },
+                    {
+                        "key": "magento",
+                        "name": "Magento Open Source",
+                        "icon": "integrations/magento.svg"
+                    },
+                    {
+                        "key": "bol",
+                        "name": "bol.com",
+                        "icon": "integrations/bol.svg"
+                    },
+                    {
+                        "key": "prestashop",
+                        "name": "PrestaShop",
+                        "icon": "integrations/prestashop.svg"
+                    },
+                    {
+                        "key": "exact_online",
+                        "name": "Exact Online",
+                        "icon": "integrations/exact_online.svg"
+                    },
+                    {
+                        "key": "pipedrive",
+                        "name": "Pipedrive",
+                        "icon": "integrations/pipedrive.svg"
+                    },
+                    {
+                        "key": "hubspot",
+                        "name": "HubSpot",
+                        "icon": "integrations/hubspot.svg"
+                    },
+                    {
+                        "key": "moneybird",
+                        "name": "Moneybird",
+                        "icon": "integrations/moneybird.svg"
+                    }
+                ],
                 "badge": null
             },
             "status": "live",
@@ -3690,7 +4210,63 @@
                 "glyph": "branche-groothandel",
                 "channel": "mail",
                 "trigger": null,
-                "platforms": [],
+                "platforms": [
+                    {
+                        "key": "woocommerce",
+                        "name": "WooCommerce",
+                        "icon": "integrations/woocommerce.svg"
+                    },
+                    {
+                        "key": "shopify",
+                        "name": "Shopify",
+                        "icon": "integrations/shopify.svg"
+                    },
+                    {
+                        "key": "lightspeed",
+                        "name": "Lightspeed eCom",
+                        "icon": "integrations/lightspeed.svg"
+                    },
+                    {
+                        "key": "shopware",
+                        "name": "Shopware",
+                        "icon": "integrations/shopware.svg"
+                    },
+                    {
+                        "key": "magento",
+                        "name": "Magento Open Source",
+                        "icon": "integrations/magento.svg"
+                    },
+                    {
+                        "key": "bol",
+                        "name": "bol.com",
+                        "icon": "integrations/bol.svg"
+                    },
+                    {
+                        "key": "prestashop",
+                        "name": "PrestaShop",
+                        "icon": "integrations/prestashop.svg"
+                    },
+                    {
+                        "key": "exact_online",
+                        "name": "Exact Online",
+                        "icon": "integrations/exact_online.svg"
+                    },
+                    {
+                        "key": "pipedrive",
+                        "name": "Pipedrive",
+                        "icon": "integrations/pipedrive.svg"
+                    },
+                    {
+                        "key": "hubspot",
+                        "name": "HubSpot",
+                        "icon": "integrations/hubspot.svg"
+                    },
+                    {
+                        "key": "moneybird",
+                        "name": "Moneybird",
+                        "icon": "integrations/moneybird.svg"
+                    }
+                ],
                 "badge": null
             },
             "status": "live",
@@ -3925,7 +4501,23 @@
                 "glyph": "branche-horeca",
                 "channel": "mail",
                 "trigger": null,
-                "platforms": [],
+                "platforms": [
+                    {
+                        "key": "guestplan",
+                        "name": "Guestplan",
+                        "icon": "integrations/guestplan.svg"
+                    },
+                    {
+                        "key": "google_agenda",
+                        "name": "Google Agenda",
+                        "icon": "integrations/google_agenda.svg"
+                    },
+                    {
+                        "key": "calendly",
+                        "name": "Calendly",
+                        "icon": "integrations/calendly.svg"
+                    }
+                ],
                 "badge": null
             },
             "status": "live",
@@ -4130,7 +4722,43 @@
                 "glyph": "branche-zakelijke_dienstverlening",
                 "channel": "mail",
                 "trigger": null,
-                "platforms": [],
+                "platforms": [
+                    {
+                        "key": "exact_online",
+                        "name": "Exact Online",
+                        "icon": "integrations/exact_online.svg"
+                    },
+                    {
+                        "key": "pipedrive",
+                        "name": "Pipedrive",
+                        "icon": "integrations/pipedrive.svg"
+                    },
+                    {
+                        "key": "hubspot",
+                        "name": "HubSpot",
+                        "icon": "integrations/hubspot.svg"
+                    },
+                    {
+                        "key": "moneybird",
+                        "name": "Moneybird",
+                        "icon": "integrations/moneybird.svg"
+                    },
+                    {
+                        "key": "guestplan",
+                        "name": "Guestplan",
+                        "icon": "integrations/guestplan.svg"
+                    },
+                    {
+                        "key": "google_agenda",
+                        "name": "Google Agenda",
+                        "icon": "integrations/google_agenda.svg"
+                    },
+                    {
+                        "key": "calendly",
+                        "name": "Calendly",
+                        "icon": "integrations/calendly.svg"
+                    }
+                ],
                 "badge": null
             },
             "status": "live",
@@ -4365,7 +4993,23 @@
                 "glyph": "branche-hotel",
                 "channel": "mail",
                 "trigger": null,
-                "platforms": [],
+                "platforms": [
+                    {
+                        "key": "guestplan",
+                        "name": "Guestplan",
+                        "icon": "integrations/guestplan.svg"
+                    },
+                    {
+                        "key": "google_agenda",
+                        "name": "Google Agenda",
+                        "icon": "integrations/google_agenda.svg"
+                    },
+                    {
+                        "key": "calendly",
+                        "name": "Calendly",
+                        "icon": "integrations/calendly.svg"
+                    }
+                ],
                 "badge": null
             },
             "status": "live",
@@ -4600,7 +5244,43 @@
                 "glyph": "branche-tattooshop",
                 "channel": "mail",
                 "trigger": null,
-                "platforms": [],
+                "platforms": [
+                    {
+                        "key": "guestplan",
+                        "name": "Guestplan",
+                        "icon": "integrations/guestplan.svg"
+                    },
+                    {
+                        "key": "google_agenda",
+                        "name": "Google Agenda",
+                        "icon": "integrations/google_agenda.svg"
+                    },
+                    {
+                        "key": "calendly",
+                        "name": "Calendly",
+                        "icon": "integrations/calendly.svg"
+                    },
+                    {
+                        "key": "exact_online",
+                        "name": "Exact Online",
+                        "icon": "integrations/exact_online.svg"
+                    },
+                    {
+                        "key": "pipedrive",
+                        "name": "Pipedrive",
+                        "icon": "integrations/pipedrive.svg"
+                    },
+                    {
+                        "key": "hubspot",
+                        "name": "HubSpot",
+                        "icon": "integrations/hubspot.svg"
+                    },
+                    {
+                        "key": "moneybird",
+                        "name": "Moneybird",
+                        "icon": "integrations/moneybird.svg"
+                    }
+                ],
                 "badge": null
             },
             "status": "live",

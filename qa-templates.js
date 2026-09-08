@@ -72,18 +72,23 @@ async function run(browserType, label, viewport, device) {
     agentChannel: Array.from(document.querySelectorAll(".tpl-picture-agent .tpl-glyph-sm svg")).map((s) => s.dataset.glyph),
     charts: document.querySelectorAll('.tpl-picture-dashboard .tpl-glyph svg[data-glyph="chart"]').length,
     dashLogoRows: document.querySelectorAll(".tpl-picture-dashboard .tpl-picture-logos").length,
+    agentLogoRows: document.querySelectorAll(".tpl-picture-agent .tpl-picture-logos").length,
+    agentSets: new Set(Array.from(document.querySelectorAll(".tpl-picture-agent .tpl-picture-logos"))
+      .map((r) => Array.from(r.querySelectorAll("img")).map((i) => i.getAttribute("src")).join("|"))).size,
     maxTiles: Math.max(0, ...Array.from(document.querySelectorAll(".tpl-picture-logos")).map((r) => r.querySelectorAll(".tpl-logo:not(.tpl-logo-more)").length)),
     badges: Array.from(document.querySelectorAll(".tpl-picture-workflow .tpl-badge")).map((b) => b.textContent.trim()),
     dashBadges: Array.from(document.querySelectorAll(".tpl-picture-dashboard .tpl-badge")).map((b) => b.textContent.trim()),
     agentBadges: document.querySelectorAll(".tpl-picture-agent .tpl-badge").length,
   }));
-  // 2026-09-07: the ghost left the cards, the branche took its slot. This
-  // also pins the point of that change — an agent card's picture is now
-  // unique to its trade, where all 10 Voice cards used to be identical.
-  check(`${label} agent pictures = branche glyph + phone/mail, no mascot`,
-    art.mascots === 0 && art.agentLead.length === a && art.agentLead.every((g) => g && g.startsWith("branche-")) && art.agentChannel.length === a && art.agentChannel.every((g) => g === "phone" || g === "mail"),
-    JSON.stringify(art));
-  check(`${label} every branche is drawn differently`, new Set(art.agentLead).size === 10, String(new Set(art.agentLead).size));
+  // 2026-09-08: the branche glyph followed the ghost off the cards. An agent
+  // draws the koppelingen its TRADE works with (derived from the branche's
+  // own flow templates), so a Kapper leads with agenda tools where a
+  // Loodgieter leads with invoicing and CRM. No mascot, no glyph, on any
+  // card that has koppelingen.
+  check(`${label} agent pictures show their branche's koppelingen`,
+    art.mascots === 0 && art.agentLead.length === 0 && art.agentLogoRows === a,
+    `mascots ${art.mascots} glyphs ${art.agentLead.length} logo rows ${art.agentLogoRows} of ${a}`);
+  check(`${label} agent logo sets differ per branche`, art.agentSets >= 4, String(art.agentSets));
   // 2026-09-08: a dashboard leads with its koppelingen now, not a chart
   // glyph — the glyph is the fallback for cards with no koppeling at all.
   check(`${label} dashboard pictures show their koppelingen, not a glyph`,
