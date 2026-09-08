@@ -439,10 +439,23 @@ function promptFor(template) {
 
 function renderIndexPage(templates, art) {
   const communityCount = templates.filter((t) => t.source === "community").length;
+  // The site never stated its own scale anywhere (2026-09-08): no number on
+  // the homepage, and this page's h1 is just "Templates", so a visitor had to
+  // count the three section headers and a search engine or an LLM
+  // summarising the site could not infer it at all. Counted here rather than
+  // written out, so it can never drift from what the page actually renders —
+  // same reasoning as reading docs/ and templates/ from disk in
+  // build-blog.js instead of hand-listing them.
+  //
+  // It counts every template the page shows, which includes the handful
+  // marked "Binnenkort" — the same arithmetic a visitor gets by adding up the
+  // section counts, so the number on the page and the number in this line can
+  // never disagree.
+  const total = templates.length;
   const intro =
     communityCount > 0
-      ? "Agents, workflows en dashboards, gebouwd door Mowi en de Mowi-community. Kies er een, Mowi zet hem klaar in uw account."
-      : "Agents, workflows en dashboards die Mowi voor u bouwt. Kies er een, Mowi zet hem klaar in uw account.";
+      ? `${total} templates: agents, workflows en dashboards, gebouwd door Mowi en de Mowi-community. Kies er een, Mowi zet hem klaar in uw account.`
+      : `${total} templates: agents, workflows en dashboards die Mowi voor u bouwt. Kies er een, Mowi zet hem klaar in uw account.`;
 
   // The three dropdowns' options, with the count each option would leave
   // on an unfiltered page (real numbers without JS; js/templates.js keeps
@@ -497,7 +510,7 @@ function renderIndexPage(templates, art) {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Templates — Mowi</title>
-  <meta name="description" content="Agents, workflows en dashboards die Mowi voor u bouwt. Kies een template en zet hem in minuten klaar in uw eigen account." />
+  <meta name="description" content="${total} templates: agents, workflows en dashboards die Mowi voor u bouwt. Kies er een en zet hem in minuten klaar in uw eigen account." />
   <link rel="canonical" href="${SITE_URL}/templates" />
   <meta property="og:title" content="Templates — Mowi" />
   <meta property="og:description" content="Agents, workflows en dashboards die Mowi voor u bouwt." />
