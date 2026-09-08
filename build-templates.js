@@ -69,7 +69,7 @@ const WF_JS_VERSION = "20260906-1";
 // This file's OWN two new assets get one shared version, bumped whenever
 // either changes — same "one value per file-pair, bump together" rule
 // the rest of the site's cache-busting convention already follows.
-const TPL_ASSET_VERSION = "20260908-6";
+const TPL_ASSET_VERSION = "20260908-7";
 
 // ---------------------------------------------------------------------------
 // Escaping — every field below can eventually carry CLIENT-authored text
@@ -411,7 +411,8 @@ function renderCard(template, art) {
 
   return `<a href="/templates/${esc(template.slug)}" class="tpl-card" data-tpl-card data-tpl-kind="${esc(template.kind)}" data-tpl-industries="${esc(template.industries.join(","))}" data-tpl-koppelingen="${esc(template.needs.platforms.join(","))}" data-tpl-trigger="${esc((template.trigger && template.trigger.kind) || "")}" data-tpl-status="${esc(template.status)}" data-tpl-search="${esc(search)}">
   <div class="tpl-picture tpl-picture-${esc(template.kind)}">
-${picture.badge ? `    <span class="tpl-badge">${esc(picture.badge)}</span>\n` : ""}    ${shown.length > 0
+    <div class="tpl-corner">${picture.badge ? `<span class="tpl-badge">${esc(picture.badge)}</span>` : ""}<span class="tpl-kind-mark">${glyphSvg(art, picture.kind_glyph)}</span></div>
+    ${shown.length > 0
       // The koppelingen ARE the picture: what this template plugs into, and
       // how many more it supports.
       ? `<div class="tpl-picture-row tpl-picture-logos">${shown.map((p) => logoTile(p, false)).join("")}${more > 0 ? `<span class="tpl-logo tpl-logo-more" title="${esc(moreTitle)}">+${more}</span>` : ""}</div>`

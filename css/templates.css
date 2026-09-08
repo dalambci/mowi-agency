@@ -169,8 +169,17 @@
 /* The corner label (2026-09-06, Sal: no kind glyph there, "maybe a dynamic
    label for something") — a workflow's cadence today; nothing on agents and
    dashboards. Text comes from the record (picture.badge), never guessed here. */
+/* The corner holds the text label and then the kind mark, right-aligned,
+   the mark last so it sits in the same column on every card. Mirrors the
+   dashboard's own .tpl-corner / .tpl-kind-mark rules. */
+.tpl-corner{position:absolute;top:.5rem;right:.5rem;display:flex;align-items:center;gap:.3125rem;z-index:1}
+.tpl-kind-mark{
+  display:inline-flex;align-items:center;justify-content:center;width:1.25rem;height:1.25rem;flex-shrink:0;
+  border-radius:.375rem;border:1px solid var(--border);background:var(--surface);color:var(--ink-2);
+}
+.tpl-kind-mark svg{width:.75rem;height:.75rem}
 .tpl-badge{
-  position:absolute;top:.5rem;right:.5rem;padding:.1875rem .5rem;border-radius:var(--radius-pill);border:1px solid var(--border);
+  position:static;padding:.1875rem .5rem;border-radius:var(--radius-pill);border:1px solid var(--border);
   background:var(--surface);color:var(--ink-2);font-size:.6875rem;font-weight:600;line-height:1.2;white-space:nowrap;
 }
 .tpl-card-body{display:flex;flex-direction:column;gap:.25rem;padding:.75rem .875rem .875rem}
@@ -211,7 +220,10 @@
   .tpl-logo-more{display:none}
   .tpl-glyph{width:2.75rem;height:2.75rem;margin-left:.25rem}
   .tpl-glyph svg{width:1.375rem;height:1.375rem}
-  .tpl-badge{top:.375rem;right:.375rem;font-size:.625rem;padding:.125rem .4375rem}
+  .tpl-corner{top:.375rem;right:.375rem;gap:.25rem}
+  .tpl-badge{font-size:.625rem;padding:.125rem .4375rem}
+  .tpl-kind-mark{width:1.125rem;height:1.125rem;border-radius:.3125rem}
+  .tpl-kind-mark svg{width:.6875rem;height:.6875rem}
   .tpl-card-body{padding:.625rem .75rem .75rem;gap:.1875rem}
   .tpl-card-title{font-size:.8125rem}
   .tpl-card-line{font-size:.75rem}

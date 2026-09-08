@@ -1,7 +1,11 @@
 {
-    "generated_at": "2026-09-08T13:21:20+00:00",
-    "commit": "4ffddb9",
+    "generated_at": "2026-09-08T13:48:53+00:00",
+    "commit": "a77c6d6",
     "glyphs": {
+        "kind-voice": "<path d=\"M2 10v3\"/><path d=\"M6 6v11\"/><path d=\"M10 3v18\"/><path d=\"M14 8v7\"/><path d=\"M18 5v13\"/><path d=\"M22 10v3\"/>",
+        "kind-inbox": "<rect width=\"20\" height=\"16\" x=\"2\" y=\"4\" rx=\"2\"/><path d=\"m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7\"/>",
+        "kind-workflow": "<circle cx=\"7\" cy=\"5.8\" r=\"2.3\"/><circle cx=\"7\" cy=\"18.2\" r=\"2.3\"/><circle cx=\"17.4\" cy=\"12\" r=\"2.3\"/><path d=\"M7 8.1v7.8\"/><path d=\"M9.3 6.6a6 6 0 0 1 5.9 4.6\"/>",
+        "kind-dashboard": "<rect x=\"3.4\" y=\"3.9\" width=\"17.2\" height=\"16.2\" rx=\"4.2\"/><path d=\"M8.5 15.9v-3.6M12 15.9v-7.2M15.5 15.9v-5.2\"/>",
         "box": "<path d=\"M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z\"/><path d=\"m3.3 7 8.7 5 8.7-5\"/><path d=\"M12 22V12\"/><path d=\"m7.5 4.27 9 5.15\"/>",
         "calendar": "<rect x=\"3\" y=\"4\" width=\"18\" height=\"18\" rx=\"2\"/><path d=\"M16 2v4M8 2v4M3 10h18\"/>",
         "handshake": "<path d=\"m11 17 2 2a1 1 0 1 0 3-3\"/><path d=\"m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4\"/><path d=\"m21 3 1 11h-2\"/><path d=\"M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3\"/><path d=\"M3 4h8\"/>",
@@ -254,7 +258,8 @@
                         "icon": "integrations/calendly.svg"
                     }
                 ],
-                "badge": null
+                "badge": null,
+                "kind_glyph": "kind-voice"
             },
             "status": "live",
             "blocked_reason": null,
@@ -497,7 +502,8 @@
                         "icon": "integrations/calendly.svg"
                     }
                 ],
-                "badge": null
+                "badge": null,
+                "kind_glyph": "kind-voice"
             },
             "status": "live",
             "blocked_reason": null,
@@ -740,7 +746,8 @@
                         "icon": "integrations/calendly.svg"
                     }
                 ],
-                "badge": null
+                "badge": null,
+                "kind_glyph": "kind-voice"
             },
             "status": "live",
             "blocked_reason": null,
@@ -983,7 +990,8 @@
                         "icon": "integrations/calendly.svg"
                     }
                 ],
-                "badge": null
+                "badge": null,
+                "kind_glyph": "kind-voice"
             },
             "status": "live",
             "blocked_reason": null,
@@ -1226,7 +1234,8 @@
                         "icon": "integrations/calendly.svg"
                     }
                 ],
-                "badge": null
+                "badge": null,
+                "kind_glyph": "kind-voice"
             },
             "status": "live",
             "blocked_reason": null,
@@ -1469,7 +1478,8 @@
                         "icon": "integrations/calendly.svg"
                     }
                 ],
-                "badge": null
+                "badge": null,
+                "kind_glyph": "kind-voice"
             },
             "status": "live",
             "blocked_reason": null,
@@ -1712,7 +1722,8 @@
                         "icon": "integrations/calendly.svg"
                     }
                 ],
-                "badge": null
+                "badge": null,
+                "kind_glyph": "kind-voice"
             },
             "status": "live",
             "blocked_reason": null,
@@ -1955,7 +1966,8 @@
                         "icon": "integrations/calendly.svg"
                     }
                 ],
-                "badge": null
+                "badge": null,
+                "kind_glyph": "kind-voice"
             },
             "status": "live",
             "blocked_reason": null,
@@ -2238,7 +2250,8 @@
                         "icon": "integrations/moneybird.svg"
                     }
                 ],
-                "badge": null
+                "badge": null,
+                "kind_glyph": "kind-voice"
             },
             "status": "live",
             "blocked_reason": null,
@@ -2521,7 +2534,8 @@
                         "icon": "integrations/moneybird.svg"
                     }
                 ],
-                "badge": null
+                "badge": null,
+                "kind_glyph": "kind-voice"
             },
             "status": "live",
             "blocked_reason": null,
@@ -2782,7 +2796,8 @@
                         "icon": "integrations/calendly.svg"
                     }
                 ],
-                "badge": null
+                "badge": null,
+                "kind_glyph": "kind-inbox"
             },
             "status": "live",
             "blocked_reason": null,
@@ -3043,7 +3058,8 @@
                         "icon": "integrations/calendly.svg"
                     }
                 ],
-                "badge": null
+                "badge": null,
+                "kind_glyph": "kind-inbox"
             },
             "status": "live",
             "blocked_reason": null,
@@ -3304,7 +3320,8 @@
                         "icon": "integrations/calendly.svg"
                     }
                 ],
-                "badge": null
+                "badge": null,
+                "kind_glyph": "kind-inbox"
             },
             "status": "live",
             "blocked_reason": null,
@@ -3565,7 +3582,8 @@
                         "icon": "integrations/calendly.svg"
                     }
                 ],
-                "badge": null
+                "badge": null,
+                "kind_glyph": "kind-inbox"
             },
             "status": "live",
             "blocked_reason": null,
@@ -3866,7 +3884,8 @@
                         "icon": "integrations/moneybird.svg"
                     }
                 ],
-                "badge": null
+                "badge": null,
+                "kind_glyph": "kind-inbox"
             },
             "status": "live",
             "blocked_reason": null,
@@ -4167,7 +4186,8 @@
                         "icon": "integrations/moneybird.svg"
                     }
                 ],
-                "badge": null
+                "badge": null,
+                "kind_glyph": "kind-inbox"
             },
             "status": "live",
             "blocked_reason": null,
@@ -4428,7 +4448,8 @@
                         "icon": "integrations/calendly.svg"
                     }
                 ],
-                "badge": null
+                "badge": null,
+                "kind_glyph": "kind-inbox"
             },
             "status": "live",
             "blocked_reason": null,
@@ -4659,7 +4680,8 @@
                         "icon": "integrations/calendly.svg"
                     }
                 ],
-                "badge": null
+                "badge": null,
+                "kind_glyph": "kind-inbox"
             },
             "status": "live",
             "blocked_reason": null,
@@ -4920,7 +4942,8 @@
                         "icon": "integrations/calendly.svg"
                     }
                 ],
-                "badge": null
+                "badge": null,
+                "kind_glyph": "kind-inbox"
             },
             "status": "live",
             "blocked_reason": null,
@@ -5181,7 +5204,8 @@
                         "icon": "integrations/calendly.svg"
                     }
                 ],
-                "badge": null
+                "badge": null,
+                "kind_glyph": "kind-inbox"
             },
             "status": "live",
             "blocked_reason": null,
@@ -5330,7 +5354,8 @@
                         "icon": "integrations/calendly.svg"
                     }
                 ],
-                "badge": "Dagelijks"
+                "badge": "Dagelijks",
+                "kind_glyph": "kind-workflow"
             },
             "status": "live",
             "blocked_reason": null,
@@ -5475,7 +5500,8 @@
                         "icon": "integrations/calendly.svg"
                     }
                 ],
-                "badge": "Wekelijks"
+                "badge": "Wekelijks",
+                "kind_glyph": "kind-workflow"
             },
             "status": "live",
             "blocked_reason": null,
@@ -5642,7 +5668,8 @@
                         "icon": "integrations/prestashop.svg"
                     }
                 ],
-                "badge": "Dagelijks"
+                "badge": "Dagelijks",
+                "kind_glyph": "kind-workflow"
             },
             "status": "live",
             "blocked_reason": null,
@@ -5807,7 +5834,8 @@
                         "icon": "integrations/prestashop.svg"
                     }
                 ],
-                "badge": "Wekelijks"
+                "badge": "Wekelijks",
+                "kind_glyph": "kind-workflow"
             },
             "status": "live",
             "blocked_reason": null,
@@ -5966,7 +5994,8 @@
                         "icon": "integrations/prestashop.svg"
                     }
                 ],
-                "badge": "Direct"
+                "badge": "Direct",
+                "kind_glyph": "kind-workflow"
             },
             "status": "live",
             "blocked_reason": null,
@@ -6152,7 +6181,8 @@
                         "icon": "integrations/moneybird.svg"
                     }
                 ],
-                "badge": "Direct"
+                "badge": "Direct",
+                "kind_glyph": "kind-workflow"
             },
             "status": "live",
             "blocked_reason": null,
@@ -6297,7 +6327,8 @@
                         "icon": "integrations/calendly.svg"
                     }
                 ],
-                "badge": "Dagelijks"
+                "badge": "Dagelijks",
+                "kind_glyph": "kind-workflow"
             },
             "status": "live",
             "blocked_reason": null,
@@ -6352,7 +6383,8 @@
                 "channel": null,
                 "trigger": null,
                 "platforms": [],
-                "badge": null
+                "badge": null,
+                "kind_glyph": "kind-workflow"
             },
             "status": "planned",
             "blocked_reason": "Er bestaat nog geen no-show- of annuleringsgegeven om op te reageren: geen enkele operatie in de manifest levert \"afspraak gemist\". Stap-chaining is sinds 2026-08-20 niet langer de blokkade; het ontbrekende signaal wel.",
@@ -6399,7 +6431,8 @@
                 "channel": null,
                 "trigger": null,
                 "platforms": [],
-                "badge": null
+                "badge": null,
+                "kind_glyph": "kind-workflow"
             },
             "status": "planned",
             "blocked_reason": "Het bestelnummer dat een klant noemt staat in de vrije tekst van de e-mail — inbox.list_recent (2026-08-28) is wel een trigger op inkomende e-mail, maar geeft bewust nooit het onderwerp of de tekst van het bericht terug (Beveiligingsplan R5: klantcontent is onbetrouwbaar totdat het via een eigen, gecontroleerde stap is verwerkt), dus er is geen veld om naar order.find_by_number door te koppelen. Er is dus geen ontbrekende trigger meer, wel ontbrekende gegevensextractie.",
@@ -6542,7 +6575,8 @@
                         "icon": "integrations/moneybird.svg"
                     }
                 ],
-                "badge": "Direct"
+                "badge": "Direct",
+                "kind_glyph": "kind-workflow"
             },
             "status": "live",
             "blocked_reason": null,
@@ -6795,7 +6829,8 @@
                         "icon": "integrations/prestashop.svg"
                     }
                 ],
-                "badge": "Wekelijks"
+                "badge": "Wekelijks",
+                "kind_glyph": "kind-workflow"
             },
             "status": "live",
             "blocked_reason": null,
@@ -6940,7 +6975,8 @@
                         "icon": "integrations/calendly.svg"
                     }
                 ],
-                "badge": "Wekelijks"
+                "badge": "Wekelijks",
+                "kind_glyph": "kind-workflow"
             },
             "status": "live",
             "blocked_reason": null,
@@ -7151,7 +7187,8 @@
                         "icon": "integrations/moneybird.svg"
                     }
                 ],
-                "badge": "Wekelijks"
+                "badge": "Wekelijks",
+                "kind_glyph": "kind-workflow"
             },
             "status": "live",
             "blocked_reason": null,
@@ -7298,7 +7335,8 @@
                         "icon": "integrations/moneybird.svg"
                     }
                 ],
-                "badge": "Direct"
+                "badge": "Direct",
+                "kind_glyph": "kind-workflow"
             },
             "status": "live",
             "blocked_reason": null,
@@ -7443,7 +7481,8 @@
                         "icon": "integrations/calendly.svg"
                     }
                 ],
-                "badge": "Direct"
+                "badge": "Direct",
+                "kind_glyph": "kind-workflow"
             },
             "status": "live",
             "blocked_reason": null,
@@ -7572,7 +7611,8 @@
                 "channel": null,
                 "trigger": "schedule",
                 "platforms": [],
-                "badge": "Dagelijks"
+                "badge": "Dagelijks",
+                "kind_glyph": "kind-workflow"
             },
             "status": "live",
             "blocked_reason": null,
@@ -7787,7 +7827,8 @@
                         "icon": "integrations/moneybird.svg"
                     }
                 ],
-                "badge": "Direct"
+                "badge": "Direct",
+                "kind_glyph": "kind-workflow"
             },
             "status": "live",
             "blocked_reason": null,
@@ -7930,7 +7971,8 @@
                 "channel": null,
                 "trigger": "poll",
                 "platforms": [],
-                "badge": "Direct"
+                "badge": "Direct",
+                "kind_glyph": "kind-workflow"
             },
             "status": "live",
             "blocked_reason": null,
@@ -8073,7 +8115,8 @@
                 "channel": null,
                 "trigger": "poll",
                 "platforms": [],
-                "badge": "Direct"
+                "badge": "Direct",
+                "kind_glyph": "kind-workflow"
             },
             "status": "live",
             "blocked_reason": null,
@@ -8256,7 +8299,8 @@
                         "icon": "integrations/prestashop.svg"
                     }
                 ],
-                "badge": "Direct"
+                "badge": "Direct",
+                "kind_glyph": "kind-workflow"
             },
             "status": "live",
             "blocked_reason": null,
@@ -8417,7 +8461,8 @@
                         "icon": "integrations/prestashop.svg"
                     }
                 ],
-                "badge": "Direct"
+                "badge": "Direct",
+                "kind_glyph": "kind-workflow"
             },
             "status": "live",
             "blocked_reason": null,
@@ -8647,7 +8692,8 @@
                         "icon": "integrations/moneybird.svg"
                     }
                 ],
-                "badge": "Direct"
+                "badge": "Direct",
+                "kind_glyph": "kind-workflow"
             },
             "status": "live",
             "blocked_reason": null,
@@ -8790,7 +8836,8 @@
                         "icon": "integrations/moneybird.svg"
                     }
                 ],
-                "badge": "Direct"
+                "badge": "Direct",
+                "kind_glyph": "kind-workflow"
             },
             "status": "live",
             "blocked_reason": null,
@@ -8935,7 +8982,8 @@
                         "icon": "integrations/moneybird.svg"
                     }
                 ],
-                "badge": "Wekelijks"
+                "badge": "Wekelijks",
+                "kind_glyph": "kind-workflow"
             },
             "status": "live",
             "blocked_reason": null,
@@ -9125,7 +9173,8 @@
                         "icon": "integrations/prestashop.svg"
                     }
                 ],
-                "badge": "30 dagen"
+                "badge": "30 dagen",
+                "kind_glyph": "kind-dashboard"
             },
             "status": "live",
             "blocked_reason": null,
@@ -9252,7 +9301,8 @@
                         "icon": "integrations/prestashop.svg"
                     }
                 ],
-                "badge": "30 dagen"
+                "badge": "30 dagen",
+                "kind_glyph": "kind-dashboard"
             },
             "status": "live",
             "blocked_reason": null,
@@ -9403,7 +9453,8 @@
                         "icon": "integrations/moneybird.svg"
                     }
                 ],
-                "badge": "30 dagen"
+                "badge": "30 dagen",
+                "kind_glyph": "kind-dashboard"
             },
             "status": "live",
             "blocked_reason": null,
@@ -9554,7 +9605,8 @@
                         "icon": "integrations/moneybird.svg"
                     }
                 ],
-                "badge": "30 dagen"
+                "badge": "30 dagen",
+                "kind_glyph": "kind-dashboard"
             },
             "status": "live",
             "blocked_reason": null,
@@ -9721,7 +9773,8 @@
                         "icon": "integrations/moneybird.svg"
                     }
                 ],
-                "badge": "30 dagen"
+                "badge": "30 dagen",
+                "kind_glyph": "kind-dashboard"
             },
             "status": "live",
             "blocked_reason": null,
@@ -9861,7 +9914,8 @@
                         "icon": "integrations/moneybird.svg"
                     }
                 ],
-                "badge": "30 dagen"
+                "badge": "30 dagen",
+                "kind_glyph": "kind-dashboard"
             },
             "status": "live",
             "blocked_reason": null,
@@ -10024,7 +10078,8 @@
                         "icon": "integrations/prestashop.svg"
                     }
                 ],
-                "badge": "30 dagen"
+                "badge": "30 dagen",
+                "kind_glyph": "kind-dashboard"
             },
             "status": "live",
             "blocked_reason": null,
