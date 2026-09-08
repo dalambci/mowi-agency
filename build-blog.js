@@ -333,6 +333,8 @@ function footerHtml() {
             <div>
               <h3 class="footer-menu-heading">Product</h3>
               <ul>
+                <li><a href="/e-mail-agent">Inbox agent</a></li>
+                <li><a href="/call-agent">Voice agent</a></li>
                 <li><a href="/workflows">Alle workflows</a></li>
                 <li><a href="/templates">Templates</a></li>
                 <li><a href="/koppelingen">Koppelingen</a></li>
@@ -585,6 +587,35 @@ function buildSitemap(posts) {
   const docsSlugs = readFolderSlugs("docs");
   const receptenboekSlugs = readFolderSlugs("receptenboek");
   const templatesSlugs = readFolderSlugs("templates");
+  // Enforce the rule stated at the top of this function but never checked:
+  // "a noindex stub should never be in the sitemap" (2026-09-08). Four
+  // hand-listed entries (workflows, receptenboek, over, demo) and every page
+  // in receptenboek/ had become noindex since the list was written in
+  // Stage 7 — nine URLs telling Google to index pages that refuse indexing.
+  // Filtering on the page's own robots meta means the list self-corrects the
+  // next time a page's status changes, the same reasoning as reading docs/
+  // and templates/ from disk instead of hand-listing them.
+  //
+  // A URL whose file cannot be found is KEPT: this filter exists to drop
+  // pages that say noindex, not to quietly prune anything it fails to
+  // resolve.
+  const fileForUrl = (url) => {
+    const slug = url.slice(SITE_URL.length).replace(/^\//, "").replace(/\/$/, "");
+    const candidates = slug === ""
+      ? ["index.html"]
+      : [`${slug}.html`, path.join(slug, "index.html")];
+    for (const c of candidates) {
+      const f = path.join(ROOT, c);
+      if (fs.existsSync(f)) return f;
+    }
+    return null;
+  };
+  const isIndexable = (url) => {
+    const f = fileForUrl(url);
+    if (f === null) return true;
+    return !/<meta\s+name="robots"\s+content="noindex/i.test(fs.readFileSync(f, "utf8"));
+  };
+
   const urls = [
     ...staticPages.map((p) => `${SITE_URL}/${p}`),
     ...docsSlugs.map((p) => `${SITE_URL}/${p}`),
@@ -592,7 +623,7 @@ function buildSitemap(posts) {
     ...templatesSlugs.map((p) => `${SITE_URL}/${p}`),
     `${SITE_URL}/blog`,
     ...posts.map((p) => `${SITE_URL}/blog/${p.slug}`),
-  ];
+  ].filter(isIndexable);
   const today = new Date().toISOString().slice(0, 10);
   const body = urls
     .map((u) => `  <url><loc>${u}</loc><lastmod>${today}</lastmod></url>`)
