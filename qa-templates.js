@@ -68,9 +68,16 @@ async function run(browserType, label, viewport, device) {
   check(`${label} every logo loaded (${imgs.length})`, imgs.length > 0 && imgs.every((i) => i.ok), imgs.filter((i) => !i.ok).map((i) => i.src).slice(0, 5).join(" "));
   const art = await page.evaluate(() => ({
     mascots: document.querySelectorAll(".tpl-picture-agent .tpl-mascot").length,
-    agentLead: Array.from(document.querySelectorAll(".tpl-picture-agent .tpl-glyph:not(.tpl-glyph-sm) svg")).map((s) => s.dataset.glyph),
-    agentChannel: Array.from(document.querySelectorAll(".tpl-picture-agent .tpl-glyph-sm svg")).map((s) => s.dataset.glyph),
-    charts: document.querySelectorAll('.tpl-picture-dashboard .tpl-glyph svg[data-glyph="chart"]').length,
+    // Round 4: an agent's marks are the strip's two nodes — the branche it
+    // serves, then the channel it answers on.
+    agentLead: Array.from(document.querySelectorAll(".tpl-picture-agent .tpl-pic-node:first-child .tpl-pic-mark svg")).map((s) => s.dataset.glyph),
+    agentChannel: Array.from(document.querySelectorAll(".tpl-picture-agent .tpl-pic-node:last-child .tpl-pic-mark svg")).map((s) => s.dataset.glyph),
+    charts: document.querySelectorAll('.tpl-picture-dashboard .tpl-pic-mark svg[data-glyph="chart"]').length,
+    // The line each card actually shows, and whether any label is clipped.
+    stripLines: Array.from(document.querySelectorAll(".tpl-pic-line")).map((l) => Array.from(l.querySelectorAll(".tpl-pic-label")).map((x) => x.textContent.trim()).join("|")),
+    clipped: Array.from(document.querySelectorAll(".tpl-pic-label")).filter((l) => l.scrollHeight > l.clientHeight + 1).length,
+    emptyLabels: Array.from(document.querySelectorAll(".tpl-pic-label")).filter((l) => l.textContent.trim() === "").length,
+    lineOverflow: Array.from(document.querySelectorAll(".tpl-pic-line")).filter((l) => l.scrollWidth > l.parentElement.clientWidth + 1).length,
     badges: Array.from(document.querySelectorAll(".tpl-picture-workflow .tpl-badge")).map((b) => b.textContent.trim()),
     dashBadges: Array.from(document.querySelectorAll(".tpl-picture-dashboard .tpl-badge")).map((b) => b.textContent.trim()),
     agentBadges: document.querySelectorAll(".tpl-picture-agent .tpl-badge").length,
@@ -80,15 +87,28 @@ async function run(browserType, label, viewport, device) {
   // unique to its trade, where all 10 Voice cards used to be identical.
   check(`${label} agent pictures = branche glyph + phone/mail, no mascot`,
     art.mascots === 0 && art.agentLead.length === a && art.agentLead.every((g) => g && g.startsWith("branche-")) && art.agentChannel.length === a && art.agentChannel.every((g) => g === "phone" || g === "mail"),
-    JSON.stringify(art));
+    JSON.stringify({ mascots: art.mascots, lead: art.agentLead.slice(0, 3), channel: art.agentChannel.slice(0, 3) }));
   check(`${label} every branche is drawn differently`, new Set(art.agentLead).size === 10, String(new Set(art.agentLead).size));
   check(`${label} dashboard pictures use the chart glyph`, art.charts === d, String(art.charts));
   check(`${label} corner labels: workflow cadence, dashboard period, none on agents`, art.badges.length > 0 && art.badges.every((b) => ["Dagelijks", "Wekelijks", "Elk uur", "Direct"].includes(b)) && art.dashBadges.length === d && art.dashBadges.every((b) => /^\d+ dagen$/.test(b)) && art.agentBadges === 0, JSON.stringify(art.badges.slice(0, 4)) + " " + JSON.stringify(art.dashBadges.slice(0, 2)) + " agent badges " + art.agentBadges);
   const overflow = await page.evaluate(() => Array.from(document.querySelectorAll(".tpl-picture")).filter((p) => { const r = p.querySelector(".tpl-picture-row"); return r && r.scrollWidth > p.clientWidth; }).length);
   check(`${label} no picture row overflows its card`, overflow === 0, String(overflow));
   check(`${label} no horizontal page overflow`, await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1));
-  // "No text" means the picture row itself — the corner label is the one deliberate exception, and "+N" is a count, not copy.
-  check(`${label} no visible text inside a picture`, await page.evaluate(() => Array.from(document.querySelectorAll(".tpl-picture-row")).every((r) => r.innerText.trim().replace(/\+\d+/g, "").trim() === "")));
+  // Round 4 (2026-09-08) deliberately REVERSED round 2's "no text in the
+  // picture". The measurement behind it: the loudest layer, the logo tiles,
+  // had only 4 states across 51 cards, so what a visitor saw first said
+  // almost nothing — while the text layer can say what the template does.
+  // What is pinned now is that the text is there, distinct, and never clipped.
+  check(`${label} every card's picture carries a strip line`, art.stripLines.length >= a + d, `${art.stripLines.length} lines for ${a + w + d} cards`);
+  // A label may ellipsize — that is what the clamp is for, and one workflow
+  // title ("Lang openstaande onverzonden bestellingen ophalen") is long
+  // enough to need it on a 168px phone card. What must never happen is an
+  // empty label, or clipping spreading across the grid: at 27 of 105 the
+  // phone breakpoint was eating ordinary titles, which is the bug this
+  // threshold guards against coming back.
+  check(`${label} strip labels are real, and clipping stays exceptional`, art.emptyLabels === 0 && art.clipped <= 3, `empty ${art.emptyLabels} clipped ${art.clipped} of ${art.stripLines.length ? "all" : "0"} labels`);
+  check(`${label} no strip overflows its picture`, art.lineOverflow === 0, String(art.lineOverflow));
+  check(`${label} the strips actually distinguish the cards`, new Set(art.stripLines).size >= 40, `${new Set(art.stripLines).size} distinct of ${art.stripLines.length}`);
   await page.screenshot({ path: path.join(OUT, `tpl-${label}-first.png`) });
 
   // 2. Type control isolates a section and writes the URL

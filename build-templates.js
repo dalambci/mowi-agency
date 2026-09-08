@@ -355,7 +355,9 @@ const KIND_LABELS = { agent: "Agent", workflow: "Workflow", dashboard: "Dashboar
 const SIGNUP_URL = "https://my.mowi.agency/aanmelden";
 
 // ---------------------------------------------------------------------------
-// Card art (round 2, 2026-09-06 — Sal: "logos + one big glyph, no text").
+// Card art (round 4, 2026-09-08 — the picture leads with a STRIP of two or
+// three labelled nodes saying what the template does; round 2's "logos + one
+// big glyph, no text" is now the fallback for a record with nothing to say).
 // The export carries the shared art ONCE at its top level: `glyphs` (name
 // -> inner-SVG fragment, App\Templates\Glyphs). A record only names its
 // glyph (picture.glyph) and, for an agent, its channel glyph
@@ -383,6 +385,31 @@ function logoTile(platform, small) {
   return `<span class="tpl-logo${small ? " tpl-logo-sm" : ""}"><img src="/assets/logos/${esc(platform.icon)}" alt="${small ? "" : esc(platform.name)}" /></span>`;
 }
 
+/** One strip node: a mark (optional) over a clamped label. Round 4,
+    2026-09-08 — the card's subject is now what the template DOES, in words.
+    The shape is resolved in the dashboard's MarketplaceCatalog and travels in
+    the export as picture.strip, so this file still keeps no art rule of its
+    own and the two sites cannot drift. */
+function stripNode(node, art) {
+  const mark = node.glyph
+    ? `<span class="tpl-pic-mark">${glyphSvg(art, node.glyph)}</span>`
+    : `<span class="tpl-pic-mark tpl-pic-mark-none" aria-hidden="true"></span>`;
+  return `<span class="tpl-pic-node">${mark}<span class="tpl-pic-label">${esc(node.label)}</span></span>`;
+}
+
+/** The strip, or the round-3 lone glyph when a record has nothing to say yet
+    (a planned workflow has no graph). 'flow' draws arrows because the nodes
+    happen in order; 'set' draws dots because a dashboard's tiles are a
+    collection and an arrow between them would state something untrue. The
+    separators are aria-hidden: the labels alone read correctly aloud. */
+function pictureBody(picture, art) {
+  const strip = picture.strip;
+  if (!strip) return `<div class="tpl-picture-row"><span class="tpl-glyph">${glyphSvg(art, picture.glyph)}</span></div>`;
+  if (strip.mode !== "flow" && strip.mode !== "set") throw new Error(`build-templates: unknown strip mode '${strip.mode}'`);
+  const sep = `<span class="tpl-pic-sep" aria-hidden="true">${strip.mode === "flow" ? "&rarr;" : "&middot;"}</span>`;
+  return `<div class="tpl-pic-line tpl-pic-${esc(strip.mode)}">${strip.nodes.map((n) => stripNode(n, art)).join(sep)}</div>`;
+}
+
 function renderCard(template, art) {
   // Only prose fields are checked, not 'label' — a card/detail-page label
   // like "Voice agent — Loodgieter" (type — branche) is dashboard-owned
@@ -408,7 +435,7 @@ function renderCard(template, art) {
 
   return `<a href="/templates/${esc(template.slug)}" class="tpl-card" data-tpl-card data-tpl-kind="${esc(template.kind)}" data-tpl-industries="${esc(template.industries.join(","))}" data-tpl-koppelingen="${esc(template.needs.platforms.join(","))}" data-tpl-trigger="${esc((template.trigger && template.trigger.kind) || "")}" data-tpl-status="${esc(template.status)}" data-tpl-search="${esc(search)}">
   <div class="tpl-picture tpl-picture-${esc(template.kind)}">
-${picture.badge ? `    <span class="tpl-badge">${esc(picture.badge)}</span>\n` : ""}    <div class="tpl-picture-row">${shown.map((p) => logoTile(p, false)).join("")}${more > 0 ? `<span class="tpl-logo tpl-logo-more" title="${esc(moreTitle)}">+${more}</span>` : ""}<span class="tpl-glyph">${glyphSvg(art, picture.glyph)}</span>${picture.channel ? `<span class="tpl-glyph tpl-glyph-sm">${glyphSvg(art, picture.channel)}</span>` : ""}</div>
+${picture.badge ? `    <span class="tpl-badge">${esc(picture.badge)}</span>\n` : ""}    ${pictureBody(picture, art)}${shown.length > 0 || more > 0 ? `\n    <div class="tpl-logo-row">${shown.map((p) => logoTile(p, true)).join("")}${more > 0 ? `<span class="tpl-logo tpl-logo-sm tpl-logo-more" title="${esc(moreTitle)}">+${more}</span>` : ""}</div>` : ""}
   </div>
   <div class="tpl-card-body">
     <h3 class="tpl-card-title">${esc(template.label)}</h3>
