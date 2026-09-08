@@ -23,20 +23,27 @@
        6590002 -> Web Rules -> Redirect, ^/receptenboek/order-status$ ->
        /workflows#order-status) and delete this file.
 
+       2026-09-08: doel verlegd van /workflows#order-status naar /templates/orderstatus-opzoeken. /workflows draagt nog
+       steeds noindex EN bevat alleen nog de Dashboards-sectie — de
+       workflow-panels waar deze stub naar verwees bestaan er niet meer, dus
+       zowel de redirect als de canonical wezen naar een dode ankerplek op een
+       pagina die zichzelf uit de index houdt. Een canonical met een #fragment
+       is bovendien altijd ongeldig: Google negeert het fragment.
+
        noindex keeps this stub itself out of search results — without it the
        stub can rank in place of the real page. -->
   <meta name="robots" content="noindex, follow" />
-  <meta http-equiv="refresh" content="0; url=/workflows#order-status" />
-  <link rel="canonical" href="https://mowi.agency/workflows#order-status" />
+  <meta http-equiv="refresh" content="0; url=/templates/orderstatus-opzoeken" />
+  <link rel="canonical" href="https://mowi.agency/templates/orderstatus-opzoeken" />
 
-  <title>Verplaatst naar /workflows#order-status — Mowi</title>
+  <title>Verplaatst naar /templates/orderstatus-opzoeken — Mowi</title>
 </head>
 <body>
-  <p>Deze pagina is verhuisd naar <a href="/workflows#order-status">mowi.agency/workflows#order-status</a>.</p>
+  <p>Deze pagina is verhuisd naar <a href="/templates/orderstatus-opzoeken">mowi.agency/templates/orderstatus-opzoeken</a>.</p>
 
   <!-- replace(), not href: keeps the dead URL out of the back-button history,
        so "terug" from /workflows#order-status doesn't bounce the visitor straight back here
        and into a redirect loop. -->
-  <script>window.location.replace("/workflows#order-status");</script>
+  <script>window.location.replace("/templates/orderstatus-opzoeken");</script>
 </body>
 </html>

@@ -25,20 +25,27 @@
        6590002 -> Web Rules -> Redirect, ^/cases$ -> /workflows) and
        delete this file.
 
+       2026-09-08: doel verlegd van /workflows naar /. /workflows draagt nog
+       steeds noindex EN bevat alleen nog de Dashboards-sectie — de
+       workflow-panels waar deze stub naar verwees bestaan er niet meer, dus
+       zowel de redirect als de canonical wezen naar een dode ankerplek op een
+       pagina die zichzelf uit de index houdt. Een canonical met een #fragment
+       is bovendien altijd ongeldig: Google negeert het fragment.
+
        noindex keeps this stub itself out of search results — without it the
        stub can rank in place of the real page. -->
   <meta name="robots" content="noindex, follow" />
-  <meta http-equiv="refresh" content="0; url=/workflows" />
-  <link rel="canonical" href="https://mowi.agency/workflows" />
+  <meta http-equiv="refresh" content="0; url=/" />
+  <link rel="canonical" href="https://mowi.agency/" />
 
-  <title>Verplaatst naar /workflows — Mowi</title>
+  <title>Verplaatst naar / — Mowi</title>
 </head>
 <body>
-  <p>Deze pagina is verhuisd naar <a href="/workflows">mowi.agency/workflows</a>.</p>
+  <p>Deze pagina is verhuisd naar <a href="/">mowi.agency/</a>.</p>
 
   <!-- replace(), not href: keeps the dead URL out of the back-button history,
        so "terug" from /workflows doesn't bounce the visitor straight back here
        and into a redirect loop. -->
-  <script>window.location.replace("/workflows");</script>
+  <script>window.location.replace("/");</script>
 </body>
 </html>

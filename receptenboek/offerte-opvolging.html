@@ -24,20 +24,27 @@
        6590002 -> Web Rules -> Redirect, ^/receptenboek/offerte-opvolging$
        -> /workflows#offerte-opvolging) and delete this file.
 
+       2026-09-08: doel verlegd van /workflows#offerte-opvolging naar /templates. /workflows draagt nog
+       steeds noindex EN bevat alleen nog de Dashboards-sectie — de
+       workflow-panels waar deze stub naar verwees bestaan er niet meer, dus
+       zowel de redirect als de canonical wezen naar een dode ankerplek op een
+       pagina die zichzelf uit de index houdt. Een canonical met een #fragment
+       is bovendien altijd ongeldig: Google negeert het fragment.
+
        noindex keeps this stub itself out of search results — without it the
        stub can rank in place of the real page. -->
   <meta name="robots" content="noindex, follow" />
-  <meta http-equiv="refresh" content="0; url=/workflows#offerte-opvolging" />
-  <link rel="canonical" href="https://mowi.agency/workflows#offerte-opvolging" />
+  <meta http-equiv="refresh" content="0; url=/templates" />
+  <link rel="canonical" href="https://mowi.agency/templates" />
 
-  <title>Verplaatst naar /workflows#offerte-opvolging — Mowi</title>
+  <title>Verplaatst naar /templates — Mowi</title>
 </head>
 <body>
-  <p>Deze pagina is verhuisd naar <a href="/workflows#offerte-opvolging">mowi.agency/workflows#offerte-opvolging</a>.</p>
+  <p>Deze pagina is verhuisd naar <a href="/templates">mowi.agency/templates</a>.</p>
 
   <!-- replace(), not href: keeps the dead URL out of the back-button history,
        so "terug" from /workflows#offerte-opvolging doesn't bounce the visitor straight back here
        and into a redirect loop. -->
-  <script>window.location.replace("/workflows#offerte-opvolging");</script>
+  <script>window.location.replace("/templates");</script>
 </body>
 </html>

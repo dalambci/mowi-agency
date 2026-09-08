@@ -24,20 +24,27 @@
        6590002 -> Web Rules -> Redirect, ^/receptenboek/agenda-samenvatting$
        -> /workflows#agenda-samenvatting) and delete this file.
 
+       2026-09-08: doel verlegd van /workflows#agenda-samenvatting naar /templates/dagelijkse-afspraken. /workflows draagt nog
+       steeds noindex EN bevat alleen nog de Dashboards-sectie — de
+       workflow-panels waar deze stub naar verwees bestaan er niet meer, dus
+       zowel de redirect als de canonical wezen naar een dode ankerplek op een
+       pagina die zichzelf uit de index houdt. Een canonical met een #fragment
+       is bovendien altijd ongeldig: Google negeert het fragment.
+
        noindex keeps this stub itself out of search results — without it the
        stub can rank in place of the real page. -->
   <meta name="robots" content="noindex, follow" />
-  <meta http-equiv="refresh" content="0; url=/workflows#agenda-samenvatting" />
-  <link rel="canonical" href="https://mowi.agency/workflows#agenda-samenvatting" />
+  <meta http-equiv="refresh" content="0; url=/templates/dagelijkse-afspraken" />
+  <link rel="canonical" href="https://mowi.agency/templates/dagelijkse-afspraken" />
 
-  <title>Verplaatst naar /workflows#agenda-samenvatting — Mowi</title>
+  <title>Verplaatst naar /templates/dagelijkse-afspraken — Mowi</title>
 </head>
 <body>
-  <p>Deze pagina is verhuisd naar <a href="/workflows#agenda-samenvatting">mowi.agency/workflows#agenda-samenvatting</a>.</p>
+  <p>Deze pagina is verhuisd naar <a href="/templates/dagelijkse-afspraken">mowi.agency/templates/dagelijkse-afspraken</a>.</p>
 
   <!-- replace(), not href: keeps the dead URL out of the back-button history,
        so "terug" from /workflows#agenda-samenvatting doesn't bounce the visitor straight back here
        and into a redirect loop. -->
-  <script>window.location.replace("/workflows#agenda-samenvatting");</script>
+  <script>window.location.replace("/templates/dagelijkse-afspraken");</script>
 </body>
 </html>
