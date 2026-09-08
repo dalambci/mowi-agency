@@ -69,7 +69,7 @@ const WF_JS_VERSION = "20260906-1";
 // This file's OWN two new assets get one shared version, bumped whenever
 // either changes — same "one value per file-pair, bump together" rule
 // the rest of the site's cache-busting convention already follows.
-const TPL_ASSET_VERSION = "20260908-1";
+const TPL_ASSET_VERSION = "20260908-2";
 
 // ---------------------------------------------------------------------------
 // Escaping — every field below can eventually carry CLIENT-authored text
@@ -355,9 +355,7 @@ const KIND_LABELS = { agent: "Agent", workflow: "Workflow", dashboard: "Dashboar
 const SIGNUP_URL = "https://my.mowi.agency/aanmelden";
 
 // ---------------------------------------------------------------------------
-// Card art (round 4, 2026-09-08 — the picture leads with a STRIP of two or
-// three labelled nodes saying what the template does; round 2's "logos + one
-// big glyph, no text" is now the fallback for a record with nothing to say).
+// Card art (round 2, 2026-09-06 — Sal: "logos + one big glyph, no text").
 // The export carries the shared art ONCE at its top level: `glyphs` (name
 // -> inner-SVG fragment, App\Templates\Glyphs). A record only names its
 // glyph (picture.glyph) and, for an agent, its channel glyph
@@ -385,31 +383,6 @@ function logoTile(platform, small) {
   return `<span class="tpl-logo${small ? " tpl-logo-sm" : ""}"><img src="/assets/logos/${esc(platform.icon)}" alt="${small ? "" : esc(platform.name)}" /></span>`;
 }
 
-/** One strip node: a mark (optional) over a clamped label. Round 4,
-    2026-09-08 — the card's subject is now what the template DOES, in words.
-    The shape is resolved in the dashboard's MarketplaceCatalog and travels in
-    the export as picture.strip, so this file still keeps no art rule of its
-    own and the two sites cannot drift. */
-function stripNode(node, art) {
-  const mark = node.glyph
-    ? `<span class="tpl-pic-mark">${glyphSvg(art, node.glyph)}</span>`
-    : `<span class="tpl-pic-mark tpl-pic-mark-none" aria-hidden="true"></span>`;
-  return `<span class="tpl-pic-node">${mark}<span class="tpl-pic-label">${esc(node.label)}</span></span>`;
-}
-
-/** The strip, or the round-3 lone glyph when a record has nothing to say yet
-    (a planned workflow has no graph). 'flow' draws arrows because the nodes
-    happen in order; 'set' draws dots because a dashboard's tiles are a
-    collection and an arrow between them would state something untrue. The
-    separators are aria-hidden: the labels alone read correctly aloud. */
-function pictureBody(picture, art) {
-  const strip = picture.strip;
-  if (!strip) return `<div class="tpl-picture-row"><span class="tpl-glyph">${glyphSvg(art, picture.glyph)}</span></div>`;
-  if (strip.mode !== "flow" && strip.mode !== "set") throw new Error(`build-templates: unknown strip mode '${strip.mode}'`);
-  const sep = `<span class="tpl-pic-sep" aria-hidden="true">${strip.mode === "flow" ? "&rarr;" : "&middot;"}</span>`;
-  return `<div class="tpl-pic-line tpl-pic-${esc(strip.mode)}">${strip.nodes.map((n) => stripNode(n, art)).join(sep)}</div>`;
-}
-
 function renderCard(template, art) {
   // Only prose fields are checked, not 'label' — a card/detail-page label
   // like "Voice agent — Loodgieter" (type — branche) is dashboard-owned
@@ -420,11 +393,14 @@ function renderCard(template, art) {
 
   const picture = template.picture;
   if (!picture) throw new Error(`build-templates: template '${template.key}' has no picture — re-export from the dashboard`);
-  // Two logo tiles + a "+N" tile is the most a 15rem card fits next to the
-  // glyph once a wordmark (Moneybird, Pipedrive) is among them.
-  const shown = picture.platforms.slice(0, 2);
+  // Four logo tiles + a "+N" tile (2026-09-08, Sal: "i just want the main
+  // 3-4 icons to appear with +[x amount] relevant integrations for that
+  // template"). Two was the cap while the tiles shared their row with a
+  // glyph; the koppelingen lead now, so the room is theirs, and the row
+  // wraps rather than overflowing when wordmarks are among them.
+  const shown = picture.platforms.slice(0, 4);
   const more = picture.platforms.length - shown.length;
-  const moreTitle = picture.platforms.slice(2).map((p) => p.name).join(", ");
+  const moreTitle = picture.platforms.slice(4).map((p) => p.name).join(", ");
   const search = [template.label, template.tagline, template.summary, template.industry_labels.join(" "), picture.platforms.map((p) => p.name).join(" ")]
     .filter(Boolean)
     .join(" ")
@@ -435,7 +411,14 @@ function renderCard(template, art) {
 
   return `<a href="/templates/${esc(template.slug)}" class="tpl-card" data-tpl-card data-tpl-kind="${esc(template.kind)}" data-tpl-industries="${esc(template.industries.join(","))}" data-tpl-koppelingen="${esc(template.needs.platforms.join(","))}" data-tpl-trigger="${esc((template.trigger && template.trigger.kind) || "")}" data-tpl-status="${esc(template.status)}" data-tpl-search="${esc(search)}">
   <div class="tpl-picture tpl-picture-${esc(template.kind)}">
-${picture.badge ? `    <span class="tpl-badge">${esc(picture.badge)}</span>\n` : ""}    ${pictureBody(picture, art)}${shown.length > 0 || more > 0 ? `\n    <div class="tpl-logo-row">${shown.map((p) => logoTile(p, true)).join("")}${more > 0 ? `<span class="tpl-logo tpl-logo-sm tpl-logo-more" title="${esc(moreTitle)}">+${more}</span>` : ""}</div>` : ""}
+${picture.badge ? `    <span class="tpl-badge">${esc(picture.badge)}</span>\n` : ""}    ${shown.length > 0
+      // The koppelingen ARE the picture: what this template plugs into, and
+      // how many more it supports.
+      ? `<div class="tpl-picture-row tpl-picture-logos">${shown.map((p) => logoTile(p, false)).join("")}${more > 0 ? `<span class="tpl-logo tpl-logo-more" title="${esc(moreTitle)}">+${more}</span>` : ""}</div>`
+      // 25 of the 51 cards need no koppeling at all — every agent, plus the
+      // planned workflows. They keep the branche glyph and its channel
+      // rather than showing an empty field.
+      : `<div class="tpl-picture-row"><span class="tpl-glyph">${glyphSvg(art, picture.glyph)}</span>${picture.channel ? `<span class="tpl-glyph tpl-glyph-sm">${glyphSvg(art, picture.channel)}</span>` : ""}</div>`}
   </div>
   <div class="tpl-card-body">
     <h3 class="tpl-card-title">${esc(template.label)}</h3>

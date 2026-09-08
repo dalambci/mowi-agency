@@ -1,6 +1,6 @@
 {
-    "generated_at": "2026-09-08T10:41:36+00:00",
-    "commit": "3b811cb",
+    "generated_at": "2026-09-08T11:06:08+00:00",
+    "commit": "6c2651c",
     "glyphs": {
         "box": "<path d=\"M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z\"/><path d=\"m3.3 7 8.7 5 8.7-5\"/><path d=\"M12 22V12\"/><path d=\"m7.5 4.27 9 5.15\"/>",
         "calendar": "<rect x=\"3\" y=\"4\" width=\"18\" height=\"18\" rx=\"2\"/><path d=\"M16 2v4M8 2v4M3 10h18\"/>",
@@ -238,20 +238,7 @@
                 "channel": "phone",
                 "trigger": null,
                 "platforms": [],
-                "badge": null,
-                "strip": {
-                    "mode": "flow",
-                    "nodes": [
-                        {
-                            "label": "Spoed?",
-                            "glyph": "branche-loodgieter"
-                        },
-                        {
-                            "label": "Terugbelverzoek",
-                            "glyph": "phone"
-                        }
-                    ]
-                }
+                "badge": null
             },
             "status": "live",
             "blocked_reason": null,
@@ -478,20 +465,7 @@
                 "channel": "phone",
                 "trigger": null,
                 "platforms": [],
-                "badge": null,
-                "strip": {
-                    "mode": "flow",
-                    "nodes": [
-                        {
-                            "label": "Afspraak of vraag?",
-                            "glyph": "branche-kapper"
-                        },
-                        {
-                            "label": "Antwoord uit kennisbank",
-                            "glyph": "phone"
-                        }
-                    ]
-                }
+                "badge": null
             },
             "status": "live",
             "blocked_reason": null,
@@ -718,20 +692,7 @@
                 "channel": "phone",
                 "trigger": null,
                 "platforms": [],
-                "badge": null,
-                "strip": {
-                    "mode": "flow",
-                    "nodes": [
-                        {
-                            "label": "Huidreactie?",
-                            "glyph": "branche-schoonheidssalon"
-                        },
-                        {
-                            "label": "Doorverbinden",
-                            "glyph": "phone"
-                        }
-                    ]
-                }
+                "badge": null
             },
             "status": "live",
             "blocked_reason": null,
@@ -958,20 +919,7 @@
                 "channel": "phone",
                 "trigger": null,
                 "platforms": [],
-                "badge": null,
-                "strip": {
-                    "mode": "flow",
-                    "nodes": [
-                        {
-                            "label": "Niet rijklaar?",
-                            "glyph": "branche-garage"
-                        },
-                        {
-                            "label": "Doorverbinden",
-                            "glyph": "phone"
-                        }
-                    ]
-                }
+                "badge": null
             },
             "status": "live",
             "blocked_reason": null,
@@ -1198,20 +1146,7 @@
                 "channel": "phone",
                 "trigger": null,
                 "platforms": [],
-                "badge": null,
-                "strip": {
-                    "mode": "flow",
-                    "nodes": [
-                        {
-                            "label": "Afspraak of vraag?",
-                            "glyph": "branche-horeca"
-                        },
-                        {
-                            "label": "Antwoord uit kennisbank",
-                            "glyph": "phone"
-                        }
-                    ]
-                }
+                "badge": null
             },
             "status": "live",
             "blocked_reason": null,
@@ -1438,20 +1373,7 @@
                 "channel": "phone",
                 "trigger": null,
                 "platforms": [],
-                "badge": null,
-                "strip": {
-                    "mode": "flow",
-                    "nodes": [
-                        {
-                            "label": "Afspraak of vraag?",
-                            "glyph": "branche-zakelijke_dienstverlening"
-                        },
-                        {
-                            "label": "Antwoord uit kennisbank",
-                            "glyph": "phone"
-                        }
-                    ]
-                }
+                "badge": null
             },
             "status": "live",
             "blocked_reason": null,
@@ -1678,20 +1600,7 @@
                 "channel": "phone",
                 "trigger": null,
                 "platforms": [],
-                "badge": null,
-                "strip": {
-                    "mode": "flow",
-                    "nodes": [
-                        {
-                            "label": "Probleem tijdens verblijf?",
-                            "glyph": "branche-hotel"
-                        },
-                        {
-                            "label": "Doorverbinden",
-                            "glyph": "phone"
-                        }
-                    ]
-                }
+                "badge": null
             },
             "status": "live",
             "blocked_reason": null,
@@ -1918,20 +1827,7 @@
                 "channel": "phone",
                 "trigger": null,
                 "platforms": [],
-                "badge": null,
-                "strip": {
-                    "mode": "flow",
-                    "nodes": [
-                        {
-                            "label": "Mogelijke infectie?",
-                            "glyph": "branche-tattooshop"
-                        },
-                        {
-                            "label": "Terugbelverzoek",
-                            "glyph": "phone"
-                        }
-                    ]
-                }
+                "badge": null
             },
             "status": "live",
             "blocked_reason": null,
@@ -2158,20 +2054,7 @@
                 "channel": "phone",
                 "trigger": null,
                 "platforms": [],
-                "badge": null,
-                "strip": {
-                    "mode": "flow",
-                    "nodes": [
-                        {
-                            "label": "Bestelling opzoeken",
-                            "glyph": "branche-webshop"
-                        },
-                        {
-                            "label": "Gevonden?",
-                            "glyph": "phone"
-                        }
-                    ]
-                }
+                "badge": null
             },
             "status": "live",
             "blocked_reason": null,
@@ -2398,20 +2281,7 @@
                 "channel": "phone",
                 "trigger": null,
                 "platforms": [],
-                "badge": null,
-                "strip": {
-                    "mode": "flow",
-                    "nodes": [
-                        {
-                            "label": "Bestelling opzoeken",
-                            "glyph": "branche-groothandel"
-                        },
-                        {
-                            "label": "Gevonden?",
-                            "glyph": "phone"
-                        }
-                    ]
-                }
+                "badge": null
             },
             "status": "live",
             "blocked_reason": null,
@@ -2646,20 +2516,7 @@
                 "channel": "mail",
                 "trigger": null,
                 "platforms": [],
-                "badge": null,
-                "strip": {
-                    "mode": "flow",
-                    "nodes": [
-                        {
-                            "label": "Storing / spoed",
-                            "glyph": "branche-loodgieter"
-                        },
-                        {
-                            "label": "Conceptantwoord klaar",
-                            "glyph": "mail"
-                        }
-                    ]
-                }
+                "badge": null
             },
             "status": "live",
             "blocked_reason": null,
@@ -2894,20 +2751,7 @@
                 "channel": "mail",
                 "trigger": null,
                 "platforms": [],
-                "badge": null,
-                "strip": {
-                    "mode": "flow",
-                    "nodes": [
-                        {
-                            "label": "Afspraak aanvraag",
-                            "glyph": "branche-kapper"
-                        },
-                        {
-                            "label": "Conceptantwoord klaar",
-                            "glyph": "mail"
-                        }
-                    ]
-                }
+                "badge": null
             },
             "status": "live",
             "blocked_reason": null,
@@ -3142,20 +2986,7 @@
                 "channel": "mail",
                 "trigger": null,
                 "platforms": [],
-                "badge": null,
-                "strip": {
-                    "mode": "flow",
-                    "nodes": [
-                        {
-                            "label": "Afspraak aanvraag",
-                            "glyph": "branche-schoonheidssalon"
-                        },
-                        {
-                            "label": "Conceptantwoord klaar",
-                            "glyph": "mail"
-                        }
-                    ]
-                }
+                "badge": null
             },
             "status": "live",
             "blocked_reason": null,
@@ -3390,20 +3221,7 @@
                 "channel": "mail",
                 "trigger": null,
                 "platforms": [],
-                "badge": null,
-                "strip": {
-                    "mode": "flow",
-                    "nodes": [
-                        {
-                            "label": "Afspraak APK/onderhoud",
-                            "glyph": "branche-garage"
-                        },
-                        {
-                            "label": "Conceptantwoord klaar",
-                            "glyph": "mail"
-                        }
-                    ]
-                }
+                "badge": null
             },
             "status": "live",
             "blocked_reason": null,
@@ -3638,20 +3456,7 @@
                 "channel": "mail",
                 "trigger": null,
                 "platforms": [],
-                "badge": null,
-                "strip": {
-                    "mode": "flow",
-                    "nodes": [
-                        {
-                            "label": "Orderstatus",
-                            "glyph": "branche-webshop"
-                        },
-                        {
-                            "label": "Conceptantwoord klaar",
-                            "glyph": "mail"
-                        }
-                    ]
-                }
+                "badge": null
             },
             "status": "live",
             "blocked_reason": null,
@@ -3886,20 +3691,7 @@
                 "channel": "mail",
                 "trigger": null,
                 "platforms": [],
-                "badge": null,
-                "strip": {
-                    "mode": "flow",
-                    "nodes": [
-                        {
-                            "label": "Bestelling",
-                            "glyph": "branche-groothandel"
-                        },
-                        {
-                            "label": "Conceptantwoord klaar",
-                            "glyph": "mail"
-                        }
-                    ]
-                }
+                "badge": null
             },
             "status": "live",
             "blocked_reason": null,
@@ -4134,20 +3926,7 @@
                 "channel": "mail",
                 "trigger": null,
                 "platforms": [],
-                "badge": null,
-                "strip": {
-                    "mode": "flow",
-                    "nodes": [
-                        {
-                            "label": "Reservering",
-                            "glyph": "branche-horeca"
-                        },
-                        {
-                            "label": "Conceptantwoord klaar",
-                            "glyph": "mail"
-                        }
-                    ]
-                }
+                "badge": null
             },
             "status": "live",
             "blocked_reason": null,
@@ -4352,20 +4131,7 @@
                 "channel": "mail",
                 "trigger": null,
                 "platforms": [],
-                "badge": null,
-                "strip": {
-                    "mode": "flow",
-                    "nodes": [
-                        {
-                            "label": "Afspraakverzoek",
-                            "glyph": "branche-zakelijke_dienstverlening"
-                        },
-                        {
-                            "label": "Conceptantwoord klaar",
-                            "glyph": "mail"
-                        }
-                    ]
-                }
+                "badge": null
             },
             "status": "live",
             "blocked_reason": null,
@@ -4600,20 +4366,7 @@
                 "channel": "mail",
                 "trigger": null,
                 "platforms": [],
-                "badge": null,
-                "strip": {
-                    "mode": "flow",
-                    "nodes": [
-                        {
-                            "label": "Reserveringsaanvraag",
-                            "glyph": "branche-hotel"
-                        },
-                        {
-                            "label": "Conceptantwoord klaar",
-                            "glyph": "mail"
-                        }
-                    ]
-                }
+                "badge": null
             },
             "status": "live",
             "blocked_reason": null,
@@ -4848,20 +4601,7 @@
                 "channel": "mail",
                 "trigger": null,
                 "platforms": [],
-                "badge": null,
-                "strip": {
-                    "mode": "flow",
-                    "nodes": [
-                        {
-                            "label": "Afspraakverzoek",
-                            "glyph": "branche-tattooshop"
-                        },
-                        {
-                            "label": "Conceptantwoord klaar",
-                            "glyph": "mail"
-                        }
-                    ]
-                }
+                "badge": null
             },
             "status": "live",
             "blocked_reason": null,
@@ -5010,16 +4750,7 @@
                         "icon": "integrations/calendly.svg"
                     }
                 ],
-                "badge": "Dagelijks",
-                "strip": {
-                    "mode": "flow",
-                    "nodes": [
-                        {
-                            "label": "Agenda voor vandaag",
-                            "glyph": "calendar"
-                        }
-                    ]
-                }
+                "badge": "Dagelijks"
             },
             "status": "live",
             "blocked_reason": null,
@@ -5164,16 +4895,7 @@
                         "icon": "integrations/calendly.svg"
                     }
                 ],
-                "badge": "Wekelijks",
-                "strip": {
-                    "mode": "flow",
-                    "nodes": [
-                        {
-                            "label": "Agenda voor deze week",
-                            "glyph": "calendar"
-                        }
-                    ]
-                }
+                "badge": "Wekelijks"
             },
             "status": "live",
             "blocked_reason": null,
@@ -5340,16 +5062,7 @@
                         "icon": "integrations/prestashop.svg"
                     }
                 ],
-                "badge": "Dagelijks",
-                "strip": {
-                    "mode": "flow",
-                    "nodes": [
-                        {
-                            "label": "Nieuwe bestellingen",
-                            "glyph": "box"
-                        }
-                    ]
-                }
+                "badge": "Dagelijks"
             },
             "status": "live",
             "blocked_reason": null,
@@ -5514,16 +5227,7 @@
                         "icon": "integrations/prestashop.svg"
                     }
                 ],
-                "badge": "Wekelijks",
-                "strip": {
-                    "mode": "flow",
-                    "nodes": [
-                        {
-                            "label": "Bestellingen van deze week",
-                            "glyph": "box"
-                        }
-                    ]
-                }
+                "badge": "Wekelijks"
             },
             "status": "live",
             "blocked_reason": null,
@@ -5682,20 +5386,7 @@
                         "icon": "integrations/prestashop.svg"
                     }
                 ],
-                "badge": "Direct",
-                "strip": {
-                    "mode": "flow",
-                    "nodes": [
-                        {
-                            "label": "Nieuwe bestellingen ophalen",
-                            "glyph": "box"
-                        },
-                        {
-                            "label": "Nieuwe bestelling",
-                            "glyph": "mail"
-                        }
-                    ]
-                }
+                "badge": "Direct"
             },
             "status": "live",
             "blocked_reason": null,
@@ -5881,20 +5572,7 @@
                         "icon": "integrations/moneybird.svg"
                     }
                 ],
-                "badge": "Direct",
-                "strip": {
-                    "mode": "flow",
-                    "nodes": [
-                        {
-                            "label": "Nieuwe bestellingen ophalen",
-                            "glyph": "box"
-                        },
-                        {
-                            "label": "Nieuwe bestelling",
-                            "glyph": "mail"
-                        }
-                    ]
-                }
+                "badge": "Direct"
             },
             "status": "live",
             "blocked_reason": null,
@@ -6039,16 +5717,7 @@
                         "icon": "integrations/calendly.svg"
                     }
                 ],
-                "badge": "Dagelijks",
-                "strip": {
-                    "mode": "flow",
-                    "nodes": [
-                        {
-                            "label": "Beschikbaarheid vandaag",
-                            "glyph": "calendar"
-                        }
-                    ]
-                }
+                "badge": "Dagelijks"
             },
             "status": "live",
             "blocked_reason": null,
@@ -6103,8 +5772,7 @@
                 "channel": null,
                 "trigger": null,
                 "platforms": [],
-                "badge": null,
-                "strip": null
+                "badge": null
             },
             "status": "planned",
             "blocked_reason": "Er bestaat nog geen no-show- of annuleringsgegeven om op te reageren: geen enkele operatie in de manifest levert \"afspraak gemist\". Stap-chaining is sinds 2026-08-20 niet langer de blokkade; het ontbrekende signaal wel.",
@@ -6151,8 +5819,7 @@
                 "channel": null,
                 "trigger": null,
                 "platforms": [],
-                "badge": null,
-                "strip": null
+                "badge": null
             },
             "status": "planned",
             "blocked_reason": "Het bestelnummer dat een klant noemt staat in de vrije tekst van de e-mail — inbox.list_recent (2026-08-28) is wel een trigger op inkomende e-mail, maar geeft bewust nooit het onderwerp of de tekst van het bericht terug (Beveiligingsplan R5: klantcontent is onbetrouwbaar totdat het via een eigen, gecontroleerde stap is verwerkt), dus er is geen veld om naar order.find_by_number door te koppelen. Er is dus geen ontbrekende trigger meer, wel ontbrekende gegevensextractie.",
@@ -6295,20 +5962,7 @@
                         "icon": "integrations/moneybird.svg"
                     }
                 ],
-                "badge": "Direct",
-                "strip": {
-                    "mode": "flow",
-                    "nodes": [
-                        {
-                            "label": "Recente gesprekken ophalen",
-                            "glyph": "phone"
-                        },
-                        {
-                            "label": "Klant herkend",
-                            "glyph": "mail"
-                        }
-                    ]
-                }
+                "badge": "Direct"
             },
             "status": "live",
             "blocked_reason": null,
@@ -6561,20 +6215,7 @@
                         "icon": "integrations/prestashop.svg"
                     }
                 ],
-                "badge": "Wekelijks",
-                "strip": {
-                    "mode": "set",
-                    "nodes": [
-                        {
-                            "label": "Omzet",
-                            "glyph": "chart"
-                        },
-                        {
-                            "label": "Aantal bestellingen",
-                            "glyph": null
-                        }
-                    ]
-                }
+                "badge": "Wekelijks"
             },
             "status": "live",
             "blocked_reason": null,
@@ -6719,16 +6360,7 @@
                         "icon": "integrations/calendly.svg"
                     }
                 ],
-                "badge": "Wekelijks",
-                "strip": {
-                    "mode": "flow",
-                    "nodes": [
-                        {
-                            "label": "Aankomende agenda-afspraken ophalen",
-                            "glyph": "calendar"
-                        }
-                    ]
-                }
+                "badge": "Wekelijks"
             },
             "status": "live",
             "blocked_reason": null,
@@ -6939,20 +6571,7 @@
                         "icon": "integrations/moneybird.svg"
                     }
                 ],
-                "badge": "Wekelijks",
-                "strip": {
-                    "mode": "set",
-                    "nodes": [
-                        {
-                            "label": "Openstaande pijplijnwaarde",
-                            "glyph": "handshake"
-                        },
-                        {
-                            "label": "Gewonnen deals",
-                            "glyph": null
-                        }
-                    ]
-                }
+                "badge": "Wekelijks"
             },
             "status": "live",
             "blocked_reason": null,
@@ -7099,20 +6718,7 @@
                         "icon": "integrations/moneybird.svg"
                     }
                 ],
-                "badge": "Direct",
-                "strip": {
-                    "mode": "flow",
-                    "nodes": [
-                        {
-                            "label": "Vervallen facturen ophalen",
-                            "glyph": "receipt"
-                        },
-                        {
-                            "label": "Vervallen factuur",
-                            "glyph": "mail"
-                        }
-                    ]
-                }
+                "badge": "Direct"
             },
             "status": "live",
             "blocked_reason": null,
@@ -7257,20 +6863,7 @@
                         "icon": "integrations/calendly.svg"
                     }
                 ],
-                "badge": "Direct",
-                "strip": {
-                    "mode": "flow",
-                    "nodes": [
-                        {
-                            "label": "Aankomende agenda-afspraken ophalen",
-                            "glyph": "calendar"
-                        },
-                        {
-                            "label": "Afspraak morgen",
-                            "glyph": "mail"
-                        }
-                    ]
-                }
+                "badge": "Direct"
             },
             "status": "live",
             "blocked_reason": null,
@@ -7399,16 +6992,7 @@
                 "channel": null,
                 "trigger": "schedule",
                 "platforms": [],
-                "badge": "Dagelijks",
-                "strip": {
-                    "mode": "flow",
-                    "nodes": [
-                        {
-                            "label": "Overzicht telefoongesprekken vandaag",
-                            "glyph": "phone"
-                        }
-                    ]
-                }
+                "badge": "Dagelijks"
             },
             "status": "live",
             "blocked_reason": null,
@@ -7623,20 +7207,7 @@
                         "icon": "integrations/moneybird.svg"
                     }
                 ],
-                "badge": "Direct",
-                "strip": {
-                    "mode": "flow",
-                    "nodes": [
-                        {
-                            "label": "Recente gesprekken ophalen",
-                            "glyph": "phone"
-                        },
-                        {
-                            "label": "Terugbelverzoek",
-                            "glyph": "mail"
-                        }
-                    ]
-                }
+                "badge": "Direct"
             },
             "status": "live",
             "blocked_reason": null,
@@ -7779,20 +7350,7 @@
                 "channel": null,
                 "trigger": "poll",
                 "platforms": [],
-                "badge": "Direct",
-                "strip": {
-                    "mode": "flow",
-                    "nodes": [
-                        {
-                            "label": "Recente gesprekken ophalen",
-                            "glyph": "phone"
-                        },
-                        {
-                            "label": "Gemiste oproep",
-                            "glyph": "mail"
-                        }
-                    ]
-                }
+                "badge": "Direct"
             },
             "status": "live",
             "blocked_reason": null,
@@ -7935,20 +7493,7 @@
                 "channel": null,
                 "trigger": "poll",
                 "platforms": [],
-                "badge": "Direct",
-                "strip": {
-                    "mode": "flow",
-                    "nodes": [
-                        {
-                            "label": "Recente e-mailacties ophalen",
-                            "glyph": "mail"
-                        },
-                        {
-                            "label": "Urgente e-mail of nieuwe lead",
-                            "glyph": "mail"
-                        }
-                    ]
-                }
+                "badge": "Direct"
             },
             "status": "live",
             "blocked_reason": null,
@@ -8131,20 +7676,7 @@
                         "icon": "integrations/prestashop.svg"
                     }
                 ],
-                "badge": "Direct",
-                "strip": {
-                    "mode": "flow",
-                    "nodes": [
-                        {
-                            "label": "Recent terugbetaalde bestellingen ophalen",
-                            "glyph": "box"
-                        },
-                        {
-                            "label": "Bestelling terugbetaald",
-                            "glyph": "mail"
-                        }
-                    ]
-                }
+                "badge": "Direct"
             },
             "status": "live",
             "blocked_reason": null,
@@ -8305,16 +7837,7 @@
                         "icon": "integrations/prestashop.svg"
                     }
                 ],
-                "badge": "Direct",
-                "strip": {
-                    "mode": "flow",
-                    "nodes": [
-                        {
-                            "label": "Melding sturen",
-                            "glyph": "box"
-                        }
-                    ]
-                }
+                "badge": "Direct"
             },
             "status": "live",
             "blocked_reason": null,
@@ -8544,20 +8067,7 @@
                         "icon": "integrations/moneybird.svg"
                     }
                 ],
-                "badge": "Direct",
-                "strip": {
-                    "mode": "set",
-                    "nodes": [
-                        {
-                            "label": "Bestelling opzoeken op bestelnummer",
-                            "glyph": "box"
-                        },
-                        {
-                            "label": "CRM-contact opzoeken op e-mailadres",
-                            "glyph": null
-                        }
-                    ]
-                }
+                "badge": "Direct"
             },
             "status": "live",
             "blocked_reason": null,
@@ -8700,16 +8210,7 @@
                         "icon": "integrations/moneybird.svg"
                     }
                 ],
-                "badge": "Direct",
-                "strip": {
-                    "mode": "flow",
-                    "nodes": [
-                        {
-                            "label": "Melding sturen",
-                            "glyph": "handshake"
-                        }
-                    ]
-                }
+                "badge": "Direct"
             },
             "status": "live",
             "blocked_reason": null,
@@ -8854,16 +8355,7 @@
                         "icon": "integrations/moneybird.svg"
                     }
                 ],
-                "badge": "Wekelijks",
-                "strip": {
-                    "mode": "flow",
-                    "nodes": [
-                        {
-                            "label": "Stilgevallen deals ophalen",
-                            "glyph": "handshake"
-                        }
-                    ]
-                }
+                "badge": "Wekelijks"
             },
             "status": "live",
             "blocked_reason": null,
@@ -9053,24 +8545,7 @@
                         "icon": "integrations/prestashop.svg"
                     }
                 ],
-                "badge": "30 dagen",
-                "strip": {
-                    "mode": "set",
-                    "nodes": [
-                        {
-                            "label": "Omzet",
-                            "glyph": "chart"
-                        },
-                        {
-                            "label": "Bestellingen",
-                            "glyph": null
-                        },
-                        {
-                            "label": "Gemiddelde bestelwaarde",
-                            "glyph": null
-                        }
-                    ]
-                }
+                "badge": "30 dagen"
             },
             "status": "live",
             "blocked_reason": null,
@@ -9197,24 +8672,7 @@
                         "icon": "integrations/prestashop.svg"
                     }
                 ],
-                "badge": "30 dagen",
-                "strip": {
-                    "mode": "set",
-                    "nodes": [
-                        {
-                            "label": "Omzet totaal",
-                            "glyph": "chart"
-                        },
-                        {
-                            "label": "Omzet",
-                            "glyph": null
-                        },
-                        {
-                            "label": "Bestellingen",
-                            "glyph": null
-                        }
-                    ]
-                }
+                "badge": "30 dagen"
             },
             "status": "live",
             "blocked_reason": null,
@@ -9365,24 +8823,7 @@
                         "icon": "integrations/moneybird.svg"
                     }
                 ],
-                "badge": "30 dagen",
-                "strip": {
-                    "mode": "set",
-                    "nodes": [
-                        {
-                            "label": "Banksaldo",
-                            "glyph": "chart"
-                        },
-                        {
-                            "label": "Openstaand bij klanten",
-                            "glyph": null
-                        },
-                        {
-                            "label": "Openstaand bij leveranciers",
-                            "glyph": null
-                        }
-                    ]
-                }
+                "badge": "30 dagen"
             },
             "status": "live",
             "blocked_reason": null,
@@ -9533,24 +8974,7 @@
                         "icon": "integrations/moneybird.svg"
                     }
                 ],
-                "badge": "30 dagen",
-                "strip": {
-                    "mode": "set",
-                    "nodes": [
-                        {
-                            "label": "Ontvangen",
-                            "glyph": "chart"
-                        },
-                        {
-                            "label": "Uitgegeven",
-                            "glyph": null
-                        },
-                        {
-                            "label": "Netto kasstroom",
-                            "glyph": null
-                        }
-                    ]
-                }
+                "badge": "30 dagen"
             },
             "status": "live",
             "blocked_reason": null,
@@ -9717,24 +9141,7 @@
                         "icon": "integrations/moneybird.svg"
                     }
                 ],
-                "badge": "30 dagen",
-                "strip": {
-                    "mode": "set",
-                    "nodes": [
-                        {
-                            "label": "Openstaand bij klanten",
-                            "glyph": "chart"
-                        },
-                        {
-                            "label": "Vervallen bij klanten",
-                            "glyph": null
-                        },
-                        {
-                            "label": "Openstaand bij leveranciers",
-                            "glyph": null
-                        }
-                    ]
-                }
+                "badge": "30 dagen"
             },
             "status": "live",
             "blocked_reason": null,
@@ -9874,24 +9281,7 @@
                         "icon": "integrations/moneybird.svg"
                     }
                 ],
-                "badge": "30 dagen",
-                "strip": {
-                    "mode": "set",
-                    "nodes": [
-                        {
-                            "label": "Openstaand bedrag",
-                            "glyph": "chart"
-                        },
-                        {
-                            "label": "Aantal openstaande facturen",
-                            "glyph": null
-                        },
-                        {
-                            "label": "Vervallen bedrag",
-                            "glyph": null
-                        }
-                    ]
-                }
+                "badge": "30 dagen"
             },
             "status": "live",
             "blocked_reason": null,
@@ -10054,24 +9444,7 @@
                         "icon": "integrations/prestashop.svg"
                     }
                 ],
-                "badge": "30 dagen",
-                "strip": {
-                    "mode": "set",
-                    "nodes": [
-                        {
-                            "label": "Omzet",
-                            "glyph": "chart"
-                        },
-                        {
-                            "label": "Brutowinst",
-                            "glyph": null
-                        },
-                        {
-                            "label": "Marge",
-                            "glyph": null
-                        }
-                    ]
-                }
+                "badge": "30 dagen"
             },
             "status": "live",
             "blocked_reason": null,
