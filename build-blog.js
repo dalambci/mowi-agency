@@ -350,6 +350,9 @@ function footerHtml() {
                 <li><a href="/koppelingen">Koppelingen</a></li>
                 <li><a href="/security">Security</a></li>
                 <li><a href="/ai-transparantie">AI-transparantie</a></li>
+                <li><a href="/mowi-vs-grok-bot">Mowi vs Grok Bot</a></li>
+                <li><a href="/mowi-vs-hermes-agent">Mowi vs Hermes Agent</a></li>
+                <li><a href="/ai-telefonist-vergelijken">AI-telefonisten vergeleken</a></li>
               </ul>
             </div>
             <div>
@@ -565,6 +568,11 @@ function buildSitemap(posts) {
     // changed. Restored here rather than shipped as a regression alongside
     // the 11 koppeling-<slug> additions below.
     "e-mail-agent", "call-agent", "waarom-mowi",
+    // Comparison pages (2026-09-12, vault: Website/comparison-pages-2026-09.md):
+    // named competitor comparisons, footer-linked, no hub. Same rule as the
+    // three above: a real, indexable root page must be listed here or it
+    // silently drops out of the sitemap on the next run.
+    "mowi-vs-grok-bot", "mowi-vs-hermes-agent", "ai-telefonist-vergelijken",
     // T99 (ralph/SPEC.md section 8, 2026-09-03): the 11 koppeling landers.
     "koppeling-exact-online", "koppeling-pipedrive", "koppeling-woocommerce",
     "koppeling-shopify", "koppeling-lightspeed-ecom", "koppeling-prestashop",

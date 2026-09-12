@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hermes Agent of Mowi? Bouwpakket of dienst — Mowi</title>
+  <meta name="description" content="Hermes Agent is gratis software die u zelf draait en bijhoudt. Mowi is een dienst voor de telefoon en e-mail van uw klanten. De feiten, met bronnen." />
+  <link rel="canonical" href="https://mowi.agency/mowi-vs-hermes-agent" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&family=Inter+Tight:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css?v=20260905-2" />
+  <link rel="icon" href="assets/icon-192.png?v=20260904-3" />
+  <link rel="shortcut icon" href="assets/icon-192.png?v=20260904-3" />
+  <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260904-3" />
+  <link rel="apple-touch-icon-precomposed" href="assets/apple-icon-180.png?v=20260904-3" />
+  <script defer data-domain="mowi.agency" src="https://plausible.io/js/script.js"></script>
+  <!-- Vergelijkingspagina (2026-09-12, vault: Website/comparison-pages-2026-09.md).
+       Elke uitspraak over Hermes Agent komt van de eigen documentatie van Nous
+       Research, de GitHub-repository, portal.nousresearch.com of het privacybeleid
+       van Nous, gelezen op 12-09-2026 en als schermafbeelding bewaard in de vault
+       (Research/_evidence/2026-09-12/). Art. 6:194a BW: feitelijk, gedateerd,
+       controleerbaar, en waar Hermes wint staat er ook in. Bewust weggelaten:
+       CVE-nummers uit tweedehands bronnen die op 12-09-2026 niet zelf te
+       controleren waren; de open audit-issue op GitHub is wel geverifieerd.
+       Maandelijks opnieuw controleren; klopt een regel niet meer, dezelfde dag
+       aanpassen of de pagina offline halen. FAQPage: vragen staan woordelijk in
+       de FAQ-sectie. Wijzig ze altijd samen. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is Hermes Agent gratis?",
+        "acceptedAnswer": { "@type": "Answer", "text": "De software wel: open source onder de MIT-licentie. U betaalt voor een server of hostingpartij, voor het taalmodel (via Nous Portal 0, 20, 100 of 200 dollar per maand, of een eigen API-sleutel) en met uw eigen uren voor installatie, updates en beheer." }
+      },
+      {
+        "@type": "Question",
+        "name": "Kan Hermes Agent de telefoon opnemen?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Niet inkomend. Er is een optionele telefonie-skill voor uitgaande gesprekken en sms via Twilio, Bland of Vapi. De documentatie zegt letterlijk dat die Hermes niet verandert in een realtime inkomende telefoongateway. De Voice agent van Mowi neemt inkomende gesprekken aan op een Nederlands nummer." }
+      },
+      {
+        "@type": "Question",
+        "name": "Kan ik Hermes Agent voor meerdere collega's of klanten draaien?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Eén agent is één profiel, en de documentatie waarschuwt om nooit twee agentprocessen op hetzelfde profiel te laten draaien. Meerdere bedrijven op één vloot kan via zogeheten tenants, die de documentatie een zacht filter noemt. Een voorstel voor isolatie per gebruiker staat open als RFC op GitHub." }
+      },
+      {
+        "@type": "Question",
+        "name": "Leert Hermes Agent zelf bij?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Ja, en dat is de kern van het product: de agent maakt zelf skills aan en schrijft zijn eigen geheugen bij. De instelling die zulke wijzigingen eerst ter goedkeuring voorlegt staat standaard uit. Bij Mowi leert de Inbox agent alleen via voorstellen die u zelf goedkeurt." }
+      },
+      {
+        "@type": "Question",
+        "name": "Wat kost Mowi?",
+        "acceptedAnswer": { "@type": "Answer", "text": "U start gratis met 60 credits, zonder betaalgegevens. Basis kost 19 euro per maand voor 800 credits, Pro 79 euro voor 3.600 credits, excl. btw. Eén e-mail kost 1 credit, één belminuut 6 credits. De Voice agent vraagt daarnaast 12,50 euro per maand voor het telefoonnummer, bovenop Basis of Pro." }
+      }
+    ]
+  }
+  </script>
+  <style>
+    /* Paginagebonden opmaak, zelfde aanpak als de koppeling-landers: niets hierin
+       raakt de gedeelde stylesheet, dus geen sitewide cache-bust. */
+    main .section { padding: 3rem 0; }
+    @media (max-width: 48rem) { main .section { padding: 2.25rem 0; } }
+    .lp-hero .hero-sub { max-width: 44rem; margin-left: auto; margin-right: auto; }
+    .cmp-intro { max-width: 44rem; margin: 0 auto 2rem; text-align: center; color: var(--ink-2); }
+    .cmp-list { padding-left: 1.15rem; margin: 0.75rem 0 0; }
+    .cmp-list li { margin: 0.4rem 0; }
+    .cmp-prose { max-width: 44rem; margin: 0 auto; }
+    .cmp-prose p + p { margin-top: 1rem; }
+    .cmp-sources { max-width: 52rem; margin: 0 auto; }
+    .cmp-sources a { text-decoration: underline; text-underline-offset: 2px; overflow-wrap: anywhere; }
+    .lp-compare td { vertical-align: top; }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-bar">
+      <a href="/" class="wordmark" aria-label="Mowi - home">
+        <img src="assets/mowi-icon.png" alt="" class="wordmark-icon" />
+        <img src="assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
+      </a>
+
+      <nav class="main-nav" id="main-nav" aria-label="Hoofdmenu">
+        <ul>
+          <li><a href="/zo-werkt-het">Zo werkt het</a></li>
+          <li class="nav-dropdown">
+            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="product-menu" aria-haspopup="true">
+              Product
+              <span class="nav-dropdown-icon" aria-hidden="true"></span>
+            </button>
+            <div class="nav-menu" id="product-menu">
+              <div class="nav-menu-col">
+                <ul class="nav-menu-item-grid">
+                  <li class="nav-menu-heading">Agents</li>
+                  <li class="nav-menu-item-full"><a href="/templates?type=agents"><span class="nav-menu-item-title">Alle agents</span><span class="nav-menu-item-desc">Het volledige overzicht van alle Mowi-agents</span></a></li>
+                  <li><a href="/e-mail-agent"><span class="nav-menu-item-title">Inbox agent</span><span class="nav-menu-item-desc">Sorteert en beantwoordt uw e-mail</span></a></li>
+                  <li><a href="/call-agent"><span class="nav-menu-item-title">Voice agent</span><span class="nav-menu-item-desc">Neemt binnenkomende gesprekken aan</span></a></li>
+                </ul>
+              </div>
+              <div class="nav-menu-col nav-menu-col-divider">
+                <ul class="nav-menu-item-grid">
+                  <li class="nav-menu-heading">Workflows</li>
+                  <li class="nav-menu-item-full"><a href="/templates?type=workflows"><span class="nav-menu-item-title">Alle workflows</span><span class="nav-menu-item-desc">Het volledige overzicht van wat Mowi automatiseert</span></a></li>
+                  <li><a href="/templates/orderstatus-opzoeken"><span class="nav-menu-item-title">Orderstatus</span><span class="nav-menu-item-desc">Zoekt bestellingen op in uw webshop</span></a></li>
+                  <li><a href="/templates"><span class="nav-menu-item-title">Offerte-opvolging</span><span class="nav-menu-item-desc">Controleert en volgt offerteaanvragen op</span></a></li>
+                  <li><a href="/templates/dagelijkse-afspraken"><span class="nav-menu-item-title">Agenda-samenvatting</span><span class="nav-menu-item-desc">Uw agenda samengevat, op uw tijdstip</span></a></li>
+                  <li><a href="/templates/klant-opzoeken"><span class="nav-menu-item-title">CRM-synchronisatie</span><span class="nav-menu-item-desc">Herkent klanten en houdt uw CRM bij</span></a></li>
+                </ul>
+              </div>
+              <div class="nav-menu-col nav-menu-col-divider">
+                <ul class="nav-menu-item-grid">
+                  <li class="nav-menu-heading">Dashboards</li>
+                  <li class="nav-menu-item-full"><a href="/templates?type=dashboards"><span class="nav-menu-item-title">Alle dashboards</span><span class="nav-menu-item-desc">Het volledige overzicht van al uw dashboards</span></a></li>
+                  <li><a href="/templates/directie-overzicht"><span class="nav-menu-item-title">Directie overzicht</span><span class="nav-menu-item-desc">De cijfers waar een eigenaar op stuurt</span></a></li>
+                  <li><a href="/templates/webshops-vergelijken"><span class="nav-menu-item-title">Webshops vergelijken</span><span class="nav-menu-item-desc">Kerncijfers per webshop naast elkaar</span></a></li>
+                  <li><a href="/templates/openstaande-facturen"><span class="nav-menu-item-title">Openstaande facturen</span><span class="nav-menu-item-desc">Welke facturen aandacht nodig hebben</span></a></li>
+                  <li><a href="/templates/winstgevendheid"><span class="nav-menu-item-title">Winstgevendheid</span><span class="nav-menu-item-desc">Marge op basis van uw eigen kostprijzen</span></a></li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li><a href="/templates">Templates</a></li>
+          <li><a href="/pricing">Prijzen</a></li>
+          <li class="nav-mobile-actions"><a href="https://my.mowi.agency/login">Inloggen</a></li>
+          <li class="nav-mobile-actions"><a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a href="https://my.mowi.agency/login" class="header-login">Inloggen</a>
+        <a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a>
+      </div>
+
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="main-nav" aria-label="Menu openen">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ================= Hero: de vraag en het antwoord ================= -->
+    <section class="hero container lp-hero hero-tight-bottom">
+      <h1>Hermes Agent of Mowi?</h1>
+      <p class="hero-sub">Een bouwpakket tegenover een dienst. Hermes Agent is gratis, open source en draait op uw eigen server of bij een hostingpartij. U kiest het model, u houdt het bij en u beoordeelt wat de agent zichzelf aanleert. Mowi is een dienst voor bedrijven zonder IT-afdeling: wij bouwen en testen de koppelingen, de agent doet alleen wat getest is, en er is iemand die u kunt aanspreken. Bent u handig met een server en wilt u alles zelf in de hand hebben, dan is Hermes een sterk pakket. Wilt u dat het gewoon werkt terwijl u klanten helpt, dan bent u bij Mowi beter af.</p>
+      <div class="hero-actions">
+        <a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a>
+      </div>
+    </section>
+
+    <!-- ================= De kernvraag ================= -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head-row section-head-row-center">
+          <h2 class="lp-section-heading">Wie zorgt dat de agent het goed doet?</h2>
+        </div>
+        <p class="cmp-intro">Dat is het echte verschil, en het bepaalt voor wie welk product past.</p>
+        <div class="lp-card-grid">
+          <div class="lp-card">
+            <h3>Bij Hermes: u zelf</h3>
+            <p>Hermes maakt zelf nieuwe vaardigheden aan (de documentatie noemt ze skills) en schrijft zijn eigen geheugen bij. De instelling die zulke wijzigingen eerst ter goedkeuring voorlegt, staat standaard uit. De documentatie is er eerlijk over: de schrijfbeveiliging "does not sandbox a hostile or compromised agent". U bent dus de beheerder én de controleur. Voor wie dat kan en wil, is dat juist de kracht.</p>
+          </div>
+          <div class="lp-card">
+            <h3>Bij Mowi: wij, vooraf</h3>
+            <p>Mowi doet alleen wat wij vooraf hebben gebouwd en getest: 76 vaste handelingen over 14 koppelingen. Elke automatisering draait eerst als proef op uw eigen recente gegevens. U leest in gewone taal terug wat er zou gebeuren en geeft per stap akkoord. Bijleren gebeurt alleen via voorstellen die u zelf goedkeurt. Gaat er iets mis, dan is er één persoon die uw opzet kent en die u kunt aanspreken.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Voor wie ================= -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head-row section-head-row-center">
+          <h2 class="lp-section-heading">Voor wie is wat?</h2>
+        </div>
+        <p class="cmp-intro">Dit is onze lezing van de documentatie, geen uitspraak van Nous Research.</p>
+        <div class="lp-card-grid">
+          <div class="lp-card">
+            <h3>Hermes Agent past bij u als</h3>
+            <ul class="cmp-list">
+              <li>u een server kunt draaien en een configuratiebestand kunt lezen;</li>
+              <li>u eigenaar wilt zijn van alles: het model, de data, de code;</li>
+              <li>u veel kanalen wilt, van Telegram en Discord tot WhatsApp en Signal;</li>
+              <li>u alleen werkt of in een klein technisch team, met één agent per persoon;</li>
+              <li>u tijd heeft voor updates, beveiliging en het nakijken van wat de agent zichzelf aanleert.</li>
+            </ul>
+          </div>
+          <div class="lp-card">
+            <h3>Mowi past bij u als</h3>
+            <ul class="cmp-list">
+              <li>uw klanten bellen en mailen, en dat contact goed moet gaan;</li>
+              <li>u een webshop, boekhoudpakket, CRM of agenda gebruikt;</li>
+              <li>u met 1 tot 50 mensen werkt en geen IT-afdeling heeft;</li>
+              <li>u wilt zien wat er gebeurt vóór het gebeurt;</li>
+              <li>u iemand wilt kunnen aanspreken.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Feitentabel. Mowi in kolom 2 (.lp-compare markeert
+         nth-child(2) als "wij"). Elke Hermes-cel is een citaat of parafrase van
+         een pagina van Nous Research, gelezen 12-09-2026; bronnen onderaan. ================= -->
+    <section class="section" id="vergelijking">
+      <div class="container">
+        <div class="section-head-row section-head-row-center">
+          <h2 class="lp-section-heading">Wat is het verschil?</h2>
+        </div>
+        <p class="cmp-intro">Alles over Hermes Agent hieronder komt van de eigen documentatie en pagina's van Nous Research, gelezen op 12 september 2026.</p>
+        <div class="lp-compare">
+          <table>
+            <thead>
+              <tr><th>Waar u op let</th><th>Mowi</th><th>Hermes Agent</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Wat het is</td>
+                <td class="lp-compare-us">Een dienst: agents voor de telefoon en de e-mail van uw klanten, plus workflows en dashboards, uit geteste bouwstenen.</td>
+                <td>Open-source agentsoftware van Nous Research, MIT-licentie, ruim 244.000 sterren op GitHub. "Run it on a $5 VPS, a GPU cluster, or serverless infrastructure."</td>
+              </tr>
+              <tr>
+                <td>Wat het kost</td>
+                <td class="lp-compare-us">Basis €19 per maand voor 800 credits, Pro €79 voor 3.600, excl. btw. Voice agent: €12,50 per maand extra voor het nummer. Op is op: de agent pauzeert.</td>
+                <td>Software gratis. Modellen en tools via Nous Portal: Free $0, Plus $20, Super $100, Ultra $200 per maand. Daarbovenop een server of hostingpartij (bijvoorbeeld hermes-agent.ai, een onafhankelijke partij, $39 tot $49 per maand) en uw eigen uren.</td>
+              </tr>
+              <tr>
+                <td>Kanalen</td>
+                <td class="lp-compare-us">E-mail en telefoon, plus de chat in uw dashboard. Geen WhatsApp.</td>
+                <td>Telegram, Discord, Slack, WhatsApp, Signal, sms, e-mail, Microsoft Teams en meer, via één gateway-proces.</td>
+              </tr>
+              <tr>
+                <td>Neemt de telefoon op</td>
+                <td class="lp-compare-us">Ja. Inkomende gesprekken op een Nederlands nummer. Elke beller hoort dat hij met een digitale assistent spreekt.</td>
+                <td>Alleen uitgaand, via een optionele skill met Twilio, Bland of Vapi. Letterlijk: "It does not turn Hermes into a real-time inbound phone gateway."</td>
+              </tr>
+              <tr>
+                <td>Uw Nederlandse systemen</td>
+                <td class="lp-compare-us">14 koppelingen: Exact Online, Moneybird, Shopify, WooCommerce, bol.com, Lightspeed, Shopware, Magento, PrestaShop, Pipedrive, HubSpot, Google Agenda, Calendly en Guestplan.</td>
+                <td>Geen Exact Online, Moneybird, AFAS of bol.com in de documentatie gevonden. Wel een terminal, een browser en zelf te bouwen tools.</td>
+              </tr>
+              <tr>
+                <td>Voordat iets gebeurt</td>
+                <td class="lp-compare-us">Eerst een proefdraai op uw eigen recente gegevens. Uitleg in gewone taal. Per stap uw akkoord.</td>
+                <td>Goedkeuring voor terminalopdrachten en bestandswijzigingen, standaard in de stand "smart": een tweede taalmodel schat het risico in. In een container worden die controles overgeslagen, "because the container itself is the security boundary".</td>
+              </tr>
+              <tr>
+                <td>Leert zelf bij</td>
+                <td class="lp-compare-us">Alleen via voorstellen uit uw eigen mailbox die u zelf goedkeurt.</td>
+                <td>Maakt zelf skills aan en schrijft zijn eigen geheugen bij. De instelling die dat eerst ter goedkeuring voorlegt (write_approval) staat standaard uit.</td>
+              </tr>
+              <tr>
+                <td>Meerdere mensen of klanten</td>
+                <td class="lp-compare-us">Per klant gescheiden. Meerdere gebruikers per account.</td>
+                <td>Eén agent is één profiel. "Never point two agent processes at the same profile." Meerdere bedrijven op één vloot kan via tenants: "Tenants are a soft filter; boards are the hard isolation boundary." Isolatie per gebruiker staat open als RFC (#21574).</td>
+              </tr>
+              <tr>
+                <td>Beveiliging</td>
+                <td class="lp-compare-us">Een vast beveiligingsplan; elke nieuwe functie gaat door dezelfde controle. Meer op de <a href="/security">securitypagina</a>.</td>
+                <td>Op 11 april 2026 gemeld op GitHub: "Security Audit: 4 Critical, 9 High severity findings in default configuration" (issue #7826). Op 12 september 2026 nog open, zonder reactie. De documentatie zelf: de schrijfbeveiliging "does not sandbox a hostile or compromised agent".</td>
+              </tr>
+              <tr>
+                <td>Waar uw gegevens staan</td>
+                <td class="lp-compare-us">Onze subverwerkers staan op de <a href="/subverwerkers">subverwerkerspagina</a>, met land per partij. Een verwerkersovereenkomst regelen we op aanvraag. Mowi traint geen modellen op uw gegevens.</td>
+                <td>Zelf hosten: uw server, uw verantwoordelijkheid. Via Nous Portal: invoer en uitvoer worden gebruikt voor training en verbetering, tenzij u Privacy Mode aanzet (privacybeleid van 11 juni 2026).</td>
+              </tr>
+              <tr>
+                <td>Taal</td>
+                <td class="lp-compare-us">Nederlands, in het product en aan de telefoon.</td>
+                <td>Documentatie in het Engels en het Chinees.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Eerlijk: waar de ander wint ================= -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head-row section-head-row-center">
+          <h2 class="lp-section-heading">Waar wint Hermes Agent?</h2>
+        </div>
+        <div class="cmp-prose">
+          <p>Op prijs, kanalen en vrijheid. De software kost niets. Het praat met Telegram, Discord, Slack, WhatsApp, Signal en sms, iets wat Mowi niet doet. U kiest zelf het model en kunt elke tool bouwen die u nodig heeft. En alles staat op uw eigen server, als u dat wilt. Voor een technisch team dat een eigen assistent wil bouwen en beheren, is dat een sterk pakket.</p>
+          <p>Mowi kan dat niet en gaat dat ook niet kunnen. Mowi doet alleen wat wij getest hebben, en dat is een bewuste keuze.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head-row section-head-row-center">
+          <h2 class="lp-section-heading">Waar wint Mowi?</h2>
+        </div>
+        <div class="cmp-prose">
+          <p>Op alles wat u níet zelf wilt beheren. Geen server, geen updates, geen configuratie. De telefoon wordt opgenomen, in het Nederlands. Een klant die mailt wordt herkend in uw webshop of CRM. Elke actie wordt eerst getoond. Wat de agent bijleert, keurt u zelf goed. En er is één persoon die uw opzet kent.</p>
+          <p>Daarom overlappen de twee nauwelijks. Hermes is een bouwpakket voor wie zelf bouwt. Mowi is een dienst voor wie klanten heeft die bellen en mailen.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FAQ: vragen staan woordelijk in de FAQPage in de head ================= -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head-row section-head-row-center">
+          <h2 class="lp-section-heading">Veelgestelde vragen</h2>
+        </div>
+        <div class="lp-card-grid">
+          <div class="lp-card">
+            <h3>Is Hermes Agent gratis?</h3>
+            <p>De software wel: open source onder de MIT-licentie. U betaalt voor een server of hostingpartij, voor het taalmodel (via Nous Portal $0, $20, $100 of $200 per maand, of een eigen API-sleutel) en met uw eigen uren voor installatie, updates en beheer.</p>
+          </div>
+          <div class="lp-card">
+            <h3>Kan Hermes Agent de telefoon opnemen?</h3>
+            <p>Niet inkomend. Er is een optionele telefonie-skill voor uitgaande gesprekken en sms via Twilio, Bland of Vapi. De documentatie zegt letterlijk dat die Hermes niet verandert in een realtime inkomende telefoongateway. De Voice agent van Mowi neemt inkomende gesprekken aan op een Nederlands nummer.</p>
+          </div>
+          <div class="lp-card">
+            <h3>Kan ik Hermes Agent voor meerdere collega's of klanten draaien?</h3>
+            <p>Eén agent is één profiel, en de documentatie waarschuwt om nooit twee agentprocessen op hetzelfde profiel te laten draaien. Meerdere bedrijven op één vloot kan via zogeheten tenants, die de documentatie een zacht filter noemt. Een voorstel voor isolatie per gebruiker staat open als RFC op GitHub.</p>
+          </div>
+          <div class="lp-card">
+            <h3>Leert Hermes Agent zelf bij?</h3>
+            <p>Ja, en dat is de kern van het product: de agent maakt zelf skills aan en schrijft zijn eigen geheugen bij. De instelling die zulke wijzigingen eerst ter goedkeuring voorlegt staat standaard uit. Bij Mowi leert de Inbox agent alleen via voorstellen die u zelf goedkeurt.</p>
+          </div>
+          <div class="lp-card">
+            <h3>Wat kost Mowi?</h3>
+            <p>U start gratis met 60 credits, zonder betaalgegevens. Basis kost €19 per maand voor 800 credits, Pro €79 voor 3.600 credits, excl. btw. Eén e-mail kost 1 credit, één belminuut 6 credits. De Voice agent vraagt daarnaast €12,50 per maand voor het telefoonnummer, bovenop Basis of Pro. Alles staat op de <a href="/pricing">prijzenpagina</a>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Bronnen en datum (art. 6:194a: controleerbaar) ================= -->
+    <section class="section">
+      <div class="container">
+        <div class="legal-notice cmp-sources">
+          <p><strong>Bronnen en datum.</strong> Alle uitspraken over Hermes Agent zijn op 12 september 2026 gelezen op pagina's van Nous Research zelf: de <a href="https://github.com/NousResearch/hermes-agent" rel="nofollow noopener">GitHub-repository</a>, de documentatie over <a href="https://hermes-agent.nousresearch.com/docs/user-guide/security" rel="nofollow noopener">security</a>, <a href="https://hermes-agent.nousresearch.com/docs/user-guide/messaging/" rel="nofollow noopener">messaging</a>, <a href="https://hermes-agent.nousresearch.com/docs/user-guide/features/skills" rel="nofollow noopener">skills</a>, <a href="https://hermes-agent.nousresearch.com/docs/user-guide/features/memory" rel="nofollow noopener">memory</a>, <a href="https://hermes-agent.nousresearch.com/docs/user-guide/profiles" rel="nofollow noopener">profiles</a>, <a href="https://hermes-agent.nousresearch.com/docs/user-guide/features/kanban" rel="nofollow noopener">kanban</a> en de <a href="https://hermes-agent.nousresearch.com/docs/user-guide/skills/optional/productivity/productivity-telephony" rel="nofollow noopener">telefonie-skill</a>, de prijzen op <a href="https://portal.nousresearch.com/" rel="nofollow noopener">portal.nousresearch.com</a>, het <a href="https://portal.nousresearch.com/privacy" rel="nofollow noopener">privacybeleid</a> van 11 juni 2026, en op GitHub <a href="https://github.com/NousResearch/hermes-agent/issues/7826" rel="nofollow noopener">issue #7826</a> en <a href="https://github.com/NousResearch/hermes-agent/issues/21574" rel="nofollow noopener">RFC #21574</a>. De hostingprijs komt van <a href="https://hermes-agent.ai/cloud" rel="nofollow noopener">hermes-agent.ai/cloud</a>, dat zichzelf een onafhankelijke dienst noemt, niet verbonden aan Nous Research. Van elke bron bewaren wij een schermafbeelding van die dag. De cijfers over Mowi komen uit ons eigen product en van onze <a href="/pricing">prijzenpagina</a>. Wij controleren deze pagina maandelijks. Klopt iets niet meer? Mail <a href="mailto:contact@mowi.agency">contact@mowi.agency</a>, dan passen we het dezelfde dag aan. Hermes Agent is een project van Nous Research. Mowi is er niet aan verbonden.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer-wrap">
+    <div class="container">
+
+      <div class="footer-cta">
+        <h2 class="footer-cta-title">Vertel het en<br />Mowi regelt het</h2>
+        <a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a>
+      </div>
+
+      <div class="footer-panel">
+        <div class="footer-top">
+          <div class="footer-brand">
+            <a href="/" class="wordmark" aria-label="Mowi - home">
+              <img src="assets/mowi-icon.png" alt="" class="wordmark-icon" />
+              <img src="assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
+            </a>
+            <p class="footer-tagline">Werk uit handen, niet uit het oog</p>
+            <a href="#" class="footer-social" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg></a>
+          </div>
+
+          <nav class="footer-menus" aria-label="Footer">
+            <div>
+              <h3 class="footer-menu-heading">Product</h3>
+              <ul>
+                <li><a href="/e-mail-agent">Inbox agent</a></li>
+                <li><a href="/call-agent">Voice agent</a></li>
+                <li><a href="/templates?type=workflows">Workflows</a></li>
+                <li><a href="/templates?type=dashboards">Dashboards</a></li>
+                <li><a href="/templates">Templates</a></li>
+                <li><a href="/pricing">Prijzen</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="footer-menu-heading">Bronnen</h3>
+              <ul>
+                <li><a href="/docs/">Documentatie</a></li>
+                <li><a href="/blog/">Blog</a></li>
+                <li><a href="/zo-werkt-het">Zo werkt het</a></li>
+                <li><a href="/koppelingen">Koppelingen</a></li>
+                <li><a href="/security">Security</a></li>
+                <li><a href="/ai-transparantie">AI-transparantie</a></li>
+                <li><a href="/mowi-vs-grok-bot">Mowi vs Grok Bot</a></li>
+                <li><a href="/mowi-vs-hermes-agent">Mowi vs Hermes Agent</a></li>
+                <li><a href="/ai-telefonist-vergelijken">AI-telefonisten vergeleken</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="footer-menu-heading">Contact</h3>
+              <ul>
+                <li><a href="tel:+31853335800">+31 85 333 58 00</a></li>
+                <li><a href="mailto:contact@mowi.agency">contact@mowi.agency</a></li>
+                <li><a href="/demo">Contact sales</a></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+
+        <div class="footer-bottom">
+          <span>&copy; 2026 Mowi. Alle rechten voorbehouden.</span>
+          <div class="footer-legal">
+            <a href="/algemene-voorwaarden">Algemene voorwaarden</a>
+            <a href="/privacyverklaring">Privacyverklaring</a>
+            <a href="/cookies">Cookies</a>
+            <!-- Bedrijfsgegevens moet wettelijk "gemakkelijk, rechtstreeks en
+                 permanent toegankelijk" blijven (art. 3:15d BW) — daarom hier,
+                 niet verwijderd, toen de Contact-kolom werd opgeschoond. -->
+            <a href="/bedrijfsgegevens">Bedrijfsgegevens</a>
+            <a href="/subverwerkers">Subverwerkers</a>
+            <!-- Alleen GDPR/AVG — een zelfverklaring, geen certificaat (dat
+                 bestaat niet voor de AVG); klopt zolang de registers en
+                 verklaringen in de vault (Legal/) worden bijgehouden. SOC 2 /
+                 ISO komen hier pas terug wanneer een echt certificaat behaald
+                 is. -->
+            <img src="assets/badges/gdpr.png" alt="GDPR" class="footer-badge" width="36" height="36" />
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <script src="js/main.js?v=20260905-2"></script>
+</body>
+</html>

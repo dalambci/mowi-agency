@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wat kost een AI-telefonist per maand? Prijzen vergeleken — Mowi</title>
+  <meta name="description" content="De totale maandprijs van Mowi, Fonio, Sam neemt op en CallingBird bij 50 tot 1.000 belminuten, excl. btw, van 12 september 2026. Ook waar Mowi verliest." />
+  <link rel="canonical" href="https://mowi.agency/ai-telefonist-vergelijken" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&family=Inter+Tight:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css?v=20260905-2" />
+  <link rel="icon" href="assets/icon-192.png?v=20260904-3" />
+  <link rel="shortcut icon" href="assets/icon-192.png?v=20260904-3" />
+  <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260904-3" />
+  <link rel="apple-touch-icon-precomposed" href="assets/apple-icon-180.png?v=20260904-3" />
+  <script defer data-domain="mowi.agency" src="https://plausible.io/js/script.js"></script>
+  <!-- Prijsvergelijking AI-telefonisten (2026-09-12, vault:
+       Website/comparison-pages-2026-09.md; opzet uit Marketing & acquisition/
+       ChatGPT Ads plan — Voice agent 2026-09 §6). Elke prijs komt van de eigen
+       prijspagina van de aanbieder, gelezen op 12-09-2026 en als schermafbeelding
+       bewaard (Research/_evidence/2026-09-12/). Mowi's cijfers komen uit
+       config/plans.php + config/credits.php van het dashboard van die dag; de
+       tabel is rekenwerk op gepubliceerde prijzen (art. 6:194a BW: objectief,
+       controleerbaar, representatief) en zegt ook waar Mowi verliest.
+       Mowi's vloer is Basis + nummer: de Voice agent vereist vandaag een lopend
+       abonnement (App\Billing\VoiceAddon::canActivateFor). Zodra het nummer los
+       te koop is, moet deze pagina opnieuw gerekend worden.
+       Maandelijks controleren; klopt een getal niet meer, dezelfde dag aanpassen
+       of de pagina offline halen. FAQPage: vragen staan woordelijk in de FAQ. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Wat kost een AI-telefonist minimaal per maand?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Van de vergeleken aanbieders is CallingBird het laagst met een minimum van 20 euro per maand. Mowi begint bij 31,50 euro per maand: Basis van 19 euro plus 12,50 euro voor het telefoonnummer, met 133 belminuten inbegrepen. Fonio en Sam neemt op beginnen bij 119 euro per maand. MIKE365 heeft een instap van 14,99 euro zonder gesprekken. Alle prijzen excl. btw, gelezen op 12 september 2026." }
+      },
+      {
+        "@type": "Question",
+        "name": "Wanneer is Mowi de goedkoopste AI-telefonist?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Tussen ongeveer 90 en 700 belminuten per maand. Onder de 90 minuten is CallingBird goedkoper. Boven de 700 minuten is Fonio goedkoper, of boven de 600 minuten als u bij Fonio een jaar vooruit betaalt." }
+      },
+      {
+        "@type": "Question",
+        "name": "Zijn de prijzen inclusief of exclusief btw?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Alle bedragen op deze pagina zijn exclusief btw, zoals de aanbieders ze zelf publiceren. MIKE365 vermeldt op zijn tarievenpagina niet of de prijzen inclusief of exclusief btw zijn." }
+      },
+      {
+        "@type": "Question",
+        "name": "Betaal ik bij Mowi voor korte of gemiste gesprekken?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Een gesprek korter dan 10 seconden kost niets. Daarboven rekent Mowi per begonnen minuut, 6 credits per minuut. Uit de Basis-bundel is dat ongeveer 0,14 euro per minuut, uit een los credit-pack 0,16 tot 0,20 euro." }
+      },
+      {
+        "@type": "Question",
+        "name": "Moet ik een abonnement nemen voor de Voice agent van Mowi?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Ja. De Voice agent werkt bovenop Basis (19 euro per maand) of Pro (79 euro per maand) en kost daarnaast 12,50 euro per maand voor het telefoonnummer. Alle prijzen excl. btw." }
+      }
+    ]
+  }
+  </script>
+  <style>
+    /* Paginagebonden opmaak, zelfde aanpak als de koppeling-landers: niets hierin
+       raakt de gedeelde stylesheet, dus geen sitewide cache-bust. */
+    main .section { padding: 3rem 0; }
+    @media (max-width: 48rem) { main .section { padding: 2.25rem 0; } }
+    .lp-hero .hero-sub { max-width: 44rem; margin-left: auto; margin-right: auto; }
+    .cmp-intro { max-width: 44rem; margin: 0 auto 2rem; text-align: center; color: var(--ink-2); }
+    .cmp-list { padding-left: 1.15rem; margin: 0.75rem 0 0; }
+    .cmp-list li { margin: 0.4rem 0; }
+    .cmp-prose { max-width: 44rem; margin: 0 auto; }
+    .cmp-prose p + p { margin-top: 1rem; }
+    .cmp-sources { max-width: 52rem; margin: 0 auto; }
+    .cmp-sources a { text-decoration: underline; text-underline-offset: 2px; overflow-wrap: anywhere; }
+    /* Getallentabellen: rechts uitgelijnd, Mowi-kolom benadrukt zoals .lp-compare doet. */
+    .cmp-num td, .cmp-num th { text-align: right; white-space: nowrap; }
+    .cmp-num td:first-child, .cmp-num th:first-child { text-align: left; }
+    .cmp-num td:nth-child(2), .cmp-num th:nth-child(2) { background: var(--muted); font-weight: 600; }
+    .cmp-num small { display: block; font-weight: 400; color: var(--ink-3); white-space: normal; }
+    .cmp-foot { font-size: 0.875rem; color: var(--ink-3); margin-top: 0.75rem; }
+    .lp-compare td { vertical-align: top; }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-bar">
+      <a href="/" class="wordmark" aria-label="Mowi - home">
+        <img src="assets/mowi-icon.png" alt="" class="wordmark-icon" />
+        <img src="assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
+      </a>
+
+      <nav class="main-nav" id="main-nav" aria-label="Hoofdmenu">
+        <ul>
+          <li><a href="/zo-werkt-het">Zo werkt het</a></li>
+          <li class="nav-dropdown">
+            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="product-menu" aria-haspopup="true">
+              Product
+              <span class="nav-dropdown-icon" aria-hidden="true"></span>
+            </button>
+            <div class="nav-menu" id="product-menu">
+              <div class="nav-menu-col">
+                <ul class="nav-menu-item-grid">
+                  <li class="nav-menu-heading">Agents</li>
+                  <li class="nav-menu-item-full"><a href="/templates?type=agents"><span class="nav-menu-item-title">Alle agents</span><span class="nav-menu-item-desc">Het volledige overzicht van alle Mowi-agents</span></a></li>
+                  <li><a href="/e-mail-agent"><span class="nav-menu-item-title">Inbox agent</span><span class="nav-menu-item-desc">Sorteert en beantwoordt uw e-mail</span></a></li>
+                  <li><a href="/call-agent"><span class="nav-menu-item-title">Voice agent</span><span class="nav-menu-item-desc">Neemt binnenkomende gesprekken aan</span></a></li>
+                </ul>
+              </div>
+              <div class="nav-menu-col nav-menu-col-divider">
+                <ul class="nav-menu-item-grid">
+                  <li class="nav-menu-heading">Workflows</li>
+                  <li class="nav-menu-item-full"><a href="/templates?type=workflows"><span class="nav-menu-item-title">Alle workflows</span><span class="nav-menu-item-desc">Het volledige overzicht van wat Mowi automatiseert</span></a></li>
+                  <li><a href="/templates/orderstatus-opzoeken"><span class="nav-menu-item-title">Orderstatus</span><span class="nav-menu-item-desc">Zoekt bestellingen op in uw webshop</span></a></li>
+                  <li><a href="/templates"><span class="nav-menu-item-title">Offerte-opvolging</span><span class="nav-menu-item-desc">Controleert en volgt offerteaanvragen op</span></a></li>
+                  <li><a href="/templates/dagelijkse-afspraken"><span class="nav-menu-item-title">Agenda-samenvatting</span><span class="nav-menu-item-desc">Uw agenda samengevat, op uw tijdstip</span></a></li>
+                  <li><a href="/templates/klant-opzoeken"><span class="nav-menu-item-title">CRM-synchronisatie</span><span class="nav-menu-item-desc">Herkent klanten en houdt uw CRM bij</span></a></li>
+                </ul>
+              </div>
+              <div class="nav-menu-col nav-menu-col-divider">
+                <ul class="nav-menu-item-grid">
+                  <li class="nav-menu-heading">Dashboards</li>
+                  <li class="nav-menu-item-full"><a href="/templates?type=dashboards"><span class="nav-menu-item-title">Alle dashboards</span><span class="nav-menu-item-desc">Het volledige overzicht van al uw dashboards</span></a></li>
+                  <li><a href="/templates/directie-overzicht"><span class="nav-menu-item-title">Directie overzicht</span><span class="nav-menu-item-desc">De cijfers waar een eigenaar op stuurt</span></a></li>
+                  <li><a href="/templates/webshops-vergelijken"><span class="nav-menu-item-title">Webshops vergelijken</span><span class="nav-menu-item-desc">Kerncijfers per webshop naast elkaar</span></a></li>
+                  <li><a href="/templates/openstaande-facturen"><span class="nav-menu-item-title">Openstaande facturen</span><span class="nav-menu-item-desc">Welke facturen aandacht nodig hebben</span></a></li>
+                  <li><a href="/templates/winstgevendheid"><span class="nav-menu-item-title">Winstgevendheid</span><span class="nav-menu-item-desc">Marge op basis van uw eigen kostprijzen</span></a></li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li><a href="/templates">Templates</a></li>
+          <li><a href="/pricing">Prijzen</a></li>
+          <li class="nav-mobile-actions"><a href="https://my.mowi.agency/login">Inloggen</a></li>
+          <li class="nav-mobile-actions"><a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a href="https://my.mowi.agency/login" class="header-login">Inloggen</a>
+        <a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a>
+      </div>
+
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="main-nav" aria-label="Menu openen">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ================= Hero: de vraag en het antwoord ================= -->
+    <section class="hero container lp-hero hero-tight-bottom">
+      <h1>Wat kost een AI-telefonist per maand?</h1>
+      <p class="hero-sub">Tussen €20 en €350 per maand, afhankelijk van hoeveel er gebeld wordt en hoe de aanbieder rekent. Bij Mowi betaalt u €31,50 per maand voor het nummer plus Basis, met 133 belminuten inbegrepen, en daarna 6 credits per minuut, tussen €0,13 en €0,20 per minuut afhankelijk van uw bundel. Van 90 tot 700 belminuten per maand is Mowi de goedkoopste van de vier aanbieders hieronder, bij maandelijks opzegbare prijzen. Onder de 90 minuten is CallingBird goedkoper. Boven de 700 minuten is Fonio goedkoper, en boven de 600 als u bij Fonio een jaar vooruitbetaalt. Alle prijzen excl. btw, van de eigen prijspagina's, gelezen op 12 september 2026.</p>
+      <div class="hero-actions">
+        <a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a>
+      </div>
+    </section>
+
+    <!-- ================= Totaalprijs per maand. Rekenwerk op gepubliceerde prijzen;
+         getallen uit scratch voice-costs.js (12-09-2026), aannames staan onder de
+         tabel. Mowi in kolom 2 (benadrukt). ================= -->
+    <section class="section" id="totaalprijs">
+      <div class="container">
+        <div class="section-head-row section-head-row-center">
+          <h2 class="lp-section-heading">Wat betaalt u in totaal per maand?</h2>
+        </div>
+        <p class="cmp-intro">Per minuut vergelijken zegt weinig, omdat de meeste aanbieders een vaste bundel rekenen die u wel of niet opmaakt. Dit is het totaalbedrag per maand bij een gegeven aantal belminuten.</p>
+        <div class="blog-table-wrap">
+          <table class="blog-table cmp-num">
+            <thead>
+              <tr><th>Belminuten per maand</th><th>Mowi</th><th>Fonio, maandelijks</th><th>Fonio, jaarbetaling</th><th>Sam neemt op</th><th>CallingBird</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>50</td><td>€31,50<small>Basis + nummer</small></td><td>€119,00</td><td>€99,00</td><td>€119,00</td><td>€20,00</td></tr>
+              <tr><td>100</td><td>€31,50<small>Basis + nummer</small></td><td>€119,00</td><td>€99,00</td><td>€119,00</td><td>€35,00</td></tr>
+              <tr><td>150</td><td>€41,50<small>Basis + nummer + 300 credits</small></td><td>€119,00</td><td>€99,00</td><td>€119,00</td><td>€52,50</td></tr>
+              <tr><td>200</td><td>€51,50<small>Basis + nummer + 600 credits</small></td><td>€119,00</td><td>€99,00</td><td>€119,00</td><td>€70,00</td></tr>
+              <tr><td>300</td><td>€66,50<small>Basis + nummer + 1.200 credits</small></td><td>€119,00</td><td>€99,00</td><td>€119,00</td><td>€105,00</td></tr>
+              <tr><td>400</td><td>€86,50<small>Basis + nummer + 1.800 credits</small></td><td>€119,00</td><td>€99,00</td><td>€119,00</td><td>€140,00</td></tr>
+              <tr><td>500</td><td>€91,50<small>Pro + nummer</small></td><td>€119,00</td><td>€99,00</td><td>€159,00</td><td>€175,00</td></tr>
+              <tr><td>600</td><td>€91,50<small>Pro + nummer</small></td><td>€119,00</td><td>€99,00</td><td>€199,00</td><td>€210,00</td></tr>
+              <tr><td>700</td><td>€111,50<small>Pro + nummer + 600 credits</small></td><td>€119,00</td><td>€99,00</td><td>€239,00</td><td>€245,00</td></tr>
+              <tr><td>800</td><td>€126,50<small>Pro + nummer + 1.200 credits</small></td><td>€119,00</td><td>€99,00</td><td>€279,00</td><td>€280,00</td></tr>
+              <tr><td>1.000</td><td>€156,50<small>Pro + nummer + 2.500 credits</small></td><td>€119,00</td><td>€99,00</td><td>€299,00</td><td>€350,00</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="cmp-foot">Alle bedragen excl. btw. Prijzen gelezen op 12 september 2026 op de prijspagina's van de aanbieders zelf. Bij Sam neemt op staat per regel het goedkoopste van de twee pakketten. Hoe dit is berekend staat hieronder.</p>
+      </div>
+    </section>
+
+    <!-- ================= Effectieve minuutprijs ================= -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head-row section-head-row-center">
+          <h2 class="lp-section-heading">Waarom is €0,12 per minuut niet wat u betaalt?</h2>
+        </div>
+        <div class="cmp-prose">
+          <p>Het Solo-pakket van Fonio kost €119 per maand met 1.000 minuten. Dat is €0,12 per minuut, maar alleen als u alle 1.000 minuten gebruikt. Belt uw zaak 200 minuten per maand, dan betaalt u in werkelijkheid €0,60 per minuut. Bij jaarbetaling (€99 per maand) is dat €0,50. Bij Mowi is het €0,26 bij 200 minuten. Wat u per minuut werkelijk betaalt, hangt dus vooral af van hoeveel u belt.</p>
+        </div>
+        <div class="blog-table-wrap" style="margin-top:2rem">
+          <table class="blog-table cmp-num">
+            <thead>
+              <tr><th>Belminuten per maand</th><th>Mowi, per minuut</th><th>Fonio maandelijks, per minuut</th><th>Fonio jaarbetaling, per minuut</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>50</td><td>€0,63</td><td>€2,38</td><td>€1,98</td></tr>
+              <tr><td>100</td><td>€0,32</td><td>€1,19</td><td>€0,99</td></tr>
+              <tr><td>200</td><td>€0,26</td><td>€0,60</td><td>€0,50</td></tr>
+              <tr><td>500</td><td>€0,18</td><td>€0,24</td><td>€0,20</td></tr>
+              <tr><td>1.000</td><td>€0,16</td><td>€0,12</td><td>€0,10</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="cmp-foot">Totaalbedrag uit de eerste tabel gedeeld door het aantal minuten. Bij 1.000 minuten is Fonio per minuut goedkoper, dat hoort erbij.</p>
+      </div>
+    </section>
+
+    <!-- ================= Zo is dit berekend (controleerbaarheid) ================= -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head-row section-head-row-center">
+          <h2 class="lp-section-heading">Zo is dit berekend</h2>
+        </div>
+        <div class="lp-card-grid">
+          <div class="lp-card">
+            <h3>Mowi</h3>
+            <ul class="cmp-list">
+              <li>De Voice agent werkt bovenop Basis (€19 per maand, 800 credits) of Pro (€79 per maand, 3.600 credits). Het telefoonnummer kost €12,50 per maand.</li>
+              <li>Eén belminuut kost 6 credits. Per gesprek rondt Mowi af naar boven op hele minuten. Een gesprek korter dan 10 seconden kost niets.</li>
+              <li>Komt u credits tekort, dan rekenen we de goedkoopste combinatie van losse packs: 300 credits voor €10, 1.200 voor €35, 2.500 voor €65, 6.400 voor €164.</li>
+              <li>Per regel staat de goedkoopste route. Dezelfde credits gebruikt u ook voor e-mail en de Builder; hier tellen we alleen bellen.</li>
+            </ul>
+          </div>
+          <div class="lp-card">
+            <h3>De andere aanbieders</h3>
+            <ul class="cmp-list">
+              <li><strong>Fonio</strong>, pakket Solo: €119 per maand bij maandelijkse betaling, €99 per maand bij jaarbetaling. 1.000 minuten inbegrepen, daarna €0,12 per minuut.</li>
+              <li><strong>Sam neemt op</strong>: Basis €119 per maand met 400 minuten, daarna €0,40 per minuut. Volledig €299 per maand met 1.000 minuten, daarna €0,35. Per regel het goedkoopste pakket.</li>
+              <li><strong>CallingBird</strong>: €0,35 per gespreksminuut, minimaal €20 per maand.</li>
+              <li><strong>MIKE365</strong> rekent per gesprek, niet per minuut: Start €14,99 zonder gesprekken en €0,65 per gesprek, Basis €34,99 met 50 gesprekken, Plus €74,99 met 150, Pro €149,99 met 300. Daarom staat het niet in de tabel. De tarievenpagina vermeldt niet of dit incl. of excl. btw is.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Eerlijk: waar Mowi verliest ================= -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head-row section-head-row-center">
+          <h2 class="lp-section-heading">Waar verliest Mowi?</h2>
+        </div>
+        <div class="cmp-prose">
+          <p>Boven de 700 belminuten per maand is Fonio goedkoper, en boven de 600 als u een jaar vooruit betaalt. Fonio biedt in de grotere pakketten ook meerdere gelijktijdige gesprekken. Onder de 90 minuten per maand is CallingBird goedkoper, omdat Mowi een abonnement vraagt en CallingBird alleen een minimum van €20.</p>
+          <p>Fonio is bovendien een veel groter bedrijf met een langere staat van dienst in telefonie. En wilt u dat de spraakverwerking binnen de EU blijft: Mowi's spraaktechnologie loopt via ElevenLabs en het telefoonverkeer via Twilio, beide in de Verenigde Staten, met doorgiftewaarborgen. Op dat punt wint Mowi de vergelijking niet. Wie precies wat verwerkt staat op onze <a href="/subverwerkers">subverwerkerspagina</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head-row section-head-row-center">
+          <h2 class="lp-section-heading">Waar wint Mowi?</h2>
+        </div>
+        <div class="cmp-prose">
+          <p>Op de instap en op wat er achter de telefoon zit. Geen bundel van 400 of 1.000 minuten vooruit betalen. Een agent die uw webshop, boekhouding, CRM en agenda kent via geteste koppelingen, zodat hij een bestelling kan opzoeken of een afspraak kan inplannen. Dezelfde agent voor uw e-mail, met één geheugen. Een proefdraai voordat iets live gaat. Elke beller hoort dat hij met een digitale assistent spreekt. Gesprekken bewaren we 30 dagen, transcripten 365 dagen. En er is één persoon die uw opzet kent en die u kunt aanspreken.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= De aanbieders, neutraal ================= -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head-row section-head-row-center">
+          <h2 class="lp-section-heading">Wie zijn de aanbieders?</h2>
+        </div>
+        <div class="lp-card-grid">
+          <div class="lp-card">
+            <h3>Fonio</h3>
+            <p>fonio GmbH, gevestigd in Wenen, Oostenrijk. AI-telefoonassistent met de pakketten Solo, Team en Scale. 30 dagen niet-goed-geld-terug.</p>
+          </div>
+          <div class="lp-card">
+            <h3>Sam neemt op</h3>
+            <p>Nederlands bedrijf uit Zevenbergen. Pakketten Basis en Volledig, maandelijks opzegbaar, 14 dagen niet-goed-geld-terug. Afspraken inplannen staat op de prijspagina als "binnenkort".</p>
+          </div>
+          <div class="lp-card">
+            <h3>CallingBird</h3>
+            <p>Handelsnaam van Stite Solutions V.O.F., Den Haag. Betalen per gespreksminuut zonder bundel, minimaal €20 per maand. 30 dagen gratis proberen zonder betaalgegevens.</p>
+          </div>
+          <div class="lp-card">
+            <h3>Mowi</h3>
+            <p>Nederlands bedrijf. Voice agent en Inbox agent op één tegoed, met koppelingen naar onder meer Exact Online, Moneybird, Shopify, WooCommerce, Pipedrive, HubSpot en Google Agenda. Maandelijks opzegbaar.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FAQ: vragen staan woordelijk in de FAQPage in de head ================= -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head-row section-head-row-center">
+          <h2 class="lp-section-heading">Veelgestelde vragen</h2>
+        </div>
+        <div class="lp-card-grid">
+          <div class="lp-card">
+            <h3>Wat kost een AI-telefonist minimaal per maand?</h3>
+            <p>Van de vergeleken aanbieders is CallingBird het laagst met een minimum van €20 per maand. Mowi begint bij €31,50 per maand: Basis van €19 plus €12,50 voor het telefoonnummer, met 133 belminuten inbegrepen. Fonio en Sam neemt op beginnen bij €119 per maand. MIKE365 heeft een instap van €14,99 zonder gesprekken. Alle prijzen excl. btw, gelezen op 12 september 2026.</p>
+          </div>
+          <div class="lp-card">
+            <h3>Wanneer is Mowi de goedkoopste AI-telefonist?</h3>
+            <p>Tussen ongeveer 90 en 700 belminuten per maand. Onder de 90 minuten is CallingBird goedkoper. Boven de 700 minuten is Fonio goedkoper, of boven de 600 minuten als u bij Fonio een jaar vooruit betaalt.</p>
+          </div>
+          <div class="lp-card">
+            <h3>Zijn de prijzen inclusief of exclusief btw?</h3>
+            <p>Alle bedragen op deze pagina zijn exclusief btw, zoals de aanbieders ze zelf publiceren. MIKE365 vermeldt op zijn tarievenpagina niet of de prijzen inclusief of exclusief btw zijn.</p>
+          </div>
+          <div class="lp-card">
+            <h3>Betaal ik bij Mowi voor korte of gemiste gesprekken?</h3>
+            <p>Een gesprek korter dan 10 seconden kost niets. Daarboven rekent Mowi per begonnen minuut, 6 credits per minuut. Uit de Basis-bundel is dat ongeveer €0,14 per minuut, uit een los credit-pack €0,16 tot €0,20.</p>
+          </div>
+          <div class="lp-card">
+            <h3>Moet ik een abonnement nemen voor de Voice agent van Mowi?</h3>
+            <p>Ja. De Voice agent werkt bovenop Basis (€19 per maand) of Pro (€79 per maand) en kost daarnaast €12,50 per maand voor het telefoonnummer. Alle prijzen excl. btw. Meer op de <a href="/call-agent">pagina van de Voice agent</a>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Bronnen en datum (art. 6:194a: controleerbaar) ================= -->
+    <section class="section">
+      <div class="container">
+        <div class="legal-notice cmp-sources">
+          <p><strong>Bronnen en datum.</strong> Alle prijzen zijn op 12 september 2026 gelezen op de prijspagina's van de aanbieders zelf: <a href="https://www.fonio.ai/nl/prijzen/" rel="nofollow noopener">fonio.ai/nl/prijzen</a>, <a href="https://www.samneemtop.nl/prijzen" rel="nofollow noopener">samneemtop.nl/prijzen</a>, <a href="https://www.callingbird.nl/antwoordservice-kosten" rel="nofollow noopener">callingbird.nl/antwoordservice-kosten</a> en <a href="https://www.mike365.nl/tarieven/" rel="nofollow noopener">mike365.nl/tarieven</a>. De vestigingsplaats van fonio GmbH staat op <a href="https://www.fonio.ai/en/contact/" rel="nofollow noopener">fonio.ai/en/contact</a>. Van elke bron bewaren wij een schermafbeelding van die dag. Mowi's prijzen staan op onze <a href="/pricing">prijzenpagina</a>. Wij controleren deze pagina maandelijks. Klopt een bedrag niet meer? Mail <a href="mailto:contact@mowi.agency">contact@mowi.agency</a>, dan passen we het dezelfde dag aan. Fonio, Sam neemt op, CallingBird en MIKE365 zijn merken van hun eigenaren. Mowi is niet aan hen verbonden.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer-wrap">
+    <div class="container">
+
+      <div class="footer-cta">
+        <h2 class="footer-cta-title">Vertel het en<br />Mowi regelt het</h2>
+        <a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a>
+      </div>
+
+      <div class="footer-panel">
+        <div class="footer-top">
+          <div class="footer-brand">
+            <a href="/" class="wordmark" aria-label="Mowi - home">
+              <img src="assets/mowi-icon.png" alt="" class="wordmark-icon" />
+              <img src="assets/mowi-wordmark.png" alt="Mowi" class="wordmark-text" />
+            </a>
+            <p class="footer-tagline">Werk uit handen, niet uit het oog</p>
+            <a href="#" class="footer-social" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg></a>
+          </div>
+
+          <nav class="footer-menus" aria-label="Footer">
+            <div>
+              <h3 class="footer-menu-heading">Product</h3>
+              <ul>
+                <li><a href="/e-mail-agent">Inbox agent</a></li>
+                <li><a href="/call-agent">Voice agent</a></li>
+                <li><a href="/templates?type=workflows">Workflows</a></li>
+                <li><a href="/templates?type=dashboards">Dashboards</a></li>
+                <li><a href="/templates">Templates</a></li>
+                <li><a href="/pricing">Prijzen</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="footer-menu-heading">Bronnen</h3>
+              <ul>
+                <li><a href="/docs/">Documentatie</a></li>
+                <li><a href="/blog/">Blog</a></li>
+                <li><a href="/zo-werkt-het">Zo werkt het</a></li>
+                <li><a href="/koppelingen">Koppelingen</a></li>
+                <li><a href="/security">Security</a></li>
+                <li><a href="/ai-transparantie">AI-transparantie</a></li>
+                <li><a href="/mowi-vs-grok-bot">Mowi vs Grok Bot</a></li>
+                <li><a href="/mowi-vs-hermes-agent">Mowi vs Hermes Agent</a></li>
+                <li><a href="/ai-telefonist-vergelijken">AI-telefonisten vergeleken</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="footer-menu-heading">Contact</h3>
+              <ul>
+                <li><a href="tel:+31853335800">+31 85 333 58 00</a></li>
+                <li><a href="mailto:contact@mowi.agency">contact@mowi.agency</a></li>
+                <li><a href="/demo">Contact sales</a></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+
+        <div class="footer-bottom">
+          <span>&copy; 2026 Mowi. Alle rechten voorbehouden.</span>
+          <div class="footer-legal">
+            <a href="/algemene-voorwaarden">Algemene voorwaarden</a>
+            <a href="/privacyverklaring">Privacyverklaring</a>
+            <a href="/cookies">Cookies</a>
+            <!-- Bedrijfsgegevens moet wettelijk "gemakkelijk, rechtstreeks en
+                 permanent toegankelijk" blijven (art. 3:15d BW) — daarom hier,
+                 niet verwijderd, toen de Contact-kolom werd opgeschoond. -->
+            <a href="/bedrijfsgegevens">Bedrijfsgegevens</a>
+            <a href="/subverwerkers">Subverwerkers</a>
+            <!-- Alleen GDPR/AVG — een zelfverklaring, geen certificaat (dat
+                 bestaat niet voor de AVG); klopt zolang de registers en
+                 verklaringen in de vault (Legal/) worden bijgehouden. SOC 2 /
+                 ISO komen hier pas terug wanneer een echt certificaat behaald
+                 is. -->
+            <img src="assets/badges/gdpr.png" alt="GDPR" class="footer-badge" width="36" height="36" />
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <script src="js/main.js?v=20260905-2"></script>
+</body>
+</html>
