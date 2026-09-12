@@ -566,7 +566,9 @@ function buildSitemap(posts) {
     // the 11 koppeling-<slug> additions below.
     "e-mail-agent", "call-agent", "waarom-mowi",
     // Comparison pages (2026-09-12, vault: Website/comparison-pages-2026-09.md):
-    // named competitor comparisons, footer-linked, no hub. Same rule as the
+    // named competitor comparisons, deliberately NOT linked from header or footer
+    // (Sal, 2026-09-12) -- reachable via sitemap and direct links, like
+    // /waarom-mowi. Same rule as the
     // three above: a real, indexable root page must be listed here or it
     // silently drops out of the sitemap on the next run.
     "mowi-vs-grok-bot", "mowi-vs-hermes-agent", "ai-telefonist-vergelijken",
