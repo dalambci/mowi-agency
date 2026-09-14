@@ -125,45 +125,10 @@ function headerHtml(activeHref) {
 
       <nav class="main-nav" id="main-nav" aria-label="Hoofdmenu">
         <ul>
-          <li><a href="/zo-werkt-het">Zo werkt het</a></li>
-          <li class="nav-dropdown">
-            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="product-menu" aria-haspopup="true">
-              Product
-              <span class="nav-dropdown-icon" aria-hidden="true"></span>
-            </button>
-            <div class="nav-menu" id="product-menu">
-              <div class="nav-menu-col">
-                <ul class="nav-menu-item-grid">
-                  <li class="nav-menu-heading">Agents</li>
-                  <li class="nav-menu-item-full"><a href="/templates?type=agents"><span class="nav-menu-item-title">Alle agents</span><span class="nav-menu-item-desc">Het volledige overzicht van alle Mowi-agents</span></a></li>
-                  <li><a href="/e-mail-agent"><span class="nav-menu-item-title">Inbox agent</span><span class="nav-menu-item-desc">Sorteert en beantwoordt uw e-mail</span></a></li>
-                  <li><a href="/call-agent"><span class="nav-menu-item-title">Voice agent</span><span class="nav-menu-item-desc">Neemt binnenkomende gesprekken aan</span></a></li>
-                </ul>
-              </div>
-              <div class="nav-menu-col nav-menu-col-divider">
-                <ul class="nav-menu-item-grid">
-                  <li class="nav-menu-heading">Workflows</li>
-                  <li class="nav-menu-item-full"><a href="/templates?type=workflows"><span class="nav-menu-item-title">Alle workflows</span><span class="nav-menu-item-desc">Het volledige overzicht van wat Mowi automatiseert</span></a></li>
-                  <li><a href="/templates/dagelijkse-nieuwe-bestellingen"><span class="nav-menu-item-title">Orderstatus</span><span class="nav-menu-item-desc">Zoekt bestellingen op in uw webshop</span></a></li>
-                  <li><a href="/templates/openstaande-factuur-signaal"><span class="nav-menu-item-title">Offerte-opvolging</span><span class="nav-menu-item-desc">Controleert en volgt offertes en facturen op</span></a></li>
-                  <li><a href="/templates/dagelijkse-afspraken"><span class="nav-menu-item-title">Agenda-samenvatting</span><span class="nav-menu-item-desc">Uw agenda samengevat, op uw tijdstip</span></a></li>
-                  <li><a href="/templates/klant-opzoeken"><span class="nav-menu-item-title">CRM-synchronisatie</span><span class="nav-menu-item-desc">Herkent klanten en houdt uw CRM bij</span></a></li>
-                </ul>
-              </div>
-              <div class="nav-menu-col nav-menu-col-divider">
-                <ul class="nav-menu-item-grid">
-                  <li class="nav-menu-heading">Dashboards</li>
-                  <li class="nav-menu-item-full"><a href="/templates?type=dashboards"><span class="nav-menu-item-title">Alle dashboards</span><span class="nav-menu-item-desc">Het volledige overzicht van al uw dashboards</span></a></li>
-                  <li><a href="/templates/directie-overzicht"><span class="nav-menu-item-title">Directie overzicht</span><span class="nav-menu-item-desc">De cijfers waar een eigenaar op stuurt</span></a></li>
-                  <li><a href="/templates/webshops-vergelijken"><span class="nav-menu-item-title">Webshops vergelijken</span><span class="nav-menu-item-desc">Kerncijfers per webshop naast elkaar</span></a></li>
-                  <li><a href="/templates/openstaande-facturen"><span class="nav-menu-item-title">Openstaande facturen</span><span class="nav-menu-item-desc">Welke facturen aandacht nodig hebben</span></a></li>
-                  <li><a href="/templates/winstgevendheid"><span class="nav-menu-item-title">Winstgevendheid</span><span class="nav-menu-item-desc">Marge op basis van uw eigen kostprijzen</span></a></li>
-                </ul>
-              </div>
-            </div>
-          </li>
-          <li><a href="/templates"${current("/templates")}>Templates</a></li>
-          <li><a href="/pricing">Prijzen</a></li>
+          <li><a href="/zo-werkt-het"${current("/zo-werkt-het")}>Zo werkt het</a></li>
+          <li><a href="/support-agent"${current("/support-agent")}>Support Agent</a></li>
+          <li><a href="/koppelingen"${current("/koppelingen")}>Koppelingen</a></li>
+          <li><a href="/pricing"${current("/pricing")}>Prijzen</a></li>
           <li class="nav-mobile-actions"><a href="https://my.mowi.agency/login">Inloggen</a></li>
           <li class="nav-mobile-actions"><a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a></li>
         </ul>
@@ -206,11 +171,10 @@ function footerHtml(extraScripts) {
             <div>
               <h3 class="footer-menu-heading">Product</h3>
               <ul>
-                <li><a href="/e-mail-agent">Inbox agent</a></li>
-                <li><a href="/call-agent">Voice agent</a></li>
-                <li><a href="/templates?type=workflows">Workflows</a></li>
-                <li><a href="/templates?type=dashboards">Dashboards</a></li>
-                <li><a href="/templates">Templates</a></li>
+                <li><a href="/support-agent">Support Agent</a></li>
+                <li><a href="/e-mail-agent">E-mail</a></li>
+                <li><a href="/call-agent">Telefoon</a></li>
+                <li><a href="/koppelingen">Koppelingen</a></li>
                 <li><a href="/pricing">Prijzen</a></li>
               </ul>
             </div>
@@ -220,7 +184,6 @@ function footerHtml(extraScripts) {
                 <li><a href="/docs/">Documentatie</a></li>
                 <li><a href="/blog/">Blog</a></li>
                 <li><a href="/zo-werkt-het">Zo werkt het</a></li>
-                <li><a href="/koppelingen">Koppelingen</a></li>
                 <li><a href="/security">Security</a></li>
                 <li><a href="/ai-transparantie">AI-transparantie</a></li>
               </ul>
@@ -230,7 +193,7 @@ function footerHtml(extraScripts) {
               <ul>
                 <li><a href="tel:+31853335800">+31 85 333 58 00</a></li>
                 <li><a href="mailto:contact@mowi.agency">contact@mowi.agency</a></li>
-                <li><a href="/demo">Contact sales</a></li>
+                <li><a href="/demo">Hulp bij opzetten</a></li>
               </ul>
             </div>
           </nav>
@@ -437,25 +400,26 @@ function promptFor(template) {
   return `Bouw het dashboard "${template.label}" voor mij.`;
 }
 
-function renderIndexPage(templates, art) {
+function renderIndexPage(allTemplates, art) {
+  // Re-scoped 2026-09-15 (Koers 2026-09 klantcontact-medewerker, Sal's
+  // decision this session): the index shows only what fits the one-employee
+  // story — the 20 branche agents and the proactive behaviours (workflows
+  // flagged 'proactive' in config/flow_templates.php, carried through the
+  // export). Plain workflows and every dashboard template keep their own
+  // detail page (still generated below from the full set, still in the
+  // sitemap, still linked from elsewhere on the site) — they are just no
+  // longer part of this gallery. relatedFor() below still draws from the
+  // FULL set, so a related suggestion is never limited to what's on this
+  // page. Nothing here changes routes, slugs, or the detail-page generator.
+  const templates = allTemplates.filter((t) => t.kind === "agent" || (t.kind === "workflow" && t.proactive));
   const communityCount = templates.filter((t) => t.source === "community").length;
-  // The site never stated its own scale anywhere (2026-09-08): no number on
-  // the homepage, and this page's h1 is just "Templates", so a visitor had to
-  // count the three section headers and a search engine or an LLM
-  // summarising the site could not infer it at all. Counted here rather than
-  // written out, so it can never drift from what the page actually renders —
-  // same reasoning as reading docs/ and templates/ from disk in
-  // build-blog.js instead of hand-listing them.
-  //
-  // It counts every template the page shows, which includes the handful
-  // marked "Binnenkort" — the same arithmetic a visitor gets by adding up the
-  // section counts, so the number on the page and the number in this line can
-  // never disagree.
   const total = templates.length;
+  const agentCount = templates.filter((t) => t.kind === "agent").length;
+  const behaviourCount = templates.filter((t) => t.kind === "workflow").length;
   const intro =
     communityCount > 0
-      ? `${total} templates: agents, workflows en dashboards, gebouwd door Mowi en de Mowi-community. Kies er een, Mowi zet hem klaar in uw account.`
-      : `${total} templates: agents, workflows en dashboards die Mowi voor u bouwt. Kies er een, Mowi zet hem klaar in uw account.`;
+      ? `${agentCount} kant-en-klare Support Agents, één per branche, en ${behaviourCount} dingen die hij uit zichzelf doet — gebouwd door Mowi en de Mowi-community. Kies er een, Mowi zet hem klaar in uw account.`
+      : `${agentCount} kant-en-klare Support Agents, één per branche, en ${behaviourCount} dingen die hij uit zichzelf doet. Kies er een, Mowi zet hem klaar in uw account.`;
 
   // The three dropdowns' options, with the count each option would leave
   // on an unfiltered page (real numbers without JS; js/templates.js keeps
@@ -486,9 +450,8 @@ function renderIndexPage(templates, art) {
     `<button type="button" data-tpl-filter="type" data-tpl-value="${value}" aria-pressed="${pressed ? "true" : "false"}">${label}</button>`;
 
   const sections = [
-    ["agent", "Agents"],
-    ["workflow", "Workflows"],
-    ["dashboard", "Dashboards"],
+    ["agent", "Voor uw branche"],
+    ["workflow", "Wat hij uit zichzelf doet"],
   ]
     .map(([kind, label]) => {
       const cards = templates.filter((t) => t.kind === kind);
@@ -509,11 +472,11 @@ function renderIndexPage(templates, art) {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Templates — Mowi</title>
-  <meta name="description" content="${total} templates: agents, workflows en dashboards die Mowi voor u bouwt. Kies er een en zet hem in minuten klaar in uw eigen account." />
+  <title>Voor uw branche — Mowi Support Agent</title>
+  <meta name="description" content="${agentCount} kant-en-klare Support Agents, één per branche, en ${behaviourCount} dingen die hij uit zichzelf doet. Kies er een, Mowi zet hem in minuten klaar in uw eigen account." />
   <link rel="canonical" href="${SITE_URL}/templates" />
-  <meta property="og:title" content="Templates — Mowi" />
-  <meta property="og:description" content="Agents, workflows en dashboards die Mowi voor u bouwt." />
+  <meta property="og:title" content="Voor uw branche — Mowi Support Agent" />
+  <meta property="og:description" content="Kant-en-klare Support Agents, één per branche, en wat ze uit zichzelf doen." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&family=Inter+Tight:wght@600;700&display=swap" rel="stylesheet" />
@@ -531,7 +494,7 @@ ${headerHtml("/templates")}
 <main>
 <section class="container tpl-head">
   <div>
-    <h1 class="page-hero-heading">Templates</h1>
+    <h1 class="page-hero-heading">Voor uw branche</h1>
     <p class="page-hero-body">${intro}</p>
   </div>
   <label class="tpl-search">
@@ -542,12 +505,6 @@ ${headerHtml("/templates")}
 
 <section class="container tpl-marketplace" id="voorbeelden" data-tpl-marketplace>
   <div class="tpl-toolbar" data-tpl-toolbar>
-    <div class="tpl-seg" role="group" aria-label="Type">
-      ${typeButton("", "Alles", true)}
-      ${typeButton("agents", "Agents", false)}
-      ${typeButton("workflows", "Workflows", false)}
-      ${typeButton("dashboards", "Dashboards", false)}
-    </div>
     ${dropdown("branche", "Branche", branches.map(([key, label]) => option("branche", key, label, countBranche(key))).join("\n        "))}
     ${dropdown("koppeling", "Koppeling", platforms.map((p) => option("koppeling", p.key, p.name, countPlatform(p.key), logoTile(p, true))).join("\n        "))}
     ${dropdown("trigger", "Trigger", triggers.map(([key, label]) => option("trigger", key, label, countTrigger(key))).join("\n        "))}
