@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mowi Support Agent — Eén AI-medewerker voor uw klantcontact</title>
-  <meta name="description" content="Uw Support Agent beantwoordt e-mail en telefoon vanuit één geheugen. Kent uw webshop, agenda en boekhouding. Doet alleen wat getest is, en meldt zich uit zichzelf als er iets misgaat." />
+  <meta name="description" content="Nooit meer een klant die wacht. Uw Support Agent neemt de telefoon op en zet het antwoord klaar voor e-mail, WhatsApp en Instagram, uit één geheugen. Test hem eerst op uw eigen mails, gratis." />
   <link rel="canonical" href="https://mowi.agency/support-agent" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,6 +16,31 @@
   <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260904-3" />
   <link rel="apple-touch-icon-precomposed" href="assets/apple-icon-180.png?v=20260904-3" />
   <script defer data-domain="mowi.agency" src="https://plausible.io/js/script.js"></script>
+  <style>
+    /* Paginagebonden opmaak, zelfde aanpak als de koppeling-landers en de
+       vergelijkingspagina: niets hierin raakt de gedeelde stylesheet, dus geen
+       sitewide cache-bust. Eén doel: de voor/na-tabel ("Vier momenten") leest op
+       een telefoon als gestapelde blokken in plaats van een tabel die opzij
+       scrolt. Anders staat de "Met uw Support Agent"-kolom, de pointe van die
+       sectie, buiten beeld. Op desktop blijft het de gedeelde .lp-compare, met
+       de rechterkolom als de benadrukte. */
+    .sa-moments td { vertical-align: top; }
+    .sa-moments td:first-child { font-weight: 400; }
+    @media (max-width: 47.9rem) {
+      .sa-moments table { min-width: 0; }
+      .sa-moments thead { display: none; }
+      .sa-moments tbody, .sa-moments tr, .sa-moments td { display: block; }
+      .sa-moments tr { border-bottom: 1px solid var(--border); }
+      .sa-moments tr:last-child { border-bottom: none; }
+      .sa-moments td { border-bottom: none; padding: 1rem 1.25rem; }
+      .sa-moments td:first-child { padding-bottom: 0.625rem; }
+      .sa-moments td:nth-child(2)::before {
+        content: "Met uw Support Agent";
+        display: block; font-size: 0.8125rem; font-weight: 700; color: var(--ink-3);
+        margin-bottom: 0.3rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -50,38 +75,109 @@
 
   <main>
 
-    <!-- ================= Hero ================= -->
+    <!-- ================= Hero =================
+         Direct-response rewrite 2026-09-15 (Sal: "the copy should focus on the pain
+         points, and that's what the copy of voice agent and inbox agent already do
+         well"). Same device as those two pages: a pain-elimination headline in the
+         "Nooit meer een …" family, then a sub built as pain → consequence → mechanism
+         → objection (time) → control. The umbrella pain shared by every channel is the
+         customer left waiting, which is the one that ends with the customer calling
+         the next business. Sources for the structure: the vault's Belief sheet
+         (B1/B3/B16) and Audience language (Theme D/F), plus the generic
+         PAS / awareness-level literature cited in the Decisions log entry. -->
     <section class="hero container lp-hero hero-tight-bottom">
-      <h1 class="h-balance">Eén AI-medewerker voor <em>al</em> uw klantcontact</h1>
-      <p class="hero-sub">Uw Support Agent neemt de telefoon op en beantwoordt uw e-mail. Ook 's avonds, ook in het weekend. Hij kent uw webshop, agenda en boekhouding, doet alleen wat u heeft getest en laat u meelezen.</p>
+      <h1 class="h-balance">Nooit meer een klant die <em>wacht</em></h1>
+      <p class="hero-sub">Een mail die blijft liggen, een oproep die niemand opneemt. Uw klant belt de volgende. Uw Support Agent neemt op en zet het antwoord klaar, op e-mail, telefoon, WhatsApp en Instagram. Ook om 22:00, ook op zaterdag. U leest mee en verstuurt wanneer het u uitkomt.</p>
       <div class="hero-actions lp-cta-block">
         <a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a>
-        <span class="lp-cta-micro">Geen betaalgegevens nodig.</span>
+        <span class="lp-cta-micro">60 gratis credits. Geen betaalgegevens nodig.</span>
       </div>
     </section>
 
-    <!-- ================= Twee kanalen ================= -->
+    <!-- ================= Agitatie: vier momenten =================
+         The "agitate" beat of PAS, done as a before/after rather than a grid of pain
+         cards (Sal removed the four-card "Er is maar één probleem" section from both
+         agent pages on 2026-08-29, so that device is deliberately NOT reintroduced
+         here). Reuses the .lp-compare primitive the agent pages already use for "De
+         eerlijke vergelijking"; its second column is the highlighted one by CSS, which
+         is why "Met uw Support Agent" sits second. Every moment is one of the trigger
+         moments in the vault's Avatar sheet (gemiste oproep → klant kwijt; offerte die
+         blijft liggen; lead een dag te laat), one row per channel. -->
     <section class="section">
       <div class="container">
         <div class="section-head-row section-head-row-center">
-          <h2 class="lp-section-heading">Twee kanalen, één geheugen</h2>
-          <p class="section-sub section-sub-center">Wat de agent leert via de mail weet hij ook aan de telefoon, en andersom.</p>
+          <h2 class="lp-section-heading">Vier momenten waarop u nu een klant kwijtraakt</h2>
+          <p class="section-sub section-sub-center">Niet omdat u slecht werk levert. Omdat u er op dat moment niet bij kunt.</p>
         </div>
-        <div class="card-strip-wrap">
-          <div class="card-strip">
-            <a href="/e-mail-agent" class="workflow-card">
-              <span class="workflow-card-tag">E-mail</span>
-              <img class="workflow-card-visual" src="assets/workflows/inbox-agent.webp" alt="" width="900" height="600" decoding="async" />
-              <h3>Uw e-mail</h3>
-              <p>Sorteert elke binnenkomende e-mail en zet het antwoord klaar. U leest na en verstuurt.</p>
-            </a>
-            <a href="/call-agent" class="workflow-card">
-              <span class="workflow-card-tag">Telefonie</span>
-              <img class="workflow-card-visual" src="assets/workflows/voice-agent.webp" alt="" width="900" height="600" decoding="async" />
-              <h3>Uw telefoon</h3>
-              <p>Neemt op, ook na sluitingstijd, en plant de afspraak in of legt een terugbelverzoek vast.</p>
-            </a>
-          </div>
+        <div class="lp-compare sa-moments">
+          <table>
+            <thead>
+              <tr><th>Nu</th><th>Met uw Support Agent</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Dinsdag 17:40.</strong> U staat bij een klant en de telefoon gaat. Voicemail. De beller probeert de volgende.</td>
+                <td>Hij neemt op, beantwoordt de vraag uit uw eigen website en plant de afspraak in. De samenvatting staat na afloop in uw dashboard.</td>
+              </tr>
+              <tr>
+                <td><strong>Vrijdag 21:15.</strong> Een offerteaanvraag komt binnen zonder adres of maten. U ziet hem maandag. De klant heeft dan al drie andere offertes.</td>
+                <td>Hij vraagt de ontbrekende gegevens zelf op en zet het antwoord klaar. Maandag leest u het na en verstuurt.</td>
+              </tr>
+              <tr>
+                <td><strong>Zaterdag 10:30.</strong> Een klant appt of de bestelling al onderweg is. Niemand kijkt naar de zakelijke WhatsApp. Zondag vraagt hij het nog eens, kortaf.</td>
+                <td>Hij zoekt de bestelling op in uw webshop en zet het antwoord klaar. U verstuurt met één tik vanaf uw telefoon, of laat hem dat zelf doen zodra u dat aanzet.</td>
+              </tr>
+              <tr>
+                <td><strong>Woensdag 20:10.</strong> Een DM op Instagram: hebben jullie dit nog op voorraad? U ziet hem twee dagen later, tussen de likes.</td>
+                <td>Hij leest elk bericht, zoekt het antwoord op in uw kennisbank of webshop en zet het klaar. Geen tweede inbox meer die u vergeet.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Oplossing: vier kanalen, één medewerker =================
+         Four channels, per Sal 2026-09-15 ("build the pages as if we already have the
+         whatsapp and instagram agent, because i will finish those tomorrow"). E-mail
+         and Telefoon link to their own pages; WhatsApp and Instagram have no page yet
+         and link to signup. Their copy is kept deliberately generic ("zet het antwoord
+         klaar", "dezelfde kennisbank", "zodra u dat aanzet") so it stays true whatever
+         the exact implementation turns out to be. The glyphs are the product's own
+         channel icons (config/channels.php in the dashboard). -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head-row section-head-row-center">
+          <h2 class="lp-section-heading">Eén medewerker voor alle vier de kanalen</h2>
+          <p class="section-sub section-sub-center">Niet vier losse tools. Eén Support Agent met één geheugen en één kennisbank. Wat een klant mailt, weet hij ook aan de telefoon.</p>
+        </div>
+        <div class="lp-card-grid">
+          <a href="/e-mail-agent" class="lp-card">
+            <span class="lp-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>
+            <h3>E-mail</h3>
+            <p>Sorteert elke mail in de juiste map en zet het antwoord klaar. Ook de aanvraag van vrijdagavond. U leest na en verstuurt.</p>
+            <span class="link-arrow">Meer over e-mail →</span>
+          </a>
+          <a href="/call-agent" class="lp-card">
+            <span class="lp-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .3 2 .7 3a2 2 0 0 1-.4 2.1L8 10.2a16 16 0 0 0 6 6l1.4-1.4a2 2 0 0 1 2.1-.4c1 .4 2 .6 3 .7a2 2 0 0 1 1.7 2z"/></svg></span>
+            <h3>Telefoon</h3>
+            <p>Neemt op als u niet kunt. Beantwoordt vragen uit uw eigen website, plant de afspraak in of legt een terugbelverzoek vast. U belt terug wanneer het u uitkomt.</p>
+            <span class="link-arrow">Meer over telefoon →</span>
+          </a>
+          <a href="https://my.mowi.agency/aanmelden" class="lp-card" data-event="Signup Click">
+            <span class="lp-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg></span>
+            <h3>WhatsApp</h3>
+            <p>Leest elk bericht op uw zakelijke WhatsApp en zet het antwoord klaar, vanuit dezelfde kennisbank als uw mail. U verstuurt met één tik, of laat hem dat zelf doen zodra u dat aanzet.</p>
+          </a>
+          <a href="https://my.mowi.agency/aanmelden" class="lp-card" data-event="Signup Click">
+            <span class="lp-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2.75" y="2.75" width="18.5" height="18.5" rx="5.1"/><circle cx="12" cy="12" r="4.15"/><circle cx="17.35" cy="6.65" r="1.05" fill="currentColor" stroke="none"/></svg></span>
+            <h3>Instagram</h3>
+            <p>Berichten op Instagram krijgen hetzelfde antwoord als een mail, in dezelfde toon. Geen tweede inbox die u vergeet.</p>
+          </a>
+        </div>
+        <div class="hero-actions lp-cta-block" style="justify-content:center; margin-top:2.5rem">
+          <a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a>
+          <span class="lp-cta-micro">Kant-en-klaar ingesteld voor kappers, garages, webshops, horeca en zes andere branches. <a href="/templates">Bekijk uw branche →</a></span>
         </div>
       </div>
     </section>
@@ -90,8 +186,8 @@
     <section class="section">
       <div class="container">
         <div class="section-head-row section-head-row-center">
-          <h2 class="lp-section-heading">Wat hij weet</h2>
-          <p class="section-sub section-sub-center">Uw Support Agent koppelt met uw webshop, agenda of boekhouding — en antwoordt daar vandaan, niet uit een gok.</p>
+          <h2 class="lp-section-heading">Hij antwoordt uit uw eigen systemen, niet uit een gok</h2>
+          <p class="section-sub section-sub-center">Gekoppeld aan uw webshop, agenda, CRM of boekhouding zegt hij "uw bestelling is gisteren verzonden" in plaats van "ik kom er bij u op terug".</p>
         </div>
         <div class="hero-actions" style="justify-content:center">
           <a href="/koppelingen" class="link-arrow">Bekijk alle koppelingen →</a>
@@ -99,33 +195,69 @@
       </div>
     </section>
 
-    <!-- ================= Wat hij uit zichzelf doet ================= -->
+    <!-- ================= Werkt met wat u al gebruikt =================
+         Same logo set as index.html (the canonical copy, see its provenance comment) —
+         any logo-set change must sweep index.html + zo-werkt-het.html + pricing.html +
+         the two agent pages + this page together. -->
+    <section class="section marquee-section">
+      <div class="container">
+        <p class="section-sub section-sub-center">Werkt met wat u al gebruikt</p>
+      </div>
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee-track" data-marquee-clone>
+          <span class="marquee-logo"><img src="assets/logos/woocommerce.svg" alt="" /></span>
+          <span class="marquee-logo"><img src="assets/logos/shopify.svg" alt="" /></span>
+          <span class="marquee-logo"><img src="assets/logos/lightspeed.svg" alt="" /></span>
+          <span class="marquee-logo"><img src="assets/logos/shopware.svg" alt="" /></span>
+          <span class="marquee-logo"><img src="assets/logos/magento.svg" alt="" /></span>
+          <span class="marquee-logo"><img src="assets/logos/bol.svg" alt="" /></span>
+          <span class="marquee-logo"><img src="assets/logos/prestashop.svg" alt="" /></span>
+        </div>
+      </div>
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee-track marquee-track-reverse" data-marquee-clone>
+          <span class="marquee-logo"><img src="assets/logos/exact.png" alt="" /></span>
+          <span class="marquee-logo"><img src="assets/logos/pipedrive.svg" alt="" /></span>
+          <span class="marquee-logo"><img src="assets/logos/hubspot.png" alt="" /></span>
+          <span class="marquee-logo"><img src="assets/logos/moneybird.svg" alt="" /></span>
+          <span class="marquee-logo"><img src="assets/logos/google-agenda.svg" alt="" /></span>
+          <span class="marquee-logo"><img src="assets/logos/calendly.svg" alt="" /></span>
+          <span class="marquee-logo"><img src="assets/logos/guestplan.svg" alt="" /></span>
+        </div>
+      </div>
+      <p class="visually-hidden">Mowi werkt onder meer samen met WooCommerce, Shopify, Lightspeed, Shopware, Magento, bol.com, PrestaShop, Exact Online, Pipedrive, HubSpot, Moneybird, Google Agenda, Calendly en Guestplan.</p>
+    </section>
+
+    <!-- ================= Wat hij uit zichzelf doet =================
+         The four cards are real, live workflow templates (content/templates/
+         templates.json, kind workflow, proactive true); each line paraphrases that
+         template's own summary, nothing more. -->
     <section class="section">
       <div class="container">
         <div class="section-head-row section-head-row-center">
-          <h2 class="lp-section-heading">Wat hij uit zichzelf doet</h2>
-          <p class="section-sub section-sub-center">Niet alleen antwoorden. Uw Support Agent meldt zich ook zelf zodra er iets aandacht nodig heeft.</p>
+          <h2 class="lp-section-heading">Hij wacht niet tot u het vraagt</h2>
+          <p class="section-sub section-sub-center">Een goede medewerker meldt zich zelf als er iets misgaat. Deze ook.</p>
         </div>
         <div class="lp-card-grid">
           <a href="/templates/terugbelverzoek-opvolging" class="lp-card">
-            <span class="lp-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg></span>
+            <span class="lp-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></span>
             <h3>Terugbelverzoek opvolgen</h3>
-            <p>Belt of mailt uzelf niet op tijd terug? De agent signaleert het en volgt op.</p>
+            <p>Noteert een beller een terugbelverzoek, dan zoekt hij de klant op in uw CRM en meldt het u meteen, met dossier erbij.</p>
           </a>
           <a href="/templates/retour-alarm" class="lp-card">
             <span class="lp-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg></span>
             <h3>Retour-alarm</h3>
-            <p>Een opvallende toename in retouren? U hoort het meteen, niet pas bij de maandcijfers.</p>
+            <p>Een melding bij elke terugbetaling, op het moment zelf. Niet pas als u de maandcijfers bekijkt.</p>
           </a>
           <a href="/templates/bestelling-blijft-liggen" class="lp-card">
             <span class="lp-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg></span>
             <h3>Bestelling blijft liggen</h3>
-            <p>Een order die te lang niet verzonden is, meldt zich zelf voordat de klant erover belt.</p>
+            <p>Betaald, maar na drie dagen nog niet verzonden? Hij meldt het voordat de klant erover belt.</p>
           </a>
           <a href="/templates/gemiste-oproepen" class="lp-card">
             <span class="lp-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10.68 13.31a16 16 0 0 0 3.41 2.6l1-1a2 2 0 0 1 2.11-.45c.9.35 1.85.59 2.81.72A2 2 0 0 1 22 17.09v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.09 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11l-1 1"/><path d="M22 2 2 22"/></svg></span>
             <h3>Gemiste oproepen</h3>
-            <p>Elke gemiste oproep komt in een overzicht, zodat er geen klant tussen wal en schip valt.</p>
+            <p>Belandt een beller toch op voicemail of valt een gesprek weg, dan weet u het direct. Geen klant tussen wal en schip.</p>
           </a>
         </div>
         <div class="hero-actions" style="justify-content:center; margin-top:1.5rem">
@@ -134,15 +266,80 @@
       </div>
     </section>
 
-    <!-- ================= Zo werkt het ================= -->
+    <!-- ================= Bewijs: eerst zien, dan pas live =================
+         Belief sheet B5 ("Ik zie precies wat hij zou doen vóór hij het doet") is the
+         single strongest asset the vault names, and B4/B6 (concepts, earned auto-send)
+         answer the control objection in the same breath. Visuals reused from
+         /zo-werkt-het (rendered cards, illustrative counts, not real data). The "laatste
+         20 e-mails" wording is the dashboard's own (setup-step4-controle). -->
+    <section class="section">
+      <div class="container">
+
+        <div class="split">
+          <div class="split-copy">
+            <h2 class="section-heading">Eerst zien. Dan pas live.</h2>
+            <p class="section-sub">Test hem op uw laatste 20 e-mails voordat er iets gebeurt. Er wordt niets verstuurd of verplaatst, u ziet precies wat hij zou doen. De telefoon test u eerst zelf, vanuit uw browser. Pas na uw akkoord gaat hij live. En ook dan blijft elk antwoord een concept dat u zelf verstuurt, tot u per onderwerp zegt dat hij het zelf mag.</p>
+          </div>
+          <img class="split-visual" src="assets/zo-werkt-het/testrun.webp" alt="" width="1200" height="800" loading="lazy" decoding="async" />
+        </div>
+
+        <div class="split split-flip">
+          <div class="split-copy">
+            <h2 class="section-heading">U ziet precies wat er gedaan is</h2>
+            <p class="section-sub">Elke oproep en elk antwoord staat in uw dashboard, met wat er gezegd is en wanneer. Vraagt iets om aandacht, dan ziet u dat meteen. Geen zwarte doos, geen verrassingen achteraf.</p>
+          </div>
+          <img class="split-visual" src="assets/zo-werkt-het/activiteit.webp" alt="" width="1200" height="800" loading="lazy" decoding="async" />
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= Bezwaren: drie dingen die u wilt weten =================
+         The three objections the vault's research found loudest in real Dutch forum
+         text: silent failure (Theme F → B11, stated honestly: technical failures are
+         flagged, judgment errors are not), billing-after-trial fear (Theme G → B9), and
+         where the data goes (B10, scoped to the AV's own art. 10.3 claim, with the
+         subprocessor page linked rather than a vaguer promise). Placed right before the
+         final CTA, per the DR anatomy: answer the biggest doubt before you ask. -->
     <section class="section">
       <div class="container">
         <div class="section-head-row section-head-row-center">
-          <h2 class="lp-section-heading">Eerst zien. Dan pas live.</h2>
-          <p class="section-sub section-sub-center">Elke wijziging draait eerst als proef op uw eigen gegevens. Pas na uw akkoord gaat het live.</p>
+          <h2 class="lp-section-heading">Drie dingen die u wilt weten voordat u begint</h2>
         </div>
-        <div class="hero-actions" style="justify-content:center">
-          <a href="/zo-werkt-het" class="link-arrow">Zo werkt het →</a>
+        <div class="reasons-grid">
+          <div>
+            <span class="icon-tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></span>
+            <h3>Wat als het fout gaat?</h3>
+            <p>Valt een koppeling weg of loopt iets technisch vast, dan krijgt u een melding. Een antwoord dat technisch klopt maar inhoudelijk niet, vangt hij niet. Daarom leest u de concepten mee, en daarom verstuurt hij pas zelf als u dat per onderwerp aanzet.</p>
+          </div>
+          <div>
+            <span class="icon-tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M14.5 9.5a2.5 2.5 0 0 0-2.5-1.5c-1.4 0-2.5.9-2.5 2s1.1 2 2.5 2 2.5.9 2.5 2-1.1 2-2.5 2a2.5 2.5 0 0 1-2.5-1.5"/><path d="M12 6.5v1.5M12 16v1.5"/></svg></span>
+            <h3>Wat als mijn tegoed op is?</h3>
+            <p>Dan pauzeert hij netjes en krijgt u een seintje. Geen rekening achteraf, geen automatische overstap naar betaald. U vult aan wanneer u wilt.</p>
+          </div>
+          <div>
+            <span class="icon-tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
+            <h3>Waar blijft mijn data?</h3>
+            <p>Uw gegevens worden niet gebruikt om AI te trainen. Wie er wél bij kan, staat per naam op onze pagina met <a href="/subverwerkers">subverwerkers</a>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Aanbod + laatste CTA =================
+         Every number is the live one: 60 gratis credits (config/credits.php
+         signup_grant_credits), Basis €19/mnd excl. btw (/pricing), 1 e-mail = 1 credit
+         and 1 belminuut = 6 credits (config/credits.php rates), maandelijks opzegbaar
+         (AV art. 5.1–5.2, same wording as the agent pages' comparison tables). -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head-row section-head-row-center">
+          <h2 class="lp-section-heading">Begin vandaag, betaal naar gebruik</h2>
+          <p class="section-sub section-sub-center">Start met 60 gratis credits, zonder betaalgegevens en zonder tijdslimiet. Daarna Basis vanaf €19 per maand, excl. btw. Eén mail is één credit, een belminuut zes. Maandelijks opzegbaar.</p>
+        </div>
+        <div class="hero-actions lp-cta-block" style="justify-content:center">
+          <a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a>
+          <span class="lp-cta-micro"><a href="/pricing">Bekijk alle prijzen →</a></span>
         </div>
       </div>
     </section>
