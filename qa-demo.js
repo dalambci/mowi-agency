@@ -373,6 +373,14 @@ async function runLive(browserType, label, pagePath = LIVE_PATH) {
   await page.click(".demo-chat-send");
   await page.waitForTimeout(15000);
   const chatText = await text(page, "[data-demo-chat-log]");
+  // The live run asks "Wat doet Mowi precies?". On 2026-09-16 the Fietsplaza
+  // agent answered "Mowi is het bedrijf achter Fietsplaza" — a relationship it
+  // invented, told to a real visitor. The prompt now states the company is
+  // fictional and unrelated; this is what would notice if that regressed.
+  const inventedLink = /(?:het bedrijf achter|eigenaar van|onderdeel van|partner van|moederbedrijf)/i;
+  check(`${label} LIVE: the agent invents no link between Mowi and the demo company`,
+    !inventedLink.test(chatText || ""), (chatText || "").slice(0, 200));
+
   check(`${label} LIVE: a real chat session produced an agent reply within 15s`, (chatText || "").split("Wat doet Mowi precies?").length > 1, chatText);
 
   await browser.close();
