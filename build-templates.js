@@ -65,7 +65,7 @@ const CSS_VERSION = readVersion(/css\/style\.css\?v=([0-9-]+)/, "index.html");
 // file is ever edited (it is deliberately NOT touched by this pass -- see
 // this file's header comment).
 const WF_CSS_VERSION = readVersion(/workflow-canvas\.css\?v=([0-9-]+)/, "index.html");
-const WF_JS_VERSION = "20260906-1";
+const WF_JS_VERSION = "20260916-1";
 // This file's OWN two new assets get one shared version, bumped whenever
 // either changes — same "one value per file-pair, bump together" rule
 // the rest of the site's cache-busting convention already follows.
@@ -762,43 +762,100 @@ const DEMO_WORKFLOW_MARK = {
   end: "<!-- wf-demo:end -->",
 };
 
-// Which workflow sits beside the demo on which page. The webshop voice agent
-// matches the sample call that is selected by default one section above
-// ("Bestelstatus"), so the two cards tell one story instead of two.
-const DEMO_WORKFLOW_PAGES = [
-  { file: "support-agent.html", slug: "voice-agent-webshop" },
-  { file: "call-agent.html", slug: "voice-agent-webshop" },
-  { file: "index.html", slug: "voice-agent-webshop" },
+/**
+ * The four kinds of call the demo section offers, in the same order and under
+ * the same names as the sample-call player one section above. That repetition
+ * is the point: a visitor hears "Bestelstatus" being handled, then sees the
+ * workflow that handles it. Two different vocabularies would break that link.
+ *
+ * The subtitles are copied verbatim from the sample tabs for the same reason.
+ */
+const DEMO_WORKFLOW_TYPES = [
+  { key: "bestelstatus", label: "Bestelstatus", slug: "voice-agent-webshop",
+    sub: "Een klant belt de webshop: waar blijft mijn bestelling?" },
+  { key: "afspraak", label: "Afspraak", slug: "voice-agent-kapper",
+    sub: "Een klant belt de kapsalon voor een nieuwe afspraak." },
+  { key: "terugbelverzoek", label: "Terugbelverzoek", slug: "terugbelverzoek-opvolging",
+    sub: "De agent belt zelf terug na een eerder gemiste oproep." },
+  { key: "receptie", label: "Receptie", slug: "voice-agent-zakelijke_dienstverlening",
+    sub: "Een offerteaanvraag aan de telefoon, met de gegevens die daarvoor nodig zijn." },
 ];
 
+const DEMO_WORKFLOW_PAGES = ["support-agent.html", "call-agent.html", "index.html"];
+
+/**
+ * Writes the workflow card's body — the type tabs and one panel per type —
+ * into every page that carries the markers.
+ *
+ * Generated rather than hand-pasted because each panel holds eight absolutely
+ * positioned nodes and hand-computed SVG edge paths that must stay in step
+ * with content/templates/templates.json. Four of those, on three pages, is
+ * twelve copies no one would ever keep in sync by hand.
+ *
+ * The tabs are the site's own pill-tab component (js/main.js, initPillTabs:
+ * role=tab + aria-controls + a matching [role=tabpanel] id), which is the same
+ * component the sample-call tabs use. Everything that changes per type lives
+ * INSIDE the panel — the scenario line, the canvas and the two buttons — so
+ * switching needs no JavaScript of its own beyond the hidden-toggle that
+ * component already does.
+ *
+ * Framing is "center" (1:1, pan to explore) rather than "fit": these flows are
+ * up to 1272px tall, and fitting all of that into a card turns the labels into
+ * unreadable confetti.
+ *
+ * The two buttons use the SITE's own CTA vocabulary (.btn-primary, the same
+ * class as "Start gratis" in the header, plus .link-arrow) rather than the
+ * demo card's .demo-btn pair. Those two classes are the only CTA idioms this
+ * site has, and Sal asked for these to match them (2026-09-16). .demo-btn
+ * stays where it belongs: inside the demo card, where it mirrors the
+ * reference's own in-card chrome.
+ */
 function injectDemoWorkflows(templates) {
+  const body = DEMO_WORKFLOW_TYPES.map((t, i) => {
+    const template = templates.find((x) => x.slug === t.slug);
+    if (!template) throw new Error(`build-templates: demo workflow type '${t.key}' wants template '${t.slug}', which is not in the export`);
+    const sel = i === 0;
+    return {
+      tab: `<button type="button" class="demo-seg-tab" role="tab" id="wf-tab-${t.key}" aria-controls="wf-panel-${t.key}" aria-selected="${sel}" tabindex="${sel ? 0 : -1}">${esc(t.label)}</button>`,
+      panel: `<div class="demo-flow-panel" id="wf-panel-${t.key}" role="tabpanel" aria-labelledby="wf-tab-${t.key}"${sel ? "" : " hidden"}>
+              <p class="demo-card-sub demo-flow-sub">${esc(t.sub)}</p>
+              <div class="demo-flow-stage">
+                ${renderCanvasInteractive(template, "center")}
+              </div>
+              <div class="demo-flow-actions">
+                <a class="btn-primary" href="https://my.mowi.agency/aanmelden" data-event="Signup Click">Gebruik deze template</a>
+                <a class="link-arrow" href="/templates/${t.slug}">Bekijk de hele workflow &rarr;</a>
+              </div>
+            </div>`,
+    };
+  });
+
+  const markup = `            <div class="demo-seg demo-flow-seg" role="tablist" aria-label="Soort gesprek">
+              ${body.map((b) => b.tab).join("\n              ")}
+            </div>
+
+            ${body.map((b) => b.panel).join("\n\n            ")}
+`;
+
   let written = 0;
 
-  DEMO_WORKFLOW_PAGES.forEach(({ file, slug }) => {
+  DEMO_WORKFLOW_PAGES.forEach((file) => {
     const full = path.join(ROOT, file);
     if (!fs.existsSync(full)) return;
 
     const html = fs.readFileSync(full, "utf8");
     const from = html.indexOf(DEMO_WORKFLOW_MARK.start);
     const to = html.indexOf(DEMO_WORKFLOW_MARK.end);
-    if (from === -1 || to === -1) return; // page does not carry a demo workflow
+    if (from === -1 || to === -1) return;
 
-    const template = templates.find((t) => t.slug === slug);
-    if (!template) throw new Error(`build-templates: ${file} wants workflow '${slug}', which is not in the export`);
-
-    const next =
-      html.slice(0, from) +
-      DEMO_WORKFLOW_MARK.start + "\n" +
-      renderCanvasInteractive(template, "center") + "\n          " +
-      html.slice(to);
-
+    const next = html.slice(0, from) + DEMO_WORKFLOW_MARK.start + "\n" + markup + "            " + html.slice(to);
     if (next !== html) {
       fs.writeFileSync(full, next);
       written += 1;
     }
   });
 
-  console.log(`Refreshed the demo workflow canvas on ${written} page(s).`);
+  console.log(`Refreshed the demo workflow card (${DEMO_WORKFLOW_TYPES.length} types) on ${written} page(s).`);
 }
 
 function main() {

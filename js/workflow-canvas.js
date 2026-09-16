@@ -628,6 +628,21 @@
     // panel's hidden state is already updated, so the re-frame sees the
     // correct, just-revealed geometry. The E-mail panel's branche list was
     // hidden (0 wide) at load, so its fade state is recomputed here too.
+    // Same problem, different tab row: the demo section's type tabs
+    // (Bestelstatus / Afspraak / ...) reveal one of four canvases that all
+    // mounted while hidden, so each measured 0x0 and framed itself against
+    // nothing. Marking that container [data-wf-refit] re-frames whichever one
+    // is now visible. Kept as its own attribute rather than widening the
+    // .tpl-showcase selector, so a future tab row opts in deliberately.
+    document.querySelectorAll("[data-wf-refit] [role=\"tab\"]").forEach(function (tab) {
+        tab.addEventListener("click", function () {
+            setTimeout(function () {
+                refitVisibleWorkflowCanvases();
+                window.dispatchEvent(new Event("resize"));
+            }, 0);
+        });
+    });
+
     document.querySelectorAll(".tpl-showcase [role=\"tab\"]").forEach(function (tab) {
         tab.addEventListener("click", function () {
             setTimeout(function () {

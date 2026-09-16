@@ -281,6 +281,7 @@ async function run(browserType, label, viewport, device, pagePath = "/support-ag
   const isExpectedTestNoise = (m) => m.includes("interactive-widget") || m.includes("does-not-exist") || m.includes("ERR_UNSAFE_PORT")
     || m.includes("status of 503") || m.includes("status of 429"); // Chromium's auto-logged resource-load-failure text carries no URL, only the status — every 503/429 on this page in this script is our own mockSession()
   await checkWorkflowCanvas(page, label);
+  await checkWorkflowTypes(page, label);
 
   check(`${label} zero console errors`, consoleErrors.filter((m) => !isExpectedTestNoise(m)).length === 0, consoleErrors.filter((m) => !isExpectedTestNoise(m)).slice(0, 5).join(" | "));
   check(`${label} zero unexpected 4xx/5xx responses`, bad.length === 0, bad.slice(0, 5).join(" | "));
@@ -388,7 +389,8 @@ async function runLive(browserType, label, pagePath = LIVE_PATH) {
  * having it at all.
  */
 async function checkWorkflowCanvas(page, label) {
-  const sel = ".demo-flow-stage [data-wf-canvas]";
+  // Four panels now, three of them hidden — always test the visible one.
+  const sel = ".demo-flow-panel:not([hidden]) [data-wf-canvas]";
   const present = await page.$(sel);
   check(`${label} the workflow canvas is on the page`, !!present);
   if (!present) return;
@@ -417,7 +419,7 @@ async function checkWorkflowCanvas(page, label) {
   // geometry stable; it changes nothing about what is being tested, since the
   // site itself already disables it under prefers-reduced-motion.
   await page.addStyleTag({ content: "html { scroll-behavior: auto !important; }" });
-  await page.evaluate(() => document.querySelector(".demo-flow-stage").scrollIntoView({ block: "center" }));
+  await page.evaluate(() => document.querySelector(".demo-flow-panel:not([hidden]) .demo-flow-stage").scrollIntoView({ block: "center" }));
   await page.waitForTimeout(250);
 
   const box = await (await page.$(`${sel} [data-wf-viewport]`)).boundingBox();
@@ -466,6 +468,56 @@ async function checkWorkflowCanvas(page, label) {
   check(`${label} the zoom control zooms`, (await readT()) !== afterDrag);
 }
 
+
+/**
+ * The four call types on the workflow card. They are generated (one panel each,
+ * three hidden) and switched by the site's own pill-tab component, so the ways
+ * this breaks are: a panel that shows no canvas, two panels visible at once, a
+ * canvas that mounted at 0x0 while hidden and never got re-framed, or a
+ * "Bekijk de hele workflow" link still pointing at the first type's template.
+ */
+async function checkWorkflowTypes(page, label) {
+  const expected = ["bestelstatus", "afspraak", "terugbelverzoek", "receptie"];
+
+  const tabs = await page.$$eval(".demo-flow-seg [role=tab]", (els) => els.map((e) => e.id.replace("wf-tab-", "")));
+  check(`${label} the workflow card offers the same four types as the samples`,
+    JSON.stringify(tabs) === JSON.stringify(expected), tabs.join(","));
+
+  check(`${label} the type buttons use the site's own CTA classes`, await page.evaluate(() => {
+    const p = document.querySelector(".demo-flow-panel:not([hidden])");
+    return !!p.querySelector("a.btn-primary") && !!p.querySelector("a.link-arrow") && !p.querySelector(".demo-btn");
+  }));
+
+  const seen = new Set();
+  for (const key of expected) {
+    await page.click(`#wf-tab-${key}`);
+    await page.waitForTimeout(450);
+    const st = await page.evaluate((k) => {
+      const open = [...document.querySelectorAll(".demo-flow-panel")].filter((x) => !x.hidden);
+      const c = open[0] && open[0].querySelector("[data-wf-canvas]");
+      const stage = c && c.querySelector("[data-wf-stage]");
+      return {
+        openCount: open.length,
+        id: open[0] && open[0].id,
+        nodes: c ? c.querySelectorAll(".wf-node").length : 0,
+        href: open[0] ? open[0].querySelector(".link-arrow").getAttribute("href") : null,
+        sub: open[0] ? open[0].querySelector(".demo-flow-sub").textContent.trim().slice(0, 40) : "",
+        // a canvas framed while hidden sits at a nonsense offset; a re-framed
+        // one is centred on a viewport with real width
+        offsetX: stage ? getComputedStyle(stage).transform.split(",")[4] : null,
+        vpWidth: c ? Math.round(c.querySelector("[data-wf-viewport]").getBoundingClientRect().width) : 0,
+      };
+    }, key);
+
+    check(`${label} type "${key}" shows exactly one panel, with a real workflow`,
+      st.openCount === 1 && st.id === `wf-panel-${key}` && st.nodes >= 3, JSON.stringify(st));
+    check(`${label} type "${key}" was re-framed after being revealed`, st.vpWidth > 200 && st.offsetX !== null, `viewport ${st.vpWidth}px, offsetX${st.offsetX}`);
+    seen.add(st.href);
+  }
+
+  check(`${label} each type links to its own template`, seen.size === expected.length, [...seen].join(" "));
+}
+
 /**
  * The homepage carries the demo card and the workflow, but NOT the sample-call
  * player, so it gets its own pass rather than run()'s full suite.
@@ -496,6 +548,7 @@ async function runHome(browserType, label) {
     () => [...document.querySelectorAll(".wf-canvas-static")].every((el) => !el.hasAttribute("data-wf-mounted"))));
 
   await checkWorkflowCanvas(page, label);
+  await checkWorkflowTypes(page, label);
 
   check(`${label} zero console errors`, errors.length === 0, errors.join(" | "));
   check(`${label} no horizontal page overflow`, await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1));

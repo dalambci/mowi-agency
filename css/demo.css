@@ -368,6 +368,14 @@
   align-items: start;
 }
 
+/* A grid item defaults to min-width:auto, so it refuses to shrink below its
+   own min-content. The four type tabs on the workflow card are wider than a
+   phone, so without this the whole track grew to fit them and BOTH cards were
+   dragged past the screen edge — the demo card too, which contains nothing
+   wide at all. The tab rail scrolls sideways instead, which is what it is
+   built for. */
+.demo-duo > .demo-card { min-width: 0; }
+
 @media (min-width: 62rem) {
   .demo-duo { grid-template-columns: 1fr 1fr; }
   /* Equal heights so the two cards read as a pair rather than a stack that
@@ -405,6 +413,47 @@
 }
 
 .demo-flow-stage .wf-canvas { position: absolute; inset: 0; height: 100%; }
+
+/* Type tabs on the workflow card (Bestelstatus / Afspraak / ...). Same pill
+   control as the Bellen/Chatten toggle, and deliberately the same four names
+   as the sample-call tabs one section above, so hearing a call and seeing its
+   workflow are obviously the same thing.
+
+   Four labels do not fit a phone, so the rail scrolls sideways rather than
+   wrapping into a second row that would push the canvas off the card. */
+.demo-flow-seg {
+  display: flex;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 0 0.25rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.demo-flow-seg::-webkit-scrollbar { display: none; }
+.demo-flow-seg .demo-seg-tab { flex: 0 0 auto; }
+
+.demo-flow-sub { margin: 0.875rem 0 0; min-height: 2.5rem; }
+
+/* The panel owns everything that changes per type — the line, the canvas and
+   the buttons — so switching is the tab component's plain hidden-toggle and
+   needs no JavaScript of its own. */
+.demo-flow-panel { display: flex; flex-direction: column; flex: 1; }
+.demo-flow-panel[hidden] { display: none; }
+
+/* The site has exactly two call-to-action idioms: .btn-primary (the dark pill,
+   same as "Start gratis" in the header) and .link-arrow. Sal asked for these
+   two to match them rather than use the demo card's own .demo-btn pair, so
+   this row only has to lay them out — .link-arrow's own margin-top is for
+   stacked prose, not a button row. */
+.demo-flow-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+.demo-flow-actions .link-arrow { margin-top: 0; }
 
 .demo-flow .demo-actions { margin-top: auto; }
 
