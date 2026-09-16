@@ -286,6 +286,20 @@
 
     function setState(state) {
       root.setAttribute("data-state", state);
+
+      // The type tabs pick which company's agent you reach, so switching one
+      // mid-session would leave the visitor talking to one agent while the
+      // card names another. initTypeTabs() refuses on the same condition;
+      // this is only what makes that refusal visible.
+      var typeTabs = document.querySelector("[data-demo-types]");
+      if (typeTabs) {
+        var locked = state !== "idle";
+        typeTabs.setAttribute("aria-disabled", String(locked));
+        typeTabs.querySelectorAll("[role=tab]").forEach(function (t) {
+          t.setAttribute("aria-disabled", String(locked));
+        });
+      }
+
       hide(body); hide(consent); hide(live); hide(ended);
       if (state === "idle") { show(body); }
       else if (state === "consent") { show(consent); if (consent) consent.focus(); }
@@ -313,10 +327,14 @@
     }
 
     function mint(mode) {
+      var body = "mode=" + encodeURIComponent(mode) + "&type=" + encodeURIComponent(currentType());
+      var device = deviceId();
+      if (device) body += "&device_id=" + encodeURIComponent(device);
+
       return fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded", Accept: "application/json" },
-        body: "mode=" + encodeURIComponent(mode),
+        body: body,
       }).then(function (r) {
         return r.json().catch(function () { return {}; }).then(function (data) {
           if (!r.ok) {
@@ -525,10 +543,105 @@
     setState("idle");
   }
 
+  /**
+   * A stable, random id for this browser, used only so the dashboard can cap
+   * a returning visitor over a longer window than one day (the daily caps
+   * reset at midnight, so on their own they allow unlimited free calls spread
+   * over time).
+   *
+   * It identifies a browser, never a person: no name, no address, nothing
+   * derived from the visitor. The server stores only a salted hash of it.
+   *
+   * Every access is wrapped because localStorage throws outright in some
+   * privacy modes. A browser that cannot store it simply sends none, and the
+   * server falls back to its IP-side caps — a missing id must never block a
+   * genuine visitor.
+   */
+  function deviceId() {
+    var KEY = "mowiDemoDevice";
+    try {
+      var existing = window.localStorage.getItem(KEY);
+      if (existing) return existing;
+      var fresh = (window.crypto && window.crypto.randomUUID)
+        ? window.crypto.randomUUID()
+        : String(Date.now()) + "-" + Math.random().toString(36).slice(2);
+      window.localStorage.setItem(KEY, fresh);
+      return fresh;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function currentType() {
+    var selected = document.querySelector("[data-demo-types] [role=tab][aria-selected=true]");
+    return (selected && selected.getAttribute("data-demo-type")) || "bestelstatus";
+  }
+
+  /**
+   * The type tabs above both cards. Deliberately NOT js/main.js's initPillTabs:
+   * that component claims every [role=tab] inside its container, and these
+   * tabs sit above the whole section — it would swallow the card's own
+   * Bellen/Chatten toggle. It also only toggles panels, while these tabs have
+   * to retitle the left card and change which agent the next call reaches.
+   */
+  function initTypeTabs(root) {
+    var tabs = Array.prototype.slice.call(root.querySelectorAll("[role=tab]"));
+    if (!tabs.length) return;
+
+    var title = document.querySelector("[data-demo-title]");
+    var sub = document.querySelector("[data-demo-sub]");
+    var tryCard = document.querySelector("[data-demo-try]");
+
+    function activate(tab, focus) {
+      // Switching company mid-call would leave the visitor talking to one
+      // agent while the card claims another, so the tabs are inert until the
+      // session ends. setState() in initTry() flips this class.
+      if (tryCard && tryCard.getAttribute("data-state") !== "idle") return;
+
+      tabs.forEach(function (t) {
+        var on = t === tab;
+        t.setAttribute("aria-selected", String(on));
+        t.tabIndex = on ? 0 : -1;
+      });
+
+      document.querySelectorAll(".demo-flow-panel").forEach(function (panel) {
+        panel.hidden = panel.id !== tab.getAttribute("aria-controls");
+      });
+
+      var company = tab.getAttribute("data-company");
+      if (title && company) title.textContent = "Digitale receptionist van " + company;
+      if (sub) sub.textContent = tab.getAttribute("data-sub") || "";
+
+      if (focus) tab.focus();
+    }
+
+    tabs.forEach(function (tab, i) {
+      tab.addEventListener("click", function () { activate(tab, false); });
+      tab.addEventListener("keydown", function (event) {
+        var keys = ["ArrowRight", "ArrowLeft", "Home", "End"];
+        if (keys.indexOf(event.key) === -1) return;
+        event.preventDefault();
+        var next = i;
+        if (event.key === "ArrowRight") next = (i + 1) % tabs.length;
+        if (event.key === "ArrowLeft") next = (i - 1 + tabs.length) % tabs.length;
+        if (event.key === "Home") next = 0;
+        if (event.key === "End") next = tabs.length - 1;
+        activate(tabs[next], true);
+      });
+    });
+
+    // Make the card agree with whichever tab is marked selected in the HTML,
+    // rather than trusting two places to have been written consistently.
+    var initial = tabs.filter(function (t) { return t.getAttribute("aria-selected") === "true"; })[0] || tabs[0];
+    activate(initial, false);
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     var listen = document.querySelector("[data-demo-listen]");
     if (listen) initListen(listen);
     var tryCard = document.querySelector("[data-demo-try]");
     if (tryCard) initTry(tryCard);
+    var types = document.querySelector("[data-demo-types]");
+    if (types) initTypeTabs(types);
   });
 })();

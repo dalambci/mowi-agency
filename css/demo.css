@@ -421,7 +421,7 @@
 
    Four labels do not fit a phone, so the rail scrolls sideways rather than
    wrapping into a second row that would push the canvas off the card. */
-.demo-flow-seg {
+.demo-type-seg {
   display: flex;
   width: fit-content;
   max-width: 100%;
@@ -430,8 +430,18 @@
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
 }
-.demo-flow-seg::-webkit-scrollbar { display: none; }
-.demo-flow-seg .demo-seg-tab { flex: 0 0 auto; }
+.demo-type-seg::-webkit-scrollbar { display: none; }
+.demo-type-seg .demo-seg-tab { flex: 0 0 auto; }
+
+/* The type tabs now sit above BOTH cards (they pick the workflow AND which
+   company's agent you reach), centred like the section heading above them. */
+.demo-type-seg { margin: 0 auto 1.25rem; }
+
+/* Inert while a session is running — see setState() in js/demo.js. Not
+   `disabled`, because these are tabs, not form controls, and a disabled tab
+   drops out of the tab order entirely. */
+.demo-type-seg[aria-disabled="true"] { opacity: 0.55; }
+.demo-type-seg[aria-disabled="true"] .demo-seg-tab { cursor: not-allowed; }
 
 .demo-flow-sub { margin: 0.875rem 0 0; min-height: 2.5rem; }
 

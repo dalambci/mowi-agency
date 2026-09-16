@@ -282,6 +282,7 @@ async function run(browserType, label, viewport, device, pagePath = "/support-ag
     || m.includes("status of 503") || m.includes("status of 429"); // Chromium's auto-logged resource-load-failure text carries no URL, only the status — every 503/429 on this page in this script is our own mockSession()
   await checkWorkflowCanvas(page, label);
   await checkWorkflowTypes(page, label);
+  await checkMintPayload(page, label, supportsGetUserMedia);
 
   check(`${label} zero console errors`, consoleErrors.filter((m) => !isExpectedTestNoise(m)).length === 0, consoleErrors.filter((m) => !isExpectedTestNoise(m)).slice(0, 5).join(" | "));
   check(`${label} zero unexpected 4xx/5xx responses`, bad.length === 0, bad.slice(0, 5).join(" | "));
@@ -470,18 +471,27 @@ async function checkWorkflowCanvas(page, label) {
 
 
 /**
- * The four call types on the workflow card. They are generated (one panel each,
- * three hidden) and switched by the site's own pill-tab component, so the ways
- * this breaks are: a panel that shows no canvas, two panels visible at once, a
- * canvas that mounted at 0x0 while hidden and never got re-framed, or a
- * "Bekijk de hele workflow" link still pointing at the first type's template.
+ * The four call types. They sit ABOVE both cards and now drive BOTH of them:
+ * the workflow panel on the right, and which company's agent the left card
+ * will ring. The ways this breaks: a panel showing no canvas, two panels open
+ * at once, a canvas that mounted at 0x0 while hidden and never got re-framed,
+ * a link still pointing at the first type's template, or — the one that would
+ * actually mislead a visitor — the left card naming one company while the
+ * mint asks for another type's agent.
  */
 async function checkWorkflowTypes(page, label) {
   const expected = ["bestelstatus", "afspraak", "terugbelverzoek", "receptie"];
 
-  const tabs = await page.$$eval(".demo-flow-seg [role=tab]", (els) => els.map((e) => e.id.replace("wf-tab-", "")));
-  check(`${label} the workflow card offers the same four types as the samples`,
+  const tabs = await page.$$eval("[data-demo-types] [role=tab]", (els) => els.map((e) => e.getAttribute("data-demo-type")));
+  check(`${label} the demo section offers the same four types as the samples`,
     JSON.stringify(tabs) === JSON.stringify(expected), tabs.join(","));
+
+  // Above both cards, like the reference — not inside one of them.
+  check(`${label} the type tabs sit above both cards`, await page.evaluate(() => {
+    const seg = document.querySelector("[data-demo-types]");
+    const duo = document.querySelector(".demo-duo");
+    return !!seg && !!duo && !duo.contains(seg) && seg.compareDocumentPosition(duo) & Node.DOCUMENT_POSITION_FOLLOWING;
+  }));
 
   check(`${label} the type buttons use the site's own CTA classes`, await page.evaluate(() => {
     const p = document.querySelector(".demo-flow-panel:not([hidden])");
@@ -489,33 +499,86 @@ async function checkWorkflowTypes(page, label) {
   }));
 
   const seen = new Set();
+  const companies = new Set();
+
   for (const key of expected) {
-    await page.click(`#wf-tab-${key}`);
+    await page.click(`#demo-type-${key}`);
     await page.waitForTimeout(450);
     const st = await page.evaluate((k) => {
       const open = [...document.querySelectorAll(".demo-flow-panel")].filter((x) => !x.hidden);
       const c = open[0] && open[0].querySelector("[data-wf-canvas]");
       const stage = c && c.querySelector("[data-wf-stage]");
+      const tab = document.querySelector(`#demo-type-${k}`);
       return {
         openCount: open.length,
         id: open[0] && open[0].id,
         nodes: c ? c.querySelectorAll(".wf-node").length : 0,
         href: open[0] ? open[0].querySelector(".link-arrow").getAttribute("href") : null,
-        sub: open[0] ? open[0].querySelector(".demo-flow-sub").textContent.trim().slice(0, 40) : "",
-        // a canvas framed while hidden sits at a nonsense offset; a re-framed
-        // one is centred on a viewport with real width
+        company: tab.getAttribute("data-company"),
+        title: document.querySelector("[data-demo-title]").textContent.trim(),
+        sub: document.querySelector("[data-demo-sub]").textContent.trim(),
         offsetX: stage ? getComputedStyle(stage).transform.split(",")[4] : null,
         vpWidth: c ? Math.round(c.querySelector("[data-wf-viewport]").getBoundingClientRect().width) : 0,
       };
     }, key);
 
     check(`${label} type "${key}" shows exactly one panel, with a real workflow`,
-      st.openCount === 1 && st.id === `wf-panel-${key}` && st.nodes >= 3, JSON.stringify(st));
-    check(`${label} type "${key}" was re-framed after being revealed`, st.vpWidth > 200 && st.offsetX !== null, `viewport ${st.vpWidth}px, offsetX${st.offsetX}`);
+      st.openCount === 1 && st.id === `wf-panel-${key}` && st.nodes >= 3, JSON.stringify({ n: st.nodes, id: st.id }));
+    check(`${label} type "${key}" was re-framed after being revealed`, st.vpWidth > 200 && st.offsetX !== null, `viewport ${st.vpWidth}px`);
+    // The left card must name THIS type's company, or the visitor is told
+    // they are ringing one business and reaches another.
+    check(`${label} type "${key}" retitles the demo card to ${st.company}`,
+      st.title.includes(st.company) && st.sub.includes(st.company), `${st.title} / ${st.sub.slice(0, 50)}`);
     seen.add(st.href);
+    companies.add(st.company);
   }
 
   check(`${label} each type links to its own template`, seen.size === expected.length, [...seen].join(" "));
+  check(`${label} each type is a different company`, companies.size === expected.length, [...companies].join(", "));
+
+  await page.click("#demo-type-bestelstatus");
+  await page.waitForTimeout(300);
+}
+
+/**
+ * What the browser actually sends when a session is minted. The type decides
+ * which agent is reached, and the device id is what the dashboard's rolling
+ * repeat-visitor cap counts — if either stopped being sent, the demo would
+ * keep working and both would silently stop doing their job.
+ */
+async function checkMintPayload(page, label, supportsGetUserMedia = true) {
+  if (!supportsGetUserMedia) {
+    console.log(`SKIP  ${label} mint-payload check — WebKit automation cannot fake getUserMedia in a real click handler (same limitation as the voice checks above).`);
+    return;
+  }
+
+  let body = null;
+  await page.route("**/api/demo/session", (route) => {
+    body = route.request().postData();
+    route.fulfill({ status: 503, contentType: "application/json", body: JSON.stringify({ message: "De demo is op dit moment niet beschikbaar." }) });
+  });
+
+  // Earlier checks leave the card on the Chatten panel, where the call button
+  // is hidden. Put it back on Bellen before asking for a voice mint.
+  await page.click("#demo-mode-voice");
+  await page.waitForTimeout(200);
+  await page.click("#demo-type-afspraak");
+  await page.waitForTimeout(300);
+  await page.click("[data-demo-start]");
+  await page.waitForTimeout(150);
+  await page.click("[data-demo-agree]");
+  await page.waitForTimeout(600);
+
+  check(`${label} the mint sends the selected type`, !!body && body.includes("type=afspraak"), body);
+  check(`${label} the mint sends a device id`, !!body && /device_id=[^&]{8,}/.test(body), body);
+
+  // Written only when a session is actually started, never on a page view.
+  check(`${label} the device id is only stored once a session is started`,
+    await page.evaluate(() => { try { return !!localStorage.getItem("mowiDemoDevice"); } catch (e) { return "blocked"; } }));
+
+  await page.unroute("**/api/demo/session");
+  await page.click("#demo-type-bestelstatus").catch(() => {});
+  await page.waitForTimeout(200);
 }
 
 /**
@@ -525,6 +588,12 @@ async function checkWorkflowTypes(page, label) {
 async function runHome(browserType, label) {
   const browser = await browserType.launch();
   const page = await (await browser.newContext({ viewport: { width: 1440, height: 1000 } })).newPage();
+  // Same stub run() installs: getUserMedia never resolves in a headless
+  // browser, so without this the consent step hangs forever and every check
+  // past it fails for a reason that has nothing to do with the page.
+  await page.addInitScript(() => {
+    navigator.mediaDevices.getUserMedia = () => Promise.resolve(new MediaStream());
+  });
   const errors = [];
   page.on("console", (m) => { if (m.type() === "error") errors.push(m.text()); });
 
@@ -549,8 +618,12 @@ async function runHome(browserType, label) {
 
   await checkWorkflowCanvas(page, label);
   await checkWorkflowTypes(page, label);
+  await checkMintPayload(page, label, true) /* chromium-only run: the stub above always applies */;
 
-  check(`${label} zero console errors`, errors.length === 0, errors.join(" | "));
+  // checkMintPayload above answers the mint with a deliberate 503, and
+  // Chromium auto-logs that as a console error. Same allowlist as run().
+  const noise = (m) => m.includes("status of 503") || m.includes("status of 429") || m.includes("interactive-widget");
+  check(`${label} zero console errors`, errors.filter((m) => !noise(m)).length === 0, errors.filter((m) => !noise(m)).join(" | "));
   check(`${label} no horizontal page overflow`, await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1));
 
   await browser.close();
