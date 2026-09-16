@@ -443,7 +443,22 @@
 .demo-type-seg[aria-disabled="true"] { opacity: 0.55; }
 .demo-type-seg[aria-disabled="true"] .demo-seg-tab { cursor: not-allowed; }
 
-.demo-flow-sub { margin: 0.875rem 0 0; min-height: 2.5rem; }
+/* Reserve the head's height so switching type cannot move the card.
+   The title and the line under it are rewritten per type, and the company
+   names differ in length — "Vlothuis Installatietechniek" wraps where
+   "Fietsplaza" does not. Without a reserved height the disc below jumped by a
+   line whenever a longer name wrapped, which is what Sal saw on Bestelstatus
+   (2026-09-16). Reserving two lines of subtitle costs a little whitespace and
+   buys a card that never shifts, on any width or any company name. */
+.demo-try .demo-card-head { min-height: 5rem; }
+.demo-try [data-demo-sub] { min-height: 1.5rem; }
+
+/* Same reservation on the right-hand card's scenario line, for the same
+   reason: "Een offerteaanvraag aan de telefoon, met de gegevens die daarvoor
+   nodig zijn." wraps to two lines where the other three do not. At 2.5rem it
+   overflowed by 4px, which grew the card, which grew the row, which nudged
+   the LEFT card's centred content by 2px on that one tab. */
+.demo-flow-sub { margin: 0.875rem 0 0; min-height: 2.875rem; }
 
 /* The panel owns everything that changes per type — the line, the canvas and
    the buttons — so switching is the tab component's plain hidden-toggle and

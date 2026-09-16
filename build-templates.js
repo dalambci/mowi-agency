@@ -783,19 +783,19 @@ const DEMO_WORKFLOW_TYPES = [
   { key: "bestelstatus", label: "Bestelstatus", slug: "voice-agent-webshop",
     company: "Fietsplaza",
     sub: "Een klant belt de webshop: waar blijft mijn bestelling?",
-    demoSub: "Bel of chat met de digitale receptionist van Fietsplaza, een webshop in fietsen." },
+    demoSub: "Bel of chat met de digitale receptionist." },
   { key: "afspraak", label: "Afspraak", slug: "voice-agent-kapper",
     company: "Kapsalon Anna",
     sub: "Een klant belt de kapsalon voor een nieuwe afspraak.",
-    demoSub: "Bel of chat met de digitale receptionist van Kapsalon Anna." },
+    demoSub: "Bel of chat met de digitale receptionist." },
   { key: "terugbelverzoek", label: "Terugbelverzoek", slug: "terugbelverzoek-opvolging",
     company: "Vlothuis Installatietechniek",
     sub: "De agent belt zelf terug na een eerder gemiste oproep.",
-    demoSub: "Bel of chat met de digitale receptionist van Vlothuis Installatietechniek." },
+    demoSub: "Bel of chat met de digitale receptionist." },
   { key: "receptie", label: "Receptie", slug: "voice-agent-zakelijke_dienstverlening",
     company: "Van Dijk Zonwering",
     sub: "Een offerteaanvraag aan de telefoon, met de gegevens die daarvoor nodig zijn.",
-    demoSub: "Bel of chat met de digitale receptionist van Van Dijk Zonwering." },
+    demoSub: "Bel of chat met de digitale receptionist." },
 ];
 
 const DEMO_WORKFLOW_PAGES = ["support-agent.html", "call-agent.html", "index.html"];

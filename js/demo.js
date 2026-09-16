@@ -609,7 +609,11 @@
       });
 
       var company = tab.getAttribute("data-company");
-      if (title && company) title.textContent = "Digitale receptionist van " + company;
+      // Just the company. The line under it already says "digitale
+      // receptionist", and the long names ("Vlothuis Installatietechniek")
+      // wrapped the title to a second line on a phone, which moved everything
+      // below it whenever you switched tab.
+      if (title && company) title.textContent = company;
       if (sub) sub.textContent = tab.getAttribute("data-sub") || "";
 
       if (focus) tab.focus();

@@ -351,6 +351,17 @@ async function runLive(browserType, label, pagePath = LIVE_PATH) {
 
   const liveText = await text(page, "[data-demo-live-log]");
   check(`${label} LIVE: a real voice session produced at least one agent line within 20s`, !!liveText && liveText.length > 0, liveText);
+
+  // The company names live in TWO repos with no shared source: the website's
+  // tab (build-templates.js) and the dashboard's agent prompt
+  // (config/demo_profiles.php). This is the only thing that notices when they
+  // drift — the agent itself says which company it is, in its first sentence.
+  const tabCompany = await page.evaluate(() => {
+    const t = document.querySelector("[data-demo-types] [role=tab][aria-selected=true]");
+    return t ? t.getAttribute("data-company") : null;
+  });
+  check(`${label} LIVE: the agent introduces itself as the company the tab promised`,
+    !!tabCompany && (liveText || "").includes(tabCompany), `tab says "${tabCompany}"`);
   await page.click("[data-demo-hangup]").catch(() => {});
   await page.waitForTimeout(500);
   check(`${label} LIVE: hanging up reaches the ended state`, await page.evaluate(() => document.querySelector("[data-demo-try]").getAttribute("data-state") === "ended"));
@@ -528,12 +539,27 @@ async function checkWorkflowTypes(page, label) {
     // The left card must name THIS type's company, or the visitor is told
     // they are ringing one business and reaches another.
     check(`${label} type "${key}" retitles the demo card to ${st.company}`,
-      st.title.includes(st.company) && st.sub.includes(st.company), `${st.title} / ${st.sub.slice(0, 50)}`);
+      st.title === st.company, `${st.title} / ${st.sub.slice(0, 50)}`);
     seen.add(st.href);
     companies.add(st.company);
   }
 
   check(`${label} each type links to its own template`, seen.size === expected.length, [...seen].join(" "));
+
+  // Sal caught this by eye, not by a test: the company names differ in length,
+  // so one type's subtitle wrapped to a second line and pushed the title and
+  // the disc up by a line. Switching a tab must move nothing but the content.
+  const geometry = [];
+  for (const key of expected) {
+    await page.click(`#demo-type-${key}`);
+    await page.waitForTimeout(250);
+    geometry.push(await page.evaluate(() => {
+      const r = (sel) => Math.round(document.querySelector(sel).getBoundingClientRect().top);
+      return [r("[data-demo-title]"), r("[data-demo-sub]"), r("[data-demo-try] .demo-disc")].join("/");
+    }));
+  }
+  check(`${label} switching type does not move the card's title, line or disc`,
+    new Set(geometry).size === 1, geometry.join("  vs  "));
   check(`${label} each type is a different company`, companies.size === expected.length, [...companies].join(", "));
 
   await page.click("#demo-type-bestelstatus");
