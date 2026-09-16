@@ -1,0 +1,75 @@
+{
+    "slug": "terugbelverzoek",
+    "title": "Terugbelverzoek",
+    "sub": "De agent belt zelf terug na een eerder gemiste oproep.",
+    "audio": "terugbelverzoek.mp3",
+    "duration": 50.49,
+    "lines": [
+        {
+            "role": "agent",
+            "text": "Goedemorgen, u spreekt met de digitale assistent van Vlothuis Installatietechniek. Dit gesprek wordt opgenomen en automatisch samengevat. U belde gisteren en vroeg of wij u terug wilden bellen. Spreek ik met de heer Jansen?",
+            "start": 0,
+            "end": 13.34
+        },
+        {
+            "role": "caller",
+            "text": "Ja, dat klopt, met Jansen.",
+            "start": 13.88,
+            "end": 15.36
+        },
+        {
+            "role": "agent",
+            "text": "Fijn dat ik u te pakken heb. Het ging over een storing aan de cv-ketel, klopt dat?",
+            "start": 15.9,
+            "end": 20.59
+        },
+        {
+            "role": "caller",
+            "text": "Ja, hij slaat steeds af na een paar minuten.",
+            "start": 21.14,
+            "end": 23.85
+        },
+        {
+            "role": "agent",
+            "text": "Vervelend. Ik zie dat er nog geen monteur is ingepland. Zullen we daar nu een moment voor afspreken?",
+            "start": 24.4,
+            "end": 29.38
+        },
+        {
+            "role": "caller",
+            "text": "Graag, hoe eerder hoe beter.",
+            "start": 29.92,
+            "end": 31.71
+        },
+        {
+            "role": "agent",
+            "text": "Morgenochtend tussen negen en elf kan er iemand langskomen. Komt dat uit?",
+            "start": 32.25,
+            "end": 36.65
+        },
+        {
+            "role": "caller",
+            "text": "Ja, dat is goed.",
+            "start": 37.2,
+            "end": 38.68
+        },
+        {
+            "role": "agent",
+            "text": "Dan zet ik dat klaar en krijgt u vandaag nog een bevestiging per e-mail. Kan ik u verder nog ergens mee helpen?",
+            "start": 39.22,
+            "end": 45.44
+        },
+        {
+            "role": "caller",
+            "text": "Nee, dat was het. Bedankt voor het terugbellen.",
+            "start": 45.98,
+            "end": 48.47
+        },
+        {
+            "role": "agent",
+            "text": "Graag gedaan. Tot morgen.",
+            "start": 49.02,
+            "end": 50.49
+        }
+    ]
+}

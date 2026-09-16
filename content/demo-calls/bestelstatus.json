@@ -1,0 +1,69 @@
+{
+    "slug": "bestelstatus",
+    "title": "Bestelstatus",
+    "sub": "Een klant belt de webshop: waar blijft mijn bestelling?",
+    "audio": "bestelstatus.mp3",
+    "duration": 49.42,
+    "lines": [
+        {
+            "role": "agent",
+            "text": "U spreekt met de digitale assistent van Fietsplaza. Dit gesprek wordt opgenomen en automatisch samengevat. Zegt u \"medewerker\", dan verbind ik u direct door. Waarmee kan ik u helpen?",
+            "start": 0,
+            "end": 11.34
+        },
+        {
+            "role": "caller",
+            "text": "Goedemiddag, ik heb vorige week een fietsendrager besteld, maar ik heb nog niets ontvangen.",
+            "start": 11.89,
+            "end": 17.54
+        },
+        {
+            "role": "agent",
+            "text": "Dat zoek ik graag voor u op. Heeft u het bestelnummer bij de hand?",
+            "start": 18.08,
+            "end": 21.53
+        },
+        {
+            "role": "caller",
+            "text": "Ja, dat is twee zeven, acht vier, vier.",
+            "start": 22.08,
+            "end": 25.42
+        },
+        {
+            "role": "agent",
+            "text": "Twee zeven, acht vier, vier. Een moment, ik kijk het na.",
+            "start": 25.97,
+            "end": 29.47
+        },
+        {
+            "role": "agent",
+            "text": "Ik heb hem gevonden. Uw bestelling is gisteren verzonden en wordt morgen bezorgd.",
+            "start": 30.02,
+            "end": 34.82
+        },
+        {
+            "role": "caller",
+            "text": "Fijn. Krijg ik nog een bericht als hij eraan komt?",
+            "start": 35.36,
+            "end": 38.34
+        },
+        {
+            "role": "agent",
+            "text": "Ja, u ontvangt op de bezorgdag zelf een tijdvak op het e-mailadres van uw bestelling.",
+            "start": 38.89,
+            "end": 43.63
+        },
+        {
+            "role": "caller",
+            "text": "Top, dan wacht ik het af. Bedankt.",
+            "start": 44.18,
+            "end": 47.32
+        },
+        {
+            "role": "agent",
+            "text": "Graag gedaan. Fijne dag nog.",
+            "start": 47.86,
+            "end": 49.42
+        }
+    ]
+}

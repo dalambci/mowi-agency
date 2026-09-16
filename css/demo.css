@@ -1,0 +1,352 @@
+/* ==========================================================================
+   Demo sections on /support-agent (2026-09-16): "Hoor hem aan het werk"
+   (pre-recorded sample calls) and "Probeer het zelf" (a live, capped call/
+   chat with Mowi's own demo receptionist). Page-scoped on purpose, same
+   convention as css/templates.css — only support-agent.html loads this, so
+   it never needs the sitewide ?v= bump every style.css/main.js edit does.
+
+   Mirrors elevenlabs.io/voice-agents' two "Talk to an agent" sections
+   structurally (card shape, tab row, Voice/Chat toggle, in-card consent
+   panel) but NOT their colourful animated sphere (Sal's explicit call) —
+   the disc here is a static, monochrome stipple texture, reusing the
+   site's own hero grain technique (style.css's feTurbulence data-URI),
+   never a gradient animation. No new color token: everything below is
+   built from the existing :root tokens in style.css:29-71.
+   ========================================================================== */
+
+.demo-card {
+  position: relative;
+  background: var(--muted);
+  border-radius: 1.5rem;
+  box-shadow: inset 0 0 0 0.5px rgba(18, 17, 16, 0.08);
+  padding: 1.75rem;
+  /* Reused on every pill/button below that should read as "lifted off the
+     card", the same soft shadow elevenlabs.io uses on its own white pills —
+     defined once here rather than repeated per rule. */
+  --demo-shadow: 0 0 1px rgba(18, 17, 16, 0.35), 0 1px 1px rgba(18, 17, 16, 0.04), 0 2px 4px rgba(18, 17, 16, 0.06);
+}
+.demo-card [hidden] { display: none !important; } /* author display rules must never win over [hidden] — 2026-09-05 QA lesson (qa-templates.js) */
+
+.demo-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.demo-card-head-center { flex-direction: column; align-items: center; text-align: center; gap: 0.375rem; }
+.demo-card-title { font-size: 1rem; margin: 0; } /* inherits the sitewide h3 -> Inter Tight rule, kept deliberately */
+.demo-card-sub { font-size: 0.875rem; color: var(--ink-3); margin-top: 0.375rem; max-width: 30rem; }
+.demo-card-head-center .demo-card-sub { margin-top: 0.5rem; }
+
+.demo-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  height: 2.25rem;
+  padding: 0 0.9375rem;
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 0.875rem;
+  font-weight: 600;
+  box-shadow: var(--demo-shadow);
+  transition: opacity 0.15s ease;
+}
+.demo-pill-btn:hover { opacity: 0.75; }
+
+/* --- Stage + disc --------------------------------------------------------- */
+.demo-stage {
+  position: relative;
+  height: 25rem;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 1.1rem;
+}
+@media (max-width: 47.9rem) { .demo-stage { height: 20rem; } }
+
+.demo-disc {
+  position: relative;
+  width: 18rem;
+  height: 18rem;
+  border-radius: 50%;
+  /* Faint light-to-dark sphere shading in pure greyscale — no color token
+     added, just --bg/--band/--ink already in the palette. */
+  background: radial-gradient(circle at 34% 28%, var(--surface) 0%, var(--bg) 42%, var(--band) 78%, var(--ink-3) 130%);
+  box-shadow: inset 0 0 0 0.5px rgba(18, 17, 16, 0.12);
+  flex-shrink: 0;
+}
+.demo-disc-lg { width: 16rem; height: 16rem; }
+.demo-disc-sm { width: 4.5rem; height: 4.5rem; flex-shrink: 0; }
+@media (max-width: 47.9rem) {
+  .demo-disc { width: 13rem; height: 13rem; }
+  .demo-disc-lg { width: 12rem; height: 12rem; }
+}
+/* The site's own hero grain (style.css .hero::before), reused at higher
+   density so it reads as a halftone sphere rather than an ambient hint —
+   same feTurbulence data-URI, same alpha-ramp filter, just denser and
+   masked to fade toward the centre (where the play/call button sits) and
+   thicken toward the rim. Static: no keyframes, nothing for the sitewide
+   reduced-motion rule to need to disable. */
+.demo-disc::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 10 -5.6'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-size: 220px 220px;
+  opacity: 0.32;
+  mask-image: radial-gradient(circle, transparent 0 20%, #000 68%);
+  -webkit-mask-image: radial-gradient(circle, transparent 0 20%, #000 68%);
+}
+
+.demo-play,
+.demo-call {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--ink);
+  cursor: pointer;
+}
+.demo-play {
+  width: 3.5rem;
+  height: 3.5rem;
+  background: rgba(18, 17, 16, 0.22);
+  color: #fff;
+  backdrop-filter: blur(2px);
+}
+.demo-call {
+  width: 3rem;
+  height: 3rem;
+  background: var(--surface);
+  box-shadow: var(--demo-shadow);
+}
+.demo-play svg, .demo-call svg { width: 1.25rem; height: 1.25rem; display: block; }
+.demo-play .demo-ico-pause, .demo-play[aria-pressed="true"] .demo-ico-play { display: none; }
+.demo-play[aria-pressed="true"] .demo-ico-pause { display: block; }
+
+/* Absolute-centred overlay button on top of the stage/disc (Section A and
+   B's voice tab both use this positioning shell). */
+.demo-stage-center {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  z-index: 3;
+}
+
+/* --- Transcript bubbles ----------------------------------------------------
+   Newest at the bottom, older ones pushed up under a top fade — flex-end +
+   overflow:hidden gives this with zero scroll/JS bookkeeping (js/demo.js
+   only ever appends; it never has to compute a scroll position). */
+.demo-transcript {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding: 1.25rem;
+  overflow: hidden;
+  pointer-events: none;
+  mask-image: linear-gradient(to bottom, transparent, #000 30%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 30%);
+}
+.demo-bubble {
+  max-width: 72%;
+  padding: 0.5rem 0.8125rem;
+  border-radius: 1.3125rem;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+}
+@media (max-width: 47.9rem) { .demo-bubble { max-width: 86%; } }
+.demo-bubble-agent { align-self: flex-start; background: rgba(18, 17, 16, 0.07); color: var(--ink-2); }
+.demo-bubble-caller { align-self: flex-end; background: var(--surface); color: var(--ink); box-shadow: var(--demo-shadow); border-top-right-radius: 0.4rem; }
+
+/* Chat mode uses a normal, always-visible scrolling log instead of the
+   fade-out overlay above (there is no disc obscuring it to fade behind). */
+.demo-transcript-chat {
+  position: static;
+  flex: 1 1 auto;
+  min-height: 8rem;
+  max-height: 16rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  mask-image: none;
+  -webkit-mask-image: none;
+  padding: 0;
+  pointer-events: auto;
+}
+
+/* --- Tabs (Section A) ------------------------------------------------------
+   Reuses js/main.js's initPillTabs contract (role=tab / aria-controls /
+   aria-selected / roving tabindex / arrow keys) — new visual classes only,
+   no JS contract change, so main.js itself is untouched. */
+.demo-tabs {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 1.25rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.demo-tabs::-webkit-scrollbar { display: none; }
+@media (max-width: 47.9rem) {
+  .demo-tabs {
+    justify-content: flex-start;
+    padding: 0 0.25rem;
+    mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  }
+}
+.demo-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  flex-shrink: 0;
+  white-space: nowrap;
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+  color: var(--ink-3);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+@media (hover: hover) { .demo-tab:hover { color: var(--ink-2); } }
+.demo-tab[aria-selected="true"] { color: var(--ink); font-weight: 600; }
+.demo-tab-thumb {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--border);
+  color: var(--ink-2);
+}
+.demo-tab[aria-selected="true"] .demo-tab-thumb { color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--ink); }
+.demo-tab-thumb svg { width: 1.125rem; height: 1.125rem; display: block; }
+
+/* --- Voice/Chat segmented toggle (Section B) -------------------------------
+   Own recipe, not css/templates.css's .tpl-seg (that file isn't loaded on
+   this page) — same idea (a pill-shaped role=tablist), retokenised. */
+.demo-seg {
+  display: inline-flex;
+  gap: 0.1875rem;
+  padding: 0.1875rem;
+  border-radius: var(--radius-pill);
+  background: rgba(18, 17, 16, 0.06);
+  margin: 1.25rem auto 0;
+}
+.demo-seg[hidden] { display: none; }
+.demo-seg-tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.125rem;
+  padding: 0 1.125rem;
+  border-radius: var(--radius-pill);
+  color: var(--ink-2);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+.demo-seg-tab[aria-selected="true"] { background: var(--surface); color: var(--ink); box-shadow: var(--demo-shadow); }
+.demo-seg-tab:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* --- Consent panel ---------------------------------------------------------
+   Replaces the card body in place (js/demo.js toggles [hidden]) rather than
+   a modal overlay — matches the reference's own in-card consent step and
+   needs no focus-trap machinery the site doesn't otherwise have. */
+.demo-consent { max-width: 30rem; margin: 0 auto; padding: 0.5rem 0 0.25rem; }
+.demo-consent-intro { font-size: 1.0625rem; color: var(--ink); margin-bottom: 1rem; }
+.demo-consent-list { list-style: disc; padding-left: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; }
+.demo-consent-list li { font-size: 0.875rem; color: var(--ink-2); line-height: 1.5; }
+.demo-consent-list a { color: var(--ink); text-decoration: underline; text-underline-offset: 2px; }
+
+.demo-actions { display: flex; gap: 0.75rem; margin-top: 1.5rem; }
+.demo-btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.75rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+.demo-btn:hover { opacity: 0.85; }
+.demo-btn-light { background: var(--surface); color: var(--ink); box-shadow: var(--demo-shadow); }
+.demo-btn-dark { background: var(--ink); color: var(--bg); }
+
+/* Live-call footer (status text, countdown, ophangen) */
+.demo-actions-live { justify-content: center; align-items: center; gap: 1.25rem; }
+.demo-actions-live .demo-btn { flex: none; padding: 0 1.75rem; }
+.demo-timer { font-variant-numeric: tabular-nums; color: var(--ink-2); font-size: 0.9375rem; }
+.demo-status { text-align: center; color: var(--ink-2); font-size: 0.9375rem; margin-top: 1rem; min-height: 1.375rem; }
+.demo-error { text-align: center; color: var(--ink-2); font-size: 0.875rem; margin-top: 0.75rem; }
+.demo-ai-note { text-align: center; font-size: 0.8125rem; color: var(--ink-3); margin-top: 1rem; }
+
+/* --- Chat mode -------------------------------------------------------------- */
+.demo-chat-intro { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; }
+.demo-chat-greeting { font-size: 0.9375rem; color: var(--ink); line-height: 1.5; }
+.demo-chat-form {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--surface);
+  border-radius: var(--radius-pill);
+  padding: 0.375rem 0.375rem 0.375rem 1.125rem;
+  box-shadow: var(--demo-shadow);
+  margin-top: 0.75rem;
+}
+.demo-chat-input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  /* 16px, not the sitewide 15px body size: iOS Safari zooms the viewport
+     into any text input under 16px on focus, which would visibly jump the
+     whole card. */
+  font-size: 1rem;
+  color: var(--ink);
+}
+.demo-chat-input::placeholder { color: var(--ink-3); }
+.demo-chat-input:focus { outline: none; }
+.demo-chat-send {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--bg);
+  cursor: pointer;
+}
+.demo-chat-send:disabled { opacity: 0.4; cursor: not-allowed; }
+.demo-chat-send svg { width: 1rem; height: 1rem; display: block; }
+
+/* --- Ended state ------------------------------------------------------------ */
+.demo-ended { text-align: center; padding: 1rem 0; }
+.demo-ended .demo-actions { justify-content: center; }
+.demo-ended .demo-actions .btn-primary { flex: none; }
+.demo-ended .demo-actions .demo-btn { flex: none; padding: 0 1.5rem; }
+
+@media (max-width: 47.9rem) {
+  .demo-card { padding: 1.25rem; }
+}

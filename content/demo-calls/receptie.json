@@ -1,0 +1,75 @@
+{
+    "slug": "receptie",
+    "title": "Receptie & offerte",
+    "sub": "Een offerteaanvraag aan de telefoon, met de gegevens die daarvoor nodig zijn.",
+    "audio": "receptie.mp3",
+    "duration": 62.75,
+    "lines": [
+        {
+            "role": "agent",
+            "text": "U spreekt met de digitale assistent van Van Dijk Zonwering. Dit gesprek wordt opgenomen en automatisch samengevat. Zegt u \"medewerker\", dan verbind ik u direct door. Waarmee kan ik u helpen?",
+            "start": 0,
+            "end": 11.25
+        },
+        {
+            "role": "caller",
+            "text": "Goedemiddag, ik wil graag een offerte voor een nieuw rolluik.",
+            "start": 11.79,
+            "end": 15.37
+        },
+        {
+            "role": "agent",
+            "text": "Dat zet ik voor u klaar. Voor welk raam is het bedoeld, en weet u de maten?",
+            "start": 15.92,
+            "end": 20.49
+        },
+        {
+            "role": "caller",
+            "text": "Het is voor de achterdeur, ongeveer twee meter breed en twee meter twintig hoog.",
+            "start": 21.04,
+            "end": 26.26
+        },
+        {
+            "role": "agent",
+            "text": "Twee meter breed, twee meter twintig hoog. Genoteerd. Wilt u handbediening of elektrisch?",
+            "start": 26.81,
+            "end": 31.93
+        },
+        {
+            "role": "caller",
+            "text": "Elektrisch graag, met een afstandsbediening.",
+            "start": 32.48,
+            "end": 35.46
+        },
+        {
+            "role": "agent",
+            "text": "Prima. Mag ik uw adres en een telefoonnummer waarop u bereikbaar bent?",
+            "start": 36.01,
+            "end": 40.11
+        },
+        {
+            "role": "caller",
+            "text": "Kerkstraat twaalf in Utrecht, en mijn nummer is nul zes, negen acht, zeven zes, vijf vier, drie twee.",
+            "start": 40.66,
+            "end": 49.41
+        },
+        {
+            "role": "agent",
+            "text": "Kerkstraat twaalf in Utrecht, nul zes, negen acht, zeven zes, vijf vier, drie twee. Een collega neemt dit door en stuurt u deze week de offerte.",
+            "start": 49.96,
+            "end": 59
+        },
+        {
+            "role": "caller",
+            "text": "Helder, dank u wel.",
+            "start": 59.54,
+            "end": 60.64
+        },
+        {
+            "role": "agent",
+            "text": "Graag gedaan. Fijne dag nog.",
+            "start": 61.18,
+            "end": 62.75
+        }
+    ]
+}
