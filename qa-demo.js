@@ -322,7 +322,21 @@ async function runLive(browserType, label) {
   await page.click("[data-demo-start]");
   await page.waitForTimeout(200);
   await page.click("[data-demo-agree]");
-  await page.waitForTimeout(20000);
+
+  // Sample the disc while the agent is actually speaking. This is the only
+  // place the conversation-driven path (the SDK's getOutputVolume /
+  // getInputVolume, rather than the AnalyserNode used for the samples) is
+  // exercised at all, so without this it ships unverified.
+  const liveLevels = [];
+  for (let i = 0; i < 100; i++) {
+    liveLevels.push(await page.evaluate(() => parseFloat(getComputedStyle(document.querySelector("[data-demo-live] .demo-disc")).getPropertyValue("--demo-level")) || 0));
+    await page.waitForTimeout(200);
+  }
+  const livePeak = Math.max(...liveLevels);
+  check(`${label} LIVE: the disc moves with the agent's real voice`,
+    livePeak > 0.05 && new Set(liveLevels.map((v) => v.toFixed(2))).size > 3,
+    `peak ${livePeak.toFixed(2)}, ${new Set(liveLevels.map((v) => v.toFixed(2))).size} distinct values`);
+
   const liveText = await text(page, "[data-demo-live-log]");
   check(`${label} LIVE: a real voice session produced at least one agent line within 20s`, !!liveText && liveText.length > 0, liveText);
   await page.click("[data-demo-hangup]").catch(() => {});
