@@ -34,6 +34,11 @@ const { chromium, webkit, devices } = require("playwright");
 
 const args = process.argv.slice(2).filter((a) => a !== "--live");
 const LIVE = process.argv.includes("--live");
+// The live run costs a real, capped voice session, so only ONE page gets one.
+// Both pages share js/demo.js and the same endpoint, and runParity() proves
+// their markup has not diverged, so one page is enough — this flag just says
+// which. Default is /support-agent.
+const LIVE_PATH = (process.argv.find((a) => a.startsWith("--live-path=")) || "").split("=")[1] || "/support-agent";
 const BASE = (args[0] || "http://localhost:8765").replace(/\/$/, "");
 const OUT = path.join(__dirname, "screenshots");
 if (!fs.existsSync(OUT)) fs.mkdirSync(OUT);
@@ -314,12 +319,12 @@ async function run(browserType, label, viewport, device, pagePath = "/support-ag
   await browser.close();
 }
 
-async function runLive(browserType, label) {
+async function runLive(browserType, label, pagePath = LIVE_PATH) {
   const browser = await browserType.launch({ args: ["--use-fake-ui-for-media-stream", "--use-fake-device-for-media-stream"] });
   const context = await browser.newContext({ viewport: { width: 1280, height: 900 } });
   await context.grantPermissions(["microphone"], { origin: BASE });
   const page = await context.newPage();
-  await page.goto(BASE + "/support-agent");
+  await page.goto(BASE + pagePath);
   await page.waitForSelector("[data-demo-try]");
 
   await page.click("[data-demo-start]");
@@ -407,7 +412,7 @@ async function runParity(browserType, label) {
   // two pages have not drifted.
   await run(chromium, "chromium-callagent", { width: 1440, height: 900 }, null, "/call-agent");
   await runParity(chromium, "parity");
-  if (LIVE) await runLive(chromium, "live-chromium");
+  if (LIVE) await runLive(chromium, `live-chromium${LIVE_PATH}`);
   console.log(`\n${results.length - failures}/${results.length} checks passed against ${BASE}${LIVE ? " (including LIVE)" : ""}`);
   process.exit(failures ? 1 : 0);
 })().catch((e) => { console.error(e); process.exit(2); });
