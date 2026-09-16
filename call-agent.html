@@ -162,83 +162,181 @@
           <p class="section-sub section-sub-center">Bel de Support Agent van Mowi en hoor aan de lijn wat uw beller hoort. Maximaal twee minuten, geen account nodig.</p>
         </div>
 
-        <div class="demo-card demo-try" data-demo-try data-state="idle" data-endpoint="https://my.mowi.agency/api/demo/session">
-          <div data-demo-body>
-            <div class="demo-card-head demo-card-head-center">
-              <h3 class="demo-card-title">Mowi's eigen Support Agent</h3>
-              <p class="demo-card-sub">Vraag wat u wilt over Mowi, of test gewoon hoe het klinkt om hem aan de lijn te hebben.</p>
+        <div class="demo-duo">
+          <div class="demo-card demo-try" data-demo-try data-state="idle" data-endpoint="https://my.mowi.agency/api/demo/session">
+            <div data-demo-body>
+              <div class="demo-card-head demo-card-head-center">
+                <h3 class="demo-card-title">Mowi's eigen Support Agent</h3>
+                <p class="demo-card-sub">Vraag wat u wilt over Mowi, of test gewoon hoe het klinkt om hem aan de lijn te hebben.</p>
+              </div>
+
+              <div data-pill-tabs>
+                <div class="demo-stage demo-stage-try" id="demo-panel-voice" role="tabpanel" aria-labelledby="demo-mode-voice">
+                  <div class="demo-disc demo-disc-lg" aria-hidden="true"></div>
+                  <div class="demo-stage-center">
+                    <button type="button" class="demo-call" data-demo-start aria-label="Gesprek starten">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .3 2 .7 3a2 2 0 0 1-.4 2.1L8 10.2a16 16 0 0 0 6 6l1.4-1.4a2 2 0 0 1 2.1-.4c1 .4 2 .6 3 .7a2 2 0 0 1 1.7 2z"/></svg>
+                    </button>
+                  </div>
+                </div>
+
+                <div id="demo-panel-chat" role="tabpanel" aria-labelledby="demo-mode-chat" hidden>
+                  <div class="demo-chat-intro">
+                    <div class="demo-disc demo-disc-sm" aria-hidden="true"></div>
+                    <p class="demo-chat-greeting" data-demo-greeting>U spreekt met de digitale assistent van Mowi, in een demo op onze website. Waarmee kan ik u helpen?</p>
+                  </div>
+                  <div class="demo-transcript demo-transcript-chat" data-demo-chat-log role="log" aria-live="polite"></div>
+                  <form class="demo-chat-form" data-demo-chat-form>
+                    <label for="demo-chat-input" class="visually-hidden">Uw bericht</label>
+                    <input id="demo-chat-input" class="demo-chat-input" data-demo-chat-input type="text" placeholder="Typ een bericht…" autocomplete="off" maxlength="500" required />
+                    <button type="submit" class="demo-chat-send" aria-label="Versturen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+                  </form>
+                </div>
+
+                <div class="demo-seg" role="tablist" aria-label="Bellen of chatten">
+                  <button type="button" class="demo-seg-tab" role="tab" id="demo-mode-voice" aria-selected="true" aria-controls="demo-panel-voice">Bellen</button>
+                  <button type="button" class="demo-seg-tab" role="tab" id="demo-mode-chat" tabindex="-1" aria-selected="false" aria-controls="demo-panel-chat">Chatten</button>
+                </div>
+              </div>
+
+              <p class="demo-ai-note">U spreekt met een AI-assistent, niet met een medewerker.</p>
             </div>
 
-            <div data-pill-tabs>
-              <div class="demo-stage demo-stage-try" id="demo-panel-voice" role="tabpanel" aria-labelledby="demo-mode-voice">
+            <div class="demo-consent" data-demo-consent hidden tabindex="-1">
+              <p class="demo-consent-intro">Door op &lsquo;Ik ga akkoord&rsquo; te klikken en deze dienst te gebruiken, bevestigt u:</p>
+              <ul class="demo-consent-list">
+                <li>dat u 18 jaar of ouder bent;</li>
+                <li>dat u spreekt met een AI-dienst, niet met een medewerker;</li>
+                <li>dat dit gesprek wordt opgenomen om de dienst te kunnen leveren, en automatisch wordt samengevat;</li>
+                <li>dat onze <a href="/privacyverklaring">privacyverklaring</a> van toepassing is;</li>
+                <li>dat uw gegevens worden gedeeld met onze leveranciers voor spraak- en taaltechnologie, voor zover nodig om deze dienst te leveren.</li>
+              </ul>
+              <div class="demo-actions">
+                <button type="button" class="demo-btn demo-btn-light" data-demo-cancel>Annuleren</button>
+                <button type="button" class="demo-btn demo-btn-dark" data-demo-agree>Ik ga akkoord</button>
+              </div>
+            </div>
+
+            <div class="demo-live" data-demo-live hidden>
+              <div class="demo-stage demo-stage-try">
                 <div class="demo-disc demo-disc-lg" aria-hidden="true"></div>
-                <div class="demo-stage-center">
-                  <button type="button" class="demo-call" data-demo-start aria-label="Gesprek starten">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .3 2 .7 3a2 2 0 0 1-.4 2.1L8 10.2a16 16 0 0 0 6 6l1.4-1.4a2 2 0 0 1 2.1-.4c1 .4 2 .6 3 .7a2 2 0 0 1 1.7 2z"/></svg>
-                  </button>
-                </div>
+                <div class="demo-transcript" data-demo-live-log aria-hidden="true"></div>
               </div>
-
-              <div id="demo-panel-chat" role="tabpanel" aria-labelledby="demo-mode-chat" hidden>
-                <div class="demo-chat-intro">
-                  <div class="demo-disc demo-disc-sm" aria-hidden="true"></div>
-                  <p class="demo-chat-greeting" data-demo-greeting>U spreekt met de digitale assistent van Mowi, in een demo op onze website. Waarmee kan ik u helpen?</p>
-                </div>
-                <div class="demo-transcript demo-transcript-chat" data-demo-chat-log role="log" aria-live="polite"></div>
-                <form class="demo-chat-form" data-demo-chat-form>
-                  <label for="demo-chat-input" class="visually-hidden">Uw bericht</label>
-                  <input id="demo-chat-input" class="demo-chat-input" data-demo-chat-input type="text" placeholder="Typ een bericht…" autocomplete="off" maxlength="500" required />
-                  <button type="submit" class="demo-chat-send" aria-label="Versturen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-                </form>
-              </div>
-
-              <div class="demo-seg" role="tablist" aria-label="Bellen of chatten">
-                <button type="button" class="demo-seg-tab" role="tab" id="demo-mode-voice" aria-selected="true" aria-controls="demo-panel-voice">Bellen</button>
-                <button type="button" class="demo-seg-tab" role="tab" id="demo-mode-chat" tabindex="-1" aria-selected="false" aria-controls="demo-panel-chat">Chatten</button>
+              <p class="demo-status" data-demo-status aria-live="polite">Verbinden…</p>
+              <div class="demo-actions demo-actions-live">
+                <span class="demo-timer" data-demo-timer aria-label="Resterende tijd">2:00</span>
+                <button type="button" class="demo-btn demo-btn-dark" data-demo-hangup>Ophangen</button>
               </div>
             </div>
 
-            <p class="demo-ai-note">U spreekt met een AI-assistent, niet met een medewerker.</p>
+            <div class="demo-ended" data-demo-ended hidden tabindex="-1">
+              <h3 class="demo-card-title">Dat was de demo</h3>
+              <p class="demo-card-sub">Wilt u zien wat hij voor uw eigen bedrijf doet, op uw eigen kennis en systemen?</p>
+              <div class="demo-actions">
+                <a class="btn-primary" href="https://my.mowi.agency/aanmelden" data-event="Signup Click">Start gratis</a>
+                <button type="button" class="demo-btn demo-btn-light" data-demo-again>Nog een keer</button>
+              </div>
+            </div>
+
+            <p class="demo-error" data-demo-error role="alert" hidden></p>
+            <a class="demo-btn demo-btn-dark demo-fallback" data-demo-fallback href="/demo" data-event="Demo Fallback" hidden>Plan een gesprek van 20 minuten</a>
           </div>
 
-          <div class="demo-consent" data-demo-consent hidden tabindex="-1">
-            <p class="demo-consent-intro">Door op &lsquo;Ik ga akkoord&rsquo; te klikken en deze dienst te gebruiken, bevestigt u:</p>
-            <ul class="demo-consent-list">
-              <li>dat u 18 jaar of ouder bent;</li>
-              <li>dat u spreekt met een AI-dienst, niet met een medewerker;</li>
-              <li>dat dit gesprek wordt opgenomen om de dienst te kunnen leveren, en automatisch wordt samengevat;</li>
-              <li>dat onze <a href="/privacyverklaring">privacyverklaring</a> van toepassing is;</li>
-              <li>dat uw gegevens worden gedeeld met onze leveranciers voor spraak- en taaltechnologie, voor zover nodig om deze dienst te leveren.</li>
-            </ul>
+          <!-- The workflow the agent beside this card is actually running. The
+               canvas is the same interactive component the template detail
+               pages use (js/workflow-canvas.js: drag to pan, scroll to zoom),
+               and its markup is GENERATED — see injectDemoWorkflows() in
+               build-templates.js. Do not hand-edit between the markers; run
+               `node build-templates.js` instead. -->
+          <div class="demo-card demo-flow">
+            <div class="demo-card-head">
+              <div>
+                <h3 class="demo-card-title">En dit is wat hij intussen doet</h3>
+                <p class="demo-card-sub">Geen script, maar een workflow die u zelf kunt aanpassen. Sleep eraan.</p>
+              </div>
+            </div>
+
+            <div class="demo-flow-stage">
+<!-- wf-demo:start — generated by build-templates.js, do not hand-edit -->
+<div class="wf-canvas" data-wf-canvas data-wf-fit="center" role="group" aria-label="Webshop — Voice agent">
+  <div class="wf-viewport" data-wf-viewport tabindex="0">
+    <div class="wf-stage" data-wf-stage style="width:520px;height:1272px">
+      <svg class="wf-edges" width="520" height="1272" aria-hidden="true"><defs><marker id="wftpl44-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--wf-edge)" /></marker></defs><path d="M260,128 C260,176 260,176 260,224" class="wf-edge-path" marker-end="url(#wftpl44-arrow)" /><path d="M260,312 C260,360 260,360 260,408" class="wf-edge-path" marker-end="url(#wftpl44-arrow)" /><path d="M260,496 C260,544 260,544 260,592" class="wf-edge-path" marker-end="url(#wftpl44-arrow)" /><path d="M260,680 C260,728 260,728 260,776" class="wf-edge-path" marker-end="url(#wftpl44-arrow)" /><path d="M260,864 C260,888 140,888 140,912 L140,960" class="wf-edge-path" marker-end="url(#wftpl44-arrow)" /><path d="M260,864 C260,888 380,888 380,912 L380,960" class="wf-edge-path" marker-end="url(#wftpl44-arrow)" /><path d="M140,1048 C140,1072 260,1072 260,1096 L260,1144" class="wf-edge-path" marker-end="url(#wftpl44-arrow)" /><path d="M380,1048 C380,1072 260,1072 260,1096 L260,1144" class="wf-edge-path" marker-end="url(#wftpl44-arrow)" /></svg>
+      <span class="wf-edge-label" style="left:140px;top:936px" title="Gevonden">Gevonden</span>
+<span class="wf-edge-label" style="left:380px;top:936px" title="Niet gevonden">Niet gevonden</span>
+      <div class="wf-node wf-node-start" style="left:160px;top:40px;width:200px;height:88px">
+  <div class="wf-node-head">
+    <span class="wf-node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="7" fill="none"/><circle cx="12" cy="12" r="2.3" fill="currentColor" stroke="none"/></svg></span>
+    <span class="wf-node-title">Start</span>
+  </div>
+  <div class="wf-node-body" title="Telefoon gaat over.">Telefoon gaat over.</div>
+</div>
+      <div class="wf-node wf-node-talk" style="left:160px;top:224px;width:200px;height:88px">
+  <div class="wf-node-head">
+    <span class="wf-node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="12" rx="3"/><path d="M8 16.5v3.5l4.5-3.5"/></svg></span>
+    <span class="wf-node-title">Begroeting</span>
+  </div>
+  <div class="wf-node-body" title="Meldt zich als virtuele assistent van het bedrijf en dat het gesprek wordt opgenomen.">Meldt zich als virtuele assistent van het bedrijf en dat het gesprek wordt opgenomen.</div>
+</div>
+      <div class="wf-node wf-node-talk" style="left:160px;top:408px;width:200px;height:88px">
+  <div class="wf-node-head">
+    <span class="wf-node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="12" rx="3"/><path d="M8 16.5v3.5l4.5-3.5"/></svg></span>
+    <span class="wf-node-title">Intake</span>
+  </div>
+  <div class="wf-node-body" title="Vraag naar het ordernummer of e-mailadres waarmee besteld is, en waar de vraag precies over gaat (levering, retour, product).">Vraag naar het ordernummer of e-mailadres waarmee besteld is, en waar de vraag precies over gaat (levering, retour, product).</div>
+</div>
+      <div class="wf-node wf-node-tool" style="left:160px;top:592px;width:200px;height:88px">
+  <div class="wf-node-head">
+    <span class="wf-node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5h8M18.5 7.5H20M4 16.5h2M12.5 16.5H20"/><circle cx="15" cy="7.5" r="2.3"/><circle cx="9" cy="16.5" r="2.3"/></svg></span>
+    <span class="wf-node-title">Bestelling opzoeken</span>
+  </div>
+  <div class="wf-node-body" title="Vraagt bestelnummer en e-mailadres (of postcode) en zoekt de bestelling op in de webshop.">Vraagt bestelnummer en e-mailadres (of postcode) en zoekt de bestelling op in de webshop.</div>
+</div>
+      <div class="wf-node wf-node-decision" style="left:160px;top:776px;width:200px;height:88px">
+  <div class="wf-node-head">
+    <span class="wf-node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M9.3 9.3a2.7 2.7 0 1 1 3.6 2.5c-.8.3-1 .9-1 1.7"/><circle cx="12" cy="16.7" r=".3" fill="currentColor"/></svg></span>
+    <span class="wf-node-title">Gevonden?</span>
+  </div>
+  <div class="wf-node-body" title="Controleert of de bestelling of order bekend is.">Controleert of de bestelling of order bekend is.</div>
+</div>
+      <div class="wf-node wf-node-talk" style="left:40px;top:960px;width:200px;height:88px">
+  <div class="wf-node-head">
+    <span class="wf-node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="12" rx="3"/><path d="M8 16.5v3.5l4.5-3.5"/></svg></span>
+    <span class="wf-node-title">Status doorgeven</span>
+  </div>
+  <div class="wf-node-body" title="Geeft de status direct door aan de beller.">Geeft de status direct door aan de beller.</div>
+</div>
+      <div class="wf-node wf-node-tool" style="left:280px;top:960px;width:200px;height:88px">
+  <div class="wf-node-head">
+    <span class="wf-node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5h8M18.5 7.5H20M4 16.5h2M12.5 16.5H20"/><circle cx="15" cy="7.5" r="2.3"/><circle cx="9" cy="16.5" r="2.3"/></svg></span>
+    <span class="wf-node-title">Terugbelverzoek</span>
+  </div>
+  <div class="wf-node-body" title="Gebruik dit als de bestelling niet gevonden kan worden of het probleem meer uitzoekwerk vraagt.">Gebruik dit als de bestelling niet gevonden kan worden of het probleem meer uitzoekwerk vraagt.</div>
+</div>
+      <div class="wf-node wf-node-end" style="left:160px;top:1144px;width:200px;height:88px">
+  <div class="wf-node-head">
+    <span class="wf-node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M9 12.2l2 2 4-4.4"/></svg></span>
+    <span class="wf-node-title">Einde</span>
+  </div>
+  <div class="wf-node-body" title="Gesprek beëindigd.">Gesprek beëindigd.</div>
+</div>
+    </div>
+  </div>
+  <div class="wf-zoom-controls" role="group" aria-label="Zoom">
+    <button type="button" data-wf-zoom-out aria-label="Uitzoomen" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M20 20l-4.35-4.35M8 10.5h5"/></svg></button>
+    <button type="button" data-wf-zoom-reset aria-label="Passend maken" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+    <button type="button" data-wf-zoom-in aria-label="Inzoomen" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M20 20l-4.35-4.35M10.5 8v5M8 10.5h5"/></svg></button>
+  </div>
+  <span class="wf-hint" data-wf-hint>Sleep om te verkennen — scroll om te zoomen</span>
+</div>
+          <!-- wf-demo:end -->
+            </div>
+
             <div class="demo-actions">
-              <button type="button" class="demo-btn demo-btn-light" data-demo-cancel>Annuleren</button>
-              <button type="button" class="demo-btn demo-btn-dark" data-demo-agree>Ik ga akkoord</button>
+              <a class="demo-btn demo-btn-light" href="/templates/voice-agent-webshop">Bekijk de hele workflow</a>
+              <a class="demo-btn demo-btn-dark" href="https://my.mowi.agency/aanmelden" data-event="Signup Click">Gebruik deze template</a>
             </div>
           </div>
-
-          <div class="demo-live" data-demo-live hidden>
-            <div class="demo-stage demo-stage-try">
-              <div class="demo-disc demo-disc-lg" aria-hidden="true"></div>
-              <div class="demo-transcript" data-demo-live-log aria-hidden="true"></div>
-            </div>
-            <p class="demo-status" data-demo-status aria-live="polite">Verbinden…</p>
-            <div class="demo-actions demo-actions-live">
-              <span class="demo-timer" data-demo-timer aria-label="Resterende tijd">2:00</span>
-              <button type="button" class="demo-btn demo-btn-dark" data-demo-hangup>Ophangen</button>
-            </div>
-          </div>
-
-          <div class="demo-ended" data-demo-ended hidden tabindex="-1">
-            <h3 class="demo-card-title">Dat was de demo</h3>
-            <p class="demo-card-sub">Wilt u zien wat hij voor uw eigen bedrijf doet, op uw eigen kennis en systemen?</p>
-            <div class="demo-actions">
-              <a class="btn-primary" href="https://my.mowi.agency/aanmelden" data-event="Signup Click">Start gratis</a>
-              <button type="button" class="demo-btn demo-btn-light" data-demo-again>Nog een keer</button>
-            </div>
-          </div>
-
-          <p class="demo-error" data-demo-error role="alert" hidden></p>
-          <a class="demo-btn demo-btn-dark demo-fallback" data-demo-fallback href="/demo" data-event="Demo Fallback" hidden>Plan een gesprek van 20 minuten</a>
         </div>
       </div>
     </section>
@@ -754,5 +852,6 @@
 
   <script src="js/main.js?v=20260905-2"></script>
   <script src="js/demo.js?v=20260916-2"></script>
+  <script src="js/workflow-canvas.js?v=20260906-1"></script>
 </body>
 </html>

@@ -353,6 +353,65 @@
 }
 .demo-ai-note { text-align: center; font-size: 0.8125rem; color: var(--ink-3); margin-top: 1rem; }
 
+/* --- Two-up: the live demo beside the workflow it is running -----------------
+   Mirrors elevenlabs.io/voice-agents' paired cards. The point of putting them
+   side by side is that neither half proves much alone: the left card shows the
+   agent talking, the right card shows there is a real, editable workflow behind
+   it rather than a scripted party trick.
+
+   Stacks below 62rem. The demo card comes FIRST in source order, so on a phone
+   the thing you can actually do lands above the thing you look at. */
+.demo-duo {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  align-items: start;
+}
+
+@media (min-width: 62rem) {
+  .demo-duo { grid-template-columns: 1fr 1fr; }
+  /* Equal heights so the two cards read as a pair rather than a stack that
+     happens to sit next to itself. */
+  .demo-duo > .demo-card { height: 100%; display: flex; flex-direction: column; }
+  .demo-duo > .demo-card > [data-demo-body] { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+}
+
+/* The canvas is absolutely positioned inside its own stacking context and has
+   no intrinsic height, so the stage has to give it one. Matches .demo-stage's
+   height on the card beside it. */
+.demo-flow-stage {
+  position: relative;
+  height: 28rem;
+  margin: 0.5rem 0 1.25rem;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+/* These flows are 1272px tall. Nothing makes all eight nodes legible inside a
+   card, so the canvas opens at 1:1 with the Start node in view and the visitor
+   drags for the rest — legible and honest, rather than the reference's
+   shrunk-to-confetti whole graph. This fade is what stops that reading as a
+   clipped accident: it says the flow continues, which is also what makes the
+   drag affordance obvious. pointer-events:none so it never eats a drag. */
+.demo-flow-stage .wf-viewport::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 4.5rem;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(245, 242, 240, 0), var(--muted));
+}
+
+.demo-flow-stage .wf-canvas { position: absolute; inset: 0; height: 100%; }
+
+.demo-flow .demo-actions { margin-top: auto; }
+
+@media (max-width: 47.99rem) {
+  .demo-flow-stage { height: 20rem; }
+}
+
 /* --- Chat mode -------------------------------------------------------------- */
 .demo-chat-intro { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; }
 .demo-chat-greeting { font-size: 0.9375rem; color: var(--ink); line-height: 1.5; }

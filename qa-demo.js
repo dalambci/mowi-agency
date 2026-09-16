@@ -280,6 +280,8 @@ async function run(browserType, label, viewport, device, pagePath = "/support-ag
   // are the test fixture working as intended, not a real defect.
   const isExpectedTestNoise = (m) => m.includes("interactive-widget") || m.includes("does-not-exist") || m.includes("ERR_UNSAFE_PORT")
     || m.includes("status of 503") || m.includes("status of 429"); // Chromium's auto-logged resource-load-failure text carries no URL, only the status — every 503/429 on this page in this script is our own mockSession()
+  await checkWorkflowCanvas(page, label);
+
   check(`${label} zero console errors`, consoleErrors.filter((m) => !isExpectedTestNoise(m)).length === 0, consoleErrors.filter((m) => !isExpectedTestNoise(m)).slice(0, 5).join(" | "));
   check(`${label} zero unexpected 4xx/5xx responses`, bad.length === 0, bad.slice(0, 5).join(" | "));
   check(`${label} no horizontal page overflow`, await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1));
@@ -373,6 +375,134 @@ async function runLive(browserType, label, pagePath = LIVE_PATH) {
  * stamped on <body>. Copy is expected to differ (the phone page talks about
  * the telephone), so headings are deliberately NOT compared.
  */
+
+/**
+ * The workflow canvas beside the live demo. This is the half of the pair that
+ * is easy to ship broken and never notice: it is generated markup (see
+ * injectDemoWorkflows() in build-templates.js) mounted by a separate script,
+ * so a missing <script>, an empty generated block, or a CSS change that gives
+ * the stage no height all leave a card that simply looks empty.
+ *
+ * It must also NOT steal the page scroll — the canvas sits mid-page, and a
+ * drag that scrolled the document instead of panning would be worse than not
+ * having it at all.
+ */
+async function checkWorkflowCanvas(page, label) {
+  const sel = ".demo-flow-stage [data-wf-canvas]";
+  const present = await page.$(sel);
+  check(`${label} the workflow canvas is on the page`, !!present);
+  if (!present) return;
+
+  const state = await page.evaluate((s) => {
+    const c = document.querySelector(s);
+    const r = c.getBoundingClientRect();
+    return {
+      mounted: c.hasAttribute("data-wf-mounted"),
+      nodes: c.querySelectorAll(".wf-node").length,
+      zoom: c.querySelectorAll("[data-wf-zoom-in],[data-wf-zoom-out]").length,
+      h: Math.round(r.height),
+    };
+  }, sel);
+
+  check(`${label} the canvas mounted and has real nodes`, state.mounted && state.nodes >= 5, JSON.stringify(state));
+  check(`${label} the canvas has a visible height`, state.h > 200, `${state.h}px`);
+  check(`${label} the canvas has zoom controls`, state.zoom === 2);
+
+  // css/style.css sets `html { scroll-behavior: smooth }`, so scrollIntoView
+  // ANIMATES. That broke this check twice over: window.scrollY was still
+  // gliding when the "does not scroll the page" baseline was read, AND the
+  // element box measured before the glide finished pointed somewhere else by
+  // the time the drag ran, so the drag missed the canvas entirely. Turning
+  // smooth scrolling off for the test makes the scroll instant and the
+  // geometry stable; it changes nothing about what is being tested, since the
+  // site itself already disables it under prefers-reduced-motion.
+  await page.addStyleTag({ content: "html { scroll-behavior: auto !important; }" });
+  await page.evaluate(() => document.querySelector(".demo-flow-stage").scrollIntoView({ block: "center" }));
+  await page.waitForTimeout(250);
+
+  const box = await (await page.$(`${sel} [data-wf-viewport]`)).boundingBox();
+  const readT = () => page.evaluate((s) => getComputedStyle(document.querySelector(s + " [data-wf-stage]")).transform, sel);
+
+  // On a touch device the canvas deliberately does NOT pan until it is armed
+  // by a tap (js/workflow-canvas.js: `pointerType === "touch" && !armed`), so
+  // that a swipe over a mid-page canvas scrolls the page like the visitor
+  // expects. Arming is therefore part of the behaviour under test, not a
+  // workaround: tap the hint, which is the arming control on touch.
+  const isTouch = await page.evaluate(() => "ontouchstart" in window || navigator.maxTouchPoints > 0);
+  if (isTouch) {
+    await page.tap(`${sel} [data-wf-hint]`).catch(() => {});
+    await page.waitForTimeout(250);
+    check(`${label} a tap arms the canvas on touch`, await page.evaluate((s) =>
+      document.querySelector(s + " [data-wf-viewport]").classList.contains("wf-armed"), sel));
+  }
+
+  const before = await readT();
+  const scrollBefore = await page.evaluate(() => window.scrollY);
+
+  if (isTouch) {
+    await page.touchscreen.tap(box.x + box.width / 2, box.y + box.height / 2).catch(() => {});
+    await page.evaluate(({ x, y }) => {
+      const v = document.querySelector(".demo-flow-stage [data-wf-viewport]");
+      const ev = (type, cy) => v.dispatchEvent(new PointerEvent(type, { pointerId: 1, pointerType: "touch", clientX: x, clientY: cy, bubbles: true, cancelable: true }));
+      ev("pointerdown", y);
+      for (let i = 1; i <= 12; i++) ev("pointermove", y - i * 10);
+      ev("pointerup", y - 120);
+    }, { x: box.x + box.width / 2, y: box.y + box.height / 2 });
+    await page.waitForTimeout(200);
+  } else {
+    await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+    await page.mouse.down();
+    for (let i = 1; i <= 12; i++) await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2 - i * 10);
+    await page.mouse.up();
+    await page.waitForTimeout(200);
+  }
+
+  check(`${label} dragging the canvas pans it`, (await readT()) !== before, `${before} -> ${await readT()}`);
+  check(`${label} dragging the canvas does not scroll the page`, (await page.evaluate(() => window.scrollY)) === scrollBefore);
+
+  const afterDrag = await readT();
+  await page.click(`${sel} [data-wf-zoom-in]`);
+  await page.waitForTimeout(200);
+  check(`${label} the zoom control zooms`, (await readT()) !== afterDrag);
+}
+
+/**
+ * The homepage carries the demo card and the workflow, but NOT the sample-call
+ * player, so it gets its own pass rather than run()'s full suite.
+ */
+async function runHome(browserType, label) {
+  const browser = await browserType.launch();
+  const page = await (await browser.newContext({ viewport: { width: 1440, height: 1000 } })).newPage();
+  const errors = [];
+  page.on("console", (m) => { if (m.type() === "error") errors.push(m.text()); });
+
+  await page.goto(BASE + "/");
+  await page.waitForTimeout(600);
+
+  check(`${label} the demo card is on the homepage`, await visible(page, "[data-demo-try]"));
+  check(`${label} it is the second section`, await page.evaluate(() => {
+    const secs = [...document.querySelectorAll("section")];
+    const i = secs.findIndex((s) => s.querySelector("[data-demo-try]"));
+    return i === 1;
+  }));
+  check(`${label} Bellen/Chatten still toggles here`, await page.evaluate(async () => {
+    document.querySelectorAll("[data-demo-try] [role=tab]")[1].click();
+    await new Promise((r) => setTimeout(r, 200));
+    return !document.querySelector("#demo-panel-chat").hidden;
+  }));
+  // The homepage's own static workflow pictures must be left alone by the
+  // canvas script it now loads — they carry no data-wf-canvas on purpose.
+  check(`${label} the static workflow pictures were not hijacked`, await page.evaluate(
+    () => [...document.querySelectorAll(".wf-canvas-static")].every((el) => !el.hasAttribute("data-wf-mounted"))));
+
+  await checkWorkflowCanvas(page, label);
+
+  check(`${label} zero console errors`, errors.length === 0, errors.join(" | "));
+  check(`${label} no horizontal page overflow`, await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1));
+
+  await browser.close();
+}
+
 async function runParity(browserType, label) {
   const browser = await browserType.launch();
   const page = await (await browser.newContext({ viewport: { width: 1440, height: 900 } })).newPage();
@@ -412,6 +542,7 @@ async function runParity(browserType, label) {
   // two pages have not drifted.
   await run(chromium, "chromium-callagent", { width: 1440, height: 900 }, null, "/call-agent");
   await runParity(chromium, "parity");
+  await runHome(chromium, "home");
   if (LIVE) await runLive(chromium, `live-chromium${LIVE_PATH}`);
   console.log(`\n${results.length - failures}/${results.length} checks passed against ${BASE}${LIVE ? " (including LIVE)" : ""}`);
   process.exit(failures ? 1 : 0);
