@@ -590,6 +590,7 @@
 
     var title = document.querySelector("[data-demo-title]");
     var sub = document.querySelector("[data-demo-sub]");
+    var scenario = document.querySelector("[data-demo-scenario]");
     var tryCard = document.querySelector("[data-demo-try]");
 
     function activate(tab, focus) {
@@ -615,6 +616,10 @@
       // below it whenever you switched tab.
       if (title && company) title.textContent = company;
       if (sub) sub.textContent = tab.getAttribute("data-sub") || "";
+      // The line under the workflow card's title, kept in that card's HEAD
+      // rather than inside the panel so both cards' heads have the same shape
+      // and their text starts on the same line.
+      if (scenario) scenario.textContent = tab.getAttribute("data-scenario") || "";
 
       if (focus) tab.focus();
     }

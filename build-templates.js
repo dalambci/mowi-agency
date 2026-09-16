@@ -839,9 +839,8 @@ function injectDemoWorkflows(templates) {
       // two repos, no shared source. qa-demo.js's --live run asserts the
       // agent's own first sentence names the company written here, so the two
       // cannot drift apart silently.
-      tab: `<button type="button" class="demo-seg-tab" role="tab" id="demo-type-${t.key}" aria-controls="wf-panel-${t.key}" aria-selected="${sel}" tabindex="${sel ? 0 : -1}" data-demo-type="${t.key}" data-company="${esc(t.company)}" data-sub="${esc(t.demoSub)}">${esc(t.label)}</button>`,
+      tab: `<button type="button" class="demo-seg-tab" role="tab" id="demo-type-${t.key}" aria-controls="wf-panel-${t.key}" aria-selected="${sel}" tabindex="${sel ? 0 : -1}" data-demo-type="${t.key}" data-company="${esc(t.company)}" data-sub="${esc(t.demoSub)}" data-scenario="${esc(t.sub)}">${esc(t.label)}</button>`,
       panel: `<div class="demo-flow-panel" id="wf-panel-${t.key}" role="tabpanel" aria-labelledby="demo-type-${t.key}"${sel ? "" : " hidden"}>
-              <p class="demo-card-sub demo-flow-sub">${esc(t.sub)}</p>
               <div class="demo-flow-stage">
                 ${renderCanvasInteractive(template, "center")}
               </div>

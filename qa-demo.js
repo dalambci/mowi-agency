@@ -568,6 +568,30 @@ async function checkWorkflowTypes(page, label) {
   }
   check(`${label} switching type does not move the card's title, line or disc`,
     new Set(geometry).size === 1, geometry.join("  vs  "));
+
+  // The two cards are a matched pair, so their headings have to start on the
+  // same line. They drifted apart twice: once because the demo card's body was
+  // vertically centred while its neighbour's was not, and once because the two
+  // heads had different inner structure. Both were invisible to every other
+  // check here, and Sal spotted them by eye.
+  const heads = await page.evaluate(() => {
+    const t = (sel) => Math.round(document.querySelector(sel).getBoundingClientRect().top);
+    const cards = [document.querySelector("[data-demo-try]"), document.querySelector(".demo-card.demo-flow")];
+    return {
+      // Below 62rem the pair stacks, and a stacked card's heading is a screen
+      // further down by design — there is nothing to line it up with.
+      sideBySide: Math.round(cards[0].getBoundingClientRect().top) === Math.round(cards[1].getBoundingClientRect().top),
+      title: [t("[data-demo-title]"), t(".demo-flow .demo-card-title")],
+      line: [t("[data-demo-sub]"), t("[data-demo-scenario]")],
+    };
+  });
+
+  if (heads.sideBySide) {
+    check(`${label} both cards' titles start on the same line`, heads.title[0] === heads.title[1], heads.title.join(" vs "));
+    check(`${label} both cards' subtitles start on the same line`, heads.line[0] === heads.line[1], heads.line.join(" vs "));
+  } else {
+    console.log(`SKIP  ${label} cross-card heading alignment — the pair is stacked at this width, so there is no shared line.`);
+  }
   check(`${label} each type is a different company`, companies.size === expected.length, [...companies].join(", "));
 
   await page.click("#demo-type-bestelstatus");
