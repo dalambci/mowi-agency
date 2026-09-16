@@ -24,6 +24,109 @@
     return url + (url.indexOf("?") === -1 ? "?" : "&") + "v=" + v;
   }
 
+
+  /* ---------------------------------------------------------------------
+     Disc level — the one piece of motion on the page.
+
+     Writes --demo-level (0..1) onto a .demo-disc; css/demo.css turns that
+     into a small scale and a breathing ring. The level always comes from
+     REAL audio: an AnalyserNode over the sample player, and the SDK's own
+     getOutputVolume/getInputVolume during a live call. Nothing here runs on
+     a timer pretending to be speech.
+
+     prefers-reduced-motion is checked here rather than left to CSS: these
+     are inline style writes, and the sitewide reduced-motion rule only
+     disables CSS animations and transitions, so it would not catch them.
+     --------------------------------------------------------------------- */
+  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function discLevel(disc) {
+    var raf = null;
+    var smoothed = 0;
+    var ctx = null;
+    var analyser = null;
+    var buffer = null;
+
+    function write(v) {
+      if (disc) disc.style.setProperty("--demo-level", v.toFixed(3));
+    }
+
+    function loop(read) {
+      raf = window.requestAnimationFrame(function step() {
+        var raw = 0;
+        try { raw = read() || 0; } catch (e) { raw = 0; }
+        // Speech sits low and spiky; rise fast so a syllable registers, fall
+        // slower so the disc settles instead of flickering between words.
+        var target = Math.max(0, Math.min(1, raw));
+        smoothed = target > smoothed ? smoothed + (target - smoothed) * 0.5 : smoothed + (target - smoothed) * 0.12;
+        write(smoothed);
+        raf = window.requestAnimationFrame(step);
+      });
+    }
+
+    return {
+      /* The <audio> element is routed through an AnalyserNode. Connecting
+         straight on to the destination in the same breath is not optional:
+         once createMediaElementSource() captures an element, anything that
+         is not reconnected plays silently. Wrapped so that a browser which
+         refuses Web Audio loses the motion, never the sound. */
+      fromAudio: function (audioEl) {
+        if (reduceMotion || !audioEl || analyser) return;
+        try {
+          var AC = window.AudioContext || window.webkitAudioContext;
+          if (!AC) return;
+          ctx = new AC();
+          var source = ctx.createMediaElementSource(audioEl);
+          analyser = ctx.createAnalyser();
+          analyser.fftSize = 256;
+          source.connect(analyser);
+          analyser.connect(ctx.destination);
+          buffer = new Uint8Array(analyser.fftSize);
+        } catch (e) {
+          analyser = null;
+          return;
+        }
+      },
+      startAudio: function () {
+        if (reduceMotion || !analyser || raf) return;
+        if (ctx && ctx.state === "suspended") ctx.resume().catch(function () {});
+        loop(function () {
+          analyser.getByteTimeDomainData(buffer);
+          var sum = 0;
+          for (var i = 0; i < buffer.length; i++) {
+            var d = (buffer[i] - 128) / 128;
+            sum += d * d;
+          }
+          // RMS for ordinary speech lands around 0.05-0.2. Gain of 3 puts
+          // normal delivery around 0.4-0.6 and leaves headroom for emphasis:
+          // measured at 4.5 first, which pinned it near 1.0 through most of a
+          // sentence, so the disc sat at full size instead of breathing.
+          return Math.sqrt(sum / buffer.length) * 3;
+        });
+      },
+      /* A live call: the SDK exposes both sides synchronously. The agent's
+         own output drives the disc while it speaks; the visitor's mic drives
+         it, more gently, while it listens — so the disc shows who has the
+         floor rather than just "something is happening". */
+      startConversation: function (getConversation, getMode) {
+        if (reduceMotion || raf) return;
+        loop(function () {
+          var c = getConversation();
+          if (!c) return 0;
+          var speaking = getMode() === "speaking";
+          if (speaking && typeof c.getOutputVolume === "function") return c.getOutputVolume() * 1.6;
+          if (!speaking && typeof c.getInputVolume === "function") return c.getInputVolume() * 1.1;
+          return 0;
+        });
+      },
+      stop: function () {
+        if (raf) { window.cancelAnimationFrame(raf); raf = null; }
+        smoothed = 0;
+        write(0);
+      },
+    };
+  }
+
   // ---------------------------------------------------------------------
   // Section A — sample-call player
   // ---------------------------------------------------------------------
@@ -38,6 +141,7 @@
 
     var manifestCache = {};
     var current = { slug: null, lines: [], next: 0 };
+    var level = discLevel(root.querySelector(".demo-disc"));
 
     function clearTranscript() {
       transcript.innerHTML = "";
@@ -72,6 +176,7 @@
       if (!slug || slug === current.slug) return;
       audio.pause();
       setPlaying(false);
+      level.stop();
       clearTranscript();
       current.slug = slug;
       if (titleEl) titleEl.textContent = tab.getAttribute("data-title") || "";
@@ -114,12 +219,15 @@
         audio.currentTime = 0;
         clearTranscript();
       }
+      // Built on the click, because an AudioContext created without a user
+      // gesture starts suspended in every current browser.
+      level.fromAudio(audio);
       audio.play().catch(function () { setPlaying(false); });
     });
 
-    audio.addEventListener("play", function () { setPlaying(true); });
-    audio.addEventListener("pause", function () { setPlaying(false); });
-    audio.addEventListener("ended", function () { setPlaying(false); });
+    audio.addEventListener("play", function () { setPlaying(true); level.startAudio(); });
+    audio.addEventListener("pause", function () { setPlaying(false); level.stop(); });
+    audio.addEventListener("ended", function () { setPlaying(false); level.stop(); });
     audio.addEventListener("timeupdate", function () {
       while (current.next < current.lines.length && current.lines[current.next].start <= audio.currentTime) {
         addBubble(current.lines[current.next]);
@@ -156,6 +264,8 @@
     var chatMessageCount = 0;
     var chatMaxMessages = 20;
     var sdkPromise = null;
+    var agentMode = "listening";
+    var liveLevel = discLevel(live && live.querySelector(".demo-disc"));
 
     function loadSdk() {
       if (window.ElevenLabsClient) return Promise.resolve(window.ElevenLabsClient);
@@ -235,6 +345,8 @@
 
     function hangUp() {
       stopCountdown();
+      liveLevel.stop();
+      agentMode = "listening";
       var c = conversation;
       conversation = null;
       Promise.resolve(c && c.endSession()).catch(function () {}).then(function () {
@@ -259,10 +371,13 @@
             onConnect: function () {
               if (statusEl) statusEl.textContent = "De agent luistert. Zeg iets.";
               startCountdown(data.max_seconds || 120);
+              // The disc follows whoever has the floor from here on.
+              liveLevel.startConversation(function () { return conversation; }, function () { return agentMode; });
             },
             onDisconnect: function () { hangUp(); },
             onModeChange: function (m) {
-              if (statusEl) statusEl.textContent = (m && m.mode === "speaking") ? "De agent spreekt" : "De agent luistert. Zeg iets.";
+              agentMode = (m && m.mode) || "listening";
+              if (statusEl) statusEl.textContent = agentMode === "speaking" ? "De agent spreekt" : "De agent luistert. Zeg iets.";
             },
             onMessage: function (msg) {
               if (!msg || !msg.message) return;
@@ -276,6 +391,7 @@
         });
       }).catch(function (err) {
         stopCountdown();
+        liveLevel.stop();
         if (err && err.name === "NotAllowedError") {
           setState("idle");
           showError("Geef de browser toegang tot uw microfoon en probeer het opnieuw.");

@@ -131,6 +131,22 @@ async function run(browserType, label, viewport, device) {
   const bubblesAfterSeek = await page.$$eval("[data-demo-transcript] .demo-bubble", (els) => els.length);
   check(`${label} at least one caption bubble appears as the sample plays`, bubblesAfterSeek >= 1, String(bubblesAfterSeek));
 
+  // The disc moves with the voice. Two things matter here and the second is
+  // the dangerous one: routing the <audio> element through an AnalyserNode
+  // captures its output, so anything not reconnected to the destination
+  // plays SILENTLY. A non-zero level is proof that audio is flowing through
+  // that graph, not just that a number is changing.
+  const levels = [];
+  for (let i = 0; i < 14; i++) {
+    levels.push(await page.evaluate(() => parseFloat(getComputedStyle(document.querySelector(".demo-disc")).getPropertyValue("--demo-level")) || 0));
+    await page.waitForTimeout(110);
+  }
+  const peak = Math.max(...levels);
+  const distinct = new Set(levels.map((v) => v.toFixed(2))).size;
+  check(`${label} the disc reacts to the actual audio`, peak > 0.05 && distinct > 3, `peak ${peak.toFixed(2)}, ${distinct} distinct values`);
+  check(`${label} audio still plays through the analyser (not silently captured)`,
+    await page.evaluate(() => { const a = document.querySelector("[data-demo-audio]"); return !a.paused && a.currentTime > 0 && !a.muted; }));
+
   // Captions must land on the words they caption. Seeking to the start of a
   // known cue and counting bubbles is what catches timing drift — the
   // rendered manifests derive their cues from measured audio, and an earlier
@@ -259,6 +275,26 @@ async function run(browserType, label, viewport, device) {
   check(`${label} zero console errors`, consoleErrors.filter((m) => !isExpectedTestNoise(m)).length === 0, consoleErrors.filter((m) => !isExpectedTestNoise(m)).slice(0, 5).join(" | "));
   check(`${label} zero unexpected 4xx/5xx responses`, bad.length === 0, bad.slice(0, 5).join(" | "));
   check(`${label} no horizontal page overflow`, await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1));
+
+  // prefers-reduced-motion must kill the disc motion completely. The level is
+  // written as an inline style, so the sitewide reduced-motion CSS rule (which
+  // only disables animations and transitions) cannot catch it — js/demo.js has
+  // to check the query itself, and this is what proves it still does.
+  const rmContext = await browser.newContext(Object.assign({ reducedMotion: "reduce" }, device ? device : { viewport }));
+  const rmPage = await rmContext.newPage();
+  await rmPage.goto(BASE + "/support-agent");
+  await rmPage.waitForSelector("[data-demo-listen]");
+  await rmPage.click("[data-demo-play]");
+  await rmPage.waitForTimeout(1500);
+  const rm = await rmPage.evaluate(() => ({
+    level: parseFloat(getComputedStyle(document.querySelector(".demo-disc")).getPropertyValue("--demo-level")) || 0,
+    transform: getComputedStyle(document.querySelector(".demo-disc")).transform,
+    playing: !document.querySelector("[data-demo-audio]").paused,
+  }));
+  check(`${label} reduced motion stops the disc but not the audio`,
+    rm.level === 0 && (rm.transform === "none" || rm.transform === "matrix(1, 0, 0, 1, 0, 0)") && rm.playing,
+    JSON.stringify(rm));
+  await rmContext.close();
 
   if (viewport && viewport.width < 500) {
     await page.reload();

@@ -8,10 +8,13 @@
    Mirrors elevenlabs.io/voice-agents' two "Talk to an agent" sections
    structurally (card shape, tab row, Voice/Chat toggle, in-card consent
    panel) but NOT their colourful animated sphere (Sal's explicit call) —
-   the disc here is a static, monochrome stipple texture, reusing the
-   site's own hero grain technique (style.css's feTurbulence data-URI),
-   never a gradient animation. No new color token: everything below is
-   built from the existing :root tokens in style.css:29-71.
+   the disc here is a monochrome stipple texture, reusing the site's own
+   hero grain technique (style.css's feTurbulence data-URI), with no colour
+   and no gradient animation. It DOES move while someone is speaking
+   (2026-09-16, Sal: "to make it feel more alive"), driven by the real
+   audio level rather than a timer — see the "Voice-reactive motion" block
+   below. No new color token: everything is built from the existing :root
+   tokens in style.css:29-71.
    ========================================================================== */
 
 .demo-card {
@@ -100,6 +103,42 @@
   opacity: 0.32;
   mask-image: radial-gradient(circle, transparent 0 20%, #000 68%);
   -webkit-mask-image: radial-gradient(circle, transparent 0 20%, #000 68%);
+}
+
+/* --- Voice-reactive motion ------------------------------------------------
+   The disc reacts to the actual voice: --demo-level is written by js/demo.js
+   from real audio (an AnalyserNode on the sample player, the SDK's own
+   getOutputVolume/getInputVolume during a live call), never from a timer, so
+   the movement follows the words rather than miming them.
+
+   Deliberately small — a scale of a few percent plus a ring that breathes.
+   This is the one piece of motion on the page, and Sal's brief ruled out
+   elevenlabs.io's animated colour sphere; a monochrome disc that swells
+   while someone is talking is the restrained version of the same idea.
+
+   The transform is set from JS, so the sitewide prefers-reduced-motion rule
+   (which only disables CSS animations/transitions) cannot catch it —
+   js/demo.js checks the media query itself and never starts the loop. */
+.demo-disc {
+  --demo-level: 0;
+  transform: scale(calc(1 + var(--demo-level) * 0.055));
+  transition: transform 90ms linear;
+  will-change: transform;
+}
+.demo-disc::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  pointer-events: none;
+  box-shadow: 0 0 0 1px rgba(18, 17, 16, 0.14);
+  opacity: calc(var(--demo-level) * 0.85);
+  transform: scale(calc(1 + var(--demo-level) * 0.085));
+  transition: opacity 120ms linear, transform 120ms linear;
+}
+@media (prefers-reduced-motion: reduce) {
+  .demo-disc { transform: none; }
+  .demo-disc::after { opacity: 0; transform: none; }
 }
 
 .demo-play,
