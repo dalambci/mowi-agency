@@ -336,6 +336,21 @@
 .demo-timer { font-variant-numeric: tabular-nums; color: var(--ink-2); font-size: 0.9375rem; }
 .demo-status { text-align: center; color: var(--ink-2); font-size: 0.9375rem; margin-top: 1rem; min-height: 1.375rem; }
 .demo-error { text-align: center; color: var(--ink-2); font-size: 0.875rem; margin-top: 0.75rem; }
+
+/* Only shown when the live demo cannot run at all: full for today, or switched
+   off (js/demo.js, showError()'s offerFallback). Those two states are not
+   something a visitor can retry their way out of, so the card offers the real
+   next step rather than dead-ending in a sentence. Overrides .demo-btn's
+   flex:1, which is meant for the two-up actions row, not a lone centred link.
+   [hidden] still wins via the !important rule at the top of this file. */
+.demo-fallback {
+  display: flex;
+  flex: none;
+  width: fit-content;
+  margin: 0.875rem auto 0;
+  padding: 0 1.5rem;
+  text-decoration: none;
+}
 .demo-ai-note { text-align: center; font-size: 0.8125rem; color: var(--ink-3); margin-top: 1rem; }
 
 /* --- Chat mode -------------------------------------------------------------- */

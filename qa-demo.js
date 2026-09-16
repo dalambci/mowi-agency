@@ -60,7 +60,7 @@ async function mockSession(page, status, body) {
   );
 }
 
-async function run(browserType, label, viewport, device) {
+async function run(browserType, label, viewport, device, pagePath = "/support-agent") {
   const launchArgs = LIVE && browserType === chromium
     ? { args: ["--use-fake-ui-for-media-stream", "--use-fake-device-for-media-stream"] }
     : {};
@@ -99,7 +99,7 @@ async function run(browserType, label, viewport, device) {
   page.on("request", (r) => requestedUrls.push(r.url()));
   page.on("response", (r) => { if (r.status() >= 400 && !r.url().includes("/api/demo/session")) bad.push(r.status() + " " + r.url()); });
 
-  await page.goto(BASE + "/support-agent");
+  await page.goto(BASE + pagePath);
   await page.waitForSelector("[data-demo-listen]", { state: "attached" });
   await page.waitForTimeout(300);
 
@@ -229,6 +229,7 @@ async function run(browserType, label, viewport, device) {
     await page.click("[data-demo-agree]");
     await page.waitForTimeout(400);
     check(`${label} a 503 from the endpoint shows the Dutch message and returns to idle`, ((await text(page, "[data-demo-error]")) || "").includes("niet beschikbaar") && await visible(page, "[data-demo-body]"), await text(page, "[data-demo-error]"));
+    check(`${label} a 503 also offers the real next step instead of a dead end`, await visible(page, "[data-demo-fallback]"));
 
     // -- Daily cap (429) --
     await mockSession(page, 429, { message: "De demo is voor vandaag vol." });
@@ -236,6 +237,8 @@ async function run(browserType, label, viewport, device) {
     await page.click("[data-demo-agree]");
     await page.waitForTimeout(400);
     check(`${label} a 429 from the endpoint surfaces its own message`, ((await text(page, "[data-demo-error]")) || "").includes("vandaag vol"), await text(page, "[data-demo-error]"));
+    check(`${label} a 429 also offers the real next step instead of a dead end`, await visible(page, "[data-demo-fallback]"));
+    check(`${label} that fallback points at /demo`, ((await page.getAttribute("[data-demo-fallback]", "href")) || "").includes("/demo"), await page.getAttribute("[data-demo-fallback]", "href"));
 
     // -- A "successful" mint with an unreachable signed url: the SDK itself
     // must fail to connect, and that failure must still land the UI back in
@@ -282,7 +285,7 @@ async function run(browserType, label, viewport, device) {
   // to check the query itself, and this is what proves it still does.
   const rmContext = await browser.newContext(Object.assign({ reducedMotion: "reduce" }, device ? device : { viewport }));
   const rmPage = await rmContext.newPage();
-  await rmPage.goto(BASE + "/support-agent");
+  await rmPage.goto(BASE + pagePath);
   await rmPage.waitForSelector("[data-demo-listen]");
   await rmPage.click("[data-demo-play]");
   await rmPage.waitForTimeout(1500);
@@ -355,10 +358,55 @@ async function runLive(browserType, label) {
   await browser.close();
 }
 
+
+/**
+ * The two pages carry the same demo markup, duplicated by hand because the
+ * site is static HTML with no includes. Nothing stops them drifting apart
+ * except this check: it compares the structural contract both pages' shared
+ * js/demo.js depends on — which data-demo-* hooks exist, which sample calls
+ * the tab row offers, which endpoint gets called, and which asset version is
+ * stamped on <body>. Copy is expected to differ (the phone page talks about
+ * the telephone), so headings are deliberately NOT compared.
+ */
+async function runParity(browserType, label) {
+  const browser = await browserType.launch();
+  const page = await (await browser.newContext({ viewport: { width: 1440, height: 900 } })).newPage();
+
+  const shapeOf = async (pagePath) => {
+    await page.goto(BASE + pagePath);
+    return page.evaluate(() => ({
+      hooks: [...new Set([...document.querySelectorAll("[data-demo-listen] *, [data-demo-try] *, [data-demo-listen], [data-demo-try]")]
+        .flatMap((el) => [...el.attributes].map((a) => a.name).filter((n) => n.startsWith("data-demo-"))))].sort(),
+      slugs: [...document.querySelectorAll("[data-demo-call]")].map((el) => el.getAttribute("data-demo-call")),
+      endpoint: document.querySelector("[data-demo-try]").getAttribute("data-endpoint"),
+      version: document.body.getAttribute("data-demo-version"),
+    }));
+  };
+
+  const a = await shapeOf("/support-agent");
+  const b = await shapeOf("/call-agent");
+
+  check(`${label} both pages expose the same data-demo-* hooks`,
+    JSON.stringify(a.hooks) === JSON.stringify(b.hooks),
+    a.hooks.filter((h) => !b.hooks.includes(h)).concat(b.hooks.filter((h) => !a.hooks.includes(h))).join(",") || "identical");
+  check(`${label} both pages offer the same four sample calls`,
+    JSON.stringify(a.slugs) === JSON.stringify(b.slugs), `${a.slugs} vs ${b.slugs}`);
+  check(`${label} both pages call the same endpoint`, a.endpoint === b.endpoint, `${a.endpoint} vs ${b.endpoint}`);
+  check(`${label} both pages stamp the same asset version`, a.version === b.version, `${a.version} vs ${b.version}`);
+
+  await browser.close();
+}
+
 (async () => {
   await run(chromium, "chromium-1440", { width: 1440, height: 900 });
   await run(chromium, "chromium-390", { width: 390, height: 844 });
   await run(webkit, "webkit-iphone", null, devices["iPhone 13"]);
+  // The phone page carries the same two sections. Run the full suite against
+  // it once (one browser is enough — the cross-browser risk lives in the
+  // shared CSS/JS, which the three runs above already cover), then prove the
+  // two pages have not drifted.
+  await run(chromium, "chromium-callagent", { width: 1440, height: 900 }, null, "/call-agent");
+  await runParity(chromium, "parity");
   if (LIVE) await runLive(chromium, "live-chromium");
   console.log(`\n${results.length - failures}/${results.length} checks passed against ${BASE}${LIVE ? " (including LIVE)" : ""}`);
   process.exit(failures ? 1 : 0);

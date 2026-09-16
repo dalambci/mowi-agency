@@ -245,6 +245,7 @@
     var live = root.querySelector("[data-demo-live]");
     var ended = root.querySelector("[data-demo-ended]");
     var errorEl = root.querySelector("[data-demo-error]");
+    var fallbackEl = root.querySelector("[data-demo-fallback]");
     var startBtn = root.querySelector("[data-demo-start]");
     var agreeBtn = root.querySelector("[data-demo-agree]");
     var cancelBtn = root.querySelector("[data-demo-cancel]");
@@ -292,12 +293,24 @@
       else if (state === "ended") { show(ended); if (ended) ended.focus(); }
     }
 
-    function showError(message) {
+    // `offerFallback` is for the two states the visitor cannot fix by trying
+    // again: the demo is full for today, or it is switched off. Those used to
+    // dead-end in a grey sentence naming mowi.agency/demo as unclickable text,
+    // which wasted the most interested visitor on the page. They now get the
+    // real next step as a button. Errors the visitor CAN fix (microphone
+    // refused, no connection) deliberately do not show it — there the right
+    // action is to try again, and a competing call-to-action would pull them
+    // away from a demo that still works.
+    function showError(message, offerFallback) {
       if (!errorEl) return;
       errorEl.textContent = message;
       errorEl.hidden = false;
+      if (fallbackEl) fallbackEl.hidden = !offerFallback;
     }
-    function clearError() { if (errorEl) { errorEl.hidden = true; errorEl.textContent = ""; } }
+    function clearError() {
+      if (errorEl) { errorEl.hidden = true; errorEl.textContent = ""; }
+      if (fallbackEl) fallbackEl.hidden = true;
+    }
 
     function mint(mode) {
       return fetch(endpoint, {
@@ -400,10 +413,10 @@
           showError("Er is geen microfoon gevonden.");
         } else if (err && err.status === 503) {
           setState("idle");
-          showError(err.userMessage || "De live demo is op dit moment niet beschikbaar. Plan een demo op mowi.agency/demo.");
+          showError(err.userMessage || "De live demo is op dit moment niet beschikbaar.", true);
         } else if (err && err.status === 429) {
           setState("idle");
-          showError(err.userMessage || "De demo is voor nu vol. Probeer het later opnieuw.");
+          showError(err.userMessage || "De demo is voor vandaag vol.", true);
         } else if (err && err.userMessage) {
           setState("idle");
           showError(err.userMessage);
@@ -462,6 +475,11 @@
       }).catch(function (err) {
         if (chatInput) chatInput.disabled = false;
         bubble(chatLog, "agent", (err && err.userMessage) || "De verbinding lukte niet. Probeer het zo nog eens.");
+        // Same reasoning as showError()'s offerFallback: full or switched off
+        // is not something the visitor can retry their way out of, so give
+        // them the real next step instead of a dead end.
+        var st = err && err.status;
+        if (fallbackEl && (st === 429 || st === 503)) fallbackEl.hidden = false;
       });
     }
 
