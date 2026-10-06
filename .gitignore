@@ -13,3 +13,6 @@ ralph/logs/
 # gate does not see them as dirt.
 out/
 content/social-templates/.render-tmp.html
+
+# AI-scan rapport: gebouwde voorbeelden; echte klantscans staan in de vault, nooit hier
+.claude/skills/mowi-ai-scan/report/out/

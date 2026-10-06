@@ -1,0 +1,96 @@
+{
+  "_voorbeeld": "Fictieve data, alleen om het sjabloon te renderen. Nooit cijfers, tools of teksten hieruit overnemen in een echte scan. Elke prijs in een echte scan wordt op de dag zelf gecontroleerd op de site van de tool.",
+  "klant": {
+    "bedrijfsnaam": "Voorbeeld Webshop B.V.",
+    "type_bedrijf": "Webshop / e-commerce",
+    "contactpersoon": "A. Voorbeeld",
+    "systemen": ["Shopify", "Moneybird", "Google Agenda"]
+  },
+  "datum": "2026-10-07",
+  "primaire_focus": "efficientie",
+  "uurtarief": 45,
+  "uurtarief_bron": "Klant in het gesprek: \"reken voor mij en Lisa maar met 45 euro per uur\".",
+  "samenvatting": {
+    "pijnpunten": [
+      "Klantvragen over bestelstatus (\"waar blijft mijn bestelling\") komen dagelijks terug en worden steeds opnieuw handmatig uitgezocht.",
+      "Inkoopfacturen worden met de hand overgetypt in Moneybird, meestal op vrijdagmiddag in één keer."
+    ],
+    "hoofdresultaat": "Vier tools die u deze week zelf kunt starten, zonder maatwerk. Samen geven ze u en Lisa 7 uur per week terug, tegen 80 euro aan toolkosten per maand."
+  },
+  "aanbevelingen": [
+    {
+      "pijnpunt": "Klanten mailen dagelijks \"waar blijft mijn bestelling\"",
+      "tool": "Mowi Inbox agent met bestelstatus",
+      "mowi_dienst": true,
+      "nl_eu": "NL",
+      "kosten_per_maand": 40,
+      "kosten_bron": "fictief (voorbeeld)",
+      "opzettijd_min": 20,
+      "tijdwinst_uur_per_week": 3,
+      "tijdwinst_bron": "Klant: \"die bestelstatusmails kosten Lisa zeker een halve dag per week, misschien drie uur\".",
+      "kwadrant": "quick_win",
+      "quickwin_label": "3 uur per week aan \"waar blijft mijn bestelling\"-mail"
+    },
+    {
+      "pijnpunt": "Belangrijke mail verdwijnt tussen nieuwsbrieven en notificaties",
+      "tool": "SaneBox",
+      "mowi_dienst": false,
+      "nl_eu": "Internationaal",
+      "kosten_per_maand": 15,
+      "kosten_bron": "fictief (voorbeeld)",
+      "opzettijd_min": 10,
+      "tijdwinst_uur_per_week": 1.5,
+      "tijdwinst_bron": "Klant: \"ik ben elke ochtend zeker twintig minuten bezig met wegklikken voor ik iets nuttigs lees\" (5 × 20 min).",
+      "kwadrant": "quick_win",
+      "quickwin_label": "Elke ochtend 20 minuten mail wegklikken"
+    },
+    {
+      "pijnpunt": "Inkoopfacturen met de hand overtypen in Moneybird",
+      "tool": "Klippa",
+      "mowi_dienst": false,
+      "nl_eu": "NL",
+      "kosten_per_maand": 25,
+      "kosten_bron": "fictief (voorbeeld)",
+      "opzettijd_min": 30,
+      "tijdwinst_uur_per_week": 2,
+      "tijdwinst_bron": "Klant: \"vrijdagmiddag gaat op aan facturen, twee uur zeker\".",
+      "kwadrant": "quick_win",
+      "quickwin_label": "Vrijdagmiddag facturen overtypen"
+    },
+    {
+      "pijnpunt": "Afspraken met leveranciers plannen kost heen-en-weer-mailen",
+      "tool": "Cal.com",
+      "mowi_dienst": false,
+      "nl_eu": "EU",
+      "kosten_per_maand": 0,
+      "kosten_bron": "fictief (voorbeeld)",
+      "opzettijd_min": 15,
+      "tijdwinst_uur_per_week": 0.5,
+      "tijdwinst_bron": "Klant: \"een afspraak plannen is altijd vijf mailtjes, een paar keer per week\" (circa 30 min).",
+      "kwadrant": "overwegen",
+      "quickwin_label": "Vijf mailtjes per afspraak"
+    }
+  ],
+  "startplan": [
+    { "dag": 1, "actie": "Shopify koppelen aan de Mowi Inbox agent en de bestelstatus-antwoorden aanzetten op concept.", "minuten": 10 },
+    { "dag": 2, "actie": "SaneBox installeren op de gedeelde mailbox en de standaardregels laten staan.", "minuten": 10 },
+    { "dag": 3, "actie": "Klippa koppelen aan Moneybird en de eerste vijf facturen laten inlezen.", "minuten": 10 },
+    { "dag": 4, "actie": "Cal.com-link instellen en in de mailhandtekening zetten.", "minuten": 10 }
+  ],
+  "grote_projecten": [
+    {
+      "titel": "Kennissysteem voor klantvragen",
+      "toelichting": "Bij elke nieuwe collectie krijgt de klantenservice tientallen keren dezelfde vraag. Een kennissysteem op uw eigen productinformatie beantwoordt die direct, zonder dat iemand het hoeft op te zoeken.",
+      "mowi_product": "Kennissysteem"
+    },
+    {
+      "titel": "Procesherontwerp orderverwerking",
+      "toelichting": "Een bestelling doorloopt vandaag negen handmatige stappen voordat hij verzendklaar is. Voordat hier iets geautomatiseerd wordt, is het proces zelf toe aan een opschoning.",
+      "mowi_product": "Procesherontwerp"
+    }
+  ],
+  "vervolg": {
+    "boek_url": "https://mowi.agency/contact",
+    "afzender": "Sal van Mowi"
+  }
+}
