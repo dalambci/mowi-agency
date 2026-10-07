@@ -15,7 +15,8 @@ const esc = (s) => String(s ?? '')
 
 const nl = new Intl.NumberFormat('nl-NL', { maximumFractionDigits: 0 });
 const nl1 = new Intl.NumberFormat('nl-NL', { minimumFractionDigits: 0, maximumFractionDigits: 1 });
-const euro = (n) => `€ ${nl.format(Math.round(n))}`;
+const nl2 = new Intl.NumberFormat('nl-NL', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const euro = (n) => `€\u00a0${Number.isInteger(Math.round(n * 100) / 100) ? nl.format(n) : nl2.format(n)}`;
 const uren = (n) => `${nl1.format(n)} uur`;
 
 const FOCUS = {
@@ -105,7 +106,7 @@ function p1(d, c, a) {
     <div style="flex-grow:1;display:flex;flex-direction:column;justify-content:center;gap:18px;max-width:820px;">
       <h1 style="font-size:60px;line-height:1.05;letter-spacing:-0.025em;">AI-scan</h1>
       <p style="font-size:26px;font-weight:500;">Rapport voor ${esc(d.klant.bedrijfsnaam)}</p>
-      <p style="font-size:16px;color:var(--ink-2);max-width:560px;line-height:1.5;">Waar u tijd wint, met tools die daar vandaag al voor bestaan. Elke aanbeveling met kosten, opzettijd en tijdwinst per week.</p>
+      <p style="font-size:16px;color:var(--ink-2);max-width:560px;line-height:1.5;">Welke terugkerende klantcontacten uw Mowi Support Agent overneemt, met kosten, opzettijd en tijdwinst per week.</p>
     </div>
     <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;">
       <div class="band" style="padding:16px 18px;"><div class="lbl" style="margin-bottom:6px;">Datum</div><div class="val">${esc(datumNl(d.datum))}</div></div>
@@ -180,11 +181,11 @@ function p4(d, c, a) {
   const rows = c.quickWins.map((r) => `<div class="card" style="display:flex;align-items:center;gap:20px;padding:16px 22px;">
       <div style="flex:1;font-size:16px;line-height:1.4;">${esc(r.quickwin_label || r.pijnpunt)}</div>
       <span style="color:var(--ink-3);display:inline-flex;">${arrow}</span>
-      <div style="flex:1;font-size:16px;font-weight:600;">${esc(r.tool)}${r.mowi_dienst ? '<span class="tag">Mowi-dienst</span>' : ''}</div>
+      <div style="flex:1;font-size:16px;font-weight:600;">${esc(r.tool)}${r.mowi_dienst ? '' : '<span class="tag">Externe tool</span>'}</div>
     </div>`).join('');
   return `<section class="page">${voorbeeldBadge(d)}${hdr('04', 'Quick wins', a)}
     <h1 class="title">In één oogopslag</h1>
-    <p class="lead">Elk pijnpunt, gekoppeld aan één tool. De uitleg per tool staat op de volgende pagina.</p>
+    <p class="lead">Elk pijnpunt, gekoppeld aan één oplossing. De uitleg staat op de volgende pagina.</p>
     <div style="flex-grow:1;display:flex;flex-direction:column;gap:12px;margin-top:22px;justify-content:center;min-height:0;">${rows}</div>
     ${ftr(d, 4)}
   </section>`;
@@ -192,20 +193,21 @@ function p4(d, c, a) {
 
 // 05 Aanbevolen oplossingen
 function p5(d, c, a) {
-  const compact = d.aanbevelingen.length > 5;
-  const pad = compact ? '12px 20px' : '16px 22px';
-  const fs = compact ? 14 : 15;
-  const rows = d.aanbevelingen.map((r) => `<div class="card" style="padding:${pad};display:grid;grid-template-columns:2.2fr 1.3fr 0.9fr 0.9fr 1fr;gap:14px;align-items:center;">
+  const n = d.aanbevelingen.length;
+  const compact = n > 3;
+  const pad = n > 5 ? '10px 18px' : compact ? '12px 20px' : '16px 22px';
+  const fs = n > 5 ? 13 : 14;
+  const rows = d.aanbevelingen.map((r) => `<div class="card" style="padding:${pad};display:grid;grid-template-columns:1.9fr 2fr 0.8fr 0.8fr 0.9fr;gap:14px;align-items:center;">
       <div><div class="lbl" style="margin-bottom:3px;">Pijnpunt</div><div style="font-size:${fs}px;font-weight:600;line-height:1.35;">${esc(r.pijnpunt)}</div></div>
-      <div><div class="lbl">Tool</div><div class="val" style="font-size:${fs}px;">${esc(r.tool)}${r.mowi_dienst ? '<span class="tag">Mowi-dienst</span>' : ''}</div><div style="font-size:11px;color:var(--ink-3);">${esc(r.nl_eu)}</div></div>
+      <div><div class="lbl">Oplossing</div><div class="val" style="font-size:${fs}px;">${esc(r.tool)}${r.mowi_dienst ? '' : '<span class="tag">Externe tool</span>'}</div><div style="font-size:11px;color:var(--ink-3);">${r.mowi_dienst ? 'Mowi' : esc(r.nl_eu)}</div></div>
       <div><div class="lbl">Kosten/maand</div><div class="val" style="font-size:${fs}px;">${esc(euro(r.kosten_per_maand))}</div></div>
       <div><div class="lbl">Opzettijd</div><div class="val" style="font-size:${fs}px;">±${esc(r.opzettijd_min)} min</div></div>
       <div><div class="lbl">Tijdwinst/week</div><div class="val" style="font-size:${fs}px;">${r.tijdwinst_uur_per_week == null ? '<span style="color:var(--ink-3);font-weight:500;">niet geschat</span>' : esc(uren(r.tijdwinst_uur_per_week))}</div></div>
     </div>`).join('');
   return `<section class="page">${voorbeeldBadge(d)}${hdr('05', 'Aanbevolen oplossingen', a)}
-    <h1 class="title">De tools, in detail</h1>
-    <p class="lead">Alle prijzen zijn actuele lijstprijzen, gecontroleerd op ${esc(datumNl(d.datum))}. Tijdwinst is gebaseerd op wat u zelf aangaf tijdens het gesprek. Zonder uw eigen inschatting staat er "niet geschat" en telt de tool niet mee in de som.</p>
-    <div style="flex-grow:1;display:flex;flex-direction:column;gap:${compact ? 8 : 12}px;margin-top:18px;justify-content:center;min-height:0;">${rows}</div>
+    <h1 class="title">De oplossingen, in detail</h1>
+    <p class="lead" style="max-width:980px;">Prijzen: lijstprijs op mowi.agency/pricing, gecontroleerd op ${esc(datumNl(d.datum))}. Tijdwinst: wat u zelf aangaf in het gesprek. Zonder uw inschatting staat er "niet geschat" en telt de oplossing niet mee.</p>
+    <div style="flex-grow:1;display:flex;flex-direction:column;gap:${compact ? 8 : 12}px;margin-top:14px;justify-content:center;min-height:0;">${rows}</div>
     ${ftr(d, 5)}
   </section>`;
 }
@@ -230,14 +232,14 @@ function p6(d, c, a) {
 function p7(d, c, a) {
   const n = d.grote_projecten.length;
   const cards = d.grote_projecten.map((g) => `<div class="card" style="padding:26px;display:flex;flex-direction:column;gap:10px;">
-      <div style="font-size:11px;font-weight:700;letter-spacing:0.04em;color:var(--ink-2);">GROOT PROJECT${g.mowi_product ? ` · ${esc(g.mowi_product)}<span class="tag">Mowi-dienst</span>` : ''}</div>
+      <div style="font-size:11px;font-weight:700;letter-spacing:0.04em;color:var(--ink-2);">GROOT PROJECT${g.mowi_product ? ` · ${esc(g.mowi_product)}` : ''}</div>
       <div style="font-size:19px;font-weight:600;line-height:1.3;">${esc(g.titel)}</div>
       <p style="font-size:14px;line-height:1.6;flex-grow:1;">${esc(g.toelichting)}</p>
       <div style="font-size:13px;color:var(--ink-2);">Vraag hiernaar tijdens het terugkoppelgesprek.</div>
     </div>`).join('');
   const intro = n === 0
-    ? 'In het gesprek kwam niets naar boven dat buiten de quick wins valt. Dat is goed nieuws: alles in dit rapport kunt u zelf starten.'
-    : `In het gesprek ${n === 1 ? 'kwam één onderwerp' : `kwamen ${['twee', 'drie'][n - 2] || n} onderwerpen`} naar boven zonder kant-en-klare tool. Geen quick wins, wel het overwegen waard.`;
+    ? 'In het gesprek kwam niets naar boven dat buiten de quick wins valt. Dat is goed nieuws: alles in dit rapport zet u zelf aan.'
+    : `In het gesprek ${n === 1 ? 'kwam één onderwerp' : `kwamen ${['twee', 'drie'][n - 2] || n} onderwerpen`} naar boven die meer vragen dan één instelling. Geen quick wins, wel het overwegen waard.`;
   return `<section class="page">${voorbeeldBadge(d)}${hdr('07', 'Wat komt er na de quick wins', a)}
     <h1 class="title">Verder kijken dan de quick wins</h1>
     <p class="lead">${intro}</p>
@@ -256,7 +258,7 @@ function p8(d, c, a) {
   const op = (s) => `<div style="font-family:var(--font-heading);font-size:28px;color:var(--ink-3);">${s}</div>`;
   return `<section class="page">${voorbeeldBadge(d)}${hdr('08', 'Financiële impact', a)}
     <h1 class="title">Wat dit oplevert, in getallen</h1>
-    <p class="lead">Elk cijfer komt uit wat u zelf in het gesprek aangaf, of uit de lijstprijs van de tool. Het is een som, geen belofte.</p>
+    <p class="lead">Elk cijfer komt uit wat u zelf in het gesprek aangaf, of uit de lijstprijs op mowi.agency/pricing. Het is een som, geen belofte.</p>
     <div style="flex-grow:1;display:flex;align-items:center;gap:14px;margin-top:10px;">
       ${box('Tijdwinst per week', esc(uren(c.tijdwinstTotaal)), 'som van pagina 5')}
       ${op('×')}
@@ -264,11 +266,11 @@ function p8(d, c, a) {
       ${op('×')}
       ${box('Weken per maand', '4,33', '52 weken / 12 maanden')}
       ${op('−')}
-      ${box('Toolkosten per maand', esc(euro(c.toolkostenTotaal)), 'som van alle tools op pagina 5')}
+      ${box('Kosten per maand', esc(euro(c.toolkostenTotaal)), 'som van pagina 5')}
       ${op('=')}
       ${box('Netto per maand', esc(euro(c.nettoPerMaand)), `${esc(nl1.format(c.tijdwinstTotaal))} × ${esc(euro(d.uurtarief))} × 4,33 − ${esc(euro(c.toolkostenTotaal))}`, true)}
     </div>
-    <p style="font-size:12px;color:var(--ink-3);line-height:1.5;max-width:900px;">Bron uurtarief: ${esc(d.uurtarief_bron.replace(/\.\s*$/, ''))}. Tools zonder uw eigen tijdsinschatting staan op pagina 5 als "niet geschat" en zijn niet meegeteld in de tijdwinst, wel in de kosten.</p>
+    <p style="font-size:12px;color:var(--ink-3);line-height:1.5;max-width:900px;">Bron uurtarief: ${esc(d.uurtarief_bron.replace(/\.\s*$/, ''))}. Oplossingen zonder uw eigen tijdsinschatting staan op pagina 5 als "niet geschat" en zijn niet meegeteld in de tijdwinst, wel in de kosten.</p>
     ${ftr(d, 8)}
   </section>`;
 }

@@ -10,6 +10,8 @@
 // The script refuses to build when the data breaks a binding rule from the vault
 // (ai-scan-offer.md, outbound-sequence-assessment-v2.md, Brand book §10):
 //   - 3 to 7 aanbevelingen, each with a real list price + where it was checked
+//   - recommendations are Mowi's own Support Agent / workflows (Sal, 2026-10-07); an external tool
+//     only raises a warning, so a deliberate exception still builds
 //   - a tijdwinst figure only counts when it carries the client's own words as its source
 //   - the garantie-som (sum of counted tijdwinst) must reach 5 uur/week, or --allow-below-guarantee
 //   - u-vorm, no banned words, no em dashes, no emoji, 4 start days of max 10 minutes
@@ -91,6 +93,7 @@ need(data.vervolg, 'afzender', isStr, 'vervolg', 'bijv. "Sal van Mowi"');
     if (!isStr(r.tijdwinst_bron)) err(`${w}: tijdwinst zonder "tijdwinst_bron" (citaat van de klant) telt niet mee voor de garantie. Vul de bron in of zet tijdwinst op null.`);
   }
   if (r.kwadrant === 'vermijden') warn(`${w}: een aanbeveling in het kwadrant "vermijden" hoort niet op pagina 5 thuis.`);
+  if (r.mowi_dienst === false) warn(`${w}: "${r.tool}" is een externe tool. Sinds 2026-10-07 beveelt de scan Mowi's eigen Support Agent en workflows aan; alleen extern als Mowi het vandaag echt niet kan (SKILL.md).`);
 });
 (data.startplan || []).forEach((s, i) => {
   const w = `startplan[${i}]`;

@@ -1,5 +1,5 @@
 {
-  "_voorbeeld": "Fictieve data, alleen om het sjabloon te renderen. Nooit cijfers, tools of teksten hieruit overnemen in een echte scan. Elke prijs in een echte scan wordt op de dag zelf gecontroleerd op de site van de tool.",
+  "_voorbeeld": "Fictieve data, alleen om het sjabloon te renderen. Nooit cijfers of teksten hieruit overnemen in een echte scan. Prijzen in een echte scan komen van mowi.agency/pricing op de dag zelf.",
   "klant": {
     "bedrijfsnaam": "Voorbeeld Webshop B.V.",
     "type_bedrijf": "Webshop / e-commerce",
@@ -12,19 +12,19 @@
   "uurtarief_bron": "Klant in het gesprek: \"reken voor mij en Lisa maar met 45 euro per uur\".",
   "samenvatting": {
     "pijnpunten": [
-      "Klantvragen over bestelstatus (\"waar blijft mijn bestelling\") komen dagelijks terug en worden steeds opnieuw handmatig uitgezocht.",
-      "Inkoopfacturen worden met de hand overgetypt in Moneybird, meestal op vrijdagmiddag in één keer."
+      "Klantvragen over bestelstatus (\"waar blijft mijn bestelling\") komen dagelijks per mail en telefoon binnen en worden steeds opnieuw handmatig opgezocht in Shopify.",
+      "Offerteaanvragen komen incompleet binnen, elke aanvraag kost drie mailtjes heen en weer voordat er een offerte kan worden gemaakt."
     ],
-    "hoofdresultaat": "Vier tools die u deze week zelf kunt starten, zonder maatwerk. Samen geven ze u en Lisa 7 uur per week terug, tegen 80 euro aan toolkosten per maand."
+    "hoofdresultaat": "Eén Mowi Support Agent op uw mailbox en telefoon neemt vier terugkerende taken over. Samen geven ze u en Lisa 6 uur per week terug, voor 31,50 euro per maand. U start gratis en zet hem in vier dagen zelf aan."
   },
   "aanbevelingen": [
     {
       "pijnpunt": "Klanten mailen dagelijks \"waar blijft mijn bestelling\"",
-      "tool": "Mowi Inbox agent met bestelstatus",
+      "tool": "Support Agent, e-mail: bestelstatus uit Shopify",
       "mowi_dienst": true,
       "nl_eu": "NL",
-      "kosten_per_maand": 40,
-      "kosten_bron": "fictief (voorbeeld)",
+      "kosten_per_maand": 19,
+      "kosten_bron": "Basis €19/mnd incl. 800 credits, 1 e-mail = 1 credit; klant schat ±60 bestelstatusmails per week = ±260 credits/mnd (lijstprijs mowi.agency/pricing, voorbeeld).",
       "opzettijd_min": 20,
       "tijdwinst_uur_per_week": 3,
       "tijdwinst_bron": "Klant: \"die bestelstatusmails kosten Lisa zeker een halve dag per week, misschien drie uur\".",
@@ -32,39 +32,39 @@
       "quickwin_label": "3 uur per week aan \"waar blijft mijn bestelling\"-mail"
     },
     {
-      "pijnpunt": "Belangrijke mail verdwijnt tussen nieuwsbrieven en notificaties",
-      "tool": "SaneBox",
-      "mowi_dienst": false,
-      "nl_eu": "Internationaal",
-      "kosten_per_maand": 15,
-      "kosten_bron": "fictief (voorbeeld)",
-      "opzettijd_min": 10,
+      "pijnpunt": "Offerteaanvragen komen incompleet binnen",
+      "tool": "Support Agent, e-mail: offerte-check vraagt zelf na wat mist",
+      "mowi_dienst": true,
+      "nl_eu": "NL",
+      "kosten_per_maand": 0,
+      "kosten_bron": "Zelfde Basis-abonnement; klant noemt ±10 aanvragen per week = ±45 credits/mnd, past binnen de 800 (voorbeeld).",
+      "opzettijd_min": 15,
       "tijdwinst_uur_per_week": 1.5,
-      "tijdwinst_bron": "Klant: \"ik ben elke ochtend zeker twintig minuten bezig met wegklikken voor ik iets nuttigs lees\" (5 × 20 min).",
+      "tijdwinst_bron": "Klant: \"elke aanvraag is drie keer heen en weer, dat is zo anderhalf uur per week\".",
       "kwadrant": "quick_win",
-      "quickwin_label": "Elke ochtend 20 minuten mail wegklikken"
+      "quickwin_label": "Drie keer heen en weer per offerteaanvraag"
     },
     {
-      "pijnpunt": "Inkoopfacturen met de hand overtypen in Moneybird",
-      "tool": "Klippa",
-      "mowi_dienst": false,
+      "pijnpunt": "Telefoon gemist tijdens het inpakken, terugbellen kost een uur per week",
+      "tool": "Support Agent, telefoon: neemt op, geeft bestelstatus, legt terugbelverzoek vast",
+      "mowi_dienst": true,
       "nl_eu": "NL",
-      "kosten_per_maand": 25,
-      "kosten_bron": "fictief (voorbeeld)",
+      "kosten_per_maand": 12.5,
+      "kosten_bron": "Telefoonlijn €12,50/mnd; belminuten 6 credits/min, ±5 gesprekken van 2 min per week = ±260 credits/mnd binnen Basis (tarief op de dag van de scan controleren; voorbeeld).",
       "opzettijd_min": 30,
-      "tijdwinst_uur_per_week": 2,
-      "tijdwinst_bron": "Klant: \"vrijdagmiddag gaat op aan facturen, twee uur zeker\".",
+      "tijdwinst_uur_per_week": 1,
+      "tijdwinst_bron": "Klant: \"ik mis zeker vijf telefoontjes per week en het terugbellen kost me zo'n uur\".",
       "kwadrant": "quick_win",
-      "quickwin_label": "Vrijdagmiddag facturen overtypen"
+      "quickwin_label": "Vijf gemiste telefoontjes per week"
     },
     {
       "pijnpunt": "Afspraken met leveranciers plannen kost heen-en-weer-mailen",
-      "tool": "Cal.com",
-      "mowi_dienst": false,
-      "nl_eu": "EU",
+      "tool": "Support Agent, agenda: stelt een moment voor uit Google Agenda",
+      "mowi_dienst": true,
+      "nl_eu": "NL",
       "kosten_per_maand": 0,
-      "kosten_bron": "fictief (voorbeeld)",
-      "opzettijd_min": 15,
+      "kosten_bron": "Zelfde abonnement, agenda-koppeling zonder meerprijs (lijstprijs mowi.agency/pricing, voorbeeld).",
+      "opzettijd_min": 10,
       "tijdwinst_uur_per_week": 0.5,
       "tijdwinst_bron": "Klant: \"een afspraak plannen is altijd vijf mailtjes, een paar keer per week\" (circa 30 min).",
       "kwadrant": "overwegen",
@@ -72,25 +72,25 @@
     }
   ],
   "startplan": [
-    { "dag": 1, "actie": "Shopify koppelen aan de Mowi Inbox agent en de bestelstatus-antwoorden aanzetten op concept.", "minuten": 10 },
-    { "dag": 2, "actie": "SaneBox installeren op de gedeelde mailbox en de standaardregels laten staan.", "minuten": 10 },
-    { "dag": 3, "actie": "Klippa koppelen aan Moneybird en de eerste vijf facturen laten inlezen.", "minuten": 10 },
-    { "dag": 4, "actie": "Cal.com-link instellen en in de mailhandtekening zetten.", "minuten": 10 }
+    { "dag": 1, "actie": "Start gratis op my.mowi.agency/aanmelden (60 credits, geen betaalgegevens) en koppel de mailbox.", "minuten": 10 },
+    { "dag": 2, "actie": "Shopify en Google Agenda koppelen en de kennisbank invullen: bedrijfsprofiel en de vijf vragen die het vaakst binnenkomen.", "minuten": 10 },
+    { "dag": 3, "actie": "Proefdraaien op uw laatste 20 e-mails, concepten nalezen en \"Ik heb dit gecontroleerd\" aanklikken.", "minuten": 10 },
+    { "dag": 4, "actie": "Telefoon aanzetten: stem kiezen, instellingen controleren, nummer aanvragen. Mowi koppelt het nummer meestal binnen een paar uur.", "minuten": 10 }
   ],
   "grote_projecten": [
     {
-      "titel": "Kennissysteem voor klantvragen",
-      "toelichting": "Bij elke nieuwe collectie krijgt de klantenservice tientallen keren dezelfde vraag. Een kennissysteem op uw eigen productinformatie beantwoordt die direct, zonder dat iemand het hoeft op te zoeken.",
-      "mowi_product": "Kennissysteem"
+      "titel": "Proactieve meldingen: besteloverzicht en nieuwe bestelling met klantdossier",
+      "toelichting": "Nu reageert de agent op wat binnenkomt. De volgende stap is dat hij u elke ochtend het besteloverzicht stuurt en bij elke nieuwe bestelling het klantdossier klaarzet, zodat u niets meer hoeft op te zoeken.",
+      "mowi_product": "Workflows"
     },
     {
-      "titel": "Procesherontwerp orderverwerking",
-      "toelichting": "Een bestelling doorloopt vandaag negen handmatige stappen voordat hij verzendklaar is. Voordat hier iets geautomatiseerd wordt, is het proces zelf toe aan een opschoning.",
-      "mowi_product": "Procesherontwerp"
+      "titel": "Auto-versturen verdienen per categorie",
+      "toelichting": "Bestelstatus-antwoorden staan nu als concept klaar. Na 14 dagen live, 25 concepten en een beoordeling van 9 op 10 mag die categorie zelf versturen. Dan verdwijnt ook het nalezen uit uw dag.",
+      "mowi_product": "Support Agent"
     }
   ],
   "vervolg": {
-    "boek_url": "https://mowi.agency/contact",
+    "boek_url": "https://mowi.agency/demo",
     "afzender": "Sal van Mowi"
   }
 }
