@@ -2,7 +2,12 @@
 'use strict';
 // Legal gate for the cold-outbound prospect list (Legal/19-LIA-outbound-prospecting.md §4).
 //
-//   KVK_API_KEY=... node kvk-check.js <apollo-export.csv> [--out <map>] [--test] [--limit N]
+//   KVK_API_KEY=... node kvk-check.js <apollo-export.csv> [--out <map>] [--test] [--limit N] [--max-paid N]
+//
+// The key may also live in ~/.config/mowi-outbound/kvk_api_key (chmod 600), so it never has to be typed
+// into a command line or a chat. KVK does not credit costs caused by implementation mistakes, so:
+// run --test first, then --limit 5 against production, then the full list. --max-paid caps the paid
+// Basisprofiel calls per run (default 200); when it is reached the script stops and writes nothing.
 //
 // Input: a CSV exported from Apollo (People). Used columns, matched case-insensitively and
 // tolerant of Apollo's variants: Company / Company Name, City / Company City, Website,
@@ -29,12 +34,27 @@ const args = process.argv.slice(2);
 const input = args.find((a) => !a.startsWith('--'));
 const flag = (n) => args.includes(n);
 const opt = (n) => { const i = args.indexOf(n); return i >= 0 ? args[i + 1] : undefined; };
-if (!input) { console.error('Gebruik: KVK_API_KEY=... node kvk-check.js <apollo-export.csv> [--out map] [--test] [--limit N]'); process.exit(2); }
+if (!input) { console.error('Gebruik: KVK_API_KEY=... node kvk-check.js <apollo-export.csv> [--out map] [--test] [--limit N] [--max-paid N]'); process.exit(2); }
 
 const TEST = flag('--test');
 const BASE = TEST ? 'https://api.kvk.nl/test/api' : 'https://api.kvk.nl/api';
-const KEY = TEST ? 'l7xx1f2691f2520d487b902f4e0b57a0b197' : process.env.KVK_API_KEY;
-if (!KEY) { console.error('KVK_API_KEY ontbreekt. Vraag een sleutel aan op developers.kvk.nl (Zoeken is gratis, Basisprofiel is betaald) of draai met --test.'); process.exit(2); }
+// Key: env var first, then a 0600 file outside git and outside the vault.
+const KEY_FILE = path.join(process.env.HOME || '', '.config', 'mowi-outbound', 'kvk_api_key');
+function readKeyFile() {
+  try {
+    const st = fs.statSync(KEY_FILE);
+    if (st.mode & 0o077) console.error(`Waarschuwing: ${KEY_FILE} is leesbaar voor anderen. Draai: chmod 600 "${KEY_FILE}"`);
+    return fs.readFileSync(KEY_FILE, 'utf8').trim();
+  } catch { return ''; }
+}
+const KEY = TEST ? 'l7xx1f2691f2520d487b902f4e0b57a0b197' : (process.env.KVK_API_KEY || readKeyFile());
+if (!KEY) { console.error(`KVK-sleutel ontbreekt. Zet KVK_API_KEY of bewaar de sleutel in ${KEY_FILE} (chmod 600). Vraag een sleutel aan op developers.kvk.nl (Zoeken is gratis, Basisprofiel is betaald) of draai met --test.`); process.exit(2); }
+
+// Hard stops against runaway cost: at most MAX_PAID paid Basisprofiel calls per run, and a 429 is
+// retried a few times, never forever.
+const MAX_PAID = Number(opt('--max-paid') || 200);
+const MAX_429_RETRIES = 4;
+const stats = { zoeken: 0, basisprofiel: 0, retries429: 0 };
 
 const VAULT = process.env.MOWI_VAULT || '/Users/sal/Desktop/Mowi brain';
 const SUPPRESSION = path.join(VAULT, 'Marketing & acquisition', 'suppression-list.csv');
@@ -77,11 +97,28 @@ function similarity(a, b) {
 }
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-async function kvk(pathname, params) {
+async function kvk(pathname, params, attempt = 0) {
+  const paid = pathname.startsWith('/v1/basisprofielen');
+  if (attempt === 0) {
+    if (paid && stats.basisprofiel >= MAX_PAID) {
+      console.error(`\nVeiligheidsgrens bereikt: ${stats.basisprofiel} betaalde Basisprofiel-calls (--max-paid ${MAX_PAID}). Gestopt, er is niets weggeschreven. Verhoog --max-paid alleen bewust.`);
+      process.exit(3);
+    }
+    stats[paid ? 'basisprofiel' : 'zoeken']++;
+  }
   const url = new URL(BASE + pathname); for (const [k, v] of Object.entries(params || {})) if (v != null && v !== '') url.searchParams.set(k, v);
   const res = await fetch(url, { headers: { apikey: KEY, accept: 'application/json' } });
   if (res.status === 404) return null;
-  if (res.status === 429) { await sleep(1500); return kvk(pathname, params); }
+  if (res.status === 401 || res.status === 403) {
+    console.error(`\nKVK weigert de sleutel (HTTP ${res.status}). Gestopt. Controleer de sleutel en het abonnement in het KVK Developer Portal.`);
+    process.exit(4);
+  }
+  if (res.status === 429) {
+    stats.retries429++;
+    if (attempt >= MAX_429_RETRIES) throw new Error(`KVK 429 (te veel verzoeken) op ${url.pathname}, opgegeven na ${attempt} nieuwe pogingen`);
+    await sleep(1500 * (attempt + 1));
+    return kvk(pathname, params, attempt + 1);
+  }
   if (!res.ok) throw new Error(`KVK ${res.status} op ${url.pathname}`);
   return res.json();
 }
@@ -89,16 +126,18 @@ async function kvk(pathname, params) {
 async function lookupCompany(name, city) {
   // 1) exact-ish search on name (+ city when known), hoofdvestiging only
   const tries = [{ naam: name, plaats: city }, { naam: name }];
+  let lastError = '';
   for (const t of tries) {
     const r = await kvk('/v2/zoeken', { ...t, type: 'hoofdvestiging', resultatenPerPagina: 10 }).catch((e) => ({ error: e.message }));
-    if (!r || r.error || !r.resultaten?.length) continue;
+    if (r?.error) { lastError = r.error; continue; }
+    if (!r || !r.resultaten?.length) continue;
     const scored = r.resultaten.map((x) => ({ x, s: similarity(name, x.naam) + (city && (x.adres?.binnenlandsAdres?.plaats || '').toLowerCase() === city.toLowerCase() ? 0.15 : 0) }))
       .sort((a, b) => b.s - a.s);
     const best = scored[0];
     if (best.s >= 0.6 && (scored.length === 1 || best.s - scored[1].s >= 0.15 || scored[1].s < 0.6)) return { match: best.x, score: Math.min(best.s, 1) };
     return { ambiguous: scored.slice(0, 3).map((y) => `${y.x.naam} (${y.x.kvkNummer}, ${y.x.adres?.binnenlandsAdres?.plaats || '?'})`), score: best.s };
   }
-  return null;
+  return lastError ? { error: lastError } : null;
 }
 
 async function profile(kvkNummer) {
@@ -139,14 +178,13 @@ function decide(prof, suppressed) {
   console.log(`${rows.length} contacten, ${companies.size} bedrijven${limit ? ` (eerste ${list.length})` : ''}; suppressielijst: ${suppression.size} domeinen; omgeving: ${TEST ? 'KVK TEST' : 'KVK productie'}`);
 
   const out = []; const counts = { TOEGESTAAN: 0, GEBLOKKEERD: 0, CONTROLE: 0 };
-  let calls = 0;
   for (const c of list) {
     const domain = domainOf(c.website) || domainOf(pick(c.contacts[0], 'Email'));
     const suppressed = suppression.has(domain);
     let prof = null, note = '';
     if (!suppressed) {
-      const found = await lookupCompany(c.company, c.city).catch((e) => ({ error: e.message })); calls++;
-      if (found?.match) { prof = await profile(found.match.kvkNummer).catch(() => null); calls++; note = `match ${Math.round(found.score * 100)}% op "${found.match.naam}"`; }
+      const found = await lookupCompany(c.company, c.city).catch((e) => ({ error: e.message }));
+      if (found?.match) { prof = await profile(found.match.kvkNummer).catch(() => null); note =`match ${Math.round(found.score * 100)}% op "${found.match.naam}"`; }
       else if (found?.ambiguous) note = 'meerdere kandidaten: ' + found.ambiguous.join(' / ');
       else if (found?.error) note = 'KVK-fout: ' + found.error;
       else note = 'niets gevonden in het Handelsregister';
@@ -173,6 +211,7 @@ function decide(prof, suppressed) {
   const allowed = out.filter((r) => r.status === 'TOEGESTAAN' && r.email);
   const allowFile = path.join(outDir, `apollo-toegestaan-${today}${TEST ? '-TEST' : ''}.csv`);
   fs.writeFileSync(allowFile, toCsv(allowed, ['email', 'contactpersoon', 'bedrijf', 'domein', 'kvk_nummer', 'rechtsvorm']));
-  console.log(`\nBedrijven: ${counts.TOEGESTAAN} toegestaan · ${counts.GEBLOKKEERD} geblokkeerd · ${counts.CONTROLE} controle · ${calls} KVK-calls (±€${(calls * 0.02 / 2).toFixed(2)} aan Basisprofiel bij productie)`);
+  console.log(`\nBedrijven: ${counts.TOEGESTAAN} toegestaan · ${counts.GEBLOKKEERD} geblokkeerd · ${counts.CONTROLE} controle`);
+  console.log(`KVK-calls: ${stats.zoeken} Zoeken (gratis) + ${stats.basisprofiel} Basisprofiel (±€${(stats.basisprofiel * 0.02).toFixed(2)} bij productie)${stats.retries429 ? ` · ${stats.retries429}× HTTP 429 ontvangen` : ''}`);
   console.log(`Volledige controle:  ${checkFile}\nAlleen toegestaan:   ${allowFile} (${allowed.length} contacten) — dit is het enige bestand dat een sequence in mag.`);
 })().catch((e) => { console.error('Mislukt:', e.message); process.exit(1); });

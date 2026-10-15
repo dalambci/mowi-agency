@@ -5,6 +5,15 @@ description: "Koude e-mailacquisitie voor Mowi via Apollo vanaf sal@getmowi.nl: 
 
 # Mowi outbound — lijst, poort, suppressie
 
+> **Blokkade sinds 2026-10-15 — geen koude e-mail activeren.** Art. 11.7 lid 1 Telecommunicatiewet vraagt
+> voorafgaande toestemming voor ongevraagde commerciële e-mail aan elke eindgebruiker, ook aan een B.V.
+> (sinds 1-10-2009; OPTA, Companeo-boetebesluit 2012). Lid 3 zondert alleen adressen uit die het bedrijf
+> zelf voor commerciële berichten heeft "bestemd en bekendgemaakt"; Apollo-adressen zijn dat niet. Bellen
+> naar een rechtspersoon mag wel (opt-out, lid 2 geldt alleen voor natuurlijke personen). Voorstel
+> (telefoon eerst, mail pas na toestemming in het gesprek) staat in de vault in
+> `Legal/19-LIA-outbound-prospecting.md` §6 en wacht op Sal. Tot hij beslist: de sequence niet activeren,
+> geen stap toevoegen die koud mailt, en niets hieronder lezen als toestemming om te mailen.
+
 Bindende bronnen in de vault (`/Users/sal/Desktop/Mowi brain/`, op de PC `c:/Users/SalP1/Desktop/Mowi brain/`):
 `Legal/19-LIA-outbound-prospecting.md` (§4 waarborgen, geen van alle optioneel),
 `Marketing & acquisition/suppression-procedure.md`, `outbound-sequence-assessment-v2.md`
@@ -59,10 +68,47 @@ regels ook toe aan `prospects-test-1.csv` (kolommen daar: bedrijf, rechtsvorm, k
 non_mailing_indicator, contactpersoon, functietitel, email, bron_adres, apollo_verified,
 toegevoegd_op, sequence_status).
 
-KVK-sleutel: aanvragen op developers.kvk.nl (Sal, eenmalig). Zoeken is gratis; Basisprofiel is een
-betaald abonnement (±€6,40/maand + €0,02/call). `--test` draait tegen KVK's testomgeving met de
-publieke testsleutel, alleen om het script te controleren; de testregistratie bevat fictieve
-bedrijven.
+KVK-sleutel: aangevraagd op developers.kvk.nl (Sal, eenmalig); sinds 2026-10-14 actief. De sleutel
+zelf staat in het Developer Portal (developers.kvk.nl/nl/login, eigen gebruikersnaam en wachtwoord;
+de Handelsregister-toegangscode werkt daar niet). Kosten (developers.kvk.nl/nl/pricing, gelezen
+2026-10-15): abonnement €6,40/maand per API-key voor de aansluiting (alle API's samen; een extra key
+kost nog eens €6,40), per bevraging Zoeken gratis en Basisprofiel/Vestigingsprofiel/Naamgeving
+€0,02, btw-vrij. Opzeggen alleen schriftelijk (account@kvk.nl); de overeenkomst loopt dan door t/m
+de laatste dag van de volgende kalendermaand (overeenkomst §3). `--test` draait tegen KVK's
+testomgeving met de publieke testsleutel, alleen om het script te controleren; de testregistratie
+bevat fictieve bedrijven.
+
+**Eerst testen, dan pas de volledige lijst** (KVK crediteert geen kosten die een implementatiefout
+veroorzaakt, gezegd in hun mail van 2026-10-07): (1) `--test`; (2) productie met `--limit 5` en
+daarna het kostenoverzicht in het Handelsregister-portaal naast de uitvoer leggen; (3) pas dan de
+hele export. Ingebouwde remmen (2026-10-14): `--max-paid N` (standaard 200) stopt het script en
+schrijft niets weg zodra N betaalde Basisprofiel-calls zijn gedaan; een HTTP 429 wordt vier keer
+herhaald en komt daarna als KVK-fout in `kvk_notitie` (status CONTROLE); een geweigerde sleutel
+(401/403) stopt de hele run meteen. De samenvatting onderaan telt de echte calls (Zoeken gratis,
+Basisprofiel betaald).
+
+De sleutel mag in plaats van in de shell ook in `~/.config/mowi-outbound/kvk_api_key` (chmod 600)
+staan, zodat hij nooit in een chat of commandoregel verschijnt: kopieer de sleutel uit het KVK
+Developer Portal en draai `mkdir -p ~/.config/mowi-outbound && pbpaste > ~/.config/mowi-outbound/kvk_api_key && chmod 600 ~/.config/mowi-outbound/kvk_api_key`.
+`KVK_API_KEY` in de omgeving gaat voor het bestand. Nooit in git of in de vault. Let op: typ die opdracht in plaats van hem te kopiëren, want kopiëren vervangt de sleutel op het klembord. Veiliger is `sh ~/.config/mowi-outbound/save-key.sh` (staat alleen op de Mac van Sal): het controleert dat het klembord op een sleutel lijkt en toont de sleutel nooit.
+
+### 2b. Sitecontrole: hoort het e-maildomein bij het gecontroleerde bedrijf?
+
+`kvk-check.js` matcht op bedrijfsnaam, en dat ging op 2026-10-15 bij ± 1 op 10 goedgekeurde bedrijven mis:
+het echte bedrijf achter de webshop bleek een VOF, eenmanszaak of NMI "Ja" te hebben (Oostendorp, Geels,
+Kilo Kilo, Kappershandel, Koffie Lovers, Woef Woef, Fento). Na het ontgrendelen daarom per contact:
+
+1. `python3 -I tools/kvk_site_check.py <goedgekeurd.csv> <apollo-lijst.txt> <uit.tsv>` zoekt het KvK-nummer
+   op de eigen site (home, contact, voorwaarden, Shopify-policies) en vergelijkt het met `kvk_nummer`.
+   `apollo-lijst.txt` heeft per regel `naam | functie | bedrijf | e-mail`.
+2. Ander KvK-nummer op de site: dat bedrijf telt. Geen nummer op de site: `node tools/kvk-profielen.mjs
+   <uit.jsonl> <kvk-nummers…>` (± € 0,02 per nummer, harde rem 70) en de KVK-website of handelsnaam
+   naast het e-maildomein leggen. Klopt geen van beide, of is het adres een privémailbox (ziggo.nl e.d.):
+   GEBLOKKEERD.
+3. `python3 -I tools/phone_crawl.py <goedgekeurd.csv> <belijst.csv>` haalt het publieke nummer van de eigen
+   site (tel:-links eerst). Gebruik nooit Apollo's betaalde nummers.
+
+De uitkomst van 2026-10-15 staat in de vault onder `prospects/2026-10-15-sitecontrole/`.
 
 ## 3. Warmup, kort
 
