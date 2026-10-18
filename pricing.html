@@ -15,6 +15,16 @@
   <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260904-3" />
   <link rel="apple-touch-icon-precomposed" href="assets/apple-icon-180.png?v=20260904-3" />
   <script defer data-domain="mowi.agency" src="https://plausible.io/js/script.js"></script>
+  <style>
+    /* Monthly/yearly toggle on /pricing only (2026-10-19). */
+    .billing-toggle-wrap { text-align: center; margin-bottom: 1.5rem; }
+    .billing-toggle { display: inline-flex; gap: 4px; padding: 4px; border: 1px solid var(--border); border-radius: var(--radius-pill); background: var(--bg); }
+    .billing-toggle[hidden] { display: none; }
+    .billing-toggle-btn { font: inherit; font-size: 0.875rem; padding: 0.5rem 1rem; border: 0; border-radius: var(--radius-pill); background: transparent; color: var(--ink-2); cursor: pointer; white-space: nowrap; }
+    .billing-toggle-btn.is-active { background: var(--ink); color: #fff; }
+    .billing-toggle-save { font-size: 0.75rem; opacity: 0.85; margin-left: 0.25rem; }
+    .tier-year-note { font-size: 0.8125rem; font-weight: 600; color: var(--ink-2); margin-top: 0.375rem; }
+  </style>
 </head>
 <body>
 
@@ -232,6 +242,17 @@
              ships. Extra minutes come from the existing packs: EUR0,154 (6.400 pack) to EUR0,20 (300 pack).
              "Ongeveer 11 gesprekken per werkdag" = 500 min / 21,7 werkdagen / 2 billed minutes per call
              (calls round up to whole minutes). Must match config/plans.php and config/credits.php. -->
+        <!-- Monthly or yearly (2026-10-19, Sal: Pro at EUR790 per year, "2 maanden gratis"; the
+             Voicelabs borrow item 4: a toggle, never a struck-out price). The toggle only appears with
+             script; without it the Pro card still states the yearly price in its own line. Only Pro
+             has a yearly price, so only Pro's figures change. Page-local style and script, so
+             css/style.css and js/main.js keep their versions. -->
+        <div class="billing-toggle-wrap">
+          <div class="billing-toggle" role="group" aria-label="Betaalperiode" hidden>
+            <button type="button" class="billing-toggle-btn is-active" data-interval="month" aria-pressed="true">Per maand</button>
+            <button type="button" class="billing-toggle-btn" data-interval="year" aria-pressed="false">Per jaar <span class="billing-toggle-save">2 maanden gratis</span></button>
+          </div>
+        </div>
         <div class="tier-grid">
           <div class="tier-card">
             <h2 class="tier-card-name">Start gratis</h2>
@@ -261,15 +282,16 @@
           </div>
           <div class="tier-card tier-card-highlight">
             <h2 class="tier-card-name">Pro</h2>
-            <div class="tier-price"><span class="tier-price-amount">€79</span><span class="tier-price-period">/mnd excl. btw</span></div>
+            <div class="tier-price"><span class="tier-price-amount" data-month="€79" data-year="€790">€79</span><span class="tier-price-period" data-month="/mnd excl. btw" data-year="/jaar excl. btw">/mnd excl. btw</span></div>
             <p class="tier-price-sub">Telefoonnummer en 3.000 credits per maand</p>
+            <p class="tier-year-note" data-month="Of €&nbsp;790 per jaar: 2 maanden gratis" data-year="Dat is €&nbsp;65,83 per maand">Of €&nbsp;790 per jaar: 2 maanden gratis</p>
             <p class="tier-profile">500 belminuten, ongeveer 11 gesprekken per werkdag</p>
             <ul class="tier-features">
               <li>Uw eigen telefoonnummer inbegrepen</li>
               <li>500 belminuten, of e-mail uit hetzelfde tegoed</li>
               <li>Extra belminuten € 0,15 tot € 0,20 met losse credits</li>
               <li>30 dagen geld terug</li>
-              <li>Maandelijks opzegbaar</li>
+              <li data-month="Maandelijks opzegbaar" data-year="Per jaar vooruit, opzeggen tegen het einde van het jaar">Maandelijks opzegbaar</li>
             </ul>
             <a href="https://my.mowi.agency/aanmelden" class="btn-primary tier-cta" data-event="Signup Click">Aan de slag</a>
           </div>
@@ -525,6 +547,28 @@
     </div>
   </footer>
 
+  <script>
+    /* Monthly/yearly toggle (2026-10-19): swaps every [data-month]/[data-year] text in the tier grid. */
+    (function () {
+      var root = document.getElementById('pricing-tiers');
+      var toggle = root && root.querySelector('.billing-toggle');
+      if (!toggle) return;
+      toggle.hidden = false;
+      toggle.addEventListener('click', function (event) {
+        var button = event.target.closest('[data-interval]');
+        if (!button) return;
+        var yearly = button.getAttribute('data-interval') === 'year';
+        toggle.querySelectorAll('[data-interval]').forEach(function (b) {
+          var on = b === button;
+          b.classList.toggle('is-active', on);
+          b.setAttribute('aria-pressed', on ? 'true' : 'false');
+        });
+        root.querySelectorAll('[data-month][data-year]').forEach(function (el) {
+          el.textContent = el.getAttribute(yearly ? 'data-year' : 'data-month');
+        });
+      });
+    })();
+  </script>
   <script src="js/main.js?v=20260905-2"></script>
 </body>
 </html>
