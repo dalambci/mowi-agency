@@ -252,10 +252,23 @@ function headerHtml() {
 
       <nav class="main-nav" id="main-nav" aria-label="Hoofdmenu">
         <ul>
-          <li><a href="/zo-werkt-het">Zo werkt het</a></li>
-          <li><a href="/support-agent">Support Agent</a></li>
-          <li><a href="/koppelingen">Koppelingen</a></li>
-          <li><a href="/pricing">Prijzen</a></li>
+          <li><a href="/ai-telefonist"${current("/ai-telefonist")}>Telefoon</a></li>
+          <li><a href="/e-mail-agent"${current("/e-mail-agent")}>E-mail</a></li>
+          <li class="nav-dropdown nav-dropdown-narrow">
+            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="branches-menu" aria-haspopup="true">
+              Branches
+              <span class="nav-dropdown-icon" aria-hidden="true"></span>
+            </button>
+            <div class="nav-menu" id="branches-menu">
+              <div class="nav-menu-col">
+                <ul class="nav-menu-item-grid">
+                  <li class="nav-menu-item-full"><a href="/ai-telefonist-installateurs"><span class="nav-menu-item-title">Installateurs</span><span class="nav-menu-item-desc">Spoed en onderhoud, ook tijdens de klus</span></a></li>
+                  <li class="nav-menu-item-full"><a href="/ai-telefonist-webshops"><span class="nav-menu-item-title">Webshops</span><span class="nav-menu-item-desc">Orderstatus zonder dat u opneemt</span></a></li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li><a href="/pricing"${current("/pricing")}>Prijzen</a></li>
           <li class="nav-mobile-actions"><a href="https://my.mowi.agency/login">Inloggen</a></li>
           <li class="nav-mobile-actions"><a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a></li>
         </ul>
@@ -298,11 +311,21 @@ function footerHtml() {
             <div>
               <h3 class="footer-menu-heading">Product</h3>
               <ul>
-                <li><a href="/support-agent">Support Agent</a></li>
+                <li><a href="/ai-telefonist">Telefoon</a></li>
                 <li><a href="/e-mail-agent">E-mail</a></li>
-                <li><a href="/call-agent">Telefoon</a></li>
+                <li><a href="/support-agent">Support Agent</a></li>
                 <li><a href="/koppelingen">Koppelingen</a></li>
                 <li><a href="/pricing">Prijzen</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="footer-menu-heading">Oplossingen</h3>
+              <ul>
+                <li><a href="/telefoon-uitbesteden">Telefoon uitbesteden</a></li>
+                <li><a href="/klantenservice-uitbesteden">Klantenservice uitbesteden</a></li>
+                <li><a href="/ai-telefonist-installateurs">Voor installateurs</a></li>
+                <li><a href="/ai-telefonist-webshops">Voor webshops</a></li>
+                <li><a href="/mowi-in-het-kort">Mowi in het kort</a></li>
               </ul>
             </div>
             <div>
@@ -538,6 +561,11 @@ function buildSitemap(posts) {
     // three above: a real, indexable root page must be listed here or it
     // silently drops out of the sitemap on the next run.
     "mowi-vs-grok-bot", "mowi-vs-hermes-agent", "ai-telefonist-vergelijken",
+    // Promotieplan self-serve Voice agent (2026-10-18, vault: Marketing & acquisition/
+    // Promotion plan — self-serve Voice agent 2026-10): landers voor betaald verkeer
+    // en zoekpagina's. Niet in header of footer; wel in de sitemap.
+    "ai-telefonist", "telefoon-uitbesteden", "klantenservice-uitbesteden",
+    "mowi-in-het-kort", "ai-telefonist-installateurs", "ai-telefonist-webshops",
     // T99 (ralph/SPEC.md section 8, 2026-09-03): the 11 koppeling landers.
     "koppeling-exact-online", "koppeling-pipedrive", "koppeling-woocommerce",
     "koppeling-shopify", "koppeling-lightspeed-ecom", "koppeling-prestashop",

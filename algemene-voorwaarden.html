@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&family=Inter+Tight:wght@600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260905-2" />
+  <link rel="stylesheet" href="css/style.css?v=20261018-1" />
   <link rel="icon" href="assets/icon-192.png?v=20260904-3" />
   <link rel="shortcut icon" href="assets/icon-192.png?v=20260904-3" />
   <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260904-3" />
@@ -27,9 +27,22 @@
 
       <nav class="main-nav" id="main-nav" aria-label="Hoofdmenu">
         <ul>
-          <li><a href="/zo-werkt-het">Zo werkt het</a></li>
-          <li><a href="/support-agent">Support Agent</a></li>
-          <li><a href="/koppelingen">Koppelingen</a></li>
+          <li><a href="/ai-telefonist">Telefoon</a></li>
+          <li><a href="/e-mail-agent">E-mail</a></li>
+          <li class="nav-dropdown nav-dropdown-narrow">
+            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="branches-menu" aria-haspopup="true">
+              Branches
+              <span class="nav-dropdown-icon" aria-hidden="true"></span>
+            </button>
+            <div class="nav-menu" id="branches-menu">
+              <div class="nav-menu-col">
+                <ul class="nav-menu-item-grid">
+                  <li class="nav-menu-item-full"><a href="/ai-telefonist-installateurs"><span class="nav-menu-item-title">Installateurs</span><span class="nav-menu-item-desc">Spoed en onderhoud, ook tijdens de klus</span></a></li>
+                  <li class="nav-menu-item-full"><a href="/ai-telefonist-webshops"><span class="nav-menu-item-title">Webshops</span><span class="nav-menu-item-desc">Orderstatus zonder dat u opneemt</span></a></li>
+                </ul>
+              </div>
+            </div>
+          </li>
           <li><a href="/pricing">Prijzen</a></li>
           <li class="nav-mobile-actions"><a href="https://my.mowi.agency/login">Inloggen</a></li>
           <li class="nav-mobile-actions"><a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a></li>
@@ -58,7 +71,7 @@
     </div>
 
     <h1>Algemene voorwaarden Mowi</h1>
-    <p class="blog-meta">Laatst bijgewerkt: 10 augustus 2026</p>
+    <p class="blog-meta">Laatst bijgewerkt: 19 oktober 2026</p>
 
     <!-- DRAAGT DE WETTELIJKE PUBLICATIEPLICHT — art. 3:15d BW + art. 6:230b BW.
          Sinds 2026-08-10 staat de losse "Bedrijfsgegevens"-link niet meer in de
@@ -116,18 +129,21 @@
     <h2>Artikel 4 — Prijzen en betaling</h2>
     <p><strong>4.1</strong> Alle door Mowi genoemde prijzen zijn exclusief BTW, tenzij Mowi op grond van de kleineondernemersregeling (KOR) geen BTW mag berekenen.</p>
     <p><strong>4.2</strong> Voor de in artikel 3.4 genoemde zelfstandig af te sluiten Dienst geldt een creditsysteem: Opdrachtgever betaalt een vaste maandvergoeding die een aantal credits omvat (zie artikel 1.6). De actuele maandvergoeding en het daarin begrepen aantal credits zijn gepubliceerd op mowi.agency/pricing en bestaan, op de datum van deze AV, uit:</p>
-    <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Dienst</th><th>Maandvergoeding</th><th>Inbegrepen credits</th><th>Eenmalige setupvergoeding</th></tr></thead><tbody>
-      <tr><td>Basis</td><td>€19</td><td>600</td><td>Geen — zelf aan te sluiten</td></tr>
-      <tr><td>Pro</td><td>€79</td><td>3.000</td><td>Geen — zelf aan te sluiten</td></tr>
-      <!-- Call-agent telefoonnummer (2026-08-28, Sal): een vaste euro-regel
-           op hetzelfde abonnement, geen credits — dashboard config/plans.php
-           'call_addon', 1033 cent excl. = €12,50 incl. btw. Verving de
-           creditvergoeding (300 credits/mnd) van dezelfde dag. -->
-      <tr><td>Call-agent — telefoonnummer (aanvulling op Basis of Pro)</td><td>€10,33 (€12,50 incl. btw)</td><td>—</td><td>Geen — zelf aan te sluiten</td></tr>
+    <!-- Herzien 2026-10-19 (Sal akkoord, vault Legal/21-AV-amendement-pro-telefoon-2026-10):
+         Pro bevat het telefoonnummer en 3.000 credits; het losse nummer
+         (dashboard config/plans.php 'call_addon', 1250 cent excl. btw sinds
+         2026-09-07) is niet meer nieuw af te sluiten. Basis heeft 800 credits
+         sinds 2026-09-04. -->
+    <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Dienst</th><th>Maandvergoeding excl. btw</th><th>Inbegrepen</th><th>Eenmalige setupvergoeding</th></tr></thead><tbody>
+      <tr><td>Basis</td><td>€19</td><td>800 credits</td><td>Geen, zelf aan te sluiten</td></tr>
+      <tr><td>Pro</td><td>€79</td><td>3.000 credits en één telefoonnummer voor de Call-agent</td><td>Geen, zelf aan te sluiten</td></tr>
+      <tr><td>Telefoonnummer als losse aanvulling</td><td>€12,50</td><td>Eén telefoonnummer</td><td>Geen. Alleen voor Opdrachtgevers die deze aanvulling vóór 19 oktober 2026 afnamen; niet meer nieuw af te sluiten</td></tr>
     </tbody></table></div>
-    <!-- Herzien 2026-08-28: het dashboard laat de vergoeding voortaan ingaan zodra Opdrachtgever de Call-agent TOEVOEGT (vóór er een telefoonnummer is gekoppeld), niet pas bij activering van een gekoppeld nummer -- "activeert" hieronder beschreef vanaf die dag niet meer wat er echt gebeurde. Wordt binnen 14 dagen na toevoegen geen telefoonnummer gekoppeld, dan vervalt de vergoeding automatisch weer (mowi:expire-unused-call-addons) en is nooit gefactureerd. -->
-    <p>Voor de Call-agent geldt daarnaast de in de tabel genoemde vaste maandvergoeding per telefoonnummer. Deze gaat in op het moment dat Opdrachtgever de Call-agent toevoegt, wordt samen met de maandvergoeding van het gekozen pakket geïncasseerd (artikel 4.5) en vervalt zodra de Call-agent wordt verwijderd. Wordt binnen 14 dagen na toevoegen geen telefoonnummer aan de Call-agent gekoppeld, dan vervalt deze vergoeding automatisch weer en wordt deze niet gefactureerd.</p>
-    <!-- Verbruikstarieven toegevoegd 2026-08-28 met de credit-rebase. Zonder
+    <p>De Call-agent is beschikbaar binnen het pakket Pro. Het telefoonnummer is in de maandvergoeding van Pro inbegrepen. Wijzigt Opdrachtgever het pakket van Pro naar een pakket zonder telefoonnummer, dan schakelt Opdrachtgever eerst de Call-agent uit; het telefoonnummer vervalt dan aan Mowi.</p>
+    <!-- Bijgewerkt 2026-10-19 naar config/credits.php 'rates': e-mail 1 credit,
+         Builder 1 credit, doorverbonden minuten 2 credits, en de grens van
+         10 seconden. De toelichting hieronder is de geschiedenis van 2026-08-28.
+         Verbruikstarieven toegevoegd 2026-08-28 met de credit-rebase. Zonder
          deze regel noemt de tabel hierboven een aantal credits zonder te zeggen
          wat een credit koopt -- en artikel 1.6 noemt sinds dezelfde datum
          bewust geen tarief meer, omdat een definitie in bindende voorwaarden
@@ -136,7 +152,7 @@
          e-mail) zijn samen verdubbeld: 600 credits à 2 per e-mail is dezelfde
          300 e-mails die 300 credits à 1 per e-mail was. Wie de tabel alleen
          zou bijwerken en 1.6 zou laten staan, belooft 600 e-mails voor €19. -->
-    <p>De actuele verbruikstarieven zijn eveneens gepubliceerd op mowi.agency/pricing en bedragen, op de datum van deze AV: 2 credits per door de E-mailagent verwerkte e-mail, 6 credits per belminuut van de Call-agent, en 2 credits per bericht in de Builder. Mowi kan deze tarieven wijzigen met inachtneming van artikel 11.1.</p>
+    <p>De actuele verbruikstarieven zijn gepubliceerd op mowi.agency/pricing en bedragen, op de datum van deze AV: 1 credit per door de E-mailagent verwerkte e-mail, 6 credits per belminuut van de Call-agent, 2 credits per doorverbonden minuut, en 1 credit per bericht aan de Builder. Een gesprek korter dan 10 seconden kost geen credits; daarboven wordt per begonnen minuut gerekend. Mowi kan deze tarieven wijzigen met inachtneming van artikel 11.1.</p>
     <p>Credits boven het inbegrepen aantal koopt Opdrachtgever desgewenst zelf bij via het dashboard, tegen de daar vóór de aankoop getoonde prijs per credit-pakket (zie artikel 4.4). De op mowi.agency/pricing gepubliceerde prijzen gelden totdat Mowi hierover schriftelijk anders beslist. Voor maatwerktrajecten die op aanvraag en na een separate Offerte worden geleverd (zie artikel 3.4) — waaronder het platform/de configurator — zijn het in die Offerte genoemde pakket en de daarbij horende prijs leidend; die prijzen kunnen wel een setupvergoeding omvatten, zoals in de Offerte gespecificeerd.</p>
     <p><strong>4.3</strong> De in artikel 4.2 genoemde zelfstandig af te sluiten Dienst kent geen eenmalige setupvergoeding. Wenst Opdrachtgever de koppeling of inrichting door Mowi te laten uitvoeren in plaats van zelf, dan wordt dit als maatwerk op aanvraag geleverd tegen een in een separate Offerte genoemde vergoeding; die vergoeding is in geen geval restitueerbaar zodra Mowi met de uitvoering is begonnen. Voor overige maatwerktrajecten (artikel 3.4) wordt de wijze van facturering van een eventuele eenmalige setupvergoeding bevestigd via het betalingsschema in de Offerte; ook die vergoeding is in geen geval restitueerbaar zodra Mowi met de bouw van de Agent is begonnen.</p>
     <p><strong>4.4 Credits en bijkopen.</strong> Credits boven het in artikel 4.2 genoemde inbegrepen aantal koopt Opdrachtgever zelf bij via het dashboard, tegen de daar vóór de aankoop getoonde prijs per credit-pakket. Zijn de credits van een lopende maand op en zijn er geen credits bijgekocht, dan pauzeert Mowi de Dienst totdat Opdrachtgever credits heeft bijgekocht of de eerstvolgende maandelijkse credit-toekenning ingaat; de Overeenkomst en de reeds ingerichte configuratie blijven daarbij behouden.</p>
@@ -144,6 +160,7 @@
     <p><strong>4.6</strong> Mowi mag de prijzen jaarlijks per 1 januari indexeren conform de CBS Consumentenprijsindex (alle huishoudens), voor het eerst in het tweede contractjaar. De indexatie is nooit negatief en wordt ten minste 2 maanden vooraf aangekondigd.</p>
     <p><strong>4.7</strong> Prijswijzigingen anders dan de in artikel 4.6 bedoelde indexatie worden ten minste 2 maanden vooraf schriftelijk aangekondigd. Opdrachtgever heeft in dat geval het recht de Overeenkomst op te zeggen tegen de datum waarop de wijziging in werking zou treden.</p>
     <p><strong>4.8 Gratis credits, geen betaalgegevens vereist om te starten.</strong> Bij het zelfstandig aansluiten van de in artikel 3.4 genoemde Dienst ontvangt Opdrachtgever eenmalig een aantal gratis credits (het actuele aantal is gepubliceerd op mowi.agency/pricing) zonder dat betaalgegevens hoeven te worden opgegeven. Deze gratis credits zijn geldig tot en met [nog te bepalen: geldigheidsduur/vervaldatum]. Zijn de gratis credits verbruikt of verlopen, dan is Mowi gerechtigd de toegang tot de Dienst op te schorten totdat Opdrachtgever betaalgegevens toevoegt en overstapt op het in artikel 4.2 bedoelde betaalde abonnement, met automatische incasso conform artikel 4.5; de Overeenkomst en de reeds ingerichte configuratie blijven daarbij behouden en de toegang wordt hersteld zodra betaalgegevens zijn toegevoegd en, waar van toepassing, credits zijn bijgekocht.</p>
+    <p><strong>4.9</strong> Neemt Opdrachtgever voor het eerst het pakket Pro af, dan kan Opdrachtgever binnen 30 dagen na de eerste betaling voor Pro de Overeenkomst voor Pro schriftelijk (waaronder per e-mail aan contact@mowi.agency) beëindigen. Mowi betaalt dan de voor Pro betaalde maandvergoeding binnen 14 dagen terug via de oorspronkelijke betaalmethode. Bijgekochte credit-pakketten en reeds verbruikte credits boven het inbegrepen aantal worden niet terugbetaald. Het telefoonnummer vervalt met de beëindiging aan Mowi. Deze regeling geldt eenmaal per Opdrachtgever.</p>
 
     <h2>Artikel 5 — Duur, opzegging en beëindiging</h2>
     <p><strong>5.1</strong> De Overeenkomst wordt aangegaan voor onbepaalde tijd en is maandelijks opzegbaar, zoals gepubliceerd op mowi.agency/pricing.</p>
@@ -241,11 +258,21 @@
             <div>
               <h3 class="footer-menu-heading">Product</h3>
               <ul>
-                <li><a href="/support-agent">Support Agent</a></li>
+                <li><a href="/ai-telefonist">Telefoon</a></li>
                 <li><a href="/e-mail-agent">E-mail</a></li>
-                <li><a href="/call-agent">Telefoon</a></li>
+                <li><a href="/support-agent">Support Agent</a></li>
                 <li><a href="/koppelingen">Koppelingen</a></li>
                 <li><a href="/pricing">Prijzen</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="footer-menu-heading">Oplossingen</h3>
+              <ul>
+                <li><a href="/telefoon-uitbesteden">Telefoon uitbesteden</a></li>
+                <li><a href="/klantenservice-uitbesteden">Klantenservice uitbesteden</a></li>
+                <li><a href="/ai-telefonist-installateurs">Voor installateurs</a></li>
+                <li><a href="/ai-telefonist-webshops">Voor webshops</a></li>
+                <li><a href="/mowi-in-het-kort">Mowi in het kort</a></li>
               </ul>
             </div>
             <div>

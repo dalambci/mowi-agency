@@ -1698,3 +1698,23 @@ img.split-visual { min-height: 0; width: 100%; height: auto; border-radius: var(
   padding: 1.25rem 1.5rem; margin: 2rem auto 0; font-size: 0.9375rem; color: var(--ink-2);
   line-height: 1.6; max-width: 40rem; text-align: center;
 }
+
+/* ---------- Branches dropdown + four-column footer (2026-10-18) ----------
+   Sal: menu Telefoon · E-mail · Branches · Prijzen. Branches reuses the old
+   Product mega-menu's .nav-dropdown machinery (js/main.js already handles
+   click and desktop hover), but as a narrow single-column panel under its own
+   trigger instead of the 76rem panel centred under the header. Below 64rem the
+   existing mobile sheet behaviour is left untouched. The footer gained an
+   "Oplossingen" column, so it runs four columns wide, two-across on phones. */
+@media (min-width: 64rem) {
+  .nav-dropdown-narrow { position: relative; }
+  .nav-dropdown-narrow .nav-menu { width: 21rem; left: 50%; }
+}
+.nav-dropdown-narrow .nav-menu-item-grid { grid-template-columns: minmax(0, 1fr); }
+.footer-menus { grid-template-columns: repeat(4, minmax(140px, 190px)); }
+@media (max-width: 77.9rem) {
+  .footer-menus { grid-template-columns: repeat(4, minmax(130px, 190px)); }
+}
+@media (max-width: 63.9rem) {
+  .footer-menus { grid-template-columns: repeat(2, 1fr); }
+}

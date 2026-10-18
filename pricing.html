@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&family=Inter+Tight:wght@600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260905-2" />
+  <link rel="stylesheet" href="css/style.css?v=20261018-1" />
   <link rel="icon" href="assets/icon-192.png?v=20260904-3" />
   <link rel="shortcut icon" href="assets/icon-192.png?v=20260904-3" />
   <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260904-3" />
@@ -28,10 +28,23 @@
 
       <nav class="main-nav" id="main-nav" aria-label="Hoofdmenu">
         <ul>
-          <li><a href="/zo-werkt-het">Zo werkt het</a></li>
-          <li><a href="/support-agent">Support Agent</a></li>
-          <li><a href="/koppelingen">Koppelingen</a></li>
-          <li><a aria-current="page" href="/pricing">Prijzen</a></li>
+          <li><a href="/ai-telefonist">Telefoon</a></li>
+          <li><a href="/e-mail-agent">E-mail</a></li>
+          <li class="nav-dropdown nav-dropdown-narrow">
+            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="branches-menu" aria-haspopup="true">
+              Branches
+              <span class="nav-dropdown-icon" aria-hidden="true"></span>
+            </button>
+            <div class="nav-menu" id="branches-menu">
+              <div class="nav-menu-col">
+                <ul class="nav-menu-item-grid">
+                  <li class="nav-menu-item-full"><a href="/ai-telefonist-installateurs"><span class="nav-menu-item-title">Installateurs</span><span class="nav-menu-item-desc">Spoed en onderhoud, ook tijdens de klus</span></a></li>
+                  <li class="nav-menu-item-full"><a href="/ai-telefonist-webshops"><span class="nav-menu-item-title">Webshops</span><span class="nav-menu-item-desc">Orderstatus zonder dat u opneemt</span></a></li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li><a href="/pricing" aria-current="page">Prijzen</a></li>
           <li class="nav-mobile-actions"><a href="https://my.mowi.agency/login">Inloggen</a></li>
           <li class="nav-mobile-actions"><a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a></li>
         </ul>
@@ -68,8 +81,8 @@
          not built yet, deferred, not forgotten. -->
     <section class="section" id="pricing-hero">
       <div class="container">
-        <h1 class="page-hero-heading">Betaal per gebruik</h1>
-        <p class="page-hero-body">U kunt altijd bijkopen of overstappen. Uw configuratie blijft staan.</p>
+        <h1 class="page-hero-heading">Telefoon en e-mail voor € 79 per maand</h1>
+        <p class="page-hero-body">Eén pakket met uw eigen telefoonnummer, 500 belminuten en e-mail. Alleen e-mail? Dan volstaat Basis. Testen is altijd gratis.</p>
       </div>
     </section>
 
@@ -211,46 +224,52 @@
          "Start gratis" carries no label on purpose: BTW on EUR0 is noise. -->
     <section class="section" id="pricing-tiers">
       <div class="container">
+        <!-- REPRICED 2026-10-18 (Sal, Decisions log 2026-10-18 "BESLUIT"): Pro is now the Voice plan.
+             EUR79/mnd excl. btw includes the telephone number (was a separate EUR12,50 line) and
+             3.000 credits (was 3.600) = 500 belminuten, or e-mail from the same credits. The number is
+             no longer sold separately to new clients; existing number-only clients keep their price.
+             Basis stays the e-mail plan. 30 dagen geld terug needs Sal's approved AV clause before this
+             ships. Extra minutes come from the existing packs: EUR0,154 (6.400 pack) to EUR0,20 (300 pack).
+             "Ongeveer 11 gesprekken per werkdag" = 500 min / 21,7 werkdagen / 2 billed minutes per call
+             (calls round up to whole minutes). Must match config/plans.php and config/credits.php. -->
         <div class="tier-grid">
-          <div class="tier-card tier-card-highlight">
+          <div class="tier-card">
             <h2 class="tier-card-name">Start gratis</h2>
             <div class="tier-price"><span class="tier-price-amount">€0</span></div>
             <p class="tier-price-sub">60 gratis credits</p>
-            <p class="tier-profile">Genoeg om het uit te proberen</p>
+            <p class="tier-profile">Om te testen in uw browser</p>
             <ul class="tier-features">
-              <li>60 gratis credits</li>
+              <li>Test e-mail en telefoon</li>
               <li>Geen betaalgegevens nodig</li>
-              <li>Toegang tot e-mail, telefoon, WhatsApp en Instagram</li>
               <li>Geen automatische overgang naar betaald</li>
             </ul>
             <a href="https://my.mowi.agency/aanmelden" class="btn-primary tier-cta" data-event="Signup Click">Start gratis</a>
           </div>
-
           <div class="tier-card">
             <h2 class="tier-card-name">Basis</h2>
             <div class="tier-price"><span class="tier-price-amount">€19</span><span class="tier-price-period">/mnd excl. btw</span></div>
             <p class="tier-price-sub">800 credits per maand</p>
-            <p class="tier-profile">Ongeveer 40 e-mails per werkdag</p>
+            <p class="tier-profile">Voor e-mail, ongeveer 40 e-mails per werkdag</p>
             <ul class="tier-features">
               <li>Alles uit Start gratis</li>
               <li>800 credits per maand</li>
-              <li>Eén tegoed voor alle kanalen</li>
+              <li>Telefoon zit in Pro</li>
               <li>Bijkopen wanneer u wilt</li>
               <li>Pauzeert netjes bij op tegoed</li>
             </ul>
             <a href="https://my.mowi.agency/aanmelden" class="btn-primary tier-cta" data-event="Signup Click">Aan de slag</a>
           </div>
-
-          <div class="tier-card">
+          <div class="tier-card tier-card-highlight">
             <h2 class="tier-card-name">Pro</h2>
             <div class="tier-price"><span class="tier-price-amount">€79</span><span class="tier-price-period">/mnd excl. btw</span></div>
-            <p class="tier-price-sub">3.600 credits per maand</p>
-            <p class="tier-profile">Ongeveer 180 e-mails per werkdag</p>
+            <p class="tier-price-sub">Telefoonnummer en 3.000 credits per maand</p>
+            <p class="tier-profile">500 belminuten, ongeveer 11 gesprekken per werkdag</p>
             <ul class="tier-features">
-              <li>Alles uit Basis</li>
-              <li>3.600 credits per maand</li>
-              <li>Voordeliger per credit</li>
-              <li>Bijkopen wanneer u wilt</li>
+              <li>Uw eigen telefoonnummer inbegrepen</li>
+              <li>500 belminuten, of e-mail uit hetzelfde tegoed</li>
+              <li>Extra belminuten € 0,15 tot € 0,20 met losse credits</li>
+              <li>30 dagen geld terug</li>
+              <li>Maandelijks opzegbaar</li>
             </ul>
             <a href="https://my.mowi.agency/aanmelden" class="btn-primary tier-cta" data-event="Signup Click">Aan de slag</a>
           </div>
@@ -444,11 +463,21 @@
             <div>
               <h3 class="footer-menu-heading">Product</h3>
               <ul>
-                <li><a href="/support-agent">Support Agent</a></li>
+                <li><a href="/ai-telefonist">Telefoon</a></li>
                 <li><a href="/e-mail-agent">E-mail</a></li>
-                <li><a href="/call-agent">Telefoon</a></li>
+                <li><a href="/support-agent">Support Agent</a></li>
                 <li><a href="/koppelingen">Koppelingen</a></li>
                 <li><a href="/pricing">Prijzen</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="footer-menu-heading">Oplossingen</h3>
+              <ul>
+                <li><a href="/telefoon-uitbesteden">Telefoon uitbesteden</a></li>
+                <li><a href="/klantenservice-uitbesteden">Klantenservice uitbesteden</a></li>
+                <li><a href="/ai-telefonist-installateurs">Voor installateurs</a></li>
+                <li><a href="/ai-telefonist-webshops">Voor webshops</a></li>
+                <li><a href="/mowi-in-het-kort">Mowi in het kort</a></li>
               </ul>
             </div>
             <div>
