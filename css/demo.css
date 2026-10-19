@@ -86,7 +86,6 @@
   flex-shrink: 0;
 }
 .demo-disc-lg { width: 16rem; height: 16rem; }
-.demo-disc-sm { width: 4.5rem; height: 4.5rem; flex-shrink: 0; }
 @media (max-width: 47.9rem) {
   .demo-disc { width: 13rem; height: 13rem; }
   .demo-disc-lg { width: 12rem; height: 12rem; }
@@ -214,18 +213,24 @@
 .demo-bubble-caller { align-self: flex-end; background: var(--surface); color: var(--ink); box-shadow: var(--demo-shadow); border-top-right-radius: 0.4rem; }
 
 /* Chat mode uses a normal, always-visible scrolling log instead of the
-   fade-out overlay above (there is no disc obscuring it to fade behind). */
+   fade-out overlay above (there is no disc obscuring it to fade behind).
+   Since 2026-10-20 it fills the chat window above the composer and starts at
+   the top, like the dashboard's thread. The fade covers only the top padding,
+   so a message is never dimmed until it scrolls up under the edge. */
 .demo-transcript-chat {
   position: static;
   flex: 1 1 auto;
-  min-height: 8rem;
-  max-height: 16rem;
+  min-height: 0;
+  justify-content: flex-start;
+  gap: 0.375rem;
   overflow-y: auto;
   overflow-x: hidden;
-  mask-image: none;
-  -webkit-mask-image: none;
-  padding: 0;
+  mask-image: linear-gradient(to bottom, transparent, #000 1rem);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 1rem);
+  padding: 1rem 1rem 0.5rem;
   pointer-events: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
 }
 
 /* --- Tabs (Section A) ------------------------------------------------------
@@ -282,10 +287,17 @@
 
 /* --- Voice/Chat segmented toggle (Section B) -------------------------------
    Own recipe, not css/templates.css's .tpl-seg (that file isn't loaded on
-   this page) — same idea (a pill-shaped role=tablist), retokenised. */
+   this page) — same idea (a pill-shaped role=tablist), retokenised.
+   2026-10-20: an icon per mode, two equal halves (a grid of 1fr columns), and
+   centred at every width: as an inline box its auto margins did nothing, so
+   on phones it sat against the left edge. The type rail below keeps its own
+   display:flex. */
 .demo-seg {
-  display: inline-flex;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
   gap: 0.1875rem;
+  width: fit-content;
   padding: 0.1875rem;
   border-radius: var(--radius-pill);
   background: rgba(18, 17, 16, 0.06);
@@ -296,16 +308,20 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 0.4375rem;
   height: 2.125rem;
   padding: 0 1.125rem;
   border-radius: var(--radius-pill);
   color: var(--ink-2);
-  font-size: 0.9375rem;
-  font-weight: 500;
+  font-size: 0.875rem;
+  font-weight: 600;
   cursor: pointer;
   transition: background-color 0.15s ease, color 0.15s ease;
 }
+.demo-seg-tab svg { width: 1rem; height: 1rem; flex-shrink: 0; display: block; }
 .demo-seg-tab[aria-selected="true"] { background: var(--surface); color: var(--ink); box-shadow: var(--demo-shadow); }
+@media (hover: hover) { .demo-seg-tab:not([aria-selected="true"]):not(:disabled):hover { color: var(--ink); } }
+.demo-seg-tab:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 .demo-seg-tab:disabled { opacity: 0.5; cursor: not-allowed; }
 
 /* --- Consent panel ---------------------------------------------------------
@@ -502,24 +518,93 @@
   .demo-flow-stage { height: 20rem; }
 }
 
-/* --- Chat mode -------------------------------------------------------------- */
-.demo-chat-intro { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; }
-.demo-chat-greeting { font-size: 0.9375rem; color: var(--ink); line-height: 1.5; }
-.demo-chat-form {
+/* --- Chat mode ----------------------------------------------------------------
+   Rebuilt 2026-10-20 on the dashboard's own chat (setup-agent/chat.blade.php,
+   the .sa-* rules in dashboard.css; Sal: "use the css from the dashboard
+   chat"). The panel is a window exactly as tall as the voice stage, so
+   switching Bellen/Chatten never moves the toggle or the card: the thread
+   scrolls on top, the composer is pinned to the bottom. The greeting is the
+   thread's first message, no longer a caption beside a second mascot (that
+   one grew to 13rem on phones and left the text one word per line). */
+.demo-chat {
+  --demo-bubble-user: #ede9e5; /* dashboard --muted-bg-hover */
+  display: flex;
+  flex-direction: column;
+  height: 24rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+@media (max-width: 47.9rem) { .demo-chat { height: 20rem; } }
+
+/* Bubbles as .sa-bubble-assistant and .sa-bubble-user: the agent white with a
+   hairline, the visitor filled and on the right, 18px corners all round. */
+.demo-transcript-chat .demo-bubble {
+  max-width: 80%;
+  padding: 0.625rem 1rem;
+  border-radius: 1.125rem;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+.demo-transcript-chat .demo-bubble-agent {
+  position: relative;
+  margin-left: 2.25rem;
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--border);
+}
+.demo-transcript-chat .demo-bubble-caller { background: var(--demo-bubble-user); color: var(--ink); box-shadow: none; }
+.demo-transcript-chat .demo-bubble-agent + .demo-bubble-caller,
+.demo-transcript-chat .demo-bubble-caller + .demo-bubble-agent { margin-top: 0.5rem; }
+
+/* The mascot as avatar (.sa-avatar, 26px), on the last message of a run only. */
+.demo-transcript-chat .demo-bubble-agent::before {
+  content: "";
+  position: absolute;
+  left: calc(-2.25rem - 1px);
+  bottom: -1px;
+  width: 1.625rem;
+  height: 1.625rem;
+  background: url("../assets/mascot/mowi-mascot.svg?v=20261020-1") center / contain no-repeat;
+}
+.demo-transcript-chat .demo-bubble-agent:has(+ .demo-bubble-agent)::before { content: none; }
+
+/* While the agent answers: the walking mascot in a bubble of its own, the
+   dashboard's .sa-thinking loader (no dots, no caption). It stands in the
+   avatar column, so it is the avatar while it works rather than a second one.
+   js/demo.js adds it after the visitor's message and bubble() removes it. */
+.demo-transcript-chat .demo-bubble-typing {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  background: var(--surface);
-  border-radius: var(--radius-pill);
-  padding: 0.375rem 0.375rem 0.375rem 1.125rem;
-  box-shadow: var(--demo-shadow);
-  margin-top: 0.75rem;
+  margin-left: 0;
+  padding: 0.375rem 0.875rem;
+}
+.demo-transcript-chat .demo-bubble-typing::before { content: none; }
+.demo-bubble-typing::after {
+  content: "";
+  width: 2.625rem;
+  height: 1.75rem;
+  background: url("../assets/mascot/mowi-mascot-walk.svg?v=20261020-1") center / contain no-repeat;
+}
+
+/* Composer as .sa-composer-shell: a 44px field with 22px corners and the send
+   button inside it, dimmed while the field is empty. */
+.demo-chat-form {
+  position: relative;
+  flex-shrink: 0;
+  padding: 0.5rem 0.75rem 0.75rem;
 }
 .demo-chat-input {
-  flex: 1;
-  min-width: 0;
-  border: 0;
-  background: none;
+  display: block;
+  width: 100%;
+  height: 2.75rem;
+  padding: 0 3.25rem 0 1rem;
+  border: 1px solid var(--border);
+  border-radius: 1.375rem;
+  background: var(--surface);
   font: inherit;
   /* 16px, not the sitewide 15px body size: iOS Safari zooms the viewport
      into any text input under 16px on focus, which would visibly jump the
@@ -528,20 +613,33 @@
   color: var(--ink);
 }
 .demo-chat-input::placeholder { color: var(--ink-3); }
-.demo-chat-input:focus { outline: none; }
+/* Quieter than the dashboard's form-field ring: the field keeps focus for the
+   whole conversation, and a black ring around it drew the eye off the thread. */
+.demo-chat-input:focus { outline: none; border-color: var(--ink-3); box-shadow: 0 0 0 3px rgba(18, 17, 16, 0.06); }
+.demo-chat-input:disabled { color: var(--ink-3); }
 .demo-chat-send {
-  display: inline-flex;
+  -webkit-appearance: none;
+  appearance: none;
+  position: absolute;
+  right: 1.125rem;
+  bottom: 1.125rem;
+  display: flex;
   align-items: center;
   justify-content: center;
-  width: 2.25rem;
-  height: 2.25rem;
-  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: 0;
   border-radius: 50%;
   background: var(--ink);
-  color: var(--bg);
+  color: var(--surface);
   cursor: pointer;
+  transition: opacity 0.15s ease;
 }
-.demo-chat-send:disabled { opacity: 0.4; cursor: not-allowed; }
+.demo-chat-input:placeholder-shown + .demo-chat-send,
+.demo-chat-send:disabled { opacity: 0.35; }
+.demo-chat-send:disabled { cursor: not-allowed; }
+.demo-chat-send:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 .demo-chat-send svg { width: 1rem; height: 1rem; display: block; }
 
 /* --- Ended state ------------------------------------------------------------ */
@@ -570,7 +668,6 @@
 }
 .demo-disc::before,
 .demo-disc::after { content: none; }
-.demo-disc-sm { background-size: 92%; }
 .demo-stage > .demo-disc { margin-bottom: 5.5rem; }
 .demo-stage-center { place-items: end center; padding-bottom: 2rem; }
 .demo-bubble-agent { background: var(--muted); }

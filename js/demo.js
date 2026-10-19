@@ -350,11 +350,30 @@
 
     function bubble(container, role, text) {
       if (!container) return;
+      if (container === chatLog) hideTyping(); // the reply, or an error, takes the loader's place
       var el = document.createElement("p");
       el.className = "demo-bubble " + (role === "caller" || role === "user" ? "demo-bubble-caller" : "demo-bubble-agent");
       el.textContent = text;
       container.appendChild(el);
       container.scrollTop = container.scrollHeight;
+    }
+
+    // While the agent answers, a bubble with the walking mascot stands in for
+    // the reply: the dashboard chat's loader (2026-10-20). The first answer has
+    // to wait for a session to be minted and the agent to connect, which used
+    // to be seconds of nothing. Decorative, so hidden from screen readers.
+    var typingEl = null;
+    function showTyping() {
+      if (!chatLog || typingEl) return;
+      typingEl = document.createElement("p");
+      typingEl.className = "demo-bubble demo-bubble-agent demo-bubble-typing";
+      typingEl.setAttribute("aria-hidden", "true");
+      chatLog.appendChild(typingEl);
+      chatLog.scrollTop = chatLog.scrollHeight;
+    }
+    function hideTyping() {
+      if (typingEl && typingEl.parentNode) typingEl.parentNode.removeChild(typingEl);
+      typingEl = null;
     }
 
     // ---- Voice ----
@@ -454,6 +473,7 @@
 
     function sendChatMessage(text) {
       bubble(chatLog, "user", text);
+      showTyping();
       chatMessageCount++;
 
       var afterSend = function () {

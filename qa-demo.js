@@ -358,7 +358,8 @@ async function runLive(browserType, label, pagePath = LIVE_PATH) {
   // drift — the agent itself says which company it is, in its first sentence.
   const tabCompany = await page.evaluate(() => {
     const t = document.querySelector("[data-demo-types] [role=tab][aria-selected=true]");
-    return t ? t.getAttribute("data-company") : null;
+    const title = document.querySelector("[data-demo-try] [data-demo-title]"); // one scenario: the card's own title
+    return t ? t.getAttribute("data-company") : (title ? title.textContent.trim() : null);
   });
   check(`${label} LIVE: the agent introduces itself as the company the tab promised`,
     !!tabCompany && (liveText || "").includes(tabCompany), `tab says "${tabCompany}"`);
@@ -501,6 +502,14 @@ async function checkWorkflowCanvas(page, label) {
 async function checkWorkflowTypes(page, label) {
   const expected = ["bestelstatus", "afspraak", "terugbelverzoek", "receptie"];
 
+  // One scenario since 2026-10-20 (Sal: keep it at one example): no tab bar, the demo card names its
+  // type and js/demo.js mints that one. The four-type checks below only apply while there is a tab bar.
+  if (!(await page.$("[data-demo-types]"))) {
+    const type = await page.getAttribute("[data-demo-try]", "data-demo-type");
+    check(`${label} one scenario: no type tabs, the demo card names its type`, expected.includes(type), type);
+    return;
+  }
+
   const tabs = await page.$$eval("[data-demo-types] [role=tab]", (els) => els.map((e) => e.getAttribute("data-demo-type")));
   check(`${label} the demo section offers the same four types as the samples`,
     JSON.stringify(tabs) === JSON.stringify(expected), tabs.join(","));
@@ -620,8 +629,10 @@ async function checkMintPayload(page, label, supportsGetUserMedia = true) {
   // is hidden. Put it back on Bellen before asking for a voice mint.
   await page.click("#demo-mode-voice");
   await page.waitForTimeout(200);
-  await page.click("#demo-type-afspraak");
-  await page.waitForTimeout(300);
+  if (await page.$("#demo-type-afspraak")) {
+    await page.click("#demo-type-afspraak");
+    await page.waitForTimeout(300);
+  }
   await page.click("[data-demo-start]");
   await page.waitForTimeout(150);
   await page.click("[data-demo-agree]");
@@ -635,7 +646,7 @@ async function checkMintPayload(page, label, supportsGetUserMedia = true) {
     await page.evaluate(() => { try { return !!localStorage.getItem("mowiDemoDevice"); } catch (e) { return "blocked"; } }));
 
   await page.unroute("**/api/demo/session");
-  await page.click("#demo-type-bestelstatus").catch(() => {});
+  if (await page.$("#demo-type-bestelstatus")) await page.click("#demo-type-bestelstatus").catch(() => {});
   await page.waitForTimeout(200);
 }
 
