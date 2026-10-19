@@ -553,3 +553,37 @@
 @media (max-width: 47.9rem) {
   .demo-card { padding: 1.25rem; }
 }
+
+/* --- Mascot instead of the sphere (2026-10-19) ---------------------------
+   Sal: "remove the sphere and use the mascotte". The dashboard's own pixel-art
+   mascot, the AI employee, as its idle loop: blink, glance and breathe in CSS
+   steps inside the SVG, no JavaScript, a still frame under reduced motion. It
+   stands above the play/call button instead of behind it, and --demo-level
+   (written by js/demo.js from the real audio) still lifts it a little while
+   someone talks, so the motion follows the voice. Agent bubbles get a solid
+   background now that they can pass over a dark figure. */
+.demo-disc {
+  background: url("../assets/mascot/mowi-mascot-idle.svg?v=20261019-1") center / 74% no-repeat;
+  box-shadow: none;
+  border-radius: 0;
+  transform: translateY(calc(var(--demo-level) * -10px)) scale(calc(1 + var(--demo-level) * 0.03));
+}
+.demo-disc::before,
+.demo-disc::after { content: none; }
+.demo-disc-sm { background-size: 92%; }
+.demo-stage > .demo-disc { margin-bottom: 5.5rem; }
+.demo-stage-center { place-items: end center; padding-bottom: 2rem; }
+.demo-bubble-agent { background: var(--muted); }
+@media (max-width: 47.9rem) { .demo-stage > .demo-disc { margin-bottom: 4.5rem; } }
+/* Sample player: mascot on top, play button right under it, the script's lines
+   in the part below so they never cover the button. */
+.demo-stage:not(.demo-stage-try) > .demo-disc { width: 13rem; height: 13rem; margin-bottom: 10.5rem; background-size: 86%; }
+.demo-stage:not(.demo-stage-try) > .demo-stage-center { place-items: start center; padding: 13.25rem 0 0; }
+.demo-stage:not(.demo-stage-try) > .demo-transcript { top: 17rem; }
+/* Live call: the conversation scrolls in under the mascot, not over it. */
+.demo-live .demo-transcript { top: 52%; }
+@media (max-width: 47.9rem) {
+  .demo-stage:not(.demo-stage-try) > .demo-disc { width: 10rem; height: 10rem; margin-bottom: 8.5rem; }
+  .demo-stage:not(.demo-stage-try) > .demo-stage-center { padding-top: 10.25rem; }
+  .demo-stage:not(.demo-stage-try) > .demo-transcript { top: 14rem; }
+}
