@@ -19,9 +19,12 @@
     /* Monthly/yearly toggle on /pricing only (2026-10-19). */
     /* Monthly/yearly switch (2026-10-19, Sal: smaller, white, no saving label in it): two compact
        segments on a white track with a hairline border, the chosen one dark. Centred over the grid. */
-    .billing-toggle-wrap { text-align: center; margin-bottom: 1.5rem; }
+    .billing-toggle-wrap { grid-column: 1 / -1; text-align: center; }
     .billing-toggle { display: inline-flex; gap: 2px; padding: 3px; border-radius: var(--radius-pill); background: var(--surface); border: 1px solid var(--border); }
-    .billing-toggle[hidden] { display: none; }
+    /* Inside the grid (2026-10-19, Sal: "on mobile the card is not visible when switching"): above all three
+       cards on a laptop; between the free start and Mowi 500 when the cards stack, a little closer to Mowi 500. */
+    @media (min-width: 64rem) { .billing-toggle-wrap { order: -1; } }
+    @media (max-width: 63.9rem) { .billing-toggle-wrap { margin: 0.5rem 0 -0.5rem; } }
     .billing-toggle-btn { font: inherit; font-size: 0.875rem; font-weight: 600; padding: 0.45rem 1.1rem; border: 0; border-radius: var(--radius-pill); background: transparent; color: var(--ink); cursor: pointer; white-space: nowrap; }
     .billing-toggle-btn.is-active { background: var(--ink); color: #fff; }
     /* Free start first (2026-10-19), so the help band spans all three columns rather than two. */
@@ -305,13 +308,10 @@
              saving under it; monthly mode hints at the yearly monthly price. Only on the cards. The toggle only appears with
              script; without it the Pro card still states the yearly price in its own line. Only Pro
              has a yearly price, so only Pro's figures change. Page-local style and script, so
-             css/style.css and js/main.js keep their versions. -->
-        <div class="billing-toggle-wrap">
-          <div class="billing-toggle" role="group" aria-label="Betaalperiode" hidden>
-            <button type="button" class="billing-toggle-btn is-active" data-interval="month" aria-pressed="true">Per maand</button>
-            <button type="button" class="billing-toggle-btn" data-interval="year" aria-pressed="false">Per jaar</button>
-          </div>
-        </div>
+             css/style.css and js/main.js keep their versions.
+             Later still (Sal: on a phone the card was out of view when switching): the toggle moved into
+             .tier-grid, after the free start. On a laptop it is lifted above all three cards; when the cards
+             stack it sits between the free start and Mowi 500, right above the price it changes. -->
         <!-- Order changed later on 2026-10-19 (Sal: "put the 3rd start gratis card ... first"): Start gratis,
              Mowi 500, Mowi 1000; the help band below now spans all three columns.
              2026-10-19 (later; Sal: "the basis plan was based off the old pricing ... 79 is the lowest one and one
@@ -333,6 +333,12 @@
               <li>U gaat nooit vanzelf over op betaald</li>
             </ul>
             <a href="https://my.mowi.agency/aanmelden" class="btn-primary tier-cta" data-event="Signup Click">Start gratis</a>
+          </div>
+          <div class="billing-toggle-wrap" hidden>
+            <div class="billing-toggle" role="group" aria-label="Betaalperiode">
+              <button type="button" class="billing-toggle-btn is-active" data-interval="month" aria-pressed="true">Per maand</button>
+              <button type="button" class="billing-toggle-btn" data-interval="year" aria-pressed="false">Per jaar</button>
+            </div>
           </div>
           <div class="tier-card tier-card-highlight">
             <h2 class="tier-card-name">Mowi 500</h2>
@@ -621,9 +627,10 @@
     /* Monthly/yearly toggle (2026-10-19): swaps every [data-month]/[data-year] text in the tier grid. */
     (function () {
       var root = document.getElementById('pricing-tiers');
-      var toggle = root && root.querySelector('.billing-toggle');
+      var wrap = root && root.querySelector('.billing-toggle-wrap');
+      var toggle = wrap && wrap.querySelector('.billing-toggle');
       if (!toggle) return;
-      toggle.hidden = false;
+      wrap.hidden = false;
       toggle.addEventListener('click', function (event) {
         var button = event.target.closest('[data-interval]');
         if (!button) return;
