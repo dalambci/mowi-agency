@@ -573,7 +573,11 @@
       <!-- Two rows holding DISJOINT sets — every brand appears in exactly one
            row, so a logo can never show up above or below itself. The set is
            the dashboard's own integrations registry (mowi-dashboard's
-           config/shop_platforms.php): 14 here, 10 below. .marquee-logo-mark
+           config/shop_platforms.php): 8 here, 7 below. Trimmed 2026-10-19 (Sal: "what works and whats on
+           the planning, the hard ones remove them"): only platforms that are live, plus Microsoft Bookings,
+           whose gateway is done and only waits for its production keys. Out went Twinfield and Lighthouse
+           (not in the registry at all) and SiteMinder, Odoo, Salonized, AFAS, Mijnwebwinkel, Formitable and
+           TheFork (no gateway yet). Add a logo back the day its platform is switched on. .marquee-logo-mark
            tags the square glyph marks so they get a taller box than the wide
            wordmarks (see style.css).
            Five marks from that registry (Teamleader, Mews, Zoho, Wix, CCV Shop)
@@ -602,33 +606,24 @@
           <span class="marquee-logo marquee-logo-mark"><img src="assets/logos/calendly.svg" alt="" /></span>
           <span class="marquee-logo"><img src="assets/logos/exact.png" alt="" /></span>
           <span class="marquee-logo marquee-logo-mark"><img src="assets/logos/magento.svg" alt="" /></span>
-          <span class="marquee-logo"><img src="assets/logos/twinfield.png" alt="" /></span>
-          <span class="marquee-logo marquee-logo-mark"><img src="assets/logos/siteminder.svg" alt="" /></span>
-          <span class="marquee-logo"><img src="assets/logos/odoo.svg" alt="" /></span>
-          <span class="marquee-logo marquee-logo-mark"><img src="assets/logos/salonized.svg" alt="" /></span>
           <span class="marquee-logo"><img src="assets/logos/bol.svg" alt="" /></span>
           <span class="marquee-logo marquee-logo-mark"><img src="assets/logos/prestashop.svg" alt="" /></span>
           <span class="marquee-logo"><img src="assets/logos/hubspot.png" alt="" /></span>
           <span class="marquee-logo marquee-logo-mark"><img src="assets/logos/google-agenda.svg" alt="" /></span>
-          <span class="marquee-logo"><img src="assets/logos/pipedrive.svg" alt="" /></span>
-          <span class="marquee-logo"><img src="assets/logos/lighthouse.svg?v=20260819-9" alt="" /></span>
         </div>
       </div>
       <div class="marquee" aria-hidden="true">
         <div class="marquee-track marquee-track-reverse" data-marquee-clone>
           <span class="marquee-logo"><img src="assets/logos/shopify.svg" alt="" /></span>
           <span class="marquee-logo marquee-logo-mark"><img src="assets/logos/lightspeed.svg" alt="" /></span>
-          <span class="marquee-logo"><img src="assets/logos/afas.png" alt="" /></span>
-          <span class="marquee-logo marquee-logo-mark"><img src="assets/logos/shopware.svg" alt="" /></span>
-          <span class="marquee-logo"><img src="assets/logos/mijnwebwinkel.svg" alt="" /></span>
-          <span class="marquee-logo marquee-logo-mark"><img src="assets/logos/microsoft-bookings.svg" alt="" /></span>
-          <span class="marquee-logo marquee-logo-mark"><img src="assets/logos/formitable.svg" alt="" /></span>
           <span class="marquee-logo"><img src="assets/logos/moneybird.svg?v=20260819-9" alt="" /></span>
-          <span class="marquee-logo"><img src="assets/logos/thefork.svg?v=20260819-9" alt="" /></span>
+          <span class="marquee-logo marquee-logo-mark"><img src="assets/logos/shopware.svg" alt="" /></span>
+          <span class="marquee-logo"><img src="assets/logos/pipedrive.svg" alt="" /></span>
+          <span class="marquee-logo marquee-logo-mark"><img src="assets/logos/microsoft-bookings.svg" alt="" /></span>
           <span class="marquee-logo"><img src="assets/logos/guestplan.svg?v=20260819-9" alt="" /></span>
         </div>
       </div>
-      <p class="visually-hidden">Mowi werkt onder meer samen met WooCommerce, Shopify, Lightspeed, Shopware, Magento, Mijnwebwinkel, bol.com, PrestaShop, Exact, Twinfield, Moneybird, AFAS, Odoo, HubSpot, Pipedrive, Google Agenda, Microsoft Bookings, Calendly, Salonized, Formitable, Guestplan, TheFork, Cubilis en SiteMinder.</p>
+      <p class="visually-hidden">Mowi werkt onder meer samen met WooCommerce, Shopify, Lightspeed, Shopware, Magento, bol.com, PrestaShop, Exact, Moneybird, HubSpot, Pipedrive, Google Agenda, Microsoft Bookings, Calendly en Guestplan.</p>
     </section>
 
     <!-- ================= Template-cards slider ================= -->
