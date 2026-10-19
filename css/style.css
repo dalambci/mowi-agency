@@ -1718,3 +1718,44 @@ img.split-visual { min-height: 0; width: 100%; height: auto; border-radius: var(
 @media (max-width: 63.9rem) {
   .footer-menus { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* ---------- Producten · Oplossingen · Bronnen · Prijzen (2026-10-19) ----------
+   Sal: Fonio's menu structure, applied to what Mowi has. Titles only, no
+   descriptions. Producten and Bronnen are narrow panels centred under their
+   own trigger's left edge, sized to their content. Oplossingen holds
+   Toepassingen next to Branches; its panel starts at the menu's own left
+   edge, as on Fonio, so Producten and Oplossingen open in the same place and
+   the wide panel stays inside the viewport at 1024px. A channel without a page yet is greyed text with a
+   "Binnenkort" chip, never a link. */
+.nav-menu .nav-menu-list a,
+.nav-menu-soon {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+.nav-menu .nav-menu-list a[aria-current="page"] { background: var(--muted); }
+.nav-menu-soon { color: var(--ink-3); cursor: default; }
+.nav-soon-chip {
+  font-size: 0.6875rem;
+  line-height: 1;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+}
+.nav-menu-list-2 { display: grid; grid-template-columns: repeat(2, max-content); column-gap: 0.25rem; }
+@media (min-width: 64rem) {
+  .main-nav { position: relative; }
+  .nav-dropdown-narrow .nav-menu { left: 0; transform: none; width: max-content; min-width: 12rem; }
+  .nav-dropdown-wide .nav-menu { left: 0; transform: none; width: max-content; }
+  .nav-dropdown-wide .nav-menu-col { flex: 0 0 auto; }
+  .nav-dropdown-wide .nav-menu-col-divider { margin-left: 1rem; padding-left: 1rem; }
+}
+@media (max-width: 63.9rem) {
+  .nav-menu-list-2 { grid-template-columns: minmax(0, 1fr); }
+  .nav-menu .nav-menu-list a, .nav-menu-soon { white-space: normal; }
+}

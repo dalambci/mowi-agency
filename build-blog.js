@@ -252,18 +252,54 @@ function headerHtml() {
 
       <nav class="main-nav" id="main-nav" aria-label="Hoofdmenu">
         <ul>
-          <li><a href="/ai-telefonist"${current("/ai-telefonist")}>Telefoon</a></li>
-          <li><a href="/e-mail-agent"${current("/e-mail-agent")}>E-mail</a></li>
           <li class="nav-dropdown nav-dropdown-narrow">
-            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="branches-menu" aria-haspopup="true">
-              Branches
+            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="producten-menu" aria-haspopup="true">
+              Producten
               <span class="nav-dropdown-icon" aria-hidden="true"></span>
             </button>
-            <div class="nav-menu" id="branches-menu">
+            <div class="nav-menu" id="producten-menu">
               <div class="nav-menu-col">
-                <ul class="nav-menu-item-grid">
-                  <li class="nav-menu-item-full"><a href="/ai-telefonist-installateurs"><span class="nav-menu-item-title">Installateurs</span><span class="nav-menu-item-desc">Spoed en onderhoud, ook tijdens de klus</span></a></li>
-                  <li class="nav-menu-item-full"><a href="/ai-telefonist-webshops"><span class="nav-menu-item-title">Webshops</span><span class="nav-menu-item-desc">Orderstatus zonder dat u opneemt</span></a></li>
+                <ul class="nav-menu-list">
+                  <li><a href="/ai-telefonist"${current("/ai-telefonist")}>Telefoon</a></li>
+                  <li><a href="/e-mail-agent"${current("/e-mail-agent")}>E-mail</a></li>
+                  <li><span class="nav-menu-soon">WhatsApp <span class="nav-soon-chip">Binnenkort</span></span></li>
+                  <li><span class="nav-menu-soon">Instagram <span class="nav-soon-chip">Binnenkort</span></span></li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li class="nav-dropdown nav-dropdown-wide">
+            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="oplossingen-menu" aria-haspopup="true">
+              Oplossingen
+              <span class="nav-dropdown-icon" aria-hidden="true"></span>
+            </button>
+            <div class="nav-menu" id="oplossingen-menu">
+              <div class="nav-menu-col">
+                <p class="nav-menu-heading" id="nav-heading-toepassingen">Toepassingen</p>
+                <ul class="nav-menu-list" aria-labelledby="nav-heading-toepassingen">
+                  <li><a href="/telefoon-uitbesteden"${current("/telefoon-uitbesteden")}>Telefoon uitbesteden</a></li>
+                  <li><a href="/klantenservice-uitbesteden"${current("/klantenservice-uitbesteden")}>Klantenservice uitbesteden</a></li>
+                </ul>
+              </div>
+              <div class="nav-menu-col nav-menu-col-divider">
+                <p class="nav-menu-heading" id="nav-heading-branches">Branches</p>
+                <ul class="nav-menu-list" aria-labelledby="nav-heading-branches">
+                  <li><a href="/ai-telefonist-installateurs"${current("/ai-telefonist-installateurs")}>Installateurs</a></li>
+                  <li><a href="/ai-telefonist-webshops"${current("/ai-telefonist-webshops")}>Webshops</a></li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li class="nav-dropdown nav-dropdown-narrow">
+            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-controls="bronnen-menu" aria-haspopup="true">
+              Bronnen
+              <span class="nav-dropdown-icon" aria-hidden="true"></span>
+            </button>
+            <div class="nav-menu" id="bronnen-menu">
+              <div class="nav-menu-col">
+                <ul class="nav-menu-list">
+                  <li><a href="/docs/"${current("/docs/")}>Documentatie</a></li>
+                  <li><a href="/koppelingen"${current("/koppelingen")}>Koppelingen</a></li>
                 </ul>
               </div>
             </div>
