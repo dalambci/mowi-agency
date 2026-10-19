@@ -98,7 +98,7 @@
     <section class="section" id="pricing-hero">
       <div class="container">
         <h1 class="page-hero-heading">Eenvoudige prijzen</h1>
-        <p class="page-hero-body">Pro voor telefoon en e-mail, met uw eigen nummer en 500 belminuten. Basis voor e-mail, en de telefoon zet u erbij voor € 12,50 per maand. Testen is altijd gratis.</p>
+        <p class="page-hero-body">Twee pakketten, allebei met uw eigen telefoonnummer en e-mail. Het verschil is het aantal belminuten. Testen is altijd gratis.</p>
       </div>
     </section>
 
@@ -259,14 +259,14 @@
             <button type="button" class="billing-toggle-btn" data-interval="year" aria-pressed="false">Per jaar <span class="billing-toggle-save">2 maanden gratis</span></button>
           </div>
         </div>
-        <!-- 2026-10-19 (Sal: "i dont like the phone in pro plan ... its just all or nothing"; "i like the
-             2 plan idea"): two plans with the phone in both, and the free start as the way in rather than a
-             package. Pro includes the number; Basis switches the phone on for the EUR12,50 line. The three
-             cards sit on the page's three-column grid, so the help band below spans Pro and Basis exactly.
-             Must match config/plans.php (call_addon new_sales true, standalone_sales false). -->
+        <!-- 2026-10-19 (later; Sal: "the basis plan was based off the old pricing ... 79 is the lowest one and one
+             even bigger", names his pick "Mowi 500" and "Mowi 1000"): two plans by size, both with the number
+             and every channel; Basis is no longer sold. The free start is the third card on the page's
+             three-column grid, so the help band below spans the two plans exactly. Must match
+             config/plans.php (credits_pro "Mowi 500", credits_1000 "Mowi 1000", credits_base not sold). -->
         <div class="tier-grid">
           <div class="tier-card tier-card-highlight">
-            <h2 class="tier-card-name">Pro</h2>
+            <h2 class="tier-card-name">Mowi 500</h2>
             <p class="tier-profile tier-for">Telefoon en e-mail</p>
             <div class="tier-price"><span class="tier-price-amount" data-month="€79" data-year="€790">€79</span><span class="tier-price-period" data-month="/mnd excl. btw" data-year="/jaar excl. btw">/mnd excl. btw</span></div>
             <p class="tier-year-note" data-month="Of €&nbsp;790 per jaar: 2 maanden gratis" data-year="Dat is €&nbsp;65,83 per maand">Of €&nbsp;790 per jaar: 2 maanden gratis</p>
@@ -282,17 +282,18 @@
             <a href="https://my.mowi.agency/aanmelden" class="btn-primary tier-cta" data-event="Signup Click">Aan de slag</a>
           </div>
           <div class="tier-card">
-            <h2 class="tier-card-name">Basis</h2>
-            <p class="tier-profile tier-for">E-mail, telefoon erbij</p>
-            <div class="tier-price"><span class="tier-price-amount">€19</span><span class="tier-price-period">/mnd excl. btw</span></div>
-            <p class="tier-year-note" data-month="Telefoon erbij: €&nbsp;12,50 per maand" data-year="Basis betaalt u per maand">Telefoon erbij: €&nbsp;12,50 per maand</p>
-            <p class="tier-minutes">800 e-mails per maand</p>
-            <p class="tier-profile">Of ongeveer 130 belminuten, uit hetzelfde tegoed</p>
+            <h2 class="tier-card-name">Mowi 1000</h2>
+            <p class="tier-profile tier-for">Telefoon en e-mail, voor een drukkere zaak</p>
+            <div class="tier-price"><span class="tier-price-amount" data-month="€149" data-year="€1.490">€149</span><span class="tier-price-period" data-month="/mnd excl. btw" data-year="/jaar excl. btw">/mnd excl. btw</span></div>
+            <p class="tier-year-note" data-month="Of €&nbsp;1.490 per jaar: 2 maanden gratis" data-year="Dat is €&nbsp;124,17 per maand">Of €&nbsp;1.490 per jaar: 2 maanden gratis</p>
+            <p class="tier-minutes">1.000 belminuten per maand</p>
+            <p class="tier-profile">Ongeveer 23 gesprekken per werkdag, of 6.000 e-mails uit hetzelfde tegoed</p>
             <ul class="tier-features">
-              <li>Leest en sorteert uw e-mail en zet antwoorden klaar</li>
-              <li>Telefoon erbij met uw eigen nummer, €&nbsp;12,50 per maand</li>
-              <li>Bijkopen wanneer u wilt</li>
-              <li>Maandelijks opzegbaar</li>
+              <li>Uw eigen telefoonnummer inbegrepen</li>
+              <li>Telefoon en e-mail uit één tegoed</li>
+              <li>Extra belminuten €&nbsp;0,15 tot €&nbsp;0,20 met losse credits</li>
+              <li>30 dagen geld terug</li>
+              <li data-month="Maandelijks opzegbaar" data-year="Per jaar vooruit, opzeggen tegen het einde van het jaar">Maandelijks opzegbaar</li>
             </ul>
             <a href="https://my.mowi.agency/aanmelden" class="btn-primary tier-cta" data-event="Signup Click">Aan de slag</a>
           </div>
@@ -367,7 +368,7 @@
               <li>Een gesprek van 20 minuten met Sal</li>
               <li>Wij kijken mee bij het koppelen van mailbox, webshop of agenda</li>
               <li>Advies over welke kanalen u eerst aanzet</li>
-              <li>Daarna gewoon Start gratis, Basis of Pro</li>
+              <li>Daarna gewoon Start gratis, Mowi 500 of Mowi 1000</li>
             </ul>
           </div>
           <!-- Label "adviesgesprek" (Sal, 2026-08-22): matches the band's
