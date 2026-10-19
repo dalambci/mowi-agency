@@ -30,10 +30,19 @@
     .tier-year-note { font-size: 0.8125rem; font-weight: 600; color: var(--ink-2); margin-top: 0.375rem; }
     /* Two plans and the free start (2026-10-19). */
     .tier-for { margin-top: 0; }
-    .tier-minutes { font-size: 1.0625rem; font-weight: 600; color: var(--ink); margin-top: 0.75rem; }
+    /* Pinpointed with Sal (2026-10-19): centred top, calmer cards, steps in the free card,
+       and a smaller gap before the help band. */
+    #pricing-hero .container { text-align: center; }
+    #pricing-hero .page-hero-body { margin-inline: auto; }
+    #pricing-tiers { padding-bottom: 2.5rem; }
+    .tier-usage { margin-top: 1rem; font-size: 0.875rem; color: var(--ink-2); line-height: 1.55; min-height: 3.1em; }
+    /* Three columns on a laptop: one plan's line wraps to three, so both reserve three and the lists stay level. */
+    @media (min-width: 64rem) and (max-width: 87.5rem) { .tier-usage { min-height: 4.65em; } }
+    .tier-steps { list-style: none; counter-reset: step; padding: 0; margin: 1.25rem 0 0; display: grid; gap: 0.7rem; }
+    .tier-steps li { counter-increment: step; display: flex; align-items: baseline; gap: 0.65rem; font-size: 0.9375rem; color: var(--ink-2); line-height: 1.45; }
+    .tier-steps li::before { content: counter(step); flex: none; width: 1.5rem; height: 1.5rem; border-radius: 50%; background: var(--ink); color: #fff; font-size: 0.75rem; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; }
     .tier-card-free { border-style: dashed; border-color: var(--ink-3); background: transparent; }
-    .tier-free-body { margin-top: 0.75rem; color: var(--ink-2); font-size: 0.9375rem; line-height: 1.55; }
-    .tier-extra-note { margin: 1.25rem 0 0; font-size: 0.875rem; color: var(--ink-3); line-height: 1.55; }
+    .tier-extra-note { margin: 1.25rem 0 0; font-size: 0.875rem; color: var(--ink-3); line-height: 1.55; text-align: center; }
   </style>
 </head>
 <body>
@@ -276,7 +285,11 @@
           <div class="tier-card tier-card-free">
             <h2 class="tier-card-name">Start gratis</h2>
             <p class="tier-profile tier-for">Eerst horen hoe hij klinkt</p>
-            <p class="tier-free-body">Stel uw telefonist in en spreek hem in de browser. Met 60 gratis credits probeert u ook de e-mailagent.</p>
+            <ol class="tier-steps">
+              <li>Vul uw website in</li>
+              <li>Spreek uw telefonist in de browser</li>
+              <li>Tevreden? Kies een pakket</li>
+            </ol>
             <ul class="tier-features">
               <li>Geen betaalgegevens nodig</li>
               <li>U gaat nooit vanzelf over op betaald</li>
@@ -285,11 +298,10 @@
           </div>
           <div class="tier-card tier-card-highlight">
             <h2 class="tier-card-name">Mowi 500</h2>
-            <p class="tier-profile tier-for">Telefoon en e-mail</p>
+            <p class="tier-profile tier-for">Voor de meeste zaken</p>
             <div class="tier-price"><span class="tier-price-amount" data-month="€79" data-year="€65,83">€79</span><span class="tier-price-period">/mnd excl. btw</span></div>
             <p class="tier-year-note" data-month="€&nbsp;65,83 per maand bij jaarbetaling" data-year="€&nbsp;790 per jaar, u bespaart €&nbsp;158">€&nbsp;65,83 per maand bij jaarbetaling</p>
-            <p class="tier-minutes">500 belminuten per maand</p>
-            <p class="tier-profile">Ongeveer 11 gesprekken per werkdag, of 3.000 e-mails uit hetzelfde tegoed</p>
+            <p class="tier-usage">500 belminuten, ongeveer 11 gesprekken per werkdag, of 3.000 e-mails</p>
             <ul class="tier-features">
               <li>Uw eigen telefoonnummer inbegrepen</li>
               <li>Telefoon en e-mail uit één tegoed</li>
@@ -301,11 +313,10 @@
           </div>
           <div class="tier-card">
             <h2 class="tier-card-name">Mowi 1000</h2>
-            <p class="tier-profile tier-for">Telefoon en e-mail, voor een drukkere zaak</p>
+            <p class="tier-profile tier-for">Voor een drukke zaak</p>
             <div class="tier-price"><span class="tier-price-amount" data-month="€149" data-year="€124,17">€149</span><span class="tier-price-period">/mnd excl. btw</span></div>
             <p class="tier-year-note" data-month="€&nbsp;124,17 per maand bij jaarbetaling" data-year="€&nbsp;1.490 per jaar, u bespaart €&nbsp;298">€&nbsp;124,17 per maand bij jaarbetaling</p>
-            <p class="tier-minutes">1.000 belminuten per maand</p>
-            <p class="tier-profile">Ongeveer 23 gesprekken per werkdag, of 6.000 e-mails uit hetzelfde tegoed</p>
+            <p class="tier-usage">1.000 belminuten, ongeveer 23 gesprekken per werkdag, of 6.000 e-mails</p>
             <ul class="tier-features">
               <li>Uw eigen telefoonnummer inbegrepen</li>
               <li>Telefoon en e-mail uit één tegoed</li>
