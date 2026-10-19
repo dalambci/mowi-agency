@@ -17,13 +17,19 @@
   <script defer data-domain="mowi.agency" src="https://plausible.io/js/script.js"></script>
   <style>
     /* Monthly/yearly toggle on /pricing only (2026-10-19). */
-    .billing-toggle-wrap { text-align: center; margin-bottom: 1.5rem; }
+    .billing-toggle-wrap { text-align: left; margin-bottom: 1.5rem; }
     .billing-toggle { display: inline-flex; gap: 4px; padding: 4px; border: 1px solid var(--border); border-radius: var(--radius-pill); background: var(--bg); }
     .billing-toggle[hidden] { display: none; }
     .billing-toggle-btn { font: inherit; font-size: 0.875rem; padding: 0.5rem 1rem; border: 0; border-radius: var(--radius-pill); background: transparent; color: var(--ink-2); cursor: pointer; white-space: nowrap; }
     .billing-toggle-btn.is-active { background: var(--ink); color: #fff; }
     .billing-toggle-save { font-size: 0.75rem; opacity: 0.85; margin-left: 0.25rem; }
     .tier-year-note { font-size: 0.8125rem; font-weight: 600; color: var(--ink-2); margin-top: 0.375rem; }
+    /* Two plans and the free start (2026-10-19). */
+    .tier-for { margin-top: 0; }
+    .tier-minutes { font-size: 1.0625rem; font-weight: 600; color: var(--ink); margin-top: 0.75rem; }
+    .tier-card-free { border-style: dashed; border-color: var(--ink-3); background: transparent; }
+    .tier-free-body { margin-top: 0.75rem; color: var(--ink-2); font-size: 0.9375rem; line-height: 1.55; }
+    .tier-extra-note { margin: 1.25rem 0 0; font-size: 0.875rem; color: var(--ink-3); line-height: 1.55; }
   </style>
 </head>
 <body>
@@ -91,8 +97,8 @@
          not built yet, deferred, not forgotten. -->
     <section class="section" id="pricing-hero">
       <div class="container">
-        <h1 class="page-hero-heading">Telefoon en e-mail voor € 79 per maand</h1>
-        <p class="page-hero-body">Eén pakket met uw eigen telefoonnummer, 500 belminuten en e-mail. Alleen e-mail? Dan volstaat Basis. Testen is altijd gratis.</p>
+        <h1 class="page-hero-heading">Eenvoudige prijzen</h1>
+        <p class="page-hero-body">Pro voor telefoon en e-mail, met uw eigen nummer en 500 belminuten. Basis voor e-mail, en de telefoon zet u erbij voor € 12,50 per maand. Testen is altijd gratis.</p>
       </div>
     </section>
 
@@ -253,49 +259,55 @@
             <button type="button" class="billing-toggle-btn" data-interval="year" aria-pressed="false">Per jaar <span class="billing-toggle-save">2 maanden gratis</span></button>
           </div>
         </div>
+        <!-- 2026-10-19 (Sal: "i dont like the phone in pro plan ... its just all or nothing"; "i like the
+             2 plan idea"): two plans with the phone in both, and the free start as the way in rather than a
+             package. Pro includes the number; Basis switches the phone on for the EUR12,50 line. The three
+             cards sit on the page's three-column grid, so the help band below spans Pro and Basis exactly.
+             Must match config/plans.php (call_addon new_sales true, standalone_sales false). -->
         <div class="tier-grid">
-          <div class="tier-card">
-            <h2 class="tier-card-name">Start gratis</h2>
-            <div class="tier-price"><span class="tier-price-amount">€0</span></div>
-            <p class="tier-price-sub">60 gratis credits</p>
-            <p class="tier-profile">Om te testen in uw browser</p>
-            <ul class="tier-features">
-              <li>Test e-mail en telefoon</li>
-              <li>Geen betaalgegevens nodig</li>
-              <li>Geen automatische overgang naar betaald</li>
-            </ul>
-            <a href="https://my.mowi.agency/aanmelden" class="btn-primary tier-cta" data-event="Signup Click">Start gratis</a>
-          </div>
-          <div class="tier-card">
-            <h2 class="tier-card-name">Basis</h2>
-            <div class="tier-price"><span class="tier-price-amount">€19</span><span class="tier-price-period">/mnd excl. btw</span></div>
-            <p class="tier-price-sub">800 credits per maand</p>
-            <p class="tier-profile">Voor e-mail, ongeveer 40 e-mails per werkdag</p>
-            <ul class="tier-features">
-              <li>Alles uit Start gratis</li>
-              <li>800 credits per maand</li>
-              <li>Telefoon zit in Pro</li>
-              <li>Bijkopen wanneer u wilt</li>
-              <li>Pauzeert netjes bij op tegoed</li>
-            </ul>
-            <a href="https://my.mowi.agency/aanmelden" class="btn-primary tier-cta" data-event="Signup Click">Aan de slag</a>
-          </div>
           <div class="tier-card tier-card-highlight">
             <h2 class="tier-card-name">Pro</h2>
+            <p class="tier-profile tier-for">Telefoon en e-mail</p>
             <div class="tier-price"><span class="tier-price-amount" data-month="€79" data-year="€790">€79</span><span class="tier-price-period" data-month="/mnd excl. btw" data-year="/jaar excl. btw">/mnd excl. btw</span></div>
-            <p class="tier-price-sub">Telefoonnummer en 3.000 credits per maand</p>
             <p class="tier-year-note" data-month="Of €&nbsp;790 per jaar: 2 maanden gratis" data-year="Dat is €&nbsp;65,83 per maand">Of €&nbsp;790 per jaar: 2 maanden gratis</p>
-            <p class="tier-profile">500 belminuten, ongeveer 11 gesprekken per werkdag</p>
+            <p class="tier-minutes">500 belminuten per maand</p>
+            <p class="tier-profile">Ongeveer 11 gesprekken per werkdag, of 3.000 e-mails uit hetzelfde tegoed</p>
             <ul class="tier-features">
               <li>Uw eigen telefoonnummer inbegrepen</li>
-              <li>500 belminuten, of e-mail uit hetzelfde tegoed</li>
-              <li>Extra belminuten € 0,15 tot € 0,20 met losse credits</li>
+              <li>Telefoon en e-mail uit één tegoed</li>
+              <li>Extra belminuten €&nbsp;0,15 tot €&nbsp;0,20 met losse credits</li>
               <li>30 dagen geld terug</li>
               <li data-month="Maandelijks opzegbaar" data-year="Per jaar vooruit, opzeggen tegen het einde van het jaar">Maandelijks opzegbaar</li>
             </ul>
             <a href="https://my.mowi.agency/aanmelden" class="btn-primary tier-cta" data-event="Signup Click">Aan de slag</a>
           </div>
+          <div class="tier-card">
+            <h2 class="tier-card-name">Basis</h2>
+            <p class="tier-profile tier-for">E-mail, telefoon erbij</p>
+            <div class="tier-price"><span class="tier-price-amount">€19</span><span class="tier-price-period">/mnd excl. btw</span></div>
+            <p class="tier-year-note" data-month="Telefoon erbij: €&nbsp;12,50 per maand" data-year="Basis betaalt u per maand">Telefoon erbij: €&nbsp;12,50 per maand</p>
+            <p class="tier-minutes">800 e-mails per maand</p>
+            <p class="tier-profile">Of ongeveer 130 belminuten, uit hetzelfde tegoed</p>
+            <ul class="tier-features">
+              <li>Leest en sorteert uw e-mail en zet antwoorden klaar</li>
+              <li>Telefoon erbij met uw eigen nummer, €&nbsp;12,50 per maand</li>
+              <li>Bijkopen wanneer u wilt</li>
+              <li>Maandelijks opzegbaar</li>
+            </ul>
+            <a href="https://my.mowi.agency/aanmelden" class="btn-primary tier-cta" data-event="Signup Click">Aan de slag</a>
+          </div>
+          <div class="tier-card tier-card-free">
+            <h2 class="tier-card-name">Start gratis</h2>
+            <p class="tier-profile tier-for">Eerst horen hoe hij klinkt</p>
+            <p class="tier-free-body">Stel uw telefonist in en spreek hem in de browser. Met 60 gratis credits probeert u ook de e-mailagent.</p>
+            <ul class="tier-features">
+              <li>Geen betaalgegevens nodig</li>
+              <li>U gaat nooit vanzelf over op betaald</li>
+            </ul>
+            <a href="https://my.mowi.agency/aanmelden" class="btn-primary tier-cta" data-event="Signup Click">Start gratis</a>
+          </div>
         </div>
+        <p class="tier-extra-note">Meer nodig dan in uw pakket zit? U koopt losse credits bij in het dashboard, wanneer u wilt.</p>
       </div>
     </section>
 

@@ -137,13 +137,15 @@
     <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Dienst</th><th>Maandvergoeding excl. btw</th><th>Inbegrepen</th><th>Eenmalige setupvergoeding</th></tr></thead><tbody>
       <tr><td>Basis</td><td>€19</td><td>800 credits</td><td>Geen, zelf aan te sluiten</td></tr>
       <tr><td>Pro</td><td>€79</td><td>3.000 credits en één telefoonnummer voor de Call-agent</td><td>Geen, zelf aan te sluiten</td></tr>
-      <tr><td>Telefoonnummer als losse aanvulling</td><td>€12,50</td><td>Eén telefoonnummer</td><td>Geen. Alleen voor Opdrachtgevers die deze aanvulling vóór 19 oktober 2026 afnamen; niet meer nieuw af te sluiten</td></tr>
+      <tr><td>Telefoonnummer bij Basis</td><td>€12,50</td><td>Eén telefoonnummer voor de Call-agent</td><td>Geen, zelf aan te sluiten</td></tr>
     </tbody></table></div>
     <!-- Jaarbetaling Pro toegevoegd 2026-10-19 (Sal akkoord, vault Legal/22-AV-amendement-jaarbetaling-pro-2026-10);
          dashboard config/plans.php 'credits_pro' yearly_price_cents 79000, credits per maand via
          mowi:grant-period-bundles. -->
     <p>Het pakket Pro kan ook per jaar worden afgenomen, tegen een jaarvergoeding van €790 excl. btw, die vooraf wordt voldaan. Bij jaarbetaling ontvangt Opdrachtgever de inbegrepen credits per maand, telkens op dezelfde kalenderdag als de betaling. Niet verbruikte inbegrepen credits vervallen aan het einde van iedere maand, zoals bij maandbetaling.</p>
-    <p>De Call-agent is beschikbaar binnen het pakket Pro. Het telefoonnummer is in de maandvergoeding van Pro inbegrepen. Wijzigt Opdrachtgever het pakket van Pro naar een pakket zonder telefoonnummer, dan schakelt Opdrachtgever eerst de Call-agent uit; het telefoonnummer vervalt dan aan Mowi.</p>
+    <!-- Herzien 2026-10-19 (later; Sal koos "Phone in both"): de Call-agent in Basis en Pro.
+         Dashboard: config/plans.php call_addon new_sales true, standalone_sales false. -->
+    <p>De Call-agent is beschikbaar in Basis en Pro. In Pro is het telefoonnummer in de maandvergoeding inbegrepen. Bij Basis geldt voor het telefoonnummer de in de tabel genoemde maandvergoeding: die gaat in zodra Opdrachtgever de Call-agent aanzet, wordt samen met Basis geïncasseerd (artikel 4.5) en vervalt zodra de Call-agent wordt verwijderd. Wordt binnen 14 dagen na het aanzetten geen telefoonnummer gekoppeld, dan vervalt deze vergoeding automatisch en wordt zij niet gefactureerd. Wijzigt Opdrachtgever het pakket van Pro naar Basis terwijl de Call-agent een telefoonnummer heeft, dan blijft het nummer behouden tegen die maandvergoeding.</p>
     <!-- Bijgewerkt 2026-10-19 naar config/credits.php 'rates': e-mail 1 credit,
          Builder 1 credit, doorverbonden minuten 2 credits, en de grens van
          10 seconden. De toelichting hieronder is de geschiedenis van 2026-08-28.

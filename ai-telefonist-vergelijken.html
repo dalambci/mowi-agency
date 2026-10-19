@@ -23,10 +23,10 @@
        config/plans.php + config/credits.php van het dashboard van die dag; de
        tabel is rekenwerk op gepubliceerde prijzen (art. 6:194a BW: objectief,
        controleerbaar, representatief) en zegt ook waar Mowi verliest.
-       Opnieuw gerekend op 2026-10-18 (later): de telefoon zit voortaan in Pro, €79 per
-       maand met telefoonnummer en 3.000 credits (500 belminuten); het nummer wordt niet
-       meer los verkocht aan nieuwe klanten. Boven 500 minuten: goedkoopste combinatie
-       van losse packs. Moet gelijk blijven met config/plans.php en config/credits.php.
+       Opnieuw gerekend op 2026-10-19: telefoon in beide pakketten. Basis €19 met 800
+       credits plus €12,50 voor het nummer, of Pro €79 met nummer en 3.000 credits
+       (500 belminuten). Per regel de goedkoopste route; een tekort aangevuld met de
+       goedkoopste combinatie losse packs. Mowi goedkoopst van 91 tot 700 minuten. Moet gelijk blijven met config/plans.php en config/credits.php.
        Maandelijks controleren; klopt een getal niet meer, dezelfde dag aanpassen
        of de pagina offline halen. FAQPage: vragen staan woordelijk in de FAQ. -->
   <script type="application/ld+json">
@@ -37,12 +37,12 @@
       {
         "@type": "Question",
         "name": "Wat kost een AI-telefonist minimaal per maand?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Van de vergeleken aanbieders is CallingBird het laagst met een minimum van 20 euro per maand. Bij Mowi kost een AI-telefonist 79 euro per maand, met telefoonnummer en 500 belminuten. Fonio en Sam neemt op beginnen bij 119 euro per maand. MIKE365 heeft een instap van 14,99 euro zonder gesprekken. Alle prijzen excl. btw, gelezen op 18 oktober 2026." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Van de vergeleken aanbieders is CallingBird het laagst met een minimum van 20 euro per maand. Bij Mowi kost een AI-telefonist vanaf 31,50 euro per maand: Basis met een eigen telefoonnummer en 800 credits, genoeg voor ongeveer 130 belminuten. Pro kost 79 euro met telefoonnummer en 500 belminuten. Fonio en Sam neemt op beginnen bij 119 euro per maand. MIKE365 heeft een instap van 14,99 euro zonder gesprekken. Alle prijzen excl. btw, gelezen op 18 oktober 2026." }
       },
       {
         "@type": "Question",
         "name": "Wanneer is Mowi de goedkoopste AI-telefonist?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Tussen ongeveer 225 en 700 belminuten per maand. Onder de 225 minuten is CallingBird goedkoper. Boven de 700 minuten is Fonio goedkoper, of boven de 600 minuten als u bij Fonio een jaar vooruit betaalt." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Tussen ongeveer 90 en 700 belminuten per maand. Onder de 90 minuten is CallingBird goedkoper. Boven de 700 minuten is Fonio goedkoper, of boven de 600 minuten als u bij Fonio een jaar vooruit betaalt." }
       },
       {
         "@type": "Question",
@@ -57,7 +57,7 @@
       {
         "@type": "Question",
         "name": "Moet ik een abonnement nemen voor de Voice agent van Mowi?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Ja. De telefoon zit in Pro: 79 euro per maand met telefoonnummer en 3.000 credits, dat is 500 belminuten. Extra minuten koopt u bij met losse credits. De eerste 30 dagen krijgt u uw geld terug als het niet bevalt. Alle prijzen excl. btw." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Ja, een pakket. Bij Basis, 19 euro per maand, zet u de telefoon erbij voor 12,50 euro per maand. In Pro, 79 euro per maand, is het telefoonnummer inbegrepen, met 3.000 credits, dat is 500 belminuten. Extra minuten koopt u bij met losse credits. Bij Pro krijgt u de eerste 30 dagen uw geld terug als het niet bevalt. Alle prijzen excl. btw." }
       }
     ]
   }
@@ -133,7 +133,7 @@
     <!-- ================= Hero: de vraag en het antwoord ================= -->
     <section class="hero container lp-hero hero-tight-bottom">
       <h1>Wat kost een AI-telefonist per maand?</h1>
-      <p class="hero-sub">Tussen €20 en €350 per maand, afhankelijk van hoeveel er gebeld wordt en hoe de aanbieder rekent. Bij Mowi kost een AI-telefonist €79 per maand, met telefoonnummer en 500 belminuten. Van ongeveer 225 tot 700 belminuten per maand is Mowi de goedkoopste van de vier aanbieders hieronder, bij maandelijks opzegbare prijzen. Onder de 225 minuten is CallingBird goedkoper. Boven de 700 minuten is Fonio goedkoper, en boven de 600 als u bij Fonio een jaar vooruitbetaalt. Alle prijzen excl. btw, van de eigen prijspagina's, gelezen op 18 oktober 2026.</p>
+      <p class="hero-sub">Tussen €20 en €350 per maand, afhankelijk van hoeveel er gebeld wordt en hoe de aanbieder rekent. Bij Mowi kost een AI-telefonist vanaf €31,50 per maand: Basis met een eigen telefoonnummer. Pro kost €79 met telefoonnummer en 500 belminuten. Van ongeveer 90 tot 700 belminuten per maand is Mowi de goedkoopste van de vier aanbieders hieronder, bij maandelijks opzegbare prijzen. Onder de 90 minuten is CallingBird goedkoper. Boven de 700 minuten is Fonio goedkoper, en boven de 600 als u bij Fonio een jaar vooruitbetaalt. Alle prijzen excl. btw, van de eigen prijspagina's, gelezen op 18 oktober 2026.</p>
       <div class="hero-actions">
         <a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a>
       </div>
@@ -154,11 +154,11 @@
               <tr><th>Belminuten per maand</th><th>Mowi</th><th>Fonio, maandelijks</th><th>Fonio, jaarbetaling</th><th>Sam neemt op</th><th>CallingBird</th></tr>
             </thead>
             <tbody>
-              <tr><td>50</td><td>€79,00<small>Pro</small></td><td>€119,00</td><td>€99,00</td><td>€119,00</td><td>€20,00</td></tr>
-              <tr><td>100</td><td>€79,00<small>Pro</small></td><td>€119,00</td><td>€99,00</td><td>€119,00</td><td>€35,00</td></tr>
-              <tr><td>150</td><td>€79,00<small>Pro</small></td><td>€119,00</td><td>€99,00</td><td>€119,00</td><td>€52,50</td></tr>
-              <tr><td>200</td><td>€79,00<small>Pro</small></td><td>€119,00</td><td>€99,00</td><td>€119,00</td><td>€70,00</td></tr>
-              <tr><td>300</td><td>€79,00<small>Pro</small></td><td>€119,00</td><td>€99,00</td><td>€119,00</td><td>€105,00</td></tr>
+              <tr><td>50</td><td>€31,50<small>Basis + nummer</small></td><td>€119,00</td><td>€99,00</td><td>€119,00</td><td>€20,00</td></tr>
+              <tr><td>100</td><td>€31,50<small>Basis + nummer</small></td><td>€119,00</td><td>€99,00</td><td>€119,00</td><td>€35,00</td></tr>
+              <tr><td>150</td><td>€41,50<small>Basis + nummer + 300 credits</small></td><td>€119,00</td><td>€99,00</td><td>€119,00</td><td>€52,50</td></tr>
+              <tr><td>200</td><td>€51,50<small>Basis + nummer + 600 credits</small></td><td>€119,00</td><td>€99,00</td><td>€119,00</td><td>€70,00</td></tr>
+              <tr><td>300</td><td>€66,50<small>Basis + nummer + 1.200 credits</small></td><td>€119,00</td><td>€99,00</td><td>€119,00</td><td>€105,00</td></tr>
               <tr><td>400</td><td>€79,00<small>Pro</small></td><td>€119,00</td><td>€99,00</td><td>€119,00</td><td>€140,00</td></tr>
               <tr><td>500</td><td>€79,00<small>Pro</small></td><td>€119,00</td><td>€99,00</td><td>€159,00</td><td>€175,00</td></tr>
               <tr><td>600</td><td>€99,00<small>Pro + 600 credits</small></td><td>€119,00</td><td>€99,00</td><td>€199,00</td><td>€210,00</td></tr>
@@ -187,9 +187,9 @@
               <tr><th>Belminuten per maand</th><th>Mowi, per minuut</th><th>Fonio maandelijks, per minuut</th><th>Fonio jaarbetaling, per minuut</th></tr>
             </thead>
             <tbody>
-              <tr><td>50</td><td>€1,58</td><td>€2,38</td><td>€1,98</td></tr>
-              <tr><td>100</td><td>€0,79</td><td>€1,19</td><td>€0,99</td></tr>
-              <tr><td>200</td><td>€0,40</td><td>€0,60</td><td>€0,50</td></tr>
+              <tr><td>50</td><td>€0,63</td><td>€2,38</td><td>€1,98</td></tr>
+              <tr><td>100</td><td>€0,32</td><td>€1,19</td><td>€0,99</td></tr>
+              <tr><td>200</td><td>€0,26</td><td>€0,60</td><td>€0,50</td></tr>
               <tr><td>500</td><td>€0,16</td><td>€0,24</td><td>€0,20</td></tr>
               <tr><td>1.000</td><td>€0,16</td><td>€0,12</td><td>€0,10</td></tr>
             </tbody>
@@ -209,7 +209,7 @@
           <div class="lp-card">
             <h3>Mowi</h3>
             <ul class="cmp-list">
-              <li>De telefoon zit in Pro: €79 per maand met telefoonnummer en 3.000 credits, dat is 500 belminuten.</li>
+              <li>Basis kost €19 per maand met 800 credits; het telefoonnummer kost daarbij €12,50 per maand. Pro kost €79 per maand met telefoonnummer en 3.000 credits, dat is 500 belminuten.</li>
               <li>Eén belminuut kost 6 credits. Per gesprek rondt Mowi af naar boven op hele minuten. Een gesprek korter dan 10 seconden kost niets.</li>
               <li>Komt u credits tekort, dan rekenen we de goedkoopste combinatie van losse packs: 300 credits voor €10, 1.200 voor €35, 2.500 voor €65, 6.400 voor €164.</li>
               <li>Per regel staat de goedkoopste route. Dezelfde credits gebruikt u ook voor e-mail en de Builder; hier tellen we alleen bellen.</li>
@@ -235,7 +235,7 @@
           <h2 class="lp-section-heading">Waar verliest Mowi?</h2>
         </div>
         <div class="cmp-prose">
-          <p>Boven de 700 belminuten per maand is Fonio goedkoper, en boven de 600 als u een jaar vooruit betaalt. Fonio biedt in de grotere pakketten ook meerdere gelijktijdige gesprekken. Onder de 225 minuten per maand is CallingBird goedkoper. CallingBird rekent per minuut met een minimum van €20, Mowi een vast bedrag van €79.</p>
+          <p>Boven de 700 belminuten per maand is Fonio goedkoper, en boven de 600 als u een jaar vooruit betaalt. Fonio biedt in de grotere pakketten ook meerdere gelijktijdige gesprekken. Onder de 90 minuten per maand is CallingBird goedkoper. CallingBird rekent per minuut met een minimum van €20, Mowi begint bij een vast bedrag van €31,50.</p>
           <p>Wilt u dat de spraakverwerking binnen de EU blijft: Mowi's spraaktechnologie loopt via ElevenLabs en het telefoonverkeer via Twilio, beide in de Verenigde Staten, met doorgiftewaarborgen. Op dat punt wint Mowi de vergelijking niet. Wie precies wat verwerkt staat op onze <a href="/subverwerkers">subverwerkerspagina</a>.</p>
         </div>
       </div>
@@ -288,11 +288,11 @@
         <div class="lp-card-grid">
           <div class="lp-card">
             <h3>Wat kost een AI-telefonist minimaal per maand?</h3>
-            <p>Van de vergeleken aanbieders is CallingBird het laagst met een minimum van €20 per maand. Bij Mowi kost een AI-telefonist €79 per maand, met telefoonnummer en 500 belminuten. Fonio en Sam neemt op beginnen bij €119 per maand. MIKE365 heeft een instap van €14,99 zonder gesprekken. Alle prijzen excl. btw, gelezen op 18 oktober 2026.</p>
+            <p>Van de vergeleken aanbieders is CallingBird het laagst met een minimum van €20 per maand. Bij Mowi kost een AI-telefonist vanaf €31,50 per maand: Basis met een eigen telefoonnummer en 800 credits, genoeg voor ongeveer 130 belminuten. Pro kost €79 met telefoonnummer en 500 belminuten. Fonio en Sam neemt op beginnen bij €119 per maand. MIKE365 heeft een instap van €14,99 zonder gesprekken. Alle prijzen excl. btw, gelezen op 18 oktober 2026.</p>
           </div>
           <div class="lp-card">
             <h3>Wanneer is Mowi de goedkoopste AI-telefonist?</h3>
-            <p>Tussen ongeveer 225 en 700 belminuten per maand. Onder de 225 minuten is CallingBird goedkoper. Boven de 700 minuten is Fonio goedkoper, of boven de 600 minuten als u bij Fonio een jaar vooruit betaalt.</p>
+            <p>Tussen ongeveer 90 en 700 belminuten per maand. Onder de 90 minuten is CallingBird goedkoper. Boven de 700 minuten is Fonio goedkoper, of boven de 600 minuten als u bij Fonio een jaar vooruit betaalt.</p>
           </div>
           <div class="lp-card">
             <h3>Zijn de prijzen inclusief of exclusief btw?</h3>
@@ -304,7 +304,7 @@
           </div>
           <div class="lp-card">
             <h3>Moet ik een abonnement nemen voor de Voice agent van Mowi?</h3>
-            <p>Ja. De telefoon zit in Pro: €79 per maand met telefoonnummer en 3.000 credits, dat is 500 belminuten. Extra minuten koopt u bij met losse credits. De eerste 30 dagen krijgt u uw geld terug als het niet bevalt. Alle prijzen excl. btw. Meer op de <a href="/ai-telefonist">pagina van de AI-telefonist</a>.</p>
+            <p>Ja, een pakket. Bij Basis, €19 per maand, zet u de telefoon erbij voor €12,50 per maand. In Pro, €79 per maand, is het telefoonnummer inbegrepen, met 3.000 credits, dat is 500 belminuten. Extra minuten koopt u bij met losse credits. Bij Pro krijgt u de eerste 30 dagen uw geld terug als het niet bevalt. Alle prijzen excl. btw. Meer op de <a href="/ai-telefonist">pagina van de AI-telefonist</a>.</p>
           </div>
         </div>
       </div>
