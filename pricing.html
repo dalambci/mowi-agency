@@ -17,20 +17,16 @@
   <script defer data-domain="mowi.agency" src="https://plausible.io/js/script.js"></script>
   <style>
     /* Monthly/yearly toggle on /pricing only (2026-10-19). */
-    /* Monthly/yearly switch (2026-10-19, Sal: "more simplistic and bold, obvious"): two big
-       segments on a greige track, the chosen one dark, the saving as a dark label that turns
-       white once yearly is chosen. Centred over the full-width grid. */
-    .billing-toggle-wrap { text-align: center; margin-bottom: 1.75rem; }
-    .billing-toggle { display: inline-flex; gap: 4px; padding: 5px; border-radius: var(--radius-pill); background: var(--band); }
+    /* Monthly/yearly switch (2026-10-19, Sal: smaller, white, no saving label in it): two compact
+       segments on a white track with a hairline border, the chosen one dark. Centred over the grid. */
+    .billing-toggle-wrap { text-align: center; margin-bottom: 1.5rem; }
+    .billing-toggle { display: inline-flex; gap: 2px; padding: 3px; border-radius: var(--radius-pill); background: var(--surface); border: 1px solid var(--border); }
     .billing-toggle[hidden] { display: none; }
-    .billing-toggle-btn { font: inherit; font-size: 1rem; font-weight: 600; padding: 0.7rem 1.4rem; border: 0; border-radius: var(--radius-pill); background: transparent; color: var(--ink); cursor: pointer; white-space: nowrap; display: inline-flex; align-items: center; gap: 0.5rem; }
+    .billing-toggle-btn { font: inherit; font-size: 0.875rem; font-weight: 600; padding: 0.45rem 1.1rem; border: 0; border-radius: var(--radius-pill); background: transparent; color: var(--ink); cursor: pointer; white-space: nowrap; }
     .billing-toggle-btn.is-active { background: var(--ink); color: #fff; }
-    .billing-toggle-save { font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.55rem; border-radius: var(--radius-pill); background: var(--ink); color: #fff; }
-    .billing-toggle-btn.is-active .billing-toggle-save { background: #fff; color: var(--ink); }
     /* Free start first (2026-10-19), so the help band spans all three columns rather than two. */
     .tier-custom { width: 100%; }
     .tier-custom .tier-cta { justify-self: end; }
-    @media (max-width: 40rem) { .billing-toggle-btn { padding: 0.65rem 1rem; } }
     .tier-year-note { font-size: 0.8125rem; font-weight: 600; color: var(--ink-2); margin-top: 0.375rem; }
     /* Two plans and the free start (2026-10-19). */
     .tier-for { margin-top: 0; }
@@ -257,14 +253,16 @@
              "Ongeveer 11 gesprekken per werkdag" = 500 min / 21,7 werkdagen / 2 billed minutes per call
              (calls round up to whole minutes). Must match config/plans.php and config/credits.php. -->
         <!-- Monthly or yearly (2026-10-19, Sal: Pro at EUR790 per year, "2 maanden gratis"; the
-             Voicelabs borrow item 4: a toggle, never a struck-out price). The toggle only appears with
+             Voicelabs borrow item 4: a toggle, never a struck-out price). Later the same day (Sal's pick):
+             yearly mode shows the monthly equivalent as the big price, with the year total and the euro
+             saving under it; monthly mode hints at the yearly monthly price. Only on the cards. The toggle only appears with
              script; without it the Pro card still states the yearly price in its own line. Only Pro
              has a yearly price, so only Pro's figures change. Page-local style and script, so
              css/style.css and js/main.js keep their versions. -->
         <div class="billing-toggle-wrap">
           <div class="billing-toggle" role="group" aria-label="Betaalperiode" hidden>
             <button type="button" class="billing-toggle-btn is-active" data-interval="month" aria-pressed="true">Per maand</button>
-            <button type="button" class="billing-toggle-btn" data-interval="year" aria-pressed="false">Per jaar <span class="billing-toggle-save">2 maanden gratis</span></button>
+            <button type="button" class="billing-toggle-btn" data-interval="year" aria-pressed="false">Per jaar</button>
           </div>
         </div>
         <!-- Order changed later on 2026-10-19 (Sal: "put the 3rd start gratis card ... first"): Start gratis,
@@ -288,8 +286,8 @@
           <div class="tier-card tier-card-highlight">
             <h2 class="tier-card-name">Mowi 500</h2>
             <p class="tier-profile tier-for">Telefoon en e-mail</p>
-            <div class="tier-price"><span class="tier-price-amount" data-month="€79" data-year="€790">€79</span><span class="tier-price-period" data-month="/mnd excl. btw" data-year="/jaar excl. btw">/mnd excl. btw</span></div>
-            <p class="tier-year-note" data-month="Of €&nbsp;790 per jaar: 2 maanden gratis" data-year="Dat is €&nbsp;65,83 per maand">Of €&nbsp;790 per jaar: 2 maanden gratis</p>
+            <div class="tier-price"><span class="tier-price-amount" data-month="€79" data-year="€65,83">€79</span><span class="tier-price-period">/mnd excl. btw</span></div>
+            <p class="tier-year-note" data-month="€&nbsp;65,83 per maand bij jaarbetaling" data-year="€&nbsp;790 per jaar, u bespaart €&nbsp;158">€&nbsp;65,83 per maand bij jaarbetaling</p>
             <p class="tier-minutes">500 belminuten per maand</p>
             <p class="tier-profile">Ongeveer 11 gesprekken per werkdag, of 3.000 e-mails uit hetzelfde tegoed</p>
             <ul class="tier-features">
@@ -304,8 +302,8 @@
           <div class="tier-card">
             <h2 class="tier-card-name">Mowi 1000</h2>
             <p class="tier-profile tier-for">Telefoon en e-mail, voor een drukkere zaak</p>
-            <div class="tier-price"><span class="tier-price-amount" data-month="€149" data-year="€1.490">€149</span><span class="tier-price-period" data-month="/mnd excl. btw" data-year="/jaar excl. btw">/mnd excl. btw</span></div>
-            <p class="tier-year-note" data-month="Of €&nbsp;1.490 per jaar: 2 maanden gratis" data-year="Dat is €&nbsp;124,17 per maand">Of €&nbsp;1.490 per jaar: 2 maanden gratis</p>
+            <div class="tier-price"><span class="tier-price-amount" data-month="€149" data-year="€124,17">€149</span><span class="tier-price-period">/mnd excl. btw</span></div>
+            <p class="tier-year-note" data-month="€&nbsp;124,17 per maand bij jaarbetaling" data-year="€&nbsp;1.490 per jaar, u bespaart €&nbsp;298">€&nbsp;124,17 per maand bij jaarbetaling</p>
             <p class="tier-minutes">1.000 belminuten per maand</p>
             <p class="tier-profile">Ongeveer 23 gesprekken per werkdag, of 6.000 e-mails uit hetzelfde tegoed</p>
             <ul class="tier-features">
