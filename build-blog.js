@@ -283,9 +283,13 @@ function headerHtml() {
               </div>
               <div class="nav-menu-col nav-menu-col-divider">
                 <p class="nav-menu-heading" id="nav-heading-branches">Branches</p>
-                <ul class="nav-menu-list" aria-labelledby="nav-heading-branches">
+                <ul class="nav-menu-list nav-menu-list-2" aria-labelledby="nav-heading-branches">
                   <li><a href="/ai-telefonist-installateurs"${current("/ai-telefonist-installateurs")}>Installateurs</a></li>
                   <li><a href="/ai-telefonist-webshops"${current("/ai-telefonist-webshops")}>Webshops</a></li>
+                  <li><a href="/ai-telefonist-kappers-en-salons"${current("/ai-telefonist-kappers-en-salons")}>Kappers en salons</a></li>
+                  <li><a href="/ai-telefonist-autogarages"${current("/ai-telefonist-autogarages")}>Autogarages</a></li>
+                  <li><a href="/ai-telefonist-restaurants"${current("/ai-telefonist-restaurants")}>Restaurants</a></li>
+                  <li><a href="/ai-telefonist-vakmensen"${current("/ai-telefonist-vakmensen")}>Vakmensen en zzp'ers</a></li>
                 </ul>
               </div>
             </div>
@@ -361,6 +365,10 @@ function footerHtml() {
                 <li><a href="/klantenservice-uitbesteden">Klantenservice uitbesteden</a></li>
                 <li><a href="/ai-telefonist-installateurs">Voor installateurs</a></li>
                 <li><a href="/ai-telefonist-webshops">Voor webshops</a></li>
+                <li><a href="/ai-telefonist-kappers-en-salons">Voor kappers en salons</a></li>
+                <li><a href="/ai-telefonist-autogarages">Voor autogarages</a></li>
+                <li><a href="/ai-telefonist-restaurants">Voor restaurants</a></li>
+                <li><a href="/ai-telefonist-vakmensen">Voor vakmensen</a></li>
                 <li><a href="/mowi-in-het-kort">Mowi in het kort</a></li>
               </ul>
             </div>
