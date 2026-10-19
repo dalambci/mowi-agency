@@ -587,3 +587,31 @@
   .demo-stage:not(.demo-stage-try) > .demo-stage-center { padding-top: 10.25rem; }
   .demo-stage:not(.demo-stage-try) > .demo-transcript { top: 14rem; }
 }
+
+/* --- One scenario, calmer layout (2026-10-20) ----------------------------
+   Sal: one example instead of four, tighter spacing, a workflow frame that no
+   longer looks cut off, and sizes in line with the rest of the page. Both
+   cards share one rhythm now: the head, a 24rem visual (the mascot stage on
+   the left, the canvas on the right), then the controls. The canvas gets its
+   own light surface inside the card, so its frame reads as a frame and the
+   bottom fade melts into the canvas instead of into the card. */
+.demo-try .demo-card-head,
+.demo-flow .demo-card-head { min-height: 0; margin-bottom: 1.25rem; }
+.demo-try [data-demo-sub],
+.demo-flow [data-demo-scenario] { min-height: 0; }
+.demo-card-title { font-size: 1.1875rem; }
+.demo-card-sub { font-size: 0.9375rem; color: var(--ink-2); }
+.demo-stage-try { height: 24rem; }
+.demo-stage-try > .demo-disc { margin-bottom: 4rem; }
+.demo-stage-try > .demo-stage-center { padding-bottom: 2.25rem; }
+.demo-flow-stage { height: 24rem; margin: 0 0 1.5rem; border-radius: 1rem; }
+.demo-flow-stage .wf-canvas { background: var(--bg); border-color: var(--border); border-radius: 1rem; }
+.demo-flow-stage .wf-viewport::after { height: 3.5rem; background: linear-gradient(to bottom, transparent, var(--bg)); }
+/* Top-aligned, so the stage starts level with the canvas even when the
+   workflow card's buttons wrap and make that card taller. */
+.demo-duo > .demo-card > [data-demo-body] > [data-pill-tabs] { justify-content: flex-start; }
+@media (max-width: 47.9rem) {
+  .demo-stage-try { height: 20rem; }
+  .demo-stage-try > .demo-disc { margin-bottom: 3.5rem; }
+  .demo-flow-stage { height: 20rem; }
+}

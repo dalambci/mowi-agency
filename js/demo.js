@@ -574,7 +574,9 @@
 
   function currentType() {
     var selected = document.querySelector("[data-demo-types] [role=tab][aria-selected=true]");
-    return (selected && selected.getAttribute("data-demo-type")) || "bestelstatus";
+    // One scenario since 2026-10-20: no tab bar, the demo card names its type.
+    var card = document.querySelector("[data-demo-try]");
+    return (selected && selected.getAttribute("data-demo-type")) || (card && card.getAttribute("data-demo-type")) || "bestelstatus";
   }
 
   /**

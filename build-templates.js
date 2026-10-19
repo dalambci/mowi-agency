@@ -846,22 +846,14 @@ const DEMO_TABS_MARK = {
  *
  * The subtitles are copied verbatim from the sample tabs for the same reason.
  */
+// One scenario since 2026-10-20 (Sal: "maybe we should not do examples for those 4 things and keep it at 1").
+// Afspraak, because booking is the promise every lander makes and Kapsalon Anna is also the sample in the
+// /ai-telefonist hero. With a single type no tab bar is written (see injectDemoWorkflows) and js/demo.js reads
+// the type from the demo card's data-demo-type. The other three stay in git history.
 const DEMO_WORKFLOW_TYPES = [
-  { key: "bestelstatus", label: "Bestelstatus", slug: "voice-agent-webshop",
-    company: "Fietsplaza",
-    sub: "Een klant belt de webshop: waar blijft mijn bestelling?",
-    demoSub: "Bel of chat met de digitale receptionist." },
   { key: "afspraak", label: "Afspraak", slug: "voice-agent-kapper",
     company: "Kapsalon Anna",
     sub: "Een klant belt de kapsalon voor een nieuwe afspraak.",
-    demoSub: "Bel of chat met de digitale receptionist." },
-  { key: "terugbelverzoek", label: "Terugbelverzoek", slug: "terugbelverzoek-opvolging",
-    company: "Vlothuis Installatietechniek",
-    sub: "De agent belt zelf terug na een eerder gemiste oproep.",
-    demoSub: "Bel of chat met de digitale receptionist." },
-  { key: "receptie", label: "Receptie", slug: "voice-agent-zakelijke_dienstverlening",
-    company: "Van Dijk Zonwering",
-    sub: "Een offerteaanvraag aan de telefoon, met de gegevens die daarvoor nodig zijn.",
     demoSub: "Bel of chat met de digitale receptionist." },
 ];
 
@@ -895,6 +887,7 @@ const DEMO_WORKFLOW_PAGES = ["support-agent.html", "call-agent.html", "index.htm
  * reference's own in-card chrome.
  */
 function injectDemoWorkflows(templates) {
+  const single = DEMO_WORKFLOW_TYPES.length === 1;
   const body = DEMO_WORKFLOW_TYPES.map((t, i) => {
     const template = templates.find((x) => x.slug === t.slug);
     if (!template) throw new Error(`build-templates: demo workflow type '${t.key}' wants template '${t.slug}', which is not in the export`);
@@ -907,7 +900,7 @@ function injectDemoWorkflows(templates) {
       // agent's own first sentence names the company written here, so the two
       // cannot drift apart silently.
       tab: `<button type="button" class="demo-seg-tab" role="tab" id="demo-type-${t.key}" aria-controls="wf-panel-${t.key}" aria-selected="${sel}" tabindex="${sel ? 0 : -1}" data-demo-type="${t.key}" data-company="${esc(t.company)}" data-sub="${esc(t.demoSub)}" data-scenario="${esc(t.sub)}">${esc(t.label)}</button>`,
-      panel: `<div class="demo-flow-panel" id="wf-panel-${t.key}" role="tabpanel" aria-labelledby="demo-type-${t.key}"${sel ? "" : " hidden"}>
+      panel: `<div class="demo-flow-panel" id="wf-panel-${t.key}"${single ? "" : ` role="tabpanel" aria-labelledby="demo-type-${t.key}"`}${sel ? "" : " hidden"}>
               <div class="demo-flow-stage">
                 ${renderCanvasInteractive(template, "center")}
               </div>
@@ -919,7 +912,7 @@ function injectDemoWorkflows(templates) {
     };
   });
 
-  const tabsMarkup = `        <div class="demo-seg demo-type-seg" role="tablist" aria-label="Soort gesprek" data-demo-types data-wf-refit>
+  const tabsMarkup = single ? "" : `        <div class="demo-seg demo-type-seg" role="tablist" aria-label="Soort gesprek" data-demo-types data-wf-refit>
           ${body.map((b) => b.tab).join("\n          ")}
         </div>
 `;
