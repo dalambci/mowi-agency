@@ -523,8 +523,7 @@ main { flex: 1 0 auto; }
   flex-direction: column;
   align-items: center;
   text-align: center;
-  /* positioning context + stacking isolation for the ::before grain layer,
-     so its z-index:-1 stays inside the hero instead of dropping behind body */
+  /* positioning context + stacking isolation for anything placed inside the hero */
   position: relative;
   z-index: 0;
   /* Longhand on purpose — .hero is combined with .container on the same
@@ -533,35 +532,9 @@ main { flex: 1 0 auto; }
   padding-top: 3.5rem;
   padding-bottom: 5rem;
 }
-/* Particle-grain backdrop — echoes the stipple/halftone grain the Mowi icon
-   and wordmark are drawn in (scattered specks dissolving at the edges), not a
-   regimented dot grid. SVG feTurbulence generates the organic specks inline
-   (no asset); the steep feColorMatrix alpha ramp keeps only sparse dark
-   particles. Same mask-fade technique as the marquees below: densest behind
-   the headline, dissolved to nothing before the hero visual. Static, so the
-   sitewide reduced-motion rule needs no carve-out. */
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 10 -5.6'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
-  background-size: 300px 300px;
-  opacity: 0.068; /* founder-tuned round 6 (2026-08-23): -15% from round 5's
-    0.08 (0.08 * 0.85 = 0.068), asked for after the coverage-area revert
-    above still read as too present. Now just under the round-2 0.07 floor
-    that was once called "too subtle to notice" — deliberately, this time.
-    Alpha ramp (-5.6) left as-is; opacity alone controls intrusiveness. */
-  /* Coverage reverted 2026-08-23 to round 2's original small halo (75%/65%
-     at 50% 15%, dissolving quickly past the headline) — round 2's widened
-     85%/90%-at-25% halo (reaching much further down the hero) had stuck
-     around through every later opacity-only tuning round since, which is
-     what actually read as "more intense" even after opacity itself came
-     back down. Opacity and the particle alpha ramp are untouched here. */
-  mask-image: radial-gradient(ellipse 75% 65% at 50% 15%, #000 20%, transparent 72%);
-  -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 15%, #000 20%, transparent 72%);
-}
+/* The particle-grain backdrop behind every hero (.hero::before, an SVG feTurbulence
+   texture) was removed 2026-10-19 (Sal: "remove the grain effect from all the pages").
+   The demo's stippled call disc in css/demo.css is a separate element and stays. */
 /* 60px (2026-08-28, Sal: "update the font size for all hero headings to
    the size of the hero heading of the call agent page") -- was 80px.
    .hero-h1-reduced below no longer reduces anything relative to this (it
