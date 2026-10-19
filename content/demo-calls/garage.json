@@ -1,0 +1,81 @@
+{
+    "slug": "garage",
+    "title": "APK inplannen",
+    "sub": "Een klant belt de garage voor een APK.",
+    "audio": "garage.mp3",
+    "duration": 57.5,
+    "lines": [
+        {
+            "role": "agent",
+            "text": "Met de digitale assistent van Garage Van Dijk. Dit gesprek wordt opgenomen. Waarmee kan ik u helpen?",
+            "start": 0,
+            "end": 6.22
+        },
+        {
+            "role": "caller",
+            "text": "Goedemorgen, mijn auto moet voor de APK. En sinds gisteren brandt het motorlampje.",
+            "start": 6.77,
+            "end": 11.69
+        },
+        {
+            "role": "agent",
+            "text": "Rijdt hij verder normaal?",
+            "start": 12.24,
+            "end": 13.8
+        },
+        {
+            "role": "caller",
+            "text": "Ja, gewoon.",
+            "start": 14.34,
+            "end": 15.77
+        },
+        {
+            "role": "agent",
+            "text": "Dan plan ik de APK in en zet ik het lampje erbij, zodat de monteur er ook naar kijkt. Wat is het kenteken?",
+            "start": 16.32,
+            "end": 23.04
+        },
+        {
+            "role": "caller",
+            "text": "A, B, een twee drie, C.",
+            "start": 23.59,
+            "end": 25.79
+        },
+        {
+            "role": "agent",
+            "text": "A, B, een twee drie, C. Een moment, ik kijk de agenda na.",
+            "start": 26.34,
+            "end": 30.56
+        },
+        {
+            "role": "agent",
+            "text": "Dinsdag om half negen is nog vrij. Heeft u dan een vervangende auto nodig?",
+            "start": 31.11,
+            "end": 35.7
+        },
+        {
+            "role": "caller",
+            "text": "Dinsdag is goed, en nee, dat hoeft niet.",
+            "start": 36.24,
+            "end": 39.28
+        },
+        {
+            "role": "agent",
+            "text": "Dan staat de APK op dinsdag om half negen. Mag ik uw naam en telefoonnummer noteren?",
+            "start": 39.83,
+            "end": 44.81
+        },
+        {
+            "role": "caller",
+            "text": "Mark de Vries, nul zes, twee drie, vier vijf, zes zeven, acht negen.",
+            "start": 45.36,
+            "end": 51.71
+        },
+        {
+            "role": "agent",
+            "text": "Nul zes, twee drie, vier vijf, zes zeven, acht negen. Genoteerd. Tot dinsdag.",
+            "start": 52.25,
+            "end": 57.5
+        }
+    ]
+}

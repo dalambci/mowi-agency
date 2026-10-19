@@ -1,0 +1,81 @@
+{
+    "slug": "restaurant",
+    "title": "Reservering",
+    "sub": "Een gast belt het restaurant om een tafel te reserveren.",
+    "audio": "restaurant.mp3",
+    "duration": 48.12,
+    "lines": [
+        {
+            "role": "agent",
+            "text": "Met de digitale assistent van Restaurant De Haven. Dit gesprek wordt opgenomen. Waarmee kan ik u helpen?",
+            "start": 0,
+            "end": 6.03
+        },
+        {
+            "role": "caller",
+            "text": "Goedemiddag, ik wil graag reserveren voor zaterdag, met vier personen.",
+            "start": 6.58,
+            "end": 11.73
+        },
+        {
+            "role": "agent",
+            "text": "Graag. Hoe laat had u gedacht?",
+            "start": 12.27,
+            "end": 14.17
+        },
+        {
+            "role": "caller",
+            "text": "Rond zeven uur.",
+            "start": 14.71,
+            "end": 16.14
+        },
+        {
+            "role": "agent",
+            "text": "Een moment, ik kijk of er een tafel vrij is.",
+            "start": 16.68,
+            "end": 19.01
+        },
+        {
+            "role": "agent",
+            "text": "Om zeven uur is er een tafel voor vier vrij. Zal ik die voor u vastleggen?",
+            "start": 19.56,
+            "end": 24
+        },
+        {
+            "role": "caller",
+            "text": "Ja, graag.",
+            "start": 24.55,
+            "end": 25.98
+        },
+        {
+            "role": "agent",
+            "text": "Zijn er dieetwensen of allergieën waar de keuken rekening mee moet houden?",
+            "start": 26.52,
+            "end": 30.56
+        },
+        {
+            "role": "caller",
+            "text": "Een van ons is allergisch voor noten.",
+            "start": 31.11,
+            "end": 33.44
+        },
+        {
+            "role": "agent",
+            "text": "Dat zet ik erbij. Op welke naam mag de reservering?",
+            "start": 33.98,
+            "end": 37.48
+        },
+        {
+            "role": "caller",
+            "text": "Op naam van Visser.",
+            "start": 38.02,
+            "end": 39.63
+        },
+        {
+            "role": "agent",
+            "text": "Dan staat er zaterdag om zeven uur een tafel voor vier personen op naam van Visser, met de notenallergie erbij. Tot zaterdag.",
+            "start": 40.17,
+            "end": 48.12
+        }
+    ]
+}

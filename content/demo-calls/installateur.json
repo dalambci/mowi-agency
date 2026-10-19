@@ -1,0 +1,75 @@
+{
+    "slug": "installateur",
+    "title": "Lekkage",
+    "sub": "Een klant belt de installateur met een lekkage.",
+    "audio": "installateur.mp3",
+    "duration": 41.12,
+    "lines": [
+        {
+            "role": "agent",
+            "text": "Met de digitale assistent van Vlothuis Installatietechniek. Dit gesprek wordt opgenomen. Waarmee kan ik u helpen?",
+            "start": 0,
+            "end": 7.12
+        },
+        {
+            "role": "caller",
+            "text": "Ik heb een lekkage onder mijn aanrecht. Het blijft maar druppelen.",
+            "start": 7.66,
+            "end": 11.63
+        },
+        {
+            "role": "agent",
+            "text": "Vervelend. Heeft u de hoofdkraan al dichtgedraaid?",
+            "start": 12.18,
+            "end": 14.79
+        },
+        {
+            "role": "caller",
+            "text": "Ja, net gedaan.",
+            "start": 15.34,
+            "end": 16.77
+        },
+        {
+            "role": "agent",
+            "text": "Goed zo. Op welk adres is het?",
+            "start": 17.31,
+            "end": 19.22
+        },
+        {
+            "role": "caller",
+            "text": "Kerkstraat twaalf in Haarlem.",
+            "start": 19.77,
+            "end": 22.28
+        },
+        {
+            "role": "agent",
+            "text": "Kerkstraat twaalf in Haarlem. En sinds wanneer lekt het?",
+            "start": 22.82,
+            "end": 26.21
+        },
+        {
+            "role": "caller",
+            "text": "Sinds vanochtend.",
+            "start": 26.76,
+            "end": 28.08
+        },
+        {
+            "role": "agent",
+            "text": "Dank u. Ik zet dit als spoed door. Een monteur belt u zo snel mogelijk terug op dit nummer. Kan ik u verder nog ergens mee helpen?",
+            "start": 28.62,
+            "end": 36.32
+        },
+        {
+            "role": "caller",
+            "text": "Nee, dat was het. Dank u wel.",
+            "start": 36.86,
+            "end": 38.84
+        },
+        {
+            "role": "agent",
+            "text": "Graag gedaan. Sterkte ermee.",
+            "start": 39.38,
+            "end": 41.12
+        }
+    ]
+}

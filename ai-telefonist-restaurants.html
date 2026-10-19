@@ -199,6 +199,16 @@
     .lp2-audio-line { margin-top: 1.25rem; min-height: 6.4em; font-size: 0.9375rem; line-height: 1.6; }
     .lp2-audio-line small { display: block; font-size: 0.75rem; font-weight: 600; color: var(--ink-3); margin-bottom: 0.15rem; }
     .lp2-audio-foot { margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid var(--border); font-size: 0.75rem; color: var(--ink-3); }
+    /* Top-aligned next to the audio card, so opening "Lees het gesprek" grows the card downward instead of
+       pushing the centred headline beside it down the page. */
+    .lp2-grid:has(.lp2-audio) { align-items: start; }
+    .lp2-audio-text { margin-top: 0.75rem; }
+    .lp2-audio-text summary { list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.875rem; font-weight: 600; color: var(--ink-2); }
+    .lp2-audio-text summary::-webkit-details-marker { display: none; }
+    .lp2-audio-text summary::after { content: "+"; font-weight: 400; color: var(--ink-3); }
+    .lp2-audio-text[open] summary::after { content: "\2212"; }
+    .lp2-audio-text p { margin-top: 0.6rem; font-size: 0.875rem; line-height: 1.55; color: var(--ink-2); }
+    .lp2-audio-text .who { display: block; font-size: 0.75rem; font-weight: 600; color: var(--ink-3); }
     @media (max-width: 47.9rem) { .lp2-audio { padding: 1.25rem; } .lp2-audio-line { min-height: 8em; } }
   </style>
 </head>
@@ -301,17 +311,31 @@
           <ul class="lp2-ticks"><li>Gratis testgesprek</li><li>30 dagen geld terug</li><li>U houdt uw eigen nummer</li></ul>
         </div>
         <div class="lp2-visual">
-          <div class="lp2-audio" data-call-audio data-duration="51.75" data-captions="/content/demo-calls/afspraak.json?v=20260916">
-            <audio preload="none" src="assets/demo-calls/afspraak.mp3?v=20260916"></audio>
+          <div class="lp2-audio" data-call-audio data-duration="48.12" data-captions="/content/demo-calls/restaurant.json?v=20261019">
+            <audio preload="none" src="assets/demo-calls/restaurant.mp3?v=20261019"></audio>
             <div class="lp2-audio-head">
               <button type="button" class="lp2-audio-play" data-call-play aria-label="Gesprek afspelen"><svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg><svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg></button>
               <div>
                 <p class="lp2-audio-title">Hoor hoe hij klinkt</p>
-                <p class="lp2-audio-meta">Kapsalon Anna · <span data-call-time>0:52</span></p>
+                <p class="lp2-audio-meta">Restaurant De Haven · <span data-call-time>0:48</span></p>
               </div>
             </div>
-            <div class="lp2-audio-wave" data-call-wave aria-hidden="true"><span class="b7"></span><span class="b5"></span><span class="b3"></span><span class="b5"></span><span class="b6"></span><span class="b3"></span><span class="b6"></span><span class="b5"></span><span class="b3"></span><span class="b6"></span><span class="b4"></span><span class="b5"></span><span class="b7"></span><span class="b6"></span><span class="b2"></span><span class="b5"></span><span class="b6"></span><span class="b3"></span><span class="b4"></span><span class="b3"></span><span class="b3"></span><span class="b6"></span><span class="b2"></span><span class="b7"></span><span class="b4"></span><span class="b4"></span><span class="b5"></span><span class="b1"></span><span class="b5"></span><span class="b2"></span><span class="b8"></span><span class="b7"></span><span class="b5"></span><span class="b7"></span><span class="b4"></span><span class="b6"></span><span class="b5"></span><span class="b3"></span><span class="b4"></span><span class="b4"></span><span class="b4"></span><span class="b3"></span><span class="b5"></span><span class="b6"></span><span class="b4"></span><span class="b4"></span><span class="b4"></span><span class="b4"></span></div>
-            <p class="lp2-audio-line" data-call-line aria-live="polite"><small>Agent</small>U spreekt met de digitale assistent van Kapsalon Anna. Dit gesprek wordt opgenomen en automatisch samengevat. Zegt u &quot;medewerker&quot;, dan verbind ik u direct door. Waarmee kan ik u helpen?</p>
+            <div class="lp2-audio-wave" data-call-wave aria-hidden="true"><span class="b7"></span><span class="b6"></span><span class="b5"></span><span class="b5"></span><span class="b7"></span><span class="b5"></span><span class="b5"></span><span class="b5"></span><span class="b6"></span><span class="b4"></span><span class="b4"></span><span class="b3"></span><span class="b6"></span><span class="b5"></span><span class="b3"></span><span class="b5"></span><span class="b5"></span><span class="b5"></span><span class="b2"></span><span class="b5"></span><span class="b5"></span><span class="b5"></span><span class="b5"></span><span class="b4"></span><span class="b3"></span><span class="b3"></span><span class="b5"></span><span class="b5"></span><span class="b7"></span><span class="b6"></span><span class="b1"></span><span class="b5"></span><span class="b5"></span><span class="b1"></span><span class="b6"></span><span class="b6"></span><span class="b6"></span><span class="b2"></span><span class="b5"></span><span class="b1"></span><span class="b6"></span><span class="b6"></span><span class="b5"></span><span class="b6"></span><span class="b2"></span><span class="b8"></span><span class="b5"></span><span class="b5"></span></div>
+            <p class="lp2-audio-line" data-call-line aria-live="polite"><small>Agent</small>Met de digitale assistent van Restaurant De Haven. Dit gesprek wordt opgenomen. Waarmee kan ik u helpen?</p>
+            <details class="lp2-audio-text"><summary>Lees het gesprek</summary>
+              <p><span class="who">Agent</span>Met de digitale assistent van Restaurant De Haven. Dit gesprek wordt opgenomen. Waarmee kan ik u helpen?</p>
+              <p><span class="who">Beller</span>Goedemiddag, ik wil graag reserveren voor zaterdag, met vier personen.</p>
+              <p><span class="who">Agent</span>Graag. Hoe laat had u gedacht?</p>
+              <p><span class="who">Beller</span>Rond zeven uur.</p>
+              <p><span class="who">Agent</span>Een moment, ik kijk of er een tafel vrij is.</p>
+              <p><span class="who">Agent</span>Om zeven uur is er een tafel voor vier vrij. Zal ik die voor u vastleggen?</p>
+              <p><span class="who">Beller</span>Ja, graag.</p>
+              <p><span class="who">Agent</span>Zijn er dieetwensen of allergieën waar de keuken rekening mee moet houden?</p>
+              <p><span class="who">Beller</span>Een van ons is allergisch voor noten.</p>
+              <p><span class="who">Agent</span>Dat zet ik erbij. Op welke naam mag de reservering?</p>
+              <p><span class="who">Beller</span>Op naam van Visser.</p>
+              <p><span class="who">Agent</span>Dan staat er zaterdag om zeven uur een tafel voor vier personen op naam van Visser, met de notenallergie erbij. Tot zaterdag.</p>
+            </details>
             <p class="lp2-audio-foot">Voorbeeldgesprek met de stem van de agent. Het bedrijf is verzonnen.</p>
             <script src="js/call-audio.js?v=20261019-1" defer></script>
           </div>

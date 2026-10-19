@@ -1,0 +1,81 @@
+{
+    "slug": "vakman",
+    "title": "Kijkafspraak",
+    "sub": "Een klant belt de schilder voor een offerte.",
+    "audio": "vakman.mp3",
+    "duration": 55.04,
+    "lines": [
+        {
+            "role": "agent",
+            "text": "Met de digitale assistent van Schildersbedrijf Bakker. Dit gesprek wordt opgenomen. Waarmee kan ik u helpen?",
+            "start": 0,
+            "end": 6.35
+        },
+        {
+            "role": "caller",
+            "text": "Goedemiddag, ik wil graag een offerte voor het schilderen van mijn kozijnen.",
+            "start": 6.9,
+            "end": 11.69
+        },
+        {
+            "role": "agent",
+            "text": "Dat kan. Jan komt eerst even kijken. Zal ik daar een moment voor inplannen?",
+            "start": 12.23,
+            "end": 17.06
+        },
+        {
+            "role": "caller",
+            "text": "Graag.",
+            "start": 17.6,
+            "end": 18.46
+        },
+        {
+            "role": "agent",
+            "text": "Een moment, ik kijk de agenda na.",
+            "start": 19,
+            "end": 21.08
+        },
+        {
+            "role": "agent",
+            "text": "Woensdag om vier uur kan, of vrijdag om negen uur. Wat past u beter?",
+            "start": 21.62,
+            "end": 25.77
+        },
+        {
+            "role": "caller",
+            "text": "Woensdag is goed.",
+            "start": 26.31,
+            "end": 27.55
+        },
+        {
+            "role": "agent",
+            "text": "Op welk adres is het?",
+            "start": 28.1,
+            "end": 29.58
+        },
+        {
+            "role": "caller",
+            "text": "Dorpsstraat acht in Zwolle.",
+            "start": 30.12,
+            "end": 33.29
+        },
+        {
+            "role": "agent",
+            "text": "Dorpsstraat acht in Zwolle. Mag ik uw naam en een telefoonnummer?",
+            "start": 33.84,
+            "end": 37.7
+        },
+        {
+            "role": "caller",
+            "text": "Petra Smit, nul zes, vijf vier, drie twee, een nul, negen acht.",
+            "start": 38.24,
+            "end": 45.19
+        },
+        {
+            "role": "agent",
+            "text": "Nul zes, vijf vier, drie twee, een nul, negen acht. Genoteerd. Jan komt woensdag om vier uur langs. Tot dan.",
+            "start": 45.73,
+            "end": 55.04
+        }
+    ]
+}
