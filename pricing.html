@@ -17,12 +17,20 @@
   <script defer data-domain="mowi.agency" src="https://plausible.io/js/script.js"></script>
   <style>
     /* Monthly/yearly toggle on /pricing only (2026-10-19). */
-    .billing-toggle-wrap { text-align: left; margin-bottom: 1.5rem; }
-    .billing-toggle { display: inline-flex; gap: 4px; padding: 4px; border: 1px solid var(--border); border-radius: var(--radius-pill); background: var(--bg); }
+    /* Monthly/yearly switch (2026-10-19, Sal: "more simplistic and bold, obvious"): two big
+       segments on a greige track, the chosen one dark, the saving as a dark label that turns
+       white once yearly is chosen. Centred over the full-width grid. */
+    .billing-toggle-wrap { text-align: center; margin-bottom: 1.75rem; }
+    .billing-toggle { display: inline-flex; gap: 4px; padding: 5px; border-radius: var(--radius-pill); background: var(--band); }
     .billing-toggle[hidden] { display: none; }
-    .billing-toggle-btn { font: inherit; font-size: 0.875rem; padding: 0.5rem 1rem; border: 0; border-radius: var(--radius-pill); background: transparent; color: var(--ink-2); cursor: pointer; white-space: nowrap; }
+    .billing-toggle-btn { font: inherit; font-size: 1rem; font-weight: 600; padding: 0.7rem 1.4rem; border: 0; border-radius: var(--radius-pill); background: transparent; color: var(--ink); cursor: pointer; white-space: nowrap; display: inline-flex; align-items: center; gap: 0.5rem; }
     .billing-toggle-btn.is-active { background: var(--ink); color: #fff; }
-    .billing-toggle-save { font-size: 0.75rem; opacity: 0.85; margin-left: 0.25rem; }
+    .billing-toggle-save { font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.55rem; border-radius: var(--radius-pill); background: var(--ink); color: #fff; }
+    .billing-toggle-btn.is-active .billing-toggle-save { background: #fff; color: var(--ink); }
+    /* Free start first (2026-10-19), so the help band spans all three columns rather than two. */
+    .tier-custom { width: 100%; }
+    .tier-custom .tier-cta { justify-self: end; }
+    @media (max-width: 40rem) { .billing-toggle-btn { padding: 0.65rem 1rem; } }
     .tier-year-note { font-size: 0.8125rem; font-weight: 600; color: var(--ink-2); margin-top: 0.375rem; }
     /* Two plans and the free start (2026-10-19). */
     .tier-for { margin-top: 0; }
@@ -259,12 +267,24 @@
             <button type="button" class="billing-toggle-btn" data-interval="year" aria-pressed="false">Per jaar <span class="billing-toggle-save">2 maanden gratis</span></button>
           </div>
         </div>
-        <!-- 2026-10-19 (later; Sal: "the basis plan was based off the old pricing ... 79 is the lowest one and one
+        <!-- Order changed later on 2026-10-19 (Sal: "put the 3rd start gratis card ... first"): Start gratis,
+             Mowi 500, Mowi 1000; the help band below now spans all three columns.
+             2026-10-19 (later; Sal: "the basis plan was based off the old pricing ... 79 is the lowest one and one
              even bigger", names his pick "Mowi 500" and "Mowi 1000"): two plans by size, both with the number
              and every channel; Basis is no longer sold. The free start is the third card on the page's
              three-column grid, so the help band below spans the two plans exactly. Must match
              config/plans.php (credits_pro "Mowi 500", credits_1000 "Mowi 1000", credits_base not sold). -->
         <div class="tier-grid">
+          <div class="tier-card tier-card-free">
+            <h2 class="tier-card-name">Start gratis</h2>
+            <p class="tier-profile tier-for">Eerst horen hoe hij klinkt</p>
+            <p class="tier-free-body">Stel uw telefonist in en spreek hem in de browser. Met 60 gratis credits probeert u ook de e-mailagent.</p>
+            <ul class="tier-features">
+              <li>Geen betaalgegevens nodig</li>
+              <li>U gaat nooit vanzelf over op betaald</li>
+            </ul>
+            <a href="https://my.mowi.agency/aanmelden" class="btn-primary tier-cta" data-event="Signup Click">Start gratis</a>
+          </div>
           <div class="tier-card tier-card-highlight">
             <h2 class="tier-card-name">Mowi 500</h2>
             <p class="tier-profile tier-for">Telefoon en e-mail</p>
@@ -296,16 +316,6 @@
               <li data-month="Maandelijks opzegbaar" data-year="Per jaar vooruit, opzeggen tegen het einde van het jaar">Maandelijks opzegbaar</li>
             </ul>
             <a href="https://my.mowi.agency/aanmelden" class="btn-primary tier-cta" data-event="Signup Click">Aan de slag</a>
-          </div>
-          <div class="tier-card tier-card-free">
-            <h2 class="tier-card-name">Start gratis</h2>
-            <p class="tier-profile tier-for">Eerst horen hoe hij klinkt</p>
-            <p class="tier-free-body">Stel uw telefonist in en spreek hem in de browser. Met 60 gratis credits probeert u ook de e-mailagent.</p>
-            <ul class="tier-features">
-              <li>Geen betaalgegevens nodig</li>
-              <li>U gaat nooit vanzelf over op betaald</li>
-            </ul>
-            <a href="https://my.mowi.agency/aanmelden" class="btn-primary tier-cta" data-event="Signup Click">Start gratis</a>
           </div>
         </div>
         <p class="tier-extra-note">Meer nodig dan in uw pakket zit? U koopt losse credits bij in het dashboard, wanneer u wilt.</p>
@@ -362,7 +372,7 @@
                  premium tier stating the sitewide brand promise at its
                  fullest, chosen by Sal 2026-08-22 over "Full service"
                  (English) with the echo tradeoff explicitly on the table. -->
-            <h2 class="tier-price-amount">Hulp bij opzetten</h2>
+            <h2 class="tier-card-name">Hulp bij opzetten</h2>
             <p class="tier-price-sub">Gratis, voor wie liever samen instelt</p>
             <ul class="tier-features tier-custom-features">
               <li>Een gesprek van 20 minuten met Sal</li>
