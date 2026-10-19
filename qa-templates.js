@@ -171,8 +171,9 @@ async function run(browserType, label, viewport, device) {
     await page.screenshot({ path: path.join(OUT, `tpl-${label}-phone.png`) });
   }
 
-  // 9. A detail page: canvas mounted, signup CTA, logo tiles with names
-  await page.goto(BASE + "/templates/klant-opzoeken");
+  // 9. A detail page: canvas mounted, signup CTA, logo tiles with names.
+  // A workflow with CRM logos: klant-opzoeken until it was removed on 2026-10-19.
+  await page.goto(BASE + "/templates/terugbelverzoek-opvolging");
   await page.waitForTimeout(400);
   check(`${label} detail page renders the canvas + CTA + named logos + numbered steps`, await page.evaluate(() => !!document.querySelector(".tpl-detail-visual-wrap [data-wf-canvas] .wf-node") && !!document.querySelector(".tpl-detail-cta a.btn-primary") && document.querySelectorAll(".tpl-needs .tpl-logo-list .tpl-logo img[alt]").length > 0 && document.querySelectorAll(".tpl-detail-nodes .tpl-node .tpl-node-num").length > 0));
   await page.screenshot({ path: path.join(OUT, `tpl-${label}-detail.png`) });

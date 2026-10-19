@@ -209,9 +209,16 @@
    itself — centered, ink-filled, tappable; js/workflow-canvas.js arms
    the canvas on tap and then drops this class, so it turns back into the
    small bottom indicator ("Sleep om te verkennen") and stops covering
-   the workflow. */
+   the workflow.
+   A button's corners, not a pill (2026-10-20, Sal: the black pill above
+   "Gebruik deze template" "looks a bit incosistent"): it had kept the
+   passive hint's pill radius by inheritance, the one pill-shaped button on
+   a site whose buttons are --radius-btn. The hint it turns back into after
+   a tap stays a pill, a label like the edge labels. Same rule in the
+   dashboard's copy, with its own --radius. */
 .wf-hint.wf-hint-cta{
   pointer-events:auto;cursor:pointer;top:50%;bottom:auto;transform:translate(-50%,-50%);
+  border-radius:var(--radius-btn);
   background:var(--ink);color:var(--bg);border-color:var(--ink);
   font-size:.875rem;font-weight:600;padding:.625rem 1.125rem;
   box-shadow:0 2px 8px rgba(18,17,16,.18);

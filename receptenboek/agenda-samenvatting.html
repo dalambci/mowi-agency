@@ -31,20 +31,25 @@
        pagina die zichzelf uit de index houdt. Een canonical met een #fragment
        is bovendien altijd ongeldig: Google negeert het fragment.
 
+       2026-10-19: target moved from /templates/dagelijkse-afspraken to /templates.
+       That template was removed from the Mowi Dashboard that day and its
+       page is a redirect stub now, and no stub may redirect to another
+       stub (CLAUDE.md).
+
        noindex keeps this stub itself out of search results — without it the
        stub can rank in place of the real page. -->
   <meta name="robots" content="noindex, follow" />
-  <meta http-equiv="refresh" content="0; url=/templates/dagelijkse-afspraken" />
-  <link rel="canonical" href="https://mowi.agency/templates/dagelijkse-afspraken" />
+  <meta http-equiv="refresh" content="0; url=/templates" />
+  <link rel="canonical" href="https://mowi.agency/templates" />
 
-  <title>Verplaatst naar /templates/dagelijkse-afspraken — Mowi</title>
+  <title>Verplaatst naar /templates — Mowi</title>
 </head>
 <body>
-  <p>Deze pagina is verhuisd naar <a href="/templates/dagelijkse-afspraken">mowi.agency/templates/dagelijkse-afspraken</a>.</p>
+  <p>Deze pagina is verhuisd naar <a href="/templates">mowi.agency/templates</a>.</p>
 
   <!-- replace(), not href: keeps the dead URL out of the back-button history,
        so "terug" from /workflows#agenda-samenvatting doesn't bounce the visitor straight back here
        and into a redirect loop. -->
-  <script>window.location.replace("/templates/dagelijkse-afspraken");</script>
+  <script>window.location.replace("/templates");</script>
 </body>
 </html>
