@@ -332,8 +332,8 @@ function footerHtml() {
     <div class="container">
 
       <div class="footer-cta">
-        <h2 class="footer-cta-title">Uw agent staat<br />klaar</h2>
-        <a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a>
+        <h2 class="footer-cta-title">Drie stappen,<br />tien minuten.</h2>
+        <a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Maak uw eigen AI support agent</a>
       </div>
 
       <div class="footer-panel">

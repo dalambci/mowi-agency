@@ -104,8 +104,8 @@
    empty state's second action gets the bone-fill/ink-border sibling the
    design system describes, kept local to this page. */
 .tpl-btn-secondary{
-  display:inline-flex;align-items:center;justify-content:center;background:var(--bg);color:var(--ink);border:1px solid var(--ink);
-  font-weight:600;font-size:.9375rem;padding:calc(.875rem - 1px) 1.5rem;border-radius:var(--radius-btn);transition:background-color .15s ease;
+  display:inline-flex;align-items:center;justify-content:center;background:var(--bg);color:var(--ink);border:2px solid var(--ink);
+  font-weight:600;font-size:.9375rem;padding:calc(.875rem - 2px) 1.5rem;border-radius:var(--radius-btn);transition:background-color .15s ease;
 }
 .tpl-btn-secondary:hover{background:var(--muted)}
 /* Load-bearing: js/templates.js toggles the `hidden` attribute, and an

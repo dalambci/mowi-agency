@@ -1257,7 +1257,7 @@ img.split-visual { min-height: 0; width: 100%; height: auto; border-radius: var(
   height: 2.75rem;
   padding: 0 1.25rem;
   border-radius: var(--radius-btn);
-  border: 1px solid var(--ink);
+  border: 2px solid var(--ink); /* 2px since 2026-10-19 (Sal: outline buttons a bit thicker; Chrome floors 1.5px to 1px) */
   background: transparent;
   color: var(--ink);
   font-family: inherit;

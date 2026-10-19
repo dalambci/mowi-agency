@@ -69,7 +69,7 @@ const WF_JS_VERSION = "20260916-1";
 // This file's OWN two new assets get one shared version, bumped whenever
 // either changes — same "one value per file-pair, bump together" rule
 // the rest of the site's cache-busting convention already follows.
-const TPL_ASSET_VERSION = "20260908-7";
+const TPL_ASSET_VERSION = "20261019-1";
 
 // ---------------------------------------------------------------------------
 // Escaping — every field below can eventually carry CLIENT-authored text
@@ -205,8 +205,8 @@ function footerHtml(extraScripts) {
     <div class="container">
 
       <div class="footer-cta">
-        <h2 class="footer-cta-title">Uw agent staat<br />klaar</h2>
-        <a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a>
+        <h2 class="footer-cta-title">Drie stappen,<br />tien minuten.</h2>
+        <a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Maak uw eigen AI support agent</a>
       </div>
 
       <div class="footer-panel">
