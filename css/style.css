@@ -1813,3 +1813,7 @@ img.split-visual { min-height: 0; width: 100%; height: auto; border-radius: var(
   transition: background-color 0.15s ease;
 }
 .btn-secondary:hover { background: var(--muted); }
+
+/* Footer band title on phones (2026-10-20, Sal): 32px read small next to the 48px hero heading. Now about 43px on an
+   iPhone, never under the 36px of a 320px screen, so "tien minuten." stays on one line. Desktop keeps its 56px. */
+@media (max-width: 47.9rem) { .footer-cta-title { font-size: clamp(2.25rem, 11vw, 3rem); } }

@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&family=Inter+Tight:wght@600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20261020-5" />
+  <link rel="stylesheet" href="css/style.css?v=20261020-6" />
   <link rel="stylesheet" href="css/workflow-canvas.css?v=20261020-1" />
   <link rel="icon" href="assets/icon-192.png?v=20260904-3" />
   <link rel="shortcut icon" href="assets/icon-192.png?v=20260904-3" />
@@ -126,6 +126,22 @@
     .lp2-photo-tag { position: absolute; top: 0.75rem; right: 0.75rem; font-size: 0.6875rem; font-weight: 600; background: rgba(252, 251, 250, 0.88); color: var(--ink-2); padding: 0.25rem 0.6rem; border-radius: var(--radius-pill); }
     .lp2-float { position: absolute; left: -1.75rem; bottom: 1.75rem; width: min(19.5rem, 82%); }
     @media (max-width: 63.9rem) { .lp2-float { left: 0.9rem; bottom: 0.9rem; } .lp2-photo { aspect-ratio: 4 / 3.6; } }
+    /* Branch hero photo (2026-10-20, Sal): the branch at work, a pill on the ringing phone, and the branch's own call
+       player on the photo's lower edge. Static on purpose: no invented motion. */
+    .lp2-scene { position: relative; }
+    .lp2-scene img { display: block; width: 100%; height: auto; border-radius: 1.4rem; }
+    .lp2-ring {
+      position: absolute; transform: translateX(calc(-1 * var(--tip, 50%)));
+      display: inline-flex; align-items: center; gap: 0.375rem; padding: 0.375rem 0.75rem;
+      background: var(--surface); color: var(--ink); border-radius: var(--radius-pill);
+      font-size: 0.8125rem; font-weight: 600; white-space: nowrap; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+    }
+    .lp2-ring::after {
+      content: ""; position: absolute; left: var(--tip, 50%); bottom: -5px; width: 10px; height: 10px; margin-left: -5px;
+      background: var(--surface); transform: rotate(45deg);
+    }
+    .lp2-ring svg { position: relative; z-index: 1; width: 0.95rem; height: 0.95rem; }
+    .lp2-scene + .lp2-audio { position: relative; margin: -3rem 1rem 0; box-shadow: 0 12px 32px rgba(18, 17, 16, 0.10); }
     .lp2-card { background: var(--surface); border: 1px solid var(--border); border-radius: 1rem; padding: 1rem 1.1rem; box-shadow: 0 12px 32px rgba(18, 17, 16, 0.10); }
     .lp2-card-head { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; font-size: 0.75rem; color: var(--ink-3); font-weight: 600; }
     .lp2-chip { font-size: 0.6875rem; font-weight: 700; padding: 0.15rem 0.55rem; border-radius: var(--radius-pill); background: var(--ink); color: var(--bg); }
@@ -682,7 +698,7 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=20261020-5"></script>
+  <script src="js/main.js?v=20261020-6"></script>
   <script src="js/workflow-canvas.js?v=20260916-1"></script>
   <script src="js/signup-utm.js?v=20261018-1"></script>
 </body>

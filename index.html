@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&family=Inter+Tight:wght@600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20261020-5" />
+  <link rel="stylesheet" href="css/style.css?v=20261020-6" />
   <!-- Two different things share this stylesheet. The "Eén platform" tabs use
        the STATIC variant (.wf-canvas-static, pictures, no data-wf-canvas), and
        the demo section near the top has one REAL interactive canvas. That is
@@ -19,7 +19,7 @@
        static pictures are untouched by it. Bump this ?v= together with
        templates.html's. -->
   <link rel="stylesheet" href="css/workflow-canvas.css?v=20261020-1" />
-  <link rel="stylesheet" href="css/demo.css?v=20261020-3" />
+  <link rel="stylesheet" href="css/demo.css?v=20261020-4" />
   <link rel="icon" href="assets/icon-192.png?v=20260904-3" />
   <link rel="shortcut icon" href="assets/icon-192.png?v=20260904-3" />
   <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260904-3" />
@@ -30,6 +30,8 @@
        demo may sit lower, and "Bel hem nu" next to Start gratis scrolls down to it). Below 64rem the photo sits under the
        buttons; from 64rem the text is left and the photo right. */
     .hero-photo-figure { width: 100%; max-width: 36rem; margin: 2.5rem auto 0; }
+    /* 0.75rem between the two buttons, as on the branch pages (Sal: a bit less space). */
+    .hero-photo .hero-actions { gap: 0.75rem; }
     .hero-photo-frame { position: relative; }
     .hero-photo-frame img { display: block; width: 100%; height: auto; border-radius: var(--radius-header); }
     /* The pill sits on the phone in his back pocket (64.5% across, its top at 59.6% down the photo): at hero size the
@@ -594,8 +596,8 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=20261020-5"></script>
-  <script src="js/demo.js?v=20261020-2"></script>
+  <script src="js/main.js?v=20261020-6"></script>
+  <script src="js/demo.js?v=20261020-3"></script>
   <script src="js/workflow-canvas.js?v=20260916-1"></script>
 </body>
 </html>

@@ -667,7 +667,25 @@
     activate(initial, false);
   }
 
+  /* The idle mascot as inline SVG (2026-10-20, Sal). As a CSS background image the browser animated the SVG in a
+     separate image document, which could freeze after long scrolling (in whatever pose it was in) and stay frozen
+     through reloads, because the cached image keeps its own clock. Inline, the loop runs on this page's timeline and
+     starts fresh on every load. Its classes carry an mmi- prefix so they cannot touch the page. The disc has no
+     background image any more, so the mascot downloads once; it appears when the fetch lands, below the fold. */
+  function inlineMascots() {
+    var discs = document.querySelectorAll(".demo-disc");
+    if (!discs.length || !window.fetch) return;
+    fetch("/assets/mascot/mowi-mascot-idle-inline.svg?v=20261020-1")
+      .then(function (r) { return r.ok ? r.text() : Promise.reject(r.status); })
+      .then(function (svg) {
+        if (svg.indexOf("<svg") !== 0) return;
+        discs.forEach(function (disc) { disc.innerHTML = svg; disc.classList.add("demo-disc-inline"); });
+      })
+      .catch(function () {});
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
+    inlineMascots();
     var listen = document.querySelector("[data-demo-listen]");
     if (listen) initListen(listen);
     var tryCard = document.querySelector("[data-demo-try]");

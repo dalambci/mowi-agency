@@ -643,7 +643,7 @@
    someone talks, so the motion follows the voice. Agent bubbles get a solid
    background now that they can pass over a dark figure. */
 .demo-disc {
-  background: url("../assets/mascot/mowi-mascot-idle.svg?v=20261019-1") center / 74% no-repeat;
+  background: none; /* the mascot is inline SVG now, put in by js/demo.js (2026-10-20) */
   box-shadow: none;
   border-radius: 0;
   transform: translateY(calc(var(--demo-level) * -10px)) scale(calc(1 + var(--demo-level) * 0.03));
@@ -699,3 +699,8 @@
 @media (min-width: 62rem) {
   .demo-flow-stage { flex: 1; height: auto; min-height: 24rem; }
 }
+
+/* The idle mascot as inline SVG (2026-10-20, js/demo.js inlineMascots), at the size the old background had. */
+.demo-disc.demo-disc-inline { background: none; display: grid; place-items: center; }
+.demo-disc-inline > svg { display: block; width: 74%; height: auto; }
+.demo-stage:not(.demo-stage-try) > .demo-disc-inline > svg { width: 86%; }
