@@ -1731,6 +1731,11 @@ img.split-visual { min-height: 0; width: 100%; height: auto; border-radius: var(
 }
 .nav-menu .nav-menu-list a[aria-current="page"] { background: var(--muted); }
 .nav-menu-soon { color: var(--ink-3); cursor: default; }
+/* Channel marks in front of the Producten items (2026-10-20, Sal): the dashboard's channel-tile icons
+   (config/channels.php), outline at 1.5 like there, WhatsApp solid. A "Binnenkort" item greys its mark too. */
+.nav-menu-icon { display: inline-flex; flex: none; width: 1.125rem; height: 1.125rem; margin-right: 0.125rem; color: var(--ink-2); }
+.nav-menu-icon svg { display: block; width: 100%; height: 100%; }
+.nav-menu-soon .nav-menu-icon { color: inherit; }
 .nav-soon-chip {
   font-size: 0.6875rem;
   line-height: 1;

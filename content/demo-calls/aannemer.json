@@ -1,0 +1,81 @@
+{
+    "slug": "aannemer",
+    "title": "Kijkafspraak",
+    "sub": "Een klant belt het klusbedrijf voor een offerte.",
+    "audio": "aannemer.mp3",
+    "duration": 56.71,
+    "lines": [
+        {
+            "role": "agent",
+            "text": "Met de digitale assistent van Klusbedrijf Van den Berg. Dit gesprek wordt opgenomen. Waarmee kan ik u helpen?",
+            "start": 0,
+            "end": 6.59
+        },
+        {
+            "role": "caller",
+            "text": "Goedemorgen, we willen onze badkamer laten verbouwen en zouden graag een offerte hebben.",
+            "start": 7.13,
+            "end": 12.37
+        },
+        {
+            "role": "agent",
+            "text": "Dat kan. Dan komt er eerst iemand kijken. Op welk adres is het?",
+            "start": 12.91,
+            "end": 16.46
+        },
+        {
+            "role": "caller",
+            "text": "Esdoornlaan veertien in Apeldoorn.",
+            "start": 17.01,
+            "end": 19.73
+        },
+        {
+            "role": "agent",
+            "text": "Esdoornlaan veertien in Apeldoorn. Is er een termijn waarop het klaar moet zijn?",
+            "start": 20.27,
+            "end": 25.09
+        },
+        {
+            "role": "caller",
+            "text": "Liefst voor de zomer.",
+            "start": 25.64,
+            "end": 27.01
+        },
+        {
+            "role": "agent",
+            "text": "Een moment, ik kijk de agenda na.",
+            "start": 27.55,
+            "end": 29.63
+        },
+        {
+            "role": "agent",
+            "text": "Dinsdag om tien uur of donderdag om twee uur kan er iemand langskomen. Wat past u beter?",
+            "start": 30.17,
+            "end": 35.33
+        },
+        {
+            "role": "caller",
+            "text": "Donderdag is goed.",
+            "start": 35.87,
+            "end": 37.11
+        },
+        {
+            "role": "agent",
+            "text": "Mag ik uw naam en telefoonnummer?",
+            "start": 37.66,
+            "end": 39.55
+        },
+        {
+            "role": "caller",
+            "text": "Kees Brouwer, nul zes, vier vier, twee twee, acht acht, een zes.",
+            "start": 40.1,
+            "end": 47.38
+        },
+        {
+            "role": "agent",
+            "text": "Nul zes, vier vier, twee twee, acht acht, een zes. Genoteerd. Donderdag om twee uur komt er iemand kijken voor de badkamer. Tot dan.",
+            "start": 47.92,
+            "end": 56.71
+        }
+    ]
+}

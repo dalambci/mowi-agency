@@ -1,0 +1,81 @@
+{
+    "slug": "schoonmaak",
+    "title": "Opname",
+    "sub": "Een bedrijf belt de schoonmaker voor een offerte.",
+    "audio": "schoonmaak.mp3",
+    "duration": 63.16,
+    "lines": [
+        {
+            "role": "agent",
+            "text": "Met de digitale assistent van Schoonmaakbedrijf Vermeer. Dit gesprek wordt opgenomen. Waarmee kan ik u helpen?",
+            "start": 0,
+            "end": 6.67
+        },
+        {
+            "role": "caller",
+            "text": "Goedemorgen, we zoeken een schoonmaakbedrijf voor ons kantoor.",
+            "start": 7.21,
+            "end": 11.08
+        },
+        {
+            "role": "agent",
+            "text": "Dat kan. Hoe groot is het kantoor ongeveer, en hoe vaak wilt u dat er wordt schoongemaakt?",
+            "start": 11.63,
+            "end": 17.1
+        },
+        {
+            "role": "caller",
+            "text": "Ongeveer tweehonderd vierkante meter, twee keer per week.",
+            "start": 17.65,
+            "end": 21.38
+        },
+        {
+            "role": "agent",
+            "text": "Dan plan ik een opname in, zodat we een offerte kunnen maken. Op welk adres is het kantoor?",
+            "start": 21.93,
+            "end": 27.15
+        },
+        {
+            "role": "caller",
+            "text": "Stationsplein drie in Deventer.",
+            "start": 27.69,
+            "end": 29.8
+        },
+        {
+            "role": "agent",
+            "text": "Stationsplein drie in Deventer. Een moment, ik kijk de agenda na.",
+            "start": 30.34,
+            "end": 34.08
+        },
+        {
+            "role": "agent",
+            "text": "Woensdag om negen uur of vrijdag om half twee kan er iemand langskomen. Wat past u beter?",
+            "start": 34.63,
+            "end": 39.74
+        },
+        {
+            "role": "caller",
+            "text": "Vrijdag om half twee.",
+            "start": 40.29,
+            "end": 42.03
+        },
+        {
+            "role": "agent",
+            "text": "Mag ik uw naam en telefoonnummer?",
+            "start": 42.58,
+            "end": 44.47
+        },
+        {
+            "role": "caller",
+            "text": "Anouk Peters, nul zes, zeven acht, drie drie, nul vijf, twee negen.",
+            "start": 45.02,
+            "end": 52.52
+        },
+        {
+            "role": "agent",
+            "text": "Nul zes, zeven acht, drie drie, nul vijf, twee negen. Genoteerd. Vrijdag om half twee komt er iemand voor de opname. Tot vrijdag.",
+            "start": 53.07,
+            "end": 63.16
+        }
+    ]
+}

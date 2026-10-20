@@ -1,0 +1,75 @@
+{
+    "slug": "elektricien",
+    "title": "Storing",
+    "sub": "Een klant belt de elektricien met een storing.",
+    "audio": "elektricien.mp3",
+    "duration": 44.09,
+    "lines": [
+        {
+            "role": "agent",
+            "text": "Met de digitale assistent van Elektrotechniek De Groot. Dit gesprek wordt opgenomen. Waarmee kan ik u helpen?",
+            "start": 0,
+            "end": 6.58
+        },
+        {
+            "role": "caller",
+            "text": "Goedemiddag, bij ons is de stroom deels uitgevallen. De keuken en de woonkamer doen het niet meer.",
+            "start": 7.13,
+            "end": 13.52
+        },
+        {
+            "role": "agent",
+            "text": "Vervelend. Is de aardlekschakelaar in de meterkast uitgeschakeld?",
+            "start": 14.06,
+            "end": 17.56
+        },
+        {
+            "role": "caller",
+            "text": "Ja, en hij springt meteen weer uit als ik hem omzet.",
+            "start": 18.11,
+            "end": 21.42
+        },
+        {
+            "role": "agent",
+            "text": "Dan zet ik dit als spoed door. Op welk adres is het?",
+            "start": 21.96,
+            "end": 25.17
+        },
+        {
+            "role": "caller",
+            "text": "Molenweg zeven in Amersfoort.",
+            "start": 25.72,
+            "end": 28.02
+        },
+        {
+            "role": "agent",
+            "text": "Molenweg zeven in Amersfoort. Ruikt u brandlucht of ziet u rook?",
+            "start": 28.56,
+            "end": 32.24
+        },
+        {
+            "role": "caller",
+            "text": "Nee, niets van dat.",
+            "start": 32.79,
+            "end": 34.02
+        },
+        {
+            "role": "agent",
+            "text": "Goed. Een monteur belt u zo snel mogelijk terug op dit nummer. Kan ik verder nog iets voor u doen?",
+            "start": 34.57,
+            "end": 40.08
+        },
+        {
+            "role": "caller",
+            "text": "Nee, dank u wel.",
+            "start": 40.63,
+            "end": 41.82
+        },
+        {
+            "role": "agent",
+            "text": "Graag gedaan. Sterkte ermee.",
+            "start": 42.36,
+            "end": 44.09
+        }
+    ]
+}

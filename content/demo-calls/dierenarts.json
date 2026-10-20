@@ -1,0 +1,81 @@
+{
+    "slug": "dierenarts",
+    "title": "Consult",
+    "sub": "Iemand belt de dierenarts over een hond die slecht eet.",
+    "audio": "dierenarts.mp3",
+    "duration": 49.5,
+    "lines": [
+        {
+            "role": "agent",
+            "text": "Met de digitale assistent van Dierenartsenpraktijk De Weide. Dit gesprek wordt opgenomen. Waarmee kan ik u helpen?",
+            "start": 0,
+            "end": 7.23
+        },
+        {
+            "role": "caller",
+            "text": "Goedemiddag, onze hond eet sinds gisteren slecht. Kan de dierenarts even kijken?",
+            "start": 7.78,
+            "end": 13.19
+        },
+        {
+            "role": "agent",
+            "text": "Dat plan ik voor u in. Hoe heet de hond, en is hij eerder bij ons geweest?",
+            "start": 13.74,
+            "end": 18.53
+        },
+        {
+            "role": "caller",
+            "text": "Hij heet Max, en ja, hij komt hier altijd.",
+            "start": 19.07,
+            "end": 22.93
+        },
+        {
+            "role": "agent",
+            "text": "Is Max benauwd, heeft hij veel pijn, of heeft hij iets verkeerds gegeten?",
+            "start": 23.48,
+            "end": 28.12
+        },
+        {
+            "role": "caller",
+            "text": "Nee, hij is alleen wat sloom.",
+            "start": 28.66,
+            "end": 30.22
+        },
+        {
+            "role": "agent",
+            "text": "Een moment, ik kijk wanneer de dierenarts tijd heeft.",
+            "start": 30.77,
+            "end": 34.08
+        },
+        {
+            "role": "agent",
+            "text": "Vanmiddag om vier uur is er plek. Past dat?",
+            "start": 34.62,
+            "end": 37.37
+        },
+        {
+            "role": "caller",
+            "text": "Ja, dat is goed.",
+            "start": 37.92,
+            "end": 39.4
+        },
+        {
+            "role": "agent",
+            "text": "Op welke naam staat Max bij ons?",
+            "start": 39.94,
+            "end": 41.86
+        },
+        {
+            "role": "caller",
+            "text": "Op naam van Van Leeuwen.",
+            "start": 42.4,
+            "end": 43.96
+        },
+        {
+            "role": "agent",
+            "text": "Dan staat Max vanmiddag om vier uur ingepland, op naam van Van Leeuwen. Tot vanmiddag.",
+            "start": 44.5,
+            "end": 49.5
+        }
+    ]
+}
