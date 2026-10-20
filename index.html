@@ -25,6 +25,42 @@
   <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260904-3" />
   <link rel="apple-touch-icon-precomposed" href="assets/apple-icon-180.png?v=20260904-3" />
   <script defer data-domain="mowi.agency" src="https://plausible.io/js/script.js"></script>
+  <style>
+    /* Homepage hero photo (2026-10-20, Sal). Below 64rem the hero stays text only, so the live demo stays in view and
+       the photo is never downloaded there: the <source> only matches from 64rem, the <img> itself is a 1px placeholder. */
+    .hero-photo-figure { display: none; }
+    @media (min-width: 64rem) {
+      .hero-photo { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: center; gap: 3.5rem; text-align: left; }
+      .hero-photo .hero-actions { justify-content: flex-start; }
+      .hero-photo-figure { display: block; width: 100%; max-width: 36rem; justify-self: end; margin: 0; }
+      .hero-photo-frame { position: relative; }
+      .hero-photo-frame img { display: block; width: 100%; height: auto; border-radius: var(--radius-header); }
+      .hero-photo-figure figcaption { margin-top: 0.5rem; text-align: right; font-size: 0.75rem; color: var(--ink-3); }
+      /* The pill sits on the phone in his back pocket (64.5% across, its top at 59.6% down the photo): at hero size the
+         phone itself is about 30px, too small to read as ringing on its own. Static on purpose: no invented motion. */
+      .hero-photo-ring {
+        position: absolute; left: 64.5%; bottom: 42%; transform: translateX(-50%);
+        display: inline-flex; align-items: center; gap: 0.375rem; padding: 0.375rem 0.75rem;
+        background: var(--surface); color: var(--ink); border-radius: 999px;
+        font-size: 0.8125rem; font-weight: 600; white-space: nowrap; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+      }
+      .hero-photo-ring::after {
+        content: ""; position: absolute; left: 50%; bottom: -5px; width: 10px; height: 10px;
+        background: var(--surface); transform: translateX(-50%) rotate(45deg);
+      }
+      .hero-photo-ring svg { position: relative; z-index: 1; width: 0.95rem; height: 0.95rem; }
+      /* The card needs the photo at 1280px and up: on a smaller photo it would cover the pill and half the scene. */
+      .hero-photo-card {
+        display: none; position: absolute; left: -2.5rem; bottom: 1.5rem; width: 16rem; padding: 0.875rem 1rem;
+        background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card);
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+      }
+      .hero-photo-card-head { font-size: 0.75rem; color: var(--ink-3); white-space: nowrap; }
+      .hero-photo-card-title { margin-top: 0.375rem; font-weight: 600; }
+      .hero-photo-card-text { margin-top: 0.125rem; font-size: 0.875rem; color: var(--ink-2); }
+    }
+    @media (min-width: 80rem) { .hero-photo-card { display: block; } }
+  </style>
 </head>
 <body data-demo-version="20261019-1">
 
@@ -129,14 +165,35 @@
   <main>
 
     <!-- ================= Hero ================= -->
-    <section class="hero container hero-h1-reduced">
+    <section class="hero container hero-h1-reduced hero-photo">
       <!-- Phone first (2026-10-19): Sal picked this headline from three drafts. WhatsApp and Instagram are
            left out of this sentence until they work; e-mail stays, from the same credits. -->
-      <h1 class="h-balance">Nooit meer een gemiste oproep</h1>
-      <p class="hero-sub">Uw AI-telefonist neemt op als u aan het werk bent, beantwoordt vragen en plant afspraken in. Uw e-mail doet hij erbij, uit hetzelfde tegoed.</p>
-      <div class="hero-actions">
-        <a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a>
+      <div class="hero-photo-copy">
+        <h1 class="h-balance">Nooit meer een gemiste oproep</h1>
+        <p class="hero-sub">Uw AI-telefonist neemt op als u aan het werk bent, beantwoordt vragen en plant afspraken in. Uw e-mail doet hij erbij, uit hetzelfde tegoed.</p>
+        <div class="hero-actions">
+          <a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a>
+        </div>
       </div>
+      <!-- Hero photo (2026-10-20, Sal): made with GPT Image 2.5 via Higgsfield and toned to the site's ink and paper; the
+           caption says it is AI-made. Only the phone screen keeps its colour, on purpose (Sal's pick): the one colour on
+           the site, so the eye finds the call. The person is not a customer and carries no name. The card is the
+           product's outcome in real text; the call in it is an example. -->
+      <figure class="hero-photo-figure">
+        <div class="hero-photo-frame">
+          <picture>
+            <source media="(min-width: 64rem)" type="image/webp" srcset="assets/home/hero-installateur-1200.webp 1200w, assets/home/hero-installateur-800.webp 800w" sizes="(min-width: 90rem) 36rem, 42vw">
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" width="1200" height="896" fetchpriority="high" alt="Een installateur op een trap werkt met beide handen aan een cv-ketel. In zijn achterzak gaat zijn telefoon over.">
+          </picture>
+          <span class="hero-photo-ring" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13 2a9 9 0 0 1 9 9"/><path d="M13 6a5 5 0 0 1 5 5"/><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>Inkomende oproep</span>
+          <div class="hero-photo-card">
+            <p class="hero-photo-card-head">Opgenomen door uw AI-telefonist</p>
+            <p class="hero-photo-card-title">Lekkage, fam. Jansen</p>
+            <p class="hero-photo-card-text">Ingepland op dinsdag 14:00. Adres en klacht genoteerd.</p>
+          </div>
+        </div>
+        <figcaption>Beeld gemaakt met AI</figcaption>
+      </figure>
     </section>
 
 <!-- ================= Demo B: probeer het zelf =================
