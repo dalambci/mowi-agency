@@ -155,7 +155,7 @@ function headerHtml(activeHref) {
                   <li><a href="/klantenservice-uitbesteden"${current("/klantenservice-uitbesteden")}>Klantenservice uitbesteden</a></li>
                   <li><a href="/afspraken-inplannen"${current("/afspraken-inplannen")}>Afspraken inplannen</a></li>
                   <li><a href="/vragen-over-bestellingen"${current("/vragen-over-bestellingen")}>Vragen over bestellingen</a></li>
-                  <li><a href="/na-sluitingstijd"${current("/na-sluitingstijd")}>Na sluitingstijd</a></li>
+                  <li><a href="/na-sluitingstijd"${current("/na-sluitingstijd")}>Na sluitingstijd bereikbaar</a></li>
                   <li><a href="/voicemail-vervangen"${current("/voicemail-vervangen")}>Voicemail vervangen</a></li>
                 </ul>
               </div>
