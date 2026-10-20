@@ -502,6 +502,11 @@ async function checkWorkflowCanvas(page, label) {
 async function checkWorkflowTypes(page, label) {
   const expected = ["bestelstatus", "afspraak", "terugbelverzoek", "receptie"];
 
+  // No buttons under the canvas since 2026-10-20 (Sal): the card is an example, not a call to action.
+  // Links only: the canvas's own zoom controls are <button>s and stay.
+  check(`${label} the workflow card has no call-to-action links`, await page.evaluate(() =>
+    !document.querySelector(".demo-flow a, .demo-flow-actions")));
+
   // One scenario since 2026-10-20 (Sal: keep it at one example): no tab bar, the demo card names its
   // type and js/demo.js mints that one. The four-type checks below only apply while there is a tab bar.
   if (!(await page.$("[data-demo-types]"))) {
@@ -521,11 +526,6 @@ async function checkWorkflowTypes(page, label) {
     return !!seg && !!duo && !duo.contains(seg) && seg.compareDocumentPosition(duo) & Node.DOCUMENT_POSITION_FOLLOWING;
   }));
 
-  check(`${label} the type buttons use the site's own CTA classes`, await page.evaluate(() => {
-    const p = document.querySelector(".demo-flow-panel:not([hidden])");
-    return !!p.querySelector("a.btn-primary") && !!p.querySelector("a.link-arrow") && !p.querySelector(".demo-btn");
-  }));
-
   const seen = new Set();
   const companies = new Set();
 
@@ -541,7 +541,7 @@ async function checkWorkflowTypes(page, label) {
         openCount: open.length,
         id: open[0] && open[0].id,
         nodes: c ? c.querySelectorAll(".wf-node").length : 0,
-        href: open[0] ? open[0].querySelector(".link-arrow").getAttribute("href") : null,
+        href: open[0] && open[0].querySelector(".link-arrow") ? open[0].querySelector(".link-arrow").getAttribute("href") : null,
         company: tab.getAttribute("data-company"),
         title: document.querySelector("[data-demo-title]").textContent.trim(),
         sub: document.querySelector("[data-demo-sub]").textContent.trim(),

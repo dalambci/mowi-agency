@@ -871,20 +871,18 @@ const DEMO_WORKFLOW_PAGES = ["support-agent.html", "call-agent.html", "index.htm
  * The tabs are the site's own pill-tab component (js/main.js, initPillTabs:
  * role=tab + aria-controls + a matching [role=tabpanel] id), which is the same
  * component the sample-call tabs use. Everything that changes per type lives
- * INSIDE the panel — the scenario line, the canvas and the two buttons — so
- * switching needs no JavaScript of its own beyond the hidden-toggle that
- * component already does.
+ * INSIDE the panel (now only the canvas), so switching needs no JavaScript of
+ * its own beyond the hidden-toggle that component already does.
  *
  * Framing is "center" (1:1, pan to explore) rather than "fit": these flows are
  * up to 1272px tall, and fitting all of that into a card turns the labels into
  * unreadable confetti.
  *
- * The two buttons use the SITE's own CTA vocabulary (.btn-primary, the same
- * class as "Start gratis" in the header, plus .link-arrow) rather than the
- * demo card's .demo-btn pair. Those two classes are the only CTA idioms this
- * site has, and Sal asked for these to match them (2026-09-16). .demo-btn
- * stays where it belongs: inside the demo card, where it mirrors the
- * reference's own in-card chrome.
+ * No buttons under the canvas since 2026-10-20. Sal: with one scenario the
+ * card is an example of one salon's workflow, and "Gebruik deze template" /
+ * "Bekijk de hele workflow" spoke to almost no visitor (agent templates are
+ * picked through the Branche field during setup now anyway). Side by side,
+ * the canvas takes the card's remaining height instead (css/demo.css).
  */
 function injectDemoWorkflows(templates) {
   const single = DEMO_WORKFLOW_TYPES.length === 1;
@@ -903,10 +901,6 @@ function injectDemoWorkflows(templates) {
       panel: `<div class="demo-flow-panel" id="wf-panel-${t.key}"${single ? "" : ` role="tabpanel" aria-labelledby="demo-type-${t.key}"`}${sel ? "" : " hidden"}>
               <div class="demo-flow-stage">
                 ${renderCanvasInteractive(template, "center")}
-              </div>
-              <div class="demo-flow-actions">
-                <a class="btn-primary" href="https://my.mowi.agency/aanmelden" data-event="Signup Click">Gebruik deze template</a>
-                <a class="link-arrow" href="/templates/${t.slug}">Bekijk de hele workflow &rarr;</a>
               </div>
             </div>`,
     };

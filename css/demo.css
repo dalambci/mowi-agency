@@ -480,10 +480,6 @@
 .demo-try .demo-card-head,
 .demo-flow .demo-card-head { min-height: 6.5rem; }
 
-/* The workflow card mirrors the demo card beside it: same centred heading,
-   same centred buttons. Left-aligned text on one side of a matched pair and
-   centred text on the other reads as two unrelated cards. */
-.demo-flow-actions { justify-content: center; }
 .demo-try [data-demo-sub] { min-height: 1.5rem; }
 
 /* The scenario line now lives in the workflow card's HEAD, mirroring the demo
@@ -492,25 +488,11 @@
    lines where the other three do not, so the reservation has to cover two. */
 .demo-flow [data-demo-scenario] { min-height: 2.875rem; }
 
-/* The panel owns everything that changes per type — the line, the canvas and
-   the buttons — so switching is the tab component's plain hidden-toggle and
-   needs no JavaScript of its own. */
+/* The panel owns everything that changes per type (now only the canvas), so
+   switching is the tab component's plain hidden-toggle and needs no
+   JavaScript of its own. */
 .demo-flow-panel { display: flex; flex-direction: column; flex: 1; }
 .demo-flow-panel[hidden] { display: none; }
-
-/* The site has exactly two call-to-action idioms: .btn-primary (the dark pill,
-   same as "Start gratis" in the header) and .link-arrow. Sal asked for these
-   two to match them rather than use the demo card's own .demo-btn pair, so
-   this row only has to lay them out — .link-arrow's own margin-top is for
-   stacked prose, not a button row. */
-.demo-flow-actions {
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
-  flex-wrap: wrap;
-  margin-top: auto;
-}
-.demo-flow-actions .link-arrow { margin-top: 0; }
 
 .demo-flow .demo-actions { margin-top: auto; }
 
@@ -701,14 +683,19 @@
 .demo-stage-try { height: 24rem; }
 .demo-stage-try > .demo-disc { margin-bottom: 4rem; }
 .demo-stage-try > .demo-stage-center { padding-bottom: 2.25rem; }
-.demo-flow-stage { height: 24rem; margin: 0 0 1.5rem; border-radius: 1rem; }
+.demo-flow-stage { height: 24rem; margin: 0; border-radius: 1rem; }
 .demo-flow-stage .wf-canvas { background: var(--bg); border-color: var(--border); border-radius: 1rem; }
 .demo-flow-stage .wf-viewport::after { height: 3.5rem; background: linear-gradient(to bottom, transparent, var(--bg)); }
-/* Top-aligned, so the stage starts level with the canvas even when the
-   workflow card's buttons wrap and make that card taller. */
+/* Top-aligned, so the stage starts level with the canvas beside it. */
 .demo-duo > .demo-card > [data-demo-body] > [data-pill-tabs] { justify-content: flex-start; }
 @media (max-width: 47.9rem) {
   .demo-stage-try { height: 20rem; }
   .demo-stage-try > .demo-disc { margin-bottom: 3.5rem; }
   .demo-flow-stage { height: 20rem; }
+}
+/* No buttons under the canvas since 2026-10-20 (Sal: the card is one salon's
+   example now). Side by side, the canvas takes the rest of the card instead
+   of leaving a gap at the bottom; stacked, it keeps its fixed height. */
+@media (min-width: 62rem) {
+  .demo-flow-stage { flex: 1; height: auto; min-height: 24rem; }
 }
