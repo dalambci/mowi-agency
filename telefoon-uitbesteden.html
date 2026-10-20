@@ -195,16 +195,6 @@
     .lp2-audio-line { margin-top: 1.25rem; min-height: 6.4em; font-size: 0.9375rem; line-height: 1.6; }
     .lp2-audio-line small { display: block; font-size: 0.75rem; font-weight: 600; color: var(--ink-3); margin-bottom: 0.15rem; }
     .lp2-audio-foot { margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid var(--border); font-size: 0.75rem; color: var(--ink-3); }
-    /* Top-aligned next to the audio card, so opening "Lees het gesprek" grows the card downward instead of
-       pushing the centred headline beside it down the page. */
-    .lp2-grid:has(.lp2-audio) { align-items: start; }
-    .lp2-audio-text { margin-top: 0.75rem; }
-    .lp2-audio-text summary { list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.875rem; font-weight: 600; color: var(--ink-2); }
-    .lp2-audio-text summary::-webkit-details-marker { display: none; }
-    .lp2-audio-text summary::after { content: "+"; font-weight: 400; color: var(--ink-3); }
-    .lp2-audio-text[open] summary::after { content: "\2212"; }
-    .lp2-audio-text p { margin-top: 0.6rem; font-size: 0.875rem; line-height: 1.55; color: var(--ink-2); }
-    .lp2-audio-text .who { display: block; font-size: 0.75rem; font-weight: 600; color: var(--ink-3); }
     @media (max-width: 47.9rem) { .lp2-audio { padding: 1.25rem; } .lp2-audio-line { min-height: 8em; } }
     /* Drie stappen als kaarten met een productbeeld onderin, zoals Fonio's stappensectie (2026-10-19, Sal: "change
        the 3 step section to look like how fonio does"). The visuals are drawn in HTML, monochrome like the site. */
