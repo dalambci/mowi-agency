@@ -1172,7 +1172,9 @@ img.split-visual { min-height: 0; width: 100%; height: auto; border-radius: var(
   border-radius: var(--radius-card);
   padding: 2rem 1.75rem;
 }
-.tier-card-highlight { border: 1px solid var(--ink); }
+/* The dashboard's featured pack (.pack-featured, 2026-10-20, Sal): the 1px border plus a 1px ring outside it,
+   so the card reads 2px thick while its box, and so the grid, stays exactly as it was. */
+.tier-card-highlight { border-color: var(--ink); box-shadow: 0 0 0 1px var(--ink); }
 .tier-card-name { font-size: 1.0625rem; }
 .tier-price { margin-top: 1.25rem; display: flex; align-items: baseline; gap: 0.25rem; }
 .tier-price-amount { font-size: 2rem; font-weight: 700; line-height: 1; }
