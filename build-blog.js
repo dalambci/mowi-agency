@@ -292,7 +292,8 @@ function headerHtml(activeHref) {
               </div>
               <div class="nav-menu-col nav-menu-col-divider">
                 <p class="nav-menu-heading" id="nav-heading-branches">Branches</p>
-                <ul class="nav-menu-list nav-menu-list-2" aria-labelledby="nav-heading-branches">
+                <button type="button" class="nav-branches-toggle" aria-expanded="false" aria-controls="nav-branches-list">Branches (14)<span class="nav-dropdown-icon" aria-hidden="true"></span></button>
+                <ul class="nav-menu-list nav-menu-list-2" id="nav-branches-list" aria-labelledby="nav-heading-branches">
                   <li><a href="/ai-telefonist-installateurs"${current("/ai-telefonist-installateurs")}>Installateurs</a></li>
                   <li><a href="/ai-telefonist-webshops"${current("/ai-telefonist-webshops")}>Webshops</a></li>
                   <li><a href="/ai-telefonist-kappers-en-salons"${current("/ai-telefonist-kappers-en-salons")}>Kappers en salons</a></li>
@@ -405,7 +406,7 @@ function footerHtml() {
               <ul>
                 <li><a href="tel:+31853335800">+31 85 333 58 00</a></li>
                 <li><a href="mailto:contact@mowi.agency">contact@mowi.agency</a></li>
-                <li><a href="/demo">Hulp bij opzetten</a></li>
+                <li><a href="/demo">Demo inplannen</a></li>
               </ul>
             </div>
           </nav>

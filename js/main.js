@@ -54,6 +54,14 @@
     });
   });
 
+  /* Phones: the branches inside Oplossingen fold behind one row (2026-10-20). CSS keys the open state off
+     aria-expanded, like the dropdowns above; wider screens never show the row. */
+  document.querySelectorAll(".nav-branches-toggle").forEach(function (toggle) {
+    toggle.addEventListener("click", function () {
+      toggle.setAttribute("aria-expanded", String(toggle.getAttribute("aria-expanded") !== "true"));
+    });
+  });
+
   /* Desktop only: the dropdown also opens on hover. Click stays as-is above
      (keyboard + touch). The close runs on a short delay so the pointer can
      cross the 10px gap between the trigger and the panel without it

@@ -1755,3 +1755,59 @@ img.split-visual { min-height: 0; width: 100%; height: auto; border-radius: var(
   .nav-menu-list-2 { grid-template-columns: minmax(0, 1fr); }
   .nav-menu .nav-menu-list a, .nav-menu-soon { white-space: normal; }
 }
+
+/* --- Phones: a shorter menu, Start gratis in the bar (2026-10-20, Sal) ----------
+   With Oplossingen open, the sheet ran about two screens on an iPhone and pushed Bronnen, Prijzen and
+   Start gratis out of view. Below 48rem the branches fold behind one "Branches (n)" row (main.js flips its
+   aria-expanded, like the dropdowns) and the two group headings go, so the use cases read as the dropdown's
+   own list. Tablets keep their side-by-side columns. Start gratis sits in the bar next to the hamburger on
+   every hamburger width, so the sheet's own copy would only repeat it. */
+.nav-branches-toggle { display: none; }
+@media (max-width: 47.9rem) {
+  #nav-heading-toepassingen, #nav-heading-branches { display: none; }
+  .nav-menu-col-divider { border-top: 0; margin-top: 0; padding-top: 0; }
+  .nav-branches-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    border-radius: 10px;
+    text-align: left;
+  }
+  .nav-branches-toggle[aria-expanded="true"] .nav-dropdown-icon { transform: rotate(225deg) translateY(-1px); }
+  .nav-branches-toggle[aria-expanded="false"] + .nav-menu-list { display: none; }
+}
+@media (max-width: 63.9rem) {
+  .header-actions { display: flex; margin-left: auto; }
+  .header-actions .header-login { display: none; }
+  .header-actions .btn-primary { padding: 0.5rem 0.875rem; font-size: 0.875rem; }
+  .nav-toggle { margin-left: 0; flex-shrink: 0; }
+  .main-nav .nav-mobile-actions + .nav-mobile-actions { display: none; }
+}
+/* Below 360px (iPhone SE) logo, button and hamburger only fit with a smaller logo and tighter gaps. */
+@media (max-width: 22.49rem) {
+  .header-bar { gap: 0.5rem; }
+  .header-bar .wordmark-icon, .header-bar .wordmark-text { height: 22px; }
+  .header-actions .btn-primary { padding: 0.5rem 0.75rem; }
+}
+
+/* Outlined twin of .btn-primary (2026-10-20, Sal: four black buttons in one view on /pricing was a bit
+   much). Where buttons sit side by side, one stays black and the others take this. Same box as
+   .btn-primary: the 2px border comes out of the padding. */
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  padding: calc(0.875rem - 2px) 1.5rem;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-btn);
+  color: var(--ink);
+  background: transparent;
+  transition: background-color 0.15s ease;
+}
+.btn-secondary:hover { background: var(--muted); }

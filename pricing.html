@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&family=Inter+Tight:wght@600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20261020-3" />
+  <link rel="stylesheet" href="css/style.css?v=20261020-4" />
   <link rel="icon" href="assets/icon-192.png?v=20260904-3" />
   <link rel="shortcut icon" href="assets/icon-192.png?v=20260904-3" />
   <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260904-3" />
@@ -99,7 +99,8 @@
               </div>
               <div class="nav-menu-col nav-menu-col-divider">
                 <p class="nav-menu-heading" id="nav-heading-branches">Branches</p>
-                <ul class="nav-menu-list nav-menu-list-2" aria-labelledby="nav-heading-branches">
+                <button type="button" class="nav-branches-toggle" aria-expanded="false" aria-controls="nav-branches-list">Branches (14)<span class="nav-dropdown-icon" aria-hidden="true"></span></button>
+                <ul class="nav-menu-list nav-menu-list-2" id="nav-branches-list" aria-labelledby="nav-heading-branches">
                   <li><a href="/ai-telefonist-installateurs">Installateurs</a></li>
                   <li><a href="/ai-telefonist-webshops">Webshops</a></li>
                   <li><a href="/ai-telefonist-kappers-en-salons">Kappers en salons</a></li>
@@ -350,7 +351,7 @@
               <li>Geen betaalgegevens nodig</li>
               <li>U gaat nooit vanzelf over op betaald</li>
             </ul>
-            <a href="https://my.mowi.agency/aanmelden" class="btn-primary tier-cta" data-event="Signup Click">Start gratis</a>
+            <a href="https://my.mowi.agency/aanmelden" class="btn-secondary tier-cta" data-event="Signup Click">Start gratis</a>
           </div>
           <div class="billing-toggle-wrap" hidden>
             <div class="billing-toggle" role="group" aria-label="Betaalperiode">
@@ -386,9 +387,11 @@
               <li>30 dagen geld terug</li>
               <li data-month="Maandelijks opzegbaar" data-year="Per jaar vooruit, opzeggen tegen het einde van het jaar">Maandelijks opzegbaar</li>
             </ul>
-            <a href="https://my.mowi.agency/aanmelden" class="btn-primary tier-cta" data-event="Signup Click">Aan de slag</a>
+            <a href="https://my.mowi.agency/aanmelden" class="btn-secondary tier-cta" data-event="Signup Click">Aan de slag</a>
           </div>
         </div>
+        <!-- 2026-10-20 (Sal): only the highlighted Mowi 500 keeps a black button; Start gratis and Mowi 1000 are
+             outlined. With the black Start gratis in the header that is two black buttons in view, not four. -->
         <p class="tier-extra-note">Meer nodig dan in uw pakket zit? U koopt losse credits bij in het dashboard, wanneer u wilt.</p>
       </div>
     </section>
@@ -443,10 +446,12 @@
                  premium tier stating the sitewide brand promise at its
                  fullest, chosen by Sal 2026-08-22 over "Full service"
                  (English) with the echo tradeoff explicitly on the table. -->
-            <h2 class="tier-card-name">Hulp bij opzetten</h2>
+            <!-- 2026-10-20 (Sal): "Hulp bij opzetten" became "Demo inplannen". The button opens /demo, where the
+                 Calendly agenda loads after a click. The event is 30 minutes, hence the first bullet. -->
+            <h2 class="tier-card-name">Demo inplannen</h2>
             <p class="tier-price-sub">Gratis, voor wie liever samen instelt</p>
             <ul class="tier-features tier-custom-features">
-              <li>Een gesprek van 20 minuten met Sal</li>
+              <li>Een gesprek van 30 minuten met Sal</li>
               <li>Wij kijken mee bij het koppelen van mailbox, webshop of agenda</li>
               <li>Advies over welke kanalen u eerst aanzet</li>
               <li>Daarna gewoon Start gratis, Mowi 500 of Mowi 1000</li>
@@ -461,7 +466,7 @@
                page (direction agreed same day, page not yet built). The
                data-event stays "Demo Click" so the Plausible series stays
                continuous across the rename. -->
-          <a href="/demo" class="btn-primary tier-cta" data-event="Demo Click">Neem contact op</a>
+          <a href="/demo" class="btn-secondary tier-cta" data-event="Demo Click">Kies een moment</a>
         </div>
       </div>
     </section>
@@ -606,7 +611,7 @@
               <ul>
                 <li><a href="tel:+31853335800">+31 85 333 58 00</a></li>
                 <li><a href="mailto:contact@mowi.agency">contact@mowi.agency</a></li>
-                <li><a href="/demo">Hulp bij opzetten</a></li>
+                <li><a href="/demo">Demo inplannen</a></li>
               </ul>
             </div>
           </nav>
@@ -659,6 +664,6 @@
       });
     })();
   </script>
-  <script src="js/main.js?v=20260905-2"></script>
+  <script src="js/main.js?v=20261020-4"></script>
 </body>
 </html>

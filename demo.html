@@ -3,21 +3,45 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mowi — Hulp bij opzetten</title>
+  <title>Demo inplannen | Mowi</title>
   <meta name="robots" content="noindex" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&family=Inter+Tight:wght@600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20261020-3" />
+  <link rel="stylesheet" href="css/style.css?v=20261020-4" />
   <link rel="icon" href="assets/icon-192.png?v=20260904-3" />
   <link rel="shortcut icon" href="assets/icon-192.png?v=20260904-3" />
   <link rel="apple-touch-icon" href="assets/apple-icon-180.png?v=20260904-3" />
   <link rel="apple-touch-icon-precomposed" href="assets/apple-icon-180.png?v=20260904-3" />
   <script defer data-domain="mowi.agency" src="https://plausible.io/js/script.js"></script>
+  <style>
+    /* Until the click this card holds the button; after it, the Calendly agenda. */
+    .demo-cal {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+    }
+    .demo-cal-note { margin: 0; font-size: 0.875rem; color: var(--ink-3); }
+    .demo-cal.is-loaded { display: block; padding: 0; overflow: hidden; }
+    .demo-cal iframe { display: block; width: 100%; height: 720px; border: 0; }
+    .demo-cal-alt { margin-top: 1.25rem; text-align: center; font-size: 0.9375rem; color: var(--ink-2); }
+    .demo-cal-alt a { text-decoration: underline; text-underline-offset: 2px; }
+  </style>
 </head>
 <body>
 
   <!-- Real content shipped 2026-09-15 (Koers 2026-09 klantcontact-medewerker): mailto/tel only, no form, no widget (Sal's decision — no new input surface, so no Security Gate needed). Was a blank skeleton before this. -->
+  <!-- 2026-10-20 (Sal): "Demo inplannen" with the Calendly agenda (https://calendly.com/contact-mowi/30min). Supersedes the mail-and-phone-only
+       page above; mail and phone stay as the fallback. Calendly loads only after a click on "Toon agenda van Calendly"
+       (Legal P0-4, Telecommunicatiewet 11.7a): no request to Calendly before that click, Calendly's own cookie notice
+       left on (the 2026-08 embed hid it), and an iframe instead of Calendly's widget.js, so none of Calendly's own
+       code runs on this page. -->
   <header class="site-header">
     <div class="header-bar">
       <a href="/" class="wordmark" aria-label="Mowi - home">
@@ -63,7 +87,8 @@
               </div>
               <div class="nav-menu-col nav-menu-col-divider">
                 <p class="nav-menu-heading" id="nav-heading-branches">Branches</p>
-                <ul class="nav-menu-list nav-menu-list-2" aria-labelledby="nav-heading-branches">
+                <button type="button" class="nav-branches-toggle" aria-expanded="false" aria-controls="nav-branches-list">Branches (14)<span class="nav-dropdown-icon" aria-hidden="true"></span></button>
+                <ul class="nav-menu-list nav-menu-list-2" id="nav-branches-list" aria-labelledby="nav-heading-branches">
                   <li><a href="/ai-telefonist-installateurs">Installateurs</a></li>
                   <li><a href="/ai-telefonist-webshops">Webshops</a></li>
                   <li><a href="/ai-telefonist-kappers-en-salons">Kappers en salons</a></li>
@@ -116,11 +141,17 @@
 
   <main>
     <section class="hero container lp-hero hero-tight-bottom">
-      <h1>Hulp bij opzetten</h1>
-      <p class="hero-sub">Liever samen instellen? Mail of bel, dan plannen we een gesprek van 20 minuten. We kijken mee bij het koppelen van uw mailbox, webshop of agenda en denken mee over welk kanaal u eerst aanzet.</p>
-      <div class="hero-actions lp-cta-block">
-        <a href="mailto:contact@mowi.agency" class="btn-primary">contact@mowi.agency</a>
-        <a href="tel:+31853335800" class="link-arrow">+31 85 333 58 00 →</a>
+      <h1>Demo inplannen</h1>
+      <p class="hero-sub">Een gesprek van 30 minuten met Sal. U ziet hoe Mowi werkt. We kijken mee bij het koppelen van uw mailbox, webshop of agenda.</p>
+    </section>
+
+    <section class="section" id="calendly-widget">
+      <div class="container">
+        <div class="demo-cal" data-calendly-url="https://calendly.com/contact-mowi/30min?embed_type=Inline&amp;embed_domain=mowi.agency">
+          <button type="button" class="btn-primary" data-calendly-load data-event="Calendly Open">Toon agenda van Calendly</button>
+          <p class="demo-cal-note">De agenda komt van Calendly. Die laadt pas als u op de knop klikt.</p>
+        </div>
+        <p class="demo-cal-alt">Liever mailen of bellen? <a href="mailto:contact@mowi.agency">contact@mowi.agency</a> of <a href="tel:+31853335800">+31 85 333 58 00</a></p>
       </div>
     </section>
   </main>
@@ -193,7 +224,7 @@
               <ul>
                 <li><a href="tel:+31853335800">+31 85 333 58 00</a></li>
                 <li><a href="mailto:contact@mowi.agency">contact@mowi.agency</a></li>
-                <li><a href="/demo">Hulp bij opzetten</a></li>
+                <li><a href="/demo">Demo inplannen</a></li>
               </ul>
             </div>
           </nav>
@@ -223,6 +254,32 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=20260905-2"></script>
+  <script src="js/main.js?v=20261020-4"></script>
+  <script>
+    /* Calendly loads on this click only (Legal P0-4). A plain iframe, not Calendly's widget.js, so nothing from
+       calendly.com runs on this page itself. Calendly reports its page height and the frame follows it, so the
+       agenda never scrolls inside the page. */
+    (function () {
+      var card = document.querySelector("[data-calendly-url]");
+      var button = card && card.querySelector("[data-calendly-load]");
+      if (!button) return;
+      button.addEventListener("click", function () {
+        var frame = document.createElement("iframe");
+        frame.src = card.getAttribute("data-calendly-url");
+        frame.title = "Agenda van Calendly";
+        card.innerHTML = "";
+        card.appendChild(frame);
+        card.classList.add("is-loaded");
+        frame.focus();
+        window.addEventListener("message", function (event) {
+          if (event.origin !== "https://calendly.com" || event.source !== frame.contentWindow) return;
+          var data = event.data || {};
+          var height = parseInt(data.payload && data.payload.height, 10);
+          // While loading it reports a few tiny heights; only a real page height moves the frame.
+          if (data.event === "calendly.page_height" && height >= 400 && height <= 2400) frame.style.height = height + "px";
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
