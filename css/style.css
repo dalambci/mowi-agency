@@ -494,7 +494,10 @@ main { flex: 1 0 auto; }
    liggen." is never split across lines. Opt-in per heading — not applied to
    every .hero h1, since the homepage's uses deliberate <br>s. */
 .h-balance { text-wrap: balance; }
-.h-nowrap { white-space: nowrap; }
+/* inline-block rather than white-space:nowrap (2026-10-20): the phrase still moves to the next line as a
+   whole, but wraps inside itself when it is wider than the screen. "Magento Open Source?" made
+   /koppeling-magento 50px wider than a 390px phone. */
+.h-nowrap { display: inline-block; }
 .link-arrow { font-weight: 600; font-size: 0.9375rem; display: inline-block; margin-top: 1.25rem; }
 .link-arrow:hover { color: var(--ink-2); }
 
@@ -1691,6 +1694,20 @@ img.split-visual { min-height: 0; width: 100%; height: auto; border-radius: var(
 @media (max-width: 63.9rem) {
   .footer-menus { grid-template-columns: repeat(2, 1fr); }
 }
+/* Below 340px the two link lists no longer fit side by side: "Klantenservice uitbesteden" and
+   contact@mowi.agency make the right column 167px wide, so at 320px every page scrolled 13px
+   sideways (2026-10-20). One column there; 340px and up keep two. */
+@media (max-width: 21.24rem) {
+  .footer-menus { grid-template-columns: minmax(0, 1fr); }
+}
+/* Long unbreakable words wrap instead of widening the page (2026-10-20, found at 320-375px): a URL in a
+   card (https://api.shoplightspeed.com/), an inline code path (calendly.com/integrations/api_webhooks) and
+   "verwerkingsverantwoordelijke" in the privacy statement. "anywhere" only breaks a word that does not fit
+   on a line by itself, so nothing moves where it fits. */
+.lp-card, .blog-article, code { overflow-wrap: anywhere; }
+/* Below 360px a 48px hero heading cannot fit its longest words ("WooCommerce?" is 351px and "automatiseren"
+   300px, in 280px), so they overflowed or split mid-word: 36px there. 360px and up keep 48px. */
+@media (max-width: 22.49rem) { .hero h1 { font-size: 2.25rem; } }
 
 /* ---------- Producten · Oplossingen · Bronnen · Prijzen (2026-10-19) ----------
    Sal: Fonio's menu structure, applied to what Mowi has. Titles only, no
