@@ -115,8 +115,12 @@
     @media (max-width: 63.9rem) { .lp2-grid { grid-template-columns: minmax(0, 1fr); gap: 2.5rem; } }
     @media (max-width: 47.9rem) {
       .lp2-copy h1 { font-size: 2.25rem; }
-      .lp2-actions a { flex: 1 1 100%; }
+      /* Both buttons share one line, as on the homepage (2026-10-20, Sal), so the photo moves up. A page with one
+         button still gets a full-width one. */
+      .lp2-actions a { flex: 1 1 auto; }
     }
+    /* Below 340px the pair only fits with 1.125rem side padding instead of 1.5rem. */
+    @media (max-width: 21.24rem) { .lp2-actions a { padding-left: 1.125rem; padding-right: 1.125rem; } }
 
     /* Beeld: foto met een productkaart erop, of een productbeeld zonder foto. */
     .lp2-visual { position: relative; }

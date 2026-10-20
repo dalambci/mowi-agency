@@ -116,8 +116,12 @@
     @media (max-width: 63.9rem) { .lp2-grid { grid-template-columns: minmax(0, 1fr); gap: 2.5rem; } }
     @media (max-width: 47.9rem) {
       .lp2-copy h1 { font-size: 2.25rem; }
-      .lp2-actions a { flex: 1 1 100%; }
+      /* Both buttons share one line, as on the homepage (2026-10-20, Sal), so the photo moves up. A page with one
+         button still gets a full-width one. */
+      .lp2-actions a { flex: 1 1 auto; }
     }
+    /* Below 340px the pair only fits with 1.125rem side padding instead of 1.5rem. */
+    @media (max-width: 21.24rem) { .lp2-actions a { padding-left: 1.125rem; padding-right: 1.125rem; } }
 
     /* Beeld: foto met een productkaart erop, of een productbeeld zonder foto. */
     .lp2-visual { position: relative; }
@@ -368,7 +372,7 @@
           <p class="hero-sub">De agent neemt op, vraagt met hoeveel personen en wanneer, en stelt zelf een tijd voor. Dieetwensen en allergieën noteert hij erbij.</p>
           <div class="lp2-actions">
             <a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a>
-            <a href="/ai-telefonist#demo-try-title" class="lp2-btn-secondary"><svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3.25" y="2.5" width="10.5" height="19" rx="2.75"/><path d="M7.5 18h2"/><path d="M17.25 9.25a4 4 0 0 1 0 5.5"/><path d="M20.25 6.5a8 8 0 0 1 0 11"/></svg>Bel hem nu</a>
+            <a href="/ai-telefonist#demo-try-title" class="lp2-btn-secondary"><svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="8.5" y="2.5" width="7" height="12" rx="3.5"/><path d="M5 11.5a7 7 0 0 0 14 0"/><path d="M12 18.5v3"/></svg>Bel hem nu</a>
           </div>
           <ul class="lp2-ticks"><li>Gratis testgesprek</li><li>30 dagen geld terug</li><li>U houdt uw eigen nummer</li></ul>
         </div>
