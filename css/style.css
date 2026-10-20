@@ -244,6 +244,7 @@ main { flex: 1 0 auto; }
   border-left: 1px solid var(--border);
   margin-left: 0.5rem; /* founder-tuned spacing either side of the divider line */
   padding-left: 0.5rem;
+  align-self: stretch; /* full height even when the column beside it is taller (2026-10-20, six use cases) */
 }
 /* Bottom-aligns the continuation column against its taller sibling, so its
    items sit level with the Workflows column's LAST rows instead of its

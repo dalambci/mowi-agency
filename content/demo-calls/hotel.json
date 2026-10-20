@@ -1,0 +1,81 @@
+{
+    "slug": "hotel",
+    "title": "Kamer reserveren",
+    "sub": "Een gast belt het hotel om een kamer te reserveren.",
+    "audio": "hotel.mp3",
+    "duration": 61.44,
+    "lines": [
+        {
+            "role": "agent",
+            "text": "Met de digitale assistent van Hotel De Linde. Dit gesprek wordt opgenomen. Waarmee kan ik u helpen?",
+            "start": 0,
+            "end": 5.84
+        },
+        {
+            "role": "caller",
+            "text": "Goedemiddag, ik wil graag een kamer reserveren voor het weekend van twaalf december.",
+            "start": 6.39,
+            "end": 11.78
+        },
+        {
+            "role": "agent",
+            "text": "Graag. Komt u op vrijdag en vertrekt u op zondag?",
+            "start": 12.33,
+            "end": 15.31
+        },
+        {
+            "role": "caller",
+            "text": "Ja, twee nachten, met z'n tweeën.",
+            "start": 15.86,
+            "end": 18.19
+        },
+        {
+            "role": "agent",
+            "text": "Een moment, ik kijk wat er vrij is.",
+            "start": 18.74,
+            "end": 20.81
+        },
+        {
+            "role": "agent",
+            "text": "Er is een tweepersoonskamer vrij van vrijdag twaalf tot zondag veertien december. Zal ik die voor u vastleggen?",
+            "start": 21.36,
+            "end": 28.49
+        },
+        {
+            "role": "caller",
+            "text": "Ja, graag. We zijn er pas rond negen uur 's avonds, kan dat?",
+            "start": 29.04,
+            "end": 33.02
+        },
+        {
+            "role": "agent",
+            "text": "Dat kan, inchecken kan tot tien uur 's avonds. Op welke naam mag de reservering?",
+            "start": 33.56,
+            "end": 38.86
+        },
+        {
+            "role": "caller",
+            "text": "Op naam van De Boer.",
+            "start": 39.4,
+            "end": 41.06
+        },
+        {
+            "role": "agent",
+            "text": "En op welk nummer kunnen we u bereiken?",
+            "start": 41.61,
+            "end": 43.77
+        },
+        {
+            "role": "caller",
+            "text": "Nul zes, vier zeven, twee acht, een negen, drie vijf.",
+            "start": 44.31,
+            "end": 50.15
+        },
+        {
+            "role": "agent",
+            "text": "Nul zes, vier zeven, twee acht, een negen, drie vijf. Dan staat de kamer van vrijdag twaalf tot zondag veertien december op naam van De Boer. Tot dan.",
+            "start": 50.7,
+            "end": 61.44
+        }
+    ]
+}

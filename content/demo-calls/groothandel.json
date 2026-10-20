@@ -1,0 +1,81 @@
+{
+    "slug": "groothandel",
+    "title": "Orderstatus",
+    "sub": "Een klant belt de groothandel over een levering.",
+    "audio": "groothandel.mp3",
+    "duration": 54.07,
+    "lines": [
+        {
+            "role": "agent",
+            "text": "Met de digitale assistent van Groothandel Hendriks. Dit gesprek wordt opgenomen. Waarmee kan ik u helpen?",
+            "start": 0,
+            "end": 6.17
+        },
+        {
+            "role": "caller",
+            "text": "Goedemorgen, met Bakkerij Smit. Onze levering van gisteren is nog niet binnen.",
+            "start": 6.72,
+            "end": 11.96
+        },
+        {
+            "role": "agent",
+            "text": "Dat zoek ik voor u op. Wat is het ordernummer?",
+            "start": 12.51,
+            "end": 15.31
+        },
+        {
+            "role": "caller",
+            "text": "Acht vier, twee zes.",
+            "start": 15.85,
+            "end": 17.88
+        },
+        {
+            "role": "agent",
+            "text": "Acht vier, twee zes. En op welke postcode wordt er geleverd?",
+            "start": 18.42,
+            "end": 22.19
+        },
+        {
+            "role": "caller",
+            "text": "Drie vier vijf zes, A B.",
+            "start": 22.73,
+            "end": 24.81
+        },
+        {
+            "role": "agent",
+            "text": "Een moment, ik kijk het na.",
+            "start": 25.35,
+            "end": 26.91
+        },
+        {
+            "role": "agent",
+            "text": "Ik heb hem gevonden. De order is vanochtend verzonden en wordt morgen geleverd.",
+            "start": 27.46,
+            "end": 32.57
+        },
+        {
+            "role": "caller",
+            "text": "Fijn. Hebben jullie de zakken bloem van vijfentwintig kilo nog op voorraad? Dan bestel ik bij.",
+            "start": 33.12,
+            "end": 39.42
+        },
+        {
+            "role": "agent",
+            "text": "Dat zoekt een collega van de binnendienst voor u uit. Ik noteer een terugbelverzoek. Kunnen we u op dit nummer terugbellen?",
+            "start": 39.97,
+            "end": 47.09
+        },
+        {
+            "role": "caller",
+            "text": "Ja, dit nummer is goed.",
+            "start": 47.64,
+            "end": 48.96
+        },
+        {
+            "role": "agent",
+            "text": "Genoteerd. Een collega belt u terug over de voorraad. Fijne dag nog.",
+            "start": 49.51,
+            "end": 54.07
+        }
+    ]
+}

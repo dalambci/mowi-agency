@@ -283,6 +283,10 @@ function headerHtml(activeHref) {
                 <ul class="nav-menu-list" aria-labelledby="nav-heading-toepassingen">
                   <li><a href="/telefoon-uitbesteden"${current("/telefoon-uitbesteden")}>Telefoon uitbesteden</a></li>
                   <li><a href="/klantenservice-uitbesteden"${current("/klantenservice-uitbesteden")}>Klantenservice uitbesteden</a></li>
+                  <li><a href="/afspraken-inplannen"${current("/afspraken-inplannen")}>Afspraken inplannen</a></li>
+                  <li><a href="/vragen-over-bestellingen"${current("/vragen-over-bestellingen")}>Vragen over bestellingen</a></li>
+                  <li><a href="/na-sluitingstijd"${current("/na-sluitingstijd")}>Na sluitingstijd</a></li>
+                  <li><a href="/voicemail-vervangen"${current("/voicemail-vervangen")}>Voicemail vervangen</a></li>
                 </ul>
               </div>
               <div class="nav-menu-col nav-menu-col-divider">
@@ -294,6 +298,10 @@ function headerHtml(activeHref) {
                   <li><a href="/ai-telefonist-autogarages"${current("/ai-telefonist-autogarages")}>Autogarages</a></li>
                   <li><a href="/ai-telefonist-restaurants"${current("/ai-telefonist-restaurants")}>Restaurants</a></li>
                   <li><a href="/ai-telefonist-vakmensen"${current("/ai-telefonist-vakmensen")}>Vakmensen en zzp'ers</a></li>
+                  <li><a href="/ai-telefonist-hotels"${current("/ai-telefonist-hotels")}>Hotels</a></li>
+                  <li><a href="/ai-telefonist-groothandels"${current("/ai-telefonist-groothandels")}>Groothandels</a></li>
+                  <li><a href="/ai-telefonist-makelaars-en-adviseurs"${current("/ai-telefonist-makelaars-en-adviseurs")}>Makelaars en adviseurs</a></li>
+                  <li><a href="/ai-telefonist-tattooshops"${current("/ai-telefonist-tattooshops")}>Tattooshops</a></li>
                 </ul>
               </div>
             </div>
@@ -618,6 +626,10 @@ function buildSitemap(posts) {
     // next run of this script would have dropped them.
     "ai-telefonist-kappers-en-salons", "ai-telefonist-autogarages", "ai-telefonist-restaurants",
     "ai-telefonist-vakmensen",
+    // Four more trades and four use cases (2026-10-20), shown in the header menu.
+    "ai-telefonist-hotels", "ai-telefonist-groothandels", "ai-telefonist-makelaars-en-adviseurs",
+    "ai-telefonist-tattooshops", "afspraken-inplannen", "vragen-over-bestellingen", "na-sluitingstijd",
+    "voicemail-vervangen",
     // T99 (ralph/SPEC.md section 8, 2026-09-03): the 11 koppeling landers.
     "koppeling-exact-online", "koppeling-pipedrive", "koppeling-woocommerce",
     "koppeling-shopify", "koppeling-lightspeed-ecom", "koppeling-prestashop",

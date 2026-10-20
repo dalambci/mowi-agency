@@ -1,0 +1,81 @@
+{
+    "slug": "tattooshop",
+    "title": "Consult inplannen",
+    "sub": "Iemand belt de tattooshop voor een eerste tattoo.",
+    "audio": "tattooshop.mp3",
+    "duration": 58.2,
+    "lines": [
+        {
+            "role": "agent",
+            "text": "Met de digitale assistent van Studio Inkt. Dit gesprek wordt opgenomen. Waarmee kan ik u helpen?",
+            "start": 0,
+            "end": 6.11
+        },
+        {
+            "role": "caller",
+            "text": "Hoi, ik wil graag een tattoo laten zetten. Het is mijn eerste.",
+            "start": 6.66,
+            "end": 12.24
+        },
+        {
+            "role": "agent",
+            "text": "Leuk. Wat voor ontwerp had u in gedachten, en op welke plek?",
+            "start": 12.79,
+            "end": 16.52
+        },
+        {
+            "role": "caller",
+            "text": "Een kleine vogel, op mijn onderarm.",
+            "start": 17.06,
+            "end": 19.86
+        },
+        {
+            "role": "agent",
+            "text": "Hoe groot ongeveer?",
+            "start": 20.41,
+            "end": 21.84
+        },
+        {
+            "role": "caller",
+            "text": "Een centimeter of vijf.",
+            "start": 22.38,
+            "end": 24.12
+        },
+        {
+            "role": "agent",
+            "text": "Dan plan ik eerst een kort consult in, zodat de artiest het ontwerp met u doorneemt. Een moment, ik kijk de agenda na.",
+            "start": 24.67,
+            "end": 32.16
+        },
+        {
+            "role": "agent",
+            "text": "Zaterdag om elf uur is er plek. Past dat?",
+            "start": 32.71,
+            "end": 35.22
+        },
+        {
+            "role": "caller",
+            "text": "Ja, dat is goed.",
+            "start": 35.77,
+            "end": 37.25
+        },
+        {
+            "role": "agent",
+            "text": "Op welke naam, en op welk nummer kunnen we u bereiken?",
+            "start": 37.79,
+            "end": 40.93
+        },
+        {
+            "role": "caller",
+            "text": "Lisa Bos, nul zes, twee vijf, acht een, vier nul, zeven drie.",
+            "start": 41.47,
+            "end": 48.34
+        },
+        {
+            "role": "agent",
+            "text": "Nul zes, twee vijf, acht een, vier nul, zeven drie. Genoteerd. Zaterdag om elf uur voor het consult. Tot zaterdag.",
+            "start": 48.89,
+            "end": 58.2
+        }
+    ]
+}

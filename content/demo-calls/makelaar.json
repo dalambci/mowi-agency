@@ -1,0 +1,81 @@
+{
+    "slug": "makelaar",
+    "title": "Kennismakingsgesprek",
+    "sub": "Iemand belt de makelaar over de verkoop van zijn huis.",
+    "audio": "makelaar.mp3",
+    "duration": 55.64,
+    "lines": [
+        {
+            "role": "agent",
+            "text": "Met de digitale assistent van Makelaardij Verhoeven. Dit gesprek wordt opgenomen. Waarmee kan ik u helpen?",
+            "start": 0,
+            "end": 6.64
+        },
+        {
+            "role": "caller",
+            "text": "Goedemiddag, ik wil mijn huis verkopen. Wat zou het ongeveer waard zijn?",
+            "start": 7.18,
+            "end": 12.34
+        },
+        {
+            "role": "agent",
+            "text": "Dat kan ik niet goed inschatten, dat bespreekt de makelaar graag met u. Bent u al klant bij ons?",
+            "start": 12.89,
+            "end": 18.4
+        },
+        {
+            "role": "caller",
+            "text": "Nee, nog niet.",
+            "start": 18.95,
+            "end": 20.01
+        },
+        {
+            "role": "agent",
+            "text": "Dan plan ik een kennismakingsgesprek in. Heeft u een voorkeur voor een dag?",
+            "start": 20.55,
+            "end": 24.93
+        },
+        {
+            "role": "caller",
+            "text": "Liefst donderdag.",
+            "start": 25.47,
+            "end": 26.84
+        },
+        {
+            "role": "agent",
+            "text": "Een moment, ik kijk de agenda na.",
+            "start": 27.39,
+            "end": 29.46
+        },
+        {
+            "role": "agent",
+            "text": "Donderdag om tien uur of om half drie is nog vrij. Wat past u beter?",
+            "start": 30.01,
+            "end": 34.41
+        },
+        {
+            "role": "caller",
+            "text": "Half drie.",
+            "start": 34.96,
+            "end": 35.97
+        },
+        {
+            "role": "agent",
+            "text": "Mag ik uw naam en telefoonnummer?",
+            "start": 36.52,
+            "end": 38.41
+        },
+        {
+            "role": "caller",
+            "text": "Ingrid Mulder, nul zes, drie een, vijf acht, twee zes, nul negen.",
+            "start": 38.96,
+            "end": 46.96
+        },
+        {
+            "role": "agent",
+            "text": "Nul zes, drie een, vijf acht, twee zes, nul negen. Genoteerd. Donderdag om half drie bespreekt u de verkoop. Tot donderdag.",
+            "start": 47.51,
+            "end": 55.64
+        }
+    ]
+}
