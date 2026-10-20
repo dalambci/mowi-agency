@@ -242,7 +242,11 @@ function formatDateNL(iso) {
 // source of truth; keep this in sync with it by hand. The skeleton nav has
 // no "Blog" item, so no aria-current is set on blog pages.
 // ---------------------------------------------------------------------------
-function headerHtml() {
+function headerHtml(activeHref) {
+  // The nav inside is written by the menu sweep (sweep_menu.py) with ${current("/path")} on every link, the
+  // same helper build-templates.js has. Blog pages pass nothing, so no link is marked current. Without it
+  // `node build-blog.js` stopped at "current is not defined" from the 2026-10-19 menu on (fixed 2026-10-20).
+  const current = (href) => (href === activeHref ? ' aria-current="page"' : "");
   return `  <header class="site-header">
     <div class="header-bar">
       <a href="/" class="wordmark" aria-label="Mowi - home">
@@ -610,6 +614,10 @@ function buildSitemap(posts) {
     // en zoekpagina's. Niet in header of footer; wel in de sitemap.
     "ai-telefonist", "telefoon-uitbesteden", "klantenservice-uitbesteden",
     "mowi-in-het-kort", "ai-telefonist-installateurs", "ai-telefonist-webshops",
+    // Four more trade pages (2026-10-19). Added here 2026-10-20: they were in sitemap.xml by hand only, so the
+    // next run of this script would have dropped them.
+    "ai-telefonist-kappers-en-salons", "ai-telefonist-autogarages", "ai-telefonist-restaurants",
+    "ai-telefonist-vakmensen",
     // T99 (ralph/SPEC.md section 8, 2026-09-03): the 11 koppeling landers.
     "koppeling-exact-online", "koppeling-pipedrive", "koppeling-woocommerce",
     "koppeling-shopify", "koppeling-lightspeed-ecom", "koppeling-prestashop",
