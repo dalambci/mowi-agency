@@ -1752,6 +1752,12 @@ img.split-visual { min-height: 0; width: 100%; height: auto; border-radius: var(
   .nav-dropdown-wide .nav-menu { left: 0; transform: none; width: max-content; }
   .nav-dropdown-wide .nav-menu-col { flex: 0 0 auto; }
   .nav-dropdown-wide .nav-menu-col-divider { margin-left: 1rem; padding-left: 1rem; }
+  /* Rows 0.25rem apart, like the two branch columns, so a hovered item's grey never touches the current page's grey
+     (2026-10-20, Sal). The boxes give up the same 0.25rem (padding 0.5rem to 0.375rem) and the list gets 0.125rem back
+     at each end, so every label and the panel stay exactly where they were. Desktop only: below 64rem the menu has
+     no hover fill. */
+  .nav-menu-list { display: grid; row-gap: 0.25rem; padding-top: 0.125rem; padding-bottom: 0.125rem; }
+  .nav-menu .nav-menu-list a, .nav-menu-soon { padding-top: 0.375rem; padding-bottom: 0.375rem; }
 }
 @media (max-width: 63.9rem) {
   .nav-menu-list-2 { grid-template-columns: minmax(0, 1fr); }
@@ -1813,6 +1819,9 @@ img.split-visual { min-height: 0; width: 100%; height: auto; border-radius: var(
   transition: background-color 0.15s ease;
 }
 .btn-secondary:hover { background: var(--muted); }
+/* An icon in front of a button label (2026-10-20, Sal: a phone on "Bel hem nu", not the standard handset). 18px next
+   to the 15px label, and on the 24-grid a 2.25 stroke (1.7px), the weight of the semibold text. */
+.btn-icon { flex: none; width: 1.125rem; height: 1.125rem; margin-right: 0.5rem; }
 
 /* Footer band title on phones (2026-10-20, Sal): 32px read small next to the 48px hero heading. Now about 43px on an
    iPhone, never under the 36px of a 320px screen, so "tien minuten." stays on one line. Desktop keeps its 56px. */
