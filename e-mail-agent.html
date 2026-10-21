@@ -50,6 +50,34 @@
       .hero-photo-figure { justify-self: end; margin: 0; }
     }
     @media (min-width: 80rem) { .hero-photo-card { display: block; } }
+    /* Three step cards in the layout of the phone pages (2026-10-21, Sal: this page still had the old three-steps block).
+       The same rules as their page style, plus .sv-mails for the test results. */
+    .lp2-steps3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; text-align: left; }
+    .lp2-step { display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--border); border-radius: 1.4rem; padding: 1.75rem 1.75rem 0; overflow: hidden; }
+    .lp2-step-num { display: inline-flex; align-items: center; justify-content: center; align-self: flex-start; width: 2.5rem; height: 2.5rem; border-radius: 50%; background: var(--muted); font-size: 0.9375rem; font-weight: 600; }
+    .lp2-step h3 { font-size: 1.1875rem; margin-top: 1.25rem; }
+    .lp2-step > p { font-size: 0.9375rem; color: var(--ink-2); line-height: 1.6; margin-top: 0.5rem; }
+    .lp2-step-visual { margin-top: auto; padding-top: 2rem; }
+    .sv-card { background: var(--bg); border: 1px solid var(--border); border-bottom: 0; border-radius: 1rem 1rem 0 0; padding: 1.1rem 1.1rem 1.5rem; font-size: 0.8125rem; min-height: 12.5rem; }
+    .sv-label { font-size: 0.75rem; font-weight: 600; color: var(--ink-3); }
+    .sv-checks { list-style: none; padding: 0; margin: 0.45rem 0 0; display: grid; gap: 0.4rem; }
+    .sv-checks li { display: flex; align-items: center; gap: 0.5rem; color: var(--ink-2); }
+    .sv-checks li::before { content: ""; width: 0.95rem; height: 0.95rem; flex: none; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23121110' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / contain no-repeat; }
+    .sv-gap { margin-top: 1rem; }
+    .sv-row { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
+    .sv-plan { font-weight: 700; font-size: 0.9375rem; color: var(--ink); }
+    .sv-live { display: inline-flex; align-items: center; gap: 0.35rem; font-weight: 600; font-size: 0.75rem; }
+    .sv-live::before { content: ""; width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--ink); }
+    .sv-radios { list-style: none; padding: 0; margin: 0.45rem 0 0; display: grid; gap: 0.4rem; }
+    .sv-radios li { display: flex; align-items: center; gap: 0.5rem; color: var(--ink-2); }
+    .sv-radios li::before { content: ""; width: 0.8rem; height: 0.8rem; flex: none; border-radius: 50%; border: 1.5px solid var(--ink-3); }
+    .sv-radios li.on { color: var(--ink); font-weight: 600; }
+    .sv-radios li.on::before { border-color: var(--ink); background: var(--ink); box-shadow: inset 0 0 0 2px var(--bg); }
+    .sv-mails { list-style: none; padding: 0; margin: 0.6rem 0 0; display: grid; gap: 0.55rem; }
+    .sv-mails li { display: flex; align-items: baseline; gap: 0.5rem; min-width: 0; color: var(--ink); line-height: 1.4; }
+    .sv-chip { flex: none; padding: 0.15rem 0.55rem; border-radius: var(--radius-pill); background: var(--surface); border: 1px solid var(--border); font-size: 0.6875rem; font-weight: 600; color: var(--ink-2); }
+    .lp2-steps-cta { text-align: center; margin-top: 2.25rem; }
+    @media (max-width: 63.9rem) { .lp2-steps3 { grid-template-columns: minmax(0, 1fr); } }
   </style>
 </head>
 <body>
@@ -213,28 +241,52 @@
     </section>
 
     <!-- ================= Zo werkt het ================= -->
+    <!-- The cards use the dashboard's own wording: the mailbox choices of setup-step1-connect, the test on the last 20
+         e-mails (setup-step4-test, AgentDryRunController), the default categories (Agent::DEFAULT_CATEGORIES) and the
+         activation checklist (ActivationChecklist). Going live needs no paid plan; every reply starts as a draft. -->
     <section class="section">
       <div class="container">
         <div class="section-head-row section-head-row-center">
-          <h2 class="lp-section-heading">Wij zetten uw agent op en u mailt zoals u al deed</h2>
+          <h2 class="lp-section-heading">Zelf opgezet in drie stappen</h2>
         </div>
-        <div class="lp-steps">
-          <div class="lp-step">
-            <div class="lp-step-circle" aria-hidden="true">1</div>
-            <h3>Kies uw abonnement</h3>
-            <p>Start gratis, of kies Mowi 500 of Mowi 1000. Credits naar gebruik, geen verborgen kosten.</p>
-          </div>
-          <div class="lp-step">
-            <div class="lp-step-circle" aria-hidden="true">2</div>
+        <div class="lp2-steps3">
+          <div class="lp2-step">
+            <span class="lp2-step-num" aria-hidden="true">01</span>
             <h3>Koppel uw mailbox</h3>
-            <p>Gmail, Outlook of via IMAP. Binnen een paar minuten verbonden.</p>
+            <p>Outlook, Gmail of een andere mailbox via IMAP. Daarna vult u aan wat de agent over uw bedrijf moet weten.</p>
+            <div class="lp2-step-visual" aria-hidden="true">
+              <div class="sv-card">
+                <div class="sv-label">Uw mailbox</div>
+                <ul class="sv-radios"><li class="on">Outlook / Microsoft 365</li><li>Gmail / Google Workspace</li><li>Overig (IMAP)</li></ul>
+                <div class="sv-label sv-gap">Verbonden</div>
+                <ul class="sv-checks"><li>info@uwbedrijf.nl</li></ul>
+              </div>
+            </div>
           </div>
-          <div class="lp-step">
-            <div class="lp-step-circle" aria-hidden="true">3</div>
-            <h3>Vertel de agent wat u wilt</h3>
-            <p>"Sorteer facturen apart." "Vraag altijd het ordernummer." De agent luistert, onthoudt en wordt scherper.</p>
+          <div class="lp2-step">
+            <span class="lp2-step-num" aria-hidden="true">02</span>
+            <h3>Test op uw eigen e-mail</h3>
+            <p>Zie wat de agent met uw laatste <span class="h-nowrap">20 e-mails</span> zou doen. Er wordt niets verstuurd of verplaatst.</p>
+            <div class="lp2-step-visual" aria-hidden="true">
+              <div class="sv-card">
+                <div class="sv-label">Resultaten</div>
+                <ul class="sv-mails"><li><span class="sv-chip">Leads</span><span>Offerteaanvraag badkamer</span></li><li><span class="sv-chip">Klantvragen</span><span>Waar blijft mijn bestelling?</span></li><li><span class="sv-chip">Facturen</span><span>Factuur maart</span></li></ul>
+              </div>
+            </div>
+          </div>
+          <div class="lp2-step">
+            <span class="lp2-step-num" aria-hidden="true">03</span>
+            <h3>Zet hem aan</h3>
+            <p>Hij sorteert uw mail en zet elk antwoord klaar als concept. U leest het na en verstuurt het zelf.</p>
+            <div class="lp2-step-visual" aria-hidden="true">
+              <div class="sv-card">
+                <div class="sv-row"><span class="sv-plan">E-mail</span><span class="sv-live">Live</span></div>
+                <ul class="sv-checks"><li>Kennisbank</li><li>Koppelingen</li><li>Test op uw eigen e-mail</li></ul>
+              </div>
+            </div>
           </div>
         </div>
+        <p class="lp2-steps-cta"><a href="https://my.mowi.agency/aanmelden" class="btn-primary" data-event="Signup Click">Start gratis</a></p>
       </div>
     </section>
 
