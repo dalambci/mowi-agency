@@ -145,6 +145,7 @@
     }
     .lp2-ring svg { position: relative; z-index: 1; width: 0.95rem; height: 0.95rem; }
     .lp2-scene + .lp2-audio { position: relative; margin: -3rem 1rem 0; box-shadow: 0 12px 32px rgba(18, 17, 16, 0.10); }
+    .lp2-scene + .lp2-compare-card { position: relative; margin: -3rem 1rem 0; box-shadow: 0 12px 32px rgba(18, 17, 16, 0.10); }
     .lp2-card { background: var(--surface); border: 1px solid var(--border); border-radius: 1rem; padding: 1rem 1.1rem; box-shadow: 0 12px 32px rgba(18, 17, 16, 0.10); }
     .lp2-card-head { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; font-size: 0.75rem; color: var(--ink-3); font-weight: 600; }
     .lp2-chip { font-size: 0.6875rem; font-weight: 700; padding: 0.15rem 0.55rem; border-radius: var(--radius-pill); background: var(--ink); color: var(--bg); }
@@ -376,6 +377,10 @@
           <ul class="lp2-ticks"><li>Gratis testgesprek</li><li>30 dagen geld terug</li><li>U houdt uw eigen nummer</li></ul>
         </div>
         <div class="lp2-visual">
+          <div class="lp2-scene">
+            <img src="assets/lp/hero-uitbesteden-800.webp" srcset="assets/lp/hero-uitbesteden-1200.webp 1200w, assets/lp/hero-uitbesteden-800.webp 800w" sizes="(min-width: 64rem) 45vw, 100vw" width="1200" height="896" fetchpriority="high" alt="Een ondernemer zit met een klant in een vergaderruimte achter glas. Op het bureau ervoor gaat de telefoon over." />
+            <span class="lp2-ring" style="left: 12.4%; bottom: 58.6%; --tip: 1.25rem" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13 2a9 9 0 0 1 9 9"/><path d="M13 6a5 5 0 0 1 5 5"/><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>Inkomende oproep</span>
+          </div>
           <div class="lp2-compare-card">
             <div class="lp2-card-head"><span>Telefoon uitbesteden, wat kost het?</span></div>
             <div class="row"><span>Antwoordservice</span><span>Per gesprek of per maand</span></div>
