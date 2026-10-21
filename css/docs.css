@@ -213,6 +213,7 @@ body.docs {
 .docs-article code {
   font-family: var(--docs-font-mono); font-size: .85em;
   background: var(--docs-muted-bg); padding: .15em .4em; border-radius: 4px;
+  overflow-wrap: anywhere; /* long URLs and codes (forwarding codes, API addresses) wrap on phones */
 }
 .docs-article ul, .docs-article ol.docs-plain-list {
   padding-left: 1.35em; margin-bottom: 14px; font-size: 14.5px; line-height: 1.7;
@@ -296,10 +297,15 @@ body.docs {
    a 420px capture across a 700px column is what made the first batch look
    blurry. Centred, since not every shot is column-width. */
 .docs-media--shot {
-  border-style: solid; min-height: 0; padding: 0; overflow: hidden;
+  border-style: solid; min-height: 0; padding: 24px; overflow: hidden;
   display: block; text-align: center;
+  /* The dashboard's own page colour (2026-10-21): the screenshots are
+     cropped dashboard cards whose rounded corners carry this exact colour,
+     so the card sits on its own background instead of on a second frame. */
+  background: var(--docs-bg);
 }
 .docs-media--shot img { display: inline-block; max-width: 100%; height: auto; vertical-align: top; }
+@media (max-width: 480px) { .docs-media--shot { padding: 12px; } }
 
 /* ---------- Copyable text block ---------- */
 .docs-token-row { display: flex; align-items: flex-start; gap: 10px; margin: 8px 0 20px; }

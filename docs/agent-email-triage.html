@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Inbox agent instellen — Documentatie — Mowi</title>
-  <meta name="description" content="Zo vindt u de Inbox agent in het dashboard, richt u de mailboxkoppeling in en controleert u dat de agent actief is." />
+  <title>E-mail instellen — Documentatie — Mowi</title>
+  <meta name="description" content="Koppel uw mailbox, test de agent op uw eigen e-mail en zet hem aan. Met de sorteerregels, urgente meldingen en automatisch versturen per categorie." />
   <link rel="preconnect" href="https://fonts.bunny.net" />
   <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/docs.css?v=20260821" />
+  <link rel="stylesheet" href="../css/docs.css?v=20261021" />
   <link rel="icon" href="../assets/icon-192.png?v=20260904-3" />
   <link rel="shortcut icon" href="../assets/icon-192.png?v=20260904-3" />
   <link rel="apple-touch-icon" href="../assets/apple-icon-180.png?v=20260904-3" />
@@ -44,190 +44,374 @@
             <nav class="docs-breadcrumb" id="docsBreadcrumb" aria-label="Broodkruimel"></nav>
 
             <article class="docs-article">
-              <h1>Inbox agent instellen</h1>
+<h1>E-mail instellen</h1>
 
-              <p class="docs-dek">
-                De Inbox agent classificeert binnenkomende klantvragen in de gekoppelde mailbox
-                en routeert elk bericht automatisch naar de juiste plek. Zo hoeft niemand in uw team
-                inkomende e-mail meer handmatig te sorteren voordat ermee gewerkt kan worden.
-              </p>
-              <p>
-                Na deze stappen vindt u de Inbox agent terug in het dashboard, weet u hoe de
-                mailboxkoppeling wordt ingericht, en kunt u controleren of de agent actief is.
-              </p>
+<p class="docs-dek">
+  Met het kanaal E-mail leest uw agent mee in uw mailbox. Hij sorteert elke binnenkomende e-mail in een map en
+  schrijft een conceptantwoord, dat u zelf controleert en verstuurt.
+</p>
+<p>
+  Na deze stappen is uw mailbox gekoppeld, heeft u de agent getest op uw eigen e-mail en staat hij aan.
+</p>
 
-              <div class="docs-prereqs">
-                <div class="docs-prereqs-label">Vereisten</div>
-                <ul>
-                  <li>Toegang tot <strong>het dashboard</strong> (inloggegevens van uw organisatie).</li>
-                  <li>Rechten om toegang tot de mailbox te verlenen die getriaged moet worden — of iemand
-                    die dat namens u kan doen, bijvoorbeeld uw IT-partner.</li>
-                  <li>Het e-mailadres van die mailbox bij de hand (bijvoorbeeld
-                    <code>info@uwbedrijf.nl</code>).</li>
-                </ul>
-              </div>
+<div class="docs-prereqs">
+<div class="docs-prereqs-label">Vereisten</div>
+<ul>
+<li><span>Een account in <strong>het dashboard</strong>. Zie <a href="account-aanmaken">Account aanmaken en gratis starten</a>.</span></li>
+<li><span>Toegang tot de mailbox die de agent gaat lezen: Outlook of Microsoft 365, Gmail of Google Workspace, of een andere mailbox met IMAP.</span></li>
+<li><span>Voor Gmail of IMAP: een app-wachtwoord. Hoe u dat bij Gmail maakt, staat onder <a href="#mailbox">Uw mailbox koppelen</a>.</span></li>
+</ul>
+</div>
 
-              <h2>De agent instellen</h2>
+<h2 id="kanaal">Het kanaal E-mail toevoegen</h2>
 
-              <div class="docs-steps">
-                <div class="docs-step">
-                  <span class="docs-step-num">1</span>
-                  <div class="docs-step-body">
-                    <h3>Log in bij het dashboard</h3>
-                    <p>Ga naar het dashboard, vul uw e-mailadres en wachtwoord in en klik op <strong>Log in</strong>.</p>
-                    <p class="docs-muted">U ziet nu het <strong>Home</strong>-overzicht van het dashboard.</p>
-                  </div>
-                </div>
+<div class="docs-steps">
+<div class="docs-step">
+<span class="docs-step-num">1</span>
+<div class="docs-step-body">
+<h3>Open de setup</h3>
+<p>Klik in de zijbalk op <strong>Agent</strong> en daarna op <strong>Setup afronden</strong>. Klik in de lijst links op
+  <strong>Kanalen</strong>.</p>
+<p class="docs-muted">U ziet nu <strong>Welke kanalen doet uw medewerker?</strong></p>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">2</span>
+<div class="docs-step-body">
+<h3>Vink E-mail aan</h3>
+<p>Klik op de tegel <strong>E-mail</strong>.</p>
+<p class="docs-muted">U ziet nu de melding <strong>Kanaal E-mail toegevoegd. De stappen ervan staan nu in de lijst.</strong>
+  Onder <strong>Koppelingen</strong> staat de stap <strong>Mailbox koppelen</strong>.</p>
+</div>
+</div>
+</div>
 
-                <div class="docs-step">
-                  <span class="docs-step-num">2</span>
-                  <div class="docs-step-body">
-                    <h3>Open Agents</h3>
-                    <p>Klik in de zijbalk op <strong>Agents</strong>.</p>
-                    <p class="docs-muted">U ziet nu een lijst met alle agents voor uw organisatie, elk met
-                      naam, schema en status (<strong>Running</strong> of <strong>Paused</strong>).</p>
-                  </div>
-                </div>
-              </div>
+<h2 id="mailbox">Uw mailbox koppelen</h2>
 
-              <div class="docs-media">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 15l5-5 4 4 4-4 5 5"/><circle cx="8.5" cy="8.5" r="1.3"/></svg>
-                <span>Schermafbeelding volgt</span>
-              </div>
-              <p class="docs-media-caption">De Agents-lijst in het dashboard, met naam, schema en status per agent.</p>
+<div class="docs-steps">
+<div class="docs-step">
+<span class="docs-step-num">1</span>
+<div class="docs-step-body">
+<h3>Open Mailbox koppelen</h3>
+<p>Klik in de lijst links op <strong>Mailbox koppelen</strong>.</p>
+<p class="docs-muted">U ziet nu <strong>Koppel uw mailbox</strong>, met drie keuzes:
+  <strong>Outlook / Microsoft 365</strong>, <strong>Gmail / Google Workspace</strong> en <strong>Overig (IMAP)</strong>.</p>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">2</span>
+<div class="docs-step-body">
+<h3>Kies uw soort mailbox en koppel</h3>
+<p>Klik op uw soort mailbox en volg de aanwijzingen hieronder.</p>
+<ul>
+<li><strong>Outlook / Microsoft 365</strong>: klik op <strong>Koppel met Microsoft</strong> en log in bij Microsoft. U geeft
+  Mowi alleen toegang tot deze ene mailbox. Een wachtwoord geeft u niet af.</li>
+<li><strong>Gmail / Google Workspace</strong>: vul uw <strong>E-mailadres</strong> en een <strong>App-wachtwoord</strong> in
+  en klik op <strong>Koppelen</strong>. De technische instellingen vult het dashboard zelf in.</li>
+<li><strong>Overig (IMAP)</strong>: vul <strong>IMAP-server</strong>, <strong>Poort</strong>, <strong>Beveiliging</strong>,
+  <strong>E-mailadres</strong> en <strong>App-wachtwoord</strong> in en klik op <strong>Koppelen</strong>. Poort
+  <code>993</code> met <strong>SSL</strong> is bij vrijwel elke mailbox de juiste keuze.</li>
+</ul>
+<p class="docs-muted">Bovenaan de stap staat nu <strong>Verbonden</strong>, met het e-mailadres van uw mailbox. Na Microsoft
+  ziet u de melding <strong>Mailbox gekoppeld via Microsoft.</strong></p>
+</div>
+</div>
+</div>
 
-              <div class="docs-steps">
-                <div class="docs-step">
-                  <span class="docs-step-num">3</span>
-                  <div class="docs-step-body">
-                    <h3>Open de Inbox agent</h3>
-                    <p>Klik op de rij met <strong>Inbox agent</strong>.</p>
-                    <p class="docs-muted">U ziet nu de detailpagina van de agent, met de status rechtsboven
-                      en een toelichting onder <strong>About</strong>.</p>
-                  </div>
-                </div>
-              </div>
+<div class="docs-media docs-media--shot">
+<a href="../assets/docs/agent-email-triage-1-mailbox.webp?v=20261021" target="_blank" rel="noopener"><img src="../assets/docs/agent-email-triage-1-mailbox.webp?v=20261021" alt="De stap Koppel uw mailbox met de keuze Outlook / Microsoft 365 en de knop Koppel met Microsoft" width="679" height="466" loading="lazy" /></a>
+</div>
+<p class="docs-media-caption">Koppelen met Outlook of Microsoft 365 gaat via een login bij Microsoft zelf.</p>
 
-              <div class="docs-media">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 15l5-5 4 4 4-4 5 5"/><circle cx="8.5" cy="8.5" r="1.3"/></svg>
-                <span>Schermafbeelding volgt</span>
-              </div>
-              <p class="docs-media-caption">De detailpagina van de Inbox agent, met de status Running of Paused rechtsboven.</p>
+<h3>Een app-wachtwoord maken in Gmail</h3>
+<p>
+  Een app-wachtwoord is een apart wachtwoord van zestien tekens, alleen voor Mowi. Uw gewone Google-wachtwoord werkt hier
+  niet. Deze stappen staan ook in het dashboard, achter het vraagteken bij <strong>App-wachtwoord</strong>.
+</p>
+<ol class="docs-plain-list">
+<li>Ga naar <strong>myaccount.google.com/security</strong>.</li>
+<li>Zet <strong>Verificatie in twee stappen</strong> aan, als dat nog niet zo is.</li>
+<li>Ga naar <strong>myaccount.google.com/apppasswords</strong>.</li>
+<li>Vul een naam in, bijvoorbeeld "Mowi", en klik op <strong>Aanmaken</strong>.</li>
+<li>Kopieer het wachtwoord van zestien tekens en plak het in het dashboard bij <strong>App-wachtwoord</strong>.</li>
+</ol>
+<!-- VERIFY: nagelopen op support.google.com/accounts/answer/185833?hl=nl (2026-10-21): "Verificatie in twee stappen", myaccount.google.com/apppasswords en de 16 tekens kloppen; de knop "Aanmaken" noemt Google daar niet (komt uit de tooltip van het dashboard). Google meldt ook dat app-wachtwoorden kunnen ontbreken bij een werk- of schoolaccount en bij Geavanceerde beveiliging. -->
 
-              <div class="docs-steps">
-                <div class="docs-step">
-                  <span class="docs-step-num">4</span>
-                  <div class="docs-step-body">
-                    <h3>Verleen toegang tot de mailbox</h3>
-                    <p>
-                      Geef Mowi toegang tot de mailbox die getriaged moet worden. Mowi's
-                      implementatieteam neemt hierover contact met u op om de koppeling in te richten.
-                      <!-- DRAFT: het dashboard heeft nog geen eigen scherm voor het zelf koppelen van een
-                           mailbox — dit gebeurt momenteel buiten het dashboard om, samen met Mowi. Zodra
-                           dit een stap in het dashboard wordt, moet deze alinea vervangen worden door de
-                           echte klikpaden (geen bestaand scherm om nu al aan te beschrijven). -->
-                    </p>
-                    <p class="docs-muted">U ontvangt een bevestiging van Mowi zodra de koppeling actief is —
-                      meestal per e-mail of telefonisch; hiervoor is geen vast, geautomatiseerd proces.</p>
-                  </div>
-                </div>
+<div class="docs-media docs-media--shot">
+<a href="../assets/docs/agent-email-triage-2-gmail.webp?v=20261021" target="_blank" rel="noopener"><img src="../assets/docs/agent-email-triage-2-gmail.webp?v=20261021" alt="De keuze Gmail / Google Workspace met de velden E-mailadres en App-wachtwoord en de knop Koppelen" width="679" height="563" loading="lazy" /></a>
+</div>
+<p class="docs-media-caption">Gmail koppelt u met uw e-mailadres en een app-wachtwoord.</p>
 
-                <div class="docs-step">
-                  <span class="docs-step-num">5</span>
-                  <div class="docs-step-body">
-                    <h3>Controleer de status</h3>
-                    <p>Ga terug naar de detailpagina van de <strong>Inbox agent</strong> en bekijk de status
-                      rechtsboven.</p>
-                    <p class="docs-muted">Staat de status op <strong>Running</strong>? Dan verwerkt de agent
-                      actief e-mail. Staat deze op <strong>Paused</strong>? Dan is de koppeling nog niet
-                      actief.</p>
-                  </div>
-                </div>
-              </div>
+<div class="docs-callout docs-callout-note">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5"/><circle cx="12" cy="8" r=".4" fill="currentColor"/></svg>
+<p>Bij een zakelijk Google Workspace-account moet uw beheerder app-wachtwoorden mogelijk eerst toestaan. Bij een
+  zakelijke Microsoft 365-omgeving moet uw IT-beheerder soms eerst toestemming geven. Download dan onder
+  <strong>Outlook / Microsoft 365</strong> het document voor uw IT-partner, of laat Mowi de koppeling afronden: binnen
+  één werkdag live.</p>
+</div>
 
-              <div class="docs-media">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 15l5-5 4 4 4-4 5 5"/><circle cx="8.5" cy="8.5" r="1.3"/></svg>
-                <span>Schermafbeelding volgt</span>
-              </div>
-              <p class="docs-media-caption">Run history op de detailpagina van de agent: tijdstip, status en aantal verwerkte taken per run.</p>
+<p>
+  Boven de knop staat een vinkje: <strong>Mowi mag mijn mailbox, inclusief verzonden e-mail van de afgelopen 30 dagen,
+  analyseren om antwoordvoorstellen te doen.</strong> Dit is optioneel. Mowi stelt dan vragen en antwoorden voor uit uw
+  eigen e-mail, die u zelf beoordeelt voordat ze gebruikt worden. U kunt dit later ook aan- of uitzetten op de pagina
+  <strong>E-mail</strong>. Zie <a href="#zelflerend">Zelflerend</a>.
+</p>
 
-              <div class="docs-callout docs-callout-result">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8 12.5l2.5 2.5 5.5-6"/></svg>
-                <p><strong>U weet dat de Inbox agent volledig actief is</strong> wanneer de status op de
-                  detailpagina <strong>Running</strong> toont en er nieuwe regels verschijnen onder
-                  <strong>Run history</strong>.</p>
-              </div>
+<h2 id="schrijven">Instellen hoe de agent schrijft</h2>
+<p>
+  Klik in de lijst links op <strong>Instellingen</strong>. Onder <strong>E-mail</strong> staat de kaart
+  <strong>Zo schrijft uw agent</strong>. Wat u invult, wordt vanzelf opgeslagen.
+</p>
+<ul>
+<li><strong>Reactiebelofte</strong> (vereist): wat de agent noemt als een klant vraagt wanneer hij antwoord krijgt,
+  bijvoorbeeld "Binnen één werkdag".</li>
+<li><strong>Schrijfstijl</strong> (optioneel): kort, maximaal 200 tekens. Bijvoorbeeld "vriendelijk en zakelijk".</li>
+<li><strong>Taal</strong>: standaard volgt de agent de taal van de klant. U kunt ook altijd Nederlands of altijd Engels
+  kiezen.</li>
+<li><strong>Lengte van antwoorden</strong>: kort (ongeveer 60 woorden), normaal (ongeveer 120) of uitgebreid (ongeveer 250).</li>
+</ul>
 
-              <h2>Problemen oplossen</h2>
+<div class="docs-media docs-media--shot">
+<a href="../assets/docs/agent-email-triage-8-schrijven.webp?v=20261021" target="_blank" rel="noopener"><img src="../assets/docs/agent-email-triage-8-schrijven.webp?v=20261021" alt="De kaart Zo schrijft uw agent met Reactiebelofte, Schrijfstijl, Taal en Lengte van antwoorden" width="679" height="505" loading="lazy" /></a>
+</div>
+<p class="docs-media-caption">De kaart <strong>Zo schrijft uw agent</strong>. Dezelfde kaart staat later op de pagina <strong>E-mail</strong>.</p>
 
-              <h3>Er verschijnen geen nieuwe runs</h3>
-              <p>
-                Controleer of er geen regel in de gekoppelde mailbox nieuwe e-mail onderschept voordat
-                de Inbox agent die te zien krijgt. De schermtekst hieronder is Engels — dat is de taal
-                waarin Google en Microsoft hun eigen documentatie schrijven; welke taal uw eigen mailbox
-                toont hangt af van uw account-instellingen, en de menunaam kan daardoor afwijken van wat
-                hieronder staat.
-              </p>
-              <p>
-                Gebruikt u Gmail? Klik op het <strong>Settings</strong>-pictogram rechtsboven, kies
-                <strong>See all settings</strong> en open het tabblad
-                <strong>Filters and Blocked Addresses</strong>. Zoek de filter op: staat bij de acties
-                <strong>Skip the Inbox (Archive it)</strong> of <strong>Apply the label</strong>
-                aangevinkt? Dan verplaatst Gmail het bericht mogelijk voordat Inbox agent het ziet. Klik
-                op <strong>Edit</strong> om de filter aan te passen, of op <strong>Delete</strong> om hem
-                te verwijderen.
-              </p>
-              <p>
-                Gebruikt u Outlook? Ga naar <strong>Settings</strong> → <strong>Mail</strong> →
-                <strong>Rules</strong> (in de klassieke Outlook-applicatie: <strong>File</strong> →
-                <strong>Manage Rules &amp; Alerts</strong>). Schakel de regel tijdelijk uit via de
-                schakelaar naast de regelnaam.
-              </p>
+<p>
+  Hoe de agent klanten aanspreekt (je of u) en welke onderwerpen hij nooit bespreekt, stelt u in bij
+  <a href="kennis-bedrijfsprofiel#bedrijfsprofiel">Wat uw medewerker weet</a>. Dat geldt voor e-mail en telefoon samen.
+  Onder de kaart staat <strong>Instructies</strong>: vaste afspraken die de agent altijd volgt, bovenop de standaard regels.
+</p>
 
-              <h3>Status staat op Paused</h3>
-              <p>
-                U kunt de status niet zelf wijzigen in het dashboard. Neem contact op met Mowi om de
-                agent weer te laten draaien.
-              </p>
+<h2 id="testen">Testen op uw eigen e-mail</h2>
+<p>
+  Rond eerst <a href="kennis-bedrijfsprofiel">Wat uw medewerker weet</a> af en koppel uw systemen, of sla dat laatste over
+  bij <strong>Koppel uw systemen</strong>. Daarna test u de agent.
+</p>
 
-              <h3>Een run heeft de status Failed</h3>
-              <p>
-                Bekijk de kolom <strong>Note</strong> bij die run onder <strong>Run history</strong> op de
-                detailpagina van de agent. Staat er een foutmelding? Neem contact op met Mowi en vermeld
-                de tekst uit <strong>Note</strong>.
-              </p>
+<div class="docs-steps">
+<div class="docs-step">
+<span class="docs-step-num">1</span>
+<div class="docs-step-body">
+<h3>Open Live → E-mail</h3>
+<p>Klik in de lijst links onder <strong>Live</strong> op <strong>E-mail</strong>.</p>
+<p class="docs-muted">U ziet nu de kaarten <strong>Stel uw agent een vraag</strong>, <strong>Test op uw eigen e-mail</strong>
+  en <strong>E-mail aanzetten</strong>.</p>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">2</span>
+<div class="docs-step-body">
+<h3>Stel een proefvraag</h3>
+<p>Typ onder <strong>Stel uw agent een vraag</strong> wat een klant zou vragen en klik op <strong>Test</strong>.</p>
+<p class="docs-muted">U ziet meteen het concept dat de agent zou schrijven. Er wordt niets verstuurd.</p>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">3</span>
+<div class="docs-step-body">
+<h3>Test op uw laatste 20 e-mails</h3>
+<p>Klik onder <strong>Test op uw eigen e-mail</strong> op <strong>Test op mijn laatste 20 e-mails</strong>.</p>
+<p class="docs-muted">Na een paar minuten ziet u onder <strong>Resultaten</strong> per e-mail de categorie, het onderwerp,
+  het concept en de map waarin de agent hem zou zetten. Er wordt niets verstuurd of verplaatst.</p>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">4</span>
+<div class="docs-step-body">
+<h3>Bevestig dat u de resultaten heeft bekeken</h3>
+<p>Loop de resultaten na en klik op <strong>Ik heb dit gecontroleerd</strong>.</p>
+<p class="docs-muted">In de kaart <strong>E-mail aanzetten</strong> staat nu <strong>Alles staat klaar</strong>.</p>
+</div>
+</div>
+</div>
 
-              <h3>Toegang tot de mailbox lijkt te zijn ingetrokken</h3>
-              <p>
-                Gebruikt u Gmail? Ga naar <strong>myaccount.google.com/linkedapps</strong>, kies
-                <strong>Access to your Google Account</strong> en zoek Mowi in de lijst. Klik op
-                <strong>See details</strong> om te zien welke toegang is verleend, of op
-                <strong>Remove access</strong> als u de koppeling zelf wilt intrekken — bijvoorbeeld om
-                daarna samen met Mowi opnieuw te koppelen.
-              </p>
-              <p>
-                Gebruikt u Microsoft 365? Ga naar <strong>myapplications.microsoft.com</strong>, zoek Mowi
-                in de lijst, klik op de <strong>···</strong>-knop naast de app en kies <strong>Manage
-                your application</strong>. Daar ziet u welke rechten zijn verleend en kunt u ze intrekken
-                via <strong>Revoke Permissions</strong>.
-              </p>
+<div class="docs-media docs-media--shot">
+<a href="../assets/docs/agent-email-triage-3-test.webp?v=20261021" target="_blank" rel="noopener"><img src="../assets/docs/agent-email-triage-3-test.webp?v=20261021" alt="De resultaten van de test op de laatste e-mails, met per e-mail een categorie, het onderwerp, een concept en de doelmap" width="679" height="1123" loading="lazy" /></a>
+</div>
+<p class="docs-media-caption">Zo ziet u per e-mail wat de agent zou doen.</p>
 
-              <h3>E-mails komen wel binnen, maar de agent reageert niet meteen</h3>
-              <p>
-                De Inbox agent draait op een vast schema, niet continu. Bekijk het schema onder de titel op
-                de detailpagina van de agent, of open <strong>Runs, last 14 days</strong> om te zien hoe
-                vaak de agent draait.
-              </p>
+<h2 id="aanzetten">De agent aanzetten</h2>
 
-              <h2>Volgende stappen</h2>
-              <p>
-                Wilt u dat een collega ook toegang krijgt tot het dashboard?
-                <a href="toegang-en-rollen">Lees Toegang en rollen</a>.
-              </p>
-              <p>
-                Loopt de agent nog niet zoals verwacht na deze stappen?
-                <a href="faq-agent-voert-geen-taken-uit">Lees Een agent voert geen taken uit</a>.
-              </p>
+<div class="docs-steps">
+<div class="docs-step">
+<span class="docs-step-num">1</span>
+<div class="docs-step-body">
+<h3>Klik op Activeren</h3>
+<p>Klik in de kaart <strong>E-mail aanzetten</strong> op <strong>Activeren</strong>.</p>
+<p class="docs-muted">U komt op de pagina <strong>E-mail</strong>, met het label <strong>Live</strong> en de regel
+  <strong>Verwerkt uw e-mail sinds</strong> met de datum van vandaag.</p>
+</div>
+</div>
+</div>
+
+<div class="docs-media docs-media--shot">
+<a href="../assets/docs/agent-email-triage-4-aanzetten.webp?v=20261021" target="_blank" rel="noopener"><img src="../assets/docs/agent-email-triage-4-aanzetten.webp?v=20261021" alt="De kaart E-mail aanzetten met de tekst Alles staat klaar en de knop Activeren" width="679" height="217" loading="lazy" /></a>
+</div>
+<p class="docs-media-caption">Is iets nog niet af, dan noemt de kaart wat er nog ontbreekt: de kennisbank, de
+  reactiebelofte, de koppelingen of de test.</p>
+
+<div class="docs-callout docs-callout-result">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8 12.5l2.5 2.5 5.5-6"/></svg>
+<p><strong>Uw agent verwerkt nu uw e-mail.</strong> Verwerkte e-mails zet hij in de mappen van uw sorteerregels, met een concept klaar. U verstuurt zelf.</p>
+</div>
+
+<p>
+  Wilt u het niet zelf afronden? Klik in de kaart op <strong>Of laat Mowi de rest voor u afronden</strong>.
+</p>
+
+<h2 id="goed-om-te-weten">Goed om te weten</h2>
+<ul>
+<li><strong>Uw Postvak IN wordt leger.</strong> Verwerkte e-mails staan in uw sorteermappen, bijvoorbeeld Leads of Vragen.</li>
+<li><strong>Zet gesprekweergave aan</strong> om een concept direct bij de ontvangen e-mail te zien.</li>
+<li><strong>De spammap blijft van u.</strong> De agent verwerkt alleen e-mail die in Postvak IN aankomt.</li>
+<li><strong>Eigen regels of filters gaan voor.</strong> Verplaatst een regel een e-mail uit Postvak IN, dan ziet de agent hem niet.</li>
+<li>Elke verwerkte e-mail kost 1 credit. Zie <a href="tegoed-en-credits">Tegoed en credits</a>.</li>
+</ul>
+
+<h2 id="instellingen">Sorteerregels, meldingen en automatisch versturen</h2>
+<p>
+  Na het aanzetten vindt u alle instellingen via <strong>Agent</strong> → <strong>E-mail</strong>. Bovenaan staan
+  <strong>Instructies</strong> en <strong>Deze maand</strong>, met het aantal verwerkte e-mails, concepten, leads en
+  urgente e-mails van deze maand. Daaronder staan <strong>Zo schrijft uw agent</strong> en de kaarten hieronder.
+</p>
+
+<h3>Sorteerregels</h3>
+<p>
+  Elke inkomende e-mail krijgt een categorie. <strong>Leads</strong> en <strong>Klantvragen</strong> krijgen een concept
+  en worden gesorteerd (<strong>Concept + sorteer</strong>). <strong>Facturen</strong> en <strong>Nieuwsbrieven</strong>
+  worden alleen gesorteerd. <strong>Overig</strong> blijft in uw inbox. Pas per categorie de <strong>Mapnaam</strong> aan,
+  of zet een categorie uit met het vinkje ervoor.
+</p>
+
+<div class="docs-media docs-media--shot">
+<a href="../assets/docs/agent-email-triage-5-sorteerregels.webp?v=20261021" target="_blank" rel="noopener"><img src="../assets/docs/agent-email-triage-5-sorteerregels.webp?v=20261021" alt="De kaart Sorteerregels met de categorieën Leads, Klantvragen, Facturen, Nieuwsbrieven en Overig, elk met een mapnaam" width="959" height="792" loading="lazy" /></a>
+</div>
+<p class="docs-media-caption">De sorteerregels, met per categorie de map.</p>
+
+<h3>Urgente meldingen</h3>
+<p>
+  Bij een urgente e-mail maakt de agent geen concept, maar krijgt u direct een melding. Dat staat aan voor
+  <strong>Urgent — klachten</strong> en <strong>Urgent — leads</strong>. Vul bij <strong>Ontvangers</strong> de adressen in,
+  met een komma ertussen. Laat u het leeg, dan gaat de melding naar de mailbox zelf.
+</p>
+
+<div class="docs-media docs-media--shot">
+<a href="../assets/docs/agent-email-triage-7-urgent.webp?v=20261021" target="_blank" rel="noopener"><img src="../assets/docs/agent-email-triage-7-urgent.webp?v=20261021" alt="De kaart Urgente meldingen met Urgent — klachten en Urgent — leads, elk met een veld Ontvangers" width="959" height="494" loading="lazy" /></a>
+</div>
+<p class="docs-media-caption">De kaart <strong>Urgente meldingen</strong>.</p>
+
+<h3>Automatisch versturen</h3>
+<p>
+  De agent schrijft altijd eerst een concept. Een categorie kan het recht verdienen om zelf te versturen. Klik bij die
+  categorie op <strong>Bekijken</strong>:
+</p>
+<ul>
+<li>Staat er <strong>Nog niet in aanmerking</strong>? Dan ziet u hoeveel dagen de agent live is en hoeveel concepten hij in
+  die categorie schreef. Nodig zijn 14 dagen en 25 concepten.</li>
+<li>Komt de categorie in aanmerking? Beoordeel dan de laatste tien concepten met <strong>Zou ik zo versturen</strong> of
+  <strong>Had aanpassing nodig</strong> en klik op <strong>Beoordeling versturen</strong>. Bij minimaal 9 van de 10 correct
+  staat de categorie op <strong>Ontgrendeld</strong>.</li>
+</ul>
+<p>
+  Ontgrendeld betekent nog niet dat de agent zelf verstuurt. Dat kiest u zelf: klik bij de categorie op
+  <strong>Automatisch versturen aanzetten</strong> en bevestig met <strong>Aanzetten</strong>. Het label wordt
+  <strong>Verstuurt zelf</strong>. Met <strong>Uitzetten</strong> maakt de agent in die categorie weer concepten.
+</p>
+
+<div class="docs-media docs-media--shot">
+<a href="../assets/docs/agent-email-triage-6-automatisch.webp?v=20261021" target="_blank" rel="noopener"><img src="../assets/docs/agent-email-triage-6-automatisch.webp?v=20261021" alt="De kaart Automatisch versturen: Leads Vergrendeld, Klantvragen Ontgrendeld met de knop Automatisch versturen aanzetten" width="959" height="347" loading="lazy" /></a>
+</div>
+<p class="docs-media-caption">Een categorie begint als <strong>Vergrendeld</strong>. Na het ontgrendelen zet u het versturen zelf aan.</p>
+
+<h3 id="zelflerend">Zelflerend</h3>
+<p>
+  Met <strong>Zelflerend</strong> leest Mowi mee met e-mails die u zelf beantwoordt. Daaruit stelt Mowi vragen met
+  antwoorden voor. U beslist wat de agent overneemt. De kaart laat zien sinds wanneer het aan staat, hoeveel beantwoorde
+  e-mails Mowi bekeek en hoeveel voorstellen op u wachten.
+</p>
+<ul>
+<li><strong>Aanzetten</strong>: klik op <strong>Aanzetten</strong> en bevestig in het venster. Mowi kijkt dan eerst naar de
+  afgelopen 30 dagen, daarna elke dag naar nieuwe antwoorden zolang de agent live staat.</li>
+<li><strong>Voorstellen bekijken</strong>: klik bij <strong>voorstellen wachten op u</strong> op <strong>Bekijken</strong>.
+  Neem een voorstel over, pas het aan of sla het over. Wat u overneemt, staat daarna bij uw vragen en antwoorden.</li>
+<li><strong>Uitzetten</strong>: klik op <strong>Uitzetten</strong> en bevestig. Mowi leest dan niet meer mee. Wat u heeft
+  overgenomen, blijft staan.</li>
+</ul>
+
+<div class="docs-media docs-media--shot">
+<a href="../assets/docs/agent-email-triage-9-zelflerend.webp?v=20261021" target="_blank" rel="noopener"><img src="../assets/docs/agent-email-triage-9-zelflerend.webp?v=20261021" alt="De kaart Zelflerend met het label Aan, sinds wanneer, het aantal bekeken e-mails, de wachtende voorstellen en de knop Uitzetten" width="959" height="309" loading="lazy" /></a>
+</div>
+<p class="docs-media-caption">De kaart <strong>Zelflerend</strong>, met de voorstellen die op u wachten.</p>
+
+<div class="docs-callout docs-callout-note">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5"/><circle cx="12" cy="8" r=".4" fill="currentColor"/></svg>
+<p>Mowi leert alleen van e-mails die u zelf beantwoord heeft. Staat er <strong>Nog geen beantwoorde e-mails gevonden</strong>,
+  dan stonden er in uw verzonden e-mail nog geen antwoorden op vragen van klanten.</p>
+</div>
+
+<h3>Geblokkeerde afzenders</h3>
+<p>
+  Afzenders onder <strong>Geblokkeerde afzenders</strong> krijgen nooit een automatisch antwoord. Vul een
+  <strong>E-mailadres</strong> in en klik op <strong>Toevoegen</strong>.
+</p>
+
+<h3>Pauzeren of ontkoppelen</h3>
+<p>
+  Klik rechtsboven op de pagina <strong>E-mail</strong> op <strong>Meer acties</strong>, daarna op <strong>Pauzeer</strong>, en
+  bevestig met <strong>Pauzeren</strong>. Er worden dan geen e-mails meer verwerkt tot u de agent weer aanzet met
+  <strong>Activeer</strong>, in hetzelfde menu. Onder
+  <strong>Mailboxkoppeling</strong> staat <strong>Koppeling verwijderen</strong>: dat pauzeert de agent totdat u opnieuw
+  verbindt.
+</p>
+
+<h2>Problemen oplossen</h2>
+
+<h3>"Verbinding mislukt"</h3>
+<p>
+  Na <strong>Koppelen</strong> staat achter deze melding wat er misging. Controleer de IMAP-server, de poort en het
+  app-wachtwoord. Gebruik bij Gmail en IMAP nooit uw gewone wachtwoord: de meeste providers vragen een apart app-wachtwoord.
+</p>
+
+<h3>"De Microsoft-koppeling is niet afgerond"</h3>
+<p>
+  U heeft het inloggen bij Microsoft afgebroken, of uw organisatie vraagt toestemming van een beheerder. Klik opnieuw op
+  <strong>Koppel met Microsoft</strong>. Lukt het niet, gebruik dan het document voor uw IT-partner of laat Mowi de koppeling
+  afronden. U ziet dan <strong>Verzoek verstuurd — wij maken de koppeling voor u af binnen 1 werkdag.</strong>
+</p>
+
+<h3>"Koppel eerst uw mailbox voordat u kunt testen"</h3>
+<p>
+  De test op uw eigen e-mail werkt pas met een gekoppelde mailbox. Rond eerst <strong>Mailbox koppelen</strong> af.
+</p>
+
+<h3>Een e-mail lijkt verdwenen</h3>
+<p>
+  Kijk in uw sorteermappen. De agent verplaatst verwerkte e-mails direct naar de map van hun categorie.
+</p>
+
+<h3>De agent ziet een e-mail niet</h3>
+<p>
+  Controleer of een eigen regel of filter de e-mail uit Postvak IN haalt voordat de agent hem ziet.
+</p>
+<ul>
+<li><strong>Gmail</strong>: klik rechtsboven op <strong>Instellingen</strong> (het tandwiel), daarna op <strong>Alle instellingen
+  bekijken</strong>, en open het tabblad <strong>Filters en geblokkeerde adressen</strong>. Pas een filter aan met
+  <strong>Bewerken</strong> of haal hem weg met <strong>Verwijderen</strong>.</li>
+<li><strong>Outlook op het web of de nieuwe Outlook</strong>: klik op <strong>Instellingen</strong>, daarna op
+  <strong>E-mail</strong> en <strong>Regels</strong>. Zet een regel uit met de schakelaar naast de naam.</li>
+<li><strong>Klassieke Outlook</strong>: kies op het tabblad <strong>Bestand</strong> de optie <strong>Regels en
+  waarschuwingen beheren</strong> en haal het vinkje naast de regel weg.</li>
+</ul>
+<!-- Nagelopen 2026-10-21 op support.google.com/mail/answer/6579?hl=nl en de Nederlandse Microsoft-supportpagina "Regels voor Postvak IN gebruiken in Outlook". Schermen in het Engels tonen See all settings / Filters and Blocked Addresses en Settings > Mail > Rules. -->
+
+<h2>Volgende stappen</h2>
+<p>
+  Wilt u dat de agent antwoordt met de status van een bestelling? <a href="koppelingen-overzicht">Lees Koppelingen: overzicht</a>.
+</p>
+<p>
+  Wilt u dat een collega de urgente meldingen krijgt? Vul zijn adres in bij <strong>Urgente meldingen</strong>, of
+  <a href="toegang-en-rollen">lees Toegang en rollen</a>.
+</p>
             </article>
 
             <nav class="docs-prevnext" id="docsPrevNext" aria-label="Vorige en volgende pagina"></nav>
@@ -242,7 +426,7 @@
     </div>
   </div>
 
-  <script src="../js/docs-nav.js?v=20260813-1"></script>
+  <script src="../js/docs-nav.js?v=20261021"></script>
   <script src="../js/docs.js?v=20260802"></script>
 </body>
 </html>

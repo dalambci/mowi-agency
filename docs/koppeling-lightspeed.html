@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lightspeed eCom koppelen — Documentatie — Mowi</title>
+  <meta name="description" content="Koppel uw Lightspeed eCom-webshop aan het dashboard, zodat uw agent bestelstatus opzoekt. Met de stappen in Lightspeed en in het dashboard." />
+  <link rel="preconnect" href="https://fonts.bunny.net" />
+  <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/docs.css?v=20261021" />
+  <link rel="icon" href="../assets/icon-192.png?v=20260904-3" />
+  <link rel="shortcut icon" href="../assets/icon-192.png?v=20260904-3" />
+  <link rel="apple-touch-icon" href="../assets/apple-icon-180.png?v=20260904-3" />
+  <link rel="apple-touch-icon-precomposed" href="../assets/apple-icon-180.png?v=20260904-3" />
+  <script defer data-domain="mowi.agency" src="https://plausible.io/js/script.js"></script>
+</head>
+<body class="docs" data-docs-href="koppeling-lightspeed">
+  <div class="docs-shell">
+    <header class="docs-header">
+      <div class="docs-header-inner">
+        <button class="docs-menu-toggle" id="docsMenuToggle" aria-expanded="false" aria-controls="docsSidebar" aria-label="Menu openen">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+        <a href="/" class="docs-wordmark" aria-label="Mowi - home">
+          <img src="../assets/mowi-icon.png" alt="" class="docs-wordmark-icon" />
+          <img src="../assets/mowi-wordmark.png" alt="Mowi" class="docs-wordmark-text" />
+        </a>
+        <span class="docs-header-divider" aria-hidden="true"></span>
+        <span class="docs-header-label">Documentatie</span>
+        <div class="docs-header-actions">
+          <a href="/" class="docs-header-link">Terug naar website</a>
+          <a href="https://my.mowi.agency/login" class="docs-header-link docs-header-link-primary" target="_blank" rel="noopener">Inloggen</a>
+        </div>
+      </div>
+    </header>
+    <div class="docs-body">
+      <div class="docs-sidebar-backdrop" id="docsSidebarBackdrop"></div>
+      <aside class="docs-sidebar" id="docsSidebar">
+        <nav class="docs-sidebar-nav" id="docsSidebarNav" aria-label="Documentatie-navigatie"></nav>
+      </aside>
+      <div class="docs-main">
+        <div class="docs-content-wrap">
+          <div class="docs-column">
+            <nav class="docs-breadcrumb" id="docsBreadcrumb" aria-label="Broodkruimel"></nav>
+
+            <article class="docs-article">
+<h1>Lightspeed eCom koppelen</h1>
+
+<p class="docs-dek">
+  Via de Lightspeed eCom-koppeling zoekt uw agent de status van een bestelling rechtstreeks op in uw
+  webshop, bijvoorbeeld als een klant belt of mailt met "waar blijft mijn bestelling?". De
+  koppeling is alleen lezend: Mowi past nooit iets aan in uw webshop.
+</p>
+<p>
+  Na deze stappen is uw webshop gekoppeld aan het dashboard en heeft het dashboard de verbinding
+  getest.
+</p>
+
+<div class="docs-prereqs">
+<div class="docs-prereqs-label">Vereisten</div>
+<ul>
+<li><span>Toegang tot het beheer van uw Lightspeed eCom-webshop, of iemand die dat namens u kan doen (bijvoorbeeld uw webbouwer).</span></li>
+<li><span>Toegang tot <strong>het dashboard</strong>.</span></li>
+</ul>
+</div>
+<!-- VERIFY: e-tailize.com/help/connections/connect-lightspeed (secondary source) says the Lightspeed eCom API needs an Advanced or Professional subscription. Not found in Lightspeed's official help (the plan article ecom-support.lightspeedhq.com/hc/en-us/articles/220662287 does not mention the API). Add it as a prerequisite if Lightspeed confirms. -->
+
+<h2>Wat zijn de API key, API secret en het API-adres?</h2>
+<p>
+  Lightspeed geeft Mowi geen toegang met uw eigen inloggegevens. U maakt in Lightspeed zelf een aparte
+  sleutel aan: een <strong>API key</strong> en een <strong>API secret</strong>, met precies de rechten die u aanvinkt.
+  Voor deze koppeling is dat alleen <strong>Read</strong> (lezen) bij <strong>Orders</strong> en bij
+  <strong>Customers</strong>. Customers is nodig om bestellingen te vinden op het e-mailadres van een klant. U kunt
+  de sleutel op elk moment zelf uitschakelen in Lightspeed.
+</p>
+<p>
+  Het <strong>API-adres</strong> hangt af van waar uw webshop draait. Het ingebouwde adres van een Europese
+  webshop eindigt op <code>.webshopapp.com</code>, dat van een Noord-Amerikaanse webshop op
+  <code>.shoplightspeed.com</code>. Het API-adres gebruikt hetzelfde domein, met de taalcode van uw webshop
+  erachter:
+</p>
+<ul>
+<li>Europa: <code>https://api.webshopapp.com/nl/</code></li>
+<li>Noord-Amerika: <code>https://api.shoplightspeed.com/nl/</code></li>
+</ul>
+<p>
+  Gebruikt uw webshop geen Nederlands? Vervang <code>nl</code> dan door de taalcode van uw webshop,
+  bijvoorbeeld <code>fr</code> of <code>de</code>.
+</p>
+
+<h2>De koppeling inrichten</h2>
+
+<div class="docs-steps">
+<div class="docs-step">
+<span class="docs-step-num">1</span>
+<div class="docs-step-body">
+<h3>Open Koppelingen in het dashboard</h3>
+<p>Klik in de zijbalk op <strong>Settings</strong> en daarna bij <strong>Koppelingen</strong> op <strong>Openen</strong>.
+  U komt er ook via het menu onder uw initialen linksboven (<strong>Koppeling(en)</strong>) of via de
+  setupstap <strong>Koppel uw systemen</strong>.</p>
+<p class="docs-muted">U ziet nu de pagina <strong>Koppelingen</strong>, met tegels onder <strong>Mailbox</strong>,
+  <strong>Webshops</strong> en <strong>Reserveren &amp; afspraken</strong>.</p>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">2</span>
+<div class="docs-step-body">
+<h3>Klik op de tegel Lightspeed eCom</h3>
+<p>Klik onder <strong>Webshops</strong> op <strong>Lightspeed eCom</strong>.</p>
+<p class="docs-muted">Het paneel <strong>Lightspeed eCom koppelen</strong> klapt open, met de stappen en de velden
+  <strong>API-adres</strong>, <strong>API Key</strong> en <strong>API Secret</strong>.</p>
+</div>
+</div>
+</div>
+
+<div class="docs-media docs-media--shot">
+<a href="../assets/docs/koppeling-lightspeed-1-dashboard.webp?v=20261021" target="_blank" rel="noopener"><img src="../assets/docs/koppeling-lightspeed-1-dashboard.webp?v=20261021" alt="Het paneel Lightspeed eCom koppelen in het dashboard, met de stappen en de velden API-adres, API Key en API Secret" width="590" height="900" loading="lazy" /></a>
+</div>
+<p class="docs-media-caption">Het paneel <strong>Lightspeed eCom koppelen</strong> in het dashboard.</p>
+
+<div class="docs-steps">
+<div class="docs-step">
+<span class="docs-step-num">3</span>
+<div class="docs-step-body">
+<h3>Open Developers in Lightspeed</h3>
+<p>Log in op het beheer van uw Lightspeed eCom-webshop en ga naar <strong>Instellingen</strong> (Settings) →
+  <strong>Shopinstellingen</strong> (Store Settings) → <strong>Developers</strong>.</p>
+<p class="docs-muted">U ziet nu de pagina <strong>Developers</strong>, met de knop <strong>Nieuwe API-sleutel</strong>
+  (New API key).</p>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">4</span>
+<div class="docs-step-body">
+<h3>Maak een nieuwe API-sleutel aan</h3>
+<p>Klik op <strong>Nieuwe API-sleutel</strong> (New API key), vul als naam bijvoorbeeld "Mowi" in en klik op
+  <strong>Opslaan</strong> (Save).</p>
+<p class="docs-muted">U ziet nu de nieuwe sleutel, met onder <strong>INSTELLINGEN</strong> (SETTINGS) een schakelaar
+  en een lijst met toestemmingen.</p>
+<div class="docs-callout docs-callout-note">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5"/><circle cx="12" cy="8" r=".4" fill="currentColor"/></svg>
+<p>Wilt u meer dan één API-sleutel aanmaken, bijvoorbeeld omdat u er al een gebruikt voor een andere koppeling? Dan vraagt Lightspeed u contact op te nemen met hun support.</p>
+</div>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">5</span>
+<div class="docs-step-body">
+<h3>Schakel de sleutel in en geef alleen leesrechten</h3>
+<p>Zet onder <strong>INSTELLINGEN</strong> (SETTINGS) de schakelaar aan om de sleutel in te schakelen. Vink bij
+  <strong>Orders</strong> (bestellingen) en bij <strong>Customers</strong> (klanten) alleen <strong>Read</strong> (lezen)
+  aan. Klik op <strong>Opslaan</strong> (Save).</p>
+<!-- VERIFY: the permission names Orders, Customers and Read come from the screenshot in Lightspeed's official article "Creating API keys" (ecom-support.lightspeedhq.com/hc/en-us/articles/1260804034770, English UI, 2021). The Dutch labels are not confirmed; the Dutch article only says "Selecteer de selectievakjes van de toestemmingen die je wilt verlenen". -->
+<p class="docs-muted">U ziet nu onder <strong>DETAILS</strong> uw API key. De API secret is nog verborgen.</p>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">6</span>
+<div class="docs-step-body">
+<h3>Toon de API secret</h3>
+<p>Klik bij de API secret op <strong>Weergeven</strong> (Show).</p>
+<p class="docs-muted">U ziet nu de API secret in leesbare tekst.</p>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">7</span>
+<div class="docs-step-body">
+<h3>Vul het formulier in en klik op Koppelen</h3>
+<p>Ga terug naar het dashboard. Vul bij <strong>API-adres</strong> het API-adres van uw webshop in, voor een
+  Europese webshop <code>https://api.webshopapp.com/nl/</code>. Plak de API key en de API secret in de velden
+  <strong>API Key</strong> en <strong>API Secret</strong>. Klik op <strong>Koppelen</strong>.</p>
+<p class="docs-muted">Het dashboard test de verbinding meteen en toont de melding
+  <strong>Koppeling opgeslagen en getest — de verbinding werkt.</strong> De tegel Lightspeed eCom krijgt het
+  label <strong>Verbonden</strong>.</p>
+</div>
+</div>
+</div>
+
+<div class="docs-callout docs-callout-result">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8 12.5l2.5 2.5 5.5-6"/></svg>
+<p><strong>De koppeling werkt</strong> als de tegel Lightspeed eCom <strong>Verbonden</strong> toont. Open de tegel later opnieuw om te zien wanneer de verbinding voor het laatst getest is, of klik op <strong>Test verbinding</strong>.</p>
+</div>
+
+<p>
+  Een koppeling geldt voor elk kanaal van uw agent: aan de telefoon en in de e-mail zoekt hij
+  dezelfde bestellingen op. Heeft u meer dan één webshop? Open de tegel en vul het formulier onder
+  <strong>Nog een Lightspeed eCom koppelen</strong> in.
+</p>
+
+<h2>Problemen oplossen</h2>
+
+<h3>"Koppeling opgeslagen, maar de test is nog niet gelukt"</h3>
+<p>
+  Het dashboard heeft uw gegevens bewaard, maar kon er nog geen bestelling mee ophalen. Open de tegel
+  Lightspeed eCom: onder de status staat wat er misging. Pas de gegevens aan via
+  <strong>Sleutel wijzigen</strong> en klik op <strong>Opslaan</strong>. Het dashboard test dan opnieuw.
+</p>
+
+<h3>"De API-sleutel/secret werd geweigerd (401)"</h3>
+<p>
+  Lightspeed herkent de sleutel niet. Controleer in Lightspeed of de sleutel is ingeschakeld en kopieer de
+  API key en de API secret opnieuw. Controleer ook het domein in het API-adres: een Europese webshop
+  gebruikt <code>api.webshopapp.com</code>, een Noord-Amerikaanse <code>api.shoplightspeed.com</code>. Vul de
+  gegevens in via <strong>Sleutel wijzigen</strong> in het paneel Lightspeed eCom.
+</p>
+
+<h3>"De API-sleutel mist rechten (403)"</h3>
+<p>
+  De sleutel staat uit of mag de bestellingen niet lezen. Zet in Lightspeed de schakelaar van de sleutel aan, vink
+  bij <strong>Orders</strong> en bij <strong>Customers</strong> de optie <strong>Read</strong> aan en klik op
+  <strong>Opslaan</strong> (Save). Klik daarna in het dashboard op <strong>Test verbinding</strong>.
+</p>
+
+<h3>"De API-sleutel mag geen klanten lezen"</h3>
+<p>
+  De sleutel mag de bestellingen lezen, maar niet de klanten. Die heeft de agent nodig om bestellingen op
+  e-mailadres te vinden. Vink in Lightspeed bij <strong>Customers</strong> ook <strong>Read</strong> aan, klik op
+  <strong>Opslaan</strong> (Save) en daarna in het dashboard op <strong>Test verbinding</strong>.
+</p>
+
+<h3>"Geen Lightspeed-omgeving gevonden op dit adres (404)"</h3>
+<p>
+  Het API-adres klopt niet. Het begint met <code>https://api.webshopapp.com/</code> of
+  <code>https://api.shoplightspeed.com/</code> en eindigt op de taalcode van uw webshop, zoals
+  <code>nl/</code>. Pas het adres aan via <strong>Sleutel wijzigen</strong>.
+</p>
+
+<h3>"De webshop is niet bereikbaar"</h3>
+<p>
+  Het dashboard kon het API-adres niet bereiken. Controleer het adres op typefouten.
+</p>
+
+<h2>Voor uw IT-partner</h2>
+<p>
+  Regelt uw webbouwer of IT-partner de Lightspeed-kant? Kopieer onderstaand verzoek en stuur het door.
+</p>
+<div class="docs-token-row">
+<div class="docs-token-value docs-token-value--block" id="itPartnerEmailLightspeed">Onderwerp: Lightspeed eCom-koppeling voor Mowi instellen
+
+Beste [naam IT-partner],
+
+Voor de koppeling van ons Mowi-dashboard met onze Lightspeed eCom-webshop hebben we het volgende nodig:
+
+1. Log in op het beheer van de webshop en ga naar Instellingen (Settings) > Shopinstellingen (Store Settings) > Developers.
+2. Klik op "Nieuwe API-sleutel" (New API key), vul als naam "Mowi" in en klik op "Opslaan" (Save).
+3. Zet de sleutel aan met de schakelaar onder INSTELLINGEN (SETTINGS). Vink bij Orders en bij Customers alleen "Read" aan. Schrijfrechten zijn niet nodig. Klik op "Opslaan" (Save).
+4. Deel de API key, de API secret (zichtbaar via "Weergeven" (Show)) en het API-adres van de webshop via een veilig kanaal met ons, niet per e-mail in platte tekst. Het API-adres is https://api.webshopapp.com/nl/ voor een Europese webshop, of https://api.shoplightspeed.com/nl/ voor een Noord-Amerikaanse.
+
+Met vriendelijke groet,
+[uw naam]</div>
+<button type="button" class="docs-copy-btn" data-copy-target="itPartnerEmailLightspeed">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
+<span class="docs-copy-btn-label">Kopiëren</span>
+</button>
+</div>
+
+<h2>Volgende stappen</h2>
+<p>
+  Wilt u horen hoe uw agent een bestelling opzoekt? <a href="telefoon-instellen#testen">Test hem in de browser</a>.
+</p>
+<p>
+  Werkt de koppeling later niet meer? <a href="faq-koppeling-werkt-niet">Lees Een koppeling werkt niet meer</a>.
+</p>
+            </article>
+
+            <nav class="docs-prevnext" id="docsPrevNext" aria-label="Vorige en volgende pagina"></nav>
+          </div>
+
+          <aside class="docs-toc" id="docsToc">
+            <div class="docs-toc-label">Op deze pagina</div>
+            <ol id="docsTocList"></ol>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/docs-nav.js?v=20261021"></script>
+  <script src="../js/docs.js?v=20260802"></script>
+</body>
+</html>

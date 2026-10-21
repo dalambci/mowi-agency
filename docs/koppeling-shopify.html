@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shopify koppelen — Documentatie — Mowi</title>
-  <meta name="description" content="Zo koppelt u uw Shopify-winkel aan het dashboard: Mowi richt de koppeling voor u in, u keurt de toegang goed. Inclusief wat Mowi wel en niet mag zien." />
+  <meta name="description" content="Koppel uw Shopify-webshop aan het dashboard, zodat uw agent bestelstatus opzoekt. Met de knop Koppel met Shopify en de bevestiging in Shopify." />
   <link rel="preconnect" href="https://fonts.bunny.net" />
   <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/docs.css?v=20260821" />
+  <link rel="stylesheet" href="../css/docs.css?v=20261021" />
   <link rel="icon" href="../assets/icon-192.png?v=20260904-3" />
   <link rel="shortcut icon" href="../assets/icon-192.png?v=20260904-3" />
   <link rel="apple-touch-icon" href="../assets/apple-icon-180.png?v=20260904-3" />
@@ -44,179 +44,202 @@
             <nav class="docs-breadcrumb" id="docsBreadcrumb" aria-label="Broodkruimel"></nav>
 
             <article class="docs-article">
-              <h1>Shopify koppelen</h1>
+<h1>Shopify koppelen</h1>
 
-              <p class="docs-dek">
-                Via de Shopify-koppeling zoekt uw agent bestelstatus rechtstreeks op in uw winkel —
-                bijvoorbeeld wanneer een klant vraagt "waar blijft mijn bestelling?". De koppeling is
-                alleen lezend: er wordt nooit iets in uw winkel aangepast.
-              </p>
-              <p>
-                Op deze pagina leest u waarom Shopify deze koppeling anders werkt dan de andere, en welke
-                stappen u zelf zet om hem in gebruik te nemen.
-              </p>
+<p class="docs-dek">
+  Via de Shopify-koppeling zoekt uw agent de status van een bestelling rechtstreeks op in uw
+  webshop, bijvoorbeeld als een klant belt of mailt met "waar blijft mijn bestelling?". De
+  koppeling is alleen lezend: Mowi past nooit iets aan in uw webshop.
+</p>
+<p>
+  Na deze stappen is uw webshop gekoppeld aan het dashboard en heeft het dashboard de verbinding
+  getest.
+</p>
+<!-- VERIFY: distribution of the "Mowi Koppeling" Shopify app. The vault (Website/voice-landers-2026-10.md; Promotion plan 2026-10) says it is probably still custom distribution. Shopify's help (help.shopify.com/nl/manual/apps/install-setup-apps) says a custom app can only be installed in stores of the same organization, not by other merchants. If that is still the case, this flow only works for Sal's own store. Check the Dev Dashboard before publishing this page. -->
 
-              <div class="docs-callout docs-callout-warning">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4l9 16H3z"/><path d="M12 10v4"/><circle cx="12" cy="17" r=".4" fill="currentColor"/></svg>
-                <p><strong>Deze koppeling zet u niet zelf in elkaar.</strong> Shopify heeft de mogelijkheid
-                  om zelf een koppelsleutel aan te maken uit het winkelbeheer gehaald. Wij richten de
-                  koppeling daarom voor u in — u hoeft alleen contact op te nemen en één link te
-                  bevestigen.</p>
-              </div>
+<div class="docs-prereqs">
+<div class="docs-prereqs-label">Vereisten</div>
+<ul>
+<li><span>Het .myshopify.com-adres van uw winkel. Hieronder leest u waar u dat vindt.</span></li>
+<li><span>Een Shopify-account waarmee u apps mag installeren: de eigenaar van de winkel, of een medewerker met de toestemming <strong>Apps en kanalen beheren en installeren</strong> (Manage and install apps and channels) die zelf ook bestellingen mag bekijken.</span></li>
+<li><span>Toegang tot <strong>het dashboard</strong>.</span></li>
+</ul>
+</div>
 
-              <div class="docs-prereqs">
-                <div class="docs-prereqs-label">Vereisten</div>
-                <ul>
-                  <li>Eigenaar- of beheerdersrechten in uw Shopify-winkel (u moet de koppeling kunnen
-                    goedkeuren).</li>
-                  <li>Het <code>.myshopify.com</code>-adres van uw winkel bij de hand.</li>
-                  <li>Toegang tot <strong>het dashboard</strong> (inloggegevens van uw organisatie).</li>
-                </ul>
-              </div>
+<h2>Wat bevestigt u in Shopify?</h2>
+<p>
+  U geeft Mowi geen wachtwoord en geen sleutel. U installeert in Shopify de app van Mowi,
+  <strong>Mowi Koppeling</strong>, en bevestigt welke gegevens die mag bekijken.
+  <!-- VERIFY: app name "Mowi Koppeling" comes from a code comment in config/shop_platforms.php and the vault, not from the live Shopify install screen. -->
+  Mowi vraagt alleen leestoegang tot uw bestellingen, ook tot bestellingen die ouder zijn dan 60 dagen.
+  Zonder dat laatste recht ziet een app alleen de bestellingen van de afgelopen 60 dagen.
+</p>
+<p>
+  Bij een bestelling horen ook klantgegevens, zoals het e-mailadres en de postcode. Daarmee controleert
+  uw agent of de bestelling bij de klant hoort. U kunt de toegang op elk moment intrekken door de app in
+  Shopify te verwijderen, via <strong>Instellingen</strong> (Settings) → <strong>Apps</strong>.
+</p>
 
-              <h2>Waarom u dit niet zelf kunt instellen</h2>
-              <p>
-                Bij WooCommerce maakt u zelf een sleutel aan in uw eigen webshopbeheer. Bij Shopify kan dat
-                niet meer. Shopify heeft het aanmaken van een eigen koppel-app uit het winkelbeheer
-                verwijderd: waar vroeger onder <strong>Instellingen</strong> → <strong>Apps</strong> een
-                knop stond om zelf een app te maken, verwijst die pagina nu alleen nog door naar een
-                aparte ontwikkelaarsomgeving. Ook toont Shopify de koppelsleutel niet meer op het scherm —
-                die moet via een technische uitwisseling opgehaald worden.
-                <!-- VERIFY: vastgesteld op 2026-08-13 in een echte Shopify-winkel (de pagina
-                     Instellingen > Apps > App development bood alleen nog "Build apps in Dev Dashboard")
-                     en bevestigd in Shopify's eigen documentatie: "You can no longer create new custom
-                     apps in the Shopify admin" en tokens verschijnen niet meer in de interface. Controleer
-                     opnieuw als Shopify dit terugdraait. -->
-              </p>
-              <p>
-                Het resultaat is hetzelfde als bij de andere koppelingen — alleen doen wij het technische
-                deel. U houdt de controle: u keurt de toegang goed, en u kunt die op elk moment weer
-                intrekken.
-              </p>
+<h2>De koppeling inrichten</h2>
 
-              <h2>De koppeling inrichten</h2>
+<div class="docs-steps">
+<div class="docs-step">
+<span class="docs-step-num">1</span>
+<div class="docs-step-body">
+<h3>Open Koppelingen in het dashboard</h3>
+<p>Klik in de zijbalk op <strong>Settings</strong> en daarna bij <strong>Koppelingen</strong> op <strong>Openen</strong>.
+  U komt er ook via het menu onder uw initialen linksboven (<strong>Koppeling(en)</strong>) of via de
+  setupstap <strong>Koppel uw systemen</strong>.</p>
+<p class="docs-muted">U ziet nu de pagina <strong>Koppelingen</strong>, met tegels onder <strong>Mailbox</strong>,
+  <strong>Webshops</strong> en <strong>Reserveren &amp; afspraken</strong>.</p>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">2</span>
+<div class="docs-step-body">
+<h3>Klik op de tegel Shopify</h3>
+<p>Klik onder <strong>Webshops</strong> op <strong>Shopify</strong>.</p>
+<p class="docs-muted">Het paneel <strong>Shopify koppelen</strong> klapt open, met de stappen, het veld
+  <strong>Shopify-adres</strong> en de knop <strong>Koppel met Shopify</strong>.</p>
+</div>
+</div>
+</div>
 
-              <div class="docs-steps">
-                <div class="docs-step">
-                  <span class="docs-step-num">1</span>
-                  <div class="docs-step-body">
-                    <h3>Vraag de koppeling aan</h3>
-                    <p>Open <a href="https://my.mowi.agency/support" target="_blank" rel="noopener">Support</a>
-                      in het dashboard en meld dat u Shopify wilt koppelen. Vermeld daarbij het
-                      <code>.myshopify.com</code>-adres van uw winkel.</p>
-                    <p class="docs-muted">U ontvangt van ons één link waarmee u de koppeling goedkeurt.</p>
-                  </div>
-                </div>
+<div class="docs-media docs-media--shot">
+<a href="../assets/docs/koppeling-shopify-1-dashboard.webp?v=20261021" target="_blank" rel="noopener"><img src="../assets/docs/koppeling-shopify-1-dashboard.webp?v=20261021" alt="Het paneel Shopify koppelen in het dashboard, met de stappen, het veld Shopify-adres en de knop Koppel met Shopify" width="590" height="522" loading="lazy" /></a>
+</div>
+<p class="docs-media-caption">Het paneel <strong>Shopify koppelen</strong> in het dashboard.</p>
 
-                <div class="docs-step">
-                  <span class="docs-step-num">2</span>
-                  <div class="docs-step-body">
-                    <h3>Keur de toegang goed</h3>
-                    <p>Open de link die u van ons krijgt terwijl u ingelogd bent in uw Shopify-winkel.
-                      Shopify laat u zien welke toegang wordt gevraagd — bestellingen en klantgegevens
-                      <strong>lezen</strong> — en u bevestigt dat.</p>
-                    <p class="docs-muted">Shopify stuurt u daarna terug naar Mowi en wij ronden de
-                      koppeling af.</p>
-                  </div>
-                </div>
+<div class="docs-steps">
+<div class="docs-step">
+<span class="docs-step-num">3</span>
+<div class="docs-step-body">
+<h3>Zoek uw .myshopify.com-adres op</h3>
+<p>Log in op uw Shopify-beheercentrum en ga naar <strong>Instellingen</strong> (Settings) →
+  <strong>Domeinen</strong> (Domains).</p>
+<p class="docs-muted">U ziet nu de pagina <strong>Domeinen</strong>, met het adres van uw winkel dat eindigt op
+  <code>.myshopify.com</code>.</p>
+<div class="docs-callout docs-callout-note">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5"/><circle cx="12" cy="8" r=".4" fill="currentColor"/></svg>
+<p>Het adres staat ook in de adresbalk van uw browser als u in Shopify bent ingelogd. Bij
+  <code>admin.shopify.com/store/voorbeeldwinkel</code> hoort <code>voorbeeldwinkel.myshopify.com</code>.</p>
+</div>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">4</span>
+<div class="docs-step-body">
+<h3>Vul het adres in en klik op Koppel met Shopify</h3>
+<p>Ga terug naar het dashboard. Vul bij <strong>Shopify-adres</strong> het adres in, bijvoorbeeld
+  <code>voorbeeldwinkel.myshopify.com</code>. Klik op <strong>Koppel met Shopify</strong>.</p>
+<p class="docs-muted">U ziet nu in Shopify het scherm <strong>App installeren</strong> (Install app), met de gegevens
+  die de app mag bekijken. Bent u nog niet ingelogd, dan vraagt Shopify u eerst in te loggen.</p>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">5</span>
+<div class="docs-step-body">
+<h3>Installeer de app in Shopify</h3>
+<p>Klik op <strong>App installeren</strong> (Install app).</p>
+<!-- VERIFY: button label on the install screen. Shopify's help (help.shopify.com/nl/manual/apps/install-setup-apps) shows "App installeren" (Install app) for install links and custom apps, and "Installeren" (Install) for the App Store flow. Which one our OAuth link shows is not confirmed. -->
+<p class="docs-muted">U komt automatisch terug in het dashboard, met de melding
+  <strong>Gekoppeld — verbinding bevestigd.</strong> De tegel Shopify krijgt het label <strong>Verbonden</strong>.</p>
+</div>
+</div>
+</div>
 
-                <div class="docs-step">
-                  <span class="docs-step-num">3</span>
-                  <div class="docs-step-body">
-                    <h3>Controleer de status</h3>
-                    <p>Ga in het dashboard naar de stap <strong>Koppelingen</strong> en klik op de tegel
-                      <strong>Shopify</strong>.</p>
-                    <p class="docs-muted">De status staat op <strong>Verbonden</strong> zodra de koppeling
-                      werkt.</p>
-                  </div>
-                </div>
-              </div>
+<div class="docs-callout docs-callout-result">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8 12.5l2.5 2.5 5.5-6"/></svg>
+<p><strong>De koppeling werkt</strong> als de tegel Shopify <strong>Verbonden</strong> toont. Open de tegel later opnieuw om te zien wanneer de verbinding voor het laatst getest is, of klik op <strong>Test verbinding</strong>.</p>
+</div>
 
-              <div class="docs-callout docs-callout-result">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8 12.5l2.5 2.5 5.5-6"/></svg>
-                <p><strong>U weet dat de koppeling actief is</strong> wanneer de Shopify-tegel in de stap
-                  Koppelingen de chip <strong>Verbonden</strong> toont.</p>
-              </div>
+<p>
+  Een koppeling geldt voor elk kanaal van uw agent: aan de telefoon en in de e-mail zoekt hij
+  dezelfde bestellingen op. Heeft u meer dan één Shopify-winkel? Open de tegel en vul onder
+  <strong>Nog een Shopify koppelen</strong> het .myshopify.com-adres van de andere winkel in.
+</p>
 
-              <h2>Wat Mowi wel en niet mag</h2>
-              <p>
-                De koppeling vraagt uitsluitend <strong>leesrechten</strong> op bestellingen en de
-                bijbehorende klantgegevens. Concreet betekent dat:
-              </p>
-              <ul>
-                <li>Wij kunnen een bestelling opzoeken en de status, verzenddatum en track&amp;trace-link
-                  teruggeven.</li>
-                <li>Wij kunnen niets in uw winkel wijzigen, aanmaken of verwijderen — geen producten, geen
-                  prijzen, geen bestellingen.</li>
-                <li>De agent controleert altijd eerst of het e-mailadres van de vraagsteller overeenkomt met
-                  de bestelling. Klopt dat niet, dan geeft hij geen gegevens vrij.</li>
-              </ul>
-              <p>
-                U kunt de toegang op elk moment intrekken: ga in uw Shopify-beheer naar
-                <strong>Instellingen</strong> → <strong>Apps</strong>, zoek de Mowi-app en verwijder hem.
-                De koppeling in het dashboard springt dan op <strong>Fout</strong>.
-              </p>
+<h2>Problemen oplossen</h2>
 
-              <h2>Problemen oplossen</h2>
+<h3>"Vul uw .myshopify.com-adres in"</h3>
+<p>
+  Het dashboard herkent het ingevulde adres niet als .myshopify.com-adres, bijvoorbeeld omdat u uw eigen
+  domeinnaam invulde. Vul het adres in dat u in Shopify vindt onder <strong>Instellingen</strong> →
+  <strong>Domeinen</strong>. Alleen de naam ervoor, zoals <code>voorbeeldwinkel</code>, mag ook.
+</p>
 
-              <h3>"Het Admin API-token werd geweigerd (401)"</h3>
-              <p>
-                De toegang is ingetrokken of verlopen — bijvoorbeeld omdat de Mowi-app uit uw Shopify-winkel
-                is verwijderd. Neem contact op via Support; wij sturen u een nieuwe goedkeuringslink.
-              </p>
+<h3>"Gekoppeld, maar de verbinding kon niet worden bevestigd"</h3>
+<p>
+  Shopify heeft de toegang gegeven, maar de test daarna is niet gelukt. Open de tegel Shopify: onder de
+  status staat wat er misging. Klik daarna op <strong>Test verbinding</strong>. Blijft er "Shopify meldde een
+  fout" of "Onverwachte reactie van Shopify" staan? Neem dan contact op via Support en noem de volledige
+  melding.
+</p>
 
-              <h3>"Het Shopify-adres is niet gevonden (404)"</h3>
-              <p>
-                Het opgeslagen <code>.myshopify.com</code>-adres klopt niet. Let op: dit is het
-                oorspronkelijke Shopify-adres van uw winkel, niet per se het domein dat uw klanten zien.
-                U vindt het in uw Shopify-beheer onder <strong>Instellingen</strong> →
-                <strong>Domeinen</strong>.
-              </p>
+<h3>"De koppeling is niet afgerond"</h3>
+<p>
+  Shopify heeft de toegang niet bevestigd. Klik in het dashboard opnieuw op <strong>Koppel met Shopify</strong>
+  en klik in Shopify op <strong>App installeren</strong>.
+</p>
 
-              <h3>Bestellingen ouder dan 60 dagen worden niet gevonden</h3>
-              <p>
-                Shopify doorzoekt standaard alleen de laatste 60 dagen. Wij vragen bij het inrichten
-                expliciet toegang tot álle bestellingen aan, dus dit hoort niet voor te komen. Merkt u het
-                toch? Neem contact op via Support — dan controleren wij de rechten van de koppeling.
-              </p>
+<h3>"De koppeling kon niet worden afgerond" of "kon niet worden geverifieerd"</h3>
+<p>
+  Bij de terugkeer uit Shopify ging iets mis. Klik in het dashboard opnieuw op
+  <strong>Koppel met Shopify</strong>. Komt de melding terug? Neem dan contact op via Support.
+</p>
 
-              <h2>Voor uw IT-partner</h2>
-              <p>
-                Beheert een IT-partner of webshopbouwer uw Shopify-winkel? Kopieer onderstaand bericht en
-                stuur het door.
-              </p>
-              <div class="docs-token-row">
-                <div class="docs-token-value docs-token-value--block" id="itPartnerEmailShopify">Onderwerp: Shopify-koppeling voor Mowi goedkeuren
+<h3>"De gekoppelde winkel komt niet overeen met het opgegeven adres"</h3>
+<p>
+  U heeft in Shopify een andere winkel bevestigd dan het adres dat u in het dashboard invulde. Controleer
+  bij welke winkel u in Shopify bent ingelogd. Vul het .myshopify.com-adres van die winkel in en klik
+  opnieuw op <strong>Koppel met Shopify</strong>.
+</p>
+
+<h3>"Deze koppelingspoging is verlopen"</h3>
+<p>
+  Tussen uw klik op <strong>Koppel met Shopify</strong> en de terugkeer in het dashboard zat meer dan
+  10 minuten, of u was intussen met een ander account in het dashboard ingelogd. Klik opnieuw op
+  <strong>Koppel met Shopify</strong> en rond de stappen in Shopify binnen 10 minuten af.
+</p>
+
+<h3>"De Shopify-koppeling is verbroken" of "Het Admin API-token werd geweigerd (401)"</h3>
+<p>
+  Shopify accepteert de toegang van Mowi niet meer, bijvoorbeeld omdat de app in Shopify is verwijderd.
+  Open de tegel Shopify, vul onder <strong>Nog een Shopify koppelen</strong> hetzelfde .myshopify.com-adres
+  in en klik op <strong>Koppel met Shopify</strong>. Het dashboard werkt dan de bestaande koppeling bij.
+</p>
+
+<h2>Voor uw IT-partner</h2>
+<p>
+  Beheert uw IT-partner of bureau uw Shopify-winkel? Kopieer onderstaand verzoek en stuur het door.
+</p>
+<div class="docs-token-row">
+<div class="docs-token-value docs-token-value--block" id="itPartnerEmailShopify">Onderwerp: Shopify-koppeling voor Mowi
 
 Beste [naam IT-partner],
 
-Wij koppelen onze Shopify-winkel aan Mowi, zodat onze AI-agent de status van bestellingen kan opzoeken.
+We koppelen onze Shopify-winkel aan ons Mowi-dashboard. Dat gaat via de knop "Koppel met Shopify" in het dashboard, waarna Shopify vraagt de app "Mowi Koppeling" te installeren. Er zijn geen API-sleutels of wachtwoorden nodig. Wel hebben we het volgende nodig:
 
-Mowi levert hiervoor een goedkeuringslink aan. Wat we van u nodig hebben:
+1. Het .myshopify.com-adres van onze winkel (in Shopify onder Instellingen (Settings) > Domeinen (Domains)).
+2. Voor ons Shopify-account de toestemming "Apps en kanalen beheren en installeren" (Manage and install apps and channels), en bij Bestellingen (Orders) de toestemming "Bekijken" (View).
 
-1. Open die link terwijl u ingelogd bent als eigenaar/beheerder van onze Shopify-winkel.
-2. Controleer op het goedkeuringsscherm dat er uitsluitend LEESrechten op bestellingen en klantgegevens gevraagd worden — geen schrijfrechten.
-3. Bevestig de installatie.
-
-Ons .myshopify.com-adres is: [uw-winkel].myshopify.com
+De app vraagt alleen leestoegang tot bestellingen (read_orders en read_all_orders), geen schrijfrechten.
 
 Met vriendelijke groet,
 [uw naam]</div>
-                <button type="button" class="docs-copy-btn" data-copy-target="itPartnerEmailShopify">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
-                  <span class="docs-copy-btn-label">Kopiëren</span>
-                </button>
-              </div>
+<button type="button" class="docs-copy-btn" data-copy-target="itPartnerEmailShopify">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
+<span class="docs-copy-btn-label">Kopiëren</span>
+</button>
+</div>
 
-              <h2>Volgende stappen</h2>
-              <p>
-                Gebruikt u WordPress met WooCommerce in plaats van Shopify? Die koppeling stelt u wél
-                helemaal zelf in. <a href="koppeling-woocommerce">Lees WooCommerce koppelen</a>.
-              </p>
-              <p>
-                Werkt de koppeling niet zoals verwacht na deze stappen?
-                <a href="faq-koppeling-werkt-niet">Lees Een koppeling werkt niet meer</a>.
-              </p>
+<h2>Volgende stappen</h2>
+<p>
+  Wilt u horen hoe uw agent een bestelling opzoekt? <a href="telefoon-instellen#testen">Test hem in de browser</a>.
+</p>
+<p>
+  Werkt de koppeling later niet meer? <a href="faq-koppeling-werkt-niet">Lees Een koppeling werkt niet meer</a>.
+</p>
             </article>
 
             <nav class="docs-prevnext" id="docsPrevNext" aria-label="Vorige en volgende pagina"></nav>
@@ -231,7 +254,7 @@ Met vriendelijke groet,
     </div>
   </div>
 
-  <script src="../js/docs-nav.js?v=20260813-1"></script>
+  <script src="../js/docs-nav.js?v=20261021"></script>
   <script src="../js/docs.js?v=20260802"></script>
 </body>
 </html>

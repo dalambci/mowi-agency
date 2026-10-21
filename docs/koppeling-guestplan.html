@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guestplan koppelen — Documentatie — Mowi</title>
+  <meta name="description" content="Koppel Guestplan aan het dashboard, zodat uw agent vrije tijden opzoekt en, als u dat toestaat, zelf reserveringen maakt. Met de stappen bij Guestplan en in het dashboard." />
+  <link rel="preconnect" href="https://fonts.bunny.net" />
+  <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/docs.css?v=20261021" />
+  <link rel="icon" href="../assets/icon-192.png?v=20260904-3" />
+  <link rel="shortcut icon" href="../assets/icon-192.png?v=20260904-3" />
+  <link rel="apple-touch-icon" href="../assets/apple-icon-180.png?v=20260904-3" />
+  <link rel="apple-touch-icon-precomposed" href="../assets/apple-icon-180.png?v=20260904-3" />
+  <script defer data-domain="mowi.agency" src="https://plausible.io/js/script.js"></script>
+</head>
+<body class="docs" data-docs-href="koppeling-guestplan">
+  <div class="docs-shell">
+    <header class="docs-header">
+      <div class="docs-header-inner">
+        <button class="docs-menu-toggle" id="docsMenuToggle" aria-expanded="false" aria-controls="docsSidebar" aria-label="Menu openen">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+        <a href="/" class="docs-wordmark" aria-label="Mowi - home">
+          <img src="../assets/mowi-icon.png" alt="" class="docs-wordmark-icon" />
+          <img src="../assets/mowi-wordmark.png" alt="Mowi" class="docs-wordmark-text" />
+        </a>
+        <span class="docs-header-divider" aria-hidden="true"></span>
+        <span class="docs-header-label">Documentatie</span>
+        <div class="docs-header-actions">
+          <a href="/" class="docs-header-link">Terug naar website</a>
+          <a href="https://my.mowi.agency/login" class="docs-header-link docs-header-link-primary" target="_blank" rel="noopener">Inloggen</a>
+        </div>
+      </div>
+    </header>
+    <div class="docs-body">
+      <div class="docs-sidebar-backdrop" id="docsSidebarBackdrop"></div>
+      <aside class="docs-sidebar" id="docsSidebar">
+        <nav class="docs-sidebar-nav" id="docsSidebarNav" aria-label="Documentatie-navigatie"></nav>
+      </aside>
+      <div class="docs-main">
+        <div class="docs-content-wrap">
+          <div class="docs-column">
+            <nav class="docs-breadcrumb" id="docsBreadcrumb" aria-label="Broodkruimel"></nav>
+
+            <article class="docs-article">
+<h1>Guestplan koppelen</h1>
+
+<p class="docs-dek">
+  Via de Guestplan-koppeling zoekt uw agent vrije tijden op in uw reserveringssysteem, bijvoorbeeld als een
+  gast belt of mailt om te reserveren. Hij stelt tijden voor en u maakt de reservering zelf.
+</p>
+<p>
+  Na deze stappen is Guestplan gekoppeld aan het dashboard en heeft het dashboard de verbinding getest.
+</p>
+
+<div class="docs-prereqs">
+<div class="docs-prereqs-label">Vereisten</div>
+<ul>
+<li><span>Een Guestplan-account. Volgens Guestplan werkt de Booking API op alle abonnementen.</span></li>
+<li><span>Een Guestplan-gebruiker met het recht <strong>Instellingen toestaan</strong>, of iemand die het Account ID voor u opzoekt.</span></li>
+<li><span>Een toegangssleutel (Access Key). Die vraagt u aan bij Guestplan-support.</span></li>
+<li><span>Toegang tot <strong>het dashboard</strong>.</span></li>
+</ul>
+</div>
+
+<h2>Wat zijn het Account ID en de toegangssleutel?</h2>
+<p>
+  Het dashboard vraagt twee gegevens uit Guestplan. Het <strong>Restaurant-ID</strong> is het nummer van uw
+  restaurant. In Guestplan heet dit het <strong>Account ID</strong>. De <strong>toegangssleutel</strong>
+  (Access Key) geeft Mowi toegang tot de Booking API van Guestplan, zonder uw eigen wachtwoord. Die sleutel
+  vraagt u aan bij Guestplan-support.
+</p>
+
+<h2>De koppeling inrichten</h2>
+
+<div class="docs-steps">
+<div class="docs-step">
+<span class="docs-step-num">1</span>
+<div class="docs-step-body">
+<h3>Open Koppelingen in het dashboard</h3>
+<p>Klik in de zijbalk op <strong>Settings</strong> en daarna bij <strong>Koppelingen</strong> op <strong>Openen</strong>.
+  U komt er ook via het menu onder uw initialen linksboven (<strong>Koppeling(en)</strong>) of via de
+  setupstap <strong>Koppel uw systemen</strong>.</p>
+<p class="docs-muted">U ziet nu de pagina <strong>Koppelingen</strong>, met tegels onder <strong>Mailbox</strong>,
+  <strong>Webshops</strong> en <strong>Reserveren &amp; afspraken</strong>.</p>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">2</span>
+<div class="docs-step-body">
+<h3>Klik op de tegel Guestplan</h3>
+<p>Klik onder <strong>Reserveren &amp; afspraken</strong> op <strong>Guestplan</strong>.</p>
+<p class="docs-muted">Het paneel <strong>Guestplan koppelen</strong> klapt open, met de stappen, de velden
+  <strong>Restaurant-ID</strong> en <strong>Toegangssleutel (Access Key)</strong>, en het vinkje
+  <strong>Agent mag zelf afspraken inplannen</strong>.</p>
+</div>
+</div>
+</div>
+
+<div class="docs-media docs-media--shot">
+<a href="../assets/docs/koppeling-guestplan-1-dashboard.webp?v=20261021" target="_blank" rel="noopener"><img src="../assets/docs/koppeling-guestplan-1-dashboard.webp?v=20261021" alt="Het paneel Guestplan koppelen in het dashboard, met de stappen, de velden Restaurant-ID en Toegangssleutel (Access Key) en het vinkje Agent mag zelf afspraken inplannen" width="590" height="710" loading="lazy" /></a>
+</div>
+<p class="docs-media-caption">Het paneel <strong>Guestplan koppelen</strong> in het dashboard.</p>
+
+<div class="docs-steps">
+<div class="docs-step">
+<span class="docs-step-num">3</span>
+<div class="docs-step-body">
+<h3>Zoek uw Account ID op in Guestplan</h3>
+<p>Log in bij Guestplan en ga naar <strong>Instellingen</strong> (Settings) → <strong>Account</strong> →
+  <strong>Algemeen</strong> (General).</p>
+<p class="docs-muted">U ziet nu het <strong>Account ID</strong>: een getal. Dat is het Restaurant-ID dat het
+  dashboard vraagt.</p>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">4</span>
+<div class="docs-step-body">
+<h3>Vraag een toegangssleutel aan bij Guestplan-support</h3>
+<p>Mail naar <strong>support@guestplan.com</strong>, bij voorkeur vanaf het e-mailadres waarmee u bij Guestplan
+  bent geregistreerd. Vraag om een toegangssleutel (Access Key) voor de Booking API en vermeld uw Account ID.
+  Onderaan deze pagina staat een verzoek dat u kunt kopiëren. U kunt ook chatten via de website van
+  Guestplan, tijdens kantooruren.</p>
+<p class="docs-muted">U krijgt een bevestigingsmail met een ticketnummer. Bewaar de toegangssleutel die
+  Guestplan-support u daarna geeft.</p>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">5</span>
+<div class="docs-step-body">
+<h3>Vul het formulier in en klik op Koppelen</h3>
+<p>Ga terug naar het dashboard. Vul bij <strong>Restaurant-ID</strong> uw Account ID in en plak bij
+  <strong>Toegangssleutel (Access Key)</strong> de sleutel van Guestplan. Het vinkje
+  <strong>Agent mag zelf afspraken inplannen</strong> mag uit blijven (zie hieronder).
+  Klik op <strong>Koppelen</strong>.</p>
+<p class="docs-muted">Het dashboard test de verbinding meteen en toont de melding
+  <strong>Koppeling opgeslagen en getest — de verbinding werkt.</strong> De tegel Guestplan krijgt het label
+  <strong>Verbonden</strong>.</p>
+</div>
+</div>
+</div>
+
+<div class="docs-callout docs-callout-result">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8 12.5l2.5 2.5 5.5-6"/></svg>
+<p><strong>De koppeling werkt</strong> als de tegel Guestplan <strong>Verbonden</strong> toont. Open de tegel later opnieuw om te zien wanneer de verbinding voor het laatst getest is, of klik op <strong>Test verbinding</strong>.</p>
+</div>
+
+<p>
+  Kiest een gast aan de telefoon een tijd, dan noteert de agent een terugbelverzoek met die tijd erbij. U of uw
+  team maakt de reservering. Zelf reserveren doet de agent aan de telefoon niet, ook niet met het vinkje
+  <strong>Agent mag zelf afspraken inplannen</strong> aan: Guestplan heeft voor een reservering het e-mailadres van
+  de gast nodig, en daar vraagt de agent aan de telefoon niet naar. Per e-mail stelt de agent altijd alleen tijden voor.
+</p>
+<p>
+  Wilt u het vinkje later aan- of uitzetten? Open de tegel Guestplan en klik op <strong>Sleutel wijzigen</strong>.
+  Vul de toegangssleutel opnieuw in, zet het vinkje aan of uit en klik op <strong>Opslaan</strong>.
+</p>
+<p>
+  Een koppeling geldt voor elk kanaal van uw agent: aan de telefoon en in de e-mail. Voor reserveringen
+  gebruikt uw agent één koppeling onder <strong>Reserveren &amp; afspraken</strong>. Heeft u er meer dan één,
+  dan gebruikt hij de koppeling die u het eerst heeft gemaakt en die op <strong>Verbonden</strong> staat.
+</p>
+
+<h2>Problemen oplossen</h2>
+
+<h3>"Koppeling opgeslagen, maar de test is nog niet gelukt"</h3>
+<p>
+  Het dashboard heeft uw gegevens bewaard, maar kon er nog geen beschikbaarheid mee ophalen. Open de tegel
+  Guestplan: naast <strong>Status</strong> staat <strong>Fout</strong>, met daaronder wat er misging. Pas de
+  gegevens aan via <strong>Sleutel wijzigen</strong> en klik op <strong>Opslaan</strong>. Het dashboard test dan
+  opnieuw.
+</p>
+
+<h3>"De toegangssleutel werd geweigerd"</h3>
+<p>
+  Guestplan herkent de sleutel niet. Kopieer de sleutel opnieuw uit het bericht van Guestplan-support en vul
+  hem in via <strong>Sleutel wijzigen</strong>. Blijft de melding staan? Vraag Guestplan-support of de sleutel
+  geldig is.
+</p>
+
+<h3>"Restaurant-ID niet gevonden"</h3>
+<p>
+  Guestplan kent het ingevulde nummer niet. Open de tegel Guestplan en klik op <strong>Sleutel wijzigen</strong>.
+  Vul bij <strong>Restaurant-ID</strong> alleen het getal in dat in Guestplan bij <strong>Account ID</strong>
+  staat, vul de toegangssleutel opnieuw in en klik op <strong>Opslaan</strong>. Klopt het getal? Vraag
+  Guestplan-support dan of de toegangssleutel voor dit account geldt.
+</p>
+
+<h3>"Guestplan is niet bereikbaar"</h3>
+<p>
+  Het dashboard kon Guestplan niet bereiken. Probeer het later opnieuw met <strong>Test verbinding</strong>.
+</p>
+
+<h3>De agent maakt geen reserveringen</h3>
+<p>
+  Dat klopt. Bij Guestplan noteert de agent aan de telefoon een terugbelverzoek met de gekozen tijd, en per e-mail
+  stelt hij tijden voor. De reservering zelf maakt u of uw team in Guestplan. Zie de terugbelverzoeken op de pagina
+  <strong>Telefoon</strong>, onder <a href="telefoon-gesprekken">Gesprekken</a>.
+</p>
+
+<h2>Voor uw IT-partner</h2>
+<p>
+  Vraagt uw IT-partner de toegangssleutel voor u aan, of mailt u Guestplan zelf? Kopieer onderstaand verzoek.
+  Het is gericht aan Guestplan-support (support@guestplan.com).
+</p>
+<div class="docs-token-row">
+<div class="docs-token-value docs-token-value--block" id="itPartnerEmailGuestplan">Onderwerp: Toegangssleutel (Access Key) voor de Guestplan Booking API
+
+Beste Guestplan-support,
+
+Wij willen ons Guestplan-account koppelen aan het dashboard van Mowi. Onze agent van Mowi gaat daarmee beschikbaarheid opvragen en, als wij dat aanzetten, reserveringen maken via de Booking API.
+
+Kunt u ons daarvoor een toegangssleutel (Access Key) geven?
+
+- Account ID: [uw Account ID]
+- De sleutel hoeft alleen voor dit account te werken.
+
+Graag ontvangen we de sleutel via een veilig kanaal.
+
+Met vriendelijke groet,
+[uw naam]
+[naam restaurant]</div>
+<button type="button" class="docs-copy-btn" data-copy-target="itPartnerEmailGuestplan">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
+<span class="docs-copy-btn-label">Kopiëren</span>
+</button>
+</div>
+
+<h2>Volgende stappen</h2>
+<p>
+  Wilt u horen hoe uw agent een vrije tijd voorstelt? <a href="telefoon-instellen#testen">Test hem in de browser</a>.
+</p>
+<p>
+  Werkt de koppeling later niet meer? <a href="faq-koppeling-werkt-niet">Lees Een koppeling werkt niet meer</a>.
+</p>
+            </article>
+
+            <nav class="docs-prevnext" id="docsPrevNext" aria-label="Vorige en volgende pagina"></nav>
+          </div>
+
+          <aside class="docs-toc" id="docsToc">
+            <div class="docs-toc-label">Op deze pagina</div>
+            <ol id="docsTocList"></ol>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/docs-nav.js?v=20261021"></script>
+  <script src="../js/docs.js?v=20260802"></script>
+</body>
+</html>

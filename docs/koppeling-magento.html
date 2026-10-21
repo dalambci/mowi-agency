@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Magento Open Source koppelen — Documentatie — Mowi</title>
+  <meta name="description" content="Koppel uw Magento Open Source-webshop aan het dashboard, zodat uw agent bestelstatus opzoekt. Met de stappen in Magento Admin en in het dashboard." />
+  <link rel="preconnect" href="https://fonts.bunny.net" />
+  <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/docs.css?v=20261021" />
+  <link rel="icon" href="../assets/icon-192.png?v=20260904-3" />
+  <link rel="shortcut icon" href="../assets/icon-192.png?v=20260904-3" />
+  <link rel="apple-touch-icon" href="../assets/apple-icon-180.png?v=20260904-3" />
+  <link rel="apple-touch-icon-precomposed" href="../assets/apple-icon-180.png?v=20260904-3" />
+  <script defer data-domain="mowi.agency" src="https://plausible.io/js/script.js"></script>
+</head>
+<body class="docs" data-docs-href="koppeling-magento">
+  <div class="docs-shell">
+    <header class="docs-header">
+      <div class="docs-header-inner">
+        <button class="docs-menu-toggle" id="docsMenuToggle" aria-expanded="false" aria-controls="docsSidebar" aria-label="Menu openen">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+        <a href="/" class="docs-wordmark" aria-label="Mowi - home">
+          <img src="../assets/mowi-icon.png" alt="" class="docs-wordmark-icon" />
+          <img src="../assets/mowi-wordmark.png" alt="Mowi" class="docs-wordmark-text" />
+        </a>
+        <span class="docs-header-divider" aria-hidden="true"></span>
+        <span class="docs-header-label">Documentatie</span>
+        <div class="docs-header-actions">
+          <a href="/" class="docs-header-link">Terug naar website</a>
+          <a href="https://my.mowi.agency/login" class="docs-header-link docs-header-link-primary" target="_blank" rel="noopener">Inloggen</a>
+        </div>
+      </div>
+    </header>
+    <div class="docs-body">
+      <div class="docs-sidebar-backdrop" id="docsSidebarBackdrop"></div>
+      <aside class="docs-sidebar" id="docsSidebar">
+        <nav class="docs-sidebar-nav" id="docsSidebarNav" aria-label="Documentatie-navigatie"></nav>
+      </aside>
+      <div class="docs-main">
+        <div class="docs-content-wrap">
+          <div class="docs-column">
+            <nav class="docs-breadcrumb" id="docsBreadcrumb" aria-label="Broodkruimel"></nav>
+
+            <article class="docs-article">
+<h1>Magento Open Source koppelen</h1>
+
+<p class="docs-dek">
+  Via de koppeling met Magento Open Source zoekt uw agent de status van een bestelling rechtstreeks op
+  in uw webshop, bijvoorbeeld als een klant belt of mailt met "waar blijft mijn bestelling?". De
+  koppeling is alleen lezend: Mowi past nooit iets aan in uw webshop.
+</p>
+<p>
+  Na deze stappen is uw webshop gekoppeld aan het dashboard en heeft het dashboard de verbinding
+  getest.
+</p>
+
+<div class="docs-prereqs">
+<div class="docs-prereqs-label">Vereisten</div>
+<ul>
+<li><span>Een beheerdersaccount in Magento Admin, of iemand die dat namens u kan doen (bijvoorbeeld uw webbouwer). U heeft het wachtwoord van dat account nodig: Magento vraagt erom bij het opslaan.</span></li>
+<li><span>Toegang tot <strong>het dashboard</strong>.</span></li>
+</ul>
+</div>
+
+<h2>Wat is een integratie?</h2>
+<p>
+  Magento geeft Mowi geen toegang met uw eigen wachtwoord. U maakt in Magento Admin een aparte
+  integratie (Integration) aan en kiest zelf wat die mag. Voor deze koppeling is dat alleen het bekijken
+  van bestellingen: het recht <strong>View</strong> onder <strong>Orders</strong>. Na het activeren toont Magento
+  vier sleutels: <strong>Consumer Key</strong>, <strong>Consumer Secret</strong>, <strong>Access Token</strong> en
+  <strong>Access Token Secret</strong>. Mowi heeft ze alle vier nodig. U kunt de integratie op elk moment
+  verwijderen in Magento, zonder dat dit uw eigen inloggegevens raakt.
+</p>
+
+<h2>De koppeling inrichten</h2>
+
+<div class="docs-steps">
+<div class="docs-step">
+<span class="docs-step-num">1</span>
+<div class="docs-step-body">
+<h3>Open Koppelingen in het dashboard</h3>
+<p>Klik in de zijbalk op <strong>Settings</strong> en daarna bij <strong>Koppelingen</strong> op <strong>Openen</strong>.
+  U komt er ook via het menu onder uw initialen linksboven (<strong>Koppeling(en)</strong>) of via de
+  setupstap <strong>Koppel uw systemen</strong>.</p>
+<p class="docs-muted">U ziet nu de pagina <strong>Koppelingen</strong>, met tegels onder <strong>Mailbox</strong>,
+  <strong>Webshops</strong> en <strong>Reserveren &amp; afspraken</strong>.</p>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">2</span>
+<div class="docs-step-body">
+<h3>Klik op de tegel Magento Open Source</h3>
+<p>Klik onder <strong>Webshops</strong> op <strong>Magento Open Source</strong>.</p>
+<p class="docs-muted">Het paneel <strong>Magento Open Source koppelen</strong> klapt open, met de stappen en de velden
+  <strong>Webshop-adres</strong>, <strong>Consumer Key</strong>, <strong>Consumer Secret</strong>,
+  <strong>Access Token</strong> en <strong>Access Token Secret</strong>.</p>
+</div>
+</div>
+</div>
+
+<div class="docs-media docs-media--shot">
+<a href="../assets/docs/koppeling-magento-1-dashboard.webp?v=20261021" target="_blank" rel="noopener"><img src="../assets/docs/koppeling-magento-1-dashboard.webp?v=20261021" alt="Het paneel Magento Open Source koppelen in het dashboard, met de stappen en de velden Webshop-adres, Consumer Key, Consumer Secret, Access Token en Access Token Secret" width="590" height="1096" loading="lazy" /></a>
+</div>
+<p class="docs-media-caption">Het paneel <strong>Magento Open Source koppelen</strong> in het dashboard.</p>
+
+<p>
+  Magento Admin staat standaard in het Engels. Daarom staan hieronder de Engelse namen van menu's en
+  knoppen.
+</p>
+
+<div class="docs-steps">
+<div class="docs-step">
+<span class="docs-step-num">3</span>
+<div class="docs-step-body">
+<h3>Open Integrations in Magento Admin</h3>
+<p>Log in op Magento Admin en ga in de zijbalk naar <strong>System</strong> → <strong>Extensions</strong> →
+  <strong>Integrations</strong>.</p>
+<p class="docs-muted">U ziet nu de lijst met integraties. Die lijst kan leeg zijn.</p>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">4</span>
+<div class="docs-step-body">
+<h3>Maak een nieuwe integratie aan</h3>
+<p>Klik op <strong>Add New Integration</strong>. Vul bij <strong>Name</strong> "Mowi" in. Vul onder
+  <strong>Current User Identity Verification</strong> bij <strong>Your Password</strong> het wachtwoord van uw eigen
+  beheerdersaccount in. Laat <strong>Callback URL</strong> en <strong>Identity link URL</strong> leeg: dan toont
+  Magento de sleutels straks in het beheer.</p>
+<p class="docs-muted">Op het tabblad <strong>Integration Info</strong> zijn <strong>Name</strong> en
+  <strong>Your Password</strong> ingevuld.</p>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">5</span>
+<div class="docs-step-body">
+<h3>Geef alleen het recht om bestellingen te bekijken</h3>
+<p>Klik links op het tabblad <strong>API</strong>. Kies bij <strong>Resource Access</strong> de optie
+  <strong>Custom</strong>. Vink in de lijst <strong>Resources</strong> onder <strong>Sales</strong> →
+  <strong>Operations</strong> → <strong>Orders</strong> → <strong>Actions</strong> alleen <strong>View</strong> aan.</p>
+<p class="docs-muted">Alleen <strong>View</strong> is aangevinkt.</p>
+<div class="docs-callout docs-callout-warning">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4l9 16H3z"/><path d="M12 10v4"/><circle cx="12" cy="17" r=".4" fill="currentColor"/></svg>
+<p>Vink <strong>Sales</strong>, <strong>Operations</strong>, <strong>Orders</strong> of <strong>Actions</strong> zelf niet aan. Magento vinkt dan alles eronder mee aan, ook rechten om bestellingen te wijzigen of te annuleren.</p>
+</div>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">6</span>
+<div class="docs-step-body">
+<h3>Sla de integratie op</h3>
+<p>Klik op <strong>Save</strong>.</p>
+<p class="docs-muted">U ziet weer de lijst met integraties. Mowi staat erin met de status
+  <strong>Inactive</strong>.</p>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">7</span>
+<div class="docs-step-body">
+<h3>Activeer de integratie</h3>
+<p>Klik in de rij van Mowi op <strong>Activate</strong>. Klik in het venster dat opent rechtsboven op
+  <strong>Allow</strong>.</p>
+<p class="docs-muted">U ziet nu het venster <strong>Integration Tokens for Extensions</strong>, met vier
+  waarden.</p>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">8</span>
+<div class="docs-step-body">
+<h3>Neem de vier sleutels over in het dashboard</h3>
+<p>Kopieer de vier waarden één voor één naar de velden met dezelfde naam in het dashboard:
+  <strong>Consumer Key</strong>, <strong>Consumer Secret</strong>, <strong>Access Token</strong> en
+  <strong>Access Token Secret</strong>. Klik daarna in Magento op <strong>Done</strong>.</p>
+<p class="docs-muted">In het dashboard zijn de vier velden gevuld. In Magento staat Mowi in de lijst met de
+  status <strong>Active</strong>.</p>
+<div class="docs-callout docs-callout-note">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5"/><circle cx="12" cy="8" r=".4" fill="currentColor"/></svg>
+<p>Venster te snel gesloten? Open de integratie via <strong>Edit</strong> in de lijst. De vier waarden staan onder <strong>Integration Details</strong>.</p>
+</div>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">9</span>
+<div class="docs-step-body">
+<h3>Vul het webshop-adres in en klik op Koppelen</h3>
+<p>Vul in het dashboard bij <strong>Webshop-adres</strong> de volledige URL van uw webshop in (met
+  <code>https://</code>). Klik op <strong>Koppelen</strong>.</p>
+<p class="docs-muted">Het dashboard test de verbinding meteen en toont de melding
+  <strong>Koppeling opgeslagen en getest — de verbinding werkt.</strong> De tegel Magento Open Source krijgt
+  het label <strong>Verbonden</strong>.</p>
+</div>
+</div>
+</div>
+
+<div class="docs-callout docs-callout-result">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8 12.5l2.5 2.5 5.5-6"/></svg>
+<p><strong>De koppeling werkt</strong> als de tegel Magento Open Source <strong>Verbonden</strong> toont. Open de tegel later opnieuw om te zien wanneer de verbinding voor het laatst getest is, of klik op <strong>Test verbinding</strong>.</p>
+</div>
+
+<p>
+  Een koppeling geldt voor elk kanaal van uw agent: aan de telefoon en in de e-mail zoekt hij
+  dezelfde bestellingen op. Heeft u meer dan één webshop? Open de tegel en vul het formulier onder
+  <strong>Nog een Magento Open Source koppelen</strong> in.
+</p>
+
+<h2>Problemen oplossen</h2>
+
+<h3>"Koppeling opgeslagen, maar de test is nog niet gelukt"</h3>
+<p>
+  Het dashboard heeft uw gegevens bewaard, maar kon er de bestellingen in uw webshop nog niet mee
+  opvragen. Open de tegel Magento Open Source: bij <strong>Status</strong> staat <strong>Fout</strong>, met daaronder
+  wat er misging. Zoek die melding hieronder op.
+</p>
+
+<h3>"De koppeling werd geweigerd (HTTP 401)"</h3>
+<p>
+  Magento weigert de sleutels. Controleer in <strong>System</strong> → <strong>Extensions</strong> →
+  <strong>Integrations</strong> drie dingen:
+</p>
+<ul>
+<li>Mowi heeft de status <strong>Active</strong>. Staat er <strong>Inactive</strong>? Activeer de integratie en neem de vier sleutels opnieuw over.</li>
+<li>Op het tabblad <strong>API</strong> van de integratie is <strong>View</strong> onder <strong>Orders</strong> aangevinkt.</li>
+<li>De vier waarden in het dashboard zijn dezelfde als onder <strong>Integration Details</strong>, als u de integratie opent via <strong>Edit</strong>.</li>
+</ul>
+<p>
+  Moet u een waarde aanpassen? Klik in het paneel Magento Open Source op <strong>Sleutel wijzigen</strong>,
+  vul alle vier de sleutels in en klik op <strong>Opslaan</strong>. Staat er HTTP 403 in de melding? Controleer
+  dan dezelfde punten.
+</p>
+
+<h3>"De Magento REST API is niet gevonden op dit adres (404)"</h3>
+<p>
+  Controleer het webshop-adres op typefouten en op het juiste domein. Vul het adres van de webshop zelf
+  in, niet het adres van Magento Admin.
+</p>
+
+<h3>"De webshop is niet bereikbaar"</h3>
+<p>
+  Het dashboard kon het adres niet bereiken. Controleer of de webshop online is en of het adres begint
+  met <code>https://</code>.
+</p>
+
+<h2>Voor uw IT-partner</h2>
+<p>
+  Regelt uw webbouwer of IT-partner de Magento-kant? Kopieer onderstaand verzoek en stuur het door.
+</p>
+<div class="docs-token-row">
+<div class="docs-token-value docs-token-value--block" id="itPartnerEmailMagento">Onderwerp: Magento-koppeling voor Mowi instellen
+
+Beste [naam IT-partner],
+
+Voor de koppeling van ons Mowi-dashboard met onze Magento Open Source-webshop hebben we het volgende nodig:
+
+1. Ga in Magento Admin naar System > Extensions > Integrations en klik op "Add New Integration". Vul bij Name "Mowi" in en bij Your Password het wachtwoord van uw beheerdersaccount. Laat Callback URL en Identity link URL leeg.
+2. Kies op het tabblad API bij Resource Access de optie "Custom" en vink alleen Sales > Operations > Orders > Actions > View aan. Er zijn geen andere rechten nodig. Klik op "Save".
+3. Klik in de lijst bij Mowi op "Activate" en daarna op "Allow".
+4. Deel de vier getoonde waarden (Consumer Key, Consumer Secret, Access Token en Access Token Secret) via een veilig kanaal met ons, niet per e-mail in platte tekst.
+
+Met vriendelijke groet,
+[uw naam]</div>
+<button type="button" class="docs-copy-btn" data-copy-target="itPartnerEmailMagento">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
+<span class="docs-copy-btn-label">Kopiëren</span>
+</button>
+</div>
+
+<h2>Volgende stappen</h2>
+<p>
+  Wilt u horen hoe uw agent een bestelling opzoekt? <a href="telefoon-instellen#testen">Test hem in de browser</a>.
+</p>
+<p>
+  Werkt de koppeling later niet meer? <a href="faq-koppeling-werkt-niet">Lees Een koppeling werkt niet meer</a>.
+</p>
+            </article>
+
+            <nav class="docs-prevnext" id="docsPrevNext" aria-label="Vorige en volgende pagina"></nav>
+          </div>
+
+          <aside class="docs-toc" id="docsToc">
+            <div class="docs-toc-label">Op deze pagina</div>
+            <ol id="docsTocList"></ol>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/docs-nav.js?v=20261021"></script>
+  <script src="../js/docs.js?v=20260802"></script>
+</body>
+</html>

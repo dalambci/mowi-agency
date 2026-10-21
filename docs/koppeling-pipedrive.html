@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pipedrive koppelen — Documentatie — Mowi</title>
-  <meta name="description" content="Zo koppelt u Pipedrive aan het dashboard, zodat uw agent klantgegevens kan opzoeken en herkennen." />
+  <meta name="description" content="Beheer een bestaande Pipedrive-koppeling in het dashboard: het API-token, de test en wat te doen als de koppeling niet meer werkt." />
   <link rel="preconnect" href="https://fonts.bunny.net" />
   <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/docs.css?v=20260821" />
+  <link rel="stylesheet" href="../css/docs.css?v=20261021" />
   <link rel="icon" href="../assets/icon-192.png?v=20260904-3" />
   <link rel="shortcut icon" href="../assets/icon-192.png?v=20260904-3" />
   <link rel="apple-touch-icon" href="../assets/apple-icon-180.png?v=20260904-3" />
@@ -44,149 +44,104 @@
             <nav class="docs-breadcrumb" id="docsBreadcrumb" aria-label="Broodkruimel"></nav>
 
             <article class="docs-article">
-              <h1>Pipedrive koppelen</h1>
+<h1>Pipedrive koppelen</h1>
 
-              <p class="docs-dek">
-                Via de Pipedrive-koppeling herkent en verrijkt uw agent klantgegevens rechtstreeks vanuit
-                uw CRM — bijvoorbeeld om een klant bij naam te herkennen. De koppeling is alleen lezend:
-                er wordt nooit iets in uw Pipedrive aangepast, en vrije-tekstnotities worden nooit aan de
-                agent getoond.
-              </p>
-              <p>
-                Na deze stappen is uw Pipedrive-account gekoppeld aan het dashboard en heeft u
-                gecontroleerd dat de koppeling werkt.
-              </p>
+<p class="docs-dek">
+  Via de Pipedrive-koppeling herkent uw agent klantgegevens uit uw CRM, bijvoorbeeld om een klant bij naam te herkennen. De
+  koppeling is alleen lezend: Mowi past nooit iets aan in uw Pipedrive.
+</p>
 
-              <div class="docs-prereqs">
-                <div class="docs-prereqs-label">Vereisten</div>
-                <ul>
-                  <li>Een Pipedrive-account met toegang tot uw persoonlijke voorkeuren.</li>
-                  <li>Toegang tot <strong>het dashboard</strong> (inloggegevens van uw organisatie).</li>
-                  <li>Een agent met de koppelingsstap in beeld — bijvoorbeeld tijdens het instellen van uw
-                    <strong>Inbox agent</strong> of <strong>Voice agent</strong>, of later via uw profiel.</li>
-                </ul>
-              </div>
+<div class="docs-callout docs-callout-note">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5"/><circle cx="12" cy="8" r=".4" fill="currentColor"/></svg>
+<p><strong>Pipedrive staat niet standaard op de pagina Koppelingen.</strong> Sinds oktober 2026 toont het dashboard de koppelingen
+  waarmee uw agent klanten helpt: uw mailbox, webshop, agenda en reserveringen. Heeft u Pipedrive al gekoppeld, dan staat de tegel er
+  nog en beheert u de koppeling zoals hieronder. Wilt u Pipedrive nieuw koppelen? Neem contact op via
+  <a href="faq-contact-support">Help</a>.</p>
+</div>
 
-              <h2>Wat is een API-token?</h2>
-              <p>
-                Pipedrive geeft externe toepassingen zoals Mowi geen toegang met uw eigen wachtwoord. In
-                plaats daarvan gebruikt u uw persoonlijke <strong>API-token</strong> — een lange,
-                willekeurige code gekoppeld aan uw eigen gebruikersaccount. Mowi gebruikt dit token alleen
-                om klantgegevens op te zoeken, nooit om iets te wijzigen. U kunt het token op elk moment
-                zelf vernieuwen in Pipedrive, waarna de koppeling opnieuw ingesteld moet worden.
-              </p>
+<div class="docs-prereqs">
+<div class="docs-prereqs-label">Vereisten</div>
+<ul>
+<li><span>Een Pipedrive-account met toegang tot uw persoonlijke voorkeuren.</span></li>
+<li><span>Toegang tot <strong>het dashboard</strong>.</span></li>
+</ul>
+</div>
 
-              <h2>De koppeling inrichten</h2>
+<h2>Wat is een API-token?</h2>
+<p>
+  Pipedrive geeft Mowi geen toegang met uw eigen wachtwoord. U gebruikt uw persoonlijke <strong>API-token</strong>: een lange code
+  die bij uw eigen gebruikersaccount hoort. U kunt het token op elk moment zelf vernieuwen in Pipedrive. Daarna vult u het nieuwe
+  token in het dashboard in.
+</p>
 
-              <div class="docs-steps">
-                <div class="docs-step">
-                  <span class="docs-step-num">1</span>
-                  <div class="docs-step-body">
-                    <h3>Open de stap Koppelingen</h3>
-                    <p>Log in bij <strong>het dashboard</strong>, klik in de zijbalk op <strong>Agents</strong>
-                      en open de agent waarvoor u wilt koppelen. Klik op het tabblad <strong>Setup</strong>
-                      en daarna op stap <strong>2 Koppelingen</strong>.</p>
-                    <p class="docs-muted">U ziet nu een overzicht met tegels per systeem, gegroepeerd onder
-                      <strong>Webshops</strong>, <strong>CRM &amp; administratie</strong> en
-                      <strong>Reserveren &amp; afspraken</strong>.</p>
-                  </div>
-                </div>
+<h2>Het token invullen of vervangen</h2>
 
-                <div class="docs-step">
-                  <span class="docs-step-num">2</span>
-                  <div class="docs-step-body">
-                    <h3>Klik op de tegel Pipedrive</h3>
-                    <p>Klik onder <strong>CRM &amp; administratie</strong> op de tegel
-                      <strong>Pipedrive</strong>.</p>
-                    <p class="docs-muted">Het paneel klapt open met genummerde stappen en een formulier met
-                      het veld <strong>API-token</strong>.</p>
-                  </div>
-                </div>
-              </div>
+<div class="docs-steps">
+<div class="docs-step">
+<span class="docs-step-num">1</span>
+<div class="docs-step-body">
+<h3>Open Koppelingen in het dashboard</h3>
+<p>Klik in de zijbalk op <strong>Settings</strong> en daarna bij <strong>Koppelingen</strong> op <strong>Openen</strong>.</p>
+<p class="docs-muted">U ziet nu de pagina <strong>Koppelingen</strong>, met de tegel <strong>Pipedrive</strong> onder
+  <strong>CRM &amp; administratie</strong>.</p>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">2</span>
+<div class="docs-step-body">
+<h3>Open de API-instellingen in Pipedrive</h3>
+<p>Log in bij Pipedrive en ga naar <a href="https://app.pipedrive.com/settings/api">app.pipedrive.com/settings/api</a>. Via het menu:
+  klik rechtsboven op uw accountnaam → <strong>Bedrijfsinstellingen</strong> (Company settings) → <strong>Persoonlijke
+  voorkeuren</strong> (Personal preferences) → tabblad <strong>API</strong>.</p>
+<p class="docs-muted">U ziet nu uw persoonlijke API-token, of een knop om er een te maken.</p>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">3</span>
+<div class="docs-step-body">
+<h3>Kopieer het token</h3>
+<p>Kopieer uw persoonlijke API-token. Staat er nog geen token? Klik dan op de knop om er een te genereren.</p>
+<p class="docs-muted">U heeft nu de code die u in het dashboard invult.</p>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">4</span>
+<div class="docs-step-body">
+<h3>Vul het token in en klik op Koppelen</h3>
+<p>Klik in het dashboard op de tegel <strong>Pipedrive</strong>, plak het token in het veld <strong>API-token</strong> en klik op
+  <strong>Koppelen</strong>. Vervangt u een token? Klik dan op <strong>Sleutel wijzigen</strong>, plak het nieuwe token en klik op
+  <strong>Opslaan</strong>.</p>
+<p class="docs-muted">Het dashboard test de verbinding en toont <strong>Koppeling opgeslagen en getest — de verbinding werkt.</strong></p>
+</div>
+</div>
+</div>
 
-              <div class="docs-media">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 15l5-5 4 4 4-4 5 5"/><circle cx="8.5" cy="8.5" r="1.3"/></svg>
-                <span>Schermafbeelding volgt</span>
-              </div>
-              <p class="docs-media-caption">De Pipedrive-tegel geopend, met de genummerde stappen en het koppelingsformulier.</p>
+<div class="docs-callout docs-callout-result">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8 12.5l2.5 2.5 5.5-6"/></svg>
+<p><strong>De koppeling werkt</strong> als de tegel Pipedrive <strong>Verbonden</strong> toont. In het paneel staat dan met welk Pipedrive-account Mowi verbonden is.</p>
+</div>
 
-              <div class="docs-steps">
-                <div class="docs-step">
-                  <span class="docs-step-num">3</span>
-                  <div class="docs-step-body">
-                    <h3>Open uw API-instellingen in Pipedrive</h3>
-                    <p>Log in bij Pipedrive en ga rechtstreeks naar
-                      <a href="https://app.pipedrive.com/settings/api" target="_blank" rel="noopener">app.pipedrive.com/settings/api</a>.</p>
-                    <p>Liever via het menu? Klik rechtsboven op uw <strong>accountnaam</strong> →
-                      <strong>Bedrijfsinstellingen</strong> (<em>Company settings</em>) →
-                      <strong>Persoonlijke voorkeuren</strong> (<em>Personal preferences</em>) → tabblad
-                      <strong>API</strong>.</p>
-                    <p class="docs-muted">U ziet nu uw persoonlijke API-token, of een knop om er een aan te
-                      maken als u er nog geen heeft.</p>
-                  </div>
-                </div>
+<h2>Problemen oplossen</h2>
 
-                <div class="docs-step">
-                  <span class="docs-step-num">4</span>
-                  <div class="docs-step-body">
-                    <h3>Kopieer het token</h3>
-                    <p>Kopieer uw persoonlijke API-token. Staat er nog geen token? Klik dan op
-                      <strong>Nieuw token genereren</strong>.</p>
-                    <p class="docs-muted">U heeft nu de code die u in het dashboard moet invullen.</p>
-                  </div>
-                </div>
-              </div>
+<h3>"Het API-token werd geweigerd (401)"</h3>
+<p>
+  Het token is ongeldig of vernieuwd. Kopieer het huidige token opnieuw op
+  <a href="https://app.pipedrive.com/settings/api">app.pipedrive.com/settings/api</a> en vul het in via <strong>Sleutel wijzigen</strong>.
+</p>
 
-              <div class="docs-media">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 15l5-5 4 4 4-4 5 5"/><circle cx="8.5" cy="8.5" r="1.3"/></svg>
-                <span>Schermafbeelding volgt</span>
-              </div>
-              <p class="docs-media-caption">Persoonlijke voorkeuren → API, met het persoonlijke API-token.</p>
+<h3>"Pipedrive is niet bereikbaar"</h3>
+<p>
+  Het dashboard kon Pipedrive niet bereiken. Probeer het later opnieuw met <strong>Test verbinding</strong>, of kijk op de statuspagina
+  van Pipedrive als het probleem aanhoudt.
+</p>
 
-              <div class="docs-steps">
-                <div class="docs-step">
-                  <span class="docs-step-num">5</span>
-                  <div class="docs-step-body">
-                    <h3>Vul het formulier in en koppel</h3>
-                    <p>Ga terug naar het dashboard en plak het token in het veld
-                      <strong>API-token</strong>. Klik op <strong>Koppelen</strong>.</p>
-                    <p class="docs-muted">Het dashboard test de verbinding meteen en toont een melding:
-                      <strong>"Koppeling opgeslagen en getest — de verbinding werkt."</strong> De status
-                      bij Pipedrive staat nu op <strong>Verbonden</strong>.</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="docs-callout docs-callout-result">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8 12.5l2.5 2.5 5.5-6"/></svg>
-                <p><strong>U weet dat de koppeling actief is</strong> wanneer de Pipedrive-tegel de chip
-                  <strong>Verbonden</strong> toont en de melding na het koppelen een geslaagde test
-                  bevestigt.</p>
-              </div>
-
-              <h2>Problemen oplossen</h2>
-
-              <h3>"Het API-token werd geweigerd (401)"</h3>
-              <p>
-                Het token is ongeldig of vernieuwd. Ga terug naar
-                <a href="https://app.pipedrive.com/settings/api" target="_blank" rel="noopener">app.pipedrive.com/settings/api</a>,
-                kopieer het huidige token opnieuw en vul dat in bij <strong>Sleutel wijzigen</strong> op de
-                koppelingstegel.
-              </p>
-
-              <h3>"Pipedrive is niet bereikbaar"</h3>
-              <p>
-                Het dashboard kon geen verbinding maken met Pipedrive. Probeer het later opnieuw, of
-                controleer de statuspagina van Pipedrive als het probleem aanhoudt.
-              </p>
-
-              <h2>Voor uw IT-partner</h2>
-              <p>
-                Regelt een collega of IT-partner de Pipedrive-kant van deze koppeling? Kopieer onderstaand
-                verzoek en stuur het door.
-              </p>
-              <div class="docs-token-row">
-                <div class="docs-token-value docs-token-value--block" id="itPartnerEmailPipedrive">Onderwerp: Pipedrive-koppeling voor Mowi instellen
+<h2>Voor uw IT-partner</h2>
+<p>
+  Regelt een collega of IT-partner de Pipedrive-kant? Kopieer onderstaand verzoek en stuur het door. Let op: het API-token is
+  persoonlijk. Deelt een collega zijn token, dan koppelt u Pipedrive met de rechten van dat account.
+</p>
+<div class="docs-token-row">
+<div class="docs-token-value docs-token-value--block" id="itPartnerEmailPipedrive">Onderwerp: Pipedrive-koppeling voor Mowi
 
 Beste [naam],
 
@@ -198,25 +153,19 @@ Voor de koppeling van ons Mowi-dashboard met Pipedrive hebben we het volgende no
 
 Met vriendelijke groet,
 [uw naam]</div>
-                <button type="button" class="docs-copy-btn" data-copy-target="itPartnerEmailPipedrive">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
-                  <span class="docs-copy-btn-label">Kopiëren</span>
-                </button>
-              </div>
-              <p class="docs-muted">
-                Let op: het API-token is persoonlijk. Vraagt u een collega dit te delen, dan koppelt u
-                Pipedrive met de rechten van dat account.
-              </p>
+<button type="button" class="docs-copy-btn" data-copy-target="itPartnerEmailPipedrive">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
+<span class="docs-copy-btn-label">Kopiëren</span>
+</button>
+</div>
 
-              <h2>Volgende stappen</h2>
-              <p>
-                Wilt u dat uw agent ook een vrije plek in de agenda kan vinden en inplannen?
-                <a href="koppeling-google-agenda">Lees Google Agenda koppelen</a>.
-              </p>
-              <p>
-                Werkt de koppeling niet zoals verwacht na deze stappen?
-                <a href="faq-koppeling-werkt-niet">Lees Een koppeling werkt niet meer</a>.
-              </p>
+<h2>Volgende stappen</h2>
+<p>
+  Welke koppelingen zijn er nog? <a href="koppelingen-overzicht">Lees Koppelingen: overzicht</a>.
+</p>
+<p>
+  Werkt de koppeling niet meer? <a href="faq-koppeling-werkt-niet">Lees Een koppeling werkt niet meer</a>.
+</p>
             </article>
 
             <nav class="docs-prevnext" id="docsPrevNext" aria-label="Vorige en volgende pagina"></nav>
@@ -231,7 +180,7 @@ Met vriendelijke groet,
     </div>
   </div>
 
-  <script src="../js/docs-nav.js?v=20260813-1"></script>
+  <script src="../js/docs-nav.js?v=20261021"></script>
   <script src="../js/docs.js?v=20260802"></script>
 </body>
 </html>

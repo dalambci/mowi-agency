@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shopware koppelen — Documentatie — Mowi</title>
+  <meta name="description" content="Koppel uw Shopware-webshop aan het dashboard, zodat uw agent bestelstatus opzoekt. Met de stappen in Shopware en in het dashboard." />
+  <link rel="preconnect" href="https://fonts.bunny.net" />
+  <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/docs.css?v=20261021" />
+  <link rel="icon" href="../assets/icon-192.png?v=20260904-3" />
+  <link rel="shortcut icon" href="../assets/icon-192.png?v=20260904-3" />
+  <link rel="apple-touch-icon" href="../assets/apple-icon-180.png?v=20260904-3" />
+  <link rel="apple-touch-icon-precomposed" href="../assets/apple-icon-180.png?v=20260904-3" />
+  <script defer data-domain="mowi.agency" src="https://plausible.io/js/script.js"></script>
+</head>
+<body class="docs" data-docs-href="koppeling-shopware">
+  <div class="docs-shell">
+    <header class="docs-header">
+      <div class="docs-header-inner">
+        <button class="docs-menu-toggle" id="docsMenuToggle" aria-expanded="false" aria-controls="docsSidebar" aria-label="Menu openen">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+        <a href="/" class="docs-wordmark" aria-label="Mowi - home">
+          <img src="../assets/mowi-icon.png" alt="" class="docs-wordmark-icon" />
+          <img src="../assets/mowi-wordmark.png" alt="Mowi" class="docs-wordmark-text" />
+        </a>
+        <span class="docs-header-divider" aria-hidden="true"></span>
+        <span class="docs-header-label">Documentatie</span>
+        <div class="docs-header-actions">
+          <a href="/" class="docs-header-link">Terug naar website</a>
+          <a href="https://my.mowi.agency/login" class="docs-header-link docs-header-link-primary" target="_blank" rel="noopener">Inloggen</a>
+        </div>
+      </div>
+    </header>
+    <div class="docs-body">
+      <div class="docs-sidebar-backdrop" id="docsSidebarBackdrop"></div>
+      <aside class="docs-sidebar" id="docsSidebar">
+        <nav class="docs-sidebar-nav" id="docsSidebarNav" aria-label="Documentatie-navigatie"></nav>
+      </aside>
+      <div class="docs-main">
+        <div class="docs-content-wrap">
+          <div class="docs-column">
+            <nav class="docs-breadcrumb" id="docsBreadcrumb" aria-label="Broodkruimel"></nav>
+
+            <article class="docs-article">
+<h1>Shopware koppelen</h1>
+
+<p class="docs-dek">
+  Via de Shopware-koppeling zoekt uw agent de status van een bestelling rechtstreeks op in uw
+  webshop, bijvoorbeeld als een klant belt of mailt met "waar blijft mijn bestelling?". De
+  koppeling is alleen lezend: Mowi past nooit iets aan in uw webshop.
+</p>
+<p>
+  Na deze stappen is uw webshop gekoppeld aan het dashboard en heeft het dashboard de verbinding
+  getest.
+</p>
+
+<div class="docs-prereqs">
+<div class="docs-prereqs-label">Vereisten</div>
+<ul>
+<li><span>Beheerdersrechten in het beheer van uw Shopware-webshop, of iemand die dat namens u kan doen (bijvoorbeeld uw webbouwer).</span></li>
+<li><span>Toegang tot <strong>het dashboard</strong>.</span></li>
+</ul>
+</div>
+
+<h2>Wat is een integratie?</h2>
+<p>
+  Shopware geeft Mowi geen toegang met uw eigen inloggegevens. U maakt in Shopware een aparte
+  integratie aan, met een eigen <strong>Toegangs-ID</strong> (Access key ID) en
+  <strong>Veiligheidssleutel</strong> (Secret access key). Wat de integratie mag, bepaalt de rol die u
+  eraan koppelt. Voor deze koppeling is dat een rol met bij <strong>Bestellingen</strong> (Orders) alleen
+  het recht <strong>Bekijken</strong> (View). U kunt de integratie op elk moment verwijderen in Shopware,
+  zonder dat dit uw eigen inloggegevens raakt.
+</p>
+
+<h2>De koppeling inrichten</h2>
+
+<div class="docs-steps">
+<div class="docs-step">
+<span class="docs-step-num">1</span>
+<div class="docs-step-body">
+<h3>Open Koppelingen in het dashboard</h3>
+<p>Klik in de zijbalk op <strong>Settings</strong> en daarna bij <strong>Koppelingen</strong> op <strong>Openen</strong>.
+  U komt er ook via het menu onder uw initialen linksboven (<strong>Koppeling(en)</strong>) of via de
+  setupstap <strong>Koppel uw systemen</strong>.</p>
+<p class="docs-muted">U ziet nu de pagina <strong>Koppelingen</strong>, met tegels onder <strong>Mailbox</strong>,
+  <strong>Webshops</strong> en <strong>Reserveren &amp; afspraken</strong>.</p>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">2</span>
+<div class="docs-step-body">
+<h3>Klik op de tegel Shopware</h3>
+<p>Klik onder <strong>Webshops</strong> op <strong>Shopware</strong>.</p>
+<p class="docs-muted">Het paneel <strong>Shopware koppelen</strong> klapt open, met de stappen en de velden
+  <strong>Webshop-adres</strong>, <strong>Access key ID</strong> en <strong>Secret access key</strong>.</p>
+</div>
+</div>
+</div>
+
+<div class="docs-media docs-media--shot">
+<a href="../assets/docs/koppeling-shopware-1-dashboard.webp?v=20261021" target="_blank" rel="noopener"><img src="../assets/docs/koppeling-shopware-1-dashboard.webp?v=20261021" alt="Het paneel Shopware koppelen in het dashboard, met de stappen en de velden Webshop-adres, Access key ID en Secret access key" width="590" height="896" loading="lazy" /></a>
+</div>
+<p class="docs-media-caption">Het paneel <strong>Shopware koppelen</strong> in het dashboard.</p>
+
+<p>In Shopware maakt u eerst een rol aan en daarna de integratie.</p>
+
+<div class="docs-steps">
+<div class="docs-step">
+<span class="docs-step-num">3</span>
+<div class="docs-step-body">
+<h3>Open Gebruikers &amp; rechten in Shopware</h3>
+<p>Log in op het beheer van uw webshop en ga naar <strong>Instellingen</strong> (Settings). Klik onder
+  <strong>Systeem</strong> (System) op <strong>Gebruikers &amp; rechten</strong> (Users &amp; permissions).</p>
+<p class="docs-muted">U ziet nu de pagina <strong>Gebruikers &amp; rechten</strong>, met de kaart
+  <strong>Rollen</strong> (Roles).</p>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">4</span>
+<div class="docs-step-body">
+<h3>Maak een rol aan die alleen bestellingen bekijkt</h3>
+<p>Klik bij <strong>Rollen</strong> op <strong>Rol maken</strong> (Create role). Vul bij <strong>Naam</strong> (Name)
+  "Mowi" in. Zet in de tabel <strong>Rechten</strong> (Permissions) bij <strong>Bestellingen</strong> (Orders)
+  alleen een vinkje in de kolom <strong>Bekijken</strong> (View).</p>
+<!-- VERIFY: that a non-admin integration with only Orders > View passes the test was inferred, not tested. Source: Shopware's own ACL definition (shopware/shopware trunk, sw-order/acl/index.js): the Orders "viewer" role includes order, order_customer, order_address, order_delivery, shipping_method and state_machine_state read rights, which covers every association ShopwareGateway requests. ShopwareGateway has never run against a live Shopware store (its own docblock says so). Confirm with one real store before publishing. -->
+<p class="docs-muted">Bij <strong>Bestellingen</strong> staat nu alleen <strong>Bekijken</strong> aangevinkt. Alle
+  andere vakjes zijn leeg.</p>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">5</span>
+<div class="docs-step-body">
+<h3>Sla de rol op</h3>
+<p>Klik op <strong>Opslaan</strong> (Save). Vraagt Shopware om uw wachtwoord? Vul het in en bevestig.</p>
+<p class="docs-muted">De rol Mowi is opgeslagen. Hij staat voortaan in de lijst <strong>Rollen</strong>.</p>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">6</span>
+<div class="docs-step-body">
+<h3>Open Integraties</h3>
+<p>Ga naar <strong>Instellingen</strong> (Settings) en klik onder <strong>Systeem</strong> (System) op
+  <strong>Integraties</strong> (Integrations).</p>
+<p class="docs-muted">U ziet nu een overzicht van integraties. Dat overzicht kan leeg zijn.</p>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">7</span>
+<div class="docs-step-body">
+<h3>Maak een integratie aan met de rol Mowi</h3>
+<p>Klik op <strong>Integratie aanmaken</strong> (Add integration). Vul bij <strong>Naam</strong> (Name) "Mowi" in.
+  Zorg dat <strong>Beheerder</strong> (Administrator) uit staat: anders krijgt de integratie alle rechten in uw
+  webshop. Kies bij <strong>Rollen</strong> (Roles) de rol Mowi.</p>
+<p class="docs-muted">In het venster <strong>Integratie aanmaken</strong> (Create integration) staat de rol Mowi bij
+  <strong>Rollen</strong>. Shopware heeft ook al een <strong>Toegangs-ID</strong> (Access key ID) en een
+  <strong>Veiligheidssleutel</strong> (Secret access key) ingevuld.</p>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">8</span>
+<div class="docs-step-body">
+<h3>Neem de twee sleutels over in het dashboard</h3>
+<p>Laat het venster in Shopware open. Kopieer de <strong>Toegangs-ID</strong> met de kopieerknop in het veld en
+  plak hem in het dashboard bij <strong>Access key ID</strong>. Doe hetzelfde met de
+  <strong>Veiligheidssleutel</strong>: plak die bij <strong>Secret access key</strong>. Klik nog niet op
+  <strong>Koppelen</strong>: de sleutels werken pas als de integratie is opgeslagen.</p>
+<p class="docs-muted">In het dashboard zijn nu beide velden gevuld. De Toegangs-ID begint met <code>SWIA</code>.</p>
+<div class="docs-callout docs-callout-warning">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4l9 16H3z"/><path d="M12 10v4"/><circle cx="12" cy="17" r=".4" fill="currentColor"/></svg>
+<p>Neem beide waarden over voordat u de integratie opslaat. Na het opslaan toont Shopware de veiligheidssleutel niet meer.</p>
+</div>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">9</span>
+<div class="docs-step-body">
+<h3>Sla de integratie op</h3>
+<p>Klik in Shopware op <strong>Integratie opslaan</strong> (Save integration).</p>
+<p class="docs-muted">U ziet de melding <strong>Integratie is opgeslagen.</strong> (Integration has been saved.) De
+  integratie Mowi staat nu in het overzicht.</p>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">10</span>
+<div class="docs-step-body">
+<h3>Vul het webshop-adres in en klik op Koppelen</h3>
+<p>Vul in het dashboard bij <strong>Webshop-adres</strong> de volledige URL van uw webshop in (met
+  <code>https://</code>). Klik op <strong>Koppelen</strong>.</p>
+<p class="docs-muted">Het dashboard test de verbinding meteen en toont de melding
+  <strong>Koppeling opgeslagen en getest — de verbinding werkt.</strong> De tegel Shopware krijgt het
+  label <strong>Verbonden</strong>.</p>
+</div>
+</div>
+</div>
+
+<div class="docs-callout docs-callout-result">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8 12.5l2.5 2.5 5.5-6"/></svg>
+<p><strong>De koppeling werkt</strong> als de tegel Shopware <strong>Verbonden</strong> toont. Open de tegel later opnieuw om te zien wanneer de verbinding voor het laatst getest is, of klik op <strong>Test verbinding</strong>.</p>
+</div>
+
+<p>
+  Een koppeling geldt voor elk kanaal van uw agent: aan de telefoon en in de e-mail zoekt hij
+  dezelfde bestellingen op. Heeft u meer dan één webshop? Open de tegel en vul onder
+  <strong>Nog een Shopware koppelen</strong> de gegevens van de volgende webshop in.
+</p>
+
+<h2>Problemen oplossen</h2>
+
+<h3>"Koppeling opgeslagen, maar de test is nog niet gelukt"</h3>
+<p>
+  Het dashboard heeft uw gegevens bewaard, maar kon er de bestellingen in uw webshop nog niet mee
+  opvragen. Open de tegel Shopware: bij <strong>Status</strong> staat <strong>Fout</strong>, met daaronder wat er
+  misging. Zoek die melding hieronder op.
+</p>
+
+<h3>"De Access Key ID of Secret Access Key werd geweigerd (401)"</h3>
+<p>
+  Shopware herkent de sleutels niet. Controleer of u de integratie heeft opgeslagen: de sleutels
+  werken pas daarna. Controleer ook of de waarden in het juiste veld staan. De Toegangs-ID begint met
+  <code>SWIA</code>.
+</p>
+<p>
+  Heeft u de veiligheidssleutel niet meer? Klik in Shopware bij <strong>Integraties</strong> op de naam Mowi en
+  daarna op <strong>Nieuwe API-toegangsgegevens genereren</strong> (Create new API key). Kopieer beide nieuwe
+  waarden en klik op <strong>Integratie opslaan</strong> (Save integration). Klik in het paneel Shopware op
+  <strong>Sleutel wijzigen</strong>, vul de nieuwe waarden in en klik op <strong>Opslaan</strong>.
+</p>
+
+<h3>"De integratie mist rechten (403)"</h3>
+<p>
+  Shopware herkent de sleutels, maar de integratie mag de bestellingen niet bekijken. Klik in Shopware
+  bij <strong>Integraties</strong> op de naam Mowi en controleer of bij <strong>Rollen</strong> (Roles) de rol Mowi
+  staat. Controleer bij <strong>Gebruikers &amp; rechten</strong> of die rol bij <strong>Bestellingen</strong>
+  (Orders) het recht <strong>Bekijken</strong> (View) heeft. Klik daarna in het dashboard op
+  <strong>Test verbinding</strong>.
+</p>
+
+<h3>"De Shopware Admin API is niet gevonden op dit adres (404)"</h3>
+<p>
+  Controleer het webshop-adres op typefouten en op het juiste domein. Vul het adres van de webshop zelf
+  in, zonder <code>/admin</code> erachter.
+</p>
+
+<h3>"De webshop is niet bereikbaar"</h3>
+<p>
+  Het dashboard kon het adres niet bereiken. Controleer of de webshop online is en of het adres begint
+  met <code>https://</code>.
+</p>
+
+<h2>Voor uw IT-partner</h2>
+<p>
+  Regelt uw webbouwer of IT-partner de Shopware-kant? Kopieer onderstaand verzoek en stuur het door.
+</p>
+<div class="docs-token-row">
+<div class="docs-token-value docs-token-value--block" id="itPartnerEmailShopware">Onderwerp: Shopware-koppeling voor Mowi instellen
+
+Beste [naam IT-partner],
+
+Voor de koppeling van ons Mowi-dashboard met onze Shopware-webshop hebben we het volgende nodig:
+
+1. Ga in het Shopware-beheer naar Instellingen (Settings) > Systeem (System) > Gebruikers & rechten (Users & permissions). Maak bij Rollen (Roles) met "Rol maken" (Create role) een rol "Mowi" aan, met bij Bestellingen (Orders) alleen het recht Bekijken (View). Sla de rol op.
+2. Ga naar Instellingen (Settings) > Systeem (System) > Integraties (Integrations) en klik op "Integratie aanmaken" (Add integration). Vul als naam "Mowi" in, laat Beheerder (Administrator) uit en kies bij Rollen (Roles) de rol "Mowi".
+3. Kopieer de Toegangs-ID (Access key ID) en de Veiligheidssleutel (Secret access key) voordat u op "Integratie opslaan" (Save integration) klikt. Shopware toont de veiligheidssleutel daarna niet meer.
+4. Deel beide waarden via een veilig kanaal met ons, niet per e-mail in platte tekst.
+
+Met vriendelijke groet,
+[uw naam]</div>
+<button type="button" class="docs-copy-btn" data-copy-target="itPartnerEmailShopware">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
+<span class="docs-copy-btn-label">Kopiëren</span>
+</button>
+</div>
+
+<h2>Volgende stappen</h2>
+<p>
+  Wilt u horen hoe uw agent een bestelling opzoekt? <a href="telefoon-instellen#testen">Test hem in de browser</a>.
+</p>
+<p>
+  Werkt de koppeling later niet meer? <a href="faq-koppeling-werkt-niet">Lees Een koppeling werkt niet meer</a>.
+</p>
+            </article>
+
+            <nav class="docs-prevnext" id="docsPrevNext" aria-label="Vorige en volgende pagina"></nav>
+          </div>
+
+          <aside class="docs-toc" id="docsToc">
+            <div class="docs-toc-label">Op deze pagina</div>
+            <ol id="docsTocList"></ol>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/docs-nav.js?v=20261021"></script>
+  <script src="../js/docs.js?v=20260802"></script>
+</body>
+</html>

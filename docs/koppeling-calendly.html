@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calendly koppelen — Documentatie — Mowi</title>
+  <meta name="description" content="Koppel Calendly aan het dashboard, zodat uw agent vrije tijden opzoekt en, als u dat toestaat, zelf afspraken inplant. Met de stappen in Calendly en in het dashboard." />
+  <link rel="preconnect" href="https://fonts.bunny.net" />
+  <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/docs.css?v=20261021" />
+  <link rel="icon" href="../assets/icon-192.png?v=20260904-3" />
+  <link rel="shortcut icon" href="../assets/icon-192.png?v=20260904-3" />
+  <link rel="apple-touch-icon" href="../assets/apple-icon-180.png?v=20260904-3" />
+  <link rel="apple-touch-icon-precomposed" href="../assets/apple-icon-180.png?v=20260904-3" />
+  <script defer data-domain="mowi.agency" src="https://plausible.io/js/script.js"></script>
+</head>
+<body class="docs" data-docs-href="koppeling-calendly">
+  <div class="docs-shell">
+    <header class="docs-header">
+      <div class="docs-header-inner">
+        <button class="docs-menu-toggle" id="docsMenuToggle" aria-expanded="false" aria-controls="docsSidebar" aria-label="Menu openen">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+        <a href="/" class="docs-wordmark" aria-label="Mowi - home">
+          <img src="../assets/mowi-icon.png" alt="" class="docs-wordmark-icon" />
+          <img src="../assets/mowi-wordmark.png" alt="Mowi" class="docs-wordmark-text" />
+        </a>
+        <span class="docs-header-divider" aria-hidden="true"></span>
+        <span class="docs-header-label">Documentatie</span>
+        <div class="docs-header-actions">
+          <a href="/" class="docs-header-link">Terug naar website</a>
+          <a href="https://my.mowi.agency/login" class="docs-header-link docs-header-link-primary" target="_blank" rel="noopener">Inloggen</a>
+        </div>
+      </div>
+    </header>
+    <div class="docs-body">
+      <div class="docs-sidebar-backdrop" id="docsSidebarBackdrop"></div>
+      <aside class="docs-sidebar" id="docsSidebar">
+        <nav class="docs-sidebar-nav" id="docsSidebarNav" aria-label="Documentatie-navigatie"></nav>
+      </aside>
+      <div class="docs-main">
+        <div class="docs-content-wrap">
+          <div class="docs-column">
+            <nav class="docs-breadcrumb" id="docsBreadcrumb" aria-label="Broodkruimel"></nav>
+
+            <article class="docs-article">
+<h1>Calendly koppelen</h1>
+
+<p class="docs-dek">
+  Via de Calendly-koppeling zoekt uw agent vrije tijden op in uw Calendly, bijvoorbeeld als een klant
+  belt of mailt voor een afspraak. Hij stelt tijden voor en u bevestigt de afspraak zelf.
+</p>
+<p>
+  Na deze stappen is Calendly gekoppeld aan het dashboard en heeft het dashboard de verbinding getest.
+</p>
+
+<div class="docs-prereqs">
+<div class="docs-prereqs-label">Vereisten</div>
+<ul>
+<li><span>Een Calendly-account met het type afspraak (event type) dat de agent mag gebruiken. Maak de token aan met het account van degene bij wie de afspraken worden ingepland.</span></li>
+<li><span>Alleen als de agent zelf afspraken mag inplannen: een betaald Calendly-abonnement. Vrije tijden opzoeken werkt ook met een gratis account.</span></li>
+<li><span>Toegang tot <strong>het dashboard</strong>.</span></li>
+</ul>
+</div>
+
+<h2>Wat is een personal access token?</h2>
+<p>
+  Calendly geeft Mowi geen toegang met uw eigen wachtwoord. U maakt in Calendly zelf een aparte sleutel
+  aan: een <strong>personal access token</strong>. Bij het aanmaken kiest u welke rechten (scopes) de token
+  krijgt. Een nieuwe token zonder rechten geeft geen toegang. U kunt de token op elk moment intrekken met
+  <strong>Revoke</strong> op de pagina <strong>API &amp; Webhooks</strong> in Calendly, zonder dat dit uw
+  eigen inloggegevens raakt.
+</p>
+<div class="docs-callout docs-callout-note">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5"/><circle cx="12" cy="8" r=".4" fill="currentColor"/></svg>
+<p>Calendly toont deze schermen mogelijk in het Engels. Daarom staan hieronder de Engelse namen van knoppen en pagina's.</p>
+</div>
+<!-- VERIFY: whether Calendly's own app screens (Integrations, API & Webhooks, the token dialog) can be shown in Dutch. Calendly's help center only confirms Dutch for booking pages and notifications (calendly.com/help/how-to-change-your-event-type-language); the English labels used below come from developer.calendly.com/docs/authentication/how-to-authenticate-with-personal-access-tokens. -->
+
+<h2>De koppeling inrichten</h2>
+
+<div class="docs-steps">
+<div class="docs-step">
+<span class="docs-step-num">1</span>
+<div class="docs-step-body">
+<h3>Open Koppelingen in het dashboard</h3>
+<p>Klik in de zijbalk op <strong>Settings</strong> en daarna bij <strong>Koppelingen</strong> op <strong>Openen</strong>.
+  U komt er ook via het menu onder uw initialen linksboven (<strong>Koppeling(en)</strong>) of via de
+  setupstap <strong>Koppel uw systemen</strong>.</p>
+<p class="docs-muted">U ziet nu de pagina <strong>Koppelingen</strong>, met tegels onder <strong>Mailbox</strong>,
+  <strong>Webshops</strong> en <strong>Reserveren &amp; afspraken</strong>.</p>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">2</span>
+<div class="docs-step-body">
+<h3>Klik op de tegel Calendly</h3>
+<p>Klik onder <strong>Reserveren &amp; afspraken</strong> op <strong>Calendly</strong>.</p>
+<p class="docs-muted">Het paneel <strong>Calendly koppelen</strong> klapt open, met de stappen, de velden
+  <strong>Personal access token</strong> en <strong>Event-type-URI (alleen nodig bij meerdere typen afspraken)</strong>,
+  en het vinkje <strong>Agent mag zelf afspraken inplannen</strong>.</p>
+</div>
+</div>
+</div>
+
+<div class="docs-media docs-media--shot">
+<a href="../assets/docs/koppeling-calendly-1-dashboard.webp?v=20261021" target="_blank" rel="noopener"><img src="../assets/docs/koppeling-calendly-1-dashboard.webp?v=20261021" alt="Het paneel Calendly koppelen in het dashboard, met de stappen, de velden Personal access token en Event-type-URI en het vinkje Agent mag zelf afspraken inplannen" width="590" height="934" loading="lazy" /></a>
+</div>
+<p class="docs-media-caption">Het paneel <strong>Calendly koppelen</strong> in het dashboard.</p>
+
+<div class="docs-steps">
+<div class="docs-step">
+<span class="docs-step-num">3</span>
+<div class="docs-step-body">
+<h3>Open de API-instellingen in Calendly</h3>
+<p>Log in bij Calendly en ga naar <strong>calendly.com/integrations/api_webhooks</strong>.</p>
+<p class="docs-muted">U ziet nu de pagina <strong>API &amp; Webhooks</strong>, met het onderdeel
+  <strong>Personal Access Tokens</strong>.</p>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">4</span>
+<div class="docs-step-body">
+<h3>Start een nieuwe token</h3>
+<p>Klik onder <strong>Personal Access Tokens</strong> op <strong>Get a token now</strong>. Heeft u al eerder
+  een token gemaakt? Klik dan onder <strong>Your personal access tokens</strong> op
+  <strong>Generate new token</strong>.</p>
+<p class="docs-muted">U ziet nu het scherm <strong>Create your personal access token</strong>.</p>
+<!-- VERIFY: a secondary, undated tutorial (trainn.co/tutorials/get-calendly-api-token) shows an extra "Continue" click before the name field. The official PAT doc does not mention it. -->
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">5</span>
+<div class="docs-step-body">
+<h3>Geef de token een naam en kies de rechten</h3>
+<p>Vul een herkenbare naam in, bijvoorbeeld "Mowi". Kies daarna deze rechten (scopes):</p>
+<ul>
+<li><code>users:read</code>: uw account herkennen.</li>
+<li><code>event_types:read</code>: uw typen afspraken en de vrije tijden lezen.</li>
+<li><code>scheduled_events:read</code>: uw geplande afspraken lezen.</li>
+<li><code>scheduled_events:write</code>: alleen als de agent zelf afspraken mag inplannen.</li>
+</ul>
+<!-- VERIFY: how the scope choice looks in Calendly's token dialog (labels, checkboxes). The official PAT doc only says "you'll provide a list of scopes when creating a personal access token"; the scope names and which endpoint needs which scope come from developer.calendly.com/docs/authentication/scopes. -->
+<p>Klik op <strong>Create Token</strong>.</p>
+<p class="docs-muted">Calendly maakt de token aan en toont de knop <strong>Copy token</strong>. Vraagt Calendly
+  eerst om een code? Die stuurt Calendly naar uw e-mailadres.</p>
+<!-- VERIFY: the e-mailed verification code before "Copy token" comes only from the trainn.co tutorial (secondary, undated), not from Calendly's own docs. -->
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">6</span>
+<div class="docs-step-body">
+<h3>Kopieer de token</h3>
+<p>Klik op <strong>Copy token</strong>.</p>
+<p class="docs-muted">De token staat nu op uw klembord.</p>
+<div class="docs-callout docs-callout-warning">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4l9 16H3z"/><path d="M12 10v4"/><circle cx="12" cy="17" r=".4" fill="currentColor"/></svg>
+<p>Kopieer de token meteen. Calendly toont hem maar één keer en bewaart hem niet. Sluit u het scherm zonder te kopiëren, dan maakt u een nieuwe token aan.</p>
+</div>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">7</span>
+<div class="docs-step-body">
+<h3>Vul het formulier in en klik op Koppelen</h3>
+<p>Ga terug naar het dashboard en plak de token bij <strong>Personal access token</strong>. Heeft uw
+  Calendly-account meer dan één actief type afspraak? Vul dan bij
+  <strong>Event-type-URI (alleen nodig bij meerdere typen afspraken)</strong> de URI in van het type dat de
+  agent moet gebruiken. Anders laat u dit veld leeg. Het vinkje
+  <strong>Agent mag zelf afspraken inplannen</strong> mag uit blijven (zie hieronder).
+  Klik op <strong>Koppelen</strong>.</p>
+<p class="docs-muted">Het dashboard test de verbinding meteen en toont de melding
+  <strong>Koppeling opgeslagen en getest — de verbinding werkt.</strong> De tegel Calendly krijgt het label
+  <strong>Verbonden</strong>.</p>
+<div class="docs-callout docs-callout-note">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5"/><circle cx="12" cy="8" r=".4" fill="currentColor"/></svg>
+<p>Weet u niet zeker of u meer dan één actief type afspraak heeft? Laat het veld leeg. Zijn het er meer, dan meldt de test dat. Hoe u de URI vindt, leest u onder Problemen oplossen.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="docs-callout docs-callout-result">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8 12.5l2.5 2.5 5.5-6"/></svg>
+<p><strong>De koppeling werkt</strong> als de tegel Calendly <strong>Verbonden</strong> toont. Open de tegel: onder de status staat welk type afspraak de agent gebruikt, bijvoorbeeld <strong>Verbonden met Calendly — type afspraak "Kennismaking"</strong>. Met <strong>Test verbinding</strong> test u later opnieuw.</p>
+</div>
+
+<p>
+  Kiest een beller aan de telefoon een tijd, dan noteert de agent een terugbelverzoek met die tijd erbij. U of uw
+  team bevestigt de afspraak. Zelf inplannen doet de agent aan de telefoon niet, ook niet met het vinkje
+  <strong>Agent mag zelf afspraken inplannen</strong> aan: Calendly heeft voor een afspraak het e-mailadres van de
+  klant nodig, en daar vraagt de agent aan de telefoon niet naar. Per e-mail stelt de agent altijd alleen tijden voor.
+</p>
+<p>
+  Wilt u het vinkje later aan- of uitzetten? Open de tegel Calendly en klik op <strong>Sleutel wijzigen</strong>.
+  Plak de token opnieuw (of een nieuwe), zet het vinkje aan of uit en klik op <strong>Opslaan</strong>.
+</p>
+<p>
+  Een koppeling geldt voor elk kanaal van uw agent: aan de telefoon en in de e-mail. Voor afspraken gebruikt
+  uw agent één koppeling onder <strong>Reserveren &amp; afspraken</strong>. Heeft u er meer dan één, dan
+  gebruikt hij de koppeling die u het eerst heeft gemaakt en die op <strong>Verbonden</strong> staat.
+</p>
+
+<h2>Problemen oplossen</h2>
+
+<h3>"Koppeling opgeslagen, maar de test is nog niet gelukt"</h3>
+<p>
+  Het dashboard heeft uw gegevens bewaard, maar kon er nog niet mee bij Calendly. Open de tegel Calendly:
+  naast <strong>Status</strong> staat <strong>Fout</strong>, met daaronder wat er misging. Pas de gegevens aan
+  via <strong>Sleutel wijzigen</strong> en klik op <strong>Opslaan</strong>. Het dashboard test dan opnieuw.
+</p>
+
+<h3>"Het access-token werd geweigerd (401)"</h3>
+<p>
+  Calendly herkent de token niet. Hij is dan niet volledig gekopieerd, of hij is ingetrokken. Calendly trekt
+  een token ook zelf in als u het wachtwoord, het inlog-e-mailadres of de inlogmethode van het account
+  wijzigt. Maak een nieuwe token aan en vul die in via <strong>Sleutel wijzigen</strong>.
+</p>
+
+<h3>"De token mist rechten (403)"</h3>
+<p>
+  Een nieuwe Calendly-token geeft pas toegang als u bij het aanmaken rechten (scopes) kiest. Maak een nieuwe
+  token aan met de rechten uit deze handleiding en vul die in via <strong>Sleutel wijzigen</strong>.
+</p>
+
+<h3>"Verbonden, maar het type afspraak kon niet worden bepaald"</h3>
+<p>
+  De token werkt, maar het dashboard weet niet welk type afspraak de agent moet gebruiken. Achter de
+  melding staat de reden:
+</p>
+<ul>
+<li><strong>Dit Calendly-account heeft meerdere typen afspraken</strong>: open de tegel Calendly en klik op <strong>Sleutel wijzigen</strong>. Plak de token opnieuw, vul bij <strong>Event-type-URI (alleen nodig bij meerdere typen afspraken)</strong> de URI in en klik op <strong>Opslaan</strong>.</li>
+<li><strong>Er is geen actief type afspraak gevonden in dit Calendly-account</strong>: maak in Calendly een type afspraak aan, of zet een bestaand type aan.</li>
+<li>Een technische melding met 403: de token mist het recht <code>event_types:read</code>. Bij een andere code: controleer de ingevulde URI.</li>
+</ul>
+<p>
+  De event-type-URI begint met <code>https://api.calendly.com/event_types/</code>. Het is niet de link naar uw
+  boekingspagina. Uw IT-partner kan de URI opzoeken via de Calendly-API (zie het verzoek hieronder), of
+  <a href="faq-contact-support">neem contact op met support</a>.
+</p>
+
+<h3>"Calendly is niet bereikbaar"</h3>
+<p>
+  Het dashboard kon Calendly niet bereiken. Probeer het later opnieuw met <strong>Test verbinding</strong>.
+</p>
+
+<h3>De agent plant geen afspraken in</h3>
+<p>
+  Dat klopt. Bij Calendly noteert de agent aan de telefoon een terugbelverzoek met de gekozen tijd, en per e-mail
+  stelt hij tijden voor. De afspraak zelf zet u of uw team in Calendly. Zie de terugbelverzoeken op de pagina
+  <strong>Telefoon</strong>, onder <a href="telefoon-gesprekken">Gesprekken</a>.
+</p>
+
+<h2>Voor uw IT-partner</h2>
+<p>
+  Regelt uw IT-partner of de beheerder van uw Calendly-account de Calendly-kant? Kopieer onderstaand verzoek
+  en stuur het door.
+</p>
+<!-- VERIFY: same open point as in the steps: the exact Calendly UI for choosing scopes is not shown in Calendly's docs. -->
+<div class="docs-token-row">
+<div class="docs-token-value docs-token-value--block" id="itPartnerEmailCalendly">Onderwerp: Calendly-koppeling voor Mowi instellen
+
+Beste [naam IT-partner],
+
+Voor de koppeling van ons Mowi-dashboard met Calendly hebben we het volgende nodig:
+
+1. Log in bij Calendly met het account waarin de afspraken worden ingepland en open https://calendly.com/integrations/api_webhooks.
+2. Klik onder Personal Access Tokens op "Get a token now" (of op "Generate new token" als er al een token is) en geef de token een naam, bijvoorbeeld "Mowi".
+3. Kies de scopes users:read, event_types:read en scheduled_events:read. Mag onze agent zelf afspraken inplannen? Kies dan ook scheduled_events:write. Daarvoor is een betaald Calendly-abonnement nodig. Klik op "Create Token" en daarna op "Copy token". Let op: de token wordt maar één keer getoond.
+4. Heeft het account meer dan één actief type afspraak? Zoek dan de URI op van het type dat de agent moet gebruiken, via GET https://api.calendly.com/event_types?user=[user-URI]. De user-URI staat in het antwoord van GET https://api.calendly.com/users/me. De event-type-URI begint met https://api.calendly.com/event_types/.
+5. Deel de token (en zo nodig de URI) via een veilig kanaal met ons, niet per e-mail in platte tekst.
+
+Met vriendelijke groet,
+[uw naam]</div>
+<button type="button" class="docs-copy-btn" data-copy-target="itPartnerEmailCalendly">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
+<span class="docs-copy-btn-label">Kopiëren</span>
+</button>
+</div>
+
+<h2>Volgende stappen</h2>
+<p>
+  Wilt u horen hoe uw agent vrije tijden voorstelt? <a href="telefoon-instellen#testen">Test hem in de browser</a>.
+</p>
+<p>
+  Werkt de koppeling later niet meer? <a href="faq-koppeling-werkt-niet">Lees Een koppeling werkt niet meer</a>.
+</p>
+            </article>
+
+            <nav class="docs-prevnext" id="docsPrevNext" aria-label="Vorige en volgende pagina"></nav>
+          </div>
+
+          <aside class="docs-toc" id="docsToc">
+            <div class="docs-toc-label">Op deze pagina</div>
+            <ol id="docsTocList"></ol>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/docs-nav.js?v=20261021"></script>
+  <script src="../js/docs.js?v=20260802"></script>
+</body>
+</html>

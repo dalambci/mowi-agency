@@ -312,7 +312,8 @@ retype credentials from scratch or falling back to a password:
   `index.html`'s own `?v=` — see its `CSS_VERSION` regex — don't hardcode it separately there).
   Does **not** apply to the 15 redirect stubs (root stubs, `agents/*`, and — new in v2 —
   `receptenboek.html` + `receptenboek/*`, none of which load either file) or to `docs/*` (own
-  separate `docs.css`/`docs.js` versioning, untouched by this rule — currently `docs.css?v=20260817`).
+  separate `docs.css`/`docs.js` versioning, untouched by this rule — currently `docs.css?v=20261021`,
+  `docs-nav.js?v=20261021`).
 - **Separate from the above:** production also has a page-level HTTP cache in front of nginx
   (confirmed 2026-08-03 — `curl -sI https://mowi.agency/` showed `X-Cache: HIT` and `Age: 252`;
   likely Varnish, which Cloudways commonly bundles). This caches whole HTML responses, not just
@@ -557,9 +558,10 @@ applied to all 16, and `test.html` is the reliable copy-paste source.
   components live in `css/docs.css`: `.docs-steps` (numbered steps with circles), `.docs-prereqs`
   (prerequisites checklist box), `.docs-callout` with `-note` / `-warning` / `-result` modifiers
   (the `-result` variant is for "U ziet nu ..." expected-result confirmations), `.docs-media`
-  (grey rounded image placeholder + caption, for screenshots to be added later), and
+  (grey rounded image placeholder + caption; with `.docs-media--shot` it frames a real screenshot
+  on the dashboard's own page colour, see "Docs refresh 2026-10-21" below), and
   `.docs-token-row` / `.docs-copy-btn` (copyable key/URL blocks with a working clipboard button).
-- `docs/index.html` (overview, dashboard-style category cards) plus **16 articles** exist with
+- **Superseded 2026-10-21 (count and anatomy), see "Docs refresh 2026-10-21" below:** `docs/index.html` (overview, dashboard-style category cards) plus **16 articles** exist with
   real written content, confirmed by direct inventory (not the older, inaccurate "19 articles"
   figure this file used to carry — recount with `ls docs/*.html` if this number is ever in
   doubt, ownership of the exact count drifts as pages are added). Every article follows the
@@ -573,6 +575,44 @@ applied to all 16, and `test.html` is the reliable copy-paste source.
   heading holds Blog + Documentatie together, linking to `docs/index.html` as "Documentatie" —
   keep that link when editing any footer, and keep it a real dedicated column, don't flatten it
   back into the platform/nav column.
+
+### Docs refresh 2026-10-21 (branch `docs-refresh-2026-10`, worktree `~/Desktop/mowi-agency-docs`)
+- **Why:** the docs still described the pre-self-serve product ("Mowi's implementatieteam richt het in",
+  English UI labels like Running/Paused/Submit ticket, one "Inbox agent"). The product is now one agent
+  with the channels Telefoon and E-mail, set up by the client in the dashboard's setup wizard, sold as
+  Start gratis / Mowi 500 / Mowi 1000. Every page was rewritten against the live dashboard (commit
+  `a93727a`) and the live /pricing and terms.
+- **IA, six categories (`js/docs-nav.js`):** Aan de slag (5) · Uw agent (5: telefoon-instellen,
+  telefoon-doorschakelen, telefoon-gesprekken, agent-email-triage = "E-mail instellen",
+  kennis-bedrijfsprofiel) · Koppelingen (overzicht + 10 platforms) · **Abonnement en tegoed** (new:
+  pakketten-en-abonnement, tegoed-en-credits) · Voor uw IT-partner (3) · Problemen oplossen & FAQ (4).
+  Old slugs were kept, so every existing link and the dashboard's `doc_url`s still resolve.
+  `koppeling-pipedrive` is deliberately **not in the nav**: the dashboard hides the CRM/bookkeeping tiles
+  from new accounts since 2026-10-17 (`config/koppelingen.php` there), so the page only serves clients
+  who already connected it.
+- **Koppeling pages follow the dashboard's `config/shop_platforms.php`:** one page per `implemented =>
+  true` platform that is visible on the Koppelingen page, at exactly the slug its `doc_url` names
+  (the dashboard links "Uitgebreide handleiding met schermafbeeldingen" to them — eight of them 404'd
+  before this refresh). Error texts under "Problemen oplossen" are the gateways' own `summary` strings.
+- **Screenshots are real dashboard screens**, not mock-ups: a local render of the dashboard (scratch
+  worktree at the live commit, sqlite, a signed-up test account for the fictional demo business
+  "Vlothuis Installatietechniek" from the dashboard's `config/demo_profiles.php`, number
+  `+31851234567`), captured with Playwright at 1280px and DPR 2, cropped to the card (≈680 CSS px, the
+  width of `.docs-article`), stored as lossless WebP in `assets/docs/<page-slug>-<n>-<name>.webp` with
+  `width`/`height` at CSS size, each wrapped in a link to itself for phones. The capture scripts, seeds,
+  the fragment builder and the QA script live in the vault at `Website/_tools/docs-shots/`. A changed
+  screenshot gets a new file name or a new `?v=`.
+- **Conventions added:** step numbers restart at 1 under every h2 (each h2 is its own procedure);
+  prerequisite items are wrapped in one `<span>` (the `li` is a flex row, so loose inline children got
+  9px gaps); no em dashes or semicolons in our own prose (quoted UI text keeps the dashboard's own
+  dashes). The HTML in `docs/` stays the source of truth after this refresh; edit it directly.
+
+- **Second pass, same afternoon:** the pages follow dashboard `4e4ec82` (setup headings) and the
+  `dashboard-docs-fixes` branch (koppeling panel steps, the automatisch-versturen switch, Zelflerend card, phone
+  bookings on Calendly/Guestplan become a callback). 27 screenshots were re-shot from a second render (vault
+  `Website/_tools/docs-shots/README.md`, "Second render"). New anchors on `agent-email-triage`: `#schrijven` and
+  `#zelflerend`. **Ship the docs together with that dashboard branch**: the panel screenshots and the
+  Zelflerend/auto-send sections describe the branch, not the dashboard that is live before it.
 
 ### Precision rules that produced this content — apply to every future edit
 - **Never invent a click-path.** Steps inside our own dashboard are grounded by reading the
@@ -605,7 +645,9 @@ applied to all 16, and `test.html` is the reliable copy-paste source.
   dashboard runs on the same server as this website but as a separate application under its own
   subdomain (stated on `docs/it-beveiliging.html`); there is no standard verwerkersovereenkomst
   (DPA) today, it's arranged per client on request (same page).
-- **Known cross-repo mismatch, not yet fixed anywhere:** the dashboard's own `config/support.php`
+- **Resolved (checked 2026-10-21): production's dashboard `.env` sets
+  `SUPPORT_DOCS_URL="https://mowi.agency/docs/"`, so the Help page and sidebar link land here.**
+  Kept for history: ~~**Known cross-repo mismatch, not yet fixed anywhere:**~~ the dashboard's own `config/support.php`
   (`SUPPORT_DOCS_URL`, referenced from `resources/views/support/index.blade.php`'s "Open
   documentation" button) defaults to `https://docs.mowi.agency` — a subdomain that doesn't exist.
   This docs section actually lives at `mowi.agency/docs/` on this repo. Someone needs to either

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PrestaShop koppelen — Documentatie — Mowi</title>
+  <meta name="description" content="Koppel uw PrestaShop-webshop aan het dashboard, zodat uw agent bestelstatus opzoekt. Met de stappen in PrestaShop en in het dashboard." />
+  <link rel="preconnect" href="https://fonts.bunny.net" />
+  <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/docs.css?v=20261021" />
+  <link rel="icon" href="../assets/icon-192.png?v=20260904-3" />
+  <link rel="shortcut icon" href="../assets/icon-192.png?v=20260904-3" />
+  <link rel="apple-touch-icon" href="../assets/apple-icon-180.png?v=20260904-3" />
+  <link rel="apple-touch-icon-precomposed" href="../assets/apple-icon-180.png?v=20260904-3" />
+  <script defer data-domain="mowi.agency" src="https://plausible.io/js/script.js"></script>
+</head>
+<body class="docs" data-docs-href="koppeling-prestashop">
+  <div class="docs-shell">
+    <header class="docs-header">
+      <div class="docs-header-inner">
+        <button class="docs-menu-toggle" id="docsMenuToggle" aria-expanded="false" aria-controls="docsSidebar" aria-label="Menu openen">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+        <a href="/" class="docs-wordmark" aria-label="Mowi - home">
+          <img src="../assets/mowi-icon.png" alt="" class="docs-wordmark-icon" />
+          <img src="../assets/mowi-wordmark.png" alt="Mowi" class="docs-wordmark-text" />
+        </a>
+        <span class="docs-header-divider" aria-hidden="true"></span>
+        <span class="docs-header-label">Documentatie</span>
+        <div class="docs-header-actions">
+          <a href="/" class="docs-header-link">Terug naar website</a>
+          <a href="https://my.mowi.agency/login" class="docs-header-link docs-header-link-primary" target="_blank" rel="noopener">Inloggen</a>
+        </div>
+      </div>
+    </header>
+    <div class="docs-body">
+      <div class="docs-sidebar-backdrop" id="docsSidebarBackdrop"></div>
+      <aside class="docs-sidebar" id="docsSidebar">
+        <nav class="docs-sidebar-nav" id="docsSidebarNav" aria-label="Documentatie-navigatie"></nav>
+      </aside>
+      <div class="docs-main">
+        <div class="docs-content-wrap">
+          <div class="docs-column">
+            <nav class="docs-breadcrumb" id="docsBreadcrumb" aria-label="Broodkruimel"></nav>
+
+            <article class="docs-article">
+<h1>PrestaShop koppelen</h1>
+
+<p class="docs-dek">
+  Via de PrestaShop-koppeling zoekt uw agent de status van een bestelling rechtstreeks op in uw
+  webshop, bijvoorbeeld als een klant belt of mailt met "waar blijft mijn bestelling?". De
+  koppeling is alleen lezend: Mowi past nooit iets aan in uw webshop.
+</p>
+<p>
+  Na deze stappen is uw webshop gekoppeld aan het dashboard en heeft het dashboard de verbinding
+  getest.
+</p>
+
+<div class="docs-prereqs">
+<div class="docs-prereqs-label">Vereisten</div>
+<ul>
+<li><span>Beheerdersrechten in het beheer van uw PrestaShop-webshop, of iemand die dat namens u kan doen (bijvoorbeeld uw webbouwer).</span></li>
+<li><span>Toegang tot <strong>het dashboard</strong>.</span></li>
+</ul>
+</div>
+
+<h2>Wat is een webservice-sleutel?</h2>
+<p>
+  PrestaShop geeft Mowi geen toegang met uw eigen inloggegevens. U maakt in PrestaShop een aparte
+  webservice-sleutel aan: een code van 32 tekens. Per soort gegevens kiest u zelf wat de sleutel mag.
+  Voor deze koppeling is dat alleen <strong>Weergeven (GET)</strong> (View (GET)), voor vijf soorten
+  gegevens: adressen, vervoerders, klanten, bestelstatussen en bestellingen. U kunt de sleutel op elk
+  moment uitschakelen of verwijderen in PrestaShop, zonder dat dit uw eigen inloggegevens raakt.
+</p>
+
+<h2>De koppeling inrichten</h2>
+
+<div class="docs-steps">
+<div class="docs-step">
+<span class="docs-step-num">1</span>
+<div class="docs-step-body">
+<h3>Open Koppelingen in het dashboard</h3>
+<p>Klik in de zijbalk op <strong>Settings</strong> en daarna bij <strong>Koppelingen</strong> op <strong>Openen</strong>.
+  U komt er ook via het menu onder uw initialen linksboven (<strong>Koppeling(en)</strong>) of via de
+  setupstap <strong>Koppel uw systemen</strong>.</p>
+<p class="docs-muted">U ziet nu de pagina <strong>Koppelingen</strong>, met tegels onder <strong>Mailbox</strong>,
+  <strong>Webshops</strong> en <strong>Reserveren &amp; afspraken</strong>.</p>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">2</span>
+<div class="docs-step-body">
+<h3>Klik op de tegel PrestaShop</h3>
+<p>Klik onder <strong>Webshops</strong> op <strong>PrestaShop</strong>.</p>
+<p class="docs-muted">Het paneel <strong>PrestaShop koppelen</strong> klapt open, met de stappen en de velden
+  <strong>Webshop-adres</strong> en <strong>Webservice-sleutel</strong>.</p>
+</div>
+</div>
+</div>
+
+<div class="docs-media docs-media--shot">
+<a href="../assets/docs/koppeling-prestashop-1-dashboard.webp?v=20261021" target="_blank" rel="noopener"><img src="../assets/docs/koppeling-prestashop-1-dashboard.webp?v=20261021" alt="Het paneel PrestaShop koppelen in het dashboard, met de stappen en de velden Webshop-adres en Webservice-sleutel" width="590" height="746" loading="lazy" /></a>
+</div>
+<p class="docs-media-caption">Het paneel <strong>PrestaShop koppelen</strong> in het dashboard.</p>
+
+<div class="docs-steps">
+<div class="docs-step">
+<span class="docs-step-num">3</span>
+<div class="docs-step-body">
+<h3>Open de pagina Webservice in PrestaShop</h3>
+<p>Log in op het beheer van uw webshop en ga in het menu naar <strong>Geavanceerde instellingen</strong>
+  (Advanced Parameters) → <strong>Webservice</strong>.</p>
+<p class="docs-muted">U ziet nu de lijst met webservice-sleutels. Die lijst kan leeg zijn. Onder de lijst staat
+  het blok <strong>Configuratie</strong> (Configuration).</p>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">4</span>
+<div class="docs-step-body">
+<h3>Zet de webservice aan</h3>
+<p>Kijk in het blok <strong>Configuratie</strong> bij <strong>Schakel Prestashop-webservice in</strong>
+  (Enable PrestaShop's webservice). Staat dit op <strong>Nee</strong> (No)? Zet het op <strong>Ja</strong> (Yes) en
+  klik in dat blok op <strong>Opslaan</strong> (Save).</p>
+<p class="docs-muted">Boven de lijst staat het blok <strong>Webservicestatus</strong> (Webservice status), met de
+  melding <strong>Webservice is ingeschakeld. Het belangrijkste toegangspunt is:</strong> (Webservice is enabled.
+  Main entry point is) en een adres dat eindigt op <code>/api</code>.</p>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">5</span>
+<div class="docs-step-body">
+<h3>Maak een nieuwe sleutel aan</h3>
+<p>Klik bovenaan de pagina op <strong>Nieuwe webservice-sleutel toevoegen</strong> (Add new webservice key). Klik
+  naast <strong>Sleutel</strong> (Key) op <strong>Genereren</strong> (Generate) en vul bij
+  <strong>Sleutelbeschrijving</strong> (Key description) "Mowi" in. Laat <strong>Schakelen webservice sleutel
+  in</strong> (Enable webservice key) aan staan.</p>
+<p class="docs-muted">In het veld <strong>Sleutel</strong> staat nu een code van 32 tekens.</p>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">6</span>
+<div class="docs-step-body">
+<h3>Geef alleen leesrechten</h3>
+<p>Zet in de tabel <strong>Permissies</strong> (Permissions) een vinkje in de kolom <strong>Weergeven (GET)</strong>
+  (View (GET)) bij deze vijf rijen: <code>addresses</code>, <code>carriers</code>, <code>customers</code>,
+  <code>order_states</code> en <code>orders</code>. Laat alle andere vakjes leeg.</p>
+<p class="docs-muted">In de kolom <strong>Weergeven (GET)</strong> staan vijf vinkjes. De andere kolommen zijn
+  leeg.</p>
+<div class="docs-callout docs-callout-warning">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4l9 16H3z"/><path d="M12 10v4"/><circle cx="12" cy="17" r=".4" fill="currentColor"/></svg>
+<p>Vink alle vijf de rijen aan. De test in het dashboard controleert alleen <code>orders</code>. Ontbreekt een van de andere vier, dan slaagt de test wel, maar mist uw agent gegevens, zoals de status van de bestelling of de vervoerder.</p>
+</div>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">7</span>
+<div class="docs-step-body">
+<h3>Sla de sleutel op</h3>
+<p>Klik op <strong>Opslaan</strong> (Save).</p>
+<p class="docs-muted">U ziet de melding <strong>Aanmaak geslaagd</strong> (Successful creation). De sleutel staat in de
+  lijst, met Mowi als beschrijving.</p>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">8</span>
+<div class="docs-step-body">
+<h3>Vul het formulier in en klik op Koppelen</h3>
+<p>Kopieer de sleutel uit de kolom <strong>Sleutel</strong> (Key) en ga terug naar het dashboard. Vul bij
+  <strong>Webshop-adres</strong> het adres van uw webshop in: het adres uit het blok <strong>Webservicestatus</strong>,
+  zonder <code>/api</code> aan het eind. Plak de sleutel bij <strong>Webservice-sleutel</strong> en klik op
+  <strong>Koppelen</strong>.</p>
+<p class="docs-muted">Het dashboard test de verbinding meteen en toont de melding
+  <strong>Koppeling opgeslagen en getest — de verbinding werkt.</strong> De tegel PrestaShop krijgt het
+  label <strong>Verbonden</strong>.</p>
+</div>
+</div>
+</div>
+
+<div class="docs-callout docs-callout-result">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8 12.5l2.5 2.5 5.5-6"/></svg>
+<p><strong>De koppeling werkt</strong> als de tegel PrestaShop <strong>Verbonden</strong> toont. Open de tegel later opnieuw om te zien wanneer de verbinding voor het laatst getest is, of klik op <strong>Test verbinding</strong>.</p>
+</div>
+
+<p>
+  Een koppeling geldt voor elk kanaal van uw agent: aan de telefoon en in de e-mail zoekt hij
+  dezelfde bestellingen op. Heeft u meer dan één webshop? Open de tegel en vul het formulier onder
+  <strong>Nog een PrestaShop koppelen</strong> in.
+</p>
+
+<h2>Problemen oplossen</h2>
+
+<h3>"Koppeling opgeslagen, maar de test is nog niet gelukt"</h3>
+<p>
+  Het dashboard heeft uw gegevens bewaard, maar kon er de bestellingen in uw webshop nog niet mee
+  opvragen. Open de tegel PrestaShop: bij <strong>Status</strong> staat <strong>Fout</strong>, met daaronder wat er
+  misging. Zoek die melding hieronder op.
+</p>
+
+<h3>"De API-sleutel werd geweigerd (401)"</h3>
+<p>
+  PrestaShop weigert de sleutel. Controleer op de pagina <strong>Webservice</strong> of de sleutel in de lijst
+  staat en of hij is ingeschakeld. Open de sleutel en controleer of bij <code>orders</code> het vakje
+  <strong>Weergeven (GET)</strong> is aangevinkt. Heeft u een nieuwe sleutel gemaakt? Klik in het paneel
+  PrestaShop op <strong>Sleutel wijzigen</strong>, vul de nieuwe sleutel in en klik op <strong>Opslaan</strong>.
+</p>
+
+<h3>"De sleutel mag … niet lezen (401)"</h3>
+<p>
+  De sleutel werkt, maar mist het leesrecht voor het onderdeel dat in de melding staat, bijvoorbeeld
+  <code>customers</code> of <code>carriers</code>. Open de sleutel op de pagina <strong>Webservice</strong>, vink bij dat
+  onderdeel <strong>Weergeven (GET)</strong> aan en klik op <strong>Opslaan</strong>. Klik daarna in het dashboard op
+  <strong>Test verbinding</strong>.
+</p>
+
+<h3>"De PrestaShop Webservice is niet gevonden op dit adres (404)"</h3>
+<p>
+  Controleer het webshop-adres. Het is het adres uit het blok <strong>Webservicestatus</strong> op de pagina
+  Webservice, zonder <code>/api</code> aan het eind. Staat in dat blok de melding <strong>Het lijkt erop dat
+  het webservice-eindpunt niet functioneel is</strong> (It seems that the webservice endpoint is not
+  functional)? Vraag uw hostingpartij dan om het herschrijven van URL's (URL rewriting) op de server aan
+  te zetten.
+</p>
+
+<h3>"De PrestaShop Webservice staat uit (503)"</h3>
+<p>
+  De webservice van uw webshop staat uit. Zet bij <strong>Schakel Prestashop-webservice
+  in</strong> (Enable PrestaShop's webservice) de schakelaar op <strong>Ja</strong> (Yes), klik op
+  <strong>Opslaan</strong> (Save) en klik daarna in het dashboard op <strong>Test verbinding</strong>.
+</p>
+
+<h3>"De webshop is niet bereikbaar"</h3>
+<p>
+  Het dashboard kon het adres niet bereiken. Controleer of de webshop online is en of het adres begint
+  met <code>https://</code>.
+</p>
+
+<h2>Voor uw IT-partner</h2>
+<p>
+  Regelt uw webbouwer of IT-partner de PrestaShop-kant? Kopieer onderstaand verzoek en stuur het door.
+</p>
+<div class="docs-token-row">
+<div class="docs-token-value docs-token-value--block" id="itPartnerEmailPrestaShop">Onderwerp: PrestaShop-koppeling voor Mowi instellen
+
+Beste [naam IT-partner],
+
+Voor de koppeling van ons Mowi-dashboard met onze PrestaShop-webshop hebben we het volgende nodig:
+
+1. Ga in het PrestaShop-beheer naar Geavanceerde instellingen (Advanced Parameters) > Webservice. Zet "Schakel Prestashop-webservice in" (Enable PrestaShop's webservice) op Ja (Yes) als dat nog niet zo is, en klik op Opslaan (Save).
+2. Klik op "Nieuwe webservice-sleutel toevoegen" (Add new webservice key), klik op "Genereren" (Generate) en vul bij Sleutelbeschrijving (Key description) "Mowi" in.
+3. Vink in de tabel Permissies (Permissions) alleen "Weergeven (GET)" (View (GET)) aan voor addresses, carriers, customers, order_states en orders. Er zijn geen schrijfrechten nodig. Klik op Opslaan (Save).
+4. Deel de sleutel via een veilig kanaal met ons, niet per e-mail in platte tekst.
+
+Met vriendelijke groet,
+[uw naam]</div>
+<button type="button" class="docs-copy-btn" data-copy-target="itPartnerEmailPrestaShop">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
+<span class="docs-copy-btn-label">Kopiëren</span>
+</button>
+</div>
+
+<h2>Volgende stappen</h2>
+<p>
+  Wilt u horen hoe uw agent een bestelling opzoekt? <a href="telefoon-instellen#testen">Test hem in de browser</a>.
+</p>
+<p>
+  Werkt de koppeling later niet meer? <a href="faq-koppeling-werkt-niet">Lees Een koppeling werkt niet meer</a>.
+</p>
+            </article>
+
+            <nav class="docs-prevnext" id="docsPrevNext" aria-label="Vorige en volgende pagina"></nav>
+          </div>
+
+          <aside class="docs-toc" id="docsToc">
+            <div class="docs-toc-label">Op deze pagina</div>
+            <ol id="docsTocList"></ol>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/docs-nav.js?v=20261021"></script>
+  <script src="../js/docs.js?v=20260802"></script>
+</body>
+</html>

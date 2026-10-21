@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>WooCommerce koppelen — Documentatie — Mowi</title>
-  <meta name="description" content="Zo koppelt u uw WooCommerce-webshop aan het dashboard, zodat uw agent bestelstatus kan opzoeken en beantwoorden." />
+  <meta name="description" content="Koppel uw WooCommerce-webshop aan het dashboard, zodat uw agent bestelstatus opzoekt. Met de stappen in WordPress en in het dashboard." />
   <link rel="preconnect" href="https://fonts.bunny.net" />
   <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/docs.css?v=20260821" />
+  <link rel="stylesheet" href="../css/docs.css?v=20261021" />
   <link rel="icon" href="../assets/icon-192.png?v=20260904-3" />
   <link rel="shortcut icon" href="../assets/icon-192.png?v=20260904-3" />
   <link rel="apple-touch-icon" href="../assets/apple-icon-180.png?v=20260904-3" />
@@ -44,191 +44,174 @@
             <nav class="docs-breadcrumb" id="docsBreadcrumb" aria-label="Broodkruimel"></nav>
 
             <article class="docs-article">
-              <h1>WooCommerce koppelen</h1>
+<h1>WooCommerce koppelen</h1>
 
-              <p class="docs-dek">
-                Via de WooCommerce-koppeling zoekt uw agent bestelstatus rechtstreeks op in uw webshop —
-                bijvoorbeeld wanneer een klant vraagt "waar blijft mijn bestelling?". De koppeling is
-                alleen lezend: er wordt nooit iets in uw webshop aangepast.
-              </p>
-              <p>
-                Na deze stappen is uw WooCommerce-webshop gekoppeld aan het dashboard en heeft u
-                gecontroleerd dat de koppeling werkt.
-              </p>
+<p class="docs-dek">
+  Via de WooCommerce-koppeling zoekt uw agent de status van een bestelling rechtstreeks op in uw
+  webshop, bijvoorbeeld als een klant belt of mailt met "waar blijft mijn bestelling?". De
+  koppeling is alleen lezend: Mowi past nooit iets aan in uw webshop.
+</p>
+<p>
+  Na deze stappen is uw webshop gekoppeld aan het dashboard en heeft het dashboard de verbinding
+  getest.
+</p>
 
-              <div class="docs-prereqs">
-                <div class="docs-prereqs-label">Vereisten</div>
-                <ul>
-                  <li>Beheerdersrechten in uw WooCommerce-webshop (WordPress) — of iemand die dat namens u
-                    kan doen, bijvoorbeeld uw hostingpartij.</li>
-                  <li>Toegang tot <strong>het dashboard</strong> (inloggegevens van uw organisatie).</li>
-                  <li>Een agent met de koppelingsstap in beeld — bijvoorbeeld tijdens het instellen van uw
-                    <strong>Inbox agent</strong> of <strong>Voice agent</strong>, of later via uw profiel.</li>
-                </ul>
-              </div>
+<div class="docs-prereqs">
+<div class="docs-prereqs-label">Vereisten</div>
+<ul>
+<li><span>Beheerdersrechten in het WordPress-beheer van uw webshop, of iemand die dat namens u kan doen (bijvoorbeeld uw hostingpartij).</span></li>
+<li><span>Toegang tot <strong>het dashboard</strong>.</span></li>
+</ul>
+</div>
 
-              <h2>Wat is een consumer key en secret?</h2>
-              <p>
-                WooCommerce geeft externe toepassingen zoals Mowi geen toegang met uw eigen
-                WordPress-wachtwoord. In plaats daarvan maakt u in WooCommerce zelf een aparte sleutel aan
-                — een <strong>consumer key</strong> en <strong>consumer secret</strong> — met precies de
-                rechten die u toekent. Voor deze koppeling is dat alleen <strong>Lezen</strong>: Mowi kan
-                bestellingen opzoeken, maar nooit iets aanpassen of verwijderen. U kunt de sleutel op elk
-                moment zelf intrekken in WooCommerce, zonder dat dit uw eigen inloggegevens raakt.
-              </p>
+<h2>Wat is een consumer key en secret?</h2>
+<p>
+  WooCommerce geeft Mowi geen toegang met uw eigen WordPress-wachtwoord. U maakt in WooCommerce
+  zelf een aparte sleutel aan: een <strong>consumer key</strong> en een <strong>consumer secret</strong>,
+  met precies de rechten die u kiest. Voor deze koppeling is dat alleen <strong>Lezen</strong>. U kunt
+  de sleutel op elk moment zelf intrekken in WooCommerce, zonder dat dit uw eigen inloggegevens raakt.
+</p>
 
-              <h2>De koppeling inrichten</h2>
+<h2>De koppeling inrichten</h2>
 
-              <div class="docs-steps">
-                <div class="docs-step">
-                  <span class="docs-step-num">1</span>
-                  <div class="docs-step-body">
-                    <h3>Open de stap Koppelingen</h3>
-                    <p>Log in bij <strong>het dashboard</strong>, klik in de zijbalk op <strong>Agents</strong>
-                      en open de agent waarvoor u wilt koppelen. Klik op het tabblad <strong>Setup</strong>
-                      en daarna op stap <strong>2 Koppelingen</strong>.</p>
-                    <p class="docs-muted">U ziet nu een overzicht met tegels per systeem, gegroepeerd onder
-                      <strong>Webshops</strong>, <strong>CRM &amp; administratie</strong> en
-                      <strong>Reserveren &amp; afspraken</strong>.</p>
-                  </div>
-                </div>
+<div class="docs-steps">
+<div class="docs-step">
+<span class="docs-step-num">1</span>
+<div class="docs-step-body">
+<h3>Open Koppelingen in het dashboard</h3>
+<p>Klik in de zijbalk op <strong>Settings</strong> en daarna bij <strong>Koppelingen</strong> op <strong>Openen</strong>.
+  U komt er ook via het menu onder uw initialen linksboven (<strong>Koppeling(en)</strong>) of via de
+  setupstap <strong>Koppel uw systemen</strong>.</p>
+<p class="docs-muted">U ziet nu de pagina <strong>Koppelingen</strong>, met tegels onder <strong>Mailbox</strong>,
+  <strong>Webshops</strong> en <strong>Reserveren &amp; afspraken</strong>.</p>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">2</span>
+<div class="docs-step-body">
+<h3>Klik op de tegel WooCommerce</h3>
+<p>Klik onder <strong>Webshops</strong> op <strong>WooCommerce</strong>.</p>
+<p class="docs-muted">Het paneel <strong>WooCommerce koppelen</strong> klapt open, met de stappen en de velden
+  <strong>Webshop-adres</strong>, <strong>Consumer key</strong> en <strong>Consumer secret</strong>.</p>
+</div>
+</div>
+</div>
 
-                <div class="docs-step">
-                  <span class="docs-step-num">2</span>
-                  <div class="docs-step-body">
-                    <h3>Klik op de tegel WooCommerce</h3>
-                    <p>Klik onder <strong>Webshops</strong> op de tegel <strong>WooCommerce</strong>.</p>
-                    <p class="docs-muted">Het paneel klapt open met genummerde stappen en een formulier met
-                      de velden <strong>Webshop-adres</strong>, <strong>Consumer key</strong> en
-                      <strong>Consumer secret</strong>.</p>
-                  </div>
-                </div>
-              </div>
+<div class="docs-media docs-media--shot">
+<a href="../assets/docs/koppeling-woocommerce-1-dashboard.webp?v=20261021" target="_blank" rel="noopener"><img src="../assets/docs/koppeling-woocommerce-1-dashboard.webp?v=20261021" alt="Het paneel WooCommerce koppelen in het dashboard, met de stappen en de velden Webshop-adres, Consumer key en Consumer secret" width="590" height="900" loading="lazy" /></a>
+</div>
+<p class="docs-media-caption">Het paneel <strong>WooCommerce koppelen</strong> in het dashboard.</p>
 
-              <div class="docs-media">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 15l5-5 4 4 4-4 5 5"/><circle cx="8.5" cy="8.5" r="1.3"/></svg>
-                <span>Schermafbeelding volgt</span>
-              </div>
-              <p class="docs-media-caption">De WooCommerce-tegel geopend, met de genummerde stappen en het koppelingsformulier.</p>
+<div class="docs-steps">
+<div class="docs-step">
+<span class="docs-step-num">3</span>
+<div class="docs-step-body">
+<h3>Open de REST API-instellingen in WooCommerce</h3>
+<p>Log in op het WordPress-beheer van uw webshop en ga naar <strong>WooCommerce</strong> →
+  <strong>Instellingen</strong> → tabblad <strong>Geavanceerd</strong> → <strong>REST API</strong>.</p>
+<p class="docs-muted">U ziet nu een overzicht van bestaande API-sleutels. Dat overzicht kan leeg zijn.</p>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">4</span>
+<div class="docs-step-body">
+<h3>Maak een sleutel aan met leesrechten</h3>
+<p>Klik op <strong>Sleutel toevoegen</strong> (Add key), of op <strong>Create an API key</strong> als u er nog
+  geen heeft. Vul bij <strong>Beschrijving</strong> (Description) bijvoorbeeld "Mowi" in en kies bij
+  <strong>Rechten</strong> (Permissions) de optie <strong>Lezen</strong> (Read). Klik daarna op
+  <strong>Generate API Key</strong>.</p>
+<p class="docs-muted">U ziet nu een <strong>Consumer key</strong> (begint met <code>ck_</code>) en een
+  <strong>Consumer secret</strong> (begint met <code>cs_</code>).</p>
+<div class="docs-callout docs-callout-warning">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4l9 16H3z"/><path d="M12 10v4"/><circle cx="12" cy="17" r=".4" fill="currentColor"/></svg>
+<p>Kopieer de consumer secret meteen. WooCommerce toont hem maar één keer. Sluit u het scherm zonder te kopiëren, dan maakt u een nieuwe sleutel aan.</p>
+</div>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">5</span>
+<div class="docs-step-body">
+<h3>Vul het formulier in en klik op Koppelen</h3>
+<p>Ga terug naar het dashboard. Vul bij <strong>Webshop-adres</strong> de volledige URL van uw webshop in
+  (met <code>https://</code>), en plak de consumer key en de consumer secret in de velden eronder. Klik op
+  <strong>Koppelen</strong>.</p>
+<p class="docs-muted">Het dashboard test de verbinding meteen en toont de melding
+  <strong>Koppeling opgeslagen en getest — de verbinding werkt.</strong> De tegel WooCommerce krijgt het
+  label <strong>Verbonden</strong>.</p>
+</div>
+</div>
+</div>
 
-              <div class="docs-steps">
-                <div class="docs-step">
-                  <span class="docs-step-num">3</span>
-                  <div class="docs-step-body">
-                    <h3>Open de REST API-instellingen in WooCommerce</h3>
-                    <p>Log in op het beheer van uw webshop (WordPress) en ga naar
-                      <strong>WooCommerce</strong> → <strong>Instellingen</strong> → tabblad
-                      <strong>Geavanceerd</strong> → <strong>REST API</strong>.</p>
-                    <p class="docs-muted">U ziet nu een overzicht van bestaande API-sleutels (mogelijk
-                      leeg).</p>
-                  </div>
-                </div>
+<div class="docs-callout docs-callout-result">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8 12.5l2.5 2.5 5.5-6"/></svg>
+<p><strong>De koppeling werkt</strong> als de tegel WooCommerce <strong>Verbonden</strong> toont. Open de tegel later opnieuw om te zien wanneer de verbinding voor het laatst getest is, of klik op <strong>Test verbinding</strong>.</p>
+</div>
 
-                <div class="docs-step">
-                  <span class="docs-step-num">4</span>
-                  <div class="docs-step-body">
-                    <h3>Maak een sleutel aan</h3>
-                    <p>Klik op <strong>Sleutel toevoegen</strong> (<em>Add key</em>) — of op
-                      <em>Create an API key</em> als u er nog geen heeft. Vul bij
-                      <strong>Beschrijving</strong> (<em>Description</em>) een naam in, bijvoorbeeld
-                      "Mowi", en kies bij <strong>Rechten</strong> (<em>Permissions</em>) de optie
-                      <strong>Lezen</strong> (<em>Read</em>) — niet Schrijven of Lezen/Schrijven.</p>
-                    <p>Klik daarna op <strong>Generate API Key</strong>.</p>
-                    <p class="docs-muted">U ziet nu een <strong>Consumer key</strong> (begint met
-                      <code>ck_</code>) en een <strong>Consumer secret</strong> (begint met
-                      <code>cs_</code>). De secret wordt maar één keer getoond.</p>
-                  </div>
-                </div>
-              </div>
+<p>
+  Een koppeling geldt voor elk kanaal van uw agent: aan de telefoon en in de e-mail zoekt hij
+  dezelfde bestellingen op. Heeft u meer dan één webshop? Open de tegel en vul het formulier onder
+  <strong>Nog een WooCommerce koppelen</strong> in.
+</p>
 
-              <div class="docs-media">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 15l5-5 4 4 4-4 5 5"/><circle cx="8.5" cy="8.5" r="1.3"/></svg>
-                <span>Schermafbeelding volgt</span>
-              </div>
-              <p class="docs-media-caption">De gegenereerde consumer key en secret in WooCommerce, direct na het aanmaken.</p>
+<h2>Problemen oplossen</h2>
 
-              <div class="docs-callout docs-callout-warning">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4l9 16H3z"/><path d="M12 10v4"/><circle cx="12" cy="17" r=".4" fill="currentColor"/></svg>
-                <p>Kopieer de consumer secret direct nadat u hem ziet. Sluit u het scherm zonder te
-                  kopiëren, dan moet u een nieuwe sleutel aanmaken.</p>
-              </div>
+<h3>"Koppeling opgeslagen, maar de test is nog niet gelukt"</h3>
+<p>
+  Het dashboard heeft uw gegevens bewaard, maar kon er nog geen bestelling mee ophalen. Open de tegel
+  WooCommerce: onder de status staat wat er misging. Pas de gegevens aan en klik op
+  <strong>Test verbinding</strong>.
+</p>
 
-              <div class="docs-steps">
-                <div class="docs-step">
-                  <span class="docs-step-num">5</span>
-                  <div class="docs-step-body">
-                    <h3>Vul het formulier in en koppel</h3>
-                    <p>Ga terug naar het dashboard en plak het webshop-adres, de consumer key en de
-                      consumer secret in de bijbehorende velden. Klik op <strong>Koppelen</strong>.</p>
-                    <p class="docs-muted">Het dashboard test de verbinding meteen en toont een melding:
-                      <strong>"Koppeling opgeslagen en getest — de verbinding werkt."</strong> De status
-                      bij WooCommerce staat nu op <strong>Verbonden</strong>.</p>
-                  </div>
-                </div>
-              </div>
+<h3>"De consumer key/secret werd geweigerd (401)"</h3>
+<p>
+  De sleutel is ongeldig, ingetrokken of heeft geen leesrechten. Maak in WooCommerce een nieuwe sleutel
+  aan met rechten <strong>Lezen</strong> en vul die in via <strong>Sleutel wijzigen</strong> in het paneel
+  WooCommerce.
+</p>
 
-              <div class="docs-callout docs-callout-result">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8 12.5l2.5 2.5 5.5-6"/></svg>
-                <p><strong>U weet dat de koppeling actief is</strong> wanneer de WooCommerce-tegel de chip
-                  <strong>Verbonden</strong> toont en de melding na het koppelen een geslaagde test
-                  bevestigt.</p>
-              </div>
+<h3>"De WooCommerce REST API is niet gevonden op dit adres (404)"</h3>
+<p>
+  Controleer het webshop-adres op typefouten en op het juiste domein. Klopt het adres? Vraag dan uw
+  hostingpartij of het pad <code>/wp-json/</code> door een beveiligingsplugin of een serverinstelling
+  wordt geblokkeerd.
+</p>
 
-              <h2>Problemen oplossen</h2>
+<h3>"De webshop is niet bereikbaar"</h3>
+<p>
+  Het dashboard kon het adres niet bereiken. Controleer of de webshop online is en of het adres begint
+  met <code>https://</code>.
+</p>
 
-              <h3>"De consumer key/secret werd geweigerd (401)"</h3>
-              <p>
-                De sleutel is ongeldig of ingetrokken, of heeft geen leesrechten. Maak in WooCommerce een
-                nieuwe sleutel aan met rechten <strong>Lezen</strong> en vul die opnieuw in bij
-                <strong>Sleutel wijzigen</strong> op de koppelingstegel.
-              </p>
-
-              <h3>"De WooCommerce REST API is niet gevonden op dit adres (404)"</h3>
-              <p>
-                Controleer of het webshop-adres klopt (geen typefout, juiste domein). Blijft de fout
-                bestaan, vraag dan uw hostingpartij of het REST API-pad (<code>/wp-json/</code>) door een
-                beveiligingsplugin of serverinstelling wordt geblokkeerd.
-              </p>
-
-              <h3>"De webshop is niet bereikbaar"</h3>
-              <p>
-                Het dashboard kon geen verbinding maken met het opgegeven adres. Controleer of de webshop
-                online is en of het adres geen typefout bevat (inclusief <code>https://</code>).
-              </p>
-
-              <h2>Voor uw IT-partner</h2>
-              <p>
-                Regelt uw hostingpartij of IT-partner de WooCommerce-kant van deze koppeling? Kopieer
-                onderstaand verzoek en stuur het door.
-              </p>
-              <div class="docs-token-row">
-                <div class="docs-token-value docs-token-value--block" id="itPartnerEmailWooCommerce">Onderwerp: WooCommerce-koppeling voor Mowi instellen
+<h2>Voor uw IT-partner</h2>
+<p>
+  Regelt uw hostingpartij of IT-partner de WooCommerce-kant? Kopieer onderstaand verzoek en stuur het door.
+</p>
+<div class="docs-token-row">
+<div class="docs-token-value docs-token-value--block" id="itPartnerEmailWooCommerce">Onderwerp: WooCommerce-koppeling voor Mowi instellen
 
 Beste [naam IT-partner],
 
 Voor de koppeling van ons Mowi-dashboard met onze WooCommerce-webshop hebben we het volgende nodig:
 
 1. Log in op het WordPress-beheer van de webshop en ga naar WooCommerce > Instellingen (Settings) > tabblad Geavanceerd (Advanced) > REST API.
-2. Klik op "Sleutel toevoegen" (Add key), vul bij Beschrijving (Description) "Mowi" in en kies bij Rechten (Permissions) de optie "Lezen" (Read) — geen schrijfrechten nodig. Klik op "Generate API Key".
+2. Klik op "Sleutel toevoegen" (Add key), vul bij Beschrijving (Description) "Mowi" in en kies bij Rechten (Permissions) de optie "Lezen" (Read). Schrijfrechten zijn niet nodig. Klik op "Generate API Key".
 3. Deel de gegenereerde Consumer key en Consumer secret via een veilig kanaal met ons, niet per e-mail in platte tekst. Let op: de secret wordt maar één keer getoond.
 
 Met vriendelijke groet,
 [uw naam]</div>
-                <button type="button" class="docs-copy-btn" data-copy-target="itPartnerEmailWooCommerce">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
-                  <span class="docs-copy-btn-label">Kopiëren</span>
-                </button>
-              </div>
+<button type="button" class="docs-copy-btn" data-copy-target="itPartnerEmailWooCommerce">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
+<span class="docs-copy-btn-label">Kopiëren</span>
+</button>
+</div>
 
-              <h2>Volgende stappen</h2>
-              <p>
-                Wilt u dat uw agent ook bestelstatus opzoekt bij een ander webshopplatform?
-                <a href="koppeling-shopify">Lees Shopify koppelen</a>.
-              </p>
-              <p>
-                Werkt de koppeling niet zoals verwacht na deze stappen?
-                <a href="faq-koppeling-werkt-niet">Lees Een koppeling werkt niet meer</a>.
-              </p>
+<h2>Volgende stappen</h2>
+<p>
+  Wilt u horen hoe uw agent een bestelling opzoekt? <a href="telefoon-instellen#testen">Test hem in de browser</a>.
+</p>
+<p>
+  Werkt de koppeling later niet meer? <a href="faq-koppeling-werkt-niet">Lees Een koppeling werkt niet meer</a>.
+</p>
             </article>
 
             <nav class="docs-prevnext" id="docsPrevNext" aria-label="Vorige en volgende pagina"></nav>
@@ -243,7 +226,7 @@ Met vriendelijke groet,
     </div>
   </div>
 
-  <script src="../js/docs-nav.js?v=20260813-1"></script>
+  <script src="../js/docs-nav.js?v=20261021"></script>
   <script src="../js/docs.js?v=20260802"></script>
 </body>
 </html>

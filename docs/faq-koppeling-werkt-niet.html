@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Een koppeling werkt niet meer — Documentatie — Mowi</title>
-  <meta name="description" content="De algemene stappen om uit te zoeken waarom een koppeling niet meer werkt, per soort systeem." />
+  <meta name="description" content="Een koppeling die eerder werkte en nu niet meer: zo test u hem opnieuw in het dashboard, vervangt u een sleutel en vindt u de oorzaak per systeem." />
   <link rel="preconnect" href="https://fonts.bunny.net" />
   <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/docs.css?v=20260821" />
+  <link rel="stylesheet" href="../css/docs.css?v=20261021" />
   <link rel="icon" href="../assets/icon-192.png?v=20260904-3" />
   <link rel="shortcut icon" href="../assets/icon-192.png?v=20260904-3" />
   <link rel="apple-touch-icon" href="../assets/apple-icon-180.png?v=20260904-3" />
@@ -44,77 +44,78 @@
             <nav class="docs-breadcrumb" id="docsBreadcrumb" aria-label="Broodkruimel"></nav>
 
             <article class="docs-article">
-              <h1>Een koppeling werkt niet meer</h1>
+<h1>Een koppeling werkt niet meer</h1>
 
-              <p class="docs-dek">
-                Een koppeling die eerder werkte, kan stoppen als de toegang aan de kant van het gekoppelde
-                systeem is ingetrokken of gewijzigd — bijvoorbeeld na een wachtwoordwijziging of een
-                interne opschoning van gekoppelde apps. Deze pagina helpt u de oorzaak te vinden.
-              </p>
+<p class="docs-dek">
+  Een koppeling die eerder werkte, kan stoppen als de toegang aan de kant van het gekoppelde systeem is ingetrokken of gewijzigd,
+  bijvoorbeeld na een nieuwe sleutel of een opschoning van gekoppelde apps. Deze pagina helpt u de oorzaak te vinden.
+</p>
 
-              <h2>Eerst: bevestig dat het aan de koppeling ligt</h2>
+<h2>De koppeling opnieuw testen</h2>
 
-              <div class="docs-steps">
-                <div class="docs-step">
-                  <span class="docs-step-num">1</span>
-                  <div class="docs-step-body">
-                    <h3>Log in bij het dashboard</h3>
-                    <p>Ga naar het dashboard, vul uw e-mailadres en wachtwoord in en klik op
-                      <strong>Log in</strong>.</p>
-                    <p class="docs-muted">U ziet nu het <strong>Home</strong>-overzicht van het dashboard.</p>
-                  </div>
-                </div>
+<div class="docs-steps">
+<div class="docs-step">
+<span class="docs-step-num">1</span>
+<div class="docs-step-body">
+<h3>Open Koppelingen</h3>
+<p>Klik in de zijbalk op <strong>Settings</strong> en daarna bij <strong>Koppelingen</strong> op <strong>Openen</strong>.</p>
+<p class="docs-muted">U ziet nu de tegels. Een werkende koppeling toont <strong>Verbonden</strong>.</p>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">2</span>
+<div class="docs-step-body">
+<h3>Open de tegel</h3>
+<p>Klik op de tegel van het systeem.</p>
+<p class="docs-muted">In het paneel staat de status en wanneer de verbinding voor het laatst getest is, met eronder de uitkomst van die
+  test.</p>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">3</span>
+<div class="docs-step-body">
+<h3>Test de verbinding</h3>
+<p>Klik op <strong>Test verbinding</strong>.</p>
+<p class="docs-muted">U ziet <strong>Test gelukt — de verbinding werkt.</strong> of <strong>Test mislukt — controleer de
+  gegevens.</strong> Bij een mislukte test staat in het paneel wat er misging.</p>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">4</span>
+<div class="docs-step-body">
+<h3>Vervang de sleutel</h3>
+<p>Is de sleutel of het token ongeldig geworden? Maak in uw eigen systeem een nieuwe aan, klik op <strong>Sleutel wijzigen</strong>, vul de
+  nieuwe in en klik op <strong>Opslaan</strong>.</p>
+<p class="docs-muted">Het dashboard test de nieuwe sleutel meteen.</p>
+</div>
+</div>
+</div>
 
-                <div class="docs-step">
-                  <span class="docs-step-num">2</span>
-                  <div class="docs-step-body">
-                    <h3>Open Agents</h3>
-                    <p>Klik in de zijbalk op <strong>Agents</strong>.</p>
-                    <p class="docs-muted">U ziet nu een lijst met alle agents voor uw organisatie.</p>
-                  </div>
-                </div>
+<h2>De mailbox</h2>
+<p>
+  Ga naar <strong>Agent</strong> → <strong>E-mail</strong> en kijk onder <strong>Mailboxkoppeling</strong>. Heeft u bij Microsoft of Google
+  de toegang van Mowi ingetrokken, of uw app-wachtwoord vervangen? Koppel de mailbox dan opnieuw via de setupstap
+  <strong>Mailbox koppelen</strong>. Zie <a href="agent-email-triage#mailbox">Uw mailbox koppelen</a>.
+</p>
 
-                <div class="docs-step">
-                  <span class="docs-step-num">3</span>
-                  <div class="docs-step-body">
-                    <h3>Open de agent die van de koppeling afhankelijk is</h3>
-                    <p>Klik op de rij met die agent.</p>
-                    <p class="docs-muted">Staat de status op <strong>Running</strong> en zijn er recente
-                      regels onder <strong>Run history</strong>? Dan is de koppeling waarschijnlijk niet
-                      het probleem — zie dan
-                      <a href="faq-agent-voert-geen-taken-uit">Een agent voert geen taken
-                      uit</a>.</p>
-                  </div>
-                </div>
-              </div>
+<h2>Per systeem</h2>
+<p>Elke koppelingsgids heeft een eigen sectie <strong>Problemen oplossen</strong>, met de meldingen van dat systeem:</p>
+<ul>
+<li><a href="koppeling-woocommerce">WooCommerce</a>, <a href="koppeling-shopify">Shopify</a>, <a href="koppeling-lightspeed">Lightspeed eCom</a>,
+  <a href="koppeling-shopware">Shopware</a>, <a href="koppeling-magento">Magento Open Source</a>, <a href="koppeling-bol">bol.com</a> en
+  <a href="koppeling-prestashop">PrestaShop</a>.</li>
+<li><a href="koppeling-google-agenda">Google Agenda</a>, <a href="koppeling-calendly">Calendly</a> en <a href="koppeling-guestplan">Guestplan</a>.</li>
+</ul>
 
-              <h2>Controleer de toegang bij het gekoppelde systeem</h2>
-              <p>Welke controle relevant is, hangt af van het systeem:</p>
-              <ul>
-                <li><strong>Een mailbox</strong> (bijvoorbeeld voor de Inbox agent) — zie
-                  <a href="agent-email-triage">Inbox agent instellen</a>, sectie Problemen
-                  oplossen.</li>
-                <li><strong>WooCommerce</strong> — zie <a href="koppeling-woocommerce">WooCommerce
-                  koppelen</a>, sectie Problemen oplossen.</li>
-                <li><strong>Shopify</strong> — zie <a href="koppeling-shopify">Shopify koppelen</a>,
-                  sectie Problemen oplossen.</li>
-                <li><strong>Pipedrive</strong> — zie <a href="koppeling-pipedrive">Pipedrive
-                  koppelen</a>, sectie Problemen oplossen.</li>
-                <li><strong>Google Agenda</strong> — zie <a href="koppeling-google-agenda">Google
-                  Agenda koppelen</a>, sectie Problemen oplossen.</li>
-              </ul>
+<h2>Nog steeds geen verklaring?</h2>
+<p>
+  Open een ticket via <strong>Help</strong> en vermeld om welke koppeling het gaat en welke melding het paneel toont. Mowi kijkt mee.
+</p>
 
-              <h2>Nog steeds geen verklaring?</h2>
-              <p>
-                Open een supportticket en vermeld om welke koppeling en welke agent het gaat. Mowi kan
-                vanuit de implementatie meekijken naar wat er precies misgaat.
-              </p>
-
-              <h2>Volgende stappen</h2>
-              <p>
-                Klaar om een ticket te openen?
-                <a href="faq-contact-support">Lees Contact opnemen met support</a>.
-              </p>
+<h2>Volgende stappen</h2>
+<p>
+  Klaar om een ticket te openen? <a href="faq-contact-support">Lees Contact opnemen met support</a>.
+</p>
             </article>
 
             <nav class="docs-prevnext" id="docsPrevNext" aria-label="Vorige en volgende pagina"></nav>
@@ -129,7 +130,7 @@
     </div>
   </div>
 
-  <script src="../js/docs-nav.js?v=20260813-1"></script>
+  <script src="../js/docs-nav.js?v=20261021"></script>
   <script src="../js/docs.js?v=20260802"></script>
 </body>
 </html>

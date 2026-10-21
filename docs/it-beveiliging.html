@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Beveiliging &amp; gegevensverwerking — Documentatie — Mowi</title>
-  <meta name="description" content="Welke gegevens agents verwerken en waar u dit met Mowi over afstemt." />
+  <meta name="description" content="Welke gegevens Mowi verwerkt bij telefoon, e-mail en koppelingen, wie de koppelingen inricht en hoe u een verwerkersovereenkomst krijgt." />
   <link rel="preconnect" href="https://fonts.bunny.net" />
   <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/docs.css?v=20260821" />
+  <link rel="stylesheet" href="../css/docs.css?v=20261021" />
   <link rel="icon" href="../assets/icon-192.png?v=20260904-3" />
   <link rel="shortcut icon" href="../assets/icon-192.png?v=20260904-3" />
   <link rel="apple-touch-icon" href="../assets/apple-icon-180.png?v=20260904-3" />
@@ -44,71 +44,66 @@
             <nav class="docs-breadcrumb" id="docsBreadcrumb" aria-label="Broodkruimel"></nav>
 
             <article class="docs-article">
-              <h1>Beveiliging &amp; gegevensverwerking</h1>
+<h1>Beveiliging &amp; gegevensverwerking</h1>
 
-              <p class="docs-dek">
-                Elke agent verwerkt gegevens uit het systeem waarmee hij gekoppeld is — bijvoorbeeld een
-                mailbox, CRM, ERP of Power BI-omgeving. Deze pagina beschrijft dat op hoofdlijnen en
-                verwijst voor de precieze details door naar Mowi.
-              </p>
+<p class="docs-dek">
+  Mowi verwerkt gegevens uit de systemen die de klant koppelt en uit de gesprekken die de agent voert. Deze pagina beschrijft dat op
+  hoofdlijnen en verwijst voor de precieze details naar Mowi.
+</p>
 
-              <h2>Waar het dashboard draait</h2>
-              <p>
-                Het dashboard draait op dezelfde server als deze website, maar als een aparte applicatie
-                onder een eigen subdomein — niet als onderdeel van de website zelf.
-              </p>
+<h2>Waar het dashboard draait</h2>
+<p>
+  Het dashboard draait op dezelfde server als deze website, maar als een aparte applicatie onder een eigen subdomein, niet als
+  onderdeel van de website zelf.
+</p>
 
-              <h2>Welke gegevens een agent verwerkt</h2>
-              <p>
-                Dit hangt af van het systeem waarmee de agent gekoppeld is. Op de pagina van elke agent
-                staat een korte beschrijving van wat de agent doet; dat geeft een indicatie van welke
-                gegevens erbij betrokken zijn. Zie de <strong>Agents</strong>-sectie in de zijbalk.
-              </p>
+<h2>Welke gegevens de agent verwerkt</h2>
+<ul>
+<li><strong>Telefoon</strong>: de gesprekken die de agent voert. Elke beller hoort aan het begin dat hij met een digitale assistent
+  spreekt en dat het gesprek wordt opgenomen. Na het gesprek staat er een samenvatting in het dashboard, met de naam, het nummer en
+  het verzoek van de beller als de agent die noteerde.</li>
+<li><strong>E-mail</strong>: de e-mail in Postvak IN van de gekoppelde mailbox. Volgens het dashboard krijgt de agent alleen lees- en
+  verzendtoegang tot die ene mailbox, versleuteld opgeslagen. Verzonden e-mail van de afgelopen 30 dagen wordt alleen geanalyseerd als
+  de klant daar bij het koppelen toestemming voor geeft.</li>
+<li><strong>Koppelingen</strong>: de gegevens die de agent opzoekt, zoals de status van een bestelling of een vrije plek in een agenda.
+  Webshopkoppelingen zijn alleen lezend.</li>
+</ul>
 
-              <h2>Wie de koppeling inricht</h2>
-              <p>
-                Koppelingen tussen het dashboard en uw systemen worden door Mowi's implementatieteam
-                ingericht, in overleg met u of uw IT-partner. Zie de pagina's in de
-                <strong>Koppelingen</strong>-sectie voor wat daarbij van u gevraagd wordt.
-              </p>
+<h2>Wie de koppeling inricht</h2>
+<p>
+  De klant richt de koppelingen zelf in, in het dashboard. Lukt dat niet, bijvoorbeeld omdat een beheerder toestemming moet geven, dan
+  rondt Mowi de koppeling op aanvraag af, in overleg met de klant of met u.
+</p>
 
-              <h2>Verwerkersovereenkomst</h2>
-              <p>
-                Mowi heeft op dit moment geen standaard verwerkersovereenkomst klaarliggen; dit wordt per
-                klant op aanvraag geregeld. Heeft uw organisatie een verwerkersovereenkomst nodig? Vraag
-                ernaar bij Mowi.
-              </p>
+<h2>Verwerkersovereenkomst</h2>
+<p>
+  Voor persoonsgegevens die Mowi namens de klant verwerkt, is Mowi verwerker en geldt een aparte verwerkersovereenkomst. Die vraagt de
+  klant aan via <strong>Help</strong> in het dashboard. Mowi gebruikt de inhoud van e-mails en gesprekken niet om producten te
+  verbeteren of AI-modellen te trainen. Zie artikel 10 van de <a href="../algemene-voorwaarden">algemene voorwaarden</a>.
+</p>
 
-              <div class="docs-callout docs-callout-warning">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4l9 16H3z"/><path d="M12 10v4"/><circle cx="12" cy="17" r=".4" fill="currentColor"/></svg>
-                <p>
-                  <strong>Encryptie, bewaartermijnen en certificeringen staan hier bewust nog niet.</strong>
-                  Dat zijn specifieke, verifieerbare uitspraken die pas op deze pagina komen zodra ze met
-                  Mowi zijn vastgesteld — niet eerder. Heeft uw organisatie hier nu al antwoord op nodig,
-                  bijvoorbeeld voor een security-vragenlijst? Neem rechtstreeks contact op met Mowi.
-                  <!-- DRAFT: encryptie (in transit/at rest), bewaartermijnen en eventuele certificeringen
-                       zijn niet bevestigd op platformniveau — bewust niet ingevuld om te voorkomen dat we
-                       iets verzinnen. -->
-                </p>
-              </div>
+<div class="docs-callout docs-callout-warning">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4l9 16H3z"/><path d="M12 10v4"/><circle cx="12" cy="17" r=".4" fill="currentColor"/></svg>
+<p><strong>Encryptie, bewaartermijnen en certificeringen staan hier bewust nog niet.</strong> Dat zijn specifieke, controleerbare
+  uitspraken die pas op deze pagina komen zodra ze met Mowi zijn vastgesteld. Heeft uw organisatie er nu al antwoord op nodig,
+  bijvoorbeeld voor een security-vragenlijst? Neem rechtstreeks contact op met Mowi.</p>
+</div>
+<!-- DRAFT: encryptie (in transit/at rest), bewaartermijnen en certificeringen zijn niet bevestigd op platformniveau. De zin over "lees- en verzendtoegang, versleuteld opgeslagen" citeert de tekst die het dashboard zelf toont bij Mailbox koppelen. -->
 
-              <h2>Meer over hoe wij AI gebruiken</h2>
-              <p>
-                Wilt u weten waar Mowi AI inzet, wat die AI wel en niet beslist, en hoe wij gebruikers
-                en bellers daarover informeren? Zie de <a href="../ai-transparantie">AI-transparantiepagina</a>.
-                Een volledig overzicht van de externe partijen die namens Mowi gegevens verwerken staat op
-                de <a href="../subverwerkers">subverwerkerspagina</a>.
-              </p>
+<h2>Meer over hoe wij AI gebruiken</h2>
+<p>
+  Waar Mowi AI inzet, wat die AI wel en niet beslist en hoe gebruikers en bellers daarover worden geïnformeerd, staat op de
+  <a href="../ai-transparantie">AI-transparantiepagina</a>. De externe partijen die namens Mowi gegevens verwerken staan op de
+  <a href="../subverwerkers">subverwerkerspagina</a>.
+</p>
 
-              <h2>Volgende stappen</h2>
-              <p>
-                Vragen over netwerktoegang? <a href="it-netwerkvereisten">Lees
-                Netwerkvereisten</a>.
-              </p>
-              <p>
-                Specifieke vraag voor Mowi? <a href="faq-contact-support">Lees Contact opnemen
-                met support</a>.
-              </p>
+<h2>Volgende stappen</h2>
+<p>
+  Vragen over netwerktoegang? <a href="it-netwerkvereisten">Lees Netwerkvereisten</a>.
+</p>
+<p>
+  Specifieke vraag voor Mowi? <a href="faq-contact-support">Lees Contact opnemen met support</a>.
+</p>
             </article>
 
             <nav class="docs-prevnext" id="docsPrevNext" aria-label="Vorige en volgende pagina"></nav>
@@ -123,7 +118,7 @@
     </div>
   </div>
 
-  <script src="../js/docs-nav.js?v=20260813-1"></script>
+  <script src="../js/docs-nav.js?v=20261021"></script>
   <script src="../js/docs.js?v=20260802"></script>
 </body>
 </html>
