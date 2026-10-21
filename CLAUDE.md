@@ -614,6 +614,22 @@ applied to all 16, and `test.html` is the reliable copy-paste source.
   `#zelflerend`. **Ship the docs together with that dashboard branch**: the panel screenshots and the
   Zelflerend/auto-send sections describe the branch, not the dashboard that is live before it.
 
+- **Third pass, same evening (correction):** the 15:28 publish described the E-mail settings as cards on the E-mail page,
+  but `801cf5e` (live before it) had moved them to Setup › Instellingen. The docs text had not been re-checked after the
+  last rebase. Re-measured against dashboard `4dcae41`:
+  - the E-mail page holds Instructies, Deze maand and E-mails, plus two conditional notices;
+  - Zelflerend is a badge beside Live that opens its card;
+  - Setup › Instellingen › E-mail holds Zo schrijft uw agent, Sorteerregels, Automatisch versturen, Urgente meldingen
+    and Geblokkeerde afzenders;
+  - Aanspreekvorm sits in Begroeting en stem;
+  - Instructies are only on the channel pages;
+  - Branche is required, with the route preview;
+  - the answer test is only on Live → E-mail;
+  - invoice address: Profiel → E-mailadres voor facturen.
+
+  Changed screenshots carry `?v=20261021b`. **Lesson: after any rebase onto another session's work, re-read the
+  documented screens in a fresh render before publishing docs.**
+
 ### Precision rules that produced this content — apply to every future edit
 - **Never invent a click-path.** Steps inside our own dashboard are grounded by reading the
   actual Mowi Dashboard Laravel codebase (`c:\Users\SalP1\Desktop\Mowi Dashboard` —
