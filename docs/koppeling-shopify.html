@@ -50,8 +50,8 @@
   Via de Shopify-koppeling zoekt uw agent de status van een bestelling rechtstreeks op in uw
   webshop, bijvoorbeeld als een klant belt of mailt met "waar blijft mijn bestelling?". Standaard
   is de koppeling alleen lezend: Mowi past niets aan in uw webshop. Zet u
-  <a href="#retouren">retourverzoeken via de telefoon</a> aan, dan dient uw agent ook retourverzoeken in,
-  die u zelf goedkeurt.
+  <a href="#retouren">retourverzoeken</a> of <a href="#annuleren">annuleren</a> via de telefoon aan, dan kan uw
+  agent ook een retourverzoek indienen of een bestelling annuleren die nog niet verzonden is.
 </p>
 <p>
   Na deze stappen is uw webshop gekoppeld aan het dashboard en heeft het dashboard de verbinding
@@ -75,7 +75,7 @@
   <!-- VERIFY: app name "Mowi Koppeling" comes from a code comment in config/shop_platforms.php and the vault, not from the live Shopify install screen. -->
   Mowi vraagt alleen leestoegang tot uw bestellingen, ook tot bestellingen die ouder zijn dan 60 dagen.
   Zonder dat laatste recht ziet een app alleen de bestellingen van de afgelopen 60 dagen. Voor
-  retourverzoeken via de telefoon vraagt Mowi pas toestemming als u die aanzet.
+  retourverzoeken en annuleren via de telefoon vraagt Mowi pas toestemming als u die aanzet.
 </p>
 <p>
   Bij een bestelling horen ook klantgegevens, zoals het e-mailadres en de postcode. Daarmee controleert
@@ -199,6 +199,23 @@
   en noteert uw agent een terugbelverzoek.
 </p>
 
+<h2 id="annuleren">Annuleren via de telefoon</h2>
+<p>
+  Wil een beller zijn bestelling annuleren, dan kan uw agent dat zelf doen. Zet in de tegel Shopify
+  <strong>De agent mag bestellingen annuleren</strong> aan, klik op <strong>Opslaan</strong> en daarna op
+  <strong>Geef Shopify toestemming</strong>. Zo staat het standaard uit.
+</p>
+<ul>
+<li>Het dashboard controleert eerst het bestelnummer en de postcode.</li>
+<li>Uw agent annuleert alleen een bestelling die nog niet verzonden is en waarvoor geen retour loopt.</li>
+<li>Pas als de beller bevestigt dat hij wil annuleren, annuleert uw agent de bestelling in Shopify.</li>
+<li>Het geld gaat terug via de oorspronkelijke betaalmethode, de voorraad wordt teruggeboekt en Shopify mailt de klant de annulering.</li>
+</ul>
+<p>
+  Een annulering is niet terug te draaien. Wil iemand iets aan zijn bestelling wijzigen, dan noteert uw
+  agent een dringend terugbelverzoek.
+</p>
+
 <h2>Problemen oplossen</h2>
 
 <h3>"Vul uw .myshopify.com-adres in"</h3>
@@ -263,7 +280,7 @@ We koppelen onze Shopify-winkel aan ons Mowi-dashboard. Dat gaat via de knop "Ko
 1. Het .myshopify.com-adres van onze winkel (in Shopify onder Instellingen (Settings) > Domeinen (Domains)).
 2. Voor ons Shopify-account de toestemming "Apps en kanalen beheren en installeren" (Manage and install apps and channels), en bij Bestellingen (Orders) de toestemming "Bekijken" (View).
 
-De app vraagt alleen leestoegang tot bestellingen (read_orders en read_all_orders), geen schrijfrechten. Zetten we later retourverzoeken via de telefoon aan, dan vraagt de app daarnaast read_returns en write_returns, om retourverzoeken in te dienen die wij zelf goedkeuren.
+De app vraagt alleen leestoegang tot bestellingen (read_orders en read_all_orders), geen schrijfrechten. Zetten we later retourverzoeken via de telefoon aan, dan vraagt de app daarnaast read_returns en write_returns, om retourverzoeken in te dienen die wij zelf goedkeuren. Voor annuleren via de telefoon vraagt de app write_orders.
 
 Met vriendelijke groet,
 [uw naam]</div>
