@@ -48,8 +48,10 @@
 
 <p class="docs-dek">
   Via de Shopify-koppeling zoekt uw agent de status van een bestelling rechtstreeks op in uw
-  webshop, bijvoorbeeld als een klant belt of mailt met "waar blijft mijn bestelling?". De
-  koppeling is alleen lezend: Mowi past nooit iets aan in uw webshop.
+  webshop, bijvoorbeeld als een klant belt of mailt met "waar blijft mijn bestelling?". Standaard
+  is de koppeling alleen lezend: Mowi past niets aan in uw webshop. Zet u
+  <a href="#retouren">retourverzoeken via de telefoon</a> aan, dan dient uw agent ook retourverzoeken in,
+  die u zelf goedkeurt.
 </p>
 <p>
   Na deze stappen is uw webshop gekoppeld aan het dashboard en heeft het dashboard de verbinding
@@ -72,7 +74,8 @@
   <strong>Mowi Koppeling</strong>, en bevestigt welke gegevens die mag bekijken.
   <!-- VERIFY: app name "Mowi Koppeling" comes from a code comment in config/shop_platforms.php and the vault, not from the live Shopify install screen. -->
   Mowi vraagt alleen leestoegang tot uw bestellingen, ook tot bestellingen die ouder zijn dan 60 dagen.
-  Zonder dat laatste recht ziet een app alleen de bestellingen van de afgelopen 60 dagen.
+  Zonder dat laatste recht ziet een app alleen de bestellingen van de afgelopen 60 dagen. Voor
+  retourverzoeken via de telefoon vraagt Mowi pas toestemming als u die aanzet.
 </p>
 <p>
   Bij een bestelling horen ook klantgegevens, zoals het e-mailadres en de postcode. Daarmee controleert
@@ -159,6 +162,43 @@
   <strong>Nog een Shopify koppelen</strong> het .myshopify.com-adres van de andere winkel in.
 </p>
 
+<h2 id="retouren">Retourverzoeken via de telefoon</h2>
+<p>
+  Meldt een beller dat zijn bestelling kapot of verkeerd is aangekomen, dan kan uw agent een
+  retourverzoek indienen in Shopify. Het dashboard controleert eerst het bestelnummer en de postcode.
+  U ziet het verzoek daarna in uw Shopify-beheercentrum en keurt het daar goed of af. Uw agent belooft
+  de beller geen terugbetaling en geen nieuwe bestelling.
+</p>
+
+<div class="docs-steps">
+<div class="docs-step">
+<span class="docs-step-num">1</span>
+<div class="docs-step-body">
+<h3>Kies wanneer uw agent een retourverzoek indient</h3>
+<p>Open de tegel Shopify. Kies bij <strong>Retourverzoeken via de telefoon</strong> een van deze opties en klik op <strong>Opslaan</strong>.</p>
+<ul>
+<li><strong>Alleen bij een fout van de winkel</strong>: als wat de beller kreeg kapot of verkeerd is. Heeft hij zich bedacht, dan biedt uw agent een terugbelverzoek aan.</li>
+<li><strong>Ook bij bedenktijd</strong>: ook als de beller zich bedacht heeft.</li>
+<li><strong>Uit</strong>: uw agent dient geen retourverzoeken in. Zo staat het standaard.</li>
+</ul>
+</div>
+</div>
+<div class="docs-step">
+<span class="docs-step-num">2</span>
+<div class="docs-step-body">
+<h3>Geef Shopify toestemming</h3>
+<p>Klik op <strong>Geef Shopify toestemming</strong> en bevestig in Shopify de extra toestemming voor retouren.</p>
+<!-- VERIFY: what Shopify's screen for the added scopes (read_returns, write_returns) looks like for an app that is already installed. Not seen yet: check on Sal's development store. -->
+<p class="docs-muted">U komt automatisch terug in het dashboard. Vanaf dan dient uw agent retourverzoeken in.</p>
+</div>
+</div>
+</div>
+
+<p>
+  Mist er iets in een pakket, of is de bestelling nog niet verzonden? Dan valt er niets terug te sturen
+  en noteert uw agent een terugbelverzoek.
+</p>
+
 <h2>Problemen oplossen</h2>
 
 <h3>"Vul uw .myshopify.com-adres in"</h3>
@@ -223,7 +263,7 @@ We koppelen onze Shopify-winkel aan ons Mowi-dashboard. Dat gaat via de knop "Ko
 1. Het .myshopify.com-adres van onze winkel (in Shopify onder Instellingen (Settings) > Domeinen (Domains)).
 2. Voor ons Shopify-account de toestemming "Apps en kanalen beheren en installeren" (Manage and install apps and channels), en bij Bestellingen (Orders) de toestemming "Bekijken" (View).
 
-De app vraagt alleen leestoegang tot bestellingen (read_orders en read_all_orders), geen schrijfrechten.
+De app vraagt alleen leestoegang tot bestellingen (read_orders en read_all_orders), geen schrijfrechten. Zetten we later retourverzoeken via de telefoon aan, dan vraagt de app daarnaast read_returns en write_returns, om retourverzoeken in te dienen die wij zelf goedkeuren.
 
 Met vriendelijke groet,
 [uw naam]</div>
