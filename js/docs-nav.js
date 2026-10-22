@@ -59,7 +59,7 @@ var DOCS_NAV = [
   {
     category: "Abonnement en tegoed",
     items: [
-      { title: "Pakketten en abonnement", href: "pakketten-en-abonnement" },
+      { title: "Bundels en abonnement", href: "pakketten-en-abonnement" },
       { title: "Tegoed en credits", href: "tegoed-en-credits" }
     ]
   },

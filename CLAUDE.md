@@ -313,7 +313,7 @@ retype credentials from scratch or falling back to a password:
   Does **not** apply to the 15 redirect stubs (root stubs, `agents/*`, and — new in v2 —
   `receptenboek.html` + `receptenboek/*`, none of which load either file) or to `docs/*` (own
   separate `docs.css`/`docs.js` versioning, untouched by this rule — currently `docs.css?v=20261021`,
-  `docs-nav.js?v=20261021`).
+  `docs-nav.js?v=20261022`).
 - **Separate from the above:** production also has a page-level HTTP cache in front of nginx
   (confirmed 2026-08-03 — `curl -sI https://mowi.agency/` showed `X-Cache: HIT` and `Age: 252`;
   likely Varnish, which Cloudways commonly bundles). This caches whole HTML responses, not just
@@ -370,6 +370,14 @@ headings (e.g. a standalone "Vertrouwen" sitting above "Automatisering die u dur
 zetten.") — they read as generic AI-generated-template filler. Let headings and body copy carry
 the section's meaning on their own instead. Same reasoning killed the hero's plain "Bekijk hoe
 het werkt →" secondary link — one clear CTA beats a hedged pair.
+
+### Bundels, not pakketten (2026-10-22)
+Sal: "i think we should call it bundels instead of pakketten". Mowi 500 and Mowi 1000 are named
+after the minutes they hold, and a monthly amount of minutes is a **bundel** ("de bundel": uw
+bundel, elke bundel, de huidige bundel). The dashboard says the same. One-off top-ups are
+**losse credits**, never bundels, so the two never share a word. The contract stays the
+**abonnement**. Still "pakket": parcels, boekhoudpakket, the competitors' own plan names, the AV,
+and the slug `docs/pakketten-en-abonnement` (kept so existing links resolve).
 
 ### Navigation — current, v2 (2026-08-18)
 The header is now **logo-left / nav-center / actions-right** (a deliberate structural change
